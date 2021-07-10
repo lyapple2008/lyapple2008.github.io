@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Android端实现手写数字识别 | BeYoung</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="&amp;emsp;&amp;emsp;对DeepLearning最初的印象是，大量的训练样本+机器学习，也就是说原来传统的机器学习会遇到的问题，不能解决的问题，换成DeepLearning同样解决不了。比如目标识别中因为光照变化，目标被遮挡，目标的几何变化造成的识别率大幅下降，在DeepLearning中同样也不能很好解决。但是不是说DeepLearning就一无事处，最近几年这么热也决不是因为名字取得好。De">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android端实现手写数字识别">
+<meta property="og:url" content="http://www.beyoung.xyz/2018/04/29/2018-04-29-Android%E7%AB%AF%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/index.html">
+<meta property="og:site_name" content="BeYoung">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;对DeepLearning最初的印象是，大量的训练样本+机器学习，也就是说原来传统的机器学习会遇到的问题，不能解决的问题，换成DeepLearning同样解决不了。比如目标识别中因为光照变化，目标被遮挡，目标的几何变化造成的识别率大幅下降，在DeepLearning中同样也不能很好解决。但是不是说DeepLearning就一无事处，最近几年这么热也决不是因为名字取得好。De">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/61178567-ece3e280-a621-11e9-9af3-08da3def9b98.gif">
+<meta property="article:published_time" content="2018-04-29T02:56:38.000Z">
+<meta property="article:modified_time" content="2019-07-14T02:28:34.700Z">
+<meta property="article:author" content="Marshall Liu">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="DeepLearning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/3350865/61178567-ece3e280-a621-11e9-9af3-08da3def9b98.gif">
+  
+    <link rel="alternate" href="/atom.xml" title="BeYoung" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">BeYoung</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Stay Hungry, Stay Young</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.beyoung.xyz"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2018-04-29-Android端实现手写数字识别" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/04/29/2018-04-29-Android%E7%AB%AF%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/" class="article-date">
+  <time class="dt-published" datetime="2018-04-29T02:56:38.000Z" itemprop="datePublished">2018-04-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Android端实现手写数字识别
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;对DeepLearning最初的印象是，大量的训练样本+机器学习，也就是说原来传统的机器学习会遇到的问题，不能解决的问题，换成DeepLearning同样解决不了。比如目标识别中因为光照变化，目标被遮挡，目标的几何变化造成的识别率大幅下降，在DeepLearning中同样也不能很好解决。但是不是说DeepLearning就一无事处，最近几年这么热也决不是因为名字取得好。DeepLearning比较明显的优势就是在特征选择上，想想之前做生物特征识别时，各种找特征，还得考虑什么光照不变，旋转不变，抗尺寸变换，抗遮挡，那叫一个累呀。现在可好啦，一个Convolution   Layer，再配Fully Connected Layer，最后来个Softmax，丢一堆带标签的样本进去自动给你找出特征。当然这个只是一个接触DeepLearning不到一个月的小白的肤浅认识，大家听听就好。</p>
+<p>&emsp;&emsp;本文算是最近1个月学习DeepLearning的入门小作业，选择的例子也是DeepLearning最流行的HelloWorld程序MNIST手写数字识别，采用Caffe2进行训练，并在Android端实现一个Demo样例。</p>
+<!---more--->
+
+<h3 id="DeepLearning基础"><a href="#DeepLearning基础" class="headerlink" title="DeepLearning基础"></a>DeepLearning基础</h3><p>&emsp;&emsp;这里推荐下台大李宏毅老师的DeepLearning课程，讲解风趣幽默，生动详细，力荐。<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av15889450">B站链接</a><br>深度学习框架：caffe2</p>
+<h3 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h3><p>整个模型训练过程主要包括数据准备、模型建立、模型训练，参考caffe2官网的<a target="_blank" rel="noopener" href="https://github.com/caffe2/tutorials/blob/master/MNIST.ipynb">tutorial</a></p>
+<h4 id="1-数据准备"><a href="#1-数据准备" class="headerlink" title="1. 数据准备"></a>1. 数据准备</h4><p>数据准备在MachineLearning类的应用中起到致关重要的作用，相当于煮饭的时候用到的米。再利害的算法，如果没有足够的数据，那也是巧妇难为无米之炊，难道马云会称现在是DT时代。另外DeepLearning作为MachineLearning的一个分支，目前了解到的大部分的DeepLearning算法更多的还是属于SuperviseLearning。SuperviseLearning一个明显的特征是非常依赖数据，而且是人工标注的数据，这也难怪一些DeepLearning大大们说在AI应用中，有多少人工就有多少智能。本文用到的数据链接地址：<a target="_blank" rel="noopener" href="http://yann.lecun.com/exdb/mnist/">MNIST手写数字数据集</a></p>
+<h5 id="2-模型建立"><a href="#2-模型建立" class="headerlink" title="2. 模型建立"></a>2. 模型建立</h5><p>这个例子采用的是DeepLearning中的经典网络LeNet，关于LeNet可以参考<a target="_blank" rel="noopener" href="https://ujjwalkarn.me/2016/08/11/intuitive-explanation-convnets/">这篇文章</a>。</p>
+<h5 id="3-模型训练"><a href="#3-模型训练" class="headerlink" title="3. 模型训练"></a>3. 模型训练</h5><p>这里模型训练采用caffe2框架，</p>
+<h3 id="模型在Android端的部署"><a href="#模型在Android端的部署" class="headerlink" title="模型在Android端的部署"></a>模型在Android端的部署</h3><p>参考caffe2官网给的AICamera例子，建立Android Studio工程（github工程地址：<a target="_blank" rel="noopener" href="https://github.com/lyapple2008/MNIST_CNN_APP">https://github.com/lyapple2008/MNIST_CNN_APP</a> ），其中最主要的代码如下所示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">void loadToNetDef(AAssetManager *mgr, caffe2::NetDef *net, const char *filename) &#123;</span><br><span class="line">    AAsset *asset = AAssetManager_open(mgr, filename, AASSET_MODE_BUFFER);</span><br><span class="line">    assert(asset != nullptr);</span><br><span class="line">    const void *data = AAsset_getBuffer(asset);</span><br><span class="line">    assert(data != nullptr);</span><br><span class="line">    off_t len = AAsset_getLength(asset);</span><br><span class="line">    assert(len != 0);</span><br><span class="line">    if (!net-&gt;ParseFromArray(data, len)) &#123;</span><br><span class="line">        alog(&quot;Couldn&#x27;t parse net from data.\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    AAsset_close(asset);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">extern &quot;C&quot;</span><br><span class="line">void Java_com_example_beyoung_handwrittendigit_MainActivity_initCaffe2(</span><br><span class="line">        JNIEnv *env,</span><br><span class="line">        jobject,</span><br><span class="line">        jobject assetManager) &#123;</span><br><span class="line">    AAssetManager *mgr = AAssetManager_fromJava(env, assetManager);</span><br><span class="line">    alog(&quot;Attempting to load protobuf netdefs...&quot;);</span><br><span class="line">    loadToNetDef(mgr, &amp;_initNet, &quot;mnist/init_net.pb&quot;);</span><br><span class="line">    loadToNetDef(mgr, &amp;_predictNet, &quot;mnist/predict_net.pb&quot;);</span><br><span class="line">    alog(&quot;done.&quot;);</span><br><span class="line">    alog(&quot;Instantiating predictor...&quot;);</span><br><span class="line">    _predictor = new caffe2::Predictor(_initNet, _predictNet);</span><br><span class="line">    if (_predictor) &#123;</span><br><span class="line">        alog(&quot;done...&quot;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        alog(&quot;fail to instantiat predictor...&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">extern &quot;C&quot;</span><br><span class="line">JNIEXPORT jstring JNICALL</span><br><span class="line">Java_com_example_beyoung_handwrittendigit_MainActivity_recognitionFromCaffe2(</span><br><span class="line">        JNIEnv *env,</span><br><span class="line">        jobject,</span><br><span class="line">        jint h, jint w, jintArray data) &#123;</span><br><span class="line">    if (!_predictor) &#123;</span><br><span class="line">        return env-&gt;NewStringUTF(&quot;Loading...&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    jsize len = env-&gt;GetArrayLength(data);</span><br><span class="line">    jint *img_data = env-&gt;GetIntArrayElements(data, 0);</span><br><span class="line">    jint img_size = h * w;</span><br><span class="line">    assert(img_size &lt;= INPUT_DATA_SIZE);</span><br><span class="line"></span><br><span class="line">    // convert rgb image to grey image and normalize to 0~1</span><br><span class="line">    for (auto i = 0; i &lt; h; ++i) &#123;</span><br><span class="line">        std::ostringstream stringStream;</span><br><span class="line">        for (auto j = 0; j &lt; w; ++j) &#123;</span><br><span class="line">            int color = img_data[i * w + j];</span><br><span class="line">            //int red = ((color &amp; 0x00FF0000) &gt;&gt; 16);</span><br><span class="line">            //int green = ((color &amp; 0x0000FF00) &gt;&gt; 8);</span><br><span class="line">            //int blue = color &amp; 0x000000FF;</span><br><span class="line">            //float grey = red * 0.3 + green * 0.59 + blue * 0.11;</span><br><span class="line">            float grey = 0.0;</span><br><span class="line">            if (color != 0) &#123;</span><br><span class="line">                grey = 1.0;</span><br><span class="line">            &#125;</span><br><span class="line">            input_data[i * w + j] = grey;</span><br><span class="line">            //alog(&quot;%f&quot;, grey);</span><br><span class="line">            //alog(&quot;%d&quot;, color);</span><br><span class="line">            if (color != 0) &#123;</span><br><span class="line">                color = 1;</span><br><span class="line">            &#125;</span><br><span class="line">            stringStream &lt;&lt; color &lt;&lt; &quot; &quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        //alog(&quot;\n&quot;);</span><br><span class="line">        alog(&quot;%s&quot;, stringStream.str().c_str());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    caffe2::TensorCPU input;</span><br><span class="line">    input.Resize(std::vector&lt;int&gt;(&#123;1, IMG_C, IMG_H, IMG_W&#125;));</span><br><span class="line">    memcpy(input.mutable_data&lt;float&gt;(), input_data, INPUT_DATA_SIZE * sizeof(float));</span><br><span class="line">    caffe2::Predictor::TensorVector input_vec&#123;&amp;input&#125;;</span><br><span class="line">    caffe2::Predictor::TensorVector output_vec;</span><br><span class="line">    _predictor-&gt;run(input_vec, &amp;output_vec);</span><br><span class="line"></span><br><span class="line">    constexpr int k = 3;</span><br><span class="line">    float max[k] = &#123;0&#125;;</span><br><span class="line">    int max_index[k] = &#123;0&#125;;</span><br><span class="line">    // Find the top-k result manually</span><br><span class="line">    if (output_vec.capacity() &gt; 0) &#123;</span><br><span class="line">        for (auto output : output_vec) &#123;</span><br><span class="line">            for (auto i = 0; i &lt; output-&gt;size(); ++i) &#123;</span><br><span class="line">                for (auto j = 0; j &lt; k; ++j) &#123;</span><br><span class="line">                    if (output-&gt;template data&lt;float&gt;()[i] &gt; max[j]) &#123;</span><br><span class="line">                        for (auto _j = k - 1; _j &gt; j; --_j) &#123;</span><br><span class="line">                            max[_j - 1] = max[_j];</span><br><span class="line">                            max_index[_j - 1] = max_index[_j];</span><br><span class="line">                        &#125;</span><br><span class="line">                        max[j] = output-&gt;template data&lt;float&gt;()[i];</span><br><span class="line">                        max_index[j] = i;</span><br><span class="line">                        goto skip;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                skip:;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::ostringstream stringStream;</span><br><span class="line">    for (auto j = 0; j &lt; k; ++j) &#123;</span><br><span class="line">        stringStream &lt;&lt; max_index[j] &lt;&lt; &quot;: &quot; &lt;&lt; max[j]*100 &lt;&lt; &quot;%\n&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">//    if (output_vec.capacity() &gt; 0) &#123;</span><br><span class="line">//        for (auto output: output_vec) &#123;</span><br><span class="line">//            for (auto i = 0;i&lt;output-&gt;size();++i) &#123;</span><br><span class="line">//                stringStream &lt;&lt; output-&gt;template data&lt;float&gt;()[i] &lt;&lt; &quot;\n&quot;;</span><br><span class="line">//            &#125;</span><br><span class="line">//        &#125;</span><br><span class="line">//    &#125;</span><br><span class="line"></span><br><span class="line">    return env-&gt;NewStringUTF(stringStream.str().c_str());</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<img src="https://user-images.githubusercontent.com/3350865/61178567-ece3e280-a621-11e9-9af3-08da3def9b98.gif" width=240 height=427/>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>&emsp;&emsp;通过上面的Demo可以看出，通过MNIST数据训练出来的模型在实际运行的准确率还是很堪忧的。所以一个算法从实验室数据到实际应用还有很长的路要走，虽然最近应用于各个领域的深度学习模型层出不穷，测试数据也很好看，但是在实际应用过程中还有很多路要走。虽然DeepLearning已经表现出很强大的黑魔法属性，在实际应用过程中还是有很多工作要做，不然只能停留在Demo阶段。以本文的手写数字识别为例，实际过程的准确率与测试集上的准确率相差甚远，这时候就需要进行大量的优化工作。由于学习深度学习没多久，暂时只能根据以往在机器学习上的经验来进行优化，目前能想到的优化方向有：训练集与实际运行环境要一致、准备更多的训练集、深度另外的模型方法。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.beyoung.xyz/2018/04/29/2018-04-29-Android%E7%AB%AF%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/" data-id="ckqxglv170000icsp6lflegkj" data-title="Android端实现手写数字识别" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/08/18/2018-08-18-Windows%E4%B8%8B%E8%BD%BD%E7%BC%96%E8%AF%91FFmpeg%E5%8A%A8%E6%80%81%E5%BA%93%E6%8C%87%E5%8C%97/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Windows下载编译FFmpeg动态库指北
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/24/2018-3-24-FFmpeg%E4%B8%ADAVFilter%E6%A8%A1%E5%9D%97%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">FFmpeg中AVFilter模块实践指南</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Audio/" rel="tag">Audio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AudioProcessing/" rel="tag">AudioProcessing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GigPage/" rel="tag">GigPage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/" rel="tag">JNI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebRTC/" rel="tag">WebRTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Audio/" style="font-size: 10px;">Audio</a> <a href="/tags/AudioProcessing/" style="font-size: 10px;">AudioProcessing</a> <a href="/tags/DeepLearning/" style="font-size: 15px;">DeepLearning</a> <a href="/tags/FFmpeg/" style="font-size: 12.5px;">FFmpeg</a> <a href="/tags/GigPage/" style="font-size: 10px;">GigPage</a> <a href="/tags/JNI/" style="font-size: 12.5px;">JNI</a> <a href="/tags/WebRTC/" style="font-size: 10px;">WebRTC</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 17.5px;">技术</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 17.5px;">生活</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/07/2020-09-07-WebRTC-Android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/">WebRTC系列-WebRTC_Android源码编译</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/25/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/">github.io博客无法访问问题</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/04/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/">代码优化方法论</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/07/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/">算法工程师到底是做什么的</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/31/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/">音乐人声分离小结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 Marshall Liu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

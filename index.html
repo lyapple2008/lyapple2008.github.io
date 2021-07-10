@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>BeYoung</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="BeYoung">
+<meta property="og:url" content="http://www.beyoung.xyz/index.html">
+<meta property="og:site_name" content="BeYoung">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Marshall Liu">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="BeYoung" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">BeYoung</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Stay Hungry, Stay Young</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.beyoung.xyz"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-2020-09-07-WebRTC-Android源码编译" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/09/07/2020-09-07-WebRTC-Android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/" class="article-date">
+  <time class="dt-published" datetime="2020-09-07T15:19:37.000Z" itemprop="datePublished">2020-09-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/09/07/2020-09-07-WebRTC-Android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/">WebRTC系列-WebRTC_Android源码编译</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="WebRTC-Android源码编译"><a href="#WebRTC-Android源码编译" class="headerlink" title="WebRTC Android源码编译"></a>WebRTC Android源码编译</h1><p>对于WebRTC的学习来说，首先需要搞定的是源码的编译，由于国内的特殊环境和WebRTC本身的复杂性，导致WebRTC源码编译成了WebRTC学习的第一道门槛。这里把自己在编译WebRTC源码过程中遇到的一些坑进行总结分享，希望对大家有帮助。主要参考官网和WebRTC的编译配置脚本，整个操作过程需要具备科学上学的环境，第一次下载好环境和源码后，后面就不需要了。这里以Android端为例，编译环境为Ubuntu 18.04（再高版本会提示不支持），WebRTC官网有提到Android端暂时只支持在Linux下编译。虽然网上也有资源介绍在Mac环境下编译的，但是用虚拟机装个Ubuntu还是挺方便的，咱就不折腾了。</p>
+        
+          <p class="article-more-link">
+            <a href="/2020/09/07/2020-09-07-WebRTC-Android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.beyoung.xyz/2020/09/07/2020-09-07-WebRTC-Android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/" data-id="ckqxgn5x50000kksp6h8a85kd" data-title="WebRTC系列-WebRTC_Android源码编译" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebRTC/" rel="tag">WebRTC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2020-04-25-github-io博客无法访问问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/04/25/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/" class="article-date">
+  <time class="dt-published" datetime="2020-04-25T01:34:29.000Z" itemprop="datePublished">2020-04-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/04/25/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/">github.io博客无法访问问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>原来的github.io自定义域名博客不能访问，提示如下信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Fastly error: unknown domain: beyoung.xyz. Please check that this domain has been added to a service.</span><br><span class="line">Details: cache-lax8629-LAX</span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2020/04/25/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.beyoung.xyz/2020/04/25/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/" data-id="ckqxglv1y0010icsp6o8c3pt2" data-title="github.io博客无法访问问题" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GigPage/" rel="tag">GigPage</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2019-08-04-代码优化方法论" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/08/04/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/" class="article-date">
+  <time class="dt-published" datetime="2019-08-04T02:44:29.000Z" itemprop="datePublished">2019-08-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2019/08/04/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/">代码优化方法论</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><a name="01ca666c"></a></p>
+<h2 id="为什么需要代码优化"><a href="#为什么需要代码优化" class="headerlink" title="为什么需要代码优化"></a>为什么需要代码优化</h2><ul>
+<li>提升体验，扩展玩法</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/3350865/62418824-63b24f80-b6a5-11e9-9bde-6cd6de0cc6a5.PNG" alt="image.png"></p>
+        
+          <p class="article-more-link">
+            <a href="/2019/08/04/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.beyoung.xyz/2019/08/04/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/" data-id="ckqxglv1v000uicsp3x2x11hc" data-title="代码优化方法论" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2019-04-07-算法工程师到底是做什么的" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/04/07/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/" class="article-date">
+  <time class="dt-published" datetime="2019-04-07T12:20:38.000Z" itemprop="datePublished">2019-04-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2019/04/07/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/">算法工程师到底是做什么的</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>还记得刚毕业那会找工作，那是一定要找法工程师这个岗位，当时就只是觉得这个岗位牛逼是公司的核心岗位，但是可能对于算法工程师与一般的软件工程有什么区别其实心理也说不清楚。作为一个到今年6月份就工作满5年了的老菜鸟，这期间工作的title也是算法工程师（虽然有些并不是真的在做算法），反正在以算法工程师的title在企业工作的感受与毕业那会想像中上的算法工程师的工作完全不一样。  </p>
+        
+          <p class="article-more-link">
+            <a href="/2019/04/07/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.beyoung.xyz/2019/04/07/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/" data-id="ckqxglv1w000wicspfyp1bwii" data-title="算法工程师到底是做什么的" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2019-03-31-音乐人声分离小结" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/03/31/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/" class="article-date">
+  <time class="dt-published" datetime="2019-03-31T14:18:43.000Z" itemprop="datePublished">2019-03-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2019/03/31/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/">音乐人声分离小结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="音乐人声分离概况"><a href="#音乐人声分离概况" class="headerlink" title="音乐人声分离概况"></a>音乐人声分离概况</h3><p>音乐人声分离的目的是，从一首歌曲中分离出人声和伴奏声。<a target="_blank" rel="noopener" href="https://www.math.ucdavis.edu/~aberrian/research/voice_separation/index.html">Project on Music/Voice Separation</a>这个网站比较了一些基于传统方法的效果，但是由于基于了一些假设（比如REPET就假伴奏都是周期重复信号），这些算法在实际测试过程中效果都差强人意。随着深度学习的流行，音乐人声分离这个领域也开始被基于深度学习的方法所占领。在<a target="_blank" rel="noopener" href="http://www.sisec17.audiolabs-erlangen.de/#/results/1/4/2">SiSEC MUS</a>上可以看到效果比较好的都是基于深度学习的方法。</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/03/31/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.beyoung.xyz/2019/03/31/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/" data-id="ckqxglv1x000yicsp5u5s9qnt" data-title="音乐人声分离小结" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2019-03-10-音频开发资源" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/03/10/2019-03-10-%E9%9F%B3%E9%A2%91%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/" class="article-date">
+  <time class="dt-published" datetime="2019-03-10T02:16:27.000Z" itemprop="datePublished">2019-03-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2019/03/10/2019-03-10-%E9%9F%B3%E9%A2%91%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/">音频开发资源</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>记录一些音频开发过程中会用到的优质资源</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://webrtc.org/">WebRTC</a>   </p>
+<blockquote>
+<p>WebRTC是google开源的实时音视频通讯项目，其中的AudioProcess模块包括了AGC/AEC/ANS算法，非常值得学习。同时WebRTC还是一个跨平台项目，代码中对各个平台（Android/Ios/Windows/Linux）硬件接口的封装和抽象可以直接拿来应用到自己的项目中。</p>
+</blockquote>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/google/oboe">Oboe</a>   </p>
+<blockquote>
+<p>Oboe是Google家开源一个高性能C++库，这个库封装了Android底层OpenSLES和AAudio接口，通过这个库可以方便地在Android实现Low Latency Audio，只需一套代码就可以了。</p>
+</blockquote>
+</li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2019/03/10/2019-03-10-%E9%9F%B3%E9%A2%91%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.beyoung.xyz/2019/03/10/2019-03-10-%E9%9F%B3%E9%A2%91%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/" data-id="ckqxglv1s000ticspcwcf7zpx" data-title="音频开发资源" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AudioProcessing/" rel="tag">AudioProcessing</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2019-03-03-JavaNativeInterface笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/03/03/2019-03-03-JavaNativeInterface%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time class="dt-published" datetime="2019-03-03T14:51:59.000Z" itemprop="datePublished">2019-03-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2019/03/03/2019-03-03-JavaNativeInterface%E7%AC%94%E8%AE%B0/">JavaNativeInterface笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>最近由于公司项目的原因开始接触WebRTC，其中Android相关部分由于需要跨越了两种不同的语<br>言，因此需要一种机制能够让C/C++和JAVA之间进行交互，而JNI就是这样一种机制。通过JNI可<br>以实现C/C++和JAVA之前需要交互。本篇笔记的首先从一个实际的例子开始介绍JNI操作的完整流<br>程是怎样的；接着将就这个例子完整介绍JNI中需要注意的点。<br><img src="https://user-images.githubusercontent.com/3350865/61180103-91c2e780-a643-11e9-8132-f85c7a83f8da.jpg" alt="image"></p>
+        
+          <p class="article-more-link">
+            <a href="/2019/03/03/2019-03-03-JavaNativeInterface%E7%AC%94%E8%AE%B0/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.beyoung.xyz/2019/03/03/2019-03-03-JavaNativeInterface%E7%AC%94%E8%AE%B0/" data-id="ckqxglv230018icsp1p2a4f9b" data-title="JavaNativeInterface笔记" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JNI/" rel="tag">JNI</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2019-01-26-2019小目标" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/01/26/2019-01-26-2019%E5%B0%8F%E7%9B%AE%E6%A0%87/" class="article-date">
+  <time class="dt-published" datetime="2019-01-26T11:58:18.000Z" itemprop="datePublished">2019-01-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2019/01/26/2019-01-26-2019%E5%B0%8F%E7%9B%AE%E6%A0%87/">2019小目标--重新开始打脸之路</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="2018回顾"><a href="#2018回顾" class="headerlink" title="2018回顾"></a>2018回顾</h1><p>先看下2018初始的时候自己立下的flag吧，看看脸被打得有多痛</p>
+<p><img src="https://user-images.githubusercontent.com/3350865/61180087-427cb700-a643-11e9-8bfd-354561f9d0e2.jpg" alt="image"> </p>
+        
+          <p class="article-more-link">
+            <a href="/2019/01/26/2019-01-26-2019%E5%B0%8F%E7%9B%AE%E6%A0%87/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.beyoung.xyz/2019/01/26/2019-01-26-2019%E5%B0%8F%E7%9B%AE%E6%A0%87/" data-id="ckqxglv1h0008icspcxw86xbp" data-title="2019小目标--重新开始打脸之路" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2018-10-29-收集音频技术应用公司与实验室" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/10/29/2018-10-29-%E6%94%B6%E9%9B%86%E9%9F%B3%E9%A2%91%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%E5%85%AC%E5%8F%B8%E4%B8%8E%E5%AE%9E%E9%AA%8C%E5%AE%A4/" class="article-date">
+  <time class="dt-published" datetime="2018-10-29T15:34:05.000Z" itemprop="datePublished">2018-10-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/10/29/2018-10-29-%E6%94%B6%E9%9B%86%E9%9F%B3%E9%A2%91%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%E5%85%AC%E5%8F%B8%E4%B8%8E%E5%AE%9E%E9%AA%8C%E5%AE%A4/">收集音频技术应用公司与实验室</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="https://user-images.githubusercontent.com/3350865/61180076-fe89b200-a642-11e9-81a7-697446a0860a.jpg"><br>&emsp;&emsp;收集一些音频相关的公司和实验室，另外还有一些个人博客，用来了解行业的最新动态。</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/10/29/2018-10-29-%E6%94%B6%E9%9B%86%E9%9F%B3%E9%A2%91%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%E5%85%AC%E5%8F%B8%E4%B8%8E%E5%AE%9E%E9%AA%8C%E5%AE%A4/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.beyoung.xyz/2018/10/29/2018-10-29-%E6%94%B6%E9%9B%86%E9%9F%B3%E9%A2%91%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%E5%85%AC%E5%8F%B8%E4%B8%8E%E5%AE%9E%E9%AA%8C%E5%AE%A4/" data-id="ckqxglv1g0005icsp3fr5f7px" data-title="收集音频技术应用公司与实验室" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Audio/" rel="tag">Audio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2018-10-15-2018健身记录" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/10/15/2018-10-15-2018%E5%81%A5%E8%BA%AB%E8%AE%B0%E5%BD%95/" class="article-date">
+  <time class="dt-published" datetime="2018-10-15T14:11:34.000Z" itemprop="datePublished">2018-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/10/15/2018-10-15-2018%E5%81%A5%E8%BA%AB%E8%AE%B0%E5%BD%95/">2018健身记录</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;今天又一次重新开始健身计划，这次到这里来做个记录，看看能坚持多久！为了更好的身体，为了腹肌，加油，少年，你是要成为海贼王的男人！！！   </p>
+<ul>
+<li>器械：瑜伽垫一张</li>
+<li>课程：Fit健身</li>
+</ul>
+<blockquote>
+<p>今天买了课程，花了大价钱，达不成目标就要打水漂了！！！</p>
+</blockquote>
+<center>
+<img src="https://user-images.githubusercontent.com/3350865/61180053-a357bf80-a642-11e9-914e-529f460e4445.jpg" width="50%" height="50%"/>
+</center>
+
+<!---more--->
+
+<ul>
+<li><h3 id="十月运动记录"><a href="#十月运动记录" class="headerlink" title="十月运动记录"></a>十月运动记录</h3></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>日期</th>
+<th align="center">体重（Kg）</th>
+<th align="center">运动内容</th>
+<th align="center">运动时间（分钟）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2018-10-15</td>
+<td align="center">65.9</td>
+<td align="center">HIIT-畅快流汗</td>
+<td align="center">20</td>
+</tr>
+<tr>
+<td>2018-10-16</td>
+<td align="center">65.0</td>
+<td align="center">HIIT-畅快流汗</td>
+<td align="center">20</td>
+</tr>
+<tr>
+<td>2018-10-17</td>
+<td align="center">65.3</td>
+<td align="center">HIIT-腹部燃脂</td>
+<td align="center">29</td>
+</tr>
+<tr>
+<td>2018-10-18</td>
+<td align="center">65.1</td>
+<td align="center">HIIT-脂肪ByeBye</td>
+<td align="center">14</td>
+</tr>
+<tr>
+<td>2018-10-19</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-10-20</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-10-21</td>
+<td align="center">64.7</td>
+<td align="center">FIT健身体能测试</td>
+<td align="center">10</td>
+</tr>
+<tr>
+<td>2018-10-22</td>
+<td align="center">65.4</td>
+<td align="center">腹肌撕裂者初级<br>HIIT-进击的Burpee</td>
+<td align="center">25</td>
+</tr>
+<tr>
+<td>2018-10-23</td>
+<td align="center">65.7</td>
+<td align="center">打篮球</td>
+<td align="center">60</td>
+</tr>
+<tr>
+<td>2018-10-24</td>
+<td align="center">65.4</td>
+<td align="center">休息恢复</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-10-25</td>
+<td align="center">65.6</td>
+<td align="center">HIIT-腹部燃脂</td>
+<td align="center">29</td>
+</tr>
+<tr>
+<td>2018-10-26</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-10-27</td>
+<td align="center"></td>
+<td align="center">HIIT-全身活力燃脂</td>
+<td align="center">22</td>
+</tr>
+<tr>
+<td>2018-10-28</td>
+<td align="center">64.1</td>
+<td align="center">HIIT-畅快流汗<br>入门瑜伽伸展</td>
+<td align="center">30</td>
+</tr>
+<tr>
+<td>2018-10-29</td>
+<td align="center">65.1</td>
+<td align="center">核心力量初级训练<br>Tabata-碎脂机进阶</td>
+<td align="center">24</td>
+</tr>
+<tr>
+<td>2018-10-30</td>
+<td align="center">65.3</td>
+<td align="center">打篮球</td>
+<td align="center">60</td>
+</tr>
+<tr>
+<td>2018-10-26</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">运动天数</th>
+<th align="center">开始体重</th>
+<th align="center">结束体重</th>
+<th align="center">体重变化（Kg）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">13</td>
+<td align="center">65.9</td>
+<td align="center">65.3</td>
+<td align="center">-0.6</td>
+</tr>
+</tbody></table>
+<hr>
+<ul>
+<li><h3 id="十一月运动记录"><a href="#十一月运动记录" class="headerlink" title="十一月运动记录"></a>十一月运动记录</h3></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>日期</th>
+<th align="center">体重（Kg）</th>
+<th align="center">运动内容</th>
+<th align="center">运动时间（分钟）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2018-11-1</td>
+<td align="center">64.7</td>
+<td align="center">腹肌撕裂者初级<br>HIIT-减脂巨星</td>
+<td align="center">41</td>
+</tr>
+<tr>
+<td>2018-11-2</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-11-3</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-11-4</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-11-5</td>
+<td align="center">64.6</td>
+<td align="center">HIIT-畅快流汗<br>核心进阶减脂训练</td>
+<td align="center">36</td>
+</tr>
+<tr>
+<td>2018-11-6</td>
+<td align="center">64.3</td>
+<td align="center">强力带全身焕活-减脂初级</td>
+<td align="center">49</td>
+</tr>
+<tr>
+<td>2018-11-7</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-11-8</td>
+<td align="center">64.7</td>
+<td align="center">HIIT-全身活力燃脂<br>腹肌撕裂者进阶</td>
+<td align="center">40</td>
+</tr>
+<tr>
+<td>2018-11-9</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-11-10</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-11-11</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-11-12</td>
+<td align="center">64.1</td>
+<td align="center">Tabata-碎脂机进阶<br>核心进阶减脂训练</td>
+<td align="center">29</td>
+</tr>
+<tr>
+<td>2018-11-13</td>
+<td align="center">64.2</td>
+<td align="center">打篮球</td>
+<td align="center">60</td>
+</tr>
+<tr>
+<td>2018-11-14</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-11-15</td>
+<td align="center">64.6</td>
+<td align="center">HIIT-腹部燃脂</td>
+<td align="center">28</td>
+</tr>
+<tr>
+<td>2018-11-16</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-11-17</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-11-18</td>
+<td align="center">64.6</td>
+<td align="center"><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=bTHnzGSgkqk">十分鐘家中腹肌訓練</a></td>
+<td align="center">10</td>
+</tr>
+<tr>
+<td>2018-11-19</td>
+<td align="center">64.7</td>
+<td align="center">HIIT-进击的Burpee</td>
+<td align="center">22</td>
+</tr>
+<tr>
+<td>2018-11-20</td>
+<td align="center">64.3</td>
+<td align="center">打篮球</td>
+<td align="center">60</td>
+</tr>
+<tr>
+<td>2018-11-21</td>
+<td align="center">64.4</td>
+<td align="center">HIIT-腹部燃脂</td>
+<td align="center">29</td>
+</tr>
+<tr>
+<td>2018-11-22</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-11-23</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-11-24</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-11-25</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-11-26</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-11-27</td>
+<td align="center">63.6</td>
+<td align="center">打篮球</td>
+<td align="center">60</td>
+</tr>
+<tr>
+<td>2018-11-28</td>
+<td align="center">63.7</td>
+<td align="center">十分鐘家中腹肌訓練</td>
+<td align="center">10</td>
+</tr>
+<tr>
+<td>2018-11-29</td>
+<td align="center">63.8</td>
+<td align="center">HIIT-全身活力燃脂</td>
+<td align="center">22</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">运动天数</th>
+<th align="center">开始体重</th>
+<th align="center">结束体重</th>
+<th align="center">体重变化（Kg）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">14</td>
+<td align="center">65.3</td>
+<td align="center">63.8</td>
+<td align="center">-1.5</td>
+</tr>
+</tbody></table>
+<hr>
+<ul>
+<li><h3 id="十二月运动记录"><a href="#十二月运动记录" class="headerlink" title="十二月运动记录"></a>十二月运动记录</h3></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>日期</th>
+<th align="center">体重（Kg）</th>
+<th align="center">运动内容</th>
+<th align="center">运动时间（分钟）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2018-12-1</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-12-2</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-12-3</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-12-4</td>
+<td align="center">64.4</td>
+<td align="center">打篮球</td>
+<td align="center">60</td>
+</tr>
+<tr>
+<td>2018-12-5</td>
+<td align="center">63.9</td>
+<td align="center">腹肌撕裂者进阶</td>
+<td align="center">18</td>
+</tr>
+<tr>
+<td>2018-12-6</td>
+<td align="center">64.0</td>
+<td align="center">HIIT-进击的Burpee</td>
+<td align="center">22</td>
+</tr>
+<tr>
+<td>2018-12-7</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-12-8</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-12-9</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-12-10</td>
+<td align="center">63.6</td>
+<td align="center"><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=bTHnzGSgkqk">十分鐘家中腹肌訓練</a></td>
+<td align="center">10</td>
+</tr>
+<tr>
+<td>2018-12-11</td>
+<td align="center">64.3</td>
+<td align="center">打篮球</td>
+<td align="center">60</td>
+</tr>
+<tr>
+<td>2018-12-12</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-12-13</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-12-14</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-12-15</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-12-16</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>2018-12-17</td>
+<td align="center">64.3</td>
+<td align="center">HIIT-减脂巨星</td>
+<td align="center">27</td>
+</tr>
+</tbody></table>
+<ul>
+<li>爆开始前的照片   </li>
+</ul>
+<center>
+<img src="https://user-images.githubusercontent.com/3350865/61180060-b8345300-a642-11e9-9859-536be6249df6.jpg" width="50%" height="50%"/>
+</center>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.beyoung.xyz/2018/10/15/2018-10-15-2018%E5%81%A5%E8%BA%AB%E8%AE%B0%E5%BD%95/" data-id="ckqxglv1c0001icsp347i0vcz" data-title="2018健身记录" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Audio/" rel="tag">Audio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AudioProcessing/" rel="tag">AudioProcessing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GigPage/" rel="tag">GigPage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/" rel="tag">JNI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebRTC/" rel="tag">WebRTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Audio/" style="font-size: 10px;">Audio</a> <a href="/tags/AudioProcessing/" style="font-size: 10px;">AudioProcessing</a> <a href="/tags/DeepLearning/" style="font-size: 15px;">DeepLearning</a> <a href="/tags/FFmpeg/" style="font-size: 12.5px;">FFmpeg</a> <a href="/tags/GigPage/" style="font-size: 10px;">GigPage</a> <a href="/tags/JNI/" style="font-size: 12.5px;">JNI</a> <a href="/tags/WebRTC/" style="font-size: 10px;">WebRTC</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 17.5px;">技术</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 17.5px;">生活</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/07/2020-09-07-WebRTC-Android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/">WebRTC系列-WebRTC_Android源码编译</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/25/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/">github.io博客无法访问问题</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/04/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/">代码优化方法论</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/07/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/">算法工程师到底是做什么的</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/31/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/">音乐人声分离小结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 Marshall Liu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

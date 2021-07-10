@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Windows下载编译FFmpeg动态库指北 | BeYoung</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="&amp;emsp;&amp;emsp;在踩了无数坑之后，才有了这篇文章，现在就一个想法还是Linux系统好呀。编译什么东西都是一个套路，configure&#x2F;make&#x2F;make install。之前不知道为什么那么程序员会推崇用mac做开发，编译的这个问题上Mac绝对完胜Windows。   一、需要下载的工具 Visual Studio 2013 或 Visual Studio 2015 MSYS2  msys">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows下载编译FFmpeg动态库指北">
+<meta property="og:url" content="http://www.beyoung.xyz/2018/08/18/2018-08-18-Windows%E4%B8%8B%E8%BD%BD%E7%BC%96%E8%AF%91FFmpeg%E5%8A%A8%E6%80%81%E5%BA%93%E6%8C%87%E5%8C%97/index.html">
+<meta property="og:site_name" content="BeYoung">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;在踩了无数坑之后，才有了这篇文章，现在就一个想法还是Linux系统好呀。编译什么东西都是一个套路，configure&#x2F;make&#x2F;make install。之前不知道为什么那么程序员会推崇用mac做开发，编译的这个问题上Mac绝对完胜Windows。   一、需要下载的工具 Visual Studio 2013 或 Visual Studio 2015 MSYS2  msys">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/61180035-21679680-a642-11e9-9c9b-eff27aff2ffb.jpg">
+<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/61180037-24fb1d80-a642-11e9-850c-263c5ca5e556.jpg">
+<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/61180038-275d7780-a642-11e9-8e97-cd2be8ee0611.jpg">
+<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/61180039-29273b00-a642-11e9-8826-8d0bdcc93810.jpg">
+<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/61180041-2b899500-a642-11e9-9cd5-d6afa776f3e4.jpg">
+<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/61180042-2d535880-a642-11e9-870c-382b5d6ddaaa.jpg">
+<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/61180043-2fb5b280-a642-11e9-9b42-27be3b4a21bc.jpg">
+<meta property="article:published_time" content="2018-08-18T04:19:55.000Z">
+<meta property="article:modified_time" content="2019-07-14T06:19:40.191Z">
+<meta property="article:author" content="Marshall Liu">
+<meta property="article:tag" content="FFmpeg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-images.githubusercontent.com/3350865/61180035-21679680-a642-11e9-9c9b-eff27aff2ffb.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="BeYoung" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">BeYoung</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Stay Hungry, Stay Young</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.beyoung.xyz"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2018-08-18-Windows下载编译FFmpeg动态库指北" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/08/18/2018-08-18-Windows%E4%B8%8B%E8%BD%BD%E7%BC%96%E8%AF%91FFmpeg%E5%8A%A8%E6%80%81%E5%BA%93%E6%8C%87%E5%8C%97/" class="article-date">
+  <time class="dt-published" datetime="2018-08-18T04:19:55.000Z" itemprop="datePublished">2018-08-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Windows下载编译FFmpeg动态库指北
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>&emsp;&emsp;在踩了无数坑之后，才有了这篇文章，现在就一个想法还是Linux系统好呀。编译什么东西都是一个套路，configure/make/make install。之前不知道为什么那么程序员会推崇用mac做开发，编译的这个问题上Mac绝对完胜Windows。</p>
+<!---more--->
+
+<h4 id="一、需要下载的工具"><a href="#一、需要下载的工具" class="headerlink" title="一、需要下载的工具"></a>一、需要下载的工具</h4><ul>
+<li>Visual Studio 2013 或 Visual Studio 2015</li>
+<li>MSYS2  <a target="_blank" rel="noopener" href="http://www.msys2.org/">msys2-x86_64</a></li>
+<li>YASM <a target="_blank" rel="noopener" href="http://yasm.tortall.net/Download.html">Win64.exe</a></li>
+<li>FFmpeg源码 <a target="_blank" rel="noopener" href="https://ffmpeg.org/">ffmpeg4.0.1</a><h4 id="二、编译环境搭建"><a href="#二、编译环境搭建" class="headerlink" title="二、编译环境搭建"></a>二、编译环境搭建</h4><h5 id="1-安装MSYS2，默认安装在C-msys64目录，安装完成后打开msys2环境，运行命令安装编译工具"><a href="#1-安装MSYS2，默认安装在C-msys64目录，安装完成后打开msys2环境，运行命令安装编译工具" class="headerlink" title="1. 安装MSYS2，默认安装在C:\msys64目录，安装完成后打开msys2环境，运行命令安装编译工具"></a>1. 安装MSYS2，默认安装在C:\msys64目录，安装完成后打开msys2环境，运行命令安装编译工具</h5><blockquote>
+<p>pacman -S make gcc diffutils</p>
+</blockquote>
+</li>
+</ul>
+<p><em>注：安装过程中可能会出现某些包下载失败的情况，这时只需要多试几次就好，直到提示净更新大小为0就说明安装完整了。</em></p>
+<p><img src="https://user-images.githubusercontent.com/3350865/61180035-21679680-a642-11e9-9c9b-eff27aff2ffb.jpg" alt="image"></p>
+<h5 id="2-修改C-msys64-msys2-shell-cmd文件，修改下图红框里的部分，这里是为了让msys2能继承VS的环境变量"><a href="#2-修改C-msys64-msys2-shell-cmd文件，修改下图红框里的部分，这里是为了让msys2能继承VS的环境变量" class="headerlink" title="2. 修改C:\msys64\msys2_shell.cmd文件，修改下图红框里的部分，这里是为了让msys2能继承VS的环境变量"></a>2. 修改C:\msys64\msys2_shell.cmd文件，修改下图红框里的部分，这里是为了让msys2能继承VS的环境变量</h5><blockquote>
+<p>set MSYS2_PATH_TYPE=inherit</p>
+</blockquote>
+<p><img src="https://user-images.githubusercontent.com/3350865/61180037-24fb1d80-a642-11e9-850c-263c5ca5e556.jpg" alt="image"></p>
+<h5 id="3-将C-msys64-usr-bin-link-exe重命名为其它名字，如link-bak-exe，这里是为了在链接的时候选择Visual-Studio的link-exe工具，避免冲突"><a href="#3-将C-msys64-usr-bin-link-exe重命名为其它名字，如link-bak-exe，这里是为了在链接的时候选择Visual-Studio的link-exe工具，避免冲突" class="headerlink" title="3. 将C:\msys64\usr\bin\link.exe重命名为其它名字，如link_bak.exe，这里是为了在链接的时候选择Visual Studio的link.exe工具，避免冲突"></a>3. 将C:\msys64\usr\bin\link.exe重命名为其它名字，如link_bak.exe，这里是为了在链接的时候选择Visual Studio的link.exe工具，避免冲突</h5><p><img src="https://user-images.githubusercontent.com/3350865/61180038-275d7780-a642-11e9-8e97-cd2be8ee0611.jpg" alt="image"></p>
+<h5 id="4-将下载的yasm工具，yasm-1-3-0-win32-exe，复制到C-msys64-usr-bin目录，将重命令为yasm-exe"><a href="#4-将下载的yasm工具，yasm-1-3-0-win32-exe，复制到C-msys64-usr-bin目录，将重命令为yasm-exe" class="headerlink" title="4. 将下载的yasm工具，yasm-1.3.0-win32.exe，复制到C:\msys64\usr\bin目录，将重命令为yasm.exe"></a>4. 将下载的yasm工具，yasm-1.3.0-win32.exe，复制到C:\msys64\usr\bin目录，将重命令为yasm.exe</h5><p><img src="https://user-images.githubusercontent.com/3350865/61180039-29273b00-a642-11e9-8826-8d0bdcc93810.jpg" alt="image"></p>
+<h4 id="三、准备编译"><a href="#三、准备编译" class="headerlink" title="三、准备编译"></a>三、准备编译</h4><h5 id="1-打开visual-studio命令行，这里要选择vs2015-x64-x86兼容工具提示符，打开方式如下图所示"><a href="#1-打开visual-studio命令行，这里要选择vs2015-x64-x86兼容工具提示符，打开方式如下图所示" class="headerlink" title="1. 打开visual studio命令行，这里要选择vs2015 x64 x86兼容工具提示符，打开方式如下图所示"></a>1. 打开visual studio命令行，这里要选择<strong>vs2015 x64 x86兼容工具提示符</strong>，打开方式如下图所示</h5><p><img src="https://user-images.githubusercontent.com/3350865/61180041-2b899500-a642-11e9-9cd5-d6afa776f3e4.jpg" alt="image"></p>
+<h5 id="2-切换目录到C-msys64，运行msy2-shell-cmd，开启msys2环境"><a href="#2-切换目录到C-msys64，运行msy2-shell-cmd，开启msys2环境" class="headerlink" title="2. 切换目录到C:\msys64，运行msy2_shell.cmd，开启msys2环境"></a>2. 切换目录到C:\msys64，运行msy2_shell.cmd，开启msys2环境</h5><p><img src="https://user-images.githubusercontent.com/3350865/61180042-2d535880-a642-11e9-870c-382b5d6ddaaa.jpg" alt="image"></p>
+<h5 id="3-测试环境是否正确，检查编译工具和链接工具是不是指向的VS工具"><a href="#3-测试环境是否正确，检查编译工具和链接工具是不是指向的VS工具" class="headerlink" title="3. 测试环境是否正确，检查编译工具和链接工具是不是指向的VS工具"></a>3. 测试环境是否正确，检查编译工具和链接工具是不是指向的VS工具</h5><p><img src="https://user-images.githubusercontent.com/3350865/61180043-2fb5b280-a642-11e9-9b42-27be3b4a21bc.jpg" alt="image"></p>
+<h4 id="四、开始编译（以下命令均在msys2环境执行）"><a href="#四、开始编译（以下命令均在msys2环境执行）" class="headerlink" title="四、开始编译（以下命令均在msys2环境执行）"></a>四、开始编译（以下命令均在msys2环境执行）</h4><h5 id="1-切换目录到ffmpeg源码目录"><a href="#1-切换目录到ffmpeg源码目录" class="headerlink" title="1. 切换目录到ffmpeg源码目录"></a>1. 切换目录到ffmpeg源码目录</h5><h5 id="2-运行configure脚本，相关参数参考下面，configure脚本执行的时间会比较长，耐心等待"><a href="#2-运行configure脚本，相关参数参考下面，configure脚本执行的时间会比较长，耐心等待" class="headerlink" title="2. 运行configure脚本，相关参数参考下面，configure脚本执行的时间会比较长，耐心等待"></a>2. 运行configure脚本，相关参数参考下面，configure脚本执行的时间会比较长，耐心等待</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">./configure \</span><br><span class="line"> --prefix=./build_hwaccel \       ====&gt; 【可选】这里指定编译完成后库的安装目录</span><br><span class="line"> --toolchain=msvc \               ====&gt; 【必须】选择使用VS的工具和环境</span><br><span class="line"> --arch=x86 \                     ====&gt; 【必须】x86指定生成win32版本的库</span><br><span class="line"> --enable-x86asm \                ====&gt; 【可选】使能x86的汇编优化</span><br><span class="line"> --disable-doc \                  ====&gt; 【可选】关闭ffmpeg文档输出</span><br><span class="line"> --enable-shared \                ====&gt; 【必须】设置输出动态库</span><br><span class="line"> --disable-static \               ====&gt; 【可选】设置关闭输出静态库</span><br><span class="line"> --enable-d3d11va \               ====&gt; 【可选】设置使能d3d11硬件加速 </span><br><span class="line"> --enable-dxva2                   ====&gt; 【可选】设置便能dxva2接口的硬件加速</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-执行make命令，这个过程可能会有一些错误提示，可以根据提示上网进搜索相关问题，"><a href="#3-执行make命令，这个过程可能会有一些错误提示，可以根据提示上网进搜索相关问题，" class="headerlink" title="3. 执行make命令，这个过程可能会有一些错误提示，可以根据提示上网进搜索相关问题，"></a>3. 执行make命令，这个过程可能会有一些错误提示，可以根据提示上网进搜索相关问题，</h5><blockquote>
+<p>如编译ffmpeg4.0.1需要注释与变量CC_IDENT相关的语句，存在于cmdutils.c和ff_probe.c文件中</p>
+</blockquote>
+<h5 id="4-执行make-install命令，将生成的动态库复制到configure时指定的目录中"><a href="#4-执行make-install命令，将生成的动态库复制到configure时指定的目录中" class="headerlink" title="4. 执行make install命令，将生成的动态库复制到configure时指定的目录中"></a>4. 执行make install命令，将生成的动态库复制到configure时指定的目录中</h5><h5 id="5-至此整个windows下的ffmpeg动态库编译完成"><a href="#5-至此整个windows下的ffmpeg动态库编译完成" class="headerlink" title="5. 至此整个windows下的ffmpeg动态库编译完成"></a>5. 至此整个windows下的ffmpeg动态库编译完成</h5>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.beyoung.xyz/2018/08/18/2018-08-18-Windows%E4%B8%8B%E8%BD%BD%E7%BC%96%E8%AF%91FFmpeg%E5%8A%A8%E6%80%81%E5%BA%93%E6%8C%87%E5%8C%97/" data-id="ckqxglv1f0004icsp6h7nhsli" data-title="Windows下载编译FFmpeg动态库指北" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/10/15/2018-10-15-2018%E5%81%A5%E8%BA%AB%E8%AE%B0%E5%BD%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          2018健身记录
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/29/2018-04-29-Android%E7%AB%AF%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Android端实现手写数字识别</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Audio/" rel="tag">Audio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AudioProcessing/" rel="tag">AudioProcessing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GigPage/" rel="tag">GigPage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/" rel="tag">JNI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebRTC/" rel="tag">WebRTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Audio/" style="font-size: 10px;">Audio</a> <a href="/tags/AudioProcessing/" style="font-size: 10px;">AudioProcessing</a> <a href="/tags/DeepLearning/" style="font-size: 15px;">DeepLearning</a> <a href="/tags/FFmpeg/" style="font-size: 12.5px;">FFmpeg</a> <a href="/tags/GigPage/" style="font-size: 10px;">GigPage</a> <a href="/tags/JNI/" style="font-size: 12.5px;">JNI</a> <a href="/tags/WebRTC/" style="font-size: 10px;">WebRTC</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 17.5px;">技术</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 17.5px;">生活</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/07/2020-09-07-WebRTC-Android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/">WebRTC系列-WebRTC_Android源码编译</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/25/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/">github.io博客无法访问问题</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/04/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/">代码优化方法论</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/07/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/">算法工程师到底是做什么的</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/31/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/">音乐人声分离小结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 Marshall Liu<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
