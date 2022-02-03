@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.beyoung.xyz","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="分析综合滤波器组的作用由于音频信号在不同的频率范围具有不同的特性，因此在音频处理之前通常都会使用分析综合滤波器组将音频信号分成不同的频率子带，再分别进行处理。比如，音频编码中常用到的子带编码（Subband coding）；webrtc的VAD中，会对不同的频率子带计算特征，再综合这些特征计算语音概率。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QMF分析综合滤波器">
+<meta property="og:url" content="http://www.beyoung.xyz/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/index.html">
+<meta property="og:site_name" content="BeYoung">
+<meta property="og:description" content="分析综合滤波器组的作用由于音频信号在不同的频率范围具有不同的特性，因此在音频处理之前通常都会使用分析综合滤波器组将音频信号分成不同的频率子带，再分别进行处理。比如，音频编码中常用到的子带编码（Subband coding）；webrtc的VAD中，会对不同的频率子带计算特征，再综合这些特征计算语音概率。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.beyoung.xyz/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/001.png">
+<meta property="og:image" content="http://www.beyoung.xyz/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/002.png">
+<meta property="og:image" content="http://www.beyoung.xyz/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/008.png">
+<meta property="og:image" content="http://www.beyoung.xyz/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/003.png">
+<meta property="og:image" content="http://www.beyoung.xyz/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/004.png">
+<meta property="og:image" content="http://www.beyoung.xyz/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/005.png">
+<meta property="og:image" content="http://www.beyoung.xyz/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/006.png">
+<meta property="og:image" content="http://www.beyoung.xyz/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/007.png">
+<meta property="article:published_time" content="2022-02-03T03:35:16.000Z">
+<meta property="article:modified_time" content="2022-02-03T03:43:53.337Z">
+<meta property="article:author" content="Marshall Liu">
+<meta property="article:tag" content="Audio">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="WebRTC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.beyoung.xyz/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/001.png">
+
+<link rel="canonical" href="http://www.beyoung.xyz/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>QMF分析综合滤波器 | BeYoung</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">BeYoung</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Stay Hungry, Stay Young</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Marshall Liu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BeYoung">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          QMF分析综合滤波器
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-02-03 11:35:16 / 修改时间：11:43:53" itemprop="dateCreated datePublished" datetime="2022-02-03T11:35:16+08:00">2022-02-03</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="分析综合滤波器组的作用"><a href="#分析综合滤波器组的作用" class="headerlink" title="分析综合滤波器组的作用"></a>分析综合滤波器组的作用</h1><p>由于音频信号在不同的频率范围具有不同的特性，因此在音频处理之前通常都会使用分析综合滤波器组将音频信号分成不同的频率子带，再分别进行处理。比如，音频编码中常用到的子带编码（Subband coding）；webrtc的VAD中，会对不同的频率子带计算特征，再综合这些特征计算语音概率。</p>
+<img src="/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/001.png" class="">
+
+<span id="more"></span>
+
+<h1 id="分析综合滤波器组是如何实现"><a href="#分析综合滤波器组是如何实现" class="headerlink" title="分析综合滤波器组是如何实现"></a>分析综合滤波器组是如何实现</h1><p>在WebRTC中使用最多的是基于IIR实现的二通道QMF分析综合滤波器组，通过二通道QMF滤波器组，可以很方便实现N等分的子带分解，因此这里只介绍二通道QMF滤波器组。</p>
+<img src="/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/002.png" class="">
+
+<p>从上图可以看出，分析综合滤波器包含分析部分和综合部分，当中间没有任何处理时，整个系统的输入输出关系如下：</p>
+<img src="/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/008.png" class="">
+<img src="/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/003.png" class="">
+
+<p>可以看到分析滤波器部分的高通和低通部分的频率响应网线正好是相对pi/2镜像对称的，QMF叫镜像滤波器的由来。图中Xa0代表的就是输入信号的低频部分，而Xa1代表的就是输入信号的高频部分，这样通过分析滤波器后，就可以对信号的低频部分和高频部分进行分别处理了。</p>
+<img src="/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/004.png" class="">
+<p>因此只要按下面的等式进行滤波器设计，就可以让A(z)=0，即消除混叠，实现完善重构。</p>
+<img src="/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/005.png" class="">
+
+<p>为了效率，通常会采用多相形式实现QMF组，如下图所示，信号处理前都会进行抽取操作，这些实际处理的数据量就减少了，从而提升了执行效率</p>
+<img src="/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/006.png" class="">
+
+<p>在QMF组的多相形式中对应的低通滤波器和高通滤波器如上式所示。<br>WebRTC中的实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">void WebRtcSpl_AnalysisQMF(const int16_t* in_data, size_t in_data_length,</span><br><span class="line">                           int16_t* low_band, int16_t* high_band,</span><br><span class="line">                           int32_t* filter_state1, int32_t* filter_state2)</span><br><span class="line">&#123;</span><br><span class="line">    size_t i;</span><br><span class="line">    int16_t k;</span><br><span class="line">    int32_t tmp;</span><br><span class="line">    int32_t half_in1[kMaxBandFrameLength];</span><br><span class="line">    int32_t half_in2[kMaxBandFrameLength];</span><br><span class="line">    int32_t filter1[kMaxBandFrameLength];</span><br><span class="line">    int32_t filter2[kMaxBandFrameLength];</span><br><span class="line">    const size_t band_length = in_data_length / 2;</span><br><span class="line">    RTC_DCHECK_EQ(0, in_data_length % 2);</span><br><span class="line">    RTC_DCHECK_LE(band_length, kMaxBandFrameLength);</span><br><span class="line"></span><br><span class="line">    // Split even and odd samples. Also shift them to Q10.</span><br><span class="line">    for (i = 0, k = 0; i &lt; band_length; i++, k += 2)</span><br><span class="line">    &#123;</span><br><span class="line">        half_in2[i] = ((int32_t)in_data[k]) * (1 &lt;&lt; 10);</span><br><span class="line">        half_in1[i] = ((int32_t)in_data[k + 1]) * (1 &lt;&lt; 10);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // All pass filter even and odd samples, independently.</span><br><span class="line">    WebRtcSpl_AllPassQMF(half_in1, band_length, filter1,</span><br><span class="line">                         WebRtcSpl_kAllPassFilter1, filter_state1);</span><br><span class="line">    WebRtcSpl_AllPassQMF(half_in2, band_length, filter2,</span><br><span class="line">                         WebRtcSpl_kAllPassFilter2, filter_state2);</span><br><span class="line"></span><br><span class="line">    // Take the sum and difference of filtered version of odd and even</span><br><span class="line">    // branches to get upper &amp; lower band.</span><br><span class="line">    for (i = 0; i &lt; band_length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        tmp = (filter1[i] + filter2[i] + 1024) &gt;&gt; 11;</span><br><span class="line">        low_band[i] = WebRtcSpl_SatW32ToW16(tmp);</span><br><span class="line"></span><br><span class="line">        tmp = (filter1[i] - filter2[i] + 1024) &gt;&gt; 11;</span><br><span class="line">        high_band[i] = WebRtcSpl_SatW32ToW16(tmp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面是WebRTC中关于分析滤波器部分的实现，从代码中可以看出WebRTC中的分析综合滤波器是基于全通滤波器的QMF多相实现，其中的全通滤器采用了IIR实现，即其中的P0(z)和P1(z)都是全通滤波器。通过参考[2]我们可以梳理这个问题的处理流程，通过分析QMF分析综合滤波器满足完美重构的条件，可以得到H0、H1、G0、G1之间的关系，同时H0和H1是基于pi/2，因此只需要知道H0，最终转化成H0低通滤波器的设计问题。进一步的由于采用了基于IIR的全通滤波器，因此只需要考虑相位失真问题，最终QMF分析综合滤波器问题转换成了滤波器的相位均衡问题。虽然我们知道了设计QMF分析综合滤波器的原理和思路，但是想设计一个完全可用的滤波器还是很有难度的，下面我们直接看下WebRTC中QMF分析综合滤波器的效果，如下图所示，可以看到对应的低通滤波器和高通滤波器都有很窄的过渡带，整个系统的幅值响应几乎接近0dB的，同时除了pi/2附近的频带都是近似线性相位的。</p>
+<img src="/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/007.png" class="">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">import scipy.signal as signal</span><br><span class="line">import numpy as np</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import control</span><br><span class="line"></span><br><span class="line">def analysis_synthesis_filter():</span><br><span class="line">    filter1_coef = [6418.0 / 65536.0, 36982.0 / 65536.0, 57261.0 / 65536.0]</span><br><span class="line">    filter2_coef = [21333.0 / 65536.0, 49062.0 / 65536.0, 63010.0 / 65536.0]</span><br><span class="line">    ha0_0_b = [1, 0, filter1_coef[0]]</span><br><span class="line">    ha0_0_a = [filter1_coef[0], 0, 1]</span><br><span class="line">    ha0_1_b = [1, 0, filter1_coef[1]]</span><br><span class="line">    ha0_1_a = [filter1_coef[1], 0, 1]</span><br><span class="line">    ha0_2_b = [1, 0, filter1_coef[2]]</span><br><span class="line">    ha0_2_a = [filter1_coef[2], 0, 1]</span><br><span class="line"></span><br><span class="line">    ha1_0_b = [1, 0, filter2_coef[0]]</span><br><span class="line">    ha1_0_a = [filter2_coef[0], 0, 1]</span><br><span class="line">    ha1_1_b = [1, 0, filter2_coef[1]]</span><br><span class="line">    ha1_1_a = [filter2_coef[1], 0, 1]</span><br><span class="line">    ha1_2_b = [1, 0, filter2_coef[2]]</span><br><span class="line">    ha1_2_a = [filter2_coef[2], 0, 1]</span><br><span class="line"></span><br><span class="line">    ha0_b = np.convolve(ha0_2_b, np.convolve(ha0_1_b, ha0_0_b))</span><br><span class="line">    ha0_a = np.convolve(ha0_2_a, np.convolve(ha0_1_a, ha0_0_a))</span><br><span class="line">    ha1_b = np.convolve([1, 0], np.convolve(ha1_2_b, np.convolve(ha1_1_b, ha1_0_b)))</span><br><span class="line">    ha1_a = np.convolve(ha1_2_a, np.convolve(ha1_1_a, ha1_0_a))</span><br><span class="line"></span><br><span class="line">    ha0_sys = control.TransferFunction(ha0_b, ha0_a)</span><br><span class="line">    ha1_sys = control.TransferFunction(ha1_b, ha1_a)</span><br><span class="line">    b0_sys = ha1_sys</span><br><span class="line">    b1_sys = ha0_sys</span><br><span class="line">    delay_sys = control.TransferFunction([1, 0], [1])</span><br><span class="line"></span><br><span class="line">    lowpass_sys = 0.5 * (ha0_sys + ha1_sys)</span><br><span class="line">    highpass_sys = 0.5 * (ha0_sys - ha1_sys)</span><br><span class="line">    t_sys = delay_sys / 2 * (ha0_sys * b0_sys + ha1_sys * b1_sys)</span><br><span class="line">    # print(t_sys)</span><br><span class="line">    lowpass_num = lowpass_sys.num[0][0]</span><br><span class="line">    lowpass_den = lowpass_sys.den[0][0]</span><br><span class="line">    highpass_num = highpass_sys.num[0][0]</span><br><span class="line">    highpass_den = highpass_sys.den[0][0]</span><br><span class="line">    t_num = t_sys.num[0][0]</span><br><span class="line">    t_den = t_sys.den[0][0]</span><br><span class="line">    lowpass_w, lowpass_h = signal.freqz(lowpass_num, lowpass_den)</span><br><span class="line">    highpass_w, highpass_h = signal.freqz(highpass_num, highpass_den)</span><br><span class="line">    t_w, t_h = signal.freqz(t_num, t_den)</span><br><span class="line">    fig, axes = plt.subplots(3, 2)</span><br><span class="line">    axes[0, 0].plot(lowpass_w/np.pi, 20*np.log10(np.abs(lowpass_h)))</span><br><span class="line">    axes[0, 1].plot(lowpass_w/np.pi, np.unwrap(np.angle(lowpass_h, deg=True)))</span><br><span class="line">    axes[1, 0].plot(highpass_w/np.pi, 20*np.log10(np.abs(highpass_h)))</span><br><span class="line">    axes[1, 1].plot(highpass_w/np.pi, np.unwrap(np.angle(highpass_h, deg=True)))</span><br><span class="line">    axes[2, 0].plot(t_w/np.pi, 20*np.log10(np.abs(t_h)))</span><br><span class="line">    axes[2, 1].plot(t_w/np.pi, np.unwrap(np.angle(t_h, deg=True)))</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+
+<h1 id="最近的一些心得"><a href="#最近的一些心得" class="headerlink" title="最近的一些心得"></a>最近的一些心得</h1><p>最后说下近期的两点小心得：</p>
+<ol>
+<li>不懂的知识点请尽早弄懂它。其实对于QMF分析综合滤波器组，在最开始学习音频编码时就遇到了，但是当时没有深入的去搞清楚，最后还是没有躲过去。所以最近也是恶补了很多基础知识，才大致了解了QMF的设计思路。</li>
+<li>不断地输出也许是应对焦虑的一种方法。人到中年难免焦虑，就不停地去学习去吸收，但是往往又是很低效的，时间花了，却什么也没有留下。特别是现在这个信息爆炸的时代，各种信息流，碎片化阅读，让我们看起来收获了很多，其实什么也没有。其实我们要对自己是几平米的房子有基本的认知，小房子就应该放少的、小的东西，定期对房间进行整理，永远保持一定的空间的留白，才会有喘息和美的余地。</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li>Book:《数字信号处理：理论、算法与应用》</li>
+<li>Paper: 具有良好重建特性的正交镜像IIR滤波器组的设计新方法</li>
+<li>Paper: IIR QMF-bank design for speech and audio subband coding</li>
+<li>Blog: WebRTC VAD 中所用滤波器之分析_book_bbyuan的博客-CSDN博客</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+            <span class="icon">
+              <i class="fa fa-wechat"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Audio/" rel="tag"># Audio</a>
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+              <a href="/tags/WebRTC/" rel="tag"># WebRTC</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/" rel="prev" title="WebRTC中的音频处理概览">
+      <i class="fa fa-chevron-left"></i> WebRTC中的音频处理概览
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8%E7%BB%84%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">分析综合滤波器组的作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8%E7%BB%84%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">分析综合滤波器组是如何实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BF%83%E5%BE%97"><span class="nav-number">3.</span> <span class="nav-text">最近的一些心得</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Marshall Liu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lyapple2008" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lyapple2008" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lyapple2008@gmail.com" title="E-Mail → mailto:lyapple2008@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Marshall Liu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
