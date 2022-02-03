@@ -156,6 +156,111 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Marshall Liu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BeYoung">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/" class="post-title-link" itemprop="url">WebRTC中的音频处理概览</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-01-22 10:53:15" itemprop="dateCreated datePublished" datetime="2022-01-22T10:53:15+08:00">2022-01-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-02-03 11:18:14" itemprop="dateModified" datetime="2022-02-03T11:18:14+08:00">2022-02-03</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>WebRTC中的音频处理概览</p>
+<ol>
+<li>音频采集播放</li>
+<li>采样率</li>
+<li>采样位宽</li>
+<li>声道</li>
+<li>音频编解码</li>
+<li>码率</li>
+<li>编解码格式：Opus</li>
+<li>音频处理</li>
+<li>回声消除</li>
+<li>降噪</li>
+<li>自动增益控制</li>
+<li>混音</li>
+<li>网络传输</li>
+<li>传输协议</li>
+<li>抗抖动</li>
+</ol>
+<p><img src="001.png" alt="image"></p>
+<p>WebRTC由音频引擎、视频引擎和传输模块，音频处理在WebRTC占了很大一块，本文主要对WebRTC中涉及的音频处理进行简单介绍，不会对具体的实现进行介绍。上图是WebRTC中音频处理的流水线（上面的图是网上的图，如有侵权，通知即删），可以看出主要包含了音频采集播放、音频处理、音频编解码和音频传输。下面对这些模块逐一进行介绍。</p>
+<p>音频采集播放<br>自然界的声音，包括人说出来的声音，都是模拟信号，这些模拟信号是不能被计算机存储和识别的，也不能通过网络进行传输。音频采集就是声音从模拟信号转换成数字信号的过程，而音频播放就是声音从数字信号转换成模拟信号的过程。对于音频数字信号来说有以下几个最主要的参数：</p>
+<ol>
+<li><p>采样率<br>采样率是指录音设备在一秒钟内对声音信号的采样次数，单位是Hz，采样频率越高，声音的还原度越真实越自然。但是人耳可以听到的频度范围是20Hz~20000Hz，然后根据采样定理，也就是说最低只需要40kHz采样率就可以满足人耳的需求了，因此CD音质和音乐音频都是44.1kHz。但是采样率越高意味着数据量越大，因此在一些特殊的场景会使用更低的采样率，如语音通话场景，因为人声都是低于4kHz，因此在语音通话场景更多会使用8kHz或者16kHz的采样率。</p>
+</li>
+<li><p>采样位宽<br>声音模拟信号经过采样后得一个个样点的值，这个值需要存储到计算机中，那么使用多少位数来表示这个 就是采样位宽，通常使用最多的是16bit，正好就是一个short类型。</p>
+</li>
+<li><p>声道数<br>在使用录音设备进行声音采集时，只能表示到采集点处的声音信号，但是实际声音是有空间信息，为了表达声音的空间信息，就有了声道的概念。这里最有名的可能就是杜比全景声了，大家在电影院看电影的时候，感受到的被声音包围的真实感就是多声道的功劳了，当然这里并不是加多几个通道这么简单啦。</p>
+</li>
+</ol>
+<p>音频编解码<br>虽然音频的数据量没有视频的量那么大，但是如果直接传输原始的音频数据（原始的音频数据有个名字叫Pulse Code Modulation (PCM)），数据量也是挺大的。现在我们来计算下1秒采样率为48kHz双通道的音频信号的数据量有多大，1秒 * 48000个采样点 * 2个声道 * 每个样点2Bytes，这样1秒的数据量是192kB字节。这样的数据量在互联网发展的早期也是不可以接受的，这时候就需要音频编解码。简单的说，音频编解码就是利用人耳的心理声学特性将也一些不影响听觉的信号丢弃，从而减少信号量的方法，在WebRTC中用得最多的是Opus格式。对于音频编码器来说一个很重要的参数是码率，单位是kbps，即每秒的音频使用多少bits位来表示。音频编解码是音频领域一个很专业的领域，这里就不展开了。</p>
+<p>音频处理<br>在实时通话场景，需要面对各种复杂的环境，处理各种音频问题，最常见的如噪声、回声、声音过大过小等，WebRTC中有一个专门的音频处理模块来处理这些问题，下面就简单介绍下这些模块。</p>
+<ol>
+<li>回声消除（Acoustic Echo Cancellation）<br>实际通话场景是一个全双工通信系统非容易产生回声，如下图所示，远端说话声==》近端扬声器播放==》近端麦克风录制==》通过网络传输到远端的扬声器播放，经过这样一个音频环路后，远端又在扬声器里听到自己的声音，也就是回声，如果回声的延时很低时还会产生啸叫，这样是很影响通话体验的。这时就需要回声消除AEC模块了，通常录音数据都会先经过个模块，在传输前先把远端播放的数据消除，这样远端在播放的时候就不会听到回声了。回声消除AEC详细的原理介绍留到后面再介绍，这里先挖个坑。</li>
+</ol>
+<ol start="2">
+<li>噪声抑制（Noise Suppression）<br>噪声抑制NS这个很好理解，实际的通话场景都会存在各种各样的噪声，为了保证通话体验不受影响，这时就需要噪声抑制NS模块了。这里也再挖一坑，后面再根据WebRTC源码进行噪声抑制原理介绍。</li>
+<li>自动增益控制（Auto Gain Control）<br>在实际通话过程中，由于使用设备的差异和通话时离麦克风的远近，导致了通话的音量差异，为了达到统一的体验就需要进行自动增益控制，简单说就是当音量小时调大增益，当音量大时调小增益，达到减少音量起伏的作用。</li>
+<li>混音（Mix）<br>在多人通话场景下，我们需要接收和播放的通常不止一条音频流，但通常只有一个播放设备，因此通常需要对多条音频流先进行混音操作，再进行播放。</li>
+</ol>
+<p>音频传输<br>目前WebRTC音频传输是UDP/RTP/RTCP协议基础上进行传输的，底层UDP协议的不可靠性，导致丢包不可避免，同时音频数据与其它的数据内容有其特殊性，通常一点音频异常都很容易被人感知出来。因此WebRTC针对音频传输做了很多额外的工作，除了最常见的丢包重传，丢包补偿等，还有一个NetEQ模块，会在播放端进行音频播放的加减速来进一步减少由于网络抖动引起的音频异常。</p>
+<p>到这里WebRTC中跟音频相关的技术模块都简单的过了一遍，这样大家对于WebRTC音频处理有个大概的印象，这里的每个模块值得深入去学习，后面也把自己学习的一些心得记录在这里，大家一起学习呀。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2020/09/07/2020-09-07-WebRTC-Android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -812,546 +917,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2018/10/15/2018-10-15-2018%E5%81%A5%E8%BA%AB%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Marshall Liu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BeYoung">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/10/15/2018-10-15-2018%E5%81%A5%E8%BA%AB%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">2018健身记录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-10-15 22:11:34" itemprop="dateCreated datePublished" datetime="2018-10-15T22:11:34+08:00">2018-10-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-07-14 14:22:18" itemprop="dateModified" datetime="2019-07-14T14:22:18+08:00">2019-07-14</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>&emsp;&emsp;今天又一次重新开始健身计划，这次到这里来做个记录，看看能坚持多久！为了更好的身体，为了腹肌，加油，少年，你是要成为海贼王的男人！！！   </p>
-<ul>
-<li>器械：瑜伽垫一张</li>
-<li>课程：Fit健身</li>
-</ul>
-<blockquote>
-<p>今天买了课程，花了大价钱，达不成目标就要打水漂了！！！</p>
-</blockquote>
-<center>
-<img src="https://user-images.githubusercontent.com/3350865/61180053-a357bf80-a642-11e9-914e-529f460e4445.jpg" width="50%" height="50%"/>
-</center>
-
-<!---more--->
-
-<ul>
-<li><h3 id="十月运动记录"><a href="#十月运动记录" class="headerlink" title="十月运动记录"></a>十月运动记录</h3></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>日期</th>
-<th align="center">体重（Kg）</th>
-<th align="center">运动内容</th>
-<th align="center">运动时间（分钟）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>2018-10-15</td>
-<td align="center">65.9</td>
-<td align="center">HIIT-畅快流汗</td>
-<td align="center">20</td>
-</tr>
-<tr>
-<td>2018-10-16</td>
-<td align="center">65.0</td>
-<td align="center">HIIT-畅快流汗</td>
-<td align="center">20</td>
-</tr>
-<tr>
-<td>2018-10-17</td>
-<td align="center">65.3</td>
-<td align="center">HIIT-腹部燃脂</td>
-<td align="center">29</td>
-</tr>
-<tr>
-<td>2018-10-18</td>
-<td align="center">65.1</td>
-<td align="center">HIIT-脂肪ByeBye</td>
-<td align="center">14</td>
-</tr>
-<tr>
-<td>2018-10-19</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-10-20</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-10-21</td>
-<td align="center">64.7</td>
-<td align="center">FIT健身体能测试</td>
-<td align="center">10</td>
-</tr>
-<tr>
-<td>2018-10-22</td>
-<td align="center">65.4</td>
-<td align="center">腹肌撕裂者初级<br>HIIT-进击的Burpee</td>
-<td align="center">25</td>
-</tr>
-<tr>
-<td>2018-10-23</td>
-<td align="center">65.7</td>
-<td align="center">打篮球</td>
-<td align="center">60</td>
-</tr>
-<tr>
-<td>2018-10-24</td>
-<td align="center">65.4</td>
-<td align="center">休息恢复</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-10-25</td>
-<td align="center">65.6</td>
-<td align="center">HIIT-腹部燃脂</td>
-<td align="center">29</td>
-</tr>
-<tr>
-<td>2018-10-26</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-10-27</td>
-<td align="center"></td>
-<td align="center">HIIT-全身活力燃脂</td>
-<td align="center">22</td>
-</tr>
-<tr>
-<td>2018-10-28</td>
-<td align="center">64.1</td>
-<td align="center">HIIT-畅快流汗<br>入门瑜伽伸展</td>
-<td align="center">30</td>
-</tr>
-<tr>
-<td>2018-10-29</td>
-<td align="center">65.1</td>
-<td align="center">核心力量初级训练<br>Tabata-碎脂机进阶</td>
-<td align="center">24</td>
-</tr>
-<tr>
-<td>2018-10-30</td>
-<td align="center">65.3</td>
-<td align="center">打篮球</td>
-<td align="center">60</td>
-</tr>
-<tr>
-<td>2018-10-26</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th align="center">运动天数</th>
-<th align="center">开始体重</th>
-<th align="center">结束体重</th>
-<th align="center">体重变化（Kg）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">13</td>
-<td align="center">65.9</td>
-<td align="center">65.3</td>
-<td align="center">-0.6</td>
-</tr>
-</tbody></table>
-<hr>
-<ul>
-<li><h3 id="十一月运动记录"><a href="#十一月运动记录" class="headerlink" title="十一月运动记录"></a>十一月运动记录</h3></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>日期</th>
-<th align="center">体重（Kg）</th>
-<th align="center">运动内容</th>
-<th align="center">运动时间（分钟）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>2018-11-1</td>
-<td align="center">64.7</td>
-<td align="center">腹肌撕裂者初级<br>HIIT-减脂巨星</td>
-<td align="center">41</td>
-</tr>
-<tr>
-<td>2018-11-2</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-3</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-4</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-5</td>
-<td align="center">64.6</td>
-<td align="center">HIIT-畅快流汗<br>核心进阶减脂训练</td>
-<td align="center">36</td>
-</tr>
-<tr>
-<td>2018-11-6</td>
-<td align="center">64.3</td>
-<td align="center">强力带全身焕活-减脂初级</td>
-<td align="center">49</td>
-</tr>
-<tr>
-<td>2018-11-7</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-8</td>
-<td align="center">64.7</td>
-<td align="center">HIIT-全身活力燃脂<br>腹肌撕裂者进阶</td>
-<td align="center">40</td>
-</tr>
-<tr>
-<td>2018-11-9</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-10</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-11</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-12</td>
-<td align="center">64.1</td>
-<td align="center">Tabata-碎脂机进阶<br>核心进阶减脂训练</td>
-<td align="center">29</td>
-</tr>
-<tr>
-<td>2018-11-13</td>
-<td align="center">64.2</td>
-<td align="center">打篮球</td>
-<td align="center">60</td>
-</tr>
-<tr>
-<td>2018-11-14</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-15</td>
-<td align="center">64.6</td>
-<td align="center">HIIT-腹部燃脂</td>
-<td align="center">28</td>
-</tr>
-<tr>
-<td>2018-11-16</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-17</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-18</td>
-<td align="center">64.6</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=bTHnzGSgkqk">十分鐘家中腹肌訓練</a></td>
-<td align="center">10</td>
-</tr>
-<tr>
-<td>2018-11-19</td>
-<td align="center">64.7</td>
-<td align="center">HIIT-进击的Burpee</td>
-<td align="center">22</td>
-</tr>
-<tr>
-<td>2018-11-20</td>
-<td align="center">64.3</td>
-<td align="center">打篮球</td>
-<td align="center">60</td>
-</tr>
-<tr>
-<td>2018-11-21</td>
-<td align="center">64.4</td>
-<td align="center">HIIT-腹部燃脂</td>
-<td align="center">29</td>
-</tr>
-<tr>
-<td>2018-11-22</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-23</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-24</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-25</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-26</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-27</td>
-<td align="center">63.6</td>
-<td align="center">打篮球</td>
-<td align="center">60</td>
-</tr>
-<tr>
-<td>2018-11-28</td>
-<td align="center">63.7</td>
-<td align="center">十分鐘家中腹肌訓練</td>
-<td align="center">10</td>
-</tr>
-<tr>
-<td>2018-11-29</td>
-<td align="center">63.8</td>
-<td align="center">HIIT-全身活力燃脂</td>
-<td align="center">22</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th align="center">运动天数</th>
-<th align="center">开始体重</th>
-<th align="center">结束体重</th>
-<th align="center">体重变化（Kg）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">14</td>
-<td align="center">65.3</td>
-<td align="center">63.8</td>
-<td align="center">-1.5</td>
-</tr>
-</tbody></table>
-<hr>
-<ul>
-<li><h3 id="十二月运动记录"><a href="#十二月运动记录" class="headerlink" title="十二月运动记录"></a>十二月运动记录</h3></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>日期</th>
-<th align="center">体重（Kg）</th>
-<th align="center">运动内容</th>
-<th align="center">运动时间（分钟）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>2018-12-1</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-2</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-3</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-4</td>
-<td align="center">64.4</td>
-<td align="center">打篮球</td>
-<td align="center">60</td>
-</tr>
-<tr>
-<td>2018-12-5</td>
-<td align="center">63.9</td>
-<td align="center">腹肌撕裂者进阶</td>
-<td align="center">18</td>
-</tr>
-<tr>
-<td>2018-12-6</td>
-<td align="center">64.0</td>
-<td align="center">HIIT-进击的Burpee</td>
-<td align="center">22</td>
-</tr>
-<tr>
-<td>2018-12-7</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-8</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-9</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-10</td>
-<td align="center">63.6</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=bTHnzGSgkqk">十分鐘家中腹肌訓練</a></td>
-<td align="center">10</td>
-</tr>
-<tr>
-<td>2018-12-11</td>
-<td align="center">64.3</td>
-<td align="center">打篮球</td>
-<td align="center">60</td>
-</tr>
-<tr>
-<td>2018-12-12</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-13</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-14</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-15</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-16</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-17</td>
-<td align="center">64.3</td>
-<td align="center">HIIT-减脂巨星</td>
-<td align="center">27</td>
-</tr>
-</tbody></table>
-<ul>
-<li>爆开始前的照片   </li>
-</ul>
-<center>
-<img src="https://user-images.githubusercontent.com/3350865/61180060-b8345300-a642-11e9-9859-536be6249df6.jpg" width="50%" height="50%"/>
-</center>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1421,7 +986,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1463,7 +1028,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
