@@ -1,1341 +1,372 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang=zh-CN>
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="beyoung的博客">
+    <meta property="og:type" content="website">
+    <meta name="description" content="beyoung的博客">
+    <meta name="keyword"  content="webrtc,beyoung的博客">
+    <link rel="shortcut icon" href="/img/favicon.ico">
 
-<link rel="stylesheet" href="/css/main.css">
+    <title>
+        
+        BeYoung
+        
+    </title>
 
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.beyoung.xyz","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta property="og:type" content="website">
-<meta property="og:title" content="BeYoung">
-<meta property="og:url" content="http://www.beyoung.xyz/page/2/index.html">
-<meta property="og:site_name" content="BeYoung">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="Marshall Liu">
-<meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="http://www.beyoung.xyz/page/2/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : true,
-    isPost : false,
-    lang   : 'zh-CN'
-  };
-</script>
-
-  <title>BeYoung</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">BeYoung</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">Stay Hungry, Stay Young</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+<link rel="stylesheet" href="/css/gitment.css">
 
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
+<body>
 
-          <div class="content index posts-expand">
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Stay Hungry, Stay Young </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/images/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Marshall Liu</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li  class=active >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2018/10/29/2018-10-29-%E6%94%B6%E9%9B%86%E9%9F%B3%E9%A2%91%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%E5%85%AC%E5%8F%B8%E4%B8%8E%E5%AE%9E%E9%AA%8C%E5%AE%A4/">
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+</div>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Marshall Liu">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BeYoung">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/10/29/2018-10-29-%E6%94%B6%E9%9B%86%E9%9F%B3%E9%A2%91%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%E5%85%AC%E5%8F%B8%E4%B8%8E%E5%AE%9E%E9%AA%8C%E5%AE%A4/" class="post-title-link" itemprop="url">收集音频技术应用公司与实验室</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-10-29 23:34:05" itemprop="dateCreated datePublished" datetime="2018-10-29T23:34:05+08:00">2018-10-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-14 11:06:05" itemprop="dateModified" datetime="2020-03-14T11:06:05+08:00">2020-03-14</time>
-              </span>
-
-          
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
 
         </div>
-      </header>
+    </div>
+</div>
 
+        <div class="index-about-mobile">
+            <i> Stay Hungry, Stay Young </i>
+        </div>
+    </div>
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><img src="https://user-images.githubusercontent.com/3350865/61180076-fe89b200-a642-11e9-81a7-697446a0860a.jpg"><br>&emsp;&emsp;收集一些音频相关的公司和实验室，另外还有一些个人博客，用来了解行业的最新动态。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/10/29/2018-10-29-%E6%94%B6%E9%9B%86%E9%9F%B3%E9%A2%91%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%E5%85%AC%E5%8F%B8%E4%B8%8E%E5%AE%9E%E9%AA%8C%E5%AE%A4/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
+    <div class="index-middle">
+        <!-- Main Content -->
         
-      
-    </div>
-
+<div class="post-preview-container" style="min-height: 720px">
     
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2018/10/15/2018-10-15-2018%E5%81%A5%E8%BA%AB%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Marshall Liu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BeYoung">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/10/15/2018-10-15-2018%E5%81%A5%E8%BA%AB%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">2018健身记录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-10-15 22:11:34" itemprop="dateCreated datePublished" datetime="2018-10-15T22:11:34+08:00">2018-10-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-07-14 14:22:18" itemprop="dateModified" datetime="2019-07-14T14:22:18+08:00">2019-07-14</time>
-              </span>
-
-          
-
+    <div class="post-preview">
+        <div class="post-time">2018-10-29</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2018/10/29/2018-10-29-%E6%94%B6%E9%9B%86%E9%9F%B3%E9%A2%91%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%E5%85%AC%E5%8F%B8%E4%B8%8E%E5%AE%9E%E9%AA%8C%E5%AE%A4/">
+                <h3>
+                    收集音频技术应用公司与实验室
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#Audio" title="Audio">Audio</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#技术" title="技术">技术</a>
+                <span>/</span>
+                
+                
+            </p>
         </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>&emsp;&emsp;今天又一次重新开始健身计划，这次到这里来做个记录，看看能坚持多久！为了更好的身体，为了腹肌，加油，少年，你是要成为海贼王的男人！！！   </p>
-<ul>
-<li>器械：瑜伽垫一张</li>
-<li>课程：Fit健身</li>
-</ul>
-<blockquote>
-<p>今天买了课程，花了大价钱，达不成目标就要打水漂了！！！</p>
-</blockquote>
-<center>
-<img src="https://user-images.githubusercontent.com/3350865/61180053-a357bf80-a642-11e9-914e-529f460e4445.jpg" width="50%" height="50%"/>
-</center>
-
-<!---more--->
-
-<ul>
-<li><h3 id="十月运动记录"><a href="#十月运动记录" class="headerlink" title="十月运动记录"></a>十月运动记录</h3></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>日期</th>
-<th align="center">体重（Kg）</th>
-<th align="center">运动内容</th>
-<th align="center">运动时间（分钟）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>2018-10-15</td>
-<td align="center">65.9</td>
-<td align="center">HIIT-畅快流汗</td>
-<td align="center">20</td>
-</tr>
-<tr>
-<td>2018-10-16</td>
-<td align="center">65.0</td>
-<td align="center">HIIT-畅快流汗</td>
-<td align="center">20</td>
-</tr>
-<tr>
-<td>2018-10-17</td>
-<td align="center">65.3</td>
-<td align="center">HIIT-腹部燃脂</td>
-<td align="center">29</td>
-</tr>
-<tr>
-<td>2018-10-18</td>
-<td align="center">65.1</td>
-<td align="center">HIIT-脂肪ByeBye</td>
-<td align="center">14</td>
-</tr>
-<tr>
-<td>2018-10-19</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-10-20</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-10-21</td>
-<td align="center">64.7</td>
-<td align="center">FIT健身体能测试</td>
-<td align="center">10</td>
-</tr>
-<tr>
-<td>2018-10-22</td>
-<td align="center">65.4</td>
-<td align="center">腹肌撕裂者初级<br>HIIT-进击的Burpee</td>
-<td align="center">25</td>
-</tr>
-<tr>
-<td>2018-10-23</td>
-<td align="center">65.7</td>
-<td align="center">打篮球</td>
-<td align="center">60</td>
-</tr>
-<tr>
-<td>2018-10-24</td>
-<td align="center">65.4</td>
-<td align="center">休息恢复</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-10-25</td>
-<td align="center">65.6</td>
-<td align="center">HIIT-腹部燃脂</td>
-<td align="center">29</td>
-</tr>
-<tr>
-<td>2018-10-26</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-10-27</td>
-<td align="center"></td>
-<td align="center">HIIT-全身活力燃脂</td>
-<td align="center">22</td>
-</tr>
-<tr>
-<td>2018-10-28</td>
-<td align="center">64.1</td>
-<td align="center">HIIT-畅快流汗<br>入门瑜伽伸展</td>
-<td align="center">30</td>
-</tr>
-<tr>
-<td>2018-10-29</td>
-<td align="center">65.1</td>
-<td align="center">核心力量初级训练<br>Tabata-碎脂机进阶</td>
-<td align="center">24</td>
-</tr>
-<tr>
-<td>2018-10-30</td>
-<td align="center">65.3</td>
-<td align="center">打篮球</td>
-<td align="center">60</td>
-</tr>
-<tr>
-<td>2018-10-26</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th align="center">运动天数</th>
-<th align="center">开始体重</th>
-<th align="center">结束体重</th>
-<th align="center">体重变化（Kg）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">13</td>
-<td align="center">65.9</td>
-<td align="center">65.3</td>
-<td align="center">-0.6</td>
-</tr>
-</tbody></table>
-<hr>
-<ul>
-<li><h3 id="十一月运动记录"><a href="#十一月运动记录" class="headerlink" title="十一月运动记录"></a>十一月运动记录</h3></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>日期</th>
-<th align="center">体重（Kg）</th>
-<th align="center">运动内容</th>
-<th align="center">运动时间（分钟）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>2018-11-1</td>
-<td align="center">64.7</td>
-<td align="center">腹肌撕裂者初级<br>HIIT-减脂巨星</td>
-<td align="center">41</td>
-</tr>
-<tr>
-<td>2018-11-2</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-3</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-4</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-5</td>
-<td align="center">64.6</td>
-<td align="center">HIIT-畅快流汗<br>核心进阶减脂训练</td>
-<td align="center">36</td>
-</tr>
-<tr>
-<td>2018-11-6</td>
-<td align="center">64.3</td>
-<td align="center">强力带全身焕活-减脂初级</td>
-<td align="center">49</td>
-</tr>
-<tr>
-<td>2018-11-7</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-8</td>
-<td align="center">64.7</td>
-<td align="center">HIIT-全身活力燃脂<br>腹肌撕裂者进阶</td>
-<td align="center">40</td>
-</tr>
-<tr>
-<td>2018-11-9</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-10</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-11</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-12</td>
-<td align="center">64.1</td>
-<td align="center">Tabata-碎脂机进阶<br>核心进阶减脂训练</td>
-<td align="center">29</td>
-</tr>
-<tr>
-<td>2018-11-13</td>
-<td align="center">64.2</td>
-<td align="center">打篮球</td>
-<td align="center">60</td>
-</tr>
-<tr>
-<td>2018-11-14</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-15</td>
-<td align="center">64.6</td>
-<td align="center">HIIT-腹部燃脂</td>
-<td align="center">28</td>
-</tr>
-<tr>
-<td>2018-11-16</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-17</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-18</td>
-<td align="center">64.6</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=bTHnzGSgkqk">十分鐘家中腹肌訓練</a></td>
-<td align="center">10</td>
-</tr>
-<tr>
-<td>2018-11-19</td>
-<td align="center">64.7</td>
-<td align="center">HIIT-进击的Burpee</td>
-<td align="center">22</td>
-</tr>
-<tr>
-<td>2018-11-20</td>
-<td align="center">64.3</td>
-<td align="center">打篮球</td>
-<td align="center">60</td>
-</tr>
-<tr>
-<td>2018-11-21</td>
-<td align="center">64.4</td>
-<td align="center">HIIT-腹部燃脂</td>
-<td align="center">29</td>
-</tr>
-<tr>
-<td>2018-11-22</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-23</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-24</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-25</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-26</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-11-27</td>
-<td align="center">63.6</td>
-<td align="center">打篮球</td>
-<td align="center">60</td>
-</tr>
-<tr>
-<td>2018-11-28</td>
-<td align="center">63.7</td>
-<td align="center">十分鐘家中腹肌訓練</td>
-<td align="center">10</td>
-</tr>
-<tr>
-<td>2018-11-29</td>
-<td align="center">63.8</td>
-<td align="center">HIIT-全身活力燃脂</td>
-<td align="center">22</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th align="center">运动天数</th>
-<th align="center">开始体重</th>
-<th align="center">结束体重</th>
-<th align="center">体重变化（Kg）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">14</td>
-<td align="center">65.3</td>
-<td align="center">63.8</td>
-<td align="center">-1.5</td>
-</tr>
-</tbody></table>
-<hr>
-<ul>
-<li><h3 id="十二月运动记录"><a href="#十二月运动记录" class="headerlink" title="十二月运动记录"></a>十二月运动记录</h3></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>日期</th>
-<th align="center">体重（Kg）</th>
-<th align="center">运动内容</th>
-<th align="center">运动时间（分钟）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>2018-12-1</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-2</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-3</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-4</td>
-<td align="center">64.4</td>
-<td align="center">打篮球</td>
-<td align="center">60</td>
-</tr>
-<tr>
-<td>2018-12-5</td>
-<td align="center">63.9</td>
-<td align="center">腹肌撕裂者进阶</td>
-<td align="center">18</td>
-</tr>
-<tr>
-<td>2018-12-6</td>
-<td align="center">64.0</td>
-<td align="center">HIIT-进击的Burpee</td>
-<td align="center">22</td>
-</tr>
-<tr>
-<td>2018-12-7</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-8</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-9</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-10</td>
-<td align="center">63.6</td>
-<td align="center"><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=bTHnzGSgkqk">十分鐘家中腹肌訓練</a></td>
-<td align="center">10</td>
-</tr>
-<tr>
-<td>2018-12-11</td>
-<td align="center">64.3</td>
-<td align="center">打篮球</td>
-<td align="center">60</td>
-</tr>
-<tr>
-<td>2018-12-12</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-13</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-14</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-15</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-16</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td>2018-12-17</td>
-<td align="center">64.3</td>
-<td align="center">HIIT-减脂巨星</td>
-<td align="center">27</td>
-</tr>
-</tbody></table>
-<ul>
-<li>爆开始前的照片   </li>
-</ul>
-<center>
-<img src="https://user-images.githubusercontent.com/3350865/61180060-b8345300-a642-11e9-9859-536be6249df6.jpg" width="50%" height="50%"/>
-</center>
-      
     </div>
-
     
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2018/08/18/2018-08-18-Windows%E4%B8%8B%E8%BD%BD%E7%BC%96%E8%AF%91FFmpeg%E5%8A%A8%E6%80%81%E5%BA%93%E6%8C%87%E5%8C%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Marshall Liu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BeYoung">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/08/18/2018-08-18-Windows%E4%B8%8B%E8%BD%BD%E7%BC%96%E8%AF%91FFmpeg%E5%8A%A8%E6%80%81%E5%BA%93%E6%8C%87%E5%8C%97/" class="post-title-link" itemprop="url">Windows下载编译FFmpeg动态库指北</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-08-18 12:19:55" itemprop="dateCreated datePublished" datetime="2018-08-18T12:19:55+08:00">2018-08-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-07-14 14:19:40" itemprop="dateModified" datetime="2019-07-14T14:19:40+08:00">2019-07-14</time>
-              </span>
-
-          
-
+    <div class="post-preview">
+        <div class="post-time">2018-10-15</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2018/10/15/2018-10-15-2018%E5%81%A5%E8%BA%AB%E8%AE%B0%E5%BD%95/">
+                <h3>
+                    2018健身记录
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#生活" title="生活">生活</a>
+                <span>/</span>
+                
+                
+            </p>
         </div>
-      </header>
-
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2018-08-18</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2018/08/18/2018-08-18-Windows%E4%B8%8B%E8%BD%BD%E7%BC%96%E8%AF%91FFmpeg%E5%8A%A8%E6%80%81%E5%BA%93%E6%8C%87%E5%8C%97/">
+                <h3>
+                    Windows下载编译FFmpeg动态库指北
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#FFmpeg" title="FFmpeg">FFmpeg</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2018-04-29</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2018/04/29/2018-04-29-Android%E7%AB%AF%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/">
+                <h3>
+                    Android端实现手写数字识别
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#Android" title="Android">Android</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#DeepLearning" title="DeepLearning">DeepLearning</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2018-03-24</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2018/03/24/2018-3-24-FFmpeg%E4%B8%ADAVFilter%E6%A8%A1%E5%9D%97%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/">
+                <h3>
+                    FFmpeg中AVFilter模块实践指南
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#FFmpeg" title="FFmpeg">FFmpeg</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2018-02-19</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2018/02/19/2018-2-19-2018%E5%B0%8F%E7%9B%AE%E6%A0%87/">
+                <h3>
+                    2018小目标
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#生活" title="生活">生活</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2018-02-15</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2018/02/15/2018-2-15-JNI%E5%85%A5%E9%97%A8%E4%B9%8BHelloWorld%E7%AF%87/">
+                <h3>
+                    JNI入门之HelloWorld篇
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#Android" title="Android">Android</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#JNI" title="JNI">JNI</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+</div>
+<ul class="pager">
+    
+    <li class="previous">
+        <a href="/">&larr; Newer Posts</a>
+    </li>
     
     
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>&emsp;&emsp;在踩了无数坑之后，才有了这篇文章，现在就一个想法还是Linux系统好呀。编译什么东西都是一个套路，configure/make/make install。之前不知道为什么那么程序员会推崇用mac做开发，编译的这个问题上Mac绝对完胜Windows。</p>
-<!---more--->
-
-<h4 id="一、需要下载的工具"><a href="#一、需要下载的工具" class="headerlink" title="一、需要下载的工具"></a>一、需要下载的工具</h4><ul>
-<li>Visual Studio 2013 或 Visual Studio 2015</li>
-<li>MSYS2  <a target="_blank" rel="noopener" href="http://www.msys2.org/">msys2-x86_64</a></li>
-<li>YASM <a target="_blank" rel="noopener" href="http://yasm.tortall.net/Download.html">Win64.exe</a></li>
-<li>FFmpeg源码 <a target="_blank" rel="noopener" href="https://ffmpeg.org/">ffmpeg4.0.1</a><h4 id="二、编译环境搭建"><a href="#二、编译环境搭建" class="headerlink" title="二、编译环境搭建"></a>二、编译环境搭建</h4><h5 id="1-安装MSYS2，默认安装在C-msys64目录，安装完成后打开msys2环境，运行命令安装编译工具"><a href="#1-安装MSYS2，默认安装在C-msys64目录，安装完成后打开msys2环境，运行命令安装编译工具" class="headerlink" title="1. 安装MSYS2，默认安装在C:\msys64目录，安装完成后打开msys2环境，运行命令安装编译工具"></a>1. 安装MSYS2，默认安装在C:\msys64目录，安装完成后打开msys2环境，运行命令安装编译工具</h5><blockquote>
-<p>pacman -S make gcc diffutils</p>
-</blockquote>
-</li>
 </ul>
-<p><em>注：安装过程中可能会出现某些包下载失败的情况，这时只需要多试几次就好，直到提示净更新大小为0就说明安装完整了。</em></p>
-<p><img src="https://user-images.githubusercontent.com/3350865/61180035-21679680-a642-11e9-9c9b-eff27aff2ffb.jpg" alt="image"></p>
-<h5 id="2-修改C-msys64-msys2-shell-cmd文件，修改下图红框里的部分，这里是为了让msys2能继承VS的环境变量"><a href="#2-修改C-msys64-msys2-shell-cmd文件，修改下图红框里的部分，这里是为了让msys2能继承VS的环境变量" class="headerlink" title="2. 修改C:\msys64\msys2_shell.cmd文件，修改下图红框里的部分，这里是为了让msys2能继承VS的环境变量"></a>2. 修改C:\msys64\msys2_shell.cmd文件，修改下图红框里的部分，这里是为了让msys2能继承VS的环境变量</h5><blockquote>
-<p>set MSYS2_PATH_TYPE=inherit</p>
-</blockquote>
-<p><img src="https://user-images.githubusercontent.com/3350865/61180037-24fb1d80-a642-11e9-850c-263c5ca5e556.jpg" alt="image"></p>
-<h5 id="3-将C-msys64-usr-bin-link-exe重命名为其它名字，如link-bak-exe，这里是为了在链接的时候选择Visual-Studio的link-exe工具，避免冲突"><a href="#3-将C-msys64-usr-bin-link-exe重命名为其它名字，如link-bak-exe，这里是为了在链接的时候选择Visual-Studio的link-exe工具，避免冲突" class="headerlink" title="3. 将C:\msys64\usr\bin\link.exe重命名为其它名字，如link_bak.exe，这里是为了在链接的时候选择Visual Studio的link.exe工具，避免冲突"></a>3. 将C:\msys64\usr\bin\link.exe重命名为其它名字，如link_bak.exe，这里是为了在链接的时候选择Visual Studio的link.exe工具，避免冲突</h5><p><img src="https://user-images.githubusercontent.com/3350865/61180038-275d7780-a642-11e9-8e97-cd2be8ee0611.jpg" alt="image"></p>
-<h5 id="4-将下载的yasm工具，yasm-1-3-0-win32-exe，复制到C-msys64-usr-bin目录，将重命令为yasm-exe"><a href="#4-将下载的yasm工具，yasm-1-3-0-win32-exe，复制到C-msys64-usr-bin目录，将重命令为yasm-exe" class="headerlink" title="4. 将下载的yasm工具，yasm-1.3.0-win32.exe，复制到C:\msys64\usr\bin目录，将重命令为yasm.exe"></a>4. 将下载的yasm工具，yasm-1.3.0-win32.exe，复制到C:\msys64\usr\bin目录，将重命令为yasm.exe</h5><p><img src="https://user-images.githubusercontent.com/3350865/61180039-29273b00-a642-11e9-8826-8d0bdcc93810.jpg" alt="image"></p>
-<h4 id="三、准备编译"><a href="#三、准备编译" class="headerlink" title="三、准备编译"></a>三、准备编译</h4><h5 id="1-打开visual-studio命令行，这里要选择vs2015-x64-x86兼容工具提示符，打开方式如下图所示"><a href="#1-打开visual-studio命令行，这里要选择vs2015-x64-x86兼容工具提示符，打开方式如下图所示" class="headerlink" title="1. 打开visual studio命令行，这里要选择vs2015 x64 x86兼容工具提示符，打开方式如下图所示"></a>1. 打开visual studio命令行，这里要选择<strong>vs2015 x64 x86兼容工具提示符</strong>，打开方式如下图所示</h5><p><img src="https://user-images.githubusercontent.com/3350865/61180041-2b899500-a642-11e9-9cd5-d6afa776f3e4.jpg" alt="image"></p>
-<h5 id="2-切换目录到C-msys64，运行msy2-shell-cmd，开启msys2环境"><a href="#2-切换目录到C-msys64，运行msy2-shell-cmd，开启msys2环境" class="headerlink" title="2. 切换目录到C:\msys64，运行msy2_shell.cmd，开启msys2环境"></a>2. 切换目录到C:\msys64，运行msy2_shell.cmd，开启msys2环境</h5><p><img src="https://user-images.githubusercontent.com/3350865/61180042-2d535880-a642-11e9-870c-382b5d6ddaaa.jpg" alt="image"></p>
-<h5 id="3-测试环境是否正确，检查编译工具和链接工具是不是指向的VS工具"><a href="#3-测试环境是否正确，检查编译工具和链接工具是不是指向的VS工具" class="headerlink" title="3. 测试环境是否正确，检查编译工具和链接工具是不是指向的VS工具"></a>3. 测试环境是否正确，检查编译工具和链接工具是不是指向的VS工具</h5><p><img src="https://user-images.githubusercontent.com/3350865/61180043-2fb5b280-a642-11e9-9b42-27be3b4a21bc.jpg" alt="image"></p>
-<h4 id="四、开始编译（以下命令均在msys2环境执行）"><a href="#四、开始编译（以下命令均在msys2环境执行）" class="headerlink" title="四、开始编译（以下命令均在msys2环境执行）"></a>四、开始编译（以下命令均在msys2环境执行）</h4><h5 id="1-切换目录到ffmpeg源码目录"><a href="#1-切换目录到ffmpeg源码目录" class="headerlink" title="1. 切换目录到ffmpeg源码目录"></a>1. 切换目录到ffmpeg源码目录</h5><h5 id="2-运行configure脚本，相关参数参考下面，configure脚本执行的时间会比较长，耐心等待"><a href="#2-运行configure脚本，相关参数参考下面，configure脚本执行的时间会比较长，耐心等待" class="headerlink" title="2. 运行configure脚本，相关参数参考下面，configure脚本执行的时间会比较长，耐心等待"></a>2. 运行configure脚本，相关参数参考下面，configure脚本执行的时间会比较长，耐心等待</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">./configure \</span><br><span class="line"> --prefix=./build_hwaccel \       ====&gt; 【可选】这里指定编译完成后库的安装目录</span><br><span class="line"> --toolchain=msvc \               ====&gt; 【必须】选择使用VS的工具和环境</span><br><span class="line"> --arch=x86 \                     ====&gt; 【必须】x86指定生成win32版本的库</span><br><span class="line"> --enable-x86asm \                ====&gt; 【可选】使能x86的汇编优化</span><br><span class="line"> --disable-doc \                  ====&gt; 【可选】关闭ffmpeg文档输出</span><br><span class="line"> --enable-shared \                ====&gt; 【必须】设置输出动态库</span><br><span class="line"> --disable-static \               ====&gt; 【可选】设置关闭输出静态库</span><br><span class="line"> --enable-d3d11va \               ====&gt; 【可选】设置使能d3d11硬件加速 </span><br><span class="line"> --enable-dxva2                   ====&gt; 【可选】设置便能dxva2接口的硬件加速</span><br></pre></td></tr></table></figure>
 
-<h5 id="3-执行make命令，这个过程可能会有一些错误提示，可以根据提示上网进搜索相关问题，"><a href="#3-执行make命令，这个过程可能会有一些错误提示，可以根据提示上网进搜索相关问题，" class="headerlink" title="3. 执行make命令，这个过程可能会有一些错误提示，可以根据提示上网进搜索相关问题，"></a>3. 执行make命令，这个过程可能会有一些错误提示，可以根据提示上网进搜索相关问题，</h5><blockquote>
-<p>如编译ffmpeg4.0.1需要注释与变量CC_IDENT相关的语句，存在于cmdutils.c和ff_probe.c文件中</p>
-</blockquote>
-<h5 id="4-执行make-install命令，将生成的动态库复制到configure时指定的目录中"><a href="#4-执行make-install命令，将生成的动态库复制到configure时指定的目录中" class="headerlink" title="4. 执行make install命令，将生成的动态库复制到configure时指定的目录中"></a>4. 执行make install命令，将生成的动态库复制到configure时指定的目录中</h5><h5 id="5-至此整个windows下的ffmpeg动态库编译完成"><a href="#5-至此整个windows下的ffmpeg动态库编译完成" class="headerlink" title="5. 至此整个windows下的ffmpeg动态库编译完成"></a>5. 至此整个windows下的ffmpeg动态库编译完成</h5>
-      
     </div>
+</div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2018/04/29/2018-04-29-Android%E7%AB%AF%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Marshall Liu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BeYoung">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/04/29/2018-04-29-Android%E7%AB%AF%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/" class="post-title-link" itemprop="url">Android端实现手写数字识别</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-04-29 10:56:38" itemprop="dateCreated datePublished" datetime="2018-04-29T10:56:38+08:00">2018-04-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-07-14 10:28:34" itemprop="dateModified" datetime="2019-07-14T10:28:34+08:00">2019-07-14</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>&emsp;&emsp;对DeepLearning最初的印象是，大量的训练样本+机器学习，也就是说原来传统的机器学习会遇到的问题，不能解决的问题，换成DeepLearning同样解决不了。比如目标识别中因为光照变化，目标被遮挡，目标的几何变化造成的识别率大幅下降，在DeepLearning中同样也不能很好解决。但是不是说DeepLearning就一无事处，最近几年这么热也决不是因为名字取得好。DeepLearning比较明显的优势就是在特征选择上，想想之前做生物特征识别时，各种找特征，还得考虑什么光照不变，旋转不变，抗尺寸变换，抗遮挡，那叫一个累呀。现在可好啦，一个Convolution   Layer，再配Fully Connected Layer，最后来个Softmax，丢一堆带标签的样本进去自动给你找出特征。当然这个只是一个接触DeepLearning不到一个月的小白的肤浅认识，大家听听就好。</p>
-<p>&emsp;&emsp;本文算是最近1个月学习DeepLearning的入门小作业，选择的例子也是DeepLearning最流行的HelloWorld程序MNIST手写数字识别，采用Caffe2进行训练，并在Android端实现一个Demo样例。</p>
-<!---more--->
-
-<h3 id="DeepLearning基础"><a href="#DeepLearning基础" class="headerlink" title="DeepLearning基础"></a>DeepLearning基础</h3><p>&emsp;&emsp;这里推荐下台大李宏毅老师的DeepLearning课程，讲解风趣幽默，生动详细，力荐。<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av15889450">B站链接</a><br>深度学习框架：caffe2</p>
-<h3 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h3><p>整个模型训练过程主要包括数据准备、模型建立、模型训练，参考caffe2官网的<a target="_blank" rel="noopener" href="https://github.com/caffe2/tutorials/blob/master/MNIST.ipynb">tutorial</a></p>
-<h4 id="1-数据准备"><a href="#1-数据准备" class="headerlink" title="1. 数据准备"></a>1. 数据准备</h4><p>数据准备在MachineLearning类的应用中起到致关重要的作用，相当于煮饭的时候用到的米。再利害的算法，如果没有足够的数据，那也是巧妇难为无米之炊，难道马云会称现在是DT时代。另外DeepLearning作为MachineLearning的一个分支，目前了解到的大部分的DeepLearning算法更多的还是属于SuperviseLearning。SuperviseLearning一个明显的特征是非常依赖数据，而且是人工标注的数据，这也难怪一些DeepLearning大大们说在AI应用中，有多少人工就有多少智能。本文用到的数据链接地址：<a target="_blank" rel="noopener" href="http://yann.lecun.com/exdb/mnist/">MNIST手写数字数据集</a></p>
-<h5 id="2-模型建立"><a href="#2-模型建立" class="headerlink" title="2. 模型建立"></a>2. 模型建立</h5><p>这个例子采用的是DeepLearning中的经典网络LeNet，关于LeNet可以参考<a target="_blank" rel="noopener" href="https://ujjwalkarn.me/2016/08/11/intuitive-explanation-convnets/">这篇文章</a>。</p>
-<h5 id="3-模型训练"><a href="#3-模型训练" class="headerlink" title="3. 模型训练"></a>3. 模型训练</h5><p>这里模型训练采用caffe2框架，</p>
-<h3 id="模型在Android端的部署"><a href="#模型在Android端的部署" class="headerlink" title="模型在Android端的部署"></a>模型在Android端的部署</h3><p>参考caffe2官网给的AICamera例子，建立Android Studio工程（github工程地址：<a target="_blank" rel="noopener" href="https://github.com/lyapple2008/MNIST_CNN_APP">https://github.com/lyapple2008/MNIST_CNN_APP</a> ），其中最主要的代码如下所示</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line">void loadToNetDef(AAssetManager *mgr, caffe2::NetDef *net, const char *filename) &#123;</span><br><span class="line">    AAsset *asset = AAssetManager_open(mgr, filename, AASSET_MODE_BUFFER);</span><br><span class="line">    assert(asset != nullptr);</span><br><span class="line">    const void *data = AAsset_getBuffer(asset);</span><br><span class="line">    assert(data != nullptr);</span><br><span class="line">    off_t len = AAsset_getLength(asset);</span><br><span class="line">    assert(len != 0);</span><br><span class="line">    if (!net-&gt;ParseFromArray(data, len)) &#123;</span><br><span class="line">        alog(&quot;Couldn&#x27;t parse net from data.\n&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    AAsset_close(asset);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">extern &quot;C&quot;</span><br><span class="line">void Java_com_example_beyoung_handwrittendigit_MainActivity_initCaffe2(</span><br><span class="line">        JNIEnv *env,</span><br><span class="line">        jobject,</span><br><span class="line">        jobject assetManager) &#123;</span><br><span class="line">    AAssetManager *mgr = AAssetManager_fromJava(env, assetManager);</span><br><span class="line">    alog(&quot;Attempting to load protobuf netdefs...&quot;);</span><br><span class="line">    loadToNetDef(mgr, &amp;_initNet, &quot;mnist/init_net.pb&quot;);</span><br><span class="line">    loadToNetDef(mgr, &amp;_predictNet, &quot;mnist/predict_net.pb&quot;);</span><br><span class="line">    alog(&quot;done.&quot;);</span><br><span class="line">    alog(&quot;Instantiating predictor...&quot;);</span><br><span class="line">    _predictor = new caffe2::Predictor(_initNet, _predictNet);</span><br><span class="line">    if (_predictor) &#123;</span><br><span class="line">        alog(&quot;done...&quot;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        alog(&quot;fail to instantiat predictor...&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">extern &quot;C&quot;</span><br><span class="line">JNIEXPORT jstring JNICALL</span><br><span class="line">Java_com_example_beyoung_handwrittendigit_MainActivity_recognitionFromCaffe2(</span><br><span class="line">        JNIEnv *env,</span><br><span class="line">        jobject,</span><br><span class="line">        jint h, jint w, jintArray data) &#123;</span><br><span class="line">    if (!_predictor) &#123;</span><br><span class="line">        return env-&gt;NewStringUTF(&quot;Loading...&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    jsize len = env-&gt;GetArrayLength(data);</span><br><span class="line">    jint *img_data = env-&gt;GetIntArrayElements(data, 0);</span><br><span class="line">    jint img_size = h * w;</span><br><span class="line">    assert(img_size &lt;= INPUT_DATA_SIZE);</span><br><span class="line"></span><br><span class="line">    // convert rgb image to grey image and normalize to 0~1</span><br><span class="line">    for (auto i = 0; i &lt; h; ++i) &#123;</span><br><span class="line">        std::ostringstream stringStream;</span><br><span class="line">        for (auto j = 0; j &lt; w; ++j) &#123;</span><br><span class="line">            int color = img_data[i * w + j];</span><br><span class="line">            //int red = ((color &amp; 0x00FF0000) &gt;&gt; 16);</span><br><span class="line">            //int green = ((color &amp; 0x0000FF00) &gt;&gt; 8);</span><br><span class="line">            //int blue = color &amp; 0x000000FF;</span><br><span class="line">            //float grey = red * 0.3 + green * 0.59 + blue * 0.11;</span><br><span class="line">            float grey = 0.0;</span><br><span class="line">            if (color != 0) &#123;</span><br><span class="line">                grey = 1.0;</span><br><span class="line">            &#125;</span><br><span class="line">            input_data[i * w + j] = grey;</span><br><span class="line">            //alog(&quot;%f&quot;, grey);</span><br><span class="line">            //alog(&quot;%d&quot;, color);</span><br><span class="line">            if (color != 0) &#123;</span><br><span class="line">                color = 1;</span><br><span class="line">            &#125;</span><br><span class="line">            stringStream &lt;&lt; color &lt;&lt; &quot; &quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        //alog(&quot;\n&quot;);</span><br><span class="line">        alog(&quot;%s&quot;, stringStream.str().c_str());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    caffe2::TensorCPU input;</span><br><span class="line">    input.Resize(std::vector&lt;int&gt;(&#123;1, IMG_C, IMG_H, IMG_W&#125;));</span><br><span class="line">    memcpy(input.mutable_data&lt;float&gt;(), input_data, INPUT_DATA_SIZE * sizeof(float));</span><br><span class="line">    caffe2::Predictor::TensorVector input_vec&#123;&amp;input&#125;;</span><br><span class="line">    caffe2::Predictor::TensorVector output_vec;</span><br><span class="line">    _predictor-&gt;run(input_vec, &amp;output_vec);</span><br><span class="line"></span><br><span class="line">    constexpr int k = 3;</span><br><span class="line">    float max[k] = &#123;0&#125;;</span><br><span class="line">    int max_index[k] = &#123;0&#125;;</span><br><span class="line">    // Find the top-k result manually</span><br><span class="line">    if (output_vec.capacity() &gt; 0) &#123;</span><br><span class="line">        for (auto output : output_vec) &#123;</span><br><span class="line">            for (auto i = 0; i &lt; output-&gt;size(); ++i) &#123;</span><br><span class="line">                for (auto j = 0; j &lt; k; ++j) &#123;</span><br><span class="line">                    if (output-&gt;template data&lt;float&gt;()[i] &gt; max[j]) &#123;</span><br><span class="line">                        for (auto _j = k - 1; _j &gt; j; --_j) &#123;</span><br><span class="line">                            max[_j - 1] = max[_j];</span><br><span class="line">                            max_index[_j - 1] = max_index[_j];</span><br><span class="line">                        &#125;</span><br><span class="line">                        max[j] = output-&gt;template data&lt;float&gt;()[i];</span><br><span class="line">                        max_index[j] = i;</span><br><span class="line">                        goto skip;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                skip:;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::ostringstream stringStream;</span><br><span class="line">    for (auto j = 0; j &lt; k; ++j) &#123;</span><br><span class="line">        stringStream &lt;&lt; max_index[j] &lt;&lt; &quot;: &quot; &lt;&lt; max[j]*100 &lt;&lt; &quot;%\n&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">//    if (output_vec.capacity() &gt; 0) &#123;</span><br><span class="line">//        for (auto output: output_vec) &#123;</span><br><span class="line">//            for (auto i = 0;i&lt;output-&gt;size();++i) &#123;</span><br><span class="line">//                stringStream &lt;&lt; output-&gt;template data&lt;float&gt;()[i] &lt;&lt; &quot;\n&quot;;</span><br><span class="line">//            &#125;</span><br><span class="line">//        &#125;</span><br><span class="line">//    &#125;</span><br><span class="line"></span><br><span class="line">    return env-&gt;NewStringUTF(stringStream.str().c_str());</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<img src="https://user-images.githubusercontent.com/3350865/61178567-ece3e280-a621-11e9-9af3-08da3def9b98.gif" width=240 height=427/>
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>&emsp;&emsp;通过上面的Demo可以看出，通过MNIST数据训练出来的模型在实际运行的准确率还是很堪忧的。所以一个算法从实验室数据到实际应用还有很长的路要走，虽然最近应用于各个领域的深度学习模型层出不穷，测试数据也很好看，但是在实际应用过程中还有很多路要走。虽然DeepLearning已经表现出很强大的黑魔法属性，在实际应用过程中还是有很多工作要做，不然只能停留在Demo阶段。以本文的手写数字识别为例，实际过程的准确率与测试集上的准确率相差甚远，这时候就需要进行大量的优化工作。由于学习深度学习没多久，暂时只能根据以往在机器学习上的经验来进行优化，目前能想到的优化方向有：训练集与实际运行环境要一致、准备更多的训练集、深度另外的模型方法。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2018/03/24/2018-3-24-FFmpeg%E4%B8%ADAVFilter%E6%A8%A1%E5%9D%97%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Marshall Liu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BeYoung">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/24/2018-3-24-FFmpeg%E4%B8%ADAVFilter%E6%A8%A1%E5%9D%97%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">FFmpeg中AVFilter模块实践指南</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2018-03-24 22:55:27 / 修改时间：23:39:37" itemprop="dateCreated datePublished" datetime="2018-03-24T22:55:27+08:00">2018-03-24</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p> 在做音视频相关的开发过程大体如下所示，对于其中的编码/解码，整个流程相对比较固定，使用ffmpeg可以很好的完成这部分的开发。对其中的帧数据处理（包括音频和视频数据）则相对要多样化一些，比如对视频做尺寸变换，进行音频音量均衡，直播中的美颜处理，多路流合成等等，这些都是属于流程中的帧数据处理。今天要介绍FFmpeg中的AVFilter模块进行帧数据处理的开发，AVFilter模块对帧数据处理进行了很好的抽象。AVFilter中的filter graph（滤波器图）概念非常适合帧数据处理中的多级滤波处理，同时对滤波器的接口进行了规定，后期添加一些自定义的滤波器也是很方便。网上关于AVFilter的介绍大多是基于ffmpeg的命令使用，基于代码实现的很少，最近项目中正好要使用到了AVFilter，写个小结，希望对有同样需求的小伙伴有帮助。</p>
-<blockquote>
-<p>原始音视频–&gt;解码–&gt;帧数据处理–&gt;编码–&gt;输出音视频</p>
-</blockquote>
-<!---more--->
-
-<h2 id="1-主要结构体和API介绍"><a href="#1-主要结构体和API介绍" class="headerlink" title="1. 主要结构体和API介绍"></a>1. 主要结构体和API介绍</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 对filters系统的整体管理</span><br><span class="line">struct AVFilterGraph</span><br><span class="line">&#123;</span><br><span class="line">    AVFilterContext **filters;</span><br><span class="line">    unsigned nb_filters;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 定义filter本身的能力，拥有的pads，回调函数接口定义</span><br><span class="line">struct AVFilter</span><br><span class="line">&#123;</span><br><span class="line">    const char *name;</span><br><span class="line">    const AVFilterPad *inputs;</span><br><span class="line">    const AVFilterPad *outputs;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// filter实例，管理filter与外部的联系</span><br><span class="line">struct AVFilterContext</span><br><span class="line">&#123;</span><br><span class="line">    const AVFilter *filter;</span><br><span class="line">    char *name;</span><br><span class="line">    </span><br><span class="line">    AVFilterPad *input_pads;</span><br><span class="line">    AVFilterLink **inputs;</span><br><span class="line">    unsigned nb_inputs</span><br><span class="line">    </span><br><span class="line">    AVFilterPad *output_pads;</span><br><span class="line">    AVFilterLink **outputs;</span><br><span class="line">    unsigned nb_outputs;</span><br><span class="line">    </span><br><span class="line">    struct AVFilterGraph *graph;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 定义两个filters之间的联接</span><br><span class="line">struct AVFilterLink</span><br><span class="line">&#123;</span><br><span class="line">    AVFilterContext *src;</span><br><span class="line">    AVFilterPad *srcpad;</span><br><span class="line">    </span><br><span class="line">    AVFilterContext *dst;</span><br><span class="line">    AVFilterPad *dstpad;</span><br><span class="line">    </span><br><span class="line">    struct AVFilterGraph *graph;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 定义filter的输入/输出接口</span><br><span class="line">struct AVFilterPad</span><br><span class="line">&#123;</span><br><span class="line">    const char *name;</span><br><span class="line">    AVFrame *(*get_video_buffer)(AVFilterLink *link, int w, int h);</span><br><span class="line">    AVFrame *(*get_audio_buffer)(AVFilterLink *link, int nb_samples);</span><br><span class="line">    int (*filter_frame)(AVFilterLink *link, AVFrame *frame);</span><br><span class="line">    int (*request_frame)(AVFilterLink *link);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">struct AVFilterInOut</span><br><span class="line">&#123;</span><br><span class="line">    char *name;</span><br><span class="line">    AVFilterContext *filter_ctx;</span><br><span class="line">    int pad_idx;</span><br><span class="line">    struct AVFilterInOut *next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><em>在AVFilter模块中定义了AVFilter结构，很个AVFilter都是具有独立功能的节点，如scale filter的作用就是进行图像尺寸变换，overlay filter的作用就是进行图像的叠加，这里需要重点提的是两个特别的filter，一个是buffer，一个是buffersink，滤波器buffer代表filter graph中的源头，原始数据就往这个filter节点输入的；而滤波器buffersink代表filter graph中的输出节点，处理完成的数据从这个filter节点输出。</em></p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// 获取FFmpeg中定义的filter，调用该方法前需要先调用avfilter_register_all();进行滤波器注册</span><br><span class="line">AVFilter *avfilter_get_by_name(const char *name);</span><br><span class="line"></span><br><span class="line">// 往源滤波器buffer中输入待处理的数据</span><br><span class="line">int av_buffersrc_add_frame(AVFilterContext *ctx, AVFrame *frame);</span><br><span class="line"></span><br><span class="line">// 从目的滤波器buffersink中输出处理完的数据</span><br><span class="line">int av_buffersink_get_frame(AVFilterContext *ctx, AVFrame *frame);</span><br><span class="line"></span><br><span class="line">// 创建一个滤波器图filter graph</span><br><span class="line">AVFilterGraph *avfilter_graph_alloc(void);</span><br><span class="line"></span><br><span class="line">// 创建一个滤波器实例AVFilterContext，并添加到AVFilterGraph中</span><br><span class="line">int avfilter_graph_create_filter(AVFilterContext **filt_ctx, const AVFilter *filt,</span><br><span class="line">                                 const char *name, const char *args, void *opaque,</span><br><span class="line">                                 AVFilterGraph *graph_ctx);</span><br><span class="line"></span><br><span class="line">// 连接两个滤波器节点</span><br><span class="line">int avfilter_link(AVFilterContext *src, unsigned srcpad,</span><br><span class="line">                  AVFilterContext *dst, unsigned dstpad);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="2-AVFilter主体框架流程"><a href="#2-AVFilter主体框架流程" class="headerlink" title="2. AVFilter主体框架流程"></a>2. AVFilter主体框架流程</h2><p>在利用AVFilter进行音视频数据处理前先将在进行的处理流程绘制出来，现在以<a target="_blank" rel="noopener" href="https://ffmpeg.org/ffmpeg-filters.html#Filtering-Introduction">FFmpeg filter官方文档</a>中的一个例子为例进行说明。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">                [main]</span><br><span class="line">input --&gt; split ---------------------&gt; overlay --&gt; output</span><br><span class="line">            |                             ^</span><br><span class="line">            |[tmp]                  [flip]|</span><br><span class="line">            +-----&gt; crop --&gt; vflip -------+</span><br></pre></td></tr></table></figure>
-<p>这个例子的处理流程如上所示，首先使用split滤波器将input流分成两路流（main和tmp），然后分别对两路流进行处理。对于tmp流，先经过crop滤波器进行裁剪处理，再经过flip滤波器进行垂直方向上的翻转操作，输出的结果命名为flip流。再将main流和flip流输入到overlay滤波器进行合成操作。上图的input就是上面提过的buffer源滤波器，output就是上面的提过的buffersink滤波器。上图中每个节点都是一个AVFilterContext，每个连线就是AVFliterLink。所有这些信息都统一由AVFilterGraph来管理。</p>
-<p><img src="http://oxfmz0qm8.bkt.clouddn.com/ffmpeg/split_crop_vflip.png" alt="image"></p>
-<h2 id="3-实例实现"><a href="#3-实例实现" class="headerlink" title="3. 实例实现"></a>3. 实例实现</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br></pre></td><td class="code"><pre><span class="line">extern &quot;C&quot; &#123;</span><br><span class="line">#include &lt;libavcodec/avcodec.h&gt;</span><br><span class="line">#include &lt;libavformat/avformat.h&gt;</span><br><span class="line">#include &lt;libavfilter/avfiltergraph.h&gt;</span><br><span class="line">#include &lt;libavfilter/buffersink.h&gt;</span><br><span class="line">#include &lt;libavfilter/buffersrc.h&gt;</span><br><span class="line">#include &lt;libavutil/opt.h&gt;</span><br><span class="line">#include &lt;libavutil/imgutils.h&gt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(int argc, char* argv)</span><br><span class="line">&#123;</span><br><span class="line">	int ret = 0;</span><br><span class="line"></span><br><span class="line">	// input yuv</span><br><span class="line">	FILE* inFile = NULL;</span><br><span class="line">	const char* inFileName = &quot;sintel_480x272_yuv420p.yuv&quot;;</span><br><span class="line">	fopen_s(&amp;inFile, inFileName, &quot;rb+&quot;);</span><br><span class="line">	if (!inFile) &#123;</span><br><span class="line">		printf(&quot;Fail to open file\n&quot;);</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	int in_width = 480;</span><br><span class="line">	int in_height = 272;</span><br><span class="line"></span><br><span class="line">	// output yuv</span><br><span class="line">	FILE* outFile = NULL;</span><br><span class="line">	const char* outFileName = &quot;out_crop_vfilter.yuv&quot;;</span><br><span class="line">	fopen_s(&amp;outFile, outFileName, &quot;wb&quot;);</span><br><span class="line">	if (!outFile) &#123;</span><br><span class="line">		printf(&quot;Fail to create file for output\n&quot;);</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	avfilter_register_all();</span><br><span class="line"></span><br><span class="line">	AVFilterGraph* filter_graph = avfilter_graph_alloc();</span><br><span class="line">	if (!filter_graph) &#123;</span><br><span class="line">		printf(&quot;Fail to create filter graph!\n&quot;);</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// source filter</span><br><span class="line">	char args[512];</span><br><span class="line">	_snprintf_s(args, sizeof(args),</span><br><span class="line">		&quot;video_size=%dx%d:pix_fmt=%d:time_base=%d/%d:pixel_aspect=%d/%d&quot;,</span><br><span class="line">		in_width, in_height, AV_PIX_FMT_YUV420P,</span><br><span class="line">		1, 25, 1, 1);</span><br><span class="line">	AVFilter* bufferSrc = avfilter_get_by_name(&quot;buffer&quot;);</span><br><span class="line">	AVFilterContext* bufferSrc_ctx;</span><br><span class="line">	ret = avfilter_graph_create_filter(&amp;bufferSrc_ctx, bufferSrc, &quot;in&quot;, args, NULL, filter_graph);</span><br><span class="line">	if (ret &lt; 0) &#123;</span><br><span class="line">		printf(&quot;Fail to create filter bufferSrc\n&quot;);</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// sink filter</span><br><span class="line">	AVBufferSinkParams *bufferSink_params;</span><br><span class="line">	AVFilterContext* bufferSink_ctx;</span><br><span class="line">	AVFilter* bufferSink = avfilter_get_by_name(&quot;buffersink&quot;);</span><br><span class="line">	enum AVPixelFormat pix_fmts[] = &#123; AV_PIX_FMT_YUV420P, AV_PIX_FMT_NONE &#125;;</span><br><span class="line">	bufferSink_params = av_buffersink_params_alloc();</span><br><span class="line">	bufferSink_params-&gt;pixel_fmts = pix_fmts;</span><br><span class="line">	ret = avfilter_graph_create_filter(&amp;bufferSink_ctx, bufferSink, &quot;out&quot;, NULL, bufferSink_params, filter_graph);</span><br><span class="line">	if (ret &lt; 0) &#123;</span><br><span class="line">		printf(&quot;Fail to create filter sink filter\n&quot;);</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// split filter</span><br><span class="line">	AVFilter *splitFilter = avfilter_get_by_name(&quot;split&quot;);</span><br><span class="line">	AVFilterContext *splitFilter_ctx;</span><br><span class="line">	ret = avfilter_graph_create_filter(&amp;splitFilter_ctx, splitFilter, &quot;split&quot;, &quot;outputs=2&quot;, NULL, filter_graph);</span><br><span class="line">	if (ret &lt; 0) &#123;</span><br><span class="line">		printf(&quot;Fail to create split filter\n&quot;);</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// crop filter</span><br><span class="line">	AVFilter *cropFilter = avfilter_get_by_name(&quot;crop&quot;);</span><br><span class="line">	AVFilterContext *cropFilter_ctx;</span><br><span class="line">	ret = avfilter_graph_create_filter(&amp;cropFilter_ctx, cropFilter, &quot;crop&quot;, &quot;out_w=iw:out_h=ih/2:x=0:y=0&quot;, NULL, filter_graph);</span><br><span class="line">	if (ret &lt; 0) &#123;</span><br><span class="line">		printf(&quot;Fail to create crop filter\n&quot;);</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// vflip filter</span><br><span class="line">	AVFilter *vflipFilter = avfilter_get_by_name(&quot;vflip&quot;);</span><br><span class="line">	AVFilterContext *vflipFilter_ctx;</span><br><span class="line">	ret = avfilter_graph_create_filter(&amp;vflipFilter_ctx, vflipFilter, &quot;vflip&quot;, NULL, NULL, filter_graph);</span><br><span class="line">	if (ret &lt; 0) &#123;</span><br><span class="line">		printf(&quot;Fail to create vflip filter\n&quot;);</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// overlay filter</span><br><span class="line">	AVFilter *overlayFilter = avfilter_get_by_name(&quot;overlay&quot;);</span><br><span class="line">	AVFilterContext *overlayFilter_ctx;</span><br><span class="line">	ret = avfilter_graph_create_filter(&amp;overlayFilter_ctx, overlayFilter, &quot;overlay&quot;, &quot;y=0:H/2&quot;, NULL, filter_graph);</span><br><span class="line">	if (ret &lt; 0) &#123;</span><br><span class="line">		printf(&quot;Fail to create overlay filter\n&quot;);</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// src filter to split filter</span><br><span class="line">	ret = avfilter_link(bufferSrc_ctx, 0, splitFilter_ctx, 0);</span><br><span class="line">	if (ret != 0) &#123;</span><br><span class="line">		printf(&quot;Fail to link src filter and split filter\n&quot;);</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line">	// split filter&#x27;s first pad to overlay filter&#x27;s main pad</span><br><span class="line">	ret = avfilter_link(splitFilter_ctx, 0, overlayFilter_ctx, 0);</span><br><span class="line">	if (ret != 0) &#123;</span><br><span class="line">		printf(&quot;Fail to link split filter and overlay filter main pad\n&quot;);</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line">	// split filter&#x27;s second pad to crop filter</span><br><span class="line">	ret = avfilter_link(splitFilter_ctx, 1, cropFilter_ctx, 0);</span><br><span class="line">	if (ret != 0) &#123;</span><br><span class="line">		printf(&quot;Fail to link split filter&#x27;s second pad and crop filter\n&quot;);</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line">	// crop filter to vflip filter</span><br><span class="line">	ret = avfilter_link(cropFilter_ctx, 0, vflipFilter_ctx, 0);</span><br><span class="line">	if (ret != 0) &#123;</span><br><span class="line">		printf(&quot;Fail to link crop filter and vflip filter\n&quot;);</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line">	// vflip filter to overlay filter&#x27;s second pad</span><br><span class="line">	ret = avfilter_link(vflipFilter_ctx, 0, overlayFilter_ctx, 1);</span><br><span class="line">	if (ret != 0) &#123;</span><br><span class="line">		printf(&quot;Fail to link vflip filter and overlay filter&#x27;s second pad\n&quot;);</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line">	// overlay filter to sink filter</span><br><span class="line">	ret = avfilter_link(overlayFilter_ctx, 0, bufferSink_ctx, 0);</span><br><span class="line">	if (ret != 0) &#123;</span><br><span class="line">		printf(&quot;Fail to link overlay filter and sink filter\n&quot;);</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// check filter graph</span><br><span class="line">	ret = avfilter_graph_config(filter_graph, NULL);</span><br><span class="line">	if (ret &lt; 0) &#123;</span><br><span class="line">		printf(&quot;Fail in filter graph\n&quot;);</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	char *graph_str = avfilter_graph_dump(filter_graph, NULL);</span><br><span class="line">	FILE* graphFile = NULL;</span><br><span class="line">	fopen_s(&amp;graphFile, &quot;graphFile.txt&quot;, &quot;w&quot;);</span><br><span class="line">	fprintf(graphFile, &quot;%s&quot;, graph_str);</span><br><span class="line">	av_free(graph_str);</span><br><span class="line"></span><br><span class="line">	AVFrame *frame_in = av_frame_alloc();</span><br><span class="line">	unsigned char *frame_buffer_in = (unsigned char *)av_malloc(av_image_get_buffer_size(AV_PIX_FMT_YUV420P, in_width, in_height, 1));</span><br><span class="line">	av_image_fill_arrays(frame_in-&gt;data, frame_in-&gt;linesize, frame_buffer_in,</span><br><span class="line">		AV_PIX_FMT_YUV420P, in_width, in_height, 1);</span><br><span class="line"></span><br><span class="line">	AVFrame *frame_out = av_frame_alloc();</span><br><span class="line">	unsigned char *frame_buffer_out = (unsigned char *)av_malloc(av_image_get_buffer_size(AV_PIX_FMT_YUV420P, in_width, in_height, 1));</span><br><span class="line">	av_image_fill_arrays(frame_out-&gt;data, frame_out-&gt;linesize, frame_buffer_out,</span><br><span class="line">		AV_PIX_FMT_YUV420P, in_width, in_height, 1);</span><br><span class="line"></span><br><span class="line">	frame_in-&gt;width = in_width;</span><br><span class="line">	frame_in-&gt;height = in_height;</span><br><span class="line">	frame_in-&gt;format = AV_PIX_FMT_YUV420P;</span><br><span class="line"></span><br><span class="line">	while (1) &#123;</span><br><span class="line"></span><br><span class="line">		if (fread(frame_buffer_in, 1, in_width*in_height * 3 / 2, inFile) != in_width*in_height * 3 / 2) &#123;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		//input Y,U,V</span><br><span class="line">		frame_in-&gt;data[0] = frame_buffer_in;</span><br><span class="line">		frame_in-&gt;data[1] = frame_buffer_in + in_width*in_height;</span><br><span class="line">		frame_in-&gt;data[2] = frame_buffer_in + in_width*in_height * 5 / 4;</span><br><span class="line"></span><br><span class="line">		if (av_buffersrc_add_frame(bufferSrc_ctx, frame_in) &lt; 0) &#123;</span><br><span class="line">			printf(&quot;Error while add frame.\n&quot;);</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		/* pull filtered pictures from the filtergraph */</span><br><span class="line">		ret = av_buffersink_get_frame(bufferSink_ctx, frame_out);</span><br><span class="line">		if (ret &lt; 0)</span><br><span class="line">			break;</span><br><span class="line"></span><br><span class="line">		//output Y,U,V</span><br><span class="line">		if (frame_out-&gt;format == AV_PIX_FMT_YUV420P) &#123;</span><br><span class="line">			for (int i = 0; i &lt; frame_out-&gt;height; i++) &#123;</span><br><span class="line">				fwrite(frame_out-&gt;data[0] + frame_out-&gt;linesize[0] * i, 1, frame_out-&gt;width, outFile);</span><br><span class="line">			&#125;</span><br><span class="line">			for (int i = 0; i &lt; frame_out-&gt;height / 2; i++) &#123;</span><br><span class="line">				fwrite(frame_out-&gt;data[1] + frame_out-&gt;linesize[1] * i, 1, frame_out-&gt;width / 2, outFile);</span><br><span class="line">			&#125;</span><br><span class="line">			for (int i = 0; i &lt; frame_out-&gt;height / 2; i++) &#123;</span><br><span class="line">				fwrite(frame_out-&gt;data[2] + frame_out-&gt;linesize[2] * i, 1, frame_out-&gt;width / 2, outFile);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		printf(&quot;Process 1 frame!\n&quot;);</span><br><span class="line">		av_frame_unref(frame_out);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fclose(inFile);</span><br><span class="line">	fclose(outFile);</span><br><span class="line"></span><br><span class="line">	av_frame_free(&amp;frame_in);</span><br><span class="line">	av_frame_free(&amp;frame_out);</span><br><span class="line">	avfilter_graph_free(&amp;filter_graph);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/lyapple2008/FFmpegExams">github代码仓库</a></p>
-</blockquote>
-<h2 id="4-建立定义Filter滤波器"><a href="#4-建立定义Filter滤波器" class="headerlink" title="4. 建立定义Filter滤波器"></a>4. 建立定义Filter滤波器</h2><p>这部分暂时还没有实践，参考ffmpeg源码中已有的filter和ffmpeg源码中的文档writing_filter.txt，应该实践起来也来难，等后面有时间再补上这部分介绍。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2018/02/19/2018-2-19-2018%E5%B0%8F%E7%9B%AE%E6%A0%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Marshall Liu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BeYoung">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/19/2018-2-19-2018%E5%B0%8F%E7%9B%AE%E6%A0%87/" class="post-title-link" itemprop="url">2018小目标</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-19 22:46:21" itemprop="dateCreated datePublished" datetime="2018-02-19T22:46:21+08:00">2018-02-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-14 11:04:41" itemprop="dateModified" datetime="2020-03-14T11:04:41+08:00">2020-03-14</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>大年初四立个flag，明年来看看能完成多少，看看脸会不会被打肿。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/02/19/2018-2-19-2018%E5%B0%8F%E7%9B%AE%E6%A0%87/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
+<footer class="footer">
+    <ul class="list-inline text-center">
         
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2018/02/15/2018-2-15-JNI%E5%85%A5%E9%97%A8%E4%B9%8BHelloWorld%E7%AF%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Marshall Liu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BeYoung">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/15/2018-2-15-JNI%E5%85%A5%E9%97%A8%E4%B9%8BHelloWorld%E7%AF%87/" class="post-title-link" itemprop="url">JNI入门之HelloWorld篇</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-15 22:35:37" itemprop="dateCreated datePublished" datetime="2018-02-15T22:35:37+08:00">2018-02-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-14 11:06:05" itemprop="dateModified" datetime="2020-03-14T11:06:05+08:00">2020-03-14</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="1-JNI的作用"><a href="#1-JNI的作用" class="headerlink" title="1. JNI的作用"></a>1. JNI的作用</h4><p>JNI（Java Native Interface）提供了一种java与C/C++ 代码进行交互的方式，可以通过java方法调用C/C++ 的实现，和已有的C/C++ 库。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/02/15/2018-2-15-JNI%E5%85%A5%E9%97%A8%E4%B9%8BHelloWorld%E7%AF%87/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-  </nav>
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
+        <li>
+            <a target="_blank" href="https://twitter.com/lyapple2008">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-twitter"></i>
+                            </span>
+            </a>
         </li>
-        <li class="sidebar-nav-overview">
-          站点概览
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/liuyang528231">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
         </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Marshall Liu</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">10</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/lyapple2008" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lyapple2008" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:lyapple2008@gmail.com" title="E-Mail → mailto:lyapple2008@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-      </span>
-  </div>
 
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/lyapple2008">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
         
 
         
 
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Marshall Liu</span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
-  </div>
+        
+        <li>
+            <a target="_blank"  href="https://github.com/lyapple2008">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
 
         
 
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
 
 
 
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
 
 </body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = false
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
 </html>

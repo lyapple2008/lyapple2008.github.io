@@ -1,1062 +1,453 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang=zh-CN>
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="beyoung的博客">
+    <meta property="og:type" content="website">
+    <meta name="description" content="beyoung的博客">
+    <meta name="keyword"  content="webrtc,beyoung的博客">
+    <link rel="shortcut icon" href="/img/favicon.ico">
 
-<link rel="stylesheet" href="/css/main.css">
+    <title>
+        
+        BeYoung
+        
+    </title>
 
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.beyoung.xyz","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta property="og:type" content="website">
-<meta property="og:title" content="BeYoung">
-<meta property="og:url" content="http://www.beyoung.xyz/index.html">
-<meta property="og:site_name" content="BeYoung">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="Marshall Liu">
-<meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="http://www.beyoung.xyz/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : true,
-    isPost : false,
-    lang   : 'zh-CN'
-  };
-</script>
-
-  <title>BeYoung</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">BeYoung</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">Stay Hungry, Stay Young</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+<link rel="stylesheet" href="/css/gitment.css">
 
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
+<body>
 
-          <div class="content index posts-expand">
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Stay Hungry, Stay Young </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/images/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Marshall Liu</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li  class=active >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>收藏</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Marshall Liu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BeYoung">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/" class="post-title-link" itemprop="url">QMF分析综合滤波器</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-02-03 11:35:16 / 修改时间：11:43:53" itemprop="dateCreated datePublished" datetime="2022-02-03T11:35:16+08:00">2022-02-03</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="分析综合滤波器组的作用"><a href="#分析综合滤波器组的作用" class="headerlink" title="分析综合滤波器组的作用"></a>分析综合滤波器组的作用</h1><p>由于音频信号在不同的频率范围具有不同的特性，因此在音频处理之前通常都会使用分析综合滤波器组将音频信号分成不同的频率子带，再分别进行处理。比如，音频编码中常用到的子带编码（Subband coding）；webrtc的VAD中，会对不同的频率子带计算特征，再综合这些特征计算语音概率。</p>
-<img src="/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/001.png" class="">
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
     </div>
-
     
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+</div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Marshall Liu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BeYoung">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/" class="post-title-link" itemprop="url">WebRTC中的音频处理概览</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-01-22 10:53:15" itemprop="dateCreated datePublished" datetime="2022-01-22T10:53:15+08:00">2022-01-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-03 11:34:30" itemprop="dateModified" datetime="2022-02-03T11:34:30+08:00">2022-02-03</time>
-              </span>
-
-          
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
 
         </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>音频采集播放<br> a. 采样率<br> b. 采样位宽<br> c. 声道</li>
-<li>音频编解码<br> a. 码率<br> b. 编解码格式：Opus</li>
-<li>音频处理<br> a. 回声消除<br> b. 降噪<br> c. 自动增益控制<br> d. 混音</li>
-<li>网络传输<br> a. 传输协议<br> b. 抗抖动</li>
-</ol>
-<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/001.png" class="">
-
-<p>WebRTC由音频引擎、视频引擎和传输模块，音频处理在WebRTC占了很大一块，本文主要对WebRTC中涉及的音频处理进行简单介绍，不会对具体的实现进行介绍。上图是WebRTC中音频处理的流水线（上面的图是网上的图，如有侵权，通知即删），可以看出主要包含了音频采集播放、音频处理、音频编解码和音频传输。下面对这些模块逐一进行介绍。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
     </div>
+</div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2020/09/07/2020-09-07-WebRTC-Android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Marshall Liu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BeYoung">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/07/2020-09-07-WebRTC-Android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/" class="post-title-link" itemprop="url">WebRTC系列-WebRTC_Android源码编译</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-09-07 23:19:37" itemprop="dateCreated datePublished" datetime="2020-09-07T23:19:37+08:00">2020-09-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-10 15:42:40" itemprop="dateModified" datetime="2021-07-10T15:42:40+08:00">2021-07-10</time>
-              </span>
-
-          
-
+        <div class="index-about-mobile">
+            <i> Stay Hungry, Stay Young </i>
         </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="WebRTC-Android源码编译"><a href="#WebRTC-Android源码编译" class="headerlink" title="WebRTC Android源码编译"></a>WebRTC Android源码编译</h1><p>对于WebRTC的学习来说，首先需要搞定的是源码的编译，由于国内的特殊环境和WebRTC本身的复杂性，导致WebRTC源码编译成了WebRTC学习的第一道门槛。这里把自己在编译WebRTC源码过程中遇到的一些坑进行总结分享，希望对大家有帮助。主要参考官网和WebRTC的编译配置脚本，整个操作过程需要具备科学上学的环境，第一次下载好环境和源码后，后面就不需要了。这里以Android端为例，编译环境为Ubuntu 18.04（再高版本会提示不支持），WebRTC官网有提到Android端暂时只支持在Linux下编译。虽然网上也有资源介绍在Mac环境下编译的，但是用虚拟机装个Ubuntu还是挺方便的，咱就不折腾了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/09/07/2020-09-07-WebRTC-Android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
     </div>
-
     
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2020/04/25/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Marshall Liu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BeYoung">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/25/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">github.io博客无法访问问题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-25 09:34:29 / 修改时间：10:04:14" itemprop="dateCreated datePublished" datetime="2020-04-25T09:34:29+08:00">2020-04-25</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>原来的github.io自定义域名博客不能访问，提示如下信息</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Fastly error: unknown domain: beyoung.xyz. Please check that this domain has been added to a service.</span><br><span class="line">Details: cache-lax8629-LAX</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/04/25/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
+    <div class="index-middle">
+        <!-- Main Content -->
         
-      
-    </div>
-
+<div class="post-preview-container" style="min-height: 720px">
     
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2019/08/04/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Marshall Liu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BeYoung">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/08/04/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/" class="post-title-link" itemprop="url">代码优化方法论</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-08-04 10:44:29" itemprop="dateCreated datePublished" datetime="2019-08-04T10:44:29+08:00">2019-08-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-29 08:52:55" itemprop="dateModified" datetime="2020-03-29T08:52:55+08:00">2020-03-29</time>
-              </span>
-
-          
-
+    <div class="post-preview">
+        <div class="post-time">2022-02-03</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/">
+                <h3>
+                    QMF分析综合滤波器
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#Audio" title="Audio">Audio</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#技术" title="技术">技术</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#WebRTC" title="WebRTC">WebRTC</a>
+                <span>/</span>
+                
+                
+            </p>
         </div>
-      </header>
-
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2022-01-22</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/">
+                <h3>
+                    WebRTC中的音频处理概览
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#Audio" title="Audio">Audio</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#技术" title="技术">技术</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#WebRTC" title="WebRTC">WebRTC</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2020-09-07</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2020/09/07/2020-09-07-WebRTC-Android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/">
+                <h3>
+                    WebRTC系列-WebRTC_Android源码编译
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#Android" title="Android">Android</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#技术" title="技术">技术</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#WebRTC" title="WebRTC">WebRTC</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2020-04-25</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2020/04/25/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/">
+                <h3>
+                    github.io博客无法访问问题
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#GitPage" title="GitPage">GitPage</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2019-08-04</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2019/08/04/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/">
+                <h3>
+                    代码优化方法论
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#DeepLearning" title="DeepLearning">DeepLearning</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#技术" title="技术">技术</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2019-04-07</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2019/04/07/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/">
+                <h3>
+                    算法工程师到底是做什么的
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#生活" title="生活">生活</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#技术" title="技术">技术</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2019-03-31</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2019/03/31/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/">
+                <h3>
+                    音乐人声分离小结
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#DeepLearning" title="DeepLearning">DeepLearning</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2019-03-10</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2019/03/10/2019-03-10-%E9%9F%B3%E9%A2%91%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/">
+                <h3>
+                    音频开发资源
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#Android" title="Android">Android</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#AudioProcessing" title="AudioProcessing">AudioProcessing</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2019-03-03</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2019/03/03/2019-03-03-JavaNativeInterface%E7%AC%94%E8%AE%B0/">
+                <h3>
+                    JavaNativeInterface笔记
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#Android" title="Android">Android</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#JNI" title="JNI">JNI</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2019-01-26</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2019/01/26/2019-01-26-2019%E5%B0%8F%E7%9B%AE%E6%A0%87/">
+                <h3>
+                    2019小目标--重新开始打脸之路
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#生活" title="生活">生活</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+</div>
+<ul class="pager">
     
     
+    <li class="next">
+        <a href="/page/2/">Older Posts &rarr;</a>
+    </li>
     
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a name="01ca666c"></a></p>
-<h2 id="为什么需要代码优化"><a href="#为什么需要代码优化" class="headerlink" title="为什么需要代码优化"></a>为什么需要代码优化</h2><ul>
-<li>提升体验，扩展玩法</li>
 </ul>
-<p><img src="https://user-images.githubusercontent.com/3350865/62418824-63b24f80-b6a5-11e9-9bde-6cd6de0cc6a5.PNG" alt="image.png"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/08/04/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+
     </div>
+</div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2019/04/07/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Marshall Liu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BeYoung">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/07/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/" class="post-title-link" itemprop="url">算法工程师到底是做什么的</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-04-07 20:20:38" itemprop="dateCreated datePublished" datetime="2019-04-07T20:20:38+08:00">2019-04-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-14 11:06:05" itemprop="dateModified" datetime="2020-03-14T11:06:05+08:00">2020-03-14</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>还记得刚毕业那会找工作，那是一定要找法工程师这个岗位，当时就只是觉得这个岗位牛逼是公司的核心岗位，但是可能对于算法工程师与一般的软件工程有什么区别其实心理也说不清楚。作为一个到今年6月份就工作满5年了的老菜鸟，这期间工作的title也是算法工程师（虽然有些并不是真的在做算法），反正在以算法工程师的title在企业工作的感受与毕业那会想像中上的算法工程师的工作完全不一样。  </p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/04/07/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
+<footer class="footer">
+    <ul class="list-inline text-center">
         
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2019/03/31/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Marshall Liu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BeYoung">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/31/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/" class="post-title-link" itemprop="url">音乐人声分离小结</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-31 22:18:43" itemprop="dateCreated datePublished" datetime="2019-03-31T22:18:43+08:00">2019-03-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-14 11:04:20" itemprop="dateModified" datetime="2020-03-14T11:04:20+08:00">2020-03-14</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="音乐人声分离概况"><a href="#音乐人声分离概况" class="headerlink" title="音乐人声分离概况"></a>音乐人声分离概况</h3><p>音乐人声分离的目的是，从一首歌曲中分离出人声和伴奏声。<a target="_blank" rel="noopener" href="https://www.math.ucdavis.edu/~aberrian/research/voice_separation/index.html">Project on Music/Voice Separation</a>这个网站比较了一些基于传统方法的效果，但是由于基于了一些假设（比如REPET就假伴奏都是周期重复信号），这些算法在实际测试过程中效果都差强人意。随着深度学习的流行，音乐人声分离这个领域也开始被基于深度学习的方法所占领。在<a target="_blank" rel="noopener" href="http://www.sisec17.audiolabs-erlangen.de/#/results/1/4/2">SiSEC MUS</a>上可以看到效果比较好的都是基于深度学习的方法。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/31/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2019/03/10/2019-03-10-%E9%9F%B3%E9%A2%91%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Marshall Liu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BeYoung">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/10/2019-03-10-%E9%9F%B3%E9%A2%91%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/" class="post-title-link" itemprop="url">音频开发资源</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-10 10:16:27" itemprop="dateCreated datePublished" datetime="2019-03-10T10:16:27+08:00">2019-03-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-07-14 14:29:22" itemprop="dateModified" datetime="2019-07-14T14:29:22+08:00">2019-07-14</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>记录一些音频开发过程中会用到的优质资源</p>
-<ul>
-<li><p><a target="_blank" rel="noopener" href="https://webrtc.org/">WebRTC</a>   </p>
-<blockquote>
-<p>WebRTC是google开源的实时音视频通讯项目，其中的AudioProcess模块包括了AGC/AEC/ANS算法，非常值得学习。同时WebRTC还是一个跨平台项目，代码中对各个平台（Android/Ios/Windows/Linux）硬件接口的封装和抽象可以直接拿来应用到自己的项目中。</p>
-</blockquote>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/google/oboe">Oboe</a>   </p>
-<blockquote>
-<p>Oboe是Google家开源一个高性能C++库，这个库封装了Android底层OpenSLES和AAudio接口，通过这个库可以方便地在Android实现Low Latency Audio，只需一套代码就可以了。</p>
-</blockquote>
-</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/10/2019-03-10-%E9%9F%B3%E9%A2%91%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2019/03/03/2019-03-03-JavaNativeInterface%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Marshall Liu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BeYoung">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/03/2019-03-03-JavaNativeInterface%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">JavaNativeInterface笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-03 22:51:59" itemprop="dateCreated datePublished" datetime="2019-03-03T22:51:59+08:00">2019-03-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-07-14 14:28:27" itemprop="dateModified" datetime="2019-07-14T14:28:27+08:00">2019-07-14</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>最近由于公司项目的原因开始接触WebRTC，其中Android相关部分由于需要跨越了两种不同的语<br>言，因此需要一种机制能够让C/C++和JAVA之间进行交互，而JNI就是这样一种机制。通过JNI可<br>以实现C/C++和JAVA之前需要交互。本篇笔记的首先从一个实际的例子开始介绍JNI操作的完整流<br>程是怎样的；接着将就这个例子完整介绍JNI中需要注意的点。<br><img src="https://user-images.githubusercontent.com/3350865/61180103-91c2e780-a643-11e9-8132-f85c7a83f8da.jpg" alt="image"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/03/2019-03-03-JavaNativeInterface%E7%AC%94%E8%AE%B0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.beyoung.xyz/2019/01/26/2019-01-26-2019%E5%B0%8F%E7%9B%AE%E6%A0%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Marshall Liu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BeYoung">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/01/26/2019-01-26-2019%E5%B0%8F%E7%9B%AE%E6%A0%87/" class="post-title-link" itemprop="url">2019小目标--重新开始打脸之路</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-01-26 19:58:18" itemprop="dateCreated datePublished" datetime="2019-01-26T19:58:18+08:00">2019-01-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-07-14 14:26:12" itemprop="dateModified" datetime="2019-07-14T14:26:12+08:00">2019-07-14</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="2018回顾"><a href="#2018回顾" class="headerlink" title="2018回顾"></a>2018回顾</h1><p>先看下2018初始的时候自己立下的flag吧，看看脸被打得有多痛</p>
-<p><img src="https://user-images.githubusercontent.com/3350865/61180087-427cb700-a643-11e9-8bfd-354561f9d0e2.jpg" alt="image"> </p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/01/26/2019-01-26-2019%E5%B0%8F%E7%9B%AE%E6%A0%87/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
+        <li>
+            <a target="_blank" href="https://twitter.com/lyapple2008">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-twitter"></i>
+                            </span>
+            </a>
         </li>
-        <li class="sidebar-nav-overview">
-          站点概览
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/liuyang528231">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
         </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Marshall Liu</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">10</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/lyapple2008" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lyapple2008" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:lyapple2008@gmail.com" title="E-Mail → mailto:lyapple2008@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-      </span>
-  </div>
 
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/lyapple2008">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
         
 
         
 
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2022</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Marshall Liu</span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
-  </div>
+        
+        <li>
+            <a target="_blank"  href="https://github.com/lyapple2008">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
 
         
 
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
 
 
 
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
 
 </body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = false
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
 </html>
