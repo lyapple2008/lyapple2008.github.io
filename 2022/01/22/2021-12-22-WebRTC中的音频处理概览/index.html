@@ -1,102 +1,87 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
   <meta charset="utf-8">
   
+  <title>WebRTC中的音频处理概览 | BeYoung | Stay Hungry, Stay Young</title>
+
   
-  <title>WebRTC中的音频处理概览 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="音频采集播放 a. 采样率 b. 采样位宽 c. 声道 音频编解码 a. 码率 b. 编解码格式：Opus 音频处理 a. 回声消除 b. 降噪 c. 自动增益控制 d. 混音 网络传输 a. 传输协议 b. 抗抖动    WebRTC由音频引擎、视频引擎和传输模块，音频处理在WebRTC占了很大一块，本文主要对WebRTC中涉及的音频处理进行简单介绍，不会对具体的实现进行介绍。上图是WebRT">
-<meta property="og:type" content="article">
-<meta property="og:title" content="WebRTC中的音频处理概览">
-<meta property="og:url" content="http://example.com/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="音频采集播放 a. 采样率 b. 采样位宽 c. 声道 音频编解码 a. 码率 b. 编解码格式：Opus 音频处理 a. 回声消除 b. 降噪 c. 自动增益控制 d. 混音 网络传输 a. 传输协议 b. 抗抖动    WebRTC由音频引擎、视频引擎和传输模块，音频处理在WebRTC占了很大一块，本文主要对WebRTC中涉及的音频处理进行简单介绍，不会对具体的实现进行介绍。上图是WebRT">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-01-22T02:53:15.000Z">
-<meta property="article:modified_time" content="2022-02-03T03:34:32.000Z">
-<meta property="article:author" content="John Doe">
-<meta property="article:tag" content="Audio">
-<meta property="article:tag" content="技术">
-<meta property="article:tag" content="WebRTC">
-<meta name="twitter:card" content="summary">
+  <meta name="author" content="Marshall Liu">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
   
+  <meta name="description" content="beyoung的博客">
   
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
 
   
   
-<link rel="stylesheet" href="/css/style.css">
+  <meta name="keywords" content="Audio,技术,WebRTC">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="WebRTC中的音频处理概览"/>
+
+  <meta property="og:site_name" content="BeYoung"/>
 
   
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
+  <meta property="og:image" content="/favicon.ico"/>
   
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="BeYoung" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
 <meta name="generator" content="Hexo 5.4.0"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">BeYoung</a>
+    </h1>
+    <p class="site-description">Stay Hungry, Stay Young</p>
   </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+    </ul>
+  </nav>
 </header>
 
-      <div class="outer">
-        <section id="main"><article id="post-2021-12-22-WebRTC中的音频处理概览" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/" class="article-date">
-  <time class="dt-published" datetime="2022-01-22T02:53:15.000Z" itemprop="datePublished">2022-01-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+    <main class="site-main posts-loop">
+    <article>
+
   
-    <h1 class="p-name article-title" itemprop="headline name">
-      WebRTC中的音频处理概览
-    </h1>
+    
+    <h3 class="article-title"><span>WebRTC中的音频处理概览</span></h3>
+    
   
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2022/01/22/2021-12-22-WebRTC中的音频处理概览/" rel="bookmark">
+        <time class="entry-date published" datetime="2022-01-22T02:53:15.000Z">
+          2022-01-22
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
       
         <ol>
 <li>音频采集播放<br> a. 采样率<br> b. 采样位宽<br> c. 声道</li>
@@ -104,7 +89,7 @@
 <li>音频处理<br> a. 回声消除<br> b. 降噪<br> c. 自动增益控制<br> d. 混音</li>
 <li>网络传输<br> a. 传输协议<br> b. 抗抖动</li>
 </ol>
-
+<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/001.png" class="">
 
 <p>WebRTC由音频引擎、视频引擎和传输模块，音频处理在WebRTC占了很大一块，本文主要对WebRTC中涉及的音频处理进行简单介绍，不会对具体的实现进行介绍。上图是WebRTC中音频处理的流水线（上面的图是网上的图，如有侵权，通知即删），可以看出主要包含了音频采集播放、音频处理、音频编解码和音频传输。下面对这些模块逐一进行介绍。</p>
 <span id="more"></span>
@@ -112,17 +97,17 @@
 <h1 id="音频采集播放"><a href="#音频采集播放" class="headerlink" title="音频采集播放"></a>音频采集播放</h1><p>自然界的声音，包括人说出来的声音，都是模拟信号，这些模拟信号是不能被计算机存储和识别的，也不能通过网络进行传输。音频采集就是声音从模拟信号转换成数字信号的过程，而音频播放就是声音从数字信号转换成模拟信号的过程。对于音频数字信号来说有以下几个最主要的参数：</p>
 <ol>
 <li><p>采样率<br>采样率是指录音设备在一秒钟内对声音信号的采样次数，单位是Hz，采样频率越高，声音的还原度越真实越自然。但是人耳可以听到的频度范围是20Hz~20000Hz，然后根据采样定理，也就是说最低只需要40kHz采样率就可以满足人耳的需求了，因此CD音质和音乐音频都是44.1kHz。但是采样率越高意味着数据量越大，因此在一些特殊的场景会使用更低的采样率，如语音通话场景，因为人声都是低于4kHz，因此在语音通话场景更多会使用8kHz或者16kHz的采样率。</p>
-</li>
+<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/002.png" class=""></li>
 <li><p>采样位宽<br>声音模拟信号经过采样后得一个个样点的值，这个值需要存储到计算机中，那么使用多少位数来表示这个 就是采样位宽，通常使用最多的是16bit，正好就是一个short类型。</p>
 </li>
 <li><p>声道数<br>在使用录音设备进行声音采集时，只能表示到采集点处的声音信号，但是实际声音是有空间信息，为了表达声音的空间信息，就有了声道的概念。这里最有名的可能就是杜比全景声了，大家在电影院看电影的时候，感受到的被声音包围的真实感就是多声道的功劳了，当然这里并不是加多几个通道这么简单啦。</p>
-</li>
+<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/003.png" class=""></li>
 </ol>
 <h1 id="音频编解码"><a href="#音频编解码" class="headerlink" title="音频编解码"></a>音频编解码</h1><p>虽然音频的数据量没有视频的量那么大，但是如果直接传输原始的音频数据（原始的音频数据有个名字叫Pulse Code Modulation (PCM)），数据量也是挺大的。现在我们来计算下1秒采样率为48kHz双通道的音频信号的数据量有多大，1秒 * 48000个采样点 * 2个声道 * 每个样点2Bytes，这样1秒的数据量是192kB字节。这样的数据量在互联网发展的早期也是不可以接受的，这时候就需要音频编解码。简单的说，音频编解码就是利用人耳的心理声学特性将也一些不影响听觉的信号丢弃，从而减少信号量的方法，在WebRTC中用得最多的是Opus格式。对于音频编码器来说一个很重要的参数是码率，单位是kbps，即每秒的音频使用多少bits位来表示。音频编解码是音频领域一个很专业的领域，这里就不展开了。</p>
 <h1 id="音频处理"><a href="#音频处理" class="headerlink" title="音频处理"></a>音频处理</h1><p>在实时通话场景，需要面对各种复杂的环境，处理各种音频问题，最常见的如噪声、回声、声音过大过小等，WebRTC中有一个专门的音频处理模块来处理这些问题，下面就简单介绍下这些模块。</p>
 <ol>
 <li><p>回声消除（Acoustic Echo Cancellation）<br>实际通话场景是一个全双工通信系统非容易产生回声，如下图所示，远端说话声==》近端扬声器播放==》近端麦克风录制==》通过网络传输到远端的扬声器播放，经过这样一个音频环路后，远端又在扬声器里听到自己的声音，也就是回声，如果回声的延时很低时还会产生啸叫，这样是很影响通话体验的。这时就需要回声消除AEC模块了，通常录音数据都会先经过个模块，在传输前先把远端播放的数据消除，这样远端在播放的时候就不会听到回声了。回声消除AEC详细的原理介绍留到后面再介绍，这里先挖个坑。</p>
-</li>
+<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/004.png" class=""></li>
 <li><p>噪声抑制（Noise Suppression）<br>噪声抑制NS这个很好理解，实际的通话场景都会存在各种各样的噪声，为了保证通话体验不受影响，这时就需要噪声抑制NS模块了。这里也再挖一坑，后面再根据WebRTC源码进行噪声抑制原理介绍。</p>
 </li>
 <li><p>自动增益控制（Auto Gain Control）<br>在实际通话过程中，由于使用设备的差异和通话时离麦克风的远近，导致了通话的音量差异，为了达到统一的体验就需要进行自动增益控制，简单说就是当音量小时调大增益，当音量大时调小增益，达到减少音量起伏的作用。</p>
@@ -131,154 +116,60 @@
 </li>
 </ol>
 <h1 id="音频传输"><a href="#音频传输" class="headerlink" title="音频传输"></a>音频传输</h1><p>目前WebRTC音频传输是UDP/RTP/RTCP协议基础上进行传输的，底层UDP协议的不可靠性，导致丢包不可避免，同时音频数据与其它的数据内容有其特殊性，通常一点音频异常都很容易被人感知出来。因此WebRTC针对音频传输做了很多额外的工作，除了最常见的丢包重传，丢包补偿等，还有一个NetEQ模块，会在播放端进行音频播放的加减速来进一步减少由于网络抖动引起的音频异常。</p>
-
+<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/005.png" class="">
 
 <p>到这里WebRTC中跟音频相关的技术模块都简单的过了一遍，这样大家对于WebRTC音频处理有个大概的印象，这里的每个模块值得深入去学习，后面也把自己学习的一些心得记录在这里，大家一起学习呀。</p>
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/" data-id="clvcibjfe000tiq5221n32n51" data-title="WebRTC中的音频处理概览" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Audio/" rel="tag">Audio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebRTC/" rel="tag">WebRTC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li></ul>
 
-    </footer>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          QMF分析综合滤波器
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2020/09/07/2020-09-07-WebRTC-Android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">WebRTC系列-WebRTC_Android源码编译</div>
-    </a>
-  
-</nav>
 
-  
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Audio/">Audio</a><a href="/tags/技术/">技术</a><a href="/tags/WebRTC/">WebRTC</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
 </article>
 
-
-</section>
-        
-          <aside id="sidebar">
   
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
     
-
-  
+    &copy; 2024 Marshall Liu
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Audio/" rel="tag">Audio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AudioProcessing/" rel="tag">AudioProcessing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitPage/" rel="tag">GitPage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/" rel="tag">JNI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebRTC/" rel="tag">WebRTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 18px;">Android</a> <a href="/tags/Audio/" style="font-size: 14px;">Audio</a> <a href="/tags/AudioProcessing/" style="font-size: 10px;">AudioProcessing</a> <a href="/tags/DeepLearning/" style="font-size: 14px;">DeepLearning</a> <a href="/tags/FFmpeg/" style="font-size: 12px;">FFmpeg</a> <a href="/tags/GitPage/" style="font-size: 10px;">GitPage</a> <a href="/tags/JNI/" style="font-size: 12px;">JNI</a> <a href="/tags/WebRTC/" style="font-size: 14px;">WebRTC</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 20px;">技术</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 16px;">生活</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2022/09/24/2022-08-24-Android%E4%B8%AD%E5%87%A0%E7%A7%8DsdkVersion%E7%9A%84%E5%8C%BA%E5%88%AB/">Android中几种sdkVersion的区别</a>
-          </li>
-        
-          <li>
-            <a href="/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/">QMF分析综合滤波器</a>
-          </li>
-        
-          <li>
-            <a href="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/">WebRTC中的音频处理概览</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/07/2020-09-07-WebRTC-Android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/">WebRTC系列-WebRTC_Android源码编译</a>
-          </li>
-        
-          <li>
-            <a href="/2020/04/25/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/">github.io博客无法访问问题</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2024 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
+  </p>
 </footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
     
-
-
-<script src="/js/jquery-3.4.1.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
+    
   </div>
+</div>
 </body>
 </html>

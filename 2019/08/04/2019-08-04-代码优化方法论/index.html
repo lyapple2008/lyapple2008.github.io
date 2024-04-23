@@ -1,122 +1,87 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
   <meta charset="utf-8">
   
+  <title>代码优化方法论 | BeYoung | Stay Hungry, Stay Young</title>
+
   
-  <title>代码优化方法论 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="为什么需要代码优化 提升体验，扩展玩法">
-<meta property="og:type" content="article">
-<meta property="og:title" content="代码优化方法论">
-<meta property="og:url" content="http://example.com/2019/08/04/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="为什么需要代码优化 提升体验，扩展玩法">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/62418824-63b24f80-b6a5-11e9-9bde-6cd6de0cc6a5.PNG">
-<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/62418833-90666700-b6a5-11e9-88f9-760391e1fe61.PNG">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/415939/1564710217474-4d6dc083-2132-4a85-af87-a61f6fdfc0d8.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/62418848-dae7e380-b6a5-11e9-9ffa-0734de7bcbf4.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/62418862-33b77c00-b6a6-11e9-8ecf-2f1388e24ab7.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/62418851-edfab380-b6a5-11e9-8e3f-75a65d5656c7.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/62418868-619cc080-b6a6-11e9-8fa1-67751a95dc11.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/62418870-6feadc80-b6a6-11e9-977e-8aad80618706.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/62418871-78431780-b6a6-11e9-91fe-5b034731dc05.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/62418875-9741a980-b6a6-11e9-8708-accea0d5a08c.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/62418876-ad4f6a00-b6a6-11e9-849d-3df81cb40be5.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/62418880-be987680-b6a6-11e9-972d-d921aebc6ef0.png">
-<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/62418882-ceb05600-b6a6-11e9-86f1-cce3ce5f093e.png#align=left&display=inline&height=223&name=image.png&originHeight=398&originWidth=436&size=39885&status=done&width=244">
-<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/62418885-e091f900-b6a6-11e9-9cec-a63afc827b12.png#align=left&display=inline&height=214&name=image.png&originHeight=381&originWidth=414&size=28847&status=done&width=233">
-<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/62418889-eab3f780-b6a6-11e9-9820-0de73ee3f997.png#align=left&display=inline&height=209&name=image.png&originHeight=381&originWidth=425&size=35671&status=done&width=233">
-<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/77837266-c8bd3700-7199-11ea-9d28-95222493a1ed.png#align=left&display=inline&height=448&name=image.png&originHeight=766&originWidth=981&size=39311&status=done&width=574">
-<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/77837270-d2df3580-7199-11ea-9b2b-704966a3c19d.png#align=left&display=inline&height=438&name=image.png&originHeight=739&originWidth=1042&size=49003&status=done&width=618">
-<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/77837270-d2df3580-7199-11ea-9b2b-704966a3c19d.png#align=left&display=inline&height=436&name=image.png&originHeight=777&originWidth=1016&size=53791&status=done&width=570">
-<meta property="og:image" content="https://user-images.githubusercontent.com/3350865/77837275-e094bb00-7199-11ea-933e-265825830d3b.png#align=left&display=inline&height=425&name=image.png&originHeight=782&originWidth=1061&size=115587&status=done&width=576">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/gif/415939/1564675047982-2a1b1c17-a309-4cc4-9c83-90cf7617a79b.gif#align=left&display=inline&height=393&name=mnist_cnn_demo.gif&originHeight=1280&originWidth=720&size=728880&status=done&width=221">
-<meta property="article:published_time" content="2019-08-04T02:44:29.000Z">
-<meta property="article:modified_time" content="2020-03-29T00:52:56.000Z">
-<meta property="article:author" content="John Doe">
-<meta property="article:tag" content="DeepLearning">
-<meta property="article:tag" content="技术">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://user-images.githubusercontent.com/3350865/62418824-63b24f80-b6a5-11e9-9bde-6cd6de0cc6a5.PNG">
+  <meta name="author" content="Marshall Liu">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
   
+  <meta name="description" content="beyoung的博客">
   
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
 
   
   
-<link rel="stylesheet" href="/css/style.css">
+  <meta name="keywords" content="DeepLearning,技术">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="代码优化方法论"/>
+
+  <meta property="og:site_name" content="BeYoung"/>
 
   
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
+  <meta property="og:image" content="/favicon.ico"/>
   
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="BeYoung" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
 <meta name="generator" content="Hexo 5.4.0"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">BeYoung</a>
+    </h1>
+    <p class="site-description">Stay Hungry, Stay Young</p>
   </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+    </ul>
+  </nav>
 </header>
 
-      <div class="outer">
-        <section id="main"><article id="post-2019-08-04-代码优化方法论" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2019/08/04/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/" class="article-date">
-  <time class="dt-published" datetime="2019-08-04T02:44:29.000Z" itemprop="datePublished">2019-08-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+    <main class="site-main posts-loop">
+    <article>
+
   
-    <h1 class="p-name article-title" itemprop="headline name">
-      代码优化方法论
-    </h1>
+    
+    <h3 class="article-title"><span>代码优化方法论</span></h3>
+    
   
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/08/04/2019-08-04-代码优化方法论/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-08-04T02:44:29.000Z">
+          2019-08-04
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
       
         <p><a name="01ca666c"></a></p>
 <h2 id="为什么需要代码优化"><a href="#为什么需要代码优化" class="headerlink" title="为什么需要代码优化"></a>为什么需要代码优化</h2><ul>
@@ -146,10 +111,10 @@
 <ul>
 <li><strong>函数近似和查表优化sigmoid函数计算</strong><br><img src="https://user-images.githubusercontent.com/3350865/62418848-dae7e380-b6a5-11e9-9ffa-0734de7bcbf4.png" alt="image.png"><br><img src="https://user-images.githubusercontent.com/3350865/62418862-33b77c00-b6a6-11e9-8ecf-2f1388e24ab7.png" alt="image.png"></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">static OPUS_INLINE float tansig_approx(float x)</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    float y, dy;</span><br><span class="line">    float sign=1;</span><br><span class="line">    /* Tests are reversed to catch NaNs */</span><br><span class="line">    if (!(x&lt;8))</span><br><span class="line">        return 1;</span><br><span class="line">    if (!(x&gt;-8))</span><br><span class="line">        return -1;</span><br><span class="line">#ifndef FIXED_POINT</span><br><span class="line">    /* Another check in case of -ffast-math */</span><br><span class="line">    if (celt_isnan(x))</span><br><span class="line">       return 0;</span><br><span class="line">#endif</span><br><span class="line">    if (x&lt;0)</span><br><span class="line">    &#123;</span><br><span class="line">       x=-x;</span><br><span class="line">       sign=-1;</span><br><span class="line">    &#125;</span><br><span class="line">    i = (int)floor(.5f+25*x);</span><br><span class="line">    x -= .04f*i;</span><br><span class="line">    y = tansig_table[i];</span><br><span class="line">    dy = 1-y*y;</span><br><span class="line">    y = y + x*dy*(1 - y*x);</span><br><span class="line">    return sign*y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static OPUS_INLINE float sigmoid_approx(float x)</span><br><span class="line">&#123;</span><br><span class="line">   return .5 + .5*tansig_approx(.5*x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">static OPUS_INLINE float tansig_approx(float <span class="meta">x</span>)</span><br><span class="line">&#123;</span><br><span class="line">    int i;</span><br><span class="line">    float y, dy;</span><br><span class="line">    float sign=1;</span><br><span class="line">    <span class="comment">/* Tests are reversed to catch NaNs */</span></span><br><span class="line">    <span class="meta">if</span> (!(<span class="meta">x</span>&lt;8))</span><br><span class="line">        <span class="meta">return</span> 1;</span><br><span class="line">    <span class="meta">if</span> (!(<span class="meta">x</span>&gt;-8))</span><br><span class="line">        <span class="meta">return</span> -1;</span><br><span class="line">#ifndef FIXED_POINT</span><br><span class="line">    <span class="comment">/* Another check in case of -ffast-math */</span></span><br><span class="line">    <span class="meta">if</span> (celt_isn<span class="meta">an(</span><span class="meta">x</span>))</span><br><span class="line">       <span class="meta">return</span> 0;</span><br><span class="line">#endif</span><br><span class="line">    <span class="meta">if</span> (<span class="meta">x</span>&lt;0)</span><br><span class="line">    &#123;</span><br><span class="line">       <span class="meta">x</span>=-<span class="meta">x</span>;</span><br><span class="line">       sign=-1;</span><br><span class="line">    &#125;</span><br><span class="line">    i = (int<span class="meta">)floor(</span>.5f+25<span class="comment">*x);</span></span><br><span class="line">    <span class="meta">x</span> -= .04f<span class="comment">*i;</span></span><br><span class="line">    y = tansig_table[i];</span><br><span class="line">    dy = 1-y<span class="comment">*y;</span></span><br><span class="line">    y = y + <span class="meta">x</span><span class="comment">*dy*(1 - y*x);</span></span><br><span class="line">    <span class="meta">return</span> sign<span class="comment">*y;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static OPUS_INLINE float sigmoid_approx(float <span class="meta">x</span>)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="meta">return</span> .5 + .5<span class="comment">*tansig_approx(.5*x);</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>最粗暴的函数近似方法：</strong><br /><img src="https://user-images.githubusercontent.com/3350865/62418851-edfab380-b6a5-11e9-8e3f-75a65d5656c7.png" alt="image.png"><br />     <img src="https://user-images.githubusercontent.com/3350865/62418868-619cc080-b6a6-11e9-8fa1-67751a95dc11.png" alt="image.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">atan(pi*x/2)*2/pi   24.1 ns</span><br><span class="line">atan(x)             23.0 ns</span><br><span class="line">1/(1+exp(-x))       20.4 ns</span><br><span class="line">1/sqrt(1+x^2)       13.4 ns</span><br><span class="line">erf(sqrt(pi)*x/2)    6.7 ns</span><br><span class="line">tanh(x)              5.5 ns</span><br><span class="line">x/(1+|x|)            5.5 ns</span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">atan</span>(pi*x/<span class="number">2</span>)*<span class="number">2</span>/pi   <span class="number">24</span>.<span class="number">1</span> ns</span><br><span class="line"><span class="attribute">atan</span>(x)             <span class="number">23</span>.<span class="number">0</span> ns</span><br><span class="line"><span class="attribute">1</span>/(<span class="number">1</span>+exp(-x))       <span class="number">20</span>.<span class="number">4</span> ns</span><br><span class="line"><span class="attribute">1</span>/sqrt(<span class="number">1</span>+x^<span class="number">2</span>)       <span class="number">13</span>.<span class="number">4</span> ns</span><br><span class="line"><span class="attribute">erf</span>(sqrt(pi)*x/<span class="number">2</span>)    <span class="number">6</span>.<span class="number">7</span> ns</span><br><span class="line"><span class="attribute">tanh</span>(x)              <span class="number">5</span>.<span class="number">5</span> ns</span><br><span class="line"><span class="attribute">x</span>/(<span class="number">1</span>+|x|)            <span class="number">5</span>.<span class="number">5</span> ns</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><strong>减少程序跳转优化RNN计算</strong></li>
@@ -278,148 +243,54 @@
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2019/08/04/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/" data-id="clvcibjfe000riq52fyxm157e" data-title="代码优化方法论" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li></ul>
 
-    </footer>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2020/04/25/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          github.io博客无法访问问题
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2019/04/07/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">算法工程师到底是做什么的</div>
-    </a>
-  
-</nav>
 
-  
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/DeepLearning/">DeepLearning</a><a href="/tags/技术/">技术</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
 </article>
 
-
-</section>
-        
-          <aside id="sidebar">
   
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
     
-
-  
+    &copy; 2024 Marshall Liu
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Audio/" rel="tag">Audio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AudioProcessing/" rel="tag">AudioProcessing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitPage/" rel="tag">GitPage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/" rel="tag">JNI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebRTC/" rel="tag">WebRTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 18px;">Android</a> <a href="/tags/Audio/" style="font-size: 14px;">Audio</a> <a href="/tags/AudioProcessing/" style="font-size: 10px;">AudioProcessing</a> <a href="/tags/DeepLearning/" style="font-size: 14px;">DeepLearning</a> <a href="/tags/FFmpeg/" style="font-size: 12px;">FFmpeg</a> <a href="/tags/GitPage/" style="font-size: 10px;">GitPage</a> <a href="/tags/JNI/" style="font-size: 12px;">JNI</a> <a href="/tags/WebRTC/" style="font-size: 14px;">WebRTC</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 20px;">技术</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 16px;">生活</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2022/09/24/2022-08-24-Android%E4%B8%AD%E5%87%A0%E7%A7%8DsdkVersion%E7%9A%84%E5%8C%BA%E5%88%AB/">Android中几种sdkVersion的区别</a>
-          </li>
-        
-          <li>
-            <a href="/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/">QMF分析综合滤波器</a>
-          </li>
-        
-          <li>
-            <a href="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/">WebRTC中的音频处理概览</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/07/2020-09-07-WebRTC-Android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/">WebRTC系列-WebRTC_Android源码编译</a>
-          </li>
-        
-          <li>
-            <a href="/2020/04/25/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/">github.io博客无法访问问题</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2024 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
+  </p>
 </footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
     
-
-
-<script src="/js/jquery-3.4.1.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
+    
   </div>
+</div>
 </body>
 </html>
