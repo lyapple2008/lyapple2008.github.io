@@ -1,293 +1,116 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta charset="utf-8">
   
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Marshall Liu">
-  <meta name="keywords" content="">
   
-    <meta name="description" content="音频采集播放 a. 采样率 b. 采样位宽 c. 声道 音频编解码 a. 码率 b. 编解码格式：Opus 音频处理 a. 回声消除 b. 降噪 c. 自动增益控制 d. 混音 网络传输 a. 传输协议 b. 抗抖动    WebRTC由音频引擎、视频引擎和传输模块，音频处理在WebRTC占了很大一块，本文主要对WebRTC中涉及的音频处理进行简单介绍，不会对具体的实现进行介绍。上图是WebRT">
+  <title>WebRTC中的音频处理概览 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="音频采集播放 a. 采样率 b. 采样位宽 c. 声道 音频编解码 a. 码率 b. 编解码格式：Opus 音频处理 a. 回声消除 b. 降噪 c. 自动增益控制 d. 混音 网络传输 a. 传输协议 b. 抗抖动    WebRTC由音频引擎、视频引擎和传输模块，音频处理在WebRTC占了很大一块，本文主要对WebRTC中涉及的音频处理进行简单介绍，不会对具体的实现进行介绍。上图是WebRT">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WebRTC中的音频处理概览">
-<meta property="og:url" content="http://www.beyoung.xyz/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/index.html">
-<meta property="og:site_name" content="BeYoung">
+<meta property="og:url" content="http://example.com/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/index.html">
+<meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="音频采集播放 a. 采样率 b. 采样位宽 c. 声道 音频编解码 a. 码率 b. 编解码格式：Opus 音频处理 a. 回声消除 b. 降噪 c. 自动增益控制 d. 混音 网络传输 a. 传输协议 b. 抗抖动    WebRTC由音频引擎、视频引擎和传输模块，音频处理在WebRTC占了很大一块，本文主要对WebRTC中涉及的音频处理进行简单介绍，不会对具体的实现进行介绍。上图是WebRT">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.beyoung.xyz/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/001.png">
-<meta property="og:image" content="http://www.beyoung.xyz/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/002.png">
-<meta property="og:image" content="http://www.beyoung.xyz/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/003.png">
-<meta property="og:image" content="http://www.beyoung.xyz/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/004.png">
-<meta property="og:image" content="http://www.beyoung.xyz/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/005.png">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/001.png">
+<meta property="og:image" content="http://example.com/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/002.png">
+<meta property="og:image" content="http://example.com/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/003.png">
+<meta property="og:image" content="http://example.com/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/004.png">
+<meta property="og:image" content="http://example.com/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/005.png">
 <meta property="article:published_time" content="2022-01-22T02:53:15.000Z">
 <meta property="article:modified_time" content="2022-02-03T03:34:32.000Z">
-<meta property="article:author" content="Marshall Liu">
+<meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Audio">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="WebRTC">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://www.beyoung.xyz/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/001.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/001.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
   
+    <link rel="shortcut icon" href="/favicon.png">
   
-  <title>WebRTC中的音频处理概览 - BeYoung</title>
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
   
-
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"www.beyoung.xyz","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
   
+<link rel="stylesheet" href="/css/style.css">
 
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
   
 <meta name="generator" content="Hexo 5.4.0"></head>
 
-
 <body>
-  
-
-  <header>
-    
-
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/" target="_self">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
     </div>
-  </div>
-</nav>
-
-  
-
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="WebRTC中的音频处理概览"></span>
-          
-        </div>
-
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
         
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-01-22 10:53" pubdate>
-          2022年1月22日 上午
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
+          <a class="main-nav-link" href="/">Home</a>
         
-          1.7k 字
+          <a class="main-nav-link" href="/archives">Archives</a>
         
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
+      </nav>
+      <nav id="sub-nav">
         
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        
-          15 分钟
-        
-      </span>
-    
-
-    
-    
-  </div>
-
-
-        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
       </div>
-
-      
     </div>
   </div>
-</div>
+</header>
 
-</div>
-
-  </header>
-
-  <main>
+      <div class="outer">
+        <section id="main"><article id="post-2021-12-22-WebRTC中的音频处理概览" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/" class="article-date">
+  <time class="dt-published" datetime="2022-01-22T02:53:15.000Z" itemprop="datePublished">2022-01-22</time>
+</a>
     
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      WebRTC中的音频处理概览
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
       
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <h1 id="seo-header">WebRTC中的音频处理概览</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <ol>
+        <ol>
 <li>音频采集播放<br> a. 采样率<br> b. 采样位宽<br> c. 声道</li>
 <li>音频编解码<br> a. 码率<br> b. 编解码格式：Opus</li>
 <li>音频处理<br> a. 回声消除<br> b. 降噪<br> c. 自动增益控制<br> d. 混音</li>
 <li>网络传输<br> a. 传输协议<br> b. 抗抖动</li>
 </ol>
-<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/001.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/001.png" class="">
 
 <p>WebRTC由音频引擎、视频引擎和传输模块，音频处理在WebRTC占了很大一块，本文主要对WebRTC中涉及的音频处理进行简单介绍，不会对具体的实现进行介绍。上图是WebRTC中音频处理的流水线（上面的图是网上的图，如有侵权，通知即删），可以看出主要包含了音频采集播放、音频处理、音频编解码和音频传输。下面对这些模块逐一进行介绍。</p>
 <span id="more"></span>
@@ -295,17 +118,17 @@
 <h1 id="音频采集播放"><a href="#音频采集播放" class="headerlink" title="音频采集播放"></a>音频采集播放</h1><p>自然界的声音，包括人说出来的声音，都是模拟信号，这些模拟信号是不能被计算机存储和识别的，也不能通过网络进行传输。音频采集就是声音从模拟信号转换成数字信号的过程，而音频播放就是声音从数字信号转换成模拟信号的过程。对于音频数字信号来说有以下几个最主要的参数：</p>
 <ol>
 <li><p>采样率<br>采样率是指录音设备在一秒钟内对声音信号的采样次数，单位是Hz，采样频率越高，声音的还原度越真实越自然。但是人耳可以听到的频度范围是20Hz~20000Hz，然后根据采样定理，也就是说最低只需要40kHz采样率就可以满足人耳的需求了，因此CD音质和音乐音频都是44.1kHz。但是采样率越高意味着数据量越大，因此在一些特殊的场景会使用更低的采样率，如语音通话场景，因为人声都是低于4kHz，因此在语音通话场景更多会使用8kHz或者16kHz的采样率。</p>
-<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/002.png" srcset="/img/loading.gif" lazyload class=""></li>
+<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/002.png" class=""></li>
 <li><p>采样位宽<br>声音模拟信号经过采样后得一个个样点的值，这个值需要存储到计算机中，那么使用多少位数来表示这个 就是采样位宽，通常使用最多的是16bit，正好就是一个short类型。</p>
 </li>
 <li><p>声道数<br>在使用录音设备进行声音采集时，只能表示到采集点处的声音信号，但是实际声音是有空间信息，为了表达声音的空间信息，就有了声道的概念。这里最有名的可能就是杜比全景声了，大家在电影院看电影的时候，感受到的被声音包围的真实感就是多声道的功劳了，当然这里并不是加多几个通道这么简单啦。</p>
-<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/003.png" srcset="/img/loading.gif" lazyload class=""></li>
+<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/003.png" class=""></li>
 </ol>
 <h1 id="音频编解码"><a href="#音频编解码" class="headerlink" title="音频编解码"></a>音频编解码</h1><p>虽然音频的数据量没有视频的量那么大，但是如果直接传输原始的音频数据（原始的音频数据有个名字叫Pulse Code Modulation (PCM)），数据量也是挺大的。现在我们来计算下1秒采样率为48kHz双通道的音频信号的数据量有多大，1秒 * 48000个采样点 * 2个声道 * 每个样点2Bytes，这样1秒的数据量是192kB字节。这样的数据量在互联网发展的早期也是不可以接受的，这时候就需要音频编解码。简单的说，音频编解码就是利用人耳的心理声学特性将也一些不影响听觉的信号丢弃，从而减少信号量的方法，在WebRTC中用得最多的是Opus格式。对于音频编码器来说一个很重要的参数是码率，单位是kbps，即每秒的音频使用多少bits位来表示。音频编解码是音频领域一个很专业的领域，这里就不展开了。</p>
 <h1 id="音频处理"><a href="#音频处理" class="headerlink" title="音频处理"></a>音频处理</h1><p>在实时通话场景，需要面对各种复杂的环境，处理各种音频问题，最常见的如噪声、回声、声音过大过小等，WebRTC中有一个专门的音频处理模块来处理这些问题，下面就简单介绍下这些模块。</p>
 <ol>
 <li><p>回声消除（Acoustic Echo Cancellation）<br>实际通话场景是一个全双工通信系统非容易产生回声，如下图所示，远端说话声==》近端扬声器播放==》近端麦克风录制==》通过网络传输到远端的扬声器播放，经过这样一个音频环路后，远端又在扬声器里听到自己的声音，也就是回声，如果回声的延时很低时还会产生啸叫，这样是很影响通话体验的。这时就需要回声消除AEC模块了，通常录音数据都会先经过个模块，在传输前先把远端播放的数据消除，这样远端在播放的时候就不会听到回声了。回声消除AEC详细的原理介绍留到后面再介绍，这里先挖个坑。</p>
-<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/004.png" srcset="/img/loading.gif" lazyload class=""></li>
+<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/004.png" class=""></li>
 <li><p>噪声抑制（Noise Suppression）<br>噪声抑制NS这个很好理解，实际的通话场景都会存在各种各样的噪声，为了保证通话体验不受影响，这时就需要噪声抑制NS模块了。这里也再挖一坑，后面再根据WebRTC源码进行噪声抑制原理介绍。</p>
 </li>
 <li><p>自动增益控制（Auto Gain Control）<br>在实际通话过程中，由于使用设备的差异和通话时离麦克风的远近，导致了通话的音量差异，为了达到统一的体验就需要进行自动增益控制，简单说就是当音量小时调大增益，当音量大时调小增益，达到减少音量起伏的作用。</p>
@@ -314,359 +137,154 @@
 </li>
 </ol>
 <h1 id="音频传输"><a href="#音频传输" class="headerlink" title="音频传输"></a>音频传输</h1><p>目前WebRTC音频传输是UDP/RTP/RTCP协议基础上进行传输的，底层UDP协议的不可靠性，导致丢包不可避免，同时音频数据与其它的数据内容有其特殊性，通常一点音频异常都很容易被人感知出来。因此WebRTC针对音频传输做了很多额外的工作，除了最常见的丢包重传，丢包补偿等，还有一个NetEQ模块，会在播放端进行音频播放的加减速来进一步减少由于网络抖动引起的音频异常。</p>
-<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/005.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/005.png" class="">
 
 <p>到这里WebRTC中跟音频相关的技术模块都简单的过了一遍，这样大家对于WebRTC音频处理有个大概的印象，这里的每个模块值得深入去学习，后面也把自己学习的一些心得记录在这里，大家一起学习呀。</p>
 
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/Audio/" class="print-no-link">#Audio</a>
-      
-        <a href="/tags/%E6%8A%80%E6%9C%AF/" class="print-no-link">#技术</a>
-      
-        <a href="/tags/WebRTC/" class="print-no-link">#WebRTC</a>
       
     </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/" data-id="clvb3k5cz000p2u52gw6bc5v3" data-title="WebRTC中的音频处理概览" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Audio/" rel="tag">Audio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WebRTC/" rel="tag">WebRTC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li></ul>
+
+    </footer>
+  </div>
   
-</div>
-
-
-              
+    
+<nav id="article-nav">
   
+    <a href="/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          QMF分析综合滤波器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/09/07/2020-09-07-WebRTC-Android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">WebRTC系列-WebRTC_Android源码编译</div>
+    </a>
+  
+</nav>
 
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>WebRTC中的音频处理概览</div>
-      <div>http://www.beyoung.xyz/2022/01/22/2021-12-22-WebRTC中的音频处理概览/</div>
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Audio/" rel="tag">Audio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AudioProcessing/" rel="tag">AudioProcessing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DeepLearning/" rel="tag">DeepLearning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/" rel="tag">FFmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitPage/" rel="tag">GitPage</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JNI/" rel="tag">JNI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebRTC/" rel="tag">WebRTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li></ul>
     </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>Marshall Liu</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2022年1月22日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
-          </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
   </div>
 
 
-
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/" title="QMF分析综合滤波器">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">QMF分析综合滤波器</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2020/09/07/2020-09-07-WebRTC-Android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/" title="WebRTC系列-WebRTC_Android源码编译">
-                        <span class="hidden-mobile">WebRTC系列-WebRTC_Android源码编译</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-
-
-  </aside>
-
-
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 18px;">Android</a> <a href="/tags/Audio/" style="font-size: 14px;">Audio</a> <a href="/tags/AudioProcessing/" style="font-size: 10px;">AudioProcessing</a> <a href="/tags/DeepLearning/" style="font-size: 14px;">DeepLearning</a> <a href="/tags/FFmpeg/" style="font-size: 12px;">FFmpeg</a> <a href="/tags/GitPage/" style="font-size: 10px;">GitPage</a> <a href="/tags/JNI/" style="font-size: 12px;">JNI</a> <a href="/tags/WebRTC/" style="font-size: 14px;">WebRTC</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 20px;">技术</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 16px;">生活</a>
     </div>
   </div>
-</div>
-
-
-
-
 
   
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
     
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li></ul>
     </div>
   </div>
-</div>
 
-    
 
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
   
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/09/24/2022-08-24-Android%E4%B8%AD%E5%87%A0%E7%A7%8DsdkVersion%E7%9A%84%E5%8C%BA%E5%88%AB/">Android中几种sdkVersion的区别</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/">QMF分析综合滤波器</a>
+          </li>
+        
+          <li>
+            <a href="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/">WebRTC中的音频处理概览</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/07/2020-09-07-WebRTC-Android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/">WebRTC系列-WebRTC_Android源码编译</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/25/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/">github.io博客无法访问问题</a>
+          </li>
+        
+      </ul>
     </div>
+  </div>
+
   
+</aside>
+        
+      </div>
+      <footer id="footer">
   
-  
-  
-</div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
+  <div class="outer">
+    <div id="footer-info" class="inner">
       
-        typing(text);
-      
-    })(window, document);
-  </script>
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
 
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
 
 
 
   
-    <script  src="/js/img-lazyload.js" ></script>
-  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
 
 
 
 
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script  src="/js/local-search.js" ></script>
+<script src="/js/script.js"></script>
 
 
 
 
 
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
+  </div>
 </body>
 </html>
