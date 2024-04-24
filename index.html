@@ -1,658 +1,466 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang=zh-CN>
 <head>
-  <meta charset="utf-8">
-  
-  <title>BeYoung | Stay Hungry, Stay Young</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="beyoung的博客">
+    <meta property="og:type" content="website">
+    <meta name="description" content="beyoung的博客">
+    <meta name="keyword"  content="webrtc,beyoung的博客">
+    <link rel="shortcut icon" href="/img/favicon.ico">
 
-  
-  <meta name="author" content="Marshall Liu">
-  
+    <title>
+        
+        BeYoung
+        
+    </title>
 
-  
-  <meta name="description" content="beyoung的博客">
-  
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
 
-  
+    
+<link rel="stylesheet" href="/css/gitment.css">
 
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
 
-  
+    
 
-  <meta property="og:site_name" content="BeYoung"/>
 
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="BeYoung" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+
+
+
+
+
 <meta name="generator" content="Hexo 5.4.0"></head>
 
-
 <body>
-<div class="blog">
-  <div class="content">
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">BeYoung</a>
-    </h1>
-    <p class="site-description">Stay Hungry, Stay Young</p>
-  </div>
-  <nav class="site-navigation">
-    <ul>
-      
-        <li><a href="/">主页</a></li>
-      
-        <li><a href="/archives">归档</a></li>
-      
-    </ul>
-  </nav>
-</header>
-
-    <main class="site-main posts-loop">
-    
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2022/09/24/2022-08-24-Android中几种sdkVersion的区别/"><span>Android中几种sdkVersion的区别</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2022/09/24/2022-08-24-Android中几种sdkVersion的区别/" rel="bookmark">
-        <time class="entry-date published" datetime="2022-09-24T09:03:48.000Z">
-          2022-09-24
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="Android中几种sdkVersion的区别"><a href="#Android中几种sdkVersion的区别" class="headerlink" title="Android中几种sdkVersion的区别"></a>Android中几种sdkVersion的区别</h1><blockquote>
-<p>最近遇到一个由于升级了targetSdkVersion而引起的线上crash，之前一直对于Android里面几个sdkVersion的含义和作用很模糊，正好这次把这几个不同的sdkVersion理清楚。</p>
-</blockquote>
-<img src="/2022/09/24/2022-08-24-Android%E4%B8%AD%E5%87%A0%E7%A7%8DsdkVersion%E7%9A%84%E5%8C%BA%E5%88%AB/001.png" class="">
-
-<ul>
-<li><strong>minSdkVersion</strong></li>
-</ul>
-<p>用于指定应用运行所需最低API级别的整数。如果系统的API级别低于属性中指定的值，Android系统将阻止用户安装应用。</p>
-<ul>
-<li><strong>compileSdkVersion</strong></li>
-</ul>
-<p>compileSdkVersion只是用来告诉Gradle用哪个Android SDK版本编译你的应用，当使用到新添加的API时就需要使用对应Level的Android SDK。这里需要强调的是，compileSdkVersion只会影响编译的时候，例如，当前我们想使用Android 12一个新的API功能，这时我们就需要将compileSdkVersion升级到31</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">android</span> &#123;</span><br><span class="line">    <span class="attribute">compileSdkVersion</span> <span class="number">31</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>但是这里我们指定了compileSdkVersion到新版本只是让APP编译可以通过，因为在旧的Android系统上还没有使用的新的API，因此在实际代码中还需要对运行时的系统API级别进行判断，保证使用的新API只会在Android12以上的系统运行。</p>
-<ul>
-<li><strong>targetSdkVersion</strong></li>
-</ul>
-<p>要理解targetSdkVersion，需要知道targetSdkVersion在Android中的作用。targetSdkVersion是Android系统提供向后兼容的主要手段（即：新版本SDK手机兼容旧版本SDK工程）。这是什么意思呢？随着 Android 系统的升级，某个系统的 API 或者模块的行为可能会发生改变，但是为了保证老 APK 的行为还是和以前兼容。只要 APK 的 targetSdkVersion 不变，即使这个 APK 安装在新 Android 系统上，其行为还是保持老的系统上的行为，这样就保证了系统对老应用的前向兼容性。<br>总结： android更新api大概有两种，一种是完全重写（这种就不干targetSdk什么事了）；另一种，保留了老版本的处理逻辑，同时又新增了新的逻辑（用if else的方式来判断具体运行哪段逻辑）。而targetSdk就是用来判断这个if-else的。</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/Android/">Android</a><a href="/tags/技术/">技术</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2022/02/03/2022-02-03-QMF分析综合滤波器/"><span>QMF分析综合滤波器</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2022/02/03/2022-02-03-QMF分析综合滤波器/" rel="bookmark">
-        <time class="entry-date published" datetime="2022-02-03T03:35:16.000Z">
-          2022-02-03
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="分析综合滤波器组的作用"><a href="#分析综合滤波器组的作用" class="headerlink" title="分析综合滤波器组的作用"></a>分析综合滤波器组的作用</h1><p>由于音频信号在不同的频率范围具有不同的特性，因此在音频处理之前通常都会使用分析综合滤波器组将音频信号分成不同的频率子带，再分别进行处理。比如，音频编码中常用到的子带编码（Subband coding）；webrtc的VAD中，会对不同的频率子带计算特征，再综合这些特征计算语音概率。</p>
-<img src="/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/001.png" class="">
-        
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/Audio/">Audio</a><a href="/tags/技术/">技术</a><a href="/tags/WebRTC/">WebRTC</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2022/01/22/2021-12-22-WebRTC中的音频处理概览/"><span>WebRTC中的音频处理概览</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2022/01/22/2021-12-22-WebRTC中的音频处理概览/" rel="bookmark">
-        <time class="entry-date published" datetime="2022-01-22T02:53:15.000Z">
-          2022-01-22
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <ol>
-<li>音频采集播放<br> a. 采样率<br> b. 采样位宽<br> c. 声道</li>
-<li>音频编解码<br> a. 码率<br> b. 编解码格式：Opus</li>
-<li>音频处理<br> a. 回声消除<br> b. 降噪<br> c. 自动增益控制<br> d. 混音</li>
-<li>网络传输<br> a. 传输协议<br> b. 抗抖动</li>
-</ol>
-<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/001.png" class="">
-
-<p>WebRTC由音频引擎、视频引擎和传输模块，音频处理在WebRTC占了很大一块，本文主要对WebRTC中涉及的音频处理进行简单介绍，不会对具体的实现进行介绍。上图是WebRTC中音频处理的流水线（上面的图是网上的图，如有侵权，通知即删），可以看出主要包含了音频采集播放、音频处理、音频编解码和音频传输。下面对这些模块逐一进行介绍。</p>
-        
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/Audio/">Audio</a><a href="/tags/技术/">技术</a><a href="/tags/WebRTC/">WebRTC</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2020/09/07/2020-09-07-WebRTC-Android源码编译/"><span>WebRTC系列-WebRTC_Android源码编译</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2020/09/07/2020-09-07-WebRTC-Android源码编译/" rel="bookmark">
-        <time class="entry-date published" datetime="2020-09-07T15:19:37.000Z">
-          2020-09-07
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="WebRTC-Android源码编译"><a href="#WebRTC-Android源码编译" class="headerlink" title="WebRTC Android源码编译"></a>WebRTC Android源码编译</h1><p>对于WebRTC的学习来说，首先需要搞定的是源码的编译，由于国内的特殊环境和WebRTC本身的复杂性，导致WebRTC源码编译成了WebRTC学习的第一道门槛。这里把自己在编译WebRTC源码过程中遇到的一些坑进行总结分享，希望对大家有帮助。主要参考官网和WebRTC的编译配置脚本，整个操作过程需要具备科学上学的环境，第一次下载好环境和源码后，后面就不需要了。这里以Android端为例，编译环境为Ubuntu 18.04（再高版本会提示不支持），WebRTC官网有提到Android端暂时只支持在Linux下编译。虽然网上也有资源介绍在Mac环境下编译的，但是用虚拟机装个Ubuntu还是挺方便的，咱就不折腾了。</p>
-        
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/Android/">Android</a><a href="/tags/技术/">技术</a><a href="/tags/WebRTC/">WebRTC</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2020/04/25/2020-04-25-github-io博客无法访问问题/"><span>github.io博客无法访问问题</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2020/04/25/2020-04-25-github-io博客无法访问问题/" rel="bookmark">
-        <time class="entry-date published" datetime="2020-04-25T01:34:29.000Z">
-          2020-04-25
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>原来的github.io自定义域名博客不能访问，提示如下信息</p>
-<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Fastly error: unknown domain: beyoung.xyz. Please<span class="built_in"> check </span>that this domain has been added to a service.</span><br><span class="line">Details: cache-lax8629-LAX</span><br></pre></td></tr></table></figure>
-        
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/GitPage/">GitPage</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/08/04/2019-08-04-代码优化方法论/"><span>代码优化方法论</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/08/04/2019-08-04-代码优化方法论/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-08-04T02:44:29.000Z">
-          2019-08-04
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p><a name="01ca666c"></a></p>
-<h2 id="为什么需要代码优化"><a href="#为什么需要代码优化" class="headerlink" title="为什么需要代码优化"></a>为什么需要代码优化</h2><ul>
-<li>提升体验，扩展玩法</li>
-</ul>
-<p><img src="https://user-images.githubusercontent.com/3350865/62418824-63b24f80-b6a5-11e9-9bde-6cd6de0cc6a5.PNG" alt="image.png"></p>
-        
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/DeepLearning/">DeepLearning</a><a href="/tags/技术/">技术</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/04/07/2019-04-07-算法工程师到底是做什么的/"><span>算法工程师到底是做什么的</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/04/07/2019-04-07-算法工程师到底是做什么的/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-04-07T12:20:38.000Z">
-          2019-04-07
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>还记得刚毕业那会找工作，那是一定要找法工程师这个岗位，当时就只是觉得这个岗位牛逼是公司的核心岗位，但是可能对于算法工程师与一般的软件工程有什么区别其实心理也说不清楚。作为一个到今年6月份就工作满5年了的老菜鸟，这期间工作的title也是算法工程师（虽然有些并不是真的在做算法），反正在以算法工程师的title在企业工作的感受与毕业那会想像中上的算法工程师的工作完全不一样。  </p>
-        
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/生活/">生活</a><a href="/tags/技术/">技术</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/03/31/2019-03-31-音乐人声分离小结/"><span>音乐人声分离小结</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/03/31/2019-03-31-音乐人声分离小结/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-03-31T14:18:43.000Z">
-          2019-03-31
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h3 id="音乐人声分离概况"><a href="#音乐人声分离概况" class="headerlink" title="音乐人声分离概况"></a>音乐人声分离概况</h3><p>音乐人声分离的目的是，从一首歌曲中分离出人声和伴奏声。<a target="_blank" rel="noopener" href="https://www.math.ucdavis.edu/~aberrian/research/voice_separation/index.html">Project on Music/Voice Separation</a>这个网站比较了一些基于传统方法的效果，但是由于基于了一些假设（比如REPET就假伴奏都是周期重复信号），这些算法在实际测试过程中效果都差强人意。随着深度学习的流行，音乐人声分离这个领域也开始被基于深度学习的方法所占领。在<a target="_blank" rel="noopener" href="http://www.sisec17.audiolabs-erlangen.de/#/results/1/4/2">SiSEC MUS</a>上可以看到效果比较好的都是基于深度学习的方法。</p>
-        
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/DeepLearning/">DeepLearning</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/03/10/2019-03-10-音频开发资源/"><span>音频开发资源</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/03/10/2019-03-10-音频开发资源/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-03-10T02:16:27.000Z">
-          2019-03-10
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>记录一些音频开发过程中会用到的优质资源</p>
-<ul>
-<li><p><a target="_blank" rel="noopener" href="https://webrtc.org/">WebRTC</a>   </p>
-<blockquote>
-<p>WebRTC是google开源的实时音视频通讯项目，其中的AudioProcess模块包括了AGC/AEC/ANS算法，非常值得学习。同时WebRTC还是一个跨平台项目，代码中对各个平台（Android/Ios/Windows/Linux）硬件接口的封装和抽象可以直接拿来应用到自己的项目中。</p>
-</blockquote>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/google/oboe">Oboe</a>   </p>
-<blockquote>
-<p>Oboe是Google家开源一个高性能C++库，这个库封装了Android底层OpenSLES和AAudio接口，通过这个库可以方便地在Android实现Low Latency Audio，只需一套代码就可以了。</p>
-</blockquote>
-</li>
-</ul>
-        
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/Android/">Android</a><a href="/tags/AudioProcessing/">AudioProcessing</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/03/03/2019-03-03-JavaNativeInterface笔记/"><span>JavaNativeInterface笔记</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/03/03/2019-03-03-JavaNativeInterface笔记/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-03-03T14:51:59.000Z">
-          2019-03-03
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>最近由于公司项目的原因开始接触WebRTC，其中Android相关部分由于需要跨越了两种不同的语<br>言，因此需要一种机制能够让C/C++和JAVA之间进行交互，而JNI就是这样一种机制。通过JNI可<br>以实现C/C++和JAVA之前需要交互。本篇笔记的首先从一个实际的例子开始介绍JNI操作的完整流<br>程是怎样的；接着将就这个例子完整介绍JNI中需要注意的点。<br><img src="https://user-images.githubusercontent.com/3350865/61180103-91c2e780-a643-11e9-8132-f85c7a83f8da.jpg" alt="image"></p>
-        
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/Android/">Android</a><a href="/tags/JNI/">JNI</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-
-<nav class="pagination">
-  
-  
-  <a href="/page/2/" class="pagination-next">下一页</a>
-  
-</nav>
-    </main>
-
-    <footer class="site-footer">
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2024 Marshall Liu
-    
-  </p>
-</footer>
-    
-    
-  </div>
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
 </div>
+
+<div class="index-about">
+    <i> Stay Hungry, Stay Young </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/images/avatar.jpg" />
+        </div>
+        <div class="name">
+            <i>Marshall Liu</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li  class=active >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>SEARCH</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> Stay Hungry, Stay Young </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+<div class="post-preview-container" style="min-height: 720px">
+    
+    <div class="post-preview">
+        <div class="post-time">2022-09-24</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2022/09/24/2022-08-24-Android%E4%B8%AD%E5%87%A0%E7%A7%8DsdkVersion%E7%9A%84%E5%8C%BA%E5%88%AB/">
+                <h3>
+                    Android中几种sdkVersion的区别
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#Android" title="Android">Android</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#技术" title="技术">技术</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2022-02-03</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2022/02/03/2022-02-03-QMF%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/">
+                <h3>
+                    QMF分析综合滤波器
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#Audio" title="Audio">Audio</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#技术" title="技术">技术</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#WebRTC" title="WebRTC">WebRTC</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2022-01-22</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/">
+                <h3>
+                    WebRTC中的音频处理概览
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#Audio" title="Audio">Audio</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#技术" title="技术">技术</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#WebRTC" title="WebRTC">WebRTC</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2020-09-07</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2020/09/07/2020-09-07-WebRTC-Android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/">
+                <h3>
+                    WebRTC系列-WebRTC_Android源码编译
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#Android" title="Android">Android</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#技术" title="技术">技术</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#WebRTC" title="WebRTC">WebRTC</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2020-04-25</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2020/04/25/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/">
+                <h3>
+                    github.io博客无法访问问题
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#GitPage" title="GitPage">GitPage</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2019-08-04</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2019/08/04/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/">
+                <h3>
+                    代码优化方法论
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#DeepLearning" title="DeepLearning">DeepLearning</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#技术" title="技术">技术</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2019-04-07</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2019/04/07/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/">
+                <h3>
+                    算法工程师到底是做什么的
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#生活" title="生活">生活</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#技术" title="技术">技术</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2019-03-31</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2019/03/31/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/">
+                <h3>
+                    音乐人声分离小结
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#DeepLearning" title="DeepLearning">DeepLearning</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2019-03-10</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2019/03/10/2019-03-10-%E9%9F%B3%E9%A2%91%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/">
+                <h3>
+                    音频开发资源
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#Android" title="Android">Android</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#AudioProcessing" title="AudioProcessing">AudioProcessing</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+    <div class="post-preview">
+        <div class="post-time">2019-03-03</div>
+        <div class="post-info">
+            <a href="http://www.beyoung.xyz/2019/03/03/2019-03-03-JavaNativeInterface%E7%AC%94%E8%AE%B0/">
+                <h3>
+                    JavaNativeInterface笔记
+                </h3>
+            </a>
+            <p>
+                
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#Android" title="Android">Android</a>
+                <span>/</span>
+                
+                <a class="tag" href="/tags/#JNI" title="JNI">JNI</a>
+                <span>/</span>
+                
+                
+            </p>
+        </div>
+    </div>
+    
+</div>
+<ul class="pager">
+    
+    
+    <li class="next">
+        <a href="/page/2/">Older Posts &rarr;</a>
+    </li>
+    
+</ul>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        <li>
+            <a target="_blank" href="https://twitter.com/lyapple2008">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-twitter"></i>
+                            </span>
+            </a>
+        </li>
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/liuyang528231">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/lyapple2008">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/lyapple2008">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
 </body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = false
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
 </html>
