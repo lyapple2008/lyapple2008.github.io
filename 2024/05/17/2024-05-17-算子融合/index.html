@@ -12,7 +12,7 @@
 
     <title>
         
-        收集音频技术应用公司与实验室 - BeYoung
+        算子融合 - BeYoung
         
     </title>
 
@@ -111,7 +111,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E5%85%AC%E5%8F%B8"><span class="toc-text">技术公司</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%AE%A4"><span class="toc-text">实验室</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2"><span class="toc-text">个人博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E6%BA%90%E5%BA%93"><span class="toc-text">开源库</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88"><span class="toc-text">什么是算子融合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%81%9A%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88"><span class="toc-text">如何做算子融合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E5%AD%90%E5%88%86%E7%B1%BB"><span class="toc-text">算子分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E5%AD%90%E5%8F%AF%E8%9E%8D%E5%90%88%E6%80%A7"><span class="toc-text">算子可融合性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%9B%BE%E5%9F%BA%E4%BA%8E%E8%9E%8D%E5%90%88%E6%80%A7%E5%88%86%E5%9D%97"><span class="toc-text">计算图基于融合性分块</span></a></li></ol></li></ol>
 </div>
     
 </div>
@@ -143,18 +143,21 @@
 
 <div class="post-container">
     <div class="post-title">
-        收集音频技术应用公司与实验室
+        算子融合
     </div>
 
     <div class="post-meta">
-        <span class="attr">发布于：<span>2018-10-29 23:34:05</span></span>
+        <span class="attr">发布于：<span>2024-05-17 22:58:36</span></span>
         
         <span class="attr">标签：/
         
-        <a class="tag" href="/tags/#Audio" title="Audio">Audio</a>
+        <a class="tag" href="/tags/#DeepLearning" title="DeepLearning">DeepLearning</a>
         <span>/</span>
         
         <a class="tag" href="/tags/#技术" title="技术">技术</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#InferenceEngine" title="InferenceEngine">InferenceEngine</a>
         <span>/</span>
         
         
@@ -164,40 +167,29 @@
 </span>
     </div>
     <div class="post-content no-indent">
-        <p><img src="https://user-images.githubusercontent.com/3350865/61180076-fe89b200-a642-11e9-81a7-697446a0860a.jpg"><br>&emsp;&emsp;收集一些音频相关的公司和实验室，另外还有一些个人博客，用来了解行业的最新动态。</p>
-<span id="more"></span>
+        <h2 id="什么是算子融合"><a href="#什么是算子融合" class="headerlink" title="什么是算子融合"></a>什么是算子融合</h2><p>算子融合是一种通过合并计算图中多个算子到一个算子，达到减少计算量和内存访问的优化方法。</p>
+<ul>
+<li>Conv + BatchNormalization + ReLu融合<img src="/2024/05/17/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/conv_bn_relu.png" class=""></li>
+</ul>
+<p>从融合后的最终公式可以看出，可以在初始阶段就通过BN的均值和方差（推理阶段BN的均值和方差是常量）更新Conv层的weights和bias参数，这样融合后的算子相当少了一个BN层的操作，既减少了内存访问，也减少了计算量</p>
+<h2 id="如何做算子融合"><a href="#如何做算子融合" class="headerlink" title="如何做算子融合"></a>如何做算子融合</h2><h3 id="算子分类"><a href="#算子分类" class="headerlink" title="算子分类"></a>算子分类</h3><img src="/2024/05/17/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/operator_category.png" class="">
 
-<ul>
-<li><h2 id="技术公司"><a href="#技术公司" class="headerlink" title="技术公司"></a>技术公司</h2></li>
-</ul>
+<p>当存在多个输入，同时存在多种输入-输出映射关系时，最终的Mapping type由最复杂的那一个决定。Mapping type复杂度递增顺序：One-to-One，Reorganize，Shuffle，One-to-Many，Many-to-Many<br>注：Many-to-Many包含Many-to-One的类型</p>
+<h3 id="算子可融合性"><a href="#算子可融合性" class="headerlink" title="算子可融合性"></a>算子可融合性</h3><img src="/2024/05/17/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/fusion_ability.png" class="">
+
+<p>绿色：可以融合，且有收益<br>黄色：要做profile才能确定是否有收益<br>红色：没有收益，不融合</p>
+<h3 id="计算图基于融合性分块"><a href="#计算图基于融合性分块" class="headerlink" title="计算图基于融合性分块"></a>计算图基于融合性分块</h3><img src="/2024/05/17/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/graph_partition.png" class="">
+
+<p>分块过程：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://www.smule.com/apps">smule</a> 一些乐器应用挺有意思的</li>
-<li><a target="_blank" rel="noopener" href="https://www.soundhound.com/soundhound">SoundHound</a> 哼唱歌曲识别</li>
-<li><a target="_blank" rel="noopener" href="http://www.vocaloid.com/en/">Vocaloid</a>   歌声合成</li>
-<li><a target="_blank" rel="noopener" href="http://www.gracenote.com/#">Gracenote</a></li>
+<li>随机挑选一个One-to-One 算子节点做为种子节点</li>
+<li>从种子节点往后进行融合，直到没有可以融合的节点，并更新块的Mapping Type</li>
+<li>从种子节点往前进行融合，直到没有可以融合的节点，并更新块的Mapping Type</li>
+<li>重复执行1、2、3，直到没有可用的种子节点<br>融合代码生成<br>基于编译生成融合代码（DNNFusion、TVM）<img src="/2024/05/17/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/code_gen.png" class=""></li>
 </ol>
-<ul>
-<li><h2 id="实验室"><a href="#实验室" class="headerlink" title="实验室"></a>实验室</h2></li>
-</ul>
+<p>参考</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="http://music.cs.northwestern.edu/">Interactive audio lab</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.upf.edu/web/mtg">Music Technology Group</a></li>
-<li><a target="_blank" rel="noopener" href="http://naplab.ee.columbia.edu/">Neural Acoustic Processing Lab</a></li>
-<li><a target="_blank" rel="noopener" href="http://marg.snu.ac.kr/">Music and Audio Research Group, Seoul National University
-</a></li>
-</ol>
-<ul>
-<li><h2 id="个人博客"><a href="#个人博客" class="headerlink" title="个人博客"></a>个人博客</h2></li>
-</ul>
-<ol>
-<li><a target="_blank" rel="noopener" href="http://www.justinsalamon.com/melody-extraction.html">Melody Extraction</a></li>
-<li><a target="_blank" rel="noopener" href="http://www.cs.cmu.edu/~yunwang/">Yun Wang (Maigo)</a></li>
-</ol>
-<ul>
-<li><h2 id="开源库"><a href="#开源库" class="headerlink" title="开源库"></a>开源库</h2></li>
-</ul>
-<ol>
-<li><a target="_blank" rel="noopener" href="http://essentia.upf.edu/documentation/">Essentia</a> </li>
+<li><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/10.1145/3453483.3454083">DNNFusion: accelerating deep neural networks execution with advanced operator fusion</a></li>
 </ol>
 
         
