@@ -61,7 +61,7 @@
 <div class="nav" id="nav">
     <div class="avatar-name">
         <div class="avatar ">
-            <img src="/img/avatar.jpg" />
+            <img src="/images/avatar.jpg" />
         </div>
         <div class="name">
             <i>Marshall Liu</i>
@@ -111,7 +111,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88"><span class="toc-text">什么是算子融合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%81%9A%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88"><span class="toc-text">如何做算子融合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E5%AD%90%E5%88%86%E7%B1%BB"><span class="toc-text">算子分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E5%AD%90%E5%8F%AF%E8%9E%8D%E5%90%88%E6%80%A7"><span class="toc-text">算子可融合性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%9B%BE%E5%9F%BA%E4%BA%8E%E8%9E%8D%E5%90%88%E6%80%A7%E5%88%86%E5%9D%97"><span class="toc-text">计算图基于融合性分块</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88"><span class="toc-text">什么是算子融合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%81%9A%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88"><span class="toc-text">如何做算子融合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E5%AD%90%E5%88%86%E7%B1%BB"><span class="toc-text">算子分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E5%AD%90%E5%8F%AF%E8%9E%8D%E5%90%88%E6%80%A7"><span class="toc-text">算子可融合性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%9B%BE%E5%9F%BA%E4%BA%8E%E8%9E%8D%E5%90%88%E6%80%A7%E5%88%86%E5%9D%97"><span class="toc-text">计算图基于融合性分块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%9E%8D%E5%90%88%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90"><span class="toc-text">融合代码生成</span></a></li></ol></li></ol>
 </div>
     
 </div>
@@ -185,7 +185,7 @@
 <li>随机挑选一个One-to-One 算子节点做为种子节点</li>
 <li>从种子节点往后进行融合，直到没有可以融合的节点，并更新块的Mapping Type</li>
 <li>从种子节点往前进行融合，直到没有可以融合的节点，并更新块的Mapping Type</li>
-<li>重复执行1、2、3，直到没有可用的种子节点<br>融合代码生成<br>基于编译生成融合代码（DNNFusion、TVM）<img src="/2024/05/17/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/code_gen.png" class=""></li>
+<li>重复执行1、2、3，直到没有可用的种子节点<h3 id="融合代码生成"><a href="#融合代码生成" class="headerlink" title="融合代码生成"></a>融合代码生成</h3>基于编译生成融合代码（DNNFusion、TVM）<img src="/2024/05/17/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/code_gen.png" class=""></li>
 </ol>
 <p>参考</p>
 <ol>
