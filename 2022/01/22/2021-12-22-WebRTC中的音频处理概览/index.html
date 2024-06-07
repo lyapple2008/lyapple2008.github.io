@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.beyoung.xyz","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.beyoung.xyz","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="音频采集播放 a. 采样率 b. 采样位宽 c. 声道 音频编解码 a. 码率 b. 编解码格式：Opus 音频处理 a. 回声消除 b. 降噪 c. 自动增益控制 d. 混音 网络传输 a. 传输协议 b. 抗抖动    WebRTC由音频引擎、视频引擎和传输模块，音频处理在WebRTC占了很大一块，本文主要对WebRTC中涉及的音频处理进行简单介绍，不会对具体的实现进行介绍。上图是WebRT">
 <meta property="og:type" content="article">
@@ -96,7 +96,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
   </ul>
 </nav>
 
@@ -231,7 +231,8 @@
 <h1 id="音频采集播放"><a href="#音频采集播放" class="headerlink" title="音频采集播放"></a>音频采集播放</h1><p>自然界的声音，包括人说出来的声音，都是模拟信号，这些模拟信号是不能被计算机存储和识别的，也不能通过网络进行传输。音频采集就是声音从模拟信号转换成数字信号的过程，而音频播放就是声音从数字信号转换成模拟信号的过程。对于音频数字信号来说有以下几个最主要的参数：</p>
 <ol>
 <li><p>采样率<br>采样率是指录音设备在一秒钟内对声音信号的采样次数，单位是Hz，采样频率越高，声音的还原度越真实越自然。但是人耳可以听到的频度范围是20Hz~20000Hz，然后根据采样定理，也就是说最低只需要40kHz采样率就可以满足人耳的需求了，因此CD音质和音乐音频都是44.1kHz。但是采样率越高意味着数据量越大，因此在一些特殊的场景会使用更低的采样率，如语音通话场景，因为人声都是低于4kHz，因此在语音通话场景更多会使用8kHz或者16kHz的采样率。</p>
-<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/002.png" class=""></li>
+<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/002.png" class="">
+</li>
 <li><p>采样位宽<br>声音模拟信号经过采样后得一个个样点的值，这个值需要存储到计算机中，那么使用多少位数来表示这个 就是采样位宽，通常使用最多的是16bit，正好就是一个short类型。</p>
 </li>
 <li><p>声道数<br>在使用录音设备进行声音采集时，只能表示到采集点处的声音信号，但是实际声音是有空间信息，为了表达声音的空间信息，就有了声道的概念。这里最有名的可能就是杜比全景声了，大家在电影院看电影的时候，感受到的被声音包围的真实感就是多声道的功劳了，当然这里并不是加多几个通道这么简单啦。</p>
@@ -240,8 +241,9 @@
 <h1 id="音频编解码"><a href="#音频编解码" class="headerlink" title="音频编解码"></a>音频编解码</h1><p>虽然音频的数据量没有视频的量那么大，但是如果直接传输原始的音频数据（原始的音频数据有个名字叫Pulse Code Modulation (PCM)），数据量也是挺大的。现在我们来计算下1秒采样率为48kHz双通道的音频信号的数据量有多大，1秒 * 48000个采样点 * 2个声道 * 每个样点2Bytes，这样1秒的数据量是192kB字节。这样的数据量在互联网发展的早期也是不可以接受的，这时候就需要音频编解码。简单的说，音频编解码就是利用人耳的心理声学特性将也一些不影响听觉的信号丢弃，从而减少信号量的方法，在WebRTC中用得最多的是Opus格式。对于音频编码器来说一个很重要的参数是码率，单位是kbps，即每秒的音频使用多少bits位来表示。音频编解码是音频领域一个很专业的领域，这里就不展开了。</p>
 <h1 id="音频处理"><a href="#音频处理" class="headerlink" title="音频处理"></a>音频处理</h1><p>在实时通话场景，需要面对各种复杂的环境，处理各种音频问题，最常见的如噪声、回声、声音过大过小等，WebRTC中有一个专门的音频处理模块来处理这些问题，下面就简单介绍下这些模块。</p>
 <ol>
-<li><p>回声消除（Acoustic Echo Cancellation）<br>实际通话场景是一个全双工通信系统非容易产生回声，如下图所示，远端说话声==》近端扬声器播放==》近端麦克风录制==》通过网络传输到远端的扬声器播放，经过这样一个音频环路后，远端又在扬声器里听到自己的声音，也就是回声，如果回声的延时很低时还会产生啸叫，这样是很影响通话体验的。这时就需要回声消除AEC模块了，通常录音数据都会先经过个模块，在传输前先把远端播放的数据消除，这样远端在播放的时候就不会听到回声了。回声消除AEC详细的原理介绍留到后面再介绍，这里先挖个坑。</p>
-<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/004.png" class=""></li>
+<li><p>回声消除（Acoustic Echo Cancellation）<br>实际通话场景是一个全双工通信系统非容易产生回声，如下图所示，远端说话声&#x3D;&#x3D;》近端扬声器播放&#x3D;&#x3D;》近端麦克风录制&#x3D;&#x3D;》通过网络传输到远端的扬声器播放，经过这样一个音频环路后，远端又在扬声器里听到自己的声音，也就是回声，如果回声的延时很低时还会产生啸叫，这样是很影响通话体验的。这时就需要回声消除AEC模块了，通常录音数据都会先经过个模块，在传输前先把远端播放的数据消除，这样远端在播放的时候就不会听到回声了。回声消除AEC详细的原理介绍留到后面再介绍，这里先挖个坑。</p>
+<img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/004.png" class="">
+</li>
 <li><p>噪声抑制（Noise Suppression）<br>噪声抑制NS这个很好理解，实际的通话场景都会存在各种各样的噪声，为了保证通话体验不受影响，这时就需要噪声抑制NS模块了。这里也再挖一坑，后面再根据WebRTC源码进行噪声抑制原理介绍。</p>
 </li>
 <li><p>自动增益控制（Auto Gain Control）<br>在实际通话过程中，由于使用设备的差异和通话时离麦克风的远近，导致了通话的音量差异，为了达到统一的体验就需要进行自动增益控制，简单说就是当音量小时调大增益，当音量大时调小增益，达到减少音量起伏的作用。</p>
@@ -249,7 +251,7 @@
 <li><p>混音（Mix）<br>在多人通话场景下，我们需要接收和播放的通常不止一条音频流，但通常只有一个播放设备，因此通常需要对多条音频流先进行混音操作，再进行播放。</p>
 </li>
 </ol>
-<h1 id="音频传输"><a href="#音频传输" class="headerlink" title="音频传输"></a>音频传输</h1><p>目前WebRTC音频传输是UDP/RTP/RTCP协议基础上进行传输的，底层UDP协议的不可靠性，导致丢包不可避免，同时音频数据与其它的数据内容有其特殊性，通常一点音频异常都很容易被人感知出来。因此WebRTC针对音频传输做了很多额外的工作，除了最常见的丢包重传，丢包补偿等，还有一个NetEQ模块，会在播放端进行音频播放的加减速来进一步减少由于网络抖动引起的音频异常。</p>
+<h1 id="音频传输"><a href="#音频传输" class="headerlink" title="音频传输"></a>音频传输</h1><p>目前WebRTC音频传输是UDP&#x2F;RTP&#x2F;RTCP协议基础上进行传输的，底层UDP协议的不可靠性，导致丢包不可避免，同时音频数据与其它的数据内容有其特殊性，通常一点音频异常都很容易被人感知出来。因此WebRTC针对音频传输做了很多额外的工作，除了最常见的丢包重传，丢包补偿等，还有一个NetEQ模块，会在播放端进行音频播放的加减速来进一步减少由于网络抖动引起的音频异常。</p>
 <img src="/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/005.png" class="">
 
 <p>到这里WebRTC中跟音频相关的技术模块都简单的过了一遍，这样大家对于WebRTC音频处理有个大概的印象，这里的每个模块值得深入去学习，后面也把自己学习的一些心得记录在这里，大家一起学习呀。</p>

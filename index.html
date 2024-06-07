@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.0">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.beyoung.xyz","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.beyoung.xyz","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="积累，沉淀，吸收，转换">
 <meta property="og:type" content="website">
@@ -85,7 +85,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
   </ul>
 </nav>
 
@@ -223,8 +223,11 @@
 <li>随机挑选一个One-to-One 算子节点做为种子节点</li>
 <li>从种子节点往后进行融合，直到没有可以融合的节点，并更新块的Mapping Type</li>
 <li>从种子节点往前进行融合，直到没有可以融合的节点，并更新块的Mapping Type</li>
-<li>重复执行1、2、3，直到没有可用的种子节点<h3 id="融合代码生成"><a href="#融合代码生成" class="headerlink" title="融合代码生成"></a>融合代码生成</h3>基于编译生成融合代码（DNNFusion、TVM）<img src="/2024/05/17/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/code_gen.png" class=""></li>
+<li>重复执行1、2、3，直到没有可用的种子节点</li>
 </ol>
+<h3 id="融合代码生成"><a href="#融合代码生成" class="headerlink" title="融合代码生成"></a>融合代码生成</h3><p>基于编译生成融合代码（DNNFusion、TVM）</p>
+<img src="/2024/05/17/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/code_gen.png" class="">
+
 <p>参考</p>
 <ol>
 <li><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/10.1145/3453483.3454083">DNNFusion: accelerating deep neural networks execution with advanced operator fusion</a></li>
@@ -311,7 +314,7 @@
 <li><strong>compileSdkVersion</strong></li>
 </ul>
 <p>compileSdkVersion只是用来告诉Gradle用哪个Android SDK版本编译你的应用，当使用到新添加的API时就需要使用对应Level的Android SDK。这里需要强调的是，compileSdkVersion只会影响编译的时候，例如，当前我们想使用Android 12一个新的API功能，这时我们就需要将compileSdkVersion升级到31</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">android</span> &#123;</span><br><span class="line">    <span class="attribute">compileSdkVersion</span> <span class="number">31</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="language-xml">android </span><span class="template-variable">&#123;</span></span><br><span class="line"><span class="template-variable">    compileSdkVersion 31</span></span><br><span class="line"><span class="template-variable">    ...</span></span><br><span class="line"><span class="template-variable">&#125;</span></span><br></pre></td></tr></table></figure>
 <p>但是这里我们指定了compileSdkVersion到新版本只是让APP编译可以通过，因为在旧的Android系统上还没有使用的新的API，因此在实际代码中还需要对运行时的系统API级别进行判断，保证使用的新API只会在Android12以上的系统运行。</p>
 <ul>
 <li><strong>targetSdkVersion</strong></li>
@@ -904,7 +907,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="音乐人声分离概况"><a href="#音乐人声分离概况" class="headerlink" title="音乐人声分离概况"></a>音乐人声分离概况</h3><p>音乐人声分离的目的是，从一首歌曲中分离出人声和伴奏声。<a target="_blank" rel="noopener" href="https://www.math.ucdavis.edu/~aberrian/research/voice_separation/index.html">Project on Music/Voice Separation</a>这个网站比较了一些基于传统方法的效果，但是由于基于了一些假设（比如REPET就假伴奏都是周期重复信号），这些算法在实际测试过程中效果都差强人意。随着深度学习的流行，音乐人声分离这个领域也开始被基于深度学习的方法所占领。在<a target="_blank" rel="noopener" href="http://www.sisec17.audiolabs-erlangen.de/#/results/1/4/2">SiSEC MUS</a>上可以看到效果比较好的都是基于深度学习的方法。</p>
+          <h3 id="音乐人声分离概况"><a href="#音乐人声分离概况" class="headerlink" title="音乐人声分离概况"></a>音乐人声分离概况</h3><p>音乐人声分离的目的是，从一首歌曲中分离出人声和伴奏声。<a target="_blank" rel="noopener" href="https://www.math.ucdavis.edu/~aberrian/research/voice_separation/index.html">Project on Music&#x2F;Voice Separation</a>这个网站比较了一些基于传统方法的效果，但是由于基于了一些假设（比如REPET就假伴奏都是周期重复信号），这些算法在实际测试过程中效果都差强人意。随着深度学习的流行，音乐人声分离这个领域也开始被基于深度学习的方法所占领。在<a target="_blank" rel="noopener" href="http://www.sisec17.audiolabs-erlangen.de/#/results/1/4/2">SiSEC MUS</a>上可以看到效果比较好的都是基于深度学习的方法。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2019/03/31/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/#more" rel="contents">
@@ -991,7 +994,7 @@
 <ul>
 <li><p><a target="_blank" rel="noopener" href="https://webrtc.org/">WebRTC</a>   </p>
 <blockquote>
-<p>WebRTC是google开源的实时音视频通讯项目，其中的AudioProcess模块包括了AGC/AEC/ANS算法，非常值得学习。同时WebRTC还是一个跨平台项目，代码中对各个平台（Android/Ios/Windows/Linux）硬件接口的封装和抽象可以直接拿来应用到自己的项目中。</p>
+<p>WebRTC是google开源的实时音视频通讯项目，其中的AudioProcess模块包括了AGC&#x2F;AEC&#x2F;ANS算法，非常值得学习。同时WebRTC还是一个跨平台项目，代码中对各个平台（Android&#x2F;Ios&#x2F;Windows&#x2F;Linux）硬件接口的封装和抽象可以直接拿来应用到自己的项目中。</p>
 </blockquote>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/google/oboe">Oboe</a>   </p>
