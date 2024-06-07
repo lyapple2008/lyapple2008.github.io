@@ -135,6 +135,20 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lyapple2008" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lyapple2008" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:lyapple2008@gmail.com" title="E-Mail → mailto:lyapple2008@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://x.com/lyapple2008" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;lyapple2008" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://youtube.com/@meta_dady" title="YouTube → https:&#x2F;&#x2F;youtube.com&#x2F;@meta_dady" rel="noopener me" target="_blank"><i class="fab fa-youtube fa-fw"></i>YouTube</a>
+      </span>
+  </div>
 
         </div>
       </div>
@@ -192,7 +206,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-06-06 23:59:41" itemprop="dateModified" datetime="2024-06-06T23:59:41+08:00">2024-06-06</time>
+      <time title="修改时间：2024-06-07 21:46:45" itemprop="dateModified" datetime="2024-06-07T21:46:45+08:00">2024-06-07</time>
     </span>
 
   
@@ -210,29 +224,14 @@
 <li>Conv + BatchNormalization + ReLu融合<img src="/2024/05/17/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/conv_bn_relu.png" class=""></li>
 </ul>
 <p>从融合后的最终公式可以看出，可以在初始阶段就通过BN的均值和方差（推理阶段BN的均值和方差是常量）更新Conv层的weights和bias参数，这样融合后的算子相当少了一个BN层的操作，既减少了内存访问，也减少了计算量</p>
-<h2 id="如何做算子融合"><a href="#如何做算子融合" class="headerlink" title="如何做算子融合"></a>如何做算子融合</h2><h3 id="算子分类"><a href="#算子分类" class="headerlink" title="算子分类"></a>算子分类</h3><img src="/2024/05/17/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/operator_category.png" class="">
-
-<p>当存在多个输入，同时存在多种输入-输出映射关系时，最终的Mapping type由最复杂的那一个决定。Mapping type复杂度递增顺序：One-to-One，Reorganize，Shuffle，One-to-Many，Many-to-Many<br>注：Many-to-Many包含Many-to-One的类型</p>
-<h3 id="算子可融合性"><a href="#算子可融合性" class="headerlink" title="算子可融合性"></a>算子可融合性</h3><img src="/2024/05/17/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/fusion_ability.png" class="">
-
-<p>绿色：可以融合，且有收益<br>黄色：要做profile才能确定是否有收益<br>红色：没有收益，不融合</p>
-<h3 id="计算图基于融合性分块"><a href="#计算图基于融合性分块" class="headerlink" title="计算图基于融合性分块"></a>计算图基于融合性分块</h3><img src="/2024/05/17/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/graph_partition.png" class="">
-
-<p>分块过程：</p>
-<ol>
-<li>随机挑选一个One-to-One 算子节点做为种子节点</li>
-<li>从种子节点往后进行融合，直到没有可以融合的节点，并更新块的Mapping Type</li>
-<li>从种子节点往前进行融合，直到没有可以融合的节点，并更新块的Mapping Type</li>
-<li>重复执行1、2、3，直到没有可用的种子节点</li>
-</ol>
-<h3 id="融合代码生成"><a href="#融合代码生成" class="headerlink" title="融合代码生成"></a>融合代码生成</h3><p>基于编译生成融合代码（DNNFusion、TVM）</p>
-<img src="/2024/05/17/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/code_gen.png" class="">
-
-<p>参考</p>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/10.1145/3453483.3454083">DNNFusion: accelerating deep neural networks execution with advanced operator fusion</a></li>
-</ol>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/05/17/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -286,9 +285,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2022-09-24 17:03:48 / 修改时间：17:14:12" itemprop="dateCreated datePublished" datetime="2022-09-24T17:03:48+08:00">2022-09-24</time>
+      <time title="创建时间：2022-09-24 17:03:48" itemprop="dateCreated datePublished" datetime="2022-09-24T17:03:48+08:00">2022-09-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-06-07 21:46:52" itemprop="dateModified" datetime="2024-06-07T21:46:52+08:00">2024-06-07</time>
     </span>
 
   
@@ -305,22 +310,14 @@
 <p>最近遇到一个由于升级了targetSdkVersion而引起的线上crash，之前一直对于Android里面几个sdkVersion的含义和作用很模糊，正好这次把这几个不同的sdkVersion理清楚。</p>
 </blockquote>
 <img src="/2022/09/24/2022-08-24-Android%E4%B8%AD%E5%87%A0%E7%A7%8DsdkVersion%E7%9A%84%E5%8C%BA%E5%88%AB/001.png" class="">
-
-<ul>
-<li><strong>minSdkVersion</strong></li>
-</ul>
-<p>用于指定应用运行所需最低API级别的整数。如果系统的API级别低于属性中指定的值，Android系统将阻止用户安装应用。</p>
-<ul>
-<li><strong>compileSdkVersion</strong></li>
-</ul>
-<p>compileSdkVersion只是用来告诉Gradle用哪个Android SDK版本编译你的应用，当使用到新添加的API时就需要使用对应Level的Android SDK。这里需要强调的是，compileSdkVersion只会影响编译的时候，例如，当前我们想使用Android 12一个新的API功能，这时我们就需要将compileSdkVersion升级到31</p>
-<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="language-xml">android </span><span class="template-variable">&#123;</span></span><br><span class="line"><span class="template-variable">    compileSdkVersion 31</span></span><br><span class="line"><span class="template-variable">    ...</span></span><br><span class="line"><span class="template-variable">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>但是这里我们指定了compileSdkVersion到新版本只是让APP编译可以通过，因为在旧的Android系统上还没有使用的新的API，因此在实际代码中还需要对运行时的系统API级别进行判断，保证使用的新API只会在Android12以上的系统运行。</p>
-<ul>
-<li><strong>targetSdkVersion</strong></li>
-</ul>
-<p>要理解targetSdkVersion，需要知道targetSdkVersion在Android中的作用。targetSdkVersion是Android系统提供向后兼容的主要手段（即：新版本SDK手机兼容旧版本SDK工程）。这是什么意思呢？随着 Android 系统的升级，某个系统的 API 或者模块的行为可能会发生改变，但是为了保证老 APK 的行为还是和以前兼容。只要 APK 的 targetSdkVersion 不变，即使这个 APK 安装在新 Android 系统上，其行为还是保持老的系统上的行为，这样就保证了系统对老应用的前向兼容性。<br>总结： android更新api大概有两种，一种是完全重写（这种就不干targetSdk什么事了）；另一种，保留了老版本的处理逻辑，同时又新增了新的逻辑（用if else的方式来判断具体运行哪段逻辑）。而targetSdk就是用来判断这个if-else的。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/09/24/2022-08-24-Android%E4%B8%AD%E5%87%A0%E7%A7%8DsdkVersion%E7%9A%84%E5%8C%BA%E5%88%AB/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
