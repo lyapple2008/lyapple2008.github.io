@@ -23,12 +23,12 @@ http://www.beyoung.xyz/2018/08/18/2018-08-18-Windows%E4%B8%8B%E8%BD%BD%E7%BC%96%
 http://www.beyoung.xyz/2018/04/29/2018-04-29-Android%E7%AB%AF%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/
 http://www.beyoung.xyz/2018/03/24/2018-3-24-FFmpeg%E4%B8%ADAVFilter%E6%A8%A1%E5%9D%97%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/
 http://www.beyoung.xyz/
-http://www.beyoung.xyz/tags/Android/
-http://www.beyoung.xyz/tags/DeepLearning/
-http://www.beyoung.xyz/tags/%E7%94%9F%E6%B4%BB/
 http://www.beyoung.xyz/tags/FFmpeg/
+http://www.beyoung.xyz/tags/%E7%94%9F%E6%B4%BB/
 http://www.beyoung.xyz/tags/Audio/
 http://www.beyoung.xyz/tags/%E6%8A%80%E6%9C%AF/
+http://www.beyoung.xyz/tags/Android/
+http://www.beyoung.xyz/tags/DeepLearning/
 http://www.beyoung.xyz/tags/JNI/
 http://www.beyoung.xyz/tags/AudioProcessing/
 http://www.beyoung.xyz/tags/GitPage/
