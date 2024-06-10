@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.beyoung.xyz/2024/06/10/2024-06-10-macos-m2-tensorflow-gpu%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
+    
+    <lastmod>2024-06-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.beyoung.xyz/2022/01/22/2021-12-22-WebRTC%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/</loc>
     
     <lastmod>2024-06-09</lastmod>
@@ -220,85 +229,92 @@
 
   <url>
     <loc>http://www.beyoung.xyz/</loc>
-    <lastmod>2024-06-09</lastmod>
+    <lastmod>2024-06-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>http://www.beyoung.xyz/tags/FFmpeg/</loc>
-    <lastmod>2024-06-09</lastmod>
+    <loc>http://www.beyoung.xyz/tags/%E7%94%9F%E6%B4%BB/</loc>
+    <lastmod>2024-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://www.beyoung.xyz/tags/%E7%94%9F%E6%B4%BB/</loc>
-    <lastmod>2024-06-09</lastmod>
+    <loc>http://www.beyoung.xyz/tags/FFmpeg/</loc>
+    <lastmod>2024-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://www.beyoung.xyz/tags/Audio/</loc>
-    <lastmod>2024-06-09</lastmod>
+    <lastmod>2024-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://www.beyoung.xyz/tags/%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2024-06-09</lastmod>
+    <lastmod>2024-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://www.beyoung.xyz/tags/Android/</loc>
-    <lastmod>2024-06-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.beyoung.xyz/tags/DeepLearning/</loc>
-    <lastmod>2024-06-09</lastmod>
+    <lastmod>2024-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://www.beyoung.xyz/tags/JNI/</loc>
-    <lastmod>2024-06-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.beyoung.xyz/tags/AudioProcessing/</loc>
-    <lastmod>2024-06-09</lastmod>
+    <lastmod>2024-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://www.beyoung.xyz/tags/GitPage/</loc>
-    <lastmod>2024-06-09</lastmod>
+    <lastmod>2024-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.beyoung.xyz/tags/DeepLearning/</loc>
+    <lastmod>2024-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.beyoung.xyz/tags/AudioProcessing/</loc>
+    <lastmod>2024-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://www.beyoung.xyz/tags/WebRTC/</loc>
-    <lastmod>2024-06-09</lastmod>
+    <lastmod>2024-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://www.beyoung.xyz/tags/InferenceEngine/</loc>
-    <lastmod>2024-06-09</lastmod>
+    <lastmod>2024-06-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.beyoung.xyz/tags/%E6%8A%80%E6%9C%AF%EF%BC%8CDeepLearning/</loc>
+    <lastmod>2024-06-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
