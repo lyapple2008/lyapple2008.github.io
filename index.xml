@@ -9,7 +9,7 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.140.2</generator>
+    <generator>Hugo -- 0.141.0</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Mon, 10 Jun 2024 22:20:31 +0000</lastBuildDate>
@@ -152,8 +152,11 @@
       <guid>https://lyapple2008.github.io/about_me/</guid>
       <description>&lt;h3 id=&#34;正在研究的项目&#34;&gt;正在研究的项目&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/xiph/rnnoise&#34;&gt;Rnnoise&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://xiaolai.co/books/c558c667ad9f05ddce38f06df2d15aa3/chapter1.html&#34;&gt;《人人都用能英语》&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;看了后发现之前关于“学”英语很多的观念都是错了&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;有意思博文记录&#34;&gt;有意思博文记录&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://tinyprojects.dev/&#34;&gt;TinyProject&lt;/a&gt;&lt;/li&gt;
@@ -168,8 +171,11 @@
 &lt;p&gt;今天乐乐出生了，从些人生多一个父亲的身份，很欢喜，也很彷徨。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<h3 id="正在研究的项目">正在研究的项目</h3>
 <ul>
-<li><a href="https://github.com/xiph/rnnoise">Rnnoise</a></li>
+<li><a href="http://xiaolai.co/books/c558c667ad9f05ddce38f06df2d15aa3/chapter1.html">《人人都用能英语》</a></li>
 </ul>
+<blockquote>
+<p>看了后发现之前关于“学”英语很多的观念都是错了</p>
+</blockquote>
 <h3 id="有意思博文记录">有意思博文记录</h3>
 <ul>
 <li><a href="https://tinyprojects.dev/">TinyProject</a></li>
