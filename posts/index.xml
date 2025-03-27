@@ -12,8 +12,312 @@
     <generator>Hugo -- 0.145.0</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Mon, 10 Jun 2024 22:20:31 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 27 Mar 2025 22:43:58 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>程序员的基本修养之代码编译</title>
+      <link>https://lyapple2008.github.io/posts/2025-03-27-%E4%BB%A3%E7%A0%81%E7%BC%96%E8%AF%91/</link>
+      <pubDate>Thu, 27 Mar 2025 22:43:58 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/2025-03-27-%E4%BB%A3%E7%A0%81%E7%BC%96%E8%AF%91/</guid>
+      <description>&lt;h1 id=&#34;程序员的基本修养之代码编译&#34;&gt;程序员的基本修养之代码编译&lt;/h1&gt;
+&lt;p&gt;| 代码编译过程介绍，避坑指南，一些常用代码查看工具使用介绍&lt;/p&gt;
+&lt;h2 id=&#34;预处理&#34;&gt;预处理&lt;/h2&gt;
+&lt;h3 id=&#34;1预处理的作用&#34;&gt;1.预处理的作用&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;宏替换&lt;/strong&gt;：&lt;br&gt;
+替换 #define 定义的宏。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#define PI 3.14159
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;circle_area&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;radius&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PI&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;radius&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;radius&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 替换后：3.14159 * radius * radius
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;头文件包含&lt;/strong&gt; &lt;br&gt;
+替换 #include 指令为头文件的内容。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<h1 id="程序员的基本修养之代码编译">程序员的基本修养之代码编译</h1>
+<p>| 代码编译过程介绍，避坑指南，一些常用代码查看工具使用介绍</p>
+<h2 id="预处理">预处理</h2>
+<h3 id="1预处理的作用">1.预处理的作用</h3>
+<p><strong>宏替换</strong>：<br>
+替换 #define 定义的宏。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#define PI 3.14159
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">double</span> <span class="nf">circle_area</span><span class="p">(</span><span class="kt">double</span> <span class="n">radius</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">PI</span> <span class="o">*</span> <span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span><span class="p">;</span> <span class="c1">// 替换后：3.14159 * radius * radius
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>头文件包含</strong> <br>
+替换 #include 指令为头文件的内容。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;// 替换为 &lt;iostream&gt; 文件的完整内容</span><span class="cp">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>条件编译</strong> <br>
+根据条件选择性地编译代码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#ifdef DEBUG
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Debug mode is on&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>宏展开</strong> <br>
+处理函数式宏。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#define SQUARE(x) ((x) * (x))
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="nf">SQUARE</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// 替换为 ((5) * (5))
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>注释删除</strong> <br>
+移除源代码中的注释内容。</p>
+<h3 id="2查看预处理结果">2.查看预处理结果</h3>
+<p>通过 编译器选项 可以仅执行预处理步骤。例如gcc/clang：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Shell" data-lang="Shell"><span class="line"><span class="cl">g++ -E main.cpp -o main.i
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>-E 选项表示仅执行预处理。</li>
+<li>输出文件 main.i 包含预处理后的源代码。
+<img src="/images/2025-03-27/001.png"/>
+cmake可以通过添加配置保存中间产物</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-CMake" data-lang="CMake"><span class="line"><span class="cl"><span class="nb">set_target_properties</span><span class="p">(</span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span> <span class="s">PROPERTIES</span> <span class="s">COMPILE_FLAGS</span> <span class="s2">&#34;-save-temps=obj&#34;</span><span class="p">)</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>注：一些复杂的宏操作可以通过这种方式确定最终展开后的形式</p>
+<h3 id="3预处理注意事项">3.预处理注意事项</h3>
+<p><strong>宏展开陷阱</strong> <br>
+注意宏的嵌套展开可能引发意外行为，用括号保护表达式。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#define ADD(x, y) ((x) + (y))
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>头文件滥用</strong> <br>
+导出了所有头文件并加入了搜索路径，当存在多个同名头文件时，可能会引起一些诡异的编译问题，或者运行时崩溃</p>
+<ul>
+<li>头文件的搜索顺序
+1.搜索当前目录（一般是#include &ldquo;header.h&rdquo;，双引号方式引用头文件）
+2.通过-I指定的目录，多个目录按加入的顺序搜索
+3.标准系统目录</li>
+</ul>
+<h2 id="编译">编译</h2>
+<p>| 编译是从源文件（<em>.c/</em>.cpp）生成目标文件（*.o）的过程</p>
+<h3 id="q1目标文件里面包含了哪些信息">Q1：目标文件里面包含了哪些信息？</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Shell" data-lang="Shell"><span class="line"><span class="cl">llvm-objdump -s /path/to/objfile <span class="c1"># 显示目标文件中所有Section的内容</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><img src="/images/2025-03-27/002.png"/>
+<h4 id="1目标文件类型目标架构">1.目标文件类型、目标架构</h4>
+<p>查看命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Shell" data-lang="Shell"><span class="line"><span class="cl"><span class="c1"># 可以直接使用ndk里面的工具，目标文件/静态库/动态库/可执行文件都可以查看</span>
+</span></span><span class="line"><span class="cl">llvm-readelf -h 目标文件
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">File: /Users/marshall/Workspace/projects/test_compile/build/lib_src/CMakeFiles/lib_src.dir/conv1d.o
+</span></span><span class="line"><span class="cl">Format: Mach-O arm64
+</span></span><span class="line"><span class="cl">Arch: aarch64
+</span></span><span class="line"><span class="cl">AddressSize: 64bit
+</span></span><span class="line"><span class="cl">MachHeader {
+</span></span><span class="line"><span class="cl">  Magic: Magic64 (0xFEEDFACF)
+</span></span><span class="line"><span class="cl">  CpuType: Arm64 (0x100000C)
+</span></span><span class="line"><span class="cl">  CpuSubType: CPU_SUBTYPE_ARM64_ALL (0x0)
+</span></span><span class="line"><span class="cl">  FileType: Relocatable (0x1)
+</span></span><span class="line"><span class="cl">  NumOfLoadCommands: 4
+</span></span><span class="line"><span class="cl">  SizeOfLoadCommands: 520
+</span></span><span class="line"><span class="cl">  Flags [ (0x2000)
+</span></span><span class="line"><span class="cl">    MH_SUBSECTIONS_VIA_SYMBOLS (0x2000)
+</span></span><span class="line"><span class="cl">  ]
+</span></span><span class="line"><span class="cl">  Reserved: 0x0
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2只读内容存在__text段">2.只读内容存在__TEXT段</h4>
+<h5 id="a__text节保存了编译后的机器码">a.__text节保存了编译后的机器码:</h5>
+<p>内容：源代码编译后的二进制机器指令，对应程序的函数和逻辑
+查看命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Shell" data-lang="Shell"><span class="line"><span class="cl">llvm-objdump -d 目标文件
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注：通过查看中间产物汇编文件（*.s）可以初步分析是否值得做 <br>
+比如通过查看conv1d.s文件，发现已经做了循环展开，就不需要在c代码上手动做循环展开了（NEON类的SIMD在代码编译是否会进行编译优化待确定）</p>
+<h5 id="b__cstring节保存了字符串">b.__cstring节保存了字符串</h5>
+<h5 id="c__const节保存了学常量">c.__const节保存了学常量</h5>
+<h4 id="3全局变量和静态变量保存在__data段">3.全局变量和静态变量保存在__DATA段</h4>
+<p>nm命令介绍
+nm命令可以用来分析二进制分析的符号信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Shell" data-lang="Shell"><span class="line"><span class="cl"><span class="c1"># -A 选项在符号名前附加文件名，适用于分析静态库（.a）：</span>
+</span></span><span class="line"><span class="cl">nm -A 静态库路径
+</span></span></code></pre></td></tr></table>
+</div>
+</div><img src="/images/2025-03-27/003.png"/>
+<img src="/images/2025-03-27/004.png"/>
+注：该命令可以用来辅助分析Undefined symbol一类的编译问题
+<h3 id="q2同一份代码保持编译参数不变的情况两次编译最终的目标文件是否是一样的">Q2：同一份代码，保持编译参数不变的情况，两次编译最终的目标文件是否是一样的？</h3>
+<ul>
+<li>通常一致的场景
+如果满足以下条件，两次编译的目标文件大概率相同：</li>
+</ul>
+<ol>
+<li>代码完全不变：未修改任何源码文件（包括头文件）</li>
+<li>编译参数严格一致：包括优化级别（如 -O2）、调试选项（如 -g）、路径参数（如 -I）等</li>
+<li>编译器版本一致：同一版本的编译器（如 GCC 12.3）和链接器</li>
+<li>环境无干扰：<br>
+a.无时间戳或随机化因素嵌入二进制文件（如代码中未使用 <strong>DATE</strong>、<strong>TIME</strong> 宏）<br>
+b.编译路径和文件系统结构相同</li>
+</ol>
+<ul>
+<li>可能导致不一致的例外情况</li>
+</ul>
+<ol>
+<li>时间戳或随机化因素 <br>
+若源码使用 <strong>DATE</strong>、<strong>TIME</strong> 等宏，编译后生成的二进制文件会包含编译时间戳，导致两次编译结果不同。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Build Time: %s %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">__DATE__</span><span class="p">,</span> <span class="n">__TIME__</span><span class="p">);</span> <span class="c1">// 每次编译结果不同
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>调试信息中的路径差异 <br>
+调试信息（.debug_line 段）默认包含源码绝对路径。若两次编译的源码目录不同，目标文件会不同。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Shell" data-lang="Shell"><span class="line"><span class="cl"><span class="c1"># 第一次编译路径：/home/user/project/</span>
+</span></span><span class="line"><span class="cl">gcc -g main.c -o main
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 第二次编译路径：/tmp/build/</span>
+</span></span><span class="line"><span class="cl">gcc -g main.c -o main  <span class="c1"># 调试信息中的路径不同，目标文件哈希值不同</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="链接">链接</h2>
+<p>| 链接就是把所有目标文件合并到起，同时目标文件中在未知的地址（如在其它文件中实现的函数调用）替换成最终的地址</p>
+<img src="/images/2025-03-27/005.png"/>
+注：左侧是目标文件main.o，右侧是最终的可执行程序main
+``` Shell
+llvm-objdump -d 目标文件
+```
+<h3 id="动态库与静态库对比">动态库与静态库对比</h3>
+<img src="/images/2025-03-27/006.png"/>
+<p>macos环境下查看依赖</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">otool</span> <span class="o">-</span><span class="n">L</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">binary</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">main:
+</span></span><span class="line"><span class="cl">	@rpath/liblib_src.dylib (compatibility version 0.0.0, current version 0.0.0)
+</span></span><span class="line"><span class="cl">	/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1351.0.0)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注：@rpath 会根据不同应用的配置解析到对应的目录</p>
+]]></content:encoded>
+    </item>
     <item>
       <title>MacOS M2 Tensorflow GPU环境搭建</title>
       <link>https://lyapple2008.github.io/posts/2024-06-10-macos-m2-tensorflow-gpu%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
@@ -983,189 +1287,6 @@ for Deep Neural Networks</a></li>
 <li>算法验证能力</li>
 </ul>
 <p>就像前面提到的那样，**算法验证在算法工程师日常工作中占据很大的比重，**我们拿到一些成熟、优秀的算法后，它的效果如何？能否起作用是未知的，我们需要对它进行验证，包括效率、精度等方面。这就要求算法工程师拥有算法验证能力，能够在众多算法中挑选出一种合适的算法来解决相应问题。</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>音乐人声分离小结</title>
-      <link>https://lyapple2008.github.io/posts/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/</link>
-      <pubDate>Sun, 31 Mar 2019 22:18:43 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/posts/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/</guid>
-      <description>&lt;h3 id=&#34;音乐人声分离概况&#34;&gt;音乐人声分离概况&lt;/h3&gt;
-&lt;p&gt;音乐人声分离的目的是，从一首歌曲中分离出人声和伴奏声。&lt;a href=&#34;https://www.math.ucdavis.edu/~aberrian/research/voice_separation/index.html&#34;&gt;Project on Music/Voice Separation&lt;/a&gt;这个网站比较了一些基于传统方法的效果，但是由于基于了一些假设（比如REPET就假伴奏都是周期重复信号），这些算法在实际测试过程中效果都差强人意。随着深度学习的流行，音乐人声分离这个领域也开始被基于深度学习的方法所占领。在&lt;a href=&#34;http://www.sisec17.audiolabs-erlangen.de/#/results/1/4/2&#34;&gt;SiSEC MUS&lt;/a&gt;上可以看到效果比较好的都是基于深度学习的方法。&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<h3 id="音乐人声分离概况">音乐人声分离概况</h3>
-<p>音乐人声分离的目的是，从一首歌曲中分离出人声和伴奏声。<a href="https://www.math.ucdavis.edu/~aberrian/research/voice_separation/index.html">Project on Music/Voice Separation</a>这个网站比较了一些基于传统方法的效果，但是由于基于了一些假设（比如REPET就假伴奏都是周期重复信号），这些算法在实际测试过程中效果都差强人意。随着深度学习的流行，音乐人声分离这个领域也开始被基于深度学习的方法所占领。在<a href="http://www.sisec17.audiolabs-erlangen.de/#/results/1/4/2">SiSEC MUS</a>上可以看到效果比较好的都是基于深度学习的方法。</p>
-<h3 id="基于深度学习方法的处理框架">基于深度学习方法的处理框架</h3>
-<!-- ![image](https://user-images.githubusercontent.com/3350865/61180141-7b695b80-a644-11e9-9477-e2efd3197adb.jpg) -->
-<img src="/images/2019-03-31-001.jpg">
-- 训练数据   
-以DSD100数据集为例，下面是DSD100数据集的目录结构
-```
-|--DSD100
-  |--Mixtures
-     |--Dev
-        |--051 - AM Contra - Heart Peripheral
-            |--mixture.wav ==> 混合音频
-     |--Test
-  |--Sources
-    |--Dev
-        |--051 - AM Contra - Heart Peripheral
-            |--bass.wav ==> 各成分音频
-            |--drums.wav
-            |--other.wav
-            |--vocals.wav ==> 人声部分音频
-    |--Test
-```
-- 训练流程  
-<!-- ![image](https://user-images.githubusercontent.com/3350865/61180143-802e0f80-a644-11e9-8675-dcd4199e0e24.jpg) -->
-<img src="/images/2019-03-31-002.jpg">
-<ul>
-<li>训练目标<br>
-在本任务中的训练目标是对应输入混合音频幅度谱的一个Mask，通过这个Mask与混合音频幅度谱做mask乘法，就可以得到目标音频的幅度谱，再结合混合音频相位谱，做ISTFT就可以得到目标音频。下面是本任务的损失函数，其中X代表混合音频幅度谱，Y代表目标音频幅度谱，f(X,&amp;)代表模型输出的Mask。</li>
-</ul>
-<!-- ![image](https://user-images.githubusercontent.com/3350865/61180144-83290000-a644-11e9-97b1-af0f014a5588.jpg) -->
-<img src="/images/2019-03-31-003.jpg">
-<p><em>Idea Binary Mask</em><br>
-理想二值掩蔽”（Ideal Binary Mask）中的分离任务就成为了一个二分类问题。这类方法根据听觉感知特性，把音频信号分成不同的子带，根据每个时频单元上的信噪比，把对应的时频单元的能量设为0（噪音占主导的情况下）或者保持原样（目标语音占主导的情况下）。</p>
-<!-- ![image](https://user-images.githubusercontent.com/3350865/61180147-858b5a00-a644-11e9-8aef-2d2811e5b4eb.jpg) -->
-<img src="/images/2019-03-31-004.jpg">
-<p><em>Idea Ratio Mask</em><br>
-IRM（Ideal Ratio Mask），它同样对每个时频单元进行计算，但不同于IBM的“非零即一”，IRM中会计算语音信号和噪音之间的能量比，得到介于0到1之间的一个数，然后据此改变时频单元的能量大小。IRM是对IBM的演进，反映了各个时频单元上对噪声的抑制程度，可以进一步提高分离后语音的质量和可懂度。<br>
-<img alt="image" loading="lazy" src="https://user-images.githubusercontent.com/3350865/61180148-891ee100-a644-11e9-9df2-8c9683fe8306.jpg">
-<img src="/images/2019-03-31-005.jpg"></p>
-<h3 id="deep-u-net方法介绍">Deep U-Net方法介绍</h3>
-<!-- ![image](https://user-images.githubusercontent.com/3350865/61180149-8cb26800-a644-11e9-8e2c-cf514a65edca.jpg) -->
-<img src="/images/2019-03-31-006.jpg">
-```
-卷积层参数个数 = (kernel_w * kernel_h + 1) * output_channel   
-归一化层参数个数 = 4 * input_channel ; (gamma, beta, moving_mean, moving_variance)
-```
-<ul>
-<li>Encode-Decode结构<br>
-U-Net中使用的Encode-Decode结构有点类似于图像中的多尺度金字塔，在高分辨率图像中更多关注的是图像的细节纹理，而在低分辨率图像中则更多关注的是图像的轮廓信息，这样就可以对不同层级的信息进行分开建模。</li>
-<li>跳跃连接（Skip-connection）<br>
-skip-connection使得每个节点在进行建模时，能够同时利用到本层的信息和来自下一层的信息</li>
-</ul>
-<h3 id="相关尝试">相关尝试</h3>
-<ul>
-<li>
-<h4 id="more-skip-connection">More Skip-Connection</h4>
-</li>
-</ul>
-<!-- ![image](https://user-images.githubusercontent.com/3350865/61180151-90de8580-a644-11e9-97ac-3e7b2fcce8c6.jpg) -->
-<img src="/images/2019-03-31-007.jpg">
-<blockquote>
-<p>UNet++网络结构将Skip-Connection发挥到了极致，每个节点不单单只跟同层相邻节点连接，而是跟同层所有节点进行相连。同时一个大的UNet++网络结构其内部又可以一层层拆分成小的UNet++网络结构，这个特点使得其在做剪枝优化的时候非常简单方便，如图UNet++ L4到UNet++ L1就是简化过程。</p></blockquote>
-<blockquote>
-<p>由于UNet++相对于UNet结构增加了大概20%的参数，而训练数据并没有相应增强，最后的效果还没达到UNet的结果。</p></blockquote>
-<ul>
-<li>
-<h4 id="结合相位信息">结合相位信息</h4>
-</li>
-</ul>
-<h5 id="deep-complex-network">Deep Complex Network</h5>
-<!-- ![image](https://user-images.githubusercontent.com/3350865/61180152-93d97600-a644-11e9-85b5-66faef80672c.jpg) -->
-<img src="/images/2019-03-31-008.jpg">
-<!-- ![image](https://user-images.githubusercontent.com/3350865/61180155-976cfd00-a644-11e9-8405-44602817d1c8.jpg) -->
-<img src="/images/2019-03-31-009.jpg">
-<h5 id="实验验证相位在分离任务中的作用">实验验证相位在分离任务中的作用</h5>
-<!-- ![image](https://user-images.githubusercontent.com/3350865/61180157-99cf5700-a644-11e9-9fd8-560b11e04dd7.jpg) -->
-<img src="/images/2019-03-31-010.jpg">
-<table>
-  <thead>
-      <tr>
-          <th>方法</th>
-          <th style="text-align: center">效果（1-10分，分数越高效果越好）</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>理想结果</td>
-          <td style="text-align: center">10</td>
-      </tr>
-      <tr>
-          <td>基于幅度谱方法的结果</td>
-          <td style="text-align: center">8</td>
-      </tr>
-      <tr>
-          <td>基于幅度谱和相位谱方法的结果</td>
-          <td style="text-align: center">7</td>
-      </tr>
-      <tr>
-          <td>忽略相位的结果</td>
-          <td style="text-align: center">0</td>
-      </tr>
-      <tr>
-          <td>基于幅度谱方法的理想结果</td>
-          <td style="text-align: center">8</td>
-      </tr>
-  </tbody>
-</table>
-<blockquote>
-<p>相位对于音源分类任务的影响极小，更准确的幅度谱估计才能提升效果，相位沿用混合音频的相位就好。</p></blockquote>
-<h3 id="一些可能的方向">一些可能的方向</h3>
-<ul>
-<li>WAVE U-Net直接在时域上进行分离</li>
-</ul>
-<blockquote>
-<p>WAVE U-Net分离的结果中伴奏都很弱</p></blockquote>
-<ul>
-<li>Multi-Scale Multi-band</li>
-</ul>
-<!-- ![image](https://user-images.githubusercontent.com/3350865/61180158-9c31b100-a644-11e9-9c10-7aff1248ab86.jpg) -->
-<img src="/images/2019-03-31-011.jpg">
-<ul>
-<li>借鉴图像分割领域的一些想法和进展<br>
-对音频信号的短时幅度谱进行分割与对图像进行语义分割一个很大的不同在于，音频信号在幅度谱上是有位置差异的，也就是说同样形状的的信号在不同位置，它代表就是不同的音频内容；而在图像语义分割中，分割的对象是没有位置这个信息的，分割对象是可以存在于图像中不同的位置。</li>
-</ul>
-<h3 id="公开的数据集">公开的数据集</h3>
-<table>
-  <thead>
-      <tr>
-          <th>名称</th>
-          <th>数据量</th>
-          <th>时长</th>
-          <th>年份</th>
-          <th>链接</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>DSD100</td>
-          <td>100首</td>
-          <td>6h58m20s</td>
-          <td>2015</td>
-          <td><a href="https://sigsep.github.io/datasets/dsd100.html">https://sigsep.github.io/datasets/dsd100.html</a></td>
-      </tr>
-      <tr>
-          <td>ccMixter</td>
-          <td>50首</td>
-          <td>3h12m30s</td>
-          <td>2014</td>
-          <td><a href="https://members.loria.fr/ALiutkus/kam/">https://members.loria.fr/ALiutkus/kam/</a></td>
-      </tr>
-      <tr>
-          <td>MUSDB18</td>
-          <td>150首</td>
-          <td>9h50m</td>
-          <td>2017</td>
-          <td><a href="https://sigsep.github.io/datasets/musdb.html">https://sigsep.github.io/datasets/musdb.html</a></td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="参考">参考</h3>
-<p>[1] <a href="https://www.math.ucdavis.edu/~aberrian/research/voice_separation/index.html">Project on Music/Voice Separation:  一些传统方法</a><br>
-[2] <a href="https://sigsep.github.io/">SigSep：关于音乐人声分离的公开数据集和开源实现方法</a> <br>
-[3] <a href="">Paper: Singing Voice Separation With Deep U-Net Convolution Networks</a><br>
-[4] <a href="">Paper: UNet++: A Nested U-Net Architecture for Medical Image Segmentation</a><br>
-[5] <a href="UNet-VocalSeparation-Chainer">Github: UNet-VocalSeparation-Chainer</a><br>
-[6] <a href="https://github.com/MrGiovanni/UNetPlusPlus">Github: UNetPlusPlus</a><br>
-[7] <a href="https://github.com/f90/Wave-U-Net">Github: Wave-U-Net</a>  <br>
-[8] <a href="https://github.com/ChihebTrabelsi/deep_complex_networks">Github: Deep-Complex-Networks</a>  <br>
-[9] <a href="">Paper: Multi-Scale Multi-Band Densenets For Audio Source Separation</a> <br>
-[10] <a href="https://sigsep.github.io/tutorials/">SigSep&ndash;Tutorial&ndash;&ldquo;Music Source Separation with DNNs, Making it work&rdquo;</a><br>
-[11] <a href="https://yq.aliyun.com/articles/228864">搜狗研究员讲解基于深度学习的语音分离</a><br>
-[12] <a href="">Paper: Phase-Aware Speech Enhancement With Deep Complex U-Net</a>  <br>
-[13] <a href="http://www.sisec17.audiolabs-erlangen.de/#/methods">SiSEC MUS: 音乐人声分离竞赛</a><br>
-[14] <a href="https://www.math.ucdavis.edu/~aberrian/research/voice_separation/index.html">Project on Music/Voice Separation: 一些传统方法</a></p>]]></content:encoded>
     </item>
   </channel>
 </rss>
