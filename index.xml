@@ -9,7 +9,7 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.141.0</generator>
+    <generator>Hugo -- 0.145.0</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Mon, 10 Jun 2024 22:20:31 +0000</lastBuildDate>
@@ -155,15 +155,13 @@
 &lt;li&gt;&lt;a href=&#34;http://xiaolai.co/books/c558c667ad9f05ddce38f06df2d15aa3/chapter1.html&#34;&gt;《人人都用能英语》&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;看了后发现之前关于“学”英语很多的观念都是错了&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;看了后发现之前关于“学”英语很多的观念都是错了&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;有意思博文记录&#34;&gt;有意思博文记录&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://tinyprojects.dev/&#34;&gt;TinyProject&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;通过记录完成一个小项目的方式来进行学习&amp;hellip;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;通过记录完成一个小项目的方式来进行学习&amp;hellip;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;思考&#34;&gt;思考&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;2022.07.20&lt;/li&gt;
@@ -174,15 +172,13 @@
 <li><a href="http://xiaolai.co/books/c558c667ad9f05ddce38f06df2d15aa3/chapter1.html">《人人都用能英语》</a></li>
 </ul>
 <blockquote>
-<p>看了后发现之前关于“学”英语很多的观念都是错了</p>
-</blockquote>
+<p>看了后发现之前关于“学”英语很多的观念都是错了</p></blockquote>
 <h3 id="有意思博文记录">有意思博文记录</h3>
 <ul>
 <li><a href="https://tinyprojects.dev/">TinyProject</a></li>
 </ul>
 <blockquote>
-<p>通过记录完成一个小项目的方式来进行学习&hellip;</p>
-</blockquote>
+<p>通过记录完成一个小项目的方式来进行学习&hellip;</p></blockquote>
 <h3 id="思考">思考</h3>
 <ul>
 <li>2022.07.20</li>
@@ -197,14 +193,12 @@
       <guid>https://lyapple2008.github.io/posts/2022-08-24-android%E4%B8%AD%E5%87%A0%E7%A7%8Dsdkversion%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
       <description>&lt;h1 id=&#34;android中几种sdkversion的区别&#34;&gt;Android中几种sdkVersion的区别&lt;/h1&gt;
 &lt;blockquote&gt;
-&lt;p&gt;最近遇到一个由于升级了targetSdkVersion而引起的线上crash，之前一直对于Android里面几个sdkVersion的含义和作用很模糊，正好这次把这几个不同的sdkVersion理清楚。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;最近遇到一个由于升级了targetSdkVersion而引起的线上crash，之前一直对于Android里面几个sdkVersion的含义和作用很模糊，正好这次把这几个不同的sdkVersion理清楚。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;!-- {% asset_img 001.png %} --&gt;
 &lt;img src=&#34;https://lyapple2008.github.io/images/2022-08-24-001.png&#34;/&gt;</description>
       <content:encoded><![CDATA[<h1 id="android中几种sdkversion的区别">Android中几种sdkVersion的区别</h1>
 <blockquote>
-<p>最近遇到一个由于升级了targetSdkVersion而引起的线上crash，之前一直对于Android里面几个sdkVersion的含义和作用很模糊，正好这次把这几个不同的sdkVersion理清楚。</p>
-</blockquote>
+<p>最近遇到一个由于升级了targetSdkVersion而引起的线上crash，之前一直对于Android里面几个sdkVersion的含义和作用很模糊，正好这次把这几个不同的sdkVersion理清楚。</p></blockquote>
 <!-- {% asset_img 001.png %} -->
 <img src="/images/2022-08-24-001.png"/>
 <ul>
@@ -576,8 +570,7 @@ WebRTC中的实现</p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>由于WebRTC源码比较大，中间网络问题可能会出错，出错的时候用gclient sync继续就可以了</p>
-</blockquote>
+<p>由于WebRTC源码比较大，中间网络问题可能会出错，出错的时候用gclient sync继续就可以了</p></blockquote>
 <h1 id="下载编译所需依赖包和工具">下载编译所需依赖包和工具</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -605,8 +598,7 @@ WebRTC中的实现</p>
 <blockquote>
 <p>target_os：因为是在Android平台上运行的，因此这里指定为&quot;android&quot;
 target_cpu: 这里指定运行的硬件平台，arm平台则是&quot;arm&quot;，如果是arm64平台则是&quot;arm64&quot;
-is_debug：表示生成是否是debug包</p>
-</blockquote>
+is_debug：表示生成是否是debug包</p></blockquote>
 <p>第二条命令是启动ninja开始编译，编译成功后，会在out_arm/debug目录生成对应的jar包和so库文件</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -624,14 +616,12 @@ is_debug：表示生成是否是debug包</p>
 </ul>
 <blockquote>
 <p>gn.py: Could not find checkout in any parent of the current path.
-This must be run inside a checkout.</p>
-</blockquote>
+This must be run inside a checkout.</p></blockquote>
 <p>这个问题通常发生在，移动了WebRTC源码目录的时候。这里需要看下是否已经把下载的WebRTC源码都完整拷贝了，进到下载WebRTC源码的目录可以看到这个目录还有几个隐藏目录和文件，这几个文件也是需要一起拷贝过去的，后面用gn命令生成编译工程的时候会去检查这几个文件。</p>
 <blockquote>
 <p>.cipd
 .gclient
-.gclient_entries</p>
-</blockquote>
+.gclient_entries</p></blockquote>
 <ul>
 <li>问题二：</li>
 </ul>
@@ -723,8 +713,7 @@ clang.gni中关闭chromium style检查，这里只是暂时关闭，为了代码
 <li>减少限制跟要求，降低门槛 ，覆盖更多群体</li>
 </ul>
 <blockquote>
-<p>在谷歌内部，打造AI应用有两条思路，一是让更多人受惠，二是尽可能减少限制和要求</p>
-</blockquote>
+<p>在谷歌内部，打造AI应用有两条思路，一是让更多人受惠，二是尽可能减少限制和要求</p></blockquote>
 <!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418833-90666700-b6a5-11e9-88f9-760391e1fe61.PNG) -->
 <img src="/images/2019-08-04-002.png"/>
 <ul>
@@ -732,8 +721,7 @@ clang.gni中关闭chromium style检查，这里只是暂时关闭，为了代码
 </ul>
 <blockquote>
 <p>个人隐私越来越被重视，以往的云端处理方案存在局限性
-一些场景要求算法要有极低的延时，如实时通信项目</p>
-</blockquote>
+一些场景要求算法要有极低的延时，如实时通信项目</p></blockquote>
 <p><em><strong>Flag终极目标：让算法随手可得</strong></em>
 <a name="6a1p8"></a></p>
 <!---more--->
@@ -992,8 +980,7 @@ for Deep Neural Networks</a></li>
 <p>我觉得所谓的算法工程师应该叫算法应用工程师会更合适一些。因为算法工程师的工作流程大概是这样的（以我自身的经历为例，可能不同公司有不同的工作方式），接到一个功能需求，然后开始调研实现这个功能需要的算法，研究过程中挑选两三种可能的方案，对这些挑选的方案进行实现（也可能是github clone），分析对比这几种方案。最后从中选出一种方案，作为最后的方案。接下来就是对最终的算法方案针对自己的功能需求和业务场景进行做优化，这期间你会对这个算法方案进行原理研究，参数调整，性能优化等等，最终的目标就是尽可能满足业务需求方的要求。</p>
 <p>知乎上@Jackpop的回答应该是符合大多数算法工程师的实际工作状态，而我们毕业那会想象中的算法工程师，天天手推工式那种，应该叫科学家或者研究员更合适些。<strong>总结一下，我觉得一个优秀的算法工程师应该是能够针对不同的业务场景选择最优的算法方案，并能对现有的算法针对业务场景做一些微调和优化，以更进一步适合业务场景。因为对于企业来说不能落地的算法，是丝毫没有价值的。</strong></p>
 <blockquote>
-<p>以下转载自知乎：https://www.zhihu.com/question/310484101/answer/644079765</p>
-</blockquote>
+<p>以下转载自知乎：https://www.zhihu.com/question/310484101/answer/644079765</p></blockquote>
 <h3 id="算法工程师大致做什么的">算法工程师大致做什么的？</h3>
 <p>算法，对于大多数理工科学生并不陌生。无论是学计算机还是学数学，或者其他理工科，我们都会接触很多成熟、经过十几年甚至几十年考验的算法。
 算法工程师的关键点在“工程师”这三个字，日常所做的工作无非是选择一种或几种成熟、优秀的算法进行组合、验证，来解决特定场景下的问题。在大多数企业里面这一点体现更为明显，**在企业里作为算法工程师是不会创造算法，只是使用经过多年考验的成熟、稳定算法。**其实现在不仅是企业界，就连学术界，创新可用的新算法也是寥寥可数，就拿人工智能常用的优化算法来说：</p>

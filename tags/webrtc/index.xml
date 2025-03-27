@@ -9,7 +9,7 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.141.0</generator>
+    <generator>Hugo -- 0.145.0</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Thu, 03 Feb 2022 11:35:16 +0000</lastBuildDate>
@@ -354,8 +354,7 @@ WebRTC中的实现</p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>由于WebRTC源码比较大，中间网络问题可能会出错，出错的时候用gclient sync继续就可以了</p>
-</blockquote>
+<p>由于WebRTC源码比较大，中间网络问题可能会出错，出错的时候用gclient sync继续就可以了</p></blockquote>
 <h1 id="下载编译所需依赖包和工具">下载编译所需依赖包和工具</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -383,8 +382,7 @@ WebRTC中的实现</p>
 <blockquote>
 <p>target_os：因为是在Android平台上运行的，因此这里指定为&quot;android&quot;
 target_cpu: 这里指定运行的硬件平台，arm平台则是&quot;arm&quot;，如果是arm64平台则是&quot;arm64&quot;
-is_debug：表示生成是否是debug包</p>
-</blockquote>
+is_debug：表示生成是否是debug包</p></blockquote>
 <p>第二条命令是启动ninja开始编译，编译成功后，会在out_arm/debug目录生成对应的jar包和so库文件</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -402,14 +400,12 @@ is_debug：表示生成是否是debug包</p>
 </ul>
 <blockquote>
 <p>gn.py: Could not find checkout in any parent of the current path.
-This must be run inside a checkout.</p>
-</blockquote>
+This must be run inside a checkout.</p></blockquote>
 <p>这个问题通常发生在，移动了WebRTC源码目录的时候。这里需要看下是否已经把下载的WebRTC源码都完整拷贝了，进到下载WebRTC源码的目录可以看到这个目录还有几个隐藏目录和文件，这几个文件也是需要一起拷贝过去的，后面用gn命令生成编译工程的时候会去检查这几个文件。</p>
 <blockquote>
 <p>.cipd
 .gclient
-.gclient_entries</p>
-</blockquote>
+.gclient_entries</p></blockquote>
 <ul>
 <li>问题二：</li>
 </ul>
