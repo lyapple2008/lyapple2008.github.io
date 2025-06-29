@@ -9,11 +9,271 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.145.0</generator>
+    <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Thu, 27 Mar 2025 22:43:58 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 28 Jun 2025 15:38:44 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>基于分位数的噪声估计算法</title>
+      <link>https://lyapple2008.github.io/posts/2025-06-28-%E5%9F%BA%E4%BA%8E%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E5%99%AA%E5%A3%B0%E4%BC%B0%E8%AE%A1/</link>
+      <pubDate>Sat, 28 Jun 2025 15:38:44 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/2025-06-28-%E5%9F%BA%E4%BA%8E%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E5%99%AA%E5%A3%B0%E4%BC%B0%E8%AE%A1/</guid>
+      <description>&lt;h2 id=&#34;噪声估计的作用&#34;&gt;噪声估计的作用&lt;/h2&gt;
+&lt;p&gt;噪声估计算法在整个语音降噪系统中起到核心支撑作用，先验SNR和后验SNR的计算都依赖于当前帧的噪声功率谱估计。若噪声估计偏低，会导致保留太多噪声（过度保留）；若噪声估计偏高，会把语音当作噪声过滤掉（语音失真）； 更新不稳定，整体听感时好时坏，忽大忽小，出现”泵声“、”音乐噪声“现象。本文介绍WebRTC中目前使用的基于分位数的噪声估计算法，及其在工程实现中的巧妙之处。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<h2 id="噪声估计的作用">噪声估计的作用</h2>
+<p>噪声估计算法在整个语音降噪系统中起到核心支撑作用，先验SNR和后验SNR的计算都依赖于当前帧的噪声功率谱估计。若噪声估计偏低，会导致保留太多噪声（过度保留）；若噪声估计偏高，会把语音当作噪声过滤掉（语音失真）； 更新不稳定，整体听感时好时坏，忽大忽小，出现”泵声“、”音乐噪声“现象。本文介绍WebRTC中目前使用的基于分位数的噪声估计算法，及其在工程实现中的巧妙之处。</p>
+<h2 id="什么是基于分位数的噪声估计">什么是基于分位数的噪声估计</h2>
+<p>基于分位数的噪声估计算法是一种利用信号统计特性区分噪声和语音的自适应方法。其核心原理在于：噪声的能量分布通常集中在低分位区域，而语音信号的能量分布会抬高高分位数。</p>
+<h2 id="webrtc中的实现解读妙呀">WebRTC中的实现解读（妙呀）</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 代码位置
+</span></span><span class="line"><span class="cl">modules/audio_processing/ns/quantile_noise_estimator.h 
+</span></span><span class="line"><span class="cl">modules/audio_processing/ns/quantile_noise_estimator.cc
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="分位数计算">分位数计算</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">log_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">log_quantile_</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">log_quantile_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.25f</span> <span class="o">*</span> <span class="n">multiplier</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">log_quantile_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="mf">0.75f</span> <span class="o">*</span> <span class="n">multiplier</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以上是WebRTC中分位数计算的代码，它表示25%分位数估计，下面我们来逐步说明为什么这段代码可以计算25%分位数。</p>
+<h4 id="什么是分位数">什么是分位数？</h4>
+<p>以25%分位数为例，它表示：如果你观察一组数，有25%是小于它的，有75%是大于它的。
+比如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">数据（已排序）：[1, 2, 3, 4, 5, 6, 7, 8, 9]
+</span></span><span class="line"><span class="cl">0.25分位数 ≈ 第3个数 = 3
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="非对称更新的数学直觉">非对称更新的数学直觉</h4>
+<p>设：当前估计值为Q，当前观测值为X</p>
+<p>我们每帧更新规则如下：</p>
+<table>
+  <thead>
+      <tr>
+          <th>情况</th>
+          <th>更新量</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>x &gt; Q</td>
+          <td>Q ← Q + 0.25 × step</td>
+          <td>当前值太大，稍微拉高估计值</td>
+      </tr>
+      <tr>
+          <td>x &lt; Q</td>
+          <td>Q ← Q - 0.75 × step</td>
+          <td>当前值太小，大幅拉低估计值</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="收敛分析平衡点--25分位数">收敛分析：平衡点 = 25%分位数</h4>
+<p>考虑连续观察大量值 {x₁, x₂, &hellip;, xₙ}，估计值 Q 如果在一个固定位置附近波动，那它一定满足：
+平均上调量 ≈ 平均下调量，也就是说，在那个点：</p>
+<blockquote>
+<p>上调概率 × 上调步长 = 下调概率 × 下调步长</p></blockquote>
+<p>其中：</p>
+<ul>
+<li>上调概率 p_up = P(x &gt; Q)</li>
+<li>下调概率 p_down = P(x &lt; Q) = 1 - p_up</li>
+<li>上调步长 = 0.25</li>
+<li>下调步长 = 0.75
+计算可以得到：p_down = 0.25</li>
+</ul>
+<p>✅ 说明这个估计最终会逼近 25% 分位数！</p>
+<blockquote>
+<p>这个分位数的实现真是妙了呀，避免了常规分位计算需要排序的问题，同时还可以实时更新。👍</p></blockquote>
+<h3 id="多分位数估计分时更新">多分位数估计分时更新</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">  <span class="o">//</span> <span class="n">Loop</span> <span class="n">over</span> <span class="n">simultaneous</span> <span class="n">estimates</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="ne">int</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="n">kSimult</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">       <span class="o">++</span><span class="n">s</span><span class="p">,</span> <span class="n">k</span> <span class="o">+=</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="ne">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">kFftSizeBy2Plus1</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="ne">float</span> <span class="n">one_by_counter_plus_1</span> <span class="o">=</span> <span class="mf">1.</span><span class="n">f</span> <span class="o">/</span> <span class="p">(</span><span class="n">counter_</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1.</span><span class="n">f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="ne">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">k</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="ne">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">kFftSizeBy2Plus1</span><span class="p">);</span> <span class="o">++</span><span class="n">i</span><span class="p">,</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="o">//</span> <span class="n">Update</span> <span class="nb">log</span> <span class="n">quantile</span> <span class="n">estimate</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">      <span class="k">const</span> <span class="ne">float</span> <span class="n">delta</span> <span class="o">=</span> <span class="n">density_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">1.</span><span class="n">f</span> <span class="err">?</span> <span class="mf">40.</span><span class="n">f</span> <span class="o">/</span> <span class="n">density_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="p">:</span> <span class="mf">40.</span><span class="n">f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="k">const</span> <span class="ne">float</span> <span class="n">multiplier</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">*</span> <span class="n">one_by_counter_plus_1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">log_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">log_quantile_</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">log_quantile_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.25</span><span class="n">f</span> <span class="o">*</span> <span class="n">multiplier</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">log_quantile_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="mf">0.75</span><span class="n">f</span> <span class="o">*</span> <span class="n">multiplier</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="o">//</span> <span class="n">Update</span> <span class="n">density</span> <span class="n">estimate</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">      <span class="n">constexpr</span> <span class="ne">float</span> <span class="n">kWidth</span> <span class="o">=</span> <span class="mf">0.01</span><span class="n">f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">constexpr</span> <span class="ne">float</span> <span class="n">kOneByWidthPlus2</span> <span class="o">=</span> <span class="mf">1.</span><span class="n">f</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span><span class="n">f</span> <span class="o">*</span> <span class="n">kWidth</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">log_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">log_quantile_</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">kWidth</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">density_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">counter_</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">*</span> <span class="n">density_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">kOneByWidthPlus2</span><span class="p">)</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl">                      <span class="n">one_by_counter_plus_1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">counter_</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">kLongStartupPhaseBlocks</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">counter_</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">num_updates_</span> <span class="o">&gt;=</span> <span class="n">kLongStartupPhaseBlocks</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">quantile_index_to_return</span> <span class="o">=</span> <span class="n">k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">++</span><span class="n">counter_</span><span class="p">[</span><span class="n">s</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>kLongStartupPhaseBlocks=200，意味着分位数估计在200帧后，即2秒，才会更新重置输出估计结果。webrtc为了减少响应延迟，设置了三个错位的独立分位数估计器，如下代码，可以看到每一个分位数估计器的更新计数是错开的，这样可以达到每67帧，即670ms，就会有一个分位数估计器进行重置更新输出估计结果，从而达到快速响应的效果。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">  <span class="n">constexpr</span> <span class="ne">float</span> <span class="n">kOneBySimult</span> <span class="o">=</span> <span class="mf">1.</span><span class="n">f</span> <span class="o">/</span> <span class="n">kSimult</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="n">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kSimult</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">counter_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">floor</span><span class="p">(</span><span class="n">kLongStartupPhaseBlocks</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mf">1.</span><span class="n">f</span><span class="p">)</span> <span class="o">*</span> <span class="n">kOneBySimult</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="利用密度估计实现自适应步长">利用”密度“估计实现自适应步长</h3>
+<p>分位数估计器在更新的时候，其更新步长与这个density_变量直接相关，现在我们来看下webrtc的实现是如果做到自适应步长的。</p>
+<blockquote>
+<p>density_[j]表示: 当前分位数估计点附近的”局部密度估计“，近似表示这个log频谱点的概率密度函数值。</p></blockquote>
+<p>现实场景中，噪声频点能量分布是变化的，当低噪声变化时，噪声频点能量分布密集；当语音变化时，噪声频点能量分布稀疏。因此需要估计分布密度，以调整步长动态性，防止在高密度或低密度区域过度抖动或者太慢反应</p>
+<ul>
+<li>density_是如何计算的</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">      <span class="o">//</span> <span class="n">Update</span> <span class="n">density</span> <span class="n">estimate</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">      <span class="n">constexpr</span> <span class="ne">float</span> <span class="n">kWidth</span> <span class="o">=</span> <span class="mf">0.01</span><span class="n">f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">constexpr</span> <span class="ne">float</span> <span class="n">kOneByWidthPlus2</span> <span class="o">=</span> <span class="mf">1.</span><span class="n">f</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span><span class="n">f</span> <span class="o">*</span> <span class="n">kWidth</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">log_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">log_quantile_</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">kWidth</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">density_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">counter_</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">*</span> <span class="n">density_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">kOneByWidthPlus2</span><span class="p">)</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl">                      <span class="n">one_by_counter_plus_1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这是一种滑动窗口统计估计法：</p>
+<table>
+  <thead>
+      <tr>
+          <th>步骤</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>fabs(&hellip;) &lt; kWidth</td>
+          <td>当前观测值是否落在估计值 ±0.01 范围内</td>
+      </tr>
+      <tr>
+          <td>kOneByWidthPlus2 = 1 / (2 × 0.01)</td>
+          <td>这是一个常数权重（经验值）</td>
+      </tr>
+      <tr>
+          <td>density_[j] = (&hellip;)</td>
+          <td>使用 指数滑动平均 来更新密度值</td>
+      </tr>
+      <tr>
+          <td>最终的效果是：</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<blockquote>
+<p>density_[j] 趋近于“单位宽度窗口”内命中次数的平均值 —— 表示在分位点附近的信号频谱密集程度。</p></blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">      <span class="k">const</span> <span class="ne">float</span> <span class="n">delta</span> <span class="o">=</span> <span class="n">density_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">1.</span><span class="n">f</span> <span class="err">?</span> <span class="mf">40.</span><span class="n">f</span> <span class="o">/</span> <span class="n">density_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="p">:</span> <span class="mf">40.</span><span class="n">f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">const</span> <span class="ne">float</span> <span class="n">multiplier</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">*</span> <span class="n">one_by_counter_plus_1</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>density_变量直接影响了分位数估计的步长，也就是说</p>
+<ul>
+<li>如果 density_ 高：说明这个频率点的能量比较“稳定”，变化较小 → delta 会小 → 更新变慢</li>
+<li>如果 density_ 低：说明这个点的能量波动大 → delta 会大 → 更新更激进</li>
+</ul>
+<p>总结就是，density_ 表示当前分位点附近的局部频谱密度，用于调节更新速率，帮助 WebRTC 实现稳定、鲁棒、快速收敛的底噪估计。</p>
+<p>Ok，这就是WebRTC中基于分位数噪声估计的全部了。总的来说，基于分位数的噪声估计算法原理简单，但WebRTC的实现有很多巧妙的地方，即保证了效果，也提高了效率，绝对是工程精华值得好好研究。</p>
+<p>接下来会继续分享WebRTC语音降噪部分代码，希望对有兴趣的朋友有帮助。</p>
+]]></content:encoded>
+    </item>
     <item>
       <title>程序员的基本修养之代码编译</title>
       <link>https://lyapple2008.github.io/posts/2025-03-27-%E4%BB%A3%E7%A0%81%E7%BC%96%E8%AF%91/</link>
@@ -993,286 +1253,6 @@ clang.gni中关闭chromium style检查，这里只是暂时关闭，为了代码
 <p>只需在将原来在阿里云上配置的CNAME，修改到最新的Github Pages上</p>
 <p>在Ping中检验是否已经修改到最新的IP上，如果已经生效，则原来的博客就可以访问了</p>
 <p><img alt="github-page-no-response" loading="lazy" src="https://user-images.githubusercontent.com/3350865/80268313-ba026b00-86d8-11ea-9d96-d92712231823.png"></p>]]></content:encoded>
-    </item>
-    <item>
-      <title>代码优化方法论</title>
-      <link>https://lyapple2008.github.io/posts/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/</link>
-      <pubDate>Sun, 04 Aug 2019 10:44:29 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/posts/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/</guid>
-      <description>&lt;p&gt;&lt;a name=&#34;01ca666c&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;为什么需要代码优化&#34;&gt;为什么需要代码优化&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;提升体验，扩展玩法&lt;/li&gt;
-&lt;/ul&gt;
-&lt;!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418824-63b24f80-b6a5-11e9-9bde-6cd6de0cc6a5.PNG) --&gt;
-&lt;img src=&#34;https://lyapple2008.github.io/images/2019-08-04-001.png&#34;/&gt;</description>
-      <content:encoded><![CDATA[<p><a name="01ca666c"></a></p>
-<h2 id="为什么需要代码优化">为什么需要代码优化</h2>
-<ul>
-<li>提升体验，扩展玩法</li>
-</ul>
-<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418824-63b24f80-b6a5-11e9-9bde-6cd6de0cc6a5.PNG) -->
-<img src="/images/2019-08-04-001.png"/>
-<ul>
-<li>减少限制跟要求，降低门槛 ，覆盖更多群体</li>
-</ul>
-<blockquote>
-<p>在谷歌内部，打造AI应用有两条思路，一是让更多人受惠，二是尽可能减少限制和要求</p></blockquote>
-<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418833-90666700-b6a5-11e9-88f9-760391e1fe61.PNG) -->
-<img src="/images/2019-08-04-002.png"/>
-<ul>
-<li>场景限制必须进行优化</li>
-</ul>
-<blockquote>
-<p>个人隐私越来越被重视，以往的云端处理方案存在局限性
-一些场景要求算法要有极低的延时，如实时通信项目</p></blockquote>
-<p><em><strong>Flag终极目标：让算法随手可得</strong></em>
-<a name="6a1p8"></a></p>
-<!---more--->
-<h2 id="传统代码优化">传统代码优化</h2>
-<!-- ![](https://cdn.nlark.com/yuque/0/2019/png/415939/1564710217474-4d6dc083-2132-4a85-af87-a61f6fdfc0d8.png) -->
-<img src="/images/2019-08-04-003.png"/>
-<p><strong>rnnoise优化举例</strong></p>
-<ul>
-<li><strong>函数近似和查表优化sigmoid函数计算</strong>
-<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418848-dae7e380-b6a5-11e9-9ffa-0734de7bcbf4.png) -->
-<img src="/images/2019-08-04-004.png"/>    
-</li>
-</ul>
-<p><img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/62418862-33b77c00-b6a6-11e9-8ecf-2f1388e24ab7.png"></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">static</span> <span class="n">OPUS_INLINE</span> <span class="kt">float</span> <span class="nf">tansig_approx</span><span class="p">(</span><span class="kt">float</span> <span class="n">x</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">y</span><span class="p">,</span> <span class="n">dy</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">sign</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="cm">/* Tests are reversed to catch NaNs */</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="mi">8</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;-</span><span class="mi">8</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="cp">#ifndef FIXED_POINT
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cm">/* Another check in case of -ffast-math */</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">celt_isnan</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">       <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">       <span class="n">x</span><span class="o">=-</span><span class="n">x</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">       <span class="n">sign</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nf">floor</span><span class="p">(</span><span class="mf">.5f</span><span class="o">+</span><span class="mi">25</span><span class="o">*</span><span class="n">x</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">-=</span> <span class="mf">.04f</span><span class="o">*</span><span class="n">i</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">y</span> <span class="o">=</span> <span class="n">tansig_table</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="n">dy</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">dy</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y</span><span class="o">*</span><span class="n">x</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">sign</span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="n">OPUS_INLINE</span> <span class="kt">float</span> <span class="nf">sigmoid_approx</span><span class="p">(</span><span class="kt">float</span> <span class="n">x</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="mf">.5</span> <span class="o">+</span> <span class="mf">.5</span><span class="o">*</span><span class="nf">tansig_approx</span><span class="p">(</span><span class="mf">.5</span><span class="o">*</span><span class="n">x</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>最粗暴的函数近似方法：</strong><br /></p>
-<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418851-edfab380-b6a5-11e9-8e3f-75a65d5656c7.png) -->
-<img src="/images/2019-08-04-005.png"/>
-<br />    
- <!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418868-619cc080-b6a6-11e9-8fa1-67751a95dc11.png) -->
-<img src="/images/2019-08-04-006.png"/>
-```
-atan(pi*x/2)*2/pi   24.1 ns
-atan(x)             23.0 ns
-1/(1+exp(-x))       20.4 ns
-1/sqrt(1+x^2)       13.4 ns
-erf(sqrt(pi)*x/2)    6.7 ns
-tanh(x)              5.5 ns
-x/(1+|x|)            5.5 ns
-```
-<ul>
-<li><strong>减少程序跳转优化RNN计算</strong></li>
-</ul>
-<p>CPU多级Cache机制 <br>
-<br /></p>
-<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418870-6feadc80-b6a6-11e9-977e-8aad80618706.png) -->
-<img src="/images/2019-08-04-007.png"/>
-<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418871-78431780-b6a6-11e9-91fe-5b034731dc05.png) -->
-<img src="/images/2019-08-04-008.png"/>
-<a name="6441fc2a"></a>
-<h2 id="深度学习移动端优化">深度学习移动端优化</h2>
-<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418875-9741a980-b6a6-11e9-8708-accea0d5a08c.png) -->
-<img src="/images/2019-08-04-009.png"/>
-<h3 id="网络剪枝">网络剪枝</h3>
-<ul>
-<li><strong>网络的参数都存在冗余的，所以可以进行网络剪枝</strong></li>
-</ul>
-<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418876-ad4f6a00-b6a6-11e9-849d-3df81cb40be5.png) -->
-<img src="/images/2019-08-04-010.png"/>
-<ul>
-<li><strong>网络剪枝的流程</strong>
-权值的重要性：计算L1或者L2<br />神经元的重要性：不为零的次数
-<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418880-be987680-b6a6-11e9-972d-d921aebc6ef0.png) -->
-<img src="/images/2019-08-04-011.png"/>
-</li>
-<li><strong>剪权值VS剪神经元</strong></li>
-</ul>
-<p><img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/62418882-ceb05600-b6a6-11e9-86f1-cce3ce5f093e.png#align=left&display=inline&height=223&name=image.png&originHeight=398&originWidth=436&size=39885&status=done&width=244"><br />剪权值                                                                           剪神经元<br />             <img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/62418885-e091f900-b6a6-11e9-9cec-a63afc827b12.png#align=left&display=inline&height=214&name=image.png&originHeight=381&originWidth=414&size=28847&status=done&width=233">                                  <img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/62418889-eab3f780-b6a6-11e9-9820-0de73ee3f997.png#align=left&display=inline&height=209&name=image.png&originHeight=381&originWidth=425&size=35671&status=done&width=233"><br /><em>剪权值：模型不规则，不便于实现和加速</em><br /><em>剪神经元：模型规则，便于实现和加速</em></p>
-<p><a name="iaztJ"></a></p>
-<h3 id="精简模型设计">精简模型设计</h3>
-<ul>
-<li><strong>标准CNN</strong></li>
-</ul>
-<p><img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/77837266-c8bd3700-7199-11ea-9d28-95222493a1ed.png#align=left&display=inline&height=448&name=image.png&originHeight=766&originWidth=981&size=39311&status=done&width=574"></p>
-<ul>
-<li><strong>深度分离卷积Depthwise Separable Convolution 【参见MobileNet】</strong></li>
-</ul>
-<p><img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/77837270-d2df3580-7199-11ea-9b2b-704966a3c19d.png#align=left&display=inline&height=438&name=image.png&originHeight=739&originWidth=1042&size=49003&status=done&width=618"></p>
-<p><img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/77837270-d2df3580-7199-11ea-9b2b-704966a3c19d.png#align=left&display=inline&height=436&name=image.png&originHeight=777&originWidth=1016&size=53791&status=done&width=570"></p>
-<ul>
-<li><strong>参数比较</strong></li>
-</ul>
-<p><img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/77837275-e094bb00-7199-11ea-933e-265825830d3b.png#align=left&display=inline&height=425&name=image.png&originHeight=782&originWidth=1061&size=115587&status=done&width=576"></p>
-<p><a name="a465ce02"></a></p>
-<h2 id="四深度学习移动端部署工具">四、深度学习移动端部署工具</h2>
-<p>      与PC端深度学习环境被大厂垄断不同，移动端的部署工具可以说是百家争鸣，很多深度学习的厂商都会推出自家的推理加速工具。
-<a name="10665c4b"></a></p>
-<h4 id="41-硬件厂商">4.1 硬件厂商</h4>
-<table>
-  <thead>
-      <tr>
-          <th>公司</th>
-          <th>硬件架构</th>
-          <th>开发工具</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>海思</td>
-          <td>NPU</td>
-          <td><a href="https://developer.huawei.com/consumer/cn/hiai">HiAI Foundation</a></td>
-      </tr>
-      <tr>
-          <td>高通</td>
-          <td>CPU/GPU/DSP</td>
-          <td><a href="https://developer.qualcomm.com/docs/snpe/index.html">Snapdragon Neural Processing Engine SDK</a></td>
-      </tr>
-      <tr>
-          <td>Apple</td>
-          <td>CPU/GPU/NeualEngine</td>
-          <td><a href="https://developer.apple.com/machine-learning/">CoreML</a></td>
-      </tr>
-      <tr>
-          <td>ARM</td>
-          <td>CPU/GPU</td>
-          <td><a href="https://github.com/ARM-software/armnn">ARM NN SDK</a></td>
-      </tr>
-      <tr>
-          <td>MediaTek</td>
-          <td>CPU/GPU/APU</td>
-          <td>NeuroPilot SDK</td>
-      </tr>
-  </tbody>
-</table>
-<p><a name="ca557462"></a></p>
-<h4 id="42-软件厂商">4.2 软件厂商</h4>
-<table>
-  <thead>
-      <tr>
-          <th>工具</th>
-          <th>公司</th>
-          <th>系统支持情况</th>
-          <th>特点</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><a href="">TensorFlow Lite</a></td>
-          <td>Google</td>
-          <td>Android/IOS</td>
-          <td>Android结合比较密，支持GPU加速</td>
-      </tr>
-      <tr>
-          <td><a href="">CoreML</a></td>
-          <td>Apple</td>
-          <td>IOS</td>
-          <td>软件硬件结合紧密，更新快</td>
-      </tr>
-      <tr>
-          <td><a href="">Caffe2</a></td>
-          <td>Facebook</td>
-          <td>Android/IOS</td>
-          <td></td>
-      </tr>
-      <tr>
-          <td><a href="">NCNN</a></td>
-          <td>Tencent</td>
-          <td>Android/IOS</td>
-          <td>支持大部分CNN网络，<strong>已经落地的应用多</strong></td>
-      </tr>
-      <tr>
-          <td><a href="https://github.com/XiaoMi/mace">MACE</a></td>
-          <td>小米</td>
-          <td>Android</td>
-          <td></td>
-      </tr>
-      <tr>
-          <td><a href="">MNN</a></td>
-          <td>阿里</td>
-          <td>Android/IOS</td>
-          <td></td>
-      </tr>
-  </tbody>
-</table>
-<ul>
-<li>利用Caffe2进行手写数字识别在Android端的部署</li>
-</ul>
-<p><img alt="mnist_cnn_demo.gif" loading="lazy" src="https://cdn.nlark.com/yuque/0/2019/gif/415939/1564675047982-2a1b1c17-a309-4cc4-9c83-90cf7617a79b.gif#align=left&display=inline&height=393&name=mnist_cnn_demo.gif&originHeight=1280&originWidth=720&size=728880&status=done&width=221">
-<a name="b84c764d"></a></p>
-<h2 id="五参考">五、参考</h2>
-<ul>
-<li>[Paper] <a href="https://arxiv.org/abs/1710.09282">A Survey of Model Compression and Acceleration</a><br /><a href="https://arxiv.org/abs/1710.09282">
-for Deep Neural Networks</a></li>
-<li>[Book] <a href="http://lamda.nju.edu.cn/weixs/book/CNN_book.html">解析卷积神经网络&ndash;深度学习实践手册</a></li>
-<li>[Video] <a href="https://www.bilibili.com/video/av19001663?from=search&amp;seid=3363657589379253237">Toward Efficient Deep Neural Network Deployment: Deep Compression and EIE</a></li>
-<li>[Video] <a href="https://www.youtube.com/watch?v=dPp8rCAnU_A&amp;list=PLJV_el3uVTsOK_ZK5L0Iv_EQoL1JefRL4&amp;index=52&amp;t=0s">李宏毅-Network Compression</a></li>
-<li>[Github] <a href="https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch17_%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E3%80%81%E5%8A%A0%E9%80%9F%E5%8F%8A%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%83%A8%E7%BD%B2/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0_%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E3%80%81%E5%8A%A0%E9%80%9F%E5%8F%8A%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%83%A8%E7%BD%B2.md">模型压缩及移动端部署</a></li>
-</ul>]]></content:encoded>
     </item>
   </channel>
 </rss>

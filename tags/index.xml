@@ -9,16 +9,30 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.145.0</generator>
+    <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Thu, 27 Mar 2025 22:43:58 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 28 Jun 2025 15:38:44 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WebRTC</title>
+      <link>https://lyapple2008.github.io/tags/webrtc/</link>
+      <pubDate>Sat, 28 Jun 2025 15:38:44 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/webrtc/</guid>
+      <description></description>
+    </item>
     <item>
       <title>技术</title>
       <link>https://lyapple2008.github.io/tags/%E6%8A%80%E6%9C%AF/</link>
-      <pubDate>Thu, 27 Mar 2025 22:43:58 +0800</pubDate>
+      <pubDate>Sat, 28 Jun 2025 15:38:44 +0800</pubDate>
       <guid>https://lyapple2008.github.io/tags/%E6%8A%80%E6%9C%AF/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>音频算法</title>
+      <link>https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Sat, 28 Jun 2025 15:38:44 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95/</guid>
       <description></description>
     </item>
     <item>
@@ -50,13 +64,6 @@
       <description></description>
     </item>
     <item>
-      <title>WebRTC</title>
-      <link>https://lyapple2008.github.io/tags/webrtc/</link>
-      <pubDate>Thu, 03 Feb 2022 11:35:16 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/tags/webrtc/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>GitPage</title>
       <link>https://lyapple2008.github.io/tags/gitpage/</link>
       <pubDate>Sat, 25 Apr 2020 09:34:29 +0000</pubDate>
@@ -75,13 +82,6 @@
       <link>https://lyapple2008.github.io/tags/audioprocessing/</link>
       <pubDate>Sun, 10 Mar 2019 10:16:27 +0000</pubDate>
       <guid>https://lyapple2008.github.io/tags/audioprocessing/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>JNI</title>
-      <link>https://lyapple2008.github.io/tags/jni/</link>
-      <pubDate>Sun, 03 Mar 2019 22:51:59 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/tags/jni/</guid>
       <description></description>
     </item>
   </channel>
