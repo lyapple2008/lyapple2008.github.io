@@ -95,20 +95,20 @@
 </div>
 </div><p>LRT衡量的是，当前观察到的频谱，更像是语音信号，还是更像噪声，是在两种假设之间进行比较：</p>
 <ul>
-<li>H<del>0</del>: 当前帧是纯噪声帧</li>
-<li>H<del>1</del>: 当前帧是语音 + 噪声帧</li>
+<li>$H_0$: 当前帧是纯噪声帧</li>
+<li>$H_1$: 当前帧是语音 + 噪声帧</li>
 </ul>
-<p>通过计算：
-$$
+<p>通过计算：</p>
+<p>$$
 \Lambda = \log \left( \frac{P(X | H_1)}{P(X | H_0)} \right)
 $$</p>
 <p>其中：</p>
 <ul>
-<li>P(X|H_1)：给定为语音的条件下，观测值 X 出现的概率；</li>
-<li>P(X|H_0)：给定为噪声的条件下，观测值 X 出现的概率；</li>
+<li>$P(X|H_1)$：给定为语音的条件下，观测值 X 出现的概率；</li>
+<li>$P(X|H_0)$：给定为噪声的条件下，观测值 X 出现的概率；</li>
 </ul>
-<p>最终近似简化为（推导过程跳过了，找了一些资料，没看太懂🙈）：
-$$
+<p>最终近似简化为（推导过程跳过了，找了一些资料，没看太懂🙈）：</p>
+<p>$$
 \text{LRT}(k) \approx  \frac{(1 + \gamma_k) \cdot 2 \cdot \xi_k}{1 + 2 \cdot \xi_k} - \log(1 + 2 \cdot \xi_k)
 $$</p>
 <p>其中：</p>
@@ -264,11 +264,11 @@ $$</p>
 </span></span><span class="line"><span class="cl">  <span class="n">avg_spect_flatness_num</span> <span class="o">=</span> <span class="n">avg_spect_flatness_num</span> <span class="o">*</span> <span class="n">kOneByFftSizeBy2Plus1</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>等价于下面的式子，先算log版本
-$$
+</div><p>等价于下面的式子，先算log版本</p>
+<p>$$
 \exp\left( \frac{1}{N} \sum \log(X_i) \right)
-$$
-再做指数运算还原为几何均值</p>
+$$</p>
+<p>再做指数运算还原为几何均值</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -423,16 +423,16 @@ $$</li>
 <li>计算后验语音概率
 因为prior_speech_prob_是通过历史信息估计的当前帧语音概率，因此这个概率称为先验语音概率。实际使用时我们不需要我们观察到当帧后给出的概率，即后验语音概率。</li>
 </ul>
-<p>贝叶斯定理给出后验概率公式：
-$$
+<p>贝叶斯定理给出后验概率公式：</p>
+<p>$$
 P(H_1 \mid X) = \frac{P(H_1) \cdot P(X \mid H_1)}{P(H_1) \cdot P(X \mid H_1) + P(H_0) \cdot P(X \mid H_0)}
 $$
 我们引入：
 •	$\text{Prior} = P(H_1)$
 •	$\text{Gain} = \frac{1 - \text{Prior}}{\text{Prior}}$
 •	$\text{LRT} = \frac{P(X \mid H_1)}{P(X \mid H_0)}$</p>
-<p>可得后验语音概率（简化推导）：
-$$
+<p>可得后验语音概率（简化推导）：</p>
+<p>$$
 P(H_1 \mid X) = \frac{1}{1 + \text{Gain} \cdot \frac{1}{\text{LRT}}}
 $$</p>
 <p>这正是代码中这段的实现</p>
