@@ -426,8 +426,8 @@ $$</li>
 <p>贝叶斯定理给出后验概率公式：</p>
 <p>$$
 P(H_1 \mid X) = \frac{P(H_1) \cdot P(X \mid H_1)}{P(H_1) \cdot P(X \mid H_1) + P(H_0) \cdot P(X \mid H_0)}
-$$
-我们引入：
+$$</p>
+<p>我们引入：
 •	$\text{Prior} = P(H_1)$
 •	$\text{Gain} = \frac{1 - \text{Prior}}{\text{Prior}}$
 •	$\text{LRT} = \frac{P(X \mid H_1)}{P(X \mid H_0)}$</p>
