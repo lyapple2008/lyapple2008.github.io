@@ -12,10 +12,607 @@
     <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Sat, 28 Jun 2025 15:38:44 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 30 Jun 2025 21:36:39 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>基于分位数的噪声估计算法</title>
+      <title>WebRTC语音降噪之语音概率估计</title>
+      <link>https://lyapple2008.github.io/posts/2025-06-30-%E8%AF%AD%E9%9F%B3%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/</link>
+      <pubDate>Mon, 30 Jun 2025 21:36:39 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/2025-06-30-%E8%AF%AD%E9%9F%B3%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/</guid>
+      <description>&lt;p&gt;WebRTC的语音降噪算法中实现了一个频点维度的语音概率估计器SpeechProbabilityEstimator，本质是一个多特征融合的线性分类器。统计计算以下三种特征，&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>WebRTC的语音降噪算法中实现了一个频点维度的语音概率估计器SpeechProbabilityEstimator，本质是一个多特征融合的线性分类器。统计计算以下三种特征，</p>
+<ul>
+<li>LRT</li>
+<li>Spectral Flatness  谱平坦度</li>
+<li>Spectral Difference 谱差</li>
+</ul>
+<p>通过tanh将特征变化映射到概率值，使用不同的width参数来调节敏感度，线性加权融合到得最终的语音概率。
+接下来完整分析 WebRTC 中用于语音概率估计的三个核心特征（indicator0, indicator1, indicator2）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="c1"># 代码位置</span>
+</span></span><span class="line"><span class="cl"><span class="n">modules</span><span class="o">/</span><span class="n">audio_processing</span><span class="o">/</span><span class="n">ns</span><span class="o">/</span><span class="n">speech_probability_estimator</span><span class="o">.</span><span class="n">h</span>
+</span></span><span class="line"><span class="cl"><span class="n">modules</span><span class="o">/</span><span class="n">audio_processing</span><span class="o">/</span><span class="n">ns</span><span class="o">/</span><span class="n">speech_probability_estimator</span><span class="o">.</span><span class="n">cc</span>
+</span></span><span class="line"><span class="cl"><span class="n">modules</span><span class="o">/</span><span class="n">audio_processing</span><span class="o">/</span><span class="n">ns</span><span class="o">/</span><span class="n">signal_model_estimator</span><span class="o">.</span><span class="n">cc</span>
+</span></span><span class="line"><span class="cl"><span class="n">modules</span><span class="o">/</span><span class="n">audio_processing</span><span class="o">/</span><span class="n">ns</span><span class="o">/</span><span class="n">signal_model_estimator</span><span class="o">.</span><span class="n">h</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="indicator0-likelihood-ratio-test-lrt">indicator0: Likelihood Ratio Test (LRT)</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="c1">// Updates the log LRT measures.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">UpdateSpectralLrt</span><span class="p">(</span><span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">prior_snr</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">post_snr</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">avg_log_lrt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="kt">float</span><span class="o">*</span> <span class="n">lrt</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">RTC_DCHECK</span><span class="p">(</span><span class="n">lrt</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">tmp1</span> <span class="o">=</span> <span class="mf">1.f</span> <span class="o">+</span> <span class="mf">2.f</span> <span class="o">*</span> <span class="n">prior_snr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">tmp2</span> <span class="o">=</span> <span class="mf">2.f</span> <span class="o">*</span> <span class="n">prior_snr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">tmp1</span> <span class="o">+</span> <span class="mf">0.0001f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">bessel_tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">post_snr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1.f</span><span class="p">)</span> <span class="o">*</span> <span class="n">tmp2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">avg_log_lrt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span>
+</span></span><span class="line"><span class="cl">        <span class="mf">.5f</span> <span class="o">*</span> <span class="p">(</span><span class="n">bessel_tmp</span> <span class="o">-</span> <span class="nf">LogApproximation</span><span class="p">(</span><span class="n">tmp1</span><span class="p">)</span> <span class="o">-</span> <span class="n">avg_log_lrt</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">log_lrt_time_avg_k_sum</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">log_lrt_time_avg_k_sum</span> <span class="o">+=</span> <span class="n">avg_log_lrt</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">*</span><span class="n">lrt</span> <span class="o">=</span> <span class="n">log_lrt_time_avg_k_sum</span> <span class="o">*</span> <span class="n">kOneByFftSizeBy2Plus1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>LRT衡量的是，当前观察到的频谱，更像是语音信号，还是更像噪声，是在两种假设之间进行比较：</p>
+<ul>
+<li>H<del>0</del>: 当前帧是纯噪声帧</li>
+<li>H<del>1</del>: 当前帧是语音 + 噪声帧</li>
+</ul>
+<p>通过计算：
+$$
+\Lambda = \log \left( \frac{P(X | H_1)}{P(X | H_0)} \right)
+$$</p>
+<p>其中：</p>
+<ul>
+<li>P(X|H_1)：给定为语音的条件下，观测值 X 出现的概率；</li>
+<li>P(X|H_0)：给定为噪声的条件下，观测值 X 出现的概率；</li>
+</ul>
+<p>最终近似简化为（推导过程跳过了，找了一些资料，没看太懂🙈）：
+$$
+\text{LRT}(k) \approx  \frac{(1 + \gamma_k) \cdot 2 \cdot \xi_k}{1 + 2 \cdot \xi_k} - \log(1 + 2 \cdot \xi_k)
+$$</p>
+<p>其中：</p>
+<ul>
+<li>$\xi_k$：频点 k 的先验 SNR；</li>
+<li>$\gamma_k$：频点 k 的后验 SNR；</li>
+<li>LRT 越大，表明信号更像语音；</li>
+<li>LRT 越小，说明更像噪声。</li>
+</ul>
+<p>再通过tanh函数映射到[0, 1]的区间。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="c1">// Width parameter in sigmoid map for prior model.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kWidthPrior0</span> <span class="o">=</span> <span class="mf">4.f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Width for pause region: lower range, so increase width in tanh map.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kWidthPrior1</span> <span class="o">=</span> <span class="mf">2.f</span> <span class="o">*</span> <span class="n">kWidthPrior0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Average LRT feature: use larger width in tanh map for pause regions.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">width_prior</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">lrt</span> <span class="o">&lt;</span> <span class="n">prior_model</span><span class="p">.</span><span class="n">lrt</span> <span class="o">?</span> <span class="nl">kWidthPrior1</span> <span class="p">:</span> <span class="n">kWidthPrior0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Compute indicator function: sigmoid map.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">indicator0</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">      <span class="mf">0.5f</span> <span class="o">*</span> <span class="p">(</span><span class="nf">tanh</span><span class="p">(</span><span class="n">width_prior</span> <span class="o">*</span> <span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">lrt</span> <span class="o">-</span> <span class="n">prior_model</span><span class="p">.</span><span class="n">lrt</span><span class="p">))</span> <span class="o">+</span> <span class="mf">1.f</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="indicator1-spectral-flatness-谱平坦度">indicator1: Spectral Flatness 谱平坦度</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="c1">// Updates the spectral flatness based on the input spectrum.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">UpdateSpectralFlatness</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">signal_spectrum</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">signal_spectral_sum</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">float</span><span class="o">*</span> <span class="n">spectral_flatness</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">RTC_DCHECK</span><span class="p">(</span><span class="n">spectral_flatness</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Compute log of ratio of the geometric to arithmetic mean (handle the log(0)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// separately).
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kAveraging</span> <span class="o">=</span> <span class="mf">0.3f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">avg_spect_flatness_num</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.f</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="o">*</span><span class="n">spectral_flatness</span> <span class="o">-=</span> <span class="n">kAveraging</span> <span class="o">*</span> <span class="p">(</span><span class="o">*</span><span class="n">spectral_flatness</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">avg_spect_flatness_num</span> <span class="o">+=</span> <span class="nf">LogApproximation</span><span class="p">(</span><span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">avg_spect_flatness_denom</span> <span class="o">=</span> <span class="n">signal_spectral_sum</span> <span class="o">-</span> <span class="n">signal_spectrum</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">avg_spect_flatness_denom</span> <span class="o">=</span> <span class="n">avg_spect_flatness_denom</span> <span class="o">*</span> <span class="n">kOneByFftSizeBy2Plus1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">avg_spect_flatness_num</span> <span class="o">=</span> <span class="n">avg_spect_flatness_num</span> <span class="o">*</span> <span class="n">kOneByFftSizeBy2Plus1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">spectral_tmp</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">ExpApproximation</span><span class="p">(</span><span class="n">avg_spect_flatness_num</span><span class="p">)</span> <span class="o">/</span> <span class="n">avg_spect_flatness_denom</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Time-avg update of spectral flatness feature.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="o">*</span><span class="n">spectral_flatness</span> <span class="o">+=</span> <span class="n">kAveraging</span> <span class="o">*</span> <span class="p">(</span><span class="n">spectral_tmp</span> <span class="o">-</span> <span class="o">*</span><span class="n">spectral_flatness</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>谱平坦度的定义
+$$
+\text{SFM} = \frac{\left( \prod_{i=1}^{N} X_i \right)^{1/N}}{\frac{1}{N} \sum_{i=1}^{N} X_i}
+= \frac{\text{几何均值}}{\text{算术均值}}
+$$</p>
+</li>
+<li>
+<p>为什么谱平坦度可以区分语音和噪声
+首先从纯数学角度，根据均值不等式有：几何均值 &lt;= 算数均值</p>
+</li>
+</ul>
+<ol>
+<li>当所有元素相等时，两者相等</li>
+<li>当元素差异越大时，几何均值相对算数均值越小，说明“越不平坦”</li>
+</ol>
+<p>再对应到语音降噪应用：</p>
+<ol>
+<li>噪声（尤其是白噪声）：频带能量均匀，几何均值 ≈ 算数均值，Flatness ≈ 1</li>
+<li>语音信号：存在能量集中（共振峰），几何均值 ≪ 算数均值，Flatness 接近 0</li>
+</ol>
+<blockquote>
+<p>因此谱平坦度 = 能量分布的“均匀性量尺” → 能直接用来做语音/噪声分类特征！</p></blockquote>
+<ul>
+<li>代码实现</li>
+</ul>
+<ol>
+<li>计算几何均值</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">avg_spect_flatness_num</span> <span class="o">+=</span> <span class="nf">LogApproximation</span><span class="p">(</span><span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">avg_spect_flatness_num</span> <span class="o">=</span> <span class="n">avg_spect_flatness_num</span> <span class="o">*</span> <span class="n">kOneByFftSizeBy2Plus1</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>等价于下面的式子，先算log版本
+$$
+\exp\left( \frac{1}{N} \sum \log(X_i) \right)
+$$
+再做指数运算还原为几何均值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="nf">ExpApproximation</span><span class="p">(</span><span class="n">avg_spect_flatness_num</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>计算算数均值（去掉DC分量）</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">avg_spect_flatness_denom</span> <span class="o">=</span> <span class="n">signal_spectral_sum</span> <span class="o">-</span> <span class="n">signal_spectrum</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">avg_spect_flatness_denom</span> <span class="o">=</span> <span class="n">avg_spect_flatness_denom</span> <span class="o">*</span> <span class="n">kOneByFftSizeBy2Plus1</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>得到谱平坦度</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">spectral_tmp</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">ExpApproximation</span><span class="p">(</span><span class="n">avg_spect_flatness_num</span><span class="p">)</span> <span class="o">/</span> <span class="n">avg_spect_flatness_denom</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>平滑更新</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="c1">// Time-avg update of spectral flatness feature.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="o">*</span><span class="n">spectral_flatness</span> <span class="o">+=</span> <span class="n">kAveraging</span> <span class="o">*</span> <span class="p">(</span><span class="n">spectral_tmp</span> <span class="o">-</span> <span class="o">*</span><span class="n">spectral_flatness</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="indicator2-spectral-difference-谱模板差异">indicator2: Spectral Difference 谱模板差异</h2>
+<p>Spectral Difference频谱差异是用于衡量当前帧的频谱与已学习噪声模板之间的差异程度。其基本思想是：</p>
+<blockquote>
+<p>如果当前帧的频谱结构与噪声模板相似，则可能是噪声；如果差异大，则可能是语音。</p></blockquote>
+<ol>
+<li>总体计算公式
+$$
+\text{SpectralDiff} = \text{Var}(X) - \frac{[\text{Cov}(X, Y)]^2}{\text{Var}(Y)}
+$$</li>
+</ol>
+<p>其中：
+•	X：当前帧的 信号频谱；
+•	Y：历史平均的 噪声频谱（称为 conservative noise spectrum）；
+•	$\mathrm{Var}$：方差（描述“起伏程度”）；
+•	$\mathrm{Cov}$：协方差（描述“是否联动”）。</p>
+<ol start="2">
+<li>为什么它能衡量相似程序？</li>
+</ol>
+<p>从统计角度看，Var(X) - Cov(X, Y)^2 / Var(Y) 是当前帧中 与过去模板不一致的能量。如果：</p>
+<ul>
+<li>如果 signal ≈ noise（噪声帧）：→ covariance² / noise_variance ≈ signal_variance → spectral_diff ≈ 0</li>
+<li>如果 signal 包含语音成分（结构和噪声不一样）：→ covariance 小，spectral_diff 增大</li>
+</ul>
+<p>这个公式本质上等价于：</p>
+<p>Var(Residual) = Var(Signal) - Var(ProjectedNoiseComponent)</p>
+<p>即：当前帧中除了可以用噪声解释的部分，剩下有多少“异常能量”</p>
+<h2 id="多特征融合">多特征融合</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="c1">// Combine the indicator function with the feature weights.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">ind_prior</span> <span class="o">=</span> <span class="n">prior_model</span><span class="p">.</span><span class="n">lrt_weighting</span> <span class="o">*</span> <span class="n">indicator0</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">prior_model</span><span class="p">.</span><span class="n">flatness_weighting</span> <span class="o">*</span> <span class="n">indicator1</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">prior_model</span><span class="p">.</span><span class="n">difference_weighting</span> <span class="o">*</span> <span class="n">indicator2</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最终组合这三个指标：</p>
+<ul>
+<li>每个特征都有独立的权重</li>
+<li>互补性强，提升稳健性</li>
+</ul>
+<p>举例子：</p>
+<table>
+  <thead>
+      <tr>
+          <th>情况</th>
+          <th>LRT</th>
+          <th>Flatness</th>
+          <th>Spectral Diff</th>
+          <th>判断结果</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>短促辅音 [k]</td>
+          <td>高</td>
+          <td>高（像噪声）</td>
+          <td>低（像模板）</td>
+          <td>不能仅靠 flatness 判断，indicator2 弥补</td>
+      </tr>
+      <tr>
+          <td>背景突发噪声</td>
+          <td>高</td>
+          <td>高</td>
+          <td>高</td>
+          <td>indicator2 抑制误判</td>
+      </tr>
+      <tr>
+          <td>语音暂停期</td>
+          <td>低</td>
+          <td>高</td>
+          <td>高</td>
+          <td>三项均为低，VAD 静音</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="计算频点的后验语音概率">计算频点的后验语音概率</h2>
+<ul>
+<li>平滑更新先验语音概率</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="c1">// Compute the prior probability.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">prior_speech_prob_</span> <span class="o">+=</span> <span class="mf">0.1f</span> <span class="o">*</span> <span class="p">(</span><span class="n">ind_prior</span> <span class="o">-</span> <span class="n">prior_speech_prob_</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Make sure probabilities are within range: keep floor to 0.01.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">prior_speech_prob_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="nf">max</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="nf">min</span><span class="p">(</span><span class="n">prior_speech_prob_</span><span class="p">,</span> <span class="mf">1.f</span><span class="p">),</span> <span class="mf">0.01f</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>计算后验语音概率
+因为prior_speech_prob_是通过历史信息估计的当前帧语音概率，因此这个概率称为先验语音概率。实际使用时我们不需要我们观察到当帧后给出的概率，即后验语音概率。</li>
+</ul>
+<p>贝叶斯定理给出后验概率公式：
+$$
+P(H_1 \mid X) = \frac{P(H_1) \cdot P(X \mid H_1)}{P(H_1) \cdot P(X \mid H_1) + P(H_0) \cdot P(X \mid H_0)}
+$$
+我们引入：
+•	$\text{Prior} = P(H_1)$
+•	$\text{Gain} = \frac{1 - \text{Prior}}{\text{Prior}}$
+•	$\text{LRT} = \frac{P(X \mid H_1)}{P(X \mid H_0)}$</p>
+<p>可得后验语音概率（简化推导）：
+$$
+P(H_1 \mid X) = \frac{1}{1 + \text{Gain} \cdot \frac{1}{\text{LRT}}}
+$$</p>
+<p>这正是代码中这段的实现</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="c1">// Final speech probability: combine prior model with LR factor:.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">gain_prior</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="mf">1.f</span> <span class="o">-</span> <span class="n">prior_speech_prob_</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">prior_speech_prob_</span> <span class="o">+</span> <span class="mf">0.0001f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">inv_lrt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">ExpApproximationSignFlip</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">avg_log_lrt</span><span class="p">,</span> <span class="n">inv_lrt</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">speech_probability_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.f</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.f</span> <span class="o">+</span> <span class="n">gain_prior</span> <span class="o">*</span> <span class="n">inv_lrt</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中：
+•	gain_prior = (1 - prior_speech_prob_) / (prior_speech_prob_ + ε)
+•	inv_lrt[i] = e^{-avg_log_lrt[i]} ≈ 1 / LRT （指数近似）</p>
+<h2 id="利用语音概率辅助更新噪声谱">利用语音概率辅助更新噪声谱</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">NoiseEstimator</span><span class="o">::</span><span class="nf">PostUpdate</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="o">&gt;</span> <span class="n">speech_probability</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">signal_spectrum</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Time-avg parameter for noise_spectrum update.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kNoiseUpdate</span> <span class="o">=</span> <span class="mf">0.9f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">gamma</span> <span class="o">=</span> <span class="n">kNoiseUpdate</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">float</span> <span class="n">prob_speech</span> <span class="o">=</span> <span class="n">speech_probability</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">float</span> <span class="n">prob_non_speech</span> <span class="o">=</span> <span class="mf">1.f</span> <span class="o">-</span> <span class="n">prob_speech</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Temporary noise update used for speech frames if update value is less
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// than previous.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">float</span> <span class="n">noise_update_tmp</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gamma</span> <span class="o">*</span> <span class="n">prev_noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="mf">1.f</span> <span class="o">-</span> <span class="n">gamma</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">prob_non_speech</span> <span class="o">*</span> <span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                         <span class="n">prob_speech</span> <span class="o">*</span> <span class="n">prev_noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Time-constant based on speech/noise_spectrum state.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">float</span> <span class="n">gamma_old</span> <span class="o">=</span> <span class="n">gamma</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Increase gamma for frame likely to be seech.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kProbRange</span> <span class="o">=</span> <span class="mf">.2f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gamma</span> <span class="o">=</span> <span class="n">prob_speech</span> <span class="o">&gt;</span> <span class="n">kProbRange</span> <span class="o">?</span> <span class="mf">.99f</span> <span class="o">:</span> <span class="n">kNoiseUpdate</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Conservative noise_spectrum update.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">prob_speech</span> <span class="o">&lt;</span> <span class="n">kProbRange</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">conservative_noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span>
+</span></span><span class="line"><span class="cl">          <span class="mf">0.05f</span> <span class="o">*</span> <span class="p">(</span><span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">conservative_noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Noise_spectrum update.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">==</span> <span class="n">gamma_old</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">noise_update_tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">          <span class="n">gamma</span> <span class="o">*</span> <span class="n">prev_noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="mf">1.f</span> <span class="o">-</span> <span class="n">gamma</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">prob_non_speech</span> <span class="o">*</span> <span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">                           <span class="n">prob_speech</span> <span class="o">*</span> <span class="n">prev_noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// Allow for noise_spectrum update downwards: If noise_spectrum update
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">// decreases the noise_spectrum, it is safe, so allow it to happen.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="n">noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="nf">min</span><span class="p">(</span><span class="n">noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">noise_update_tmp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面这段代码是webrtc中结合语音概率，对之前基于分位数估计得到的噪声谱，进行进一步修正的过程。</p>
+<p>那为什么已经有了基于分位数的噪声估计，还需要在PostUpdate()中进行进一步修正呢？</p>
+<p>如下表，我们对比与初始分位数估计的关系和区别</p>
+<table>
+  <thead>
+      <tr>
+          <th>特征</th>
+          <th>PreUpdate() 中的分位数估计</th>
+          <th>PostUpdate() 中的时间平均更新</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>原理</td>
+          <td>统计过往帧的底噪分布（log-domain）</td>
+          <td>利用当前帧的语音概率进行时间递归更新</td>
+      </tr>
+      <tr>
+          <td>更新维度</td>
+          <td>横向（跨帧分布）</td>
+          <td>纵向（帧内时间平滑）</td>
+      </tr>
+      <tr>
+          <td>响应特性</td>
+          <td>对背景缓慢变化有响应，对突发语音稳健</td>
+          <td>在语音帧期间抑制更新，非语音帧中轻微修正</td>
+      </tr>
+      <tr>
+          <td>对应变量</td>
+          <td>quantile_noise_estimator_.Estimate(&hellip;) → noise_spectrum_[]</td>
+          <td>初值	noise_spectrum_[] → 平滑动态追踪修正</td>
+      </tr>
+      <tr>
+          <td>目的</td>
+          <td>建立初步噪声模型</td>
+          <td>细化并动态追踪噪声谱</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="总结为什么需要-postupdate">总结：为什么需要 PostUpdate？</h3>
+<ul>
+<li>分位数估计（PreUpdate）很强健，但慢。</li>
+<li>PostUpdate 提供 快速、平滑、概率驱动 的动态调整机制。</li>
+<li>防止语音能量污染噪声估计；</li>
+<li>保持噪声谱能持续跟踪 非平稳噪声（如空调开关、风声变化）；</li>
+<li>为后续 Wiener 滤波器提供更可靠的噪声谱输入。</li>
+</ul>
+<p>Ok! 到这里WebRTC就真正完成了噪声谱的估计，接下继续分享WebRTC语音降噪代码.</p>
+<h4 id="to-be-continue">To Be Continue!!!</h4>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>WebRTC语音降噪之基于分位数的噪声估计</title>
       <link>https://lyapple2008.github.io/posts/2025-06-28-%E5%9F%BA%E4%BA%8E%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E5%99%AA%E5%A3%B0%E4%BC%B0%E8%AE%A1/</link>
       <pubDate>Sat, 28 Jun 2025 15:38:44 +0800</pubDate>
       <guid>https://lyapple2008.github.io/posts/2025-06-28-%E5%9F%BA%E4%BA%8E%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E5%99%AA%E5%A3%B0%E4%BC%B0%E8%AE%A1/</guid>
@@ -1215,44 +1812,6 @@ clang.gni中关闭chromium style检查，这里只是暂时关闭，为了代码
 <ol>
 <li><a href="https://webrtc.github.io/webrtc-org/native-code/development/">WebRTC官网</a></li>
 </ol>]]></content:encoded>
-    </item>
-    <item>
-      <title>github.io博客无法访问问题</title>
-      <link>https://lyapple2008.github.io/posts/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/</link>
-      <pubDate>Sat, 25 Apr 2020 09:34:29 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/posts/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/</guid>
-      <description>&lt;h3 id=&#34;问题描述&#34;&gt;问题描述&lt;/h3&gt;
-&lt;p&gt;原来的github.io自定义域名博客不能访问，提示如下信息&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Fastly error: unknown domain: beyoung.xyz. Please check that this domain has been added to a service.
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Details: cache-lax8629-LAX
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description>
-      <content:encoded><![CDATA[<h3 id="问题描述">问题描述</h3>
-<p>原来的github.io自定义域名博客不能访问，提示如下信息</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Fastly error: unknown domain: beyoung.xyz. Please check that this domain has been added to a service.
-</span></span><span class="line"><span class="cl">Details: cache-lax8629-LAX
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="问题原因">问题原因</h3>
-<p>Github Pages修改了公布的IP，可以到这个网址查到Github Pages目前公布的最新IP</p>
-<p><a href="https://help.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site">https://help.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site</a></p>
-<h3 id="解决方案">解决方案</h3>
-<p>只需在将原来在阿里云上配置的CNAME，修改到最新的Github Pages上</p>
-<p>在Ping中检验是否已经修改到最新的IP上，如果已经生效，则原来的博客就可以访问了</p>
-<p><img alt="github-page-no-response" loading="lazy" src="https://user-images.githubusercontent.com/3350865/80268313-ba026b00-86d8-11ea-9d96-d92712231823.png"></p>]]></content:encoded>
     </item>
   </channel>
 </rss>
