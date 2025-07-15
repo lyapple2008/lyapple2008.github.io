@@ -9,11 +9,369 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.147.9</generator>
+    <generator>Hugo -- 0.148.1</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Mon, 30 Jun 2025 21:36:39 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 07 Jul 2025 21:59:22 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WebRTC语音降噪之Wiener滤波</title>
+      <link>https://lyapple2008.github.io/posts/2025-07-13-webrtc%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E4%B9%8Bwiener%E6%BB%A4%E6%B3%A2/</link>
+      <pubDate>Mon, 07 Jul 2025 21:59:22 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/2025-07-13-webrtc%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E4%B9%8Bwiener%E6%BB%A4%E6%B3%A2/</guid>
+      <description>&lt;h1 id=&#34;webrtc中的wiener滤波降噪算法&#34;&gt;WebRTC中的Wiener滤波降噪算法&lt;/h1&gt;
+&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;
+&lt;p&gt;在实时语音通信系统中，背景噪声的抑制对于提升通话清晰度至关重要。Google 的 WebRTC 项目在其开源语音引擎中实现了高质量的语音降噪模块，其中 Wiener 滤波器作为核心组成部分，结合语音概率估计、多特征建模、噪声谱跟踪等模块构建了一个高度实用的增强框架。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<h1 id="webrtc中的wiener滤波降噪算法">WebRTC中的Wiener滤波降噪算法</h1>
+<h2 id="引言">引言</h2>
+<p>在实时语音通信系统中，背景噪声的抑制对于提升通话清晰度至关重要。Google 的 WebRTC 项目在其开源语音引擎中实现了高质量的语音降噪模块，其中 Wiener 滤波器作为核心组成部分，结合语音概率估计、多特征建模、噪声谱跟踪等模块构建了一个高度实用的增强框架。</p>
+<p>本文将从 Wiener 滤波理论入手，逐步解析 WebRTC 中该算法的工程实现，其中噪声估计模块和语音概率估计模块已经在之前介绍了，有需要的可以翻阅。</p>
+<h2 id="一wiener滤波基础">一、Wiener滤波基础</h2>
+<p>Wiener 滤波器是一种最小均方误差（MMSE）估计器，在频域降噪中用于构造一个频点增益函数，以最大程度还原语音信号。</p>
+<p>其基本形式为：</p>
+<p>$$
+G(f) = \frac{\xi(f)}{\xi(f) + 1}
+$$</p>
+<p>其中：
+•	$\xi(f)$：先验信噪比（prior SNR）
+•	$G(f)$：频率点 f 的 Wiener 增益</p>
+<p>此增益用于对输入频谱进行缩放，从而滤除噪声成分。</p>
+<h2 id="二webrtc中的wiener滤波结构">二、WebRTC中的Wiener滤波结构</h2>
+<p>在 WebRTC 降噪模块中，Wiener 滤波不是孤立运行，而是集成在一套完整的噪声估计与语音概率建模框架中：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">graph TD
+</span></span><span class="line"><span class="cl">    A[输入音频帧] --&gt; B[STFT 分帧]
+</span></span><span class="line"><span class="cl">    B --&gt; C[信号谱 + 噪声谱]
+</span></span><span class="line"><span class="cl">    C --&gt; D[SNR估计（后验+先验）]
+</span></span><span class="line"><span class="cl">    C --&gt; E[LRT / Flatness / Diff 特征提取]
+</span></span><span class="line"><span class="cl">    D &amp; E --&gt; F[Wiener 滤波增益计算]
+</span></span><span class="line"><span class="cl">    F --&gt; G[基于语音概率微调增益]
+</span></span><span class="line"><span class="cl">    G --&gt; H[频谱乘以增益后逆变换]
+</span></span><span class="line"><span class="cl">    H --&gt; I[输出增强语音]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="三核心增益计算逻辑">三、核心增益计算逻辑</h2>
+<ol>
+<li>后验SNR与先验SNR估计
+•	后验SNR：使用当前帧信号谱与噪声谱之比
+•	先验SNR：</li>
+</ol>
+<p>$$
+\xi_t(f) = \alpha \cdot \frac{|S_{t-1}(f)|^2}{N_{t-1}(f)} + (1 - \alpha) \cdot \max(\gamma_t(f) - 1, 0)
+$$</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">    <span class="c1">// Previous estimate based on previous frame with gain filter.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">float</span> <span class="n">prev_tsa</span> <span class="o">=</span> <span class="n">spectrum_prev_process_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span>
+</span></span><span class="line"><span class="cl">                     <span class="p">(</span><span class="n">prev_noise_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.0001f</span><span class="p">)</span> <span class="o">*</span> <span class="n">filter_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>spectrum_prev_process_[i] 为前一帧信号的幅度谱，filter_[i]为前帧的Wiener滤波器增益，两者相乘后就是估计的纯净语音信号，因此prev_tsa就是前一帧的TSA (time-smoothed a priori SNR)</p></blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">    <span class="c1">// Post SNR.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">noise_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">post_snr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">noise_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.0001f</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">post_snr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>只有当信号幅度大于噪声幅度时，才认为有语音信号存在，避免负增益</p></blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">prior_snr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.98f</span> <span class="o">*</span> <span class="n">prev_estimate</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.f</span> <span class="o">-</span> <span class="mf">0.98f</span><span class="p">)</span> <span class="o">*</span> <span class="n">post_snr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>0.98 是平滑因子，表示以历史先验估计为主，防止突变</p></blockquote>
+<ol start="2">
+<li>基本增益计算</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">    <span class="c1">// 参变维纳滤波器，参考《语音增强--理论与实践》,通过over_subtraction_factor来控制降噪力度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">filter_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="n">snr_prior</span> <span class="o">/</span> <span class="p">(</span><span class="n">suppression_params_</span><span class="p">.</span><span class="n">over_subtraction_factor</span> <span class="o">+</span> <span class="n">snr_prior</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">filter_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="nf">max</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="nf">min</span><span class="p">(</span><span class="n">filter_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mf">1.f</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                          <span class="n">suppression_params_</span><span class="p">.</span><span class="n">minimum_attenuating_gain</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><img src="/images/2025-07-13/wiener_over_subtraction_factor.png"/>
+<h2 id="四增益微调语音概率辅助因子">四、增益微调：语音概率辅助因子</h2>
+<p>虽然 Wiener 滤波器理论上是最优的，但其在以下情况下仍存在问题：
+•	SNR 估计不准确
+•	缺乏上下文判断
+•	语音尾音易被吞掉</p>
+<p>因此 WebRTC 引入了语音概率估计模块，通过以下方式微调 Wiener 增益：</p>
+<p>scale = prior_prob * scale1 + (1 - prior_prob) * scale2;</p>
+<p>其中：
+•	scale1: 当前是语音 → 增强增益
+•	scale2: 当前是噪声 → 抑制增益
+•	prior_prob: 通过 LRT、Spectral Flatness、Spectral Diff 等特征综合估计</p>
+<h2 id="五高带处理">五、高带处理</h2>
+<p>在WebRTC的噪声抑制算法中，高频带（8kHz以上）没有直接使用频域Wiener滤波处理，而是在时域统一增益处理，这里即是因为语音大部分是在低带部分，同时也是为了效率减少计算量。接下我们来分析WebRTC的噪声抑制算法是如何通过低带的信息计算高频带增益的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="c1">// Computes the attenuating gain for the noise suppression of the upper bands.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">float</span> <span class="nf">ComputeUpperBandsGain</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">minimum_attenuating_gain</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">filter</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="o">&gt;</span> <span class="n">speech_probability</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">prev_analysis_signal_spectrum</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">signal_spectrum</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Average speech prob and filter gain for the end of the lowest band.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">constexpr</span> <span class="kt">int</span> <span class="n">kNumAvgBins</span> <span class="o">=</span> <span class="mi">32</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kOneByNumAvgBins</span> <span class="o">=</span> <span class="mf">1.f</span> <span class="o">/</span> <span class="n">kNumAvgBins</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 计算低带中最后的的kNumAvgBins个频点（靠近8kHz附近）的平均语音概率和平均增益
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">avg_prob_speech</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">avg_filter_gain</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="n">kFftSizeBy2Plus1</span> <span class="o">-</span> <span class="n">kNumAvgBins</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">       <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">avg_prob_speech</span> <span class="o">+=</span> <span class="n">speech_probability</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">avg_filter_gain</span> <span class="o">+=</span> <span class="n">filter</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">avg_prob_speech</span> <span class="o">=</span> <span class="n">avg_prob_speech</span> <span class="o">*</span> <span class="n">kOneByNumAvgBins</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">avg_filter_gain</span> <span class="o">=</span> <span class="n">avg_filter_gain</span> <span class="o">*</span> <span class="n">kOneByNumAvgBins</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// If the speech was suppressed by a component between Analyze and Process, an
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// example being by an AEC, it should not be considered speech for the purpose
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// of high band suppression. To that end, the speech probability is scaled
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// accordingly.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">sum_analysis_spectrum</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">sum_processing_spectrum</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sum_analysis_spectrum</span> <span class="o">+=</span> <span class="n">prev_analysis_signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sum_processing_spectrum</span> <span class="o">+=</span> <span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// The magnitude spectrum computation enforces the spectrum to be strictly
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// positive.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">RTC_DCHECK_GT</span><span class="p">(</span><span class="n">sum_analysis_spectrum</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">avg_prob_speech</span> <span class="o">*=</span> <span class="n">sum_processing_spectrum</span> <span class="o">/</span> <span class="n">sum_analysis_spectrum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Compute gain based on speech probability.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">gain</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">      <span class="mf">0.5f</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.f</span> <span class="o">+</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="nf">tanh</span><span class="p">(</span><span class="mf">2.f</span> <span class="o">*</span> <span class="n">avg_prob_speech</span> <span class="o">-</span> <span class="mf">1.f</span><span class="p">)));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Combine gain with low band gain.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="n">avg_prob_speech</span> <span class="o">&gt;=</span> <span class="mf">0.5f</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gain</span> <span class="o">=</span> <span class="mf">0.25f</span> <span class="o">*</span> <span class="n">gain</span> <span class="o">+</span> <span class="mf">0.75f</span> <span class="o">*</span> <span class="n">avg_filter_gain</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gain</span> <span class="o">=</span> <span class="mf">0.5f</span> <span class="o">*</span> <span class="n">gain</span> <span class="o">+</span> <span class="mf">0.5f</span> <span class="o">*</span> <span class="n">avg_filter_gain</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Make sure gain is within flooring range.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="nf">min</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="nf">max</span><span class="p">(</span><span class="n">gain</span><span class="p">,</span> <span class="n">minimum_attenuating_gain</span><span class="p">),</span> <span class="mf">1.f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>选取低带频谱中最后32个bin（即靠近8kHz的部分），计算平均语音概率和平均Wiener滤波器增益</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">avg_prob_speech：语音存在的可能性（0~1）
+</span></span><span class="line"><span class="cl">avg_filter_gain：低带最后段的增益（代表频谱高频变化）
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>处理前后谱能量比修正语音概率</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">avg_prob_speech</span> <span class="o">*=</span> <span class="n">sum_processing_spectrum</span> <span class="o">/</span> <span class="n">sum_analysis_spectrum</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>sum_analysis_spectrum：分析阶段的谱（原始 noisy 语音）</li>
+<li>sum_processing_spectrum：处理阶段的谱（可能被 AEC、AGC 等处理）
+⚠️ 如果语音信号被其他模块（比如回声消除）削弱了，而估计器没注意到，就会过度抑制高带，这里通过能量比进行修正，防止“假静音”影响高频压制判断。</li>
+</ul>
+<ol start="3">
+<li>使用 tanh 平滑映射为增益因子</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">gain</span> <span class="o">=</span> <span class="mf">0.5f</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.f</span> <span class="o">+</span> <span class="nf">tanh</span><span class="p">(</span><span class="mf">2.f</span> <span class="o">*</span> <span class="n">avg_prob_speech</span> <span class="o">-</span> <span class="mf">1.f</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>tanh 函数做了一个S型映射：使得 01 的 avg_prob_speech 映射为 01 的增益，但中心更敏感，平滑、可导。</li>
+<li>当语音概率高于 0.5 时增益快速上升；低于 0.5 时快速下降。</li>
+</ul>
+<ol start="4">
+<li>将该增益和低带平均滤波器增益融合</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">avg_prob_speech</span> <span class="o">&gt;=</span> <span class="mf">0.5f</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">gain</span> <span class="o">=</span> <span class="mf">0.25f</span> <span class="o">*</span> <span class="n">gain</span> <span class="o">+</span> <span class="mf">0.75f</span> <span class="o">*</span> <span class="n">avg_filter_gain</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl">  <span class="n">gain</span> <span class="o">=</span> <span class="mf">0.5f</span> <span class="o">*</span> <span class="n">gain</span> <span class="o">+</span> <span class="mf">0.5f</span> <span class="o">*</span> <span class="n">avg_filter_gain</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>当语音概率较高，以低带滤波器为主（强调保留语音的高频特征）</li>
+<li>当语音概率较低，用概率增益和滤波增益各一半权重</li>
+</ul>
+<ol start="5">
+<li>高带延时处理</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="nf">DelaySignal</span><span class="p">(</span><span class="n">y_band</span><span class="p">,</span> <span class="n">channels_</span><span class="p">[</span><span class="n">ch</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">process_delay_memory</span><span class="p">[</span><span class="n">b</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">delayed_frame</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>低带由于滤波器组分析→合成，会产生系统延时，因此在低带和高带合成前，需要将高带信号进行延时操作，与低带信号进行对齐。</p>
+<h2 id="六小结与启发">六、小结与启发</h2>
+<p>WebRTC 的 Wiener 降噪模块体现了“理论 + 工程”的完美结合：</p>
+<table>
+  <thead>
+      <tr>
+          <th>模块</th>
+          <th>功能</th>
+          <th>工程优化</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Wiener 增益</td>
+          <td>降噪核心</td>
+          <td>加入先验平滑与概率调节</td>
+      </tr>
+      <tr>
+          <td>SNR估计</td>
+          <td>支持增益计算</td>
+          <td>TSA平滑，避免突变</td>
+      </tr>
+      <tr>
+          <td>语音概率</td>
+          <td>增益微调</td>
+          <td>三特征融合 + Sigmoid 映射</td>
+      </tr>
+      <tr>
+          <td>噪声谱估计</td>
+          <td>保证准确性</td>
+          <td>分位数估计 + 启动模型</td>
+      </tr>
+  </tbody>
+</table>
+<p>这种设计保证了算法在实时语音场景中的鲁棒性、稳定性与可听感提升效果。</p>
+<img src="/images/To-Be-Continued.jpeg"/>
+]]></content:encoded>
+    </item>
     <item>
       <title>WebRTC语音降噪之语音概率估计</title>
       <link>https://lyapple2008.github.io/posts/2025-06-30-%E8%AF%AD%E9%9F%B3%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/</link>
@@ -1771,44 +2129,6 @@ clang.gni中关闭chromium style检查，这里只是暂时关闭，为了代码
 <ol>
 <li><a href="https://webrtc.github.io/webrtc-org/native-code/development/">WebRTC官网</a></li>
 </ol>]]></content:encoded>
-    </item>
-    <item>
-      <title>github.io博客无法访问问题</title>
-      <link>https://lyapple2008.github.io/posts/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/</link>
-      <pubDate>Sat, 25 Apr 2020 09:34:29 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/posts/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/</guid>
-      <description>&lt;h3 id=&#34;问题描述&#34;&gt;问题描述&lt;/h3&gt;
-&lt;p&gt;原来的github.io自定义域名博客不能访问，提示如下信息&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Fastly error: unknown domain: beyoung.xyz. Please check that this domain has been added to a service.
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Details: cache-lax8629-LAX
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description>
-      <content:encoded><![CDATA[<h3 id="问题描述">问题描述</h3>
-<p>原来的github.io自定义域名博客不能访问，提示如下信息</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Fastly error: unknown domain: beyoung.xyz. Please check that this domain has been added to a service.
-</span></span><span class="line"><span class="cl">Details: cache-lax8629-LAX
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="问题原因">问题原因</h3>
-<p>Github Pages修改了公布的IP，可以到这个网址查到Github Pages目前公布的最新IP</p>
-<p><a href="https://help.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site">https://help.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site</a></p>
-<h3 id="解决方案">解决方案</h3>
-<p>只需在将原来在阿里云上配置的CNAME，修改到最新的Github Pages上</p>
-<p>在Ping中检验是否已经修改到最新的IP上，如果已经生效，则原来的博客就可以访问了</p>
-<p><img alt="github-page-no-response" loading="lazy" src="https://user-images.githubusercontent.com/3350865/80268313-ba026b00-86d8-11ea-9d96-d92712231823.png"></p>]]></content:encoded>
     </item>
   </channel>
 </rss>
