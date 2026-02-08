@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>FFmpeg on BeYoung</title>
+    <link>http://localhost:1313/tags/ffmpeg/</link>
+    <description>Recent content in FFmpeg on BeYoung</description>
+    <image>
+      <title>BeYoung</title>
+      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.147.9</generator>
+    <language>zh</language>
+    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
+    <lastBuildDate>Sat, 18 Aug 2018 12:19:55 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/ffmpeg/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Windows下载编译FFmpeg动态库指北</title>
+      <link>http://localhost:1313/posts/2018-08-18-windows%E4%B8%8B%E8%BD%BD%E7%BC%96%E8%AF%91ffmpeg%E5%8A%A8%E6%80%81%E5%BA%93%E6%8C%87%E5%8C%97/</link>
+      <pubDate>Sat, 18 Aug 2018 12:19:55 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2018-08-18-windows%E4%B8%8B%E8%BD%BD%E7%BC%96%E8%AF%91ffmpeg%E5%8A%A8%E6%80%81%E5%BA%93%E6%8C%87%E5%8C%97/</guid>
+      <description>&lt;p&gt;  在踩了无数坑之后，才有了这篇文章，现在就一个想法还是Linux系统好呀。编译什么东西都是一个套路，configure/make/make install。之前不知道为什么那么程序员会推崇用mac做开发，编译的这个问题上Mac绝对完胜Windows。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>  在踩了无数坑之后，才有了这篇文章，现在就一个想法还是Linux系统好呀。编译什么东西都是一个套路，configure/make/make install。之前不知道为什么那么程序员会推崇用mac做开发，编译的这个问题上Mac绝对完胜Windows。</p>
+<!---more--->
+<h4 id="一需要下载的工具">一、需要下载的工具</h4>
+<ul>
+<li>Visual Studio 2013 或 Visual Studio 2015</li>
+<li>MSYS2  <a href="http://www.msys2.org/">msys2-x86_64</a></li>
+<li>YASM <a href="http://yasm.tortall.net/Download.html">Win64.exe</a></li>
+<li>FFmpeg源码 <a href="https://ffmpeg.org/">ffmpeg4.0.1</a></li>
+</ul>
+<h4 id="二编译环境搭建">二、编译环境搭建</h4>
+<h5 id="1-安装msys2默认安装在cmsys64目录安装完成后打开msys2环境运行命令安装编译工具">1. 安装MSYS2，默认安装在C:\msys64目录，安装完成后打开msys2环境，运行命令安装编译工具</h5>
+<blockquote>
+<p>pacman -S make gcc diffutils</p></blockquote>
+<p><em>注：安装过程中可能会出现某些包下载失败的情况，这时只需要多试几次就好，直到提示净更新大小为0就说明安装完整了。</em></p>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180035-21679680-a642-11e9-9c9b-eff27aff2ffb.jpg) -->
+<p><img alt="Image Caption" loading="lazy" src="/images/2018-08-18-001.jpg"></p>
+<h5 id="2-修改cmsys64msys2_shellcmd文件修改下图红框里的部分这里是为了让msys2能继承vs的环境变量">2. 修改C:\msys64\msys2_shell.cmd文件，修改下图红框里的部分，这里是为了让msys2能继承VS的环境变量</h5>
+<blockquote>
+<p>set MSYS2_PATH_TYPE=inherit</p></blockquote>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180037-24fb1d80-a642-11e9-850c-263c5ca5e556.jpg) -->
+<p><img alt="Image Caption" loading="lazy" src="/images/2018-08-18-002.jpg"></p>
+<h5 id="3-将cmsys64usrbinlinkexe重命名为其它名字如link_bakexe这里是为了在链接的时候选择visual-studio的linkexe工具避免冲突">3. 将C:\msys64\usr\bin\link.exe重命名为其它名字，如link_bak.exe，这里是为了在链接的时候选择Visual Studio的link.exe工具，避免冲突</h5>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180038-275d7780-a642-11e9-8e97-cd2be8ee0611.jpg) -->
+<p><img alt="Image Caption" loading="lazy" src="/images/2018-08-18-003.jpg"></p>
+<h5 id="4-将下载的yasm工具yasm-130-win32exe复制到cmsys64usrbin目录将重命令为yasmexe">4. 将下载的yasm工具，yasm-1.3.0-win32.exe，复制到C:\msys64\usr\bin目录，将重命令为yasm.exe</h5>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180039-29273b00-a642-11e9-8826-8d0bdcc93810.jpg) -->
+<p><img alt="Image Caption" loading="lazy" src="/images/2018-08-18-004.jpg"></p>
+<h4 id="三准备编译">三、准备编译</h4>
+<h5 id="1-打开visual-studio命令行这里要选择vs2015-x64-x86兼容工具提示符打开方式如下图所示">1. 打开visual studio命令行，这里要选择<strong>vs2015 x64 x86兼容工具提示符</strong>，打开方式如下图所示</h5>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180041-2b899500-a642-11e9-9cd5-d6afa776f3e4.jpg) -->
+<p><img alt="Image Caption" loading="lazy" src="/images/2018-08-18-005.jpg"></p>
+<h5 id="2-切换目录到cmsys64运行msy2_shellcmd开启msys2环境">2. 切换目录到C:\msys64，运行msy2_shell.cmd，开启msys2环境</h5>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180042-2d535880-a642-11e9-870c-382b5d6ddaaa.jpg) -->
+<p><img alt="Image Caption" loading="lazy" src="/images/2018-08-18-006.jpg"></p>
+<h5 id="3-测试环境是否正确检查编译工具和链接工具是不是指向的vs工具">3. 测试环境是否正确，检查编译工具和链接工具是不是指向的VS工具</h5>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180043-2fb5b280-a642-11e9-9b42-27be3b4a21bc.jpg) -->
+<p><img alt="Image Caption" loading="lazy" src="/images/2018-08-18-007.jpg"></p>
+<h4 id="四开始编译以下命令均在msys2环境执行">四、开始编译（以下命令均在msys2环境执行）</h4>
+<h5 id="1-切换目录到ffmpeg源码目录">1. 切换目录到ffmpeg源码目录</h5>
+<h5 id="2-运行configure脚本相关参数参考下面configure脚本执行的时间会比较长耐心等待">2. 运行configure脚本，相关参数参考下面，configure脚本执行的时间会比较长，耐心等待</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"> <span class="o">./</span><span class="n">configure</span> \
+</span></span><span class="line"><span class="cl">  <span class="o">--</span><span class="n">prefix</span><span class="o">=./</span><span class="n">build_hwaccel</span> \       <span class="o">====&gt;</span> <span class="err">【可选】这里指定编译完成后库的安装目录</span>
+</span></span><span class="line"><span class="cl">  <span class="o">--</span><span class="n">toolchain</span><span class="o">=</span><span class="n">msvc</span> \               <span class="o">====&gt;</span> <span class="err">【必须】选择使用</span><span class="n">VS的工具和环境</span>
+</span></span><span class="line"><span class="cl">  <span class="o">--</span><span class="n">arch</span><span class="o">=</span><span class="n">x86</span> \                     <span class="o">====&gt;</span> <span class="err">【必须】</span><span class="n">x86指定生成win32版本的库</span>
+</span></span><span class="line"><span class="cl">  <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">x86asm</span> \                <span class="o">====&gt;</span> <span class="err">【可选】使能</span><span class="n">x86的汇编优化</span>
+</span></span><span class="line"><span class="cl">  <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">doc</span> \                  <span class="o">====&gt;</span> <span class="err">【可选】关闭</span><span class="n">ffmpeg文档输出</span>
+</span></span><span class="line"><span class="cl">  <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">shared</span> \                <span class="o">====&gt;</span> <span class="err">【必须】设置输出动态库</span>
+</span></span><span class="line"><span class="cl">  <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="k">static</span> \               <span class="o">====&gt;</span> <span class="err">【可选】设置关闭输出静态库</span>
+</span></span><span class="line"><span class="cl">  <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">d3d11va</span> \               <span class="o">====&gt;</span> <span class="err">【可选】设置使能</span><span class="n">d3d11硬件加速</span> 
+</span></span><span class="line"><span class="cl">  <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">dxva2</span>                   <span class="o">====&gt;</span> <span class="err">【可选】设置便能</span><span class="n">dxva2接口的硬件加速</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="3-执行make命令这个过程可能会有一些错误提示可以根据提示上网进搜索相关问题">3. 执行make命令，这个过程可能会有一些错误提示，可以根据提示上网进搜索相关问题，</h5>
+<blockquote>
+<p>如编译ffmpeg4.0.1需要注释与变量CC_IDENT相关的语句，存在于cmdutils.c和ff_probe.c文件中</p></blockquote>
+<h5 id="4-执行make-install命令将生成的动态库复制到configure时指定的目录中">4. 执行make install命令，将生成的动态库复制到configure时指定的目录中</h5>
+<h5 id="5-至此整个windows下的ffmpeg动态库编译完成">5. 至此整个windows下的ffmpeg动态库编译完成</h5>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>FFmpeg中AVFilter模块实践指南</title>
+      <link>http://localhost:1313/posts/2018-3-24-ffmpeg%E4%B8%ADavfilter%E6%A8%A1%E5%9D%97%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Sat, 24 Mar 2018 22:55:27 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2018-3-24-ffmpeg%E4%B8%ADavfilter%E6%A8%A1%E5%9D%97%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/</guid>
+      <description>&lt;p&gt;在做音视频相关的开发过程大体如下所示，对于其中的编码/解码，整个流程相对比较固定，使用ffmpeg可以很好的完成这部分的开发。对其中的帧数据处理（包括音频和视频数据）则相对要多样化一些，比如对视频做尺寸变换，进行音频音量均衡，直播中的美颜处理，多路流合成等等，这些都是属于流程中的帧数据处理。今天要介绍FFmpeg中的AVFilter模块进行帧数据处理的开发，AVFilter模块对帧数据处理进行了很好的抽象。AVFilter中的filter graph（滤波器图）概念非常适合帧数据处理中的多级滤波处理，同时对滤波器的接口进行了规定，后期添加一些自定义的滤波器也是很方便。网上关于AVFilter的介绍大多是基于ffmpeg的命令使用，基于代码实现的很少，最近项目中正好要使用到了AVFilter，写个小结，希望对有同样需求的小伙伴有帮助。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>在做音视频相关的开发过程大体如下所示，对于其中的编码/解码，整个流程相对比较固定，使用ffmpeg可以很好的完成这部分的开发。对其中的帧数据处理（包括音频和视频数据）则相对要多样化一些，比如对视频做尺寸变换，进行音频音量均衡，直播中的美颜处理，多路流合成等等，这些都是属于流程中的帧数据处理。今天要介绍FFmpeg中的AVFilter模块进行帧数据处理的开发，AVFilter模块对帧数据处理进行了很好的抽象。AVFilter中的filter graph（滤波器图）概念非常适合帧数据处理中的多级滤波处理，同时对滤波器的接口进行了规定，后期添加一些自定义的滤波器也是很方便。网上关于AVFilter的介绍大多是基于ffmpeg的命令使用，基于代码实现的很少，最近项目中正好要使用到了AVFilter，写个小结，希望对有同样需求的小伙伴有帮助。</p>
+<blockquote>
+<p>原始音视频&ndash;&gt;解码&ndash;&gt;帧数据处理&ndash;&gt;编码&ndash;&gt;输出音视频</p></blockquote>
+<!---more--->
+<h2 id="1-主要结构体和api介绍">1. 主要结构体和API介绍</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// 对filters系统的整体管理
+</span></span><span class="line"><span class="cl">struct AVFilterGraph
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    AVFilterContext **filters;
+</span></span><span class="line"><span class="cl">    unsigned nb_filters;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="err">定义</span><span class="n">filter本身的能力</span><span class="err">，拥有的</span><span class="n">pads</span><span class="err">，回调函数接口定义</span>
+</span></span><span class="line"><span class="cl"><span class="n">struct</span> <span class="n">AVFilter</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">AVFilterPad</span> <span class="o">*</span><span class="n">inputs</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">AVFilterPad</span> <span class="o">*</span><span class="n">outputs</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="n">filter实例</span><span class="err">，管理</span><span class="n">filter与外部的联系</span>
+</span></span><span class="line"><span class="cl"><span class="n">struct</span> <span class="n">AVFilterContext</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">AVFilter</span> <span class="o">*</span><span class="n">filter</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">char</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">AVFilterPad</span> <span class="o">*</span><span class="n">input_pads</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">AVFilterLink</span> <span class="o">**</span><span class="n">inputs</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">unsigned</span> <span class="n">nb_inputs</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">AVFilterPad</span> <span class="o">*</span><span class="n">output_pads</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">AVFilterLink</span> <span class="o">**</span><span class="n">outputs</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">unsigned</span> <span class="n">nb_outputs</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">struct</span> <span class="n">AVFilterGraph</span> <span class="o">*</span><span class="n">graph</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// 定义两个filters之间的联接
+</span></span><span class="line"><span class="cl">struct AVFilterLink
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    AVFilterContext *src;
+</span></span><span class="line"><span class="cl">    AVFilterPad *srcpad;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    AVFilterContext *dst;
+</span></span><span class="line"><span class="cl">    AVFilterPad *dstpad;
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    struct AVFilterGraph *graph;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="err">定义</span><span class="n">filter的输入</span><span class="o">/</span><span class="err">输出接口</span>
+</span></span><span class="line"><span class="cl"><span class="n">struct</span> <span class="n">AVFilterPad</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">AVFrame</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">get_video_buffer</span><span class="p">)(</span><span class="n">AVFilterLink</span> <span class="o">*</span><span class="n">link</span><span class="p">,</span> <span class="ne">int</span> <span class="n">w</span><span class="p">,</span> <span class="ne">int</span> <span class="n">h</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">AVFrame</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">get_audio_buffer</span><span class="p">)(</span><span class="n">AVFilterLink</span> <span class="o">*</span><span class="n">link</span><span class="p">,</span> <span class="ne">int</span> <span class="n">nb_samples</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="ne">int</span> <span class="p">(</span><span class="o">*</span><span class="n">filter_frame</span><span class="p">)(</span><span class="n">AVFilterLink</span> <span class="o">*</span><span class="n">link</span><span class="p">,</span> <span class="n">AVFrame</span> <span class="o">*</span><span class="n">frame</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="ne">int</span> <span class="p">(</span><span class="o">*</span><span class="n">request_frame</span><span class="p">)(</span><span class="n">AVFilterLink</span> <span class="o">*</span><span class="n">link</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">struct AVFilterInOut
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    char *name;
+</span></span><span class="line"><span class="cl">    AVFilterContext *filter_ctx;
+</span></span><span class="line"><span class="cl">    int pad_idx;
+</span></span><span class="line"><span class="cl">    struct AVFilterInOut *next;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><em>在AVFilter模块中定义了AVFilter结构，很个AVFilter都是具有独立功能的节点，如scale filter的作用就是进行图像尺寸变换，overlay filter的作用就是进行图像的叠加，这里需要重点提的是两个特别的filter，一个是buffer，一个是buffersink，滤波器buffer代表filter graph中的源头，原始数据就往这个filter节点输入的；而滤波器buffersink代表filter graph中的输出节点，处理完成的数据从这个filter节点输出。</em></p></blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="err">获取</span><span class="n">FFmpeg中定义的filter</span><span class="err">，调用该方法前需要先调用</span><span class="n">avfilter_register_all</span><span class="p">();</span><span class="err">进行滤波器注册</span>
+</span></span><span class="line"><span class="cl"><span class="n">AVFilter</span> <span class="o">*</span><span class="n">avfilter_get_by_name</span><span class="p">(</span><span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">往源滤波器</span><span class="n">buffer中输入待处理的数据</span>
+</span></span><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">av_buffersrc_add_frame</span><span class="p">(</span><span class="n">AVFilterContext</span> <span class="o">*</span><span class="n">ctx</span><span class="p">,</span> <span class="n">AVFrame</span> <span class="o">*</span><span class="n">frame</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">从目的滤波器</span><span class="n">buffersink中输出处理完的数据</span>
+</span></span><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">av_buffersink_get_frame</span><span class="p">(</span><span class="n">AVFilterContext</span> <span class="o">*</span><span class="n">ctx</span><span class="p">,</span> <span class="n">AVFrame</span> <span class="o">*</span><span class="n">frame</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">创建一个滤波器图</span><span class="n">filter</span> <span class="n">graph</span>
+</span></span><span class="line"><span class="cl"><span class="n">AVFilterGraph</span> <span class="o">*</span><span class="n">avfilter_graph_alloc</span><span class="p">(</span><span class="n">void</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">创建一个滤波器实例</span><span class="n">AVFilterContext</span><span class="err">，并添加到</span><span class="n">AVFilterGraph中</span>
+</span></span><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">avfilter_graph_create_filter</span><span class="p">(</span><span class="n">AVFilterContext</span> <span class="o">**</span><span class="n">filt_ctx</span><span class="p">,</span> <span class="k">const</span> <span class="n">AVFilter</span> <span class="o">*</span><span class="n">filt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                 <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">name</span><span class="p">,</span> <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">void</span> <span class="o">*</span><span class="n">opaque</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                 <span class="n">AVFilterGraph</span> <span class="o">*</span><span class="n">graph_ctx</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">连接两个滤波器节点</span>
+</span></span><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">avfilter_link</span><span class="p">(</span><span class="n">AVFilterContext</span> <span class="o">*</span><span class="n">src</span><span class="p">,</span> <span class="n">unsigned</span> <span class="n">srcpad</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">AVFilterContext</span> <span class="o">*</span><span class="n">dst</span><span class="p">,</span> <span class="n">unsigned</span> <span class="n">dstpad</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2-avfilter主体框架流程">2. AVFilter主体框架流程</h2>
+<p>在利用AVFilter进行音视频数据处理前先将在进行的处理流程绘制出来，现在以<a href="https://ffmpeg.org/ffmpeg-filters.html#Filtering-Introduction">FFmpeg filter官方文档</a>中的一个例子为例进行说明。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">                [main]
+</span></span><span class="line"><span class="cl">input --&gt; split ---------------------&gt; overlay --&gt; output
+</span></span><span class="line"><span class="cl">            |                             ^
+</span></span><span class="line"><span class="cl">            |[tmp]                  [flip]|
+</span></span><span class="line"><span class="cl">            +-----&gt; crop --&gt; vflip -------+
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个例子的处理流程如上所示，首先使用split滤波器将input流分成两路流（main和tmp），然后分别对两路流进行处理。对于tmp流，先经过crop滤波器进行裁剪处理，再经过flip滤波器进行垂直方向上的翻转操作，输出的结果命名为flip流。再将main流和flip流输入到overlay滤波器进行合成操作。上图的input就是上面提过的buffer源滤波器，output就是上面的提过的buffersink滤波器。上图中每个节点都是一个AVFilterContext，每个连线就是AVFliterLink。所有这些信息都统一由AVFilterGraph来管理。</p>
+<p><img alt="image" loading="lazy" src="http://oxfmz0qm8.bkt.clouddn.com/ffmpeg/split_crop_vflip.png"></p>
+<h2 id="3-实例实现">3. 实例实现</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">extern</span> <span class="s2">&#34;C&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#include &lt;libavcodec/avcodec.h&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#include &lt;libavformat/avformat.h&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#include &lt;libavfilter/avfiltergraph.h&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#include &lt;libavfilter/buffersink.h&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#include &lt;libavfilter/buffersrc.h&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#include &lt;libavutil/opt.h&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#include &lt;libavutil/imgutils.h&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">main</span><span class="p">(</span><span class="ne">int</span> <span class="n">argc</span><span class="p">,</span> <span class="n">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="ne">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="n">input</span> <span class="n">yuv</span>
+</span></span><span class="line"><span class="cl">	<span class="n">FILE</span><span class="o">*</span> <span class="n">inFile</span> <span class="o">=</span> <span class="n">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="n">char</span><span class="o">*</span> <span class="n">inFileName</span> <span class="o">=</span> <span class="s2">&#34;sintel_480x272_yuv420p.yuv&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">fopen_s</span><span class="p">(</span><span class="o">&amp;</span><span class="n">inFile</span><span class="p">,</span> <span class="n">inFileName</span><span class="p">,</span> <span class="s2">&#34;rb+&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">inFile</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;Fail to open file</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="ne">int</span> <span class="n">in_width</span> <span class="o">=</span> <span class="mi">480</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="ne">int</span> <span class="n">in_height</span> <span class="o">=</span> <span class="mi">272</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="n">output</span> <span class="n">yuv</span>
+</span></span><span class="line"><span class="cl">	<span class="n">FILE</span><span class="o">*</span> <span class="n">outFile</span> <span class="o">=</span> <span class="n">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">const</span> <span class="n">char</span><span class="o">*</span> <span class="n">outFileName</span> <span class="o">=</span> <span class="s2">&#34;out_crop_vfilter.yuv&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">fopen_s</span><span class="p">(</span><span class="o">&amp;</span><span class="n">outFile</span><span class="p">,</span> <span class="n">outFileName</span><span class="p">,</span> <span class="s2">&#34;wb&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">outFile</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;Fail to create file for output</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">avfilter_register_all</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">AVFilterGraph</span><span class="o">*</span> <span class="n">filter_graph</span> <span class="o">=</span> <span class="n">avfilter_graph_alloc</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">filter_graph</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;Fail to create filter graph!</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="n">source</span> <span class="n">filter</span>
+</span></span><span class="line"><span class="cl">	<span class="n">char</span> <span class="n">args</span><span class="p">[</span><span class="mi">512</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">	<span class="n">_snprintf_s</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">args</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="s2">&#34;video_size=</span><span class="si">%d</span><span class="s2">x</span><span class="si">%d</span><span class="s2">:pix_fmt=</span><span class="si">%d</span><span class="s2">:time_base=</span><span class="si">%d</span><span class="s2">/</span><span class="si">%d</span><span class="s2">:pixel_aspect=</span><span class="si">%d</span><span class="s2">/</span><span class="si">%d</span><span class="s2">&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="n">in_width</span><span class="p">,</span> <span class="n">in_height</span><span class="p">,</span> <span class="n">AV_PIX_FMT_YUV420P</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">AVFilter</span><span class="o">*</span> <span class="n">bufferSrc</span> <span class="o">=</span> <span class="n">avfilter_get_by_name</span><span class="p">(</span><span class="s2">&#34;buffer&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">AVFilterContext</span><span class="o">*</span> <span class="n">bufferSrc_ctx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ret</span> <span class="o">=</span> <span class="n">avfilter_graph_create_filter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bufferSrc_ctx</span><span class="p">,</span> <span class="n">bufferSrc</span><span class="p">,</span> <span class="s2">&#34;in&#34;</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">NULL</span><span class="p">,</span> <span class="n">filter_graph</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;Fail to create filter bufferSrc</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="n">sink</span> <span class="n">filter</span>
+</span></span><span class="line"><span class="cl">	<span class="n">AVBufferSinkParams</span> <span class="o">*</span><span class="n">bufferSink_params</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">AVFilterContext</span><span class="o">*</span> <span class="n">bufferSink_ctx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">AVFilter</span><span class="o">*</span> <span class="n">bufferSink</span> <span class="o">=</span> <span class="n">avfilter_get_by_name</span><span class="p">(</span><span class="s2">&#34;buffersink&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">enum</span> <span class="n">AVPixelFormat</span> <span class="n">pix_fmts</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="n">AV_PIX_FMT_YUV420P</span><span class="p">,</span> <span class="n">AV_PIX_FMT_NONE</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="n">bufferSink_params</span> <span class="o">=</span> <span class="n">av_buffersink_params_alloc</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="n">bufferSink_params</span><span class="o">-&gt;</span><span class="n">pixel_fmts</span> <span class="o">=</span> <span class="n">pix_fmts</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ret</span> <span class="o">=</span> <span class="n">avfilter_graph_create_filter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bufferSink_ctx</span><span class="p">,</span> <span class="n">bufferSink</span><span class="p">,</span> <span class="s2">&#34;out&#34;</span><span class="p">,</span> <span class="n">NULL</span><span class="p">,</span> <span class="n">bufferSink_params</span><span class="p">,</span> <span class="n">filter_graph</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;Fail to create filter sink filter</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="n">split</span> <span class="n">filter</span>
+</span></span><span class="line"><span class="cl">	<span class="n">AVFilter</span> <span class="o">*</span><span class="n">splitFilter</span> <span class="o">=</span> <span class="n">avfilter_get_by_name</span><span class="p">(</span><span class="s2">&#34;split&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">AVFilterContext</span> <span class="o">*</span><span class="n">splitFilter_ctx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ret</span> <span class="o">=</span> <span class="n">avfilter_graph_create_filter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">splitFilter_ctx</span><span class="p">,</span> <span class="n">splitFilter</span><span class="p">,</span> <span class="s2">&#34;split&#34;</span><span class="p">,</span> <span class="s2">&#34;outputs=2&#34;</span><span class="p">,</span> <span class="n">NULL</span><span class="p">,</span> <span class="n">filter_graph</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;Fail to create split filter</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="n">crop</span> <span class="n">filter</span>
+</span></span><span class="line"><span class="cl">	<span class="n">AVFilter</span> <span class="o">*</span><span class="n">cropFilter</span> <span class="o">=</span> <span class="n">avfilter_get_by_name</span><span class="p">(</span><span class="s2">&#34;crop&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">AVFilterContext</span> <span class="o">*</span><span class="n">cropFilter_ctx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ret</span> <span class="o">=</span> <span class="n">avfilter_graph_create_filter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cropFilter_ctx</span><span class="p">,</span> <span class="n">cropFilter</span><span class="p">,</span> <span class="s2">&#34;crop&#34;</span><span class="p">,</span> <span class="s2">&#34;out_w=iw:out_h=ih/2:x=0:y=0&#34;</span><span class="p">,</span> <span class="n">NULL</span><span class="p">,</span> <span class="n">filter_graph</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;Fail to create crop filter</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="n">vflip</span> <span class="n">filter</span>
+</span></span><span class="line"><span class="cl">	<span class="n">AVFilter</span> <span class="o">*</span><span class="n">vflipFilter</span> <span class="o">=</span> <span class="n">avfilter_get_by_name</span><span class="p">(</span><span class="s2">&#34;vflip&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">AVFilterContext</span> <span class="o">*</span><span class="n">vflipFilter_ctx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ret</span> <span class="o">=</span> <span class="n">avfilter_graph_create_filter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vflipFilter_ctx</span><span class="p">,</span> <span class="n">vflipFilter</span><span class="p">,</span> <span class="s2">&#34;vflip&#34;</span><span class="p">,</span> <span class="n">NULL</span><span class="p">,</span> <span class="n">NULL</span><span class="p">,</span> <span class="n">filter_graph</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;Fail to create vflip filter</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="n">overlay</span> <span class="n">filter</span>
+</span></span><span class="line"><span class="cl">	<span class="n">AVFilter</span> <span class="o">*</span><span class="n">overlayFilter</span> <span class="o">=</span> <span class="n">avfilter_get_by_name</span><span class="p">(</span><span class="s2">&#34;overlay&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">AVFilterContext</span> <span class="o">*</span><span class="n">overlayFilter_ctx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ret</span> <span class="o">=</span> <span class="n">avfilter_graph_create_filter</span><span class="p">(</span><span class="o">&amp;</span><span class="n">overlayFilter_ctx</span><span class="p">,</span> <span class="n">overlayFilter</span><span class="p">,</span> <span class="s2">&#34;overlay&#34;</span><span class="p">,</span> <span class="s2">&#34;y=0:H/2&#34;</span><span class="p">,</span> <span class="n">NULL</span><span class="p">,</span> <span class="n">filter_graph</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;Fail to create overlay filter</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="n">src</span> <span class="n">filter</span> <span class="n">to</span> <span class="n">split</span> <span class="n">filter</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ret</span> <span class="o">=</span> <span class="n">avfilter_link</span><span class="p">(</span><span class="n">bufferSrc_ctx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">splitFilter_ctx</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;Fail to link src filter and split filter</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="n">split</span> <span class="n">filter</span><span class="s1">&#39;s first pad to overlay filter&#39;</span><span class="n">s</span> <span class="n">main</span> <span class="n">pad</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ret</span> <span class="o">=</span> <span class="n">avfilter_link</span><span class="p">(</span><span class="n">splitFilter_ctx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">overlayFilter_ctx</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;Fail to link split filter and overlay filter main pad</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="n">split</span> <span class="n">filter</span><span class="s1">&#39;s second pad to crop filter</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ret</span> <span class="o">=</span> <span class="n">avfilter_link</span><span class="p">(</span><span class="n">splitFilter_ctx</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cropFilter_ctx</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;Fail to link split filter&#39;s second pad and crop filter</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="n">crop</span> <span class="n">filter</span> <span class="n">to</span> <span class="n">vflip</span> <span class="n">filter</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ret</span> <span class="o">=</span> <span class="n">avfilter_link</span><span class="p">(</span><span class="n">cropFilter_ctx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vflipFilter_ctx</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;Fail to link crop filter and vflip filter</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="n">vflip</span> <span class="n">filter</span> <span class="n">to</span> <span class="n">overlay</span> <span class="n">filter</span><span class="s1">&#39;s second pad</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ret</span> <span class="o">=</span> <span class="n">avfilter_link</span><span class="p">(</span><span class="n">vflipFilter_ctx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">overlayFilter_ctx</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;Fail to link vflip filter and overlay filter&#39;s second pad</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="n">overlay</span> <span class="n">filter</span> <span class="n">to</span> <span class="n">sink</span> <span class="n">filter</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ret</span> <span class="o">=</span> <span class="n">avfilter_link</span><span class="p">(</span><span class="n">overlayFilter_ctx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">bufferSink_ctx</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;Fail to link overlay filter and sink filter</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="o">//</span> <span class="n">check</span> <span class="n">filter</span> <span class="n">graph</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ret</span> <span class="o">=</span> <span class="n">avfilter_graph_config</span><span class="p">(</span><span class="n">filter_graph</span><span class="p">,</span> <span class="n">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;Fail in filter graph</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">char</span> <span class="o">*</span><span class="n">graph_str</span> <span class="o">=</span> <span class="n">avfilter_graph_dump</span><span class="p">(</span><span class="n">filter_graph</span><span class="p">,</span> <span class="n">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">FILE</span><span class="o">*</span> <span class="n">graphFile</span> <span class="o">=</span> <span class="n">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">fopen_s</span><span class="p">(</span><span class="o">&amp;</span><span class="n">graphFile</span><span class="p">,</span> <span class="s2">&#34;graphFile.txt&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">fprintf</span><span class="p">(</span><span class="n">graphFile</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">%s</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">graph_str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">av_free</span><span class="p">(</span><span class="n">graph_str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">AVFrame</span> <span class="o">*</span><span class="n">frame_in</span> <span class="o">=</span> <span class="n">av_frame_alloc</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="n">unsigned</span> <span class="n">char</span> <span class="o">*</span><span class="n">frame_buffer_in</span> <span class="o">=</span> <span class="p">(</span><span class="n">unsigned</span> <span class="n">char</span> <span class="o">*</span><span class="p">)</span><span class="n">av_malloc</span><span class="p">(</span><span class="n">av_image_get_buffer_size</span><span class="p">(</span><span class="n">AV_PIX_FMT_YUV420P</span><span class="p">,</span> <span class="n">in_width</span><span class="p">,</span> <span class="n">in_height</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="n">av_image_fill_arrays</span><span class="p">(</span><span class="n">frame_in</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">frame_in</span><span class="o">-&gt;</span><span class="n">linesize</span><span class="p">,</span> <span class="n">frame_buffer_in</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="n">AV_PIX_FMT_YUV420P</span><span class="p">,</span> <span class="n">in_width</span><span class="p">,</span> <span class="n">in_height</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">AVFrame</span> <span class="o">*</span><span class="n">frame_out</span> <span class="o">=</span> <span class="n">av_frame_alloc</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="n">unsigned</span> <span class="n">char</span> <span class="o">*</span><span class="n">frame_buffer_out</span> <span class="o">=</span> <span class="p">(</span><span class="n">unsigned</span> <span class="n">char</span> <span class="o">*</span><span class="p">)</span><span class="n">av_malloc</span><span class="p">(</span><span class="n">av_image_get_buffer_size</span><span class="p">(</span><span class="n">AV_PIX_FMT_YUV420P</span><span class="p">,</span> <span class="n">in_width</span><span class="p">,</span> <span class="n">in_height</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="n">av_image_fill_arrays</span><span class="p">(</span><span class="n">frame_out</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">frame_out</span><span class="o">-&gt;</span><span class="n">linesize</span><span class="p">,</span> <span class="n">frame_buffer_out</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="n">AV_PIX_FMT_YUV420P</span><span class="p">,</span> <span class="n">in_width</span><span class="p">,</span> <span class="n">in_height</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">frame_in</span><span class="o">-&gt;</span><span class="n">width</span> <span class="o">=</span> <span class="n">in_width</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">frame_in</span><span class="o">-&gt;</span><span class="n">height</span> <span class="o">=</span> <span class="n">in_height</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">frame_in</span><span class="o">-&gt;</span><span class="n">format</span> <span class="o">=</span> <span class="n">AV_PIX_FMT_YUV420P</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">fread</span><span class="p">(</span><span class="n">frame_buffer_in</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">in_width</span><span class="o">*</span><span class="n">in_height</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">inFile</span><span class="p">)</span> <span class="o">!=</span> <span class="n">in_width</span><span class="o">*</span><span class="n">in_height</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="o">//</span><span class="n">input</span> <span class="n">Y</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">V</span>
+</span></span><span class="line"><span class="cl">		<span class="n">frame_in</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">frame_buffer_in</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">frame_in</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">frame_buffer_in</span> <span class="o">+</span> <span class="n">in_width</span><span class="o">*</span><span class="n">in_height</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="n">frame_in</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">frame_buffer_in</span> <span class="o">+</span> <span class="n">in_width</span><span class="o">*</span><span class="n">in_height</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">av_buffersrc_add_frame</span><span class="p">(</span><span class="n">bufferSrc_ctx</span><span class="p">,</span> <span class="n">frame_in</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;Error while add frame.</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="o">/*</span> <span class="n">pull</span> <span class="n">filtered</span> <span class="n">pictures</span> <span class="n">from</span> <span class="n">the</span> <span class="n">filtergraph</span> <span class="o">*/</span>
+</span></span><span class="line"><span class="cl">		<span class="n">ret</span> <span class="o">=</span> <span class="n">av_buffersink_get_frame</span><span class="p">(</span><span class="n">bufferSink_ctx</span><span class="p">,</span> <span class="n">frame_out</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="o">//</span><span class="n">output</span> <span class="n">Y</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="n">V</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">frame_out</span><span class="o">-&gt;</span><span class="n">format</span> <span class="o">==</span> <span class="n">AV_PIX_FMT_YUV420P</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">for</span> <span class="p">(</span><span class="ne">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">frame_out</span><span class="o">-&gt;</span><span class="n">height</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="n">fwrite</span><span class="p">(</span><span class="n">frame_out</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">frame_out</span><span class="o">-&gt;</span><span class="n">linesize</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">frame_out</span><span class="o">-&gt;</span><span class="n">width</span><span class="p">,</span> <span class="n">outFile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="k">for</span> <span class="p">(</span><span class="ne">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">frame_out</span><span class="o">-&gt;</span><span class="n">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="n">fwrite</span><span class="p">(</span><span class="n">frame_out</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">frame_out</span><span class="o">-&gt;</span><span class="n">linesize</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">frame_out</span><span class="o">-&gt;</span><span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">outFile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="k">for</span> <span class="p">(</span><span class="ne">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">frame_out</span><span class="o">-&gt;</span><span class="n">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="n">fwrite</span><span class="p">(</span><span class="n">frame_out</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">frame_out</span><span class="o">-&gt;</span><span class="n">linesize</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">frame_out</span><span class="o">-&gt;</span><span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">outFile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="n">printf</span><span class="p">(</span><span class="s2">&#34;Process 1 frame!</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">av_frame_unref</span><span class="p">(</span><span class="n">frame_out</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">fclose</span><span class="p">(</span><span class="n">inFile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">fclose</span><span class="p">(</span><span class="n">outFile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">av_frame_free</span><span class="p">(</span><span class="o">&amp;</span><span class="n">frame_in</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">av_frame_free</span><span class="p">(</span><span class="o">&amp;</span><span class="n">frame_out</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">avfilter_graph_free</span><span class="p">(</span><span class="o">&amp;</span><span class="n">filter_graph</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><a href="https://github.com/lyapple2008/FFmpegExams">github代码仓库</a></p></blockquote>
+<h2 id="4-建立定义filter滤波器">4. 建立定义Filter滤波器</h2>
+<p>这部分暂时还没有实践，参考ffmpeg源码中已有的filter和ffmpeg源码中的文档writing_filter.txt，应该实践起来也来难，等后面有时间再补上这部分介绍。</p>
+]]></content:encoded>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>InferenceEngine on BeYoung</title>
+    <link>http://localhost:1313/tags/inferenceengine/</link>
+    <description>Recent content in InferenceEngine on BeYoung</description>
+    <image>
+      <title>BeYoung</title>
+      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.147.9</generator>
+    <language>zh</language>
+    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
+    <lastBuildDate>Fri, 17 May 2024 22:58:36 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/inferenceengine/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>算子融合</title>
+      <link>http://localhost:1313/posts/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</link>
+      <pubDate>Fri, 17 May 2024 22:58:36 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</guid>
+      <description>&lt;h2 id=&#34;什么是算子融合&#34;&gt;什么是算子融合&lt;/h2&gt;
+&lt;p&gt;算子融合是一种通过合并计算图中多个算子到一个算子，达到减少计算量和内存访问的优化方法。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Conv + BatchNormalization + ReLu融合&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- {% asset_img conv_bn_relu.png %} --&gt;
+&lt;img src=&#34;http://localhost:1313/images/2024-05-17-conv_bn_relu.png&#34;/&gt;
+&lt;p&gt;从融合后的最终公式可以看出，可以在初始阶段就通过BN的均值和方差（推理阶段BN的均值和方差是常量）更新Conv层的weights和bias参数，这样融合后的算子相当少了一个BN层的操作，既减少了内存访问，也减少了计算量&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<h2 id="什么是算子融合">什么是算子融合</h2>
+<p>算子融合是一种通过合并计算图中多个算子到一个算子，达到减少计算量和内存访问的优化方法。</p>
+<ul>
+<li>Conv + BatchNormalization + ReLu融合</li>
+</ul>
+<!-- {% asset_img conv_bn_relu.png %} -->
+<img src="/images/2024-05-17-conv_bn_relu.png"/>
+<p>从融合后的最终公式可以看出，可以在初始阶段就通过BN的均值和方差（推理阶段BN的均值和方差是常量）更新Conv层的weights和bias参数，这样融合后的算子相当少了一个BN层的操作，既减少了内存访问，也减少了计算量</p>
+<h2 id="如何做算子融合">如何做算子融合</h2>
+<h3 id="算子分类">算子分类</h3>
+<!-- {% asset_img operator_category.png %} -->
+<img src="/images/2024-05-17-conv_bn_relu.png"/>
+<p>当存在多个输入，同时存在多种输入-输出映射关系时，最终的Mapping type由最复杂的那一个决定。Mapping type复杂度递增顺序：One-to-One，Reorganize，Shuffle，One-to-Many，Many-to-Many
+注：Many-to-Many包含Many-to-One的类型</p>
+<h3 id="算子可融合性">算子可融合性</h3>
+<!-- {% asset_img fusion_ability.png %} -->
+<img src="/images/2024-05-17-fusion_ability.png"/>
+<p>绿色：可以融合，且有收益
+黄色：要做profile才能确定是否有收益
+红色：没有收益，不融合</p>
+<h3 id="计算图基于融合性分块">计算图基于融合性分块</h3>
+<!-- {% asset_img graph_partition.png %} -->
+<img src="/images/2024-05-17-graph_partition.png"/>
+<p>分块过程：</p>
+<ol>
+<li>随机挑选一个One-to-One 算子节点做为种子节点</li>
+<li>从种子节点往后进行融合，直到没有可以融合的节点，并更新块的Mapping Type</li>
+<li>从种子节点往前进行融合，直到没有可以融合的节点，并更新块的Mapping Type</li>
+<li>重复执行1、2、3，直到没有可用的种子节点</li>
+</ol>
+<h3 id="融合代码生成">融合代码生成</h3>
+<p>基于编译生成融合代码（DNNFusion、TVM）</p>
+<!-- {% asset_img code_gen.png %} -->
+<img src="/images/2024-05-17-code_gen.png"/>
+<p>参考</p>
+<ol>
+<li><a href="https://dl.acm.org/doi/10.1145/3453483.3454083">DNNFusion: accelerating deep neural networks execution with advanced operator fusion</a></li>
+</ol>]]></content:encoded>
+    </item>
+  </channel>
+</rss>

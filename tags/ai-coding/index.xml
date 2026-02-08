@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>‘AI Coding’ on BeYoung</title>
+    <link>http://localhost:1313/tags/ai-coding/</link>
+    <description>Recent content in ‘AI Coding’ on BeYoung</description>
+    <image>
+      <title>BeYoung</title>
+      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.147.9</generator>
+    <language>zh</language>
+    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
+    <lastBuildDate>Sun, 01 Feb 2026 09:28:45 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/ai-coding/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>关于AICoding的一些感想和后续的规划</title>
+      <link>http://localhost:1313/posts/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/</link>
+      <pubDate>Sun, 01 Feb 2026 09:28:45 +0800</pubDate>
+      <guid>http://localhost:1313/posts/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;最近要说最热最火的话题，那一定是 AI，而其中 AI 应用场景 AI Coding 也是发展迅速，大有替代程序员的势头。最近几个月一直在使用 AI Coding，心态上经历了最初的「完了，失业要提前了」，到「稳了，还能苟几年」。下面就分享一些使用上的感受，以及面对 AI Coding 这股后浪，这个号后面的一些规划。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<blockquote>
+<p>最近要说最热最火的话题，那一定是 AI，而其中 AI 应用场景 AI Coding 也是发展迅速，大有替代程序员的势头。最近几个月一直在使用 AI Coding，心态上经历了最初的「完了，失业要提前了」，到「稳了，还能苟几年」。下面就分享一些使用上的感受，以及面对 AI Coding 这股后浪，这个号后面的一些规划。</p></blockquote>
+<p><img alt="程序员使用 AI 编码提升效率" loading="lazy" src="/images/2026-02-01/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BD%BF%E7%94%A8AI%E7%BC%96%E7%A0%81%E6%8F%90%E5%8D%87%E6%95%88%E7%8E%87.jpg"></p>
+<h3 id="1-ai-coding-非常有帮助收费的优于免费的">1. AI Coding 非常有帮助，收费的优于免费的</h3>
+<p>这几年 AI 发展迅速，早已不是当年的「人工智障」了，确实是可以作为生产力工具帮忙提升效率的。对于 AI Coding 来说，到底能提升多少效率，取决于多方面因素：比如 Coding 在日常开发中占的比重、使用 AI 的熟练程度、AI Coding 工具本身的性能等等。但不管怎么说，AI Coding 对于程序员来说都是有正向作用的，是值得花时间去用起来的。</p>
+<p>我自己用得比较多的是 Cursor 跟 Claude Code。Cursor 是公司给配置的，Claude Code 是我自己订阅了 MiniMax 的 Coding Plan 配置的。在此之前也用过国内一些免费的 AI Coding 工具（比如 Trae 和 Qcoder），短暂的使用给我的感受就是没有付费的好用，一个问题反复折腾好几轮都没有跑通。</p>
+<p>当然这些纯粹是个人拍脑袋的感受，使用时间不长，也没有很深入地去使用。网上也有一些使用 Trae 和 Qcoder 做出可用应用的案例。重要的是 AI Coding 确实能够提升开发效率的，大家都应该用起来。</p>
+<h3 id="2-ai-coding-的能力约等于使用者自身">2. AI Coding 的能力约等于使用者自身</h3>
+<p><img alt="AI Coding 能力边界" loading="lazy" src="/images/2026-02-01/1770474310208.jpg"></p>
+<p>AI Coding 在目前这个阶段还是一个被动的工具，需要使用者去给它进行规划和任务指引，因此使用者的能力边界就约等于使用 AI Coding 后的能力边界。</p>
+<p>程序开发是一个复杂的系统工程，每个需求拆分任务后就有很多步骤。就算 AI Coding 每一步的成功率为 95%，8 步之后最终能成功的概率也只剩下 66%。另外，AI Coding 获取的需求信息主要来源于使用者，使用者在与 AI 沟通描述时，这里又得损耗一些性能，导致成功率下降。不过好消息是，使用者可以在与 AI 互动过程中不断扩展自己的能力边界，把原来了解的领域变成熟悉领域，所以理论上 AI Coding 是没有边界的。</p>
+<p>这里给我几点启发：</p>
+<ol>
+<li>生产环境只在自己熟悉的范围内使用，最多只触及到了解的区域，再往外扩展能得到什么成果就只能听天由命了，试验性的尝试性的项目不受这个限制。</li>
+<li>给 AI 描述需求时，尽可能详细，就像你自己开发一样，想好整个代码的架构和目标，并记录成文档。文档不仅可以给 AI 描述需求，也可以随时给 AI 找回上下文，弥补 AI Coding 上下文有限的问题。</li>
+<li>大龄程序员凭借多年积累的经验，辅以AI Coding弥补”编程体力不足“，又可以焕发第二春了。</li>
+</ol>
+<h3 id="3-ai-coding-还只是辅助编程使用者需要为其质量兜底">3. AI Coding 还只是辅助编程，使用者需要为其质量兜底</h3>
+<p><img alt="AI 与程序员" loading="lazy" src="/images/2026-02-01/%E7%A8%8B%E5%BA%8F%E5%91%98%E8%A2%ABAI%E9%A9%BE%E9%A9%B6%E6%B1%BD%E8%BD%A6%E6%8B%A6%E4%BD%8F%E7%BD%9A%E6%AC%BE.png"></p>
+<p>类似于汽车自动驾驶，AI Coding 现在也还只是 L2 水平，辅助编程阶段，出了事故还是得使用者来负责。所以对于生产环境使用 AI Coding 时，要对 AI Coding 生成的代码进行严格的 Review。</p>
+<p>不过最近也看到另一种解法：随着 AI Coding 生成的代码量级快速上升，传统逐行代码 Review 的方式已经不太现实，而且效率不高。所以也有不 Review 只测试的方式来验收 AI Coding 生成的代码，在修改和生成代码的同时，让AI也生成对应的单元测试，人类负责把关单元测试的通过情况，可能也许也是一种可行的AI Coding协同方式。</p>
+<h2 id="后续的规划">后续的规划</h2>
+<p>随着 AI 的普及和渗透，获取知识、甚至获取技能都越来越轻而易举。坏的方面是，个人的知识和技能越来越贬值；乐观的方面是，个人可以利用的知识和技能也是越来越多，也越来越轻松。</p>
+<p><img alt="Peter Steinberger github主页" loading="lazy" src="/images/2026-02-01/20260208-132545.jpg"></p>
+<p>最近 OpenClaw 非常火，<a href="https://github.com/steipete">Peter Steinberger</a> 是其核心开发者。从其 GitHub 主页可以看到，在 Claude 爆火之前，他一直在做迭代各种各样的工具或者产品（具有完整定义功能的程序就算产品，不一定是像 WeChat/WhatsApp/TikTok 这样才算），OpenClaw的爆火不过是其多年程序迭代的一次厚积薄发。后面希望可以学习他这种方式，在做中学，在学中做，这也许是 AI 时代最快的进步方式。</p>
+<p>后面将不再进行纯粹的单点知识分享，希望可以从打造一个真实可用的产品角度去分享打造的过程。这个产品只需要能提供完整可用的功能就行。</p>
+<p>在这个知识和技能获取越来越便捷的时代，迭代速度也许才是制胜法宝。</p>
+<hr>
+<p>OK，以上就是一些个人浅显的、混乱的感想和 2026 年的 Flag，剩下的就交给时间和执行了，各位道友记得点赞追番一起加油吧！</p>
+<p><img alt="请一键三连" loading="lazy" src="/images/2026-02-01/1770529335422.jpg"></p>
+]]></content:encoded>
+    </item>
+  </channel>
+</rss>

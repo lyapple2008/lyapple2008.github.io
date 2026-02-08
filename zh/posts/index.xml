@@ -1,0 +1,1184 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on BeYoung</title>
+    <link>http://localhost:1313/zh/posts/</link>
+    <description>Recent content in Posts on BeYoung</description>
+    <image>
+      <title>BeYoung</title>
+      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.140.1</generator>
+    <language>zh</language>
+    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
+    <lastBuildDate>Mon, 10 Jun 2024 22:20:31 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/zh/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MacOS M2 Tensorflow GPU环境搭建</title>
+      <link>http://localhost:1313/zh/posts/2024-06-10-macos-m2-tensorflow-gpu%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Mon, 10 Jun 2024 22:20:31 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/2024-06-10-macos-m2-tensorflow-gpu%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <description>&lt;!-- {% asset_img title.gif %} --&gt;
+&lt;img src=&#34;http://localhost:1313/images/2024-06-10-title.gif&#34;/&gt;
+本文记录在mac mini m2 pro上搭建tensorflow gpu版本的过程，中间因为一些坑，导致环境搭建过程有点反复，希望对有相同需求的同学有帮助。</description>
+      <content:encoded><![CDATA[<!-- {% asset_img title.gif %} -->
+<img src="/images/2024-06-10-title.gif"/>
+本文记录在mac mini m2 pro上搭建tensorflow gpu版本的过程，中间因为一些坑，导致环境搭建过程有点反复，希望对有相同需求的同学有帮助。
+<h2 id="1-安装conda环境">1. 安装conda环境</h2>
+<p>这里创建conda环境的时候需要指定python版本为3.9，这是因为后面需要安装的tensorflow需要python 3.6~3.9</p>
+<!-- {% asset_img tensorflow_python_version.png %} -->
+<img src="/images/2024-06-10-tensorflow_python_version.png"/>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">conda create -n tf_gpu python=3.9
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2-安装tensorflow">2. 安装tensorflow</h2>
+<p>安装tensorflow的时候，需要指定版本为2.14.1，这里是因为后面需要安装的tensorflow-metal，最新版本只支持2.14</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pip install tensorflow==2.14.1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><!-- {% asset_img tensorflow_metal.png %} -->
+<img src="/images/2024-06-10-tensorflow_metal.png"/>
+<h2 id="3-安装tensorflow-metal">3. 安装tensorflow-metal</h2>
+<p>目前tensorflow官方没有支持apple gpu，需要通过<a href="https://developer.apple.com/metal/tensorflow-plugin/">tensorflow-metal</a>插件来支持使用apple gpu</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pip install tensorflow-metal==1.1.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4-测试验证">4. 测试验证</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import tensorflow.keras
+</span></span><span class="line"><span class="cl">import tensorflow as tf
+</span></span><span class="line"><span class="cl">print(f&#34;Tensor Flow Version: {tf.__version__}&#34;)
+</span></span><span class="line"><span class="cl">gpu = len(tf.config.list_physical_devices(&#39;GPU&#39;))&gt;0
+</span></span><span class="line"><span class="cl">print(&#34;GPU is&#34;, &#34;available&#34; if gpu else &#34;NOT AVAILABLE&#34;)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>成功后会得到下面的输出</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Tensor Flow Version: 2.14.1
+</span></span><span class="line"><span class="cl">Scikit-Learn 1.5.0
+</span></span><span class="line"><span class="cl">SciPy 1.13.1
+</span></span><span class="line"><span class="cl">GPU is available
+</span></span></code></pre></td></tr></table>
+</div>
+</div>]]></content:encoded>
+    </item>
+    <item>
+      <title>算子融合</title>
+      <link>http://localhost:1313/zh/posts/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</link>
+      <pubDate>Fri, 17 May 2024 22:58:36 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</guid>
+      <description>&lt;h2 id=&#34;什么是算子融合&#34;&gt;什么是算子融合&lt;/h2&gt;
+&lt;p&gt;算子融合是一种通过合并计算图中多个算子到一个算子，达到减少计算量和内存访问的优化方法。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Conv + BatchNormalization + ReLu融合&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- {% asset_img conv_bn_relu.png %} --&gt;
+&lt;img src=&#34;http://localhost:1313/images/2024-05-17-conv_bn_relu.png&#34;/&gt;
+&lt;p&gt;从融合后的最终公式可以看出，可以在初始阶段就通过BN的均值和方差（推理阶段BN的均值和方差是常量）更新Conv层的weights和bias参数，这样融合后的算子相当少了一个BN层的操作，既减少了内存访问，也减少了计算量&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<h2 id="什么是算子融合">什么是算子融合</h2>
+<p>算子融合是一种通过合并计算图中多个算子到一个算子，达到减少计算量和内存访问的优化方法。</p>
+<ul>
+<li>Conv + BatchNormalization + ReLu融合</li>
+</ul>
+<!-- {% asset_img conv_bn_relu.png %} -->
+<img src="/images/2024-05-17-conv_bn_relu.png"/>
+<p>从融合后的最终公式可以看出，可以在初始阶段就通过BN的均值和方差（推理阶段BN的均值和方差是常量）更新Conv层的weights和bias参数，这样融合后的算子相当少了一个BN层的操作，既减少了内存访问，也减少了计算量</p>
+<h2 id="如何做算子融合">如何做算子融合</h2>
+<h3 id="算子分类">算子分类</h3>
+<!-- {% asset_img operator_category.png %} -->
+<img src="/images/2024-05-17-conv_bn_relu.png"/>
+<p>当存在多个输入，同时存在多种输入-输出映射关系时，最终的Mapping type由最复杂的那一个决定。Mapping type复杂度递增顺序：One-to-One，Reorganize，Shuffle，One-to-Many，Many-to-Many
+注：Many-to-Many包含Many-to-One的类型</p>
+<h3 id="算子可融合性">算子可融合性</h3>
+<!-- {% asset_img fusion_ability.png %} -->
+<img src="/images/2024-05-17-fusion_ability.png"/>
+<p>绿色：可以融合，且有收益
+黄色：要做profile才能确定是否有收益
+红色：没有收益，不融合</p>
+<h3 id="计算图基于融合性分块">计算图基于融合性分块</h3>
+<!-- {% asset_img graph_partition.png %} -->
+<img src="/images/2024-05-17-graph_partition.png"/>
+<p>分块过程：</p>
+<ol>
+<li>随机挑选一个One-to-One 算子节点做为种子节点</li>
+<li>从种子节点往后进行融合，直到没有可以融合的节点，并更新块的Mapping Type</li>
+<li>从种子节点往前进行融合，直到没有可以融合的节点，并更新块的Mapping Type</li>
+<li>重复执行1、2、3，直到没有可用的种子节点</li>
+</ol>
+<h3 id="融合代码生成">融合代码生成</h3>
+<p>基于编译生成融合代码（DNNFusion、TVM）</p>
+<!-- {% asset_img code_gen.png %} -->
+<img src="/images/2024-05-17-code_gen.png"/>
+<p>参考</p>
+<ol>
+<li><a href="https://dl.acm.org/doi/10.1145/3453483.3454083">DNNFusion: accelerating deep neural networks execution with advanced operator fusion</a></li>
+</ol>]]></content:encoded>
+    </item>
+    <item>
+      <title>Android中几种sdkVersion的区别</title>
+      <link>http://localhost:1313/zh/posts/2022-08-24-android%E4%B8%AD%E5%87%A0%E7%A7%8Dsdkversion%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Sat, 24 Sep 2022 17:03:48 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/2022-08-24-android%E4%B8%AD%E5%87%A0%E7%A7%8Dsdkversion%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <description>&lt;h1 id=&#34;android中几种sdkversion的区别&#34;&gt;Android中几种sdkVersion的区别&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;最近遇到一个由于升级了targetSdkVersion而引起的线上crash，之前一直对于Android里面几个sdkVersion的含义和作用很模糊，正好这次把这几个不同的sdkVersion理清楚。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;!-- {% asset_img 001.png %} --&gt;
+&lt;img src=&#34;http://localhost:1313/images/2022-08-24-001.png&#34;/&gt;</description>
+      <content:encoded><![CDATA[<h1 id="android中几种sdkversion的区别">Android中几种sdkVersion的区别</h1>
+<blockquote>
+<p>最近遇到一个由于升级了targetSdkVersion而引起的线上crash，之前一直对于Android里面几个sdkVersion的含义和作用很模糊，正好这次把这几个不同的sdkVersion理清楚。</p>
+</blockquote>
+<!-- {% asset_img 001.png %} -->
+<img src="/images/2022-08-24-001.png"/>
+<ul>
+<li><strong>minSdkVersion</strong></li>
+</ul>
+<p>用于指定应用运行所需最低API级别的整数。如果系统的API级别低于属性中指定的值，Android系统将阻止用户安装应用。</p>
+<ul>
+<li><strong>compileSdkVersion</strong></li>
+</ul>
+<p>compileSdkVersion只是用来告诉Gradle用哪个Android SDK版本编译你的应用，当使用到新添加的API时就需要使用对应Level的Android SDK。这里需要强调的是，compileSdkVersion只会影响编译的时候，例如，当前我们想使用Android 12一个新的API功能，这时我们就需要将compileSdkVersion升级到31</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">android {
+</span></span><span class="line"><span class="cl">    compileSdkVersion 31
+</span></span><span class="line"><span class="cl">    ...
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但是这里我们指定了compileSdkVersion到新版本只是让APP编译可以通过，因为在旧的Android系统上还没有使用的新的API，因此在实际代码中还需要对运行时的系统API级别进行判断，保证使用的新API只会在Android12以上的系统运行。</p>
+<ul>
+<li><strong>targetSdkVersion</strong></li>
+</ul>
+<p>要理解targetSdkVersion，需要知道targetSdkVersion在Android中的作用。targetSdkVersion是Android系统提供向后兼容的主要手段（即：新版本SDK手机兼容旧版本SDK工程）。这是什么意思呢？随着 Android 系统的升级，某个系统的 API 或者模块的行为可能会发生改变，但是为了保证老 APK 的行为还是和以前兼容。只要 APK 的 targetSdkVersion 不变，即使这个 APK 安装在新 Android 系统上，其行为还是保持老的系统上的行为，这样就保证了系统对老应用的前向兼容性。
+总结： android更新api大概有两种，一种是完全重写（这种就不干targetSdk什么事了）；另一种，保留了老版本的处理逻辑，同时又新增了新的逻辑（用if else的方式来判断具体运行哪段逻辑）。而targetSdk就是用来判断这个if-else的。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>QMF分析综合滤波器</title>
+      <link>http://localhost:1313/zh/posts/2022-02-03-qmf%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/</link>
+      <pubDate>Thu, 03 Feb 2022 11:35:16 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/2022-02-03-qmf%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/</guid>
+      <description>&lt;h1 id=&#34;分析综合滤波器组的作用&#34;&gt;分析综合滤波器组的作用&lt;/h1&gt;
+&lt;p&gt;由于音频信号在不同的频率范围具有不同的特性，因此在音频处理之前通常都会使用分析综合滤波器组将音频信号分成不同的频率子带，再分别进行处理。比如，音频编码中常用到的子带编码（Subband coding）；webrtc的VAD中，会对不同的频率子带计算特征，再综合这些特征计算语音概率。&lt;/p&gt;
+&lt;!-- {% asset_img 001.png %} --&gt;
+&lt;img src=&#34;http://localhost:1313/images/2022-02-03-001.png&#34;/&gt;</description>
+      <content:encoded><![CDATA[<h1 id="分析综合滤波器组的作用">分析综合滤波器组的作用</h1>
+<p>由于音频信号在不同的频率范围具有不同的特性，因此在音频处理之前通常都会使用分析综合滤波器组将音频信号分成不同的频率子带，再分别进行处理。比如，音频编码中常用到的子带编码（Subband coding）；webrtc的VAD中，会对不同的频率子带计算特征，再综合这些特征计算语音概率。</p>
+<!-- {% asset_img 001.png %} -->
+<img src="/images/2022-02-03-001.png"/>
+<h1 id="分析综合滤波器组是如何实现">分析综合滤波器组是如何实现</h1>
+<p>在WebRTC中使用最多的是基于IIR实现的二通道QMF分析综合滤波器组，通过二通道QMF滤波器组，可以很方便实现N等分的子带分解，因此这里只介绍二通道QMF滤波器组。</p>
+<!-- {% asset_img 002.png %} -->
+<img src="/images/2022-02-03-002.png"/>
+<p>从上图可以看出，分析综合滤波器包含分析部分和综合部分，当中间没有任何处理时，整个系统的输入输出关系如下：</p>
+<!-- {% asset_img 008.png %} -->
+<img src="/images/2022-02-03-008.png"/>
+<!-- {% asset_img 003.png %} -->
+<img src="/images/2022-02-03-003.png"/>
+<p>可以看到分析滤波器部分的高通和低通部分的频率响应网线正好是相对pi/2镜像对称的，QMF叫镜像滤波器的由来。图中Xa0代表的就是输入信号的低频部分，而Xa1代表的就是输入信号的高频部分，这样通过分析滤波器后，就可以对信号的低频部分和高频部分进行分别处理了。</p>
+<!-- {% asset_img 004.png %} -->
+<img src="/images/2022-02-03-004.png"/>
+因此只要按下面的等式进行滤波器设计，就可以让A(z)=0，即消除混叠，实现完善重构。
+<!-- {% asset_img 005.png %} -->
+<img src="/images/2022-02-03-005.png"/>
+<p>为了效率，通常会采用多相形式实现QMF组，如下图所示，信号处理前都会进行抽取操作，这些实际处理的数据量就减少了，从而提升了执行效率</p>
+<!-- {% asset_img 006.png %} -->
+<img src="/images/2022-02-03-006.png"/>
+<p>在QMF组的多相形式中对应的低通滤波器和高通滤波器如上式所示。
+WebRTC中的实现</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">void</span> <span class="n">WebRtcSpl_AnalysisQMF</span><span class="p">(</span><span class="k">const</span> <span class="n">int16_t</span><span class="o">*</span> <span class="n">in_data</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">in_data_length</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                           <span class="n">int16_t</span><span class="o">*</span> <span class="n">low_band</span><span class="p">,</span> <span class="n">int16_t</span><span class="o">*</span> <span class="n">high_band</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                           <span class="n">int32_t</span><span class="o">*</span> <span class="n">filter_state1</span><span class="p">,</span> <span class="n">int32_t</span><span class="o">*</span> <span class="n">filter_state2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">size_t</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">int16_t</span> <span class="n">k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">int32_t</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">int32_t</span> <span class="n">half_in1</span><span class="p">[</span><span class="n">kMaxBandFrameLength</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">int32_t</span> <span class="n">half_in2</span><span class="p">[</span><span class="n">kMaxBandFrameLength</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">int32_t</span> <span class="n">filter1</span><span class="p">[</span><span class="n">kMaxBandFrameLength</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">int32_t</span> <span class="n">filter2</span><span class="p">[</span><span class="n">kMaxBandFrameLength</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">size_t</span> <span class="n">band_length</span> <span class="o">=</span> <span class="n">in_data_length</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RTC_DCHECK_EQ</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">in_data_length</span> <span class="o">%</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RTC_DCHECK_LE</span><span class="p">(</span><span class="n">band_length</span><span class="p">,</span> <span class="n">kMaxBandFrameLength</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="n">Split</span> <span class="n">even</span> <span class="ow">and</span> <span class="n">odd</span> <span class="n">samples</span><span class="o">.</span> <span class="n">Also</span> <span class="n">shift</span> <span class="n">them</span> <span class="n">to</span> <span class="n">Q10</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">band_length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">,</span> <span class="n">k</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">half_in2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">int32_t</span><span class="p">)</span><span class="n">in_data</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">half_in1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">int32_t</span><span class="p">)</span><span class="n">in_data</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="n">All</span> <span class="k">pass</span> <span class="n">filter</span> <span class="n">even</span> <span class="ow">and</span> <span class="n">odd</span> <span class="n">samples</span><span class="p">,</span> <span class="n">independently</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="n">WebRtcSpl_AllPassQMF</span><span class="p">(</span><span class="n">half_in1</span><span class="p">,</span> <span class="n">band_length</span><span class="p">,</span> <span class="n">filter1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                         <span class="n">WebRtcSpl_kAllPassFilter1</span><span class="p">,</span> <span class="n">filter_state1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">WebRtcSpl_AllPassQMF</span><span class="p">(</span><span class="n">half_in2</span><span class="p">,</span> <span class="n">band_length</span><span class="p">,</span> <span class="n">filter2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                         <span class="n">WebRtcSpl_kAllPassFilter2</span><span class="p">,</span> <span class="n">filter_state2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="n">Take</span> <span class="n">the</span> <span class="n">sum</span> <span class="ow">and</span> <span class="n">difference</span> <span class="n">of</span> <span class="n">filtered</span> <span class="n">version</span> <span class="n">of</span> <span class="n">odd</span> <span class="ow">and</span> <span class="n">even</span>
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="n">branches</span> <span class="n">to</span> <span class="n">get</span> <span class="n">upper</span> <span class="o">&amp;</span> <span class="n">lower</span> <span class="n">band</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">band_length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">filter1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">filter2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1024</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">11</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">low_band</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">WebRtcSpl_SatW32ToW16</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">filter1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">filter2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1024</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">11</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">high_band</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">WebRtcSpl_SatW32ToW16</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面是WebRTC中关于分析滤波器部分的实现，从代码中可以看出WebRTC中的分析综合滤波器是基于全通滤波器的QMF多相实现，其中的全通滤器采用了IIR实现，即其中的P0(z)和P1(z)都是全通滤波器。通过参考[2]我们可以梳理这个问题的处理流程，通过分析QMF分析综合滤波器满足完美重构的条件，可以得到H0、H1、G0、G1之间的关系，同时H0和H1是基于pi/2，因此只需要知道H0，最终转化成H0低通滤波器的设计问题。进一步的由于采用了基于IIR的全通滤波器，因此只需要考虑相位失真问题，最终QMF分析综合滤波器问题转换成了滤波器的相位均衡问题。虽然我们知道了设计QMF分析综合滤波器的原理和思路，但是想设计一个完全可用的滤波器还是很有难度的，下面我们直接看下WebRTC中QMF分析综合滤波器的效果，如下图所示，可以看到对应的低通滤波器和高通滤波器都有很窄的过渡带，整个系统的幅值响应几乎接近0dB的，同时除了pi/2附近的频带都是近似线性相位的。</p>
+<!-- {% asset_img 007.png %} -->
+<img src="/images/2022-02-03-007.png"/>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="n">scipy</span><span class="o">.</span><span class="k">signal</span> <span class="n">as</span> <span class="k">signal</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">numpy</span> <span class="n">as</span> <span class="n">np</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">pyplot</span> <span class="n">as</span> <span class="n">plt</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">control</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">analysis_synthesis_filter</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">filter1_coef</span> <span class="o">=</span> <span class="p">[</span><span class="mf">6418.0</span> <span class="o">/</span> <span class="mf">65536.0</span><span class="p">,</span> <span class="mf">36982.0</span> <span class="o">/</span> <span class="mf">65536.0</span><span class="p">,</span> <span class="mf">57261.0</span> <span class="o">/</span> <span class="mf">65536.0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">filter2_coef</span> <span class="o">=</span> <span class="p">[</span><span class="mf">21333.0</span> <span class="o">/</span> <span class="mf">65536.0</span><span class="p">,</span> <span class="mf">49062.0</span> <span class="o">/</span> <span class="mf">65536.0</span><span class="p">,</span> <span class="mf">63010.0</span> <span class="o">/</span> <span class="mf">65536.0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ha0_0_b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">filter1_coef</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ha0_0_a</span> <span class="o">=</span> <span class="p">[</span><span class="n">filter1_coef</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ha0_1_b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">filter1_coef</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ha0_1_a</span> <span class="o">=</span> <span class="p">[</span><span class="n">filter1_coef</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ha0_2_b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">filter1_coef</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ha0_2_a</span> <span class="o">=</span> <span class="p">[</span><span class="n">filter1_coef</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">ha1_0_b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">filter2_coef</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ha1_0_a</span> <span class="o">=</span> <span class="p">[</span><span class="n">filter2_coef</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ha1_1_b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">filter2_coef</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ha1_1_a</span> <span class="o">=</span> <span class="p">[</span><span class="n">filter2_coef</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ha1_2_b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">filter2_coef</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ha1_2_a</span> <span class="o">=</span> <span class="p">[</span><span class="n">filter2_coef</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">ha0_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">ha0_2_b</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">ha0_1_b</span><span class="p">,</span> <span class="n">ha0_0_b</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ha0_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">ha0_2_a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">ha0_1_a</span><span class="p">,</span> <span class="n">ha0_0_a</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ha1_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">ha1_2_b</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">ha1_1_b</span><span class="p">,</span> <span class="n">ha1_0_b</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ha1_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">ha1_2_a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">ha1_1_a</span><span class="p">,</span> <span class="n">ha1_0_a</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">ha0_sys</span> <span class="o">=</span> <span class="n">control</span><span class="o">.</span><span class="n">TransferFunction</span><span class="p">(</span><span class="n">ha0_b</span><span class="p">,</span> <span class="n">ha0_a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ha1_sys</span> <span class="o">=</span> <span class="n">control</span><span class="o">.</span><span class="n">TransferFunction</span><span class="p">(</span><span class="n">ha1_b</span><span class="p">,</span> <span class="n">ha1_a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">b0_sys</span> <span class="o">=</span> <span class="n">ha1_sys</span>
+</span></span><span class="line"><span class="cl">    <span class="n">b1_sys</span> <span class="o">=</span> <span class="n">ha0_sys</span>
+</span></span><span class="line"><span class="cl">    <span class="n">delay_sys</span> <span class="o">=</span> <span class="n">control</span><span class="o">.</span><span class="n">TransferFunction</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">lowpass_sys</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">ha0_sys</span> <span class="o">+</span> <span class="n">ha1_sys</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">highpass_sys</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">ha0_sys</span> <span class="o">-</span> <span class="n">ha1_sys</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t_sys</span> <span class="o">=</span> <span class="n">delay_sys</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">ha0_sys</span> <span class="o">*</span> <span class="n">b0_sys</span> <span class="o">+</span> <span class="n">ha1_sys</span> <span class="o">*</span> <span class="n">b1_sys</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># print(t_sys)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lowpass_num</span> <span class="o">=</span> <span class="n">lowpass_sys</span><span class="o">.</span><span class="n">num</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lowpass_den</span> <span class="o">=</span> <span class="n">lowpass_sys</span><span class="o">.</span><span class="n">den</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">highpass_num</span> <span class="o">=</span> <span class="n">highpass_sys</span><span class="o">.</span><span class="n">num</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">highpass_den</span> <span class="o">=</span> <span class="n">highpass_sys</span><span class="o">.</span><span class="n">den</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t_num</span> <span class="o">=</span> <span class="n">t_sys</span><span class="o">.</span><span class="n">num</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t_den</span> <span class="o">=</span> <span class="n">t_sys</span><span class="o">.</span><span class="n">den</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lowpass_w</span><span class="p">,</span> <span class="n">lowpass_h</span> <span class="o">=</span> <span class="k">signal</span><span class="o">.</span><span class="n">freqz</span><span class="p">(</span><span class="n">lowpass_num</span><span class="p">,</span> <span class="n">lowpass_den</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">highpass_w</span><span class="p">,</span> <span class="n">highpass_h</span> <span class="o">=</span> <span class="k">signal</span><span class="o">.</span><span class="n">freqz</span><span class="p">(</span><span class="n">highpass_num</span><span class="p">,</span> <span class="n">highpass_den</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t_w</span><span class="p">,</span> <span class="n">t_h</span> <span class="o">=</span> <span class="k">signal</span><span class="o">.</span><span class="n">freqz</span><span class="p">(</span><span class="n">t_num</span><span class="p">,</span> <span class="n">t_den</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lowpass_w</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">20</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">lowpass_h</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lowpass_w</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">lowpass_h</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="n">True</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">highpass_w</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">20</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">highpass_h</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">highpass_w</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">highpass_h</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="n">True</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_w</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">20</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">t_h</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_w</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">t_h</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="n">True</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="最近的一些心得">最近的一些心得</h1>
+<p>最后说下近期的两点小心得：</p>
+<ol>
+<li>不懂的知识点请尽早弄懂它。其实对于QMF分析综合滤波器组，在最开始学习音频编码时就遇到了，但是当时没有深入的去搞清楚，最后还是没有躲过去。所以最近也是恶补了很多基础知识，才大致了解了QMF的设计思路。</li>
+<li>不断地输出也许是应对焦虑的一种方法。人到中年难免焦虑，就不停地去学习去吸收，但是往往又是很低效的，时间花了，却什么也没有留下。特别是现在这个信息爆炸的时代，各种信息流，碎片化阅读，让我们看起来收获了很多，其实什么也没有。其实我们要对自己是几平米的房子有基本的认知，小房子就应该放少的、小的东西，定期对房间进行整理，永远保持一定的空间的留白，才会有喘息和美的余地。</li>
+</ol>
+<h1 id="参考">参考</h1>
+<ol>
+<li>Book:《数字信号处理：理论、算法与应用》</li>
+<li>Paper: 具有良好重建特性的正交镜像IIR滤波器组的设计新方法</li>
+<li>Paper: IIR QMF-bank design for speech and audio subband coding</li>
+<li>Blog: WebRTC VAD 中所用滤波器之分析_book_bbyuan的博客-CSDN博客</li>
+</ol>]]></content:encoded>
+    </item>
+    <item>
+      <title>WebRTC中的音频处理概览</title>
+      <link>http://localhost:1313/zh/posts/2021-12-22-webrtc%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/</link>
+      <pubDate>Sat, 22 Jan 2022 10:53:15 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/2021-12-22-webrtc%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/</guid>
+      <description>&lt;!-- {% asset_img 001.png %} --&gt;
+&lt;img src=&#34;http://localhost:1313/images/2021-12-22-001.png&#34;/&gt;
+&lt;p&gt;WebRTC由音频引擎、视频引擎和传输模块，音频处理在WebRTC占了很大一块，本文主要对WebRTC中涉及的音频处理进行简单介绍，不会对具体的实现进行介绍。上图是WebRTC中音频处理的流水线（上面的图是网上的图，如有侵权，通知即删），可以看出主要包含了音频采集播放、音频处理、音频编解码和音频传输。下面对这些模块逐一进行介绍。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<!-- {% asset_img 001.png %} -->
+<img src="/images/2021-12-22-001.png"/>
+<p>WebRTC由音频引擎、视频引擎和传输模块，音频处理在WebRTC占了很大一块，本文主要对WebRTC中涉及的音频处理进行简单介绍，不会对具体的实现进行介绍。上图是WebRTC中音频处理的流水线（上面的图是网上的图，如有侵权，通知即删），可以看出主要包含了音频采集播放、音频处理、音频编解码和音频传输。下面对这些模块逐一进行介绍。</p>
+<h1 id="音频采集播放">音频采集播放</h1>
+<p>自然界的声音，包括人说出来的声音，都是模拟信号，这些模拟信号是不能被计算机存储和识别的，也不能通过网络进行传输。音频采集就是声音从模拟信号转换成数字信号的过程，而音频播放就是声音从数字信号转换成模拟信号的过程。对于音频数字信号来说有以下几个最主要的参数：</p>
+<ol>
+<li>采样率
+采样率是指录音设备在一秒钟内对声音信号的采样次数，单位是Hz，采样频率越高，声音的还原度越真实越自然。但是人耳可以听到的频度范围是20Hz~20000Hz，然后根据采样定理，也就是说最低只需要40kHz采样率就可以满足人耳的需求了，因此CD音质和音乐音频都是44.1kHz。但是采样率越高意味着数据量越大，因此在一些特殊的场景会使用更低的采样率，如语音通话场景，因为人声都是低于4kHz，因此在语音通话场景更多会使用8kHz或者16kHz的采样率。</li>
+</ol>
+<!-- {% asset_img 002.png %} -->
+<img src="/images/2021-12-22-002.png"/>
+<ol start="2">
+<li>采样位宽
+声音模拟信号经过采样后得一个个样点的值，这个值需要存储到计算机中，那么使用多少位数来表示这个 就是采样位宽，通常使用最多的是16bit，正好就是一个short类型。</li>
+<li>声道数
+在使用录音设备进行声音采集时，只能表示到采集点处的声音信号，但是实际声音是有空间信息，为了表达声音的空间信息，就有了声道的概念。这里最有名的可能就是杜比全景声了，大家在电影院看电影的时候，感受到的被声音包围的真实感就是多声道的功劳了，当然这里并不是加多几个通道这么简单啦。</li>
+</ol>
+<!-- {% asset_img 003.png %} -->
+<img src="/images/2021-12-22-003.png"/>
+<h1 id="音频编解码">音频编解码</h1>
+<p>虽然音频的数据量没有视频的量那么大，但是如果直接传输原始的音频数据（原始的音频数据有个名字叫Pulse Code Modulation (PCM)），数据量也是挺大的。现在我们来计算下1秒采样率为48kHz双通道的音频信号的数据量有多大，1秒 * 48000个采样点 * 2个声道 * 每个样点2Bytes，这样1秒的数据量是192kB字节。这样的数据量在互联网发展的早期也是不可以接受的，这时候就需要音频编解码。简单的说，音频编解码就是利用人耳的心理声学特性将也一些不影响听觉的信号丢弃，从而减少信号量的方法，在WebRTC中用得最多的是Opus格式。对于音频编码器来说一个很重要的参数是码率，单位是kbps，即每秒的音频使用多少bits位来表示。音频编解码是音频领域一个很专业的领域，这里就不展开了。</p>
+<h1 id="音频处理">音频处理</h1>
+<p>在实时通话场景，需要面对各种复杂的环境，处理各种音频问题，最常见的如噪声、回声、声音过大过小等，WebRTC中有一个专门的音频处理模块来处理这些问题，下面就简单介绍下这些模块。</p>
+<ol>
+<li>回声消除（Acoustic Echo Cancellation）
+实际通话场景是一个全双工通信系统非容易产生回声，如下图所示，远端说话声==》近端扬声器播放==》近端麦克风录制==》通过网络传输到远端的扬声器播放，经过这样一个音频环路后，远端又在扬声器里听到自己的声音，也就是回声，如果回声的延时很低时还会产生啸叫，这样是很影响通话体验的。这时就需要回声消除AEC模块了，通常录音数据都会先经过个模块，在传输前先把远端播放的数据消除，这样远端在播放的时候就不会听到回声了。回声消除AEC详细的原理介绍留到后面再介绍，这里先挖个坑。</li>
+</ol>
+<!-- {% asset_img 004.png %} -->
+<img src="/images/2021-12-22-004.png"/>
+<ol start="2">
+<li>噪声抑制（Noise Suppression）
+噪声抑制NS这个很好理解，实际的通话场景都会存在各种各样的噪声，为了保证通话体验不受影响，这时就需要噪声抑制NS模块了。这里也再挖一坑，后面再根据WebRTC源码进行噪声抑制原理介绍。</li>
+<li>自动增益控制（Auto Gain Control）
+在实际通话过程中，由于使用设备的差异和通话时离麦克风的远近，导致了通话的音量差异，为了达到统一的体验就需要进行自动增益控制，简单说就是当音量小时调大增益，当音量大时调小增益，达到减少音量起伏的作用。</li>
+<li>混音（Mix）
+在多人通话场景下，我们需要接收和播放的通常不止一条音频流，但通常只有一个播放设备，因此通常需要对多条音频流先进行混音操作，再进行播放。</li>
+</ol>
+<h1 id="音频传输">音频传输</h1>
+<p>目前WebRTC音频传输是UDP/RTP/RTCP协议基础上进行传输的，底层UDP协议的不可靠性，导致丢包不可避免，同时音频数据与其它的数据内容有其特殊性，通常一点音频异常都很容易被人感知出来。因此WebRTC针对音频传输做了很多额外的工作，除了最常见的丢包重传，丢包补偿等，还有一个NetEQ模块，会在播放端进行音频播放的加减速来进一步减少由于网络抖动引起的音频异常。</p>
+<!-- {% asset_img 005.png %} -->
+<img src="/images/2021-12-22-005.png"/>
+<p>到这里WebRTC中跟音频相关的技术模块都简单的过了一遍，这样大家对于WebRTC音频处理有个大概的印象，这里的每个模块值得深入去学习，后面也把自己学习的一些心得记录在这里，大家一起学习呀。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>WebRTC系列-WebRTC_Android源码编译</title>
+      <link>http://localhost:1313/zh/posts/2020-09-07-webrtc-android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/</link>
+      <pubDate>Mon, 07 Sep 2020 23:19:37 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/2020-09-07-webrtc-android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/</guid>
+      <description>&lt;h1 id=&#34;webrtc-android源码编译&#34;&gt;WebRTC Android源码编译&lt;/h1&gt;
+&lt;p&gt;对于WebRTC的学习来说，首先需要搞定的是源码的编译，由于国内的特殊环境和WebRTC本身的复杂性，导致WebRTC源码编译成了WebRTC学习的第一道门槛。这里把自己在编译WebRTC源码过程中遇到的一些坑进行总结分享，希望对大家有帮助。主要参考官网和WebRTC的编译配置脚本，整个操作过程需要具备科学上学的环境，第一次下载好环境和源码后，后面就不需要了。这里以Android端为例，编译环境为Ubuntu 18.04（再高版本会提示不支持），WebRTC官网有提到Android端暂时只支持在Linux下编译。虽然网上也有资源介绍在Mac环境下编译的，但是用虚拟机装个Ubuntu还是挺方便的，咱就不折腾了。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<h1 id="webrtc-android源码编译">WebRTC Android源码编译</h1>
+<p>对于WebRTC的学习来说，首先需要搞定的是源码的编译，由于国内的特殊环境和WebRTC本身的复杂性，导致WebRTC源码编译成了WebRTC学习的第一道门槛。这里把自己在编译WebRTC源码过程中遇到的一些坑进行总结分享，希望对大家有帮助。主要参考官网和WebRTC的编译配置脚本，整个操作过程需要具备科学上学的环境，第一次下载好环境和源码后，后面就不需要了。这里以Android端为例，编译环境为Ubuntu 18.04（再高版本会提示不支持），WebRTC官网有提到Android端暂时只支持在Linux下编译。虽然网上也有资源介绍在Mac环境下编译的，但是用虚拟机装个Ubuntu还是挺方便的，咱就不折腾了。</p>
+<h1 id="安装depots_tools工具包">安装depots_tools工具包</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将depot_tools目录添加到环境变量PATH中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim ~/.profile
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$PATH</span><span class="s2">:/path/to/depot_tools&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">source</span> ~/.profile
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="下载webrtc源码">下载WebRTC源码</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">fetch --nohooks webrtc_android
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>由于WebRTC源码比较大，中间网络问题可能会出错，出错的时候用gclient sync继续就可以了</p>
+</blockquote>
+<h1 id="下载编译所需依赖包和工具">下载编译所需依赖包和工具</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./build/install-build-deps.sh --no-chromeos-fonts
+</span></span><span class="line"><span class="cl">. /build/install-build-deps-android.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="下载指定分支">下载指定分支</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git checkout -b my_branch refs/remotes/branch-heads/83
+</span></span><span class="line"><span class="cl">$ gclient sync
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="源码编译">源码编译</h1>
+<p>第一条命令是生成编译工程的，可以添加一些参数来控制编译生成，这里可以研究下源码里的webrtc.gni文件，里面有可以指定的参数，这里主要介绍三个：</p>
+<blockquote>
+<p>target_os：因为是在Android平台上运行的，因此这里指定为&quot;android&quot;
+target_cpu: 这里指定运行的硬件平台，arm平台则是&quot;arm&quot;，如果是arm64平台则是&quot;arm64&quot;
+is_debug：表示生成是否是debug包</p>
+</blockquote>
+<p>第二条命令是启动ninja开始编译，编译成功后，会在out_arm/debug目录生成对应的jar包和so库文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gn gen out_arm/debug --args<span class="o">=</span><span class="s1">&#39;is_debug=true target_os=&#34;android&#34; target_cpu=&#34;arm&#34; rtc_include_tests=false rtc_build_tools=false rtc_build_examples=false&#39;</span>
+</span></span><span class="line"><span class="cl">ninja -C out_arm/debug
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="编译问题解决">编译问题解决</h1>
+<ul>
+<li>问题一：gn.py运行失败</li>
+</ul>
+<blockquote>
+<p>gn.py: Could not find checkout in any parent of the current path.
+This must be run inside a checkout.</p>
+</blockquote>
+<p>这个问题通常发生在，移动了WebRTC源码目录的时候。这里需要看下是否已经把下载的WebRTC源码都完整拷贝了，进到下载WebRTC源码的目录可以看到这个目录还有几个隐藏目录和文件，这几个文件也是需要一起拷贝过去的，后面用gn命令生成编译工程的时候会去检查这几个文件。</p>
+<blockquote>
+<p>.cipd
+.gclient
+.gclient_entries</p>
+</blockquote>
+<ul>
+<li>问题二：</li>
+</ul>
+<p>chromium style问题
+clang.gni中关闭chromium style检查，这里只是暂时关闭，为了代码风格的统一介绍还是按照chromium style还添加自己的代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">declare_args() {
+</span></span><span class="line"><span class="cl">  # Indicates if the build should use the Chrome-specific plugins for enforcing
+</span></span><span class="line"><span class="cl">  # coding guidelines, etc. Only used when compiling with Clang.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  clang_use_chrome_plugins = false # is_clang &amp;&amp; !is_nacl &amp;&amp; !use_xcode_clang
+</span></span><span class="line"><span class="cl">  clang_base_path = default_clang_base_path
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>参考：</p>
+<ol>
+<li><a href="https://webrtc.github.io/webrtc-org/native-code/development/">WebRTC官网</a></li>
+</ol>]]></content:encoded>
+    </item>
+    <item>
+      <title>github.io博客无法访问问题</title>
+      <link>http://localhost:1313/zh/posts/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Sat, 25 Apr 2020 09:34:29 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/</guid>
+      <description>&lt;h3 id=&#34;问题描述&#34;&gt;问题描述&lt;/h3&gt;
+&lt;p&gt;原来的github.io自定义域名博客不能访问，提示如下信息&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Fastly error: unknown domain: beyoung.xyz. Please check that this domain has been added to a service.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Details: cache-lax8629-LAX
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+      <content:encoded><![CDATA[<h3 id="问题描述">问题描述</h3>
+<p>原来的github.io自定义域名博客不能访问，提示如下信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Fastly error: unknown domain: beyoung.xyz. Please check that this domain has been added to a service.
+</span></span><span class="line"><span class="cl">Details: cache-lax8629-LAX
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="问题原因">问题原因</h3>
+<p>Github Pages修改了公布的IP，可以到这个网址查到Github Pages目前公布的最新IP</p>
+<p><a href="https://help.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site">https://help.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site</a></p>
+<h3 id="解决方案">解决方案</h3>
+<p>只需在将原来在阿里云上配置的CNAME，修改到最新的Github Pages上</p>
+<p>在Ping中检验是否已经修改到最新的IP上，如果已经生效，则原来的博客就可以访问了</p>
+<p><img alt="github-page-no-response" loading="lazy" src="https://user-images.githubusercontent.com/3350865/80268313-ba026b00-86d8-11ea-9d96-d92712231823.png"></p>]]></content:encoded>
+    </item>
+    <item>
+      <title>代码优化方法论</title>
+      <link>http://localhost:1313/zh/posts/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/</link>
+      <pubDate>Sun, 04 Aug 2019 10:44:29 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/</guid>
+      <description>&lt;p&gt;&lt;a name=&#34;01ca666c&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;为什么需要代码优化&#34;&gt;为什么需要代码优化&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;提升体验，扩展玩法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418824-63b24f80-b6a5-11e9-9bde-6cd6de0cc6a5.PNG) --&gt;
+&lt;img src=&#34;http://localhost:1313/images/2019-08-04-001.png&#34;/&gt;</description>
+      <content:encoded><![CDATA[<p><a name="01ca666c"></a></p>
+<h2 id="为什么需要代码优化">为什么需要代码优化</h2>
+<ul>
+<li>提升体验，扩展玩法</li>
+</ul>
+<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418824-63b24f80-b6a5-11e9-9bde-6cd6de0cc6a5.PNG) -->
+<img src="/images/2019-08-04-001.png"/>
+<ul>
+<li>减少限制跟要求，降低门槛 ，覆盖更多群体</li>
+</ul>
+<blockquote>
+<p>在谷歌内部，打造AI应用有两条思路，一是让更多人受惠，二是尽可能减少限制和要求</p>
+</blockquote>
+<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418833-90666700-b6a5-11e9-88f9-760391e1fe61.PNG) -->
+<img src="/images/2019-08-04-002.png"/>
+<ul>
+<li>场景限制必须进行优化</li>
+</ul>
+<blockquote>
+<p>个人隐私越来越被重视，以往的云端处理方案存在局限性
+一些场景要求算法要有极低的延时，如实时通信项目</p>
+</blockquote>
+<p><em><strong>Flag终极目标：让算法随手可得</strong></em>
+<a name="6a1p8"></a></p>
+<!---more--->
+<h2 id="传统代码优化">传统代码优化</h2>
+<!-- ![](https://cdn.nlark.com/yuque/0/2019/png/415939/1564710217474-4d6dc083-2132-4a85-af87-a61f6fdfc0d8.png) -->
+<img src="/images/2019-08-04-003.png"/>
+<p><strong>rnnoise优化举例</strong></p>
+<ul>
+<li><strong>函数近似和查表优化sigmoid函数计算</strong>
+<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418848-dae7e380-b6a5-11e9-9ffa-0734de7bcbf4.png) -->
+<img src="/images/2019-08-04-004.png"/>    
+</li>
+</ul>
+<p><img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/62418862-33b77c00-b6a6-11e9-8ecf-2f1388e24ab7.png"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">static</span> <span class="n">OPUS_INLINE</span> <span class="kt">float</span> <span class="nf">tansig_approx</span><span class="p">(</span><span class="kt">float</span> <span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">y</span><span class="p">,</span> <span class="n">dy</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">sign</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Tests are reversed to catch NaNs */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="mi">8</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;-</span><span class="mi">8</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#ifndef FIXED_POINT
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cm">/* Another check in case of -ffast-math */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">celt_isnan</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">       <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">       <span class="n">x</span><span class="o">=-</span><span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">       <span class="n">sign</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nf">floor</span><span class="p">(</span><span class="mf">.5f</span><span class="o">+</span><span class="mi">25</span><span class="o">*</span><span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">-=</span> <span class="mf">.04f</span><span class="o">*</span><span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y</span> <span class="o">=</span> <span class="n">tansig_table</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dy</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">dy</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y</span><span class="o">*</span><span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">sign</span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="n">OPUS_INLINE</span> <span class="kt">float</span> <span class="nf">sigmoid_approx</span><span class="p">(</span><span class="kt">float</span> <span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="mf">.5</span> <span class="o">+</span> <span class="mf">.5</span><span class="o">*</span><span class="nf">tansig_approx</span><span class="p">(</span><span class="mf">.5</span><span class="o">*</span><span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>最粗暴的函数近似方法：</strong><br /></p>
+<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418851-edfab380-b6a5-11e9-8e3f-75a65d5656c7.png) -->
+<img src="/images/2019-08-04-005.png"/>
+<br />    
+ <!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418868-619cc080-b6a6-11e9-8fa1-67751a95dc11.png) -->
+<img src="/images/2019-08-04-006.png"/>
+```
+atan(pi*x/2)*2/pi   24.1 ns
+atan(x)             23.0 ns
+1/(1+exp(-x))       20.4 ns
+1/sqrt(1+x^2)       13.4 ns
+erf(sqrt(pi)*x/2)    6.7 ns
+tanh(x)              5.5 ns
+x/(1+|x|)            5.5 ns
+```
+<ul>
+<li><strong>减少程序跳转优化RNN计算</strong></li>
+</ul>
+<p>CPU多级Cache机制 <br>
+<br /></p>
+<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418870-6feadc80-b6a6-11e9-977e-8aad80618706.png) -->
+<img src="/images/2019-08-04-007.png"/>
+<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418871-78431780-b6a6-11e9-91fe-5b034731dc05.png) -->
+<img src="/images/2019-08-04-008.png"/>
+<a name="6441fc2a"></a>
+<h2 id="深度学习移动端优化">深度学习移动端优化</h2>
+<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418875-9741a980-b6a6-11e9-8708-accea0d5a08c.png) -->
+<img src="/images/2019-08-04-009.png"/>
+<h3 id="网络剪枝">网络剪枝</h3>
+<ul>
+<li><strong>网络的参数都存在冗余的，所以可以进行网络剪枝</strong></li>
+</ul>
+<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418876-ad4f6a00-b6a6-11e9-849d-3df81cb40be5.png) -->
+<img src="/images/2019-08-04-010.png"/>
+<ul>
+<li><strong>网络剪枝的流程</strong>
+权值的重要性：计算L1或者L2<br />神经元的重要性：不为零的次数
+<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418880-be987680-b6a6-11e9-972d-d921aebc6ef0.png) -->
+<img src="/images/2019-08-04-011.png"/>
+</li>
+<li><strong>剪权值VS剪神经元</strong></li>
+</ul>
+<p><img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/62418882-ceb05600-b6a6-11e9-86f1-cce3ce5f093e.png#align=left&display=inline&height=223&name=image.png&originHeight=398&originWidth=436&size=39885&status=done&width=244"><br />剪权值                                                                           剪神经元<br />             <img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/62418885-e091f900-b6a6-11e9-9cec-a63afc827b12.png#align=left&display=inline&height=214&name=image.png&originHeight=381&originWidth=414&size=28847&status=done&width=233">                                  <img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/62418889-eab3f780-b6a6-11e9-9820-0de73ee3f997.png#align=left&display=inline&height=209&name=image.png&originHeight=381&originWidth=425&size=35671&status=done&width=233"><br /><em>剪权值：模型不规则，不便于实现和加速</em><br /><em>剪神经元：模型规则，便于实现和加速</em></p>
+<p><a name="iaztJ"></a></p>
+<h3 id="精简模型设计">精简模型设计</h3>
+<ul>
+<li><strong>标准CNN</strong></li>
+</ul>
+<p><img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/77837266-c8bd3700-7199-11ea-9d28-95222493a1ed.png#align=left&display=inline&height=448&name=image.png&originHeight=766&originWidth=981&size=39311&status=done&width=574"></p>
+<ul>
+<li><strong>深度分离卷积Depthwise Separable Convolution 【参见MobileNet】</strong></li>
+</ul>
+<p><img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/77837270-d2df3580-7199-11ea-9b2b-704966a3c19d.png#align=left&display=inline&height=438&name=image.png&originHeight=739&originWidth=1042&size=49003&status=done&width=618"></p>
+<p><img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/77837270-d2df3580-7199-11ea-9b2b-704966a3c19d.png#align=left&display=inline&height=436&name=image.png&originHeight=777&originWidth=1016&size=53791&status=done&width=570"></p>
+<ul>
+<li><strong>参数比较</strong></li>
+</ul>
+<p><img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/77837275-e094bb00-7199-11ea-933e-265825830d3b.png#align=left&display=inline&height=425&name=image.png&originHeight=782&originWidth=1061&size=115587&status=done&width=576"></p>
+<p><a name="a465ce02"></a></p>
+<h2 id="四深度学习移动端部署工具">四、深度学习移动端部署工具</h2>
+<p>      与PC端深度学习环境被大厂垄断不同，移动端的部署工具可以说是百家争鸣，很多深度学习的厂商都会推出自家的推理加速工具。
+<a name="10665c4b"></a></p>
+<h4 id="41-硬件厂商">4.1 硬件厂商</h4>
+<table>
+  <thead>
+      <tr>
+          <th>公司</th>
+          <th>硬件架构</th>
+          <th>开发工具</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>海思</td>
+          <td>NPU</td>
+          <td><a href="https://developer.huawei.com/consumer/cn/hiai">HiAI Foundation</a></td>
+      </tr>
+      <tr>
+          <td>高通</td>
+          <td>CPU/GPU/DSP</td>
+          <td><a href="https://developer.qualcomm.com/docs/snpe/index.html">Snapdragon Neural Processing Engine SDK</a></td>
+      </tr>
+      <tr>
+          <td>Apple</td>
+          <td>CPU/GPU/NeualEngine</td>
+          <td><a href="https://developer.apple.com/machine-learning/">CoreML</a></td>
+      </tr>
+      <tr>
+          <td>ARM</td>
+          <td>CPU/GPU</td>
+          <td><a href="https://github.com/ARM-software/armnn">ARM NN SDK</a></td>
+      </tr>
+      <tr>
+          <td>MediaTek</td>
+          <td>CPU/GPU/APU</td>
+          <td>NeuroPilot SDK</td>
+      </tr>
+  </tbody>
+</table>
+<p><a name="ca557462"></a></p>
+<h4 id="42-软件厂商">4.2 软件厂商</h4>
+<table>
+  <thead>
+      <tr>
+          <th>工具</th>
+          <th>公司</th>
+          <th>系统支持情况</th>
+          <th>特点</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><a href="">TensorFlow Lite</a></td>
+          <td>Google</td>
+          <td>Android/IOS</td>
+          <td>Android结合比较密，支持GPU加速</td>
+      </tr>
+      <tr>
+          <td><a href="">CoreML</a></td>
+          <td>Apple</td>
+          <td>IOS</td>
+          <td>软件硬件结合紧密，更新快</td>
+      </tr>
+      <tr>
+          <td><a href="">Caffe2</a></td>
+          <td>Facebook</td>
+          <td>Android/IOS</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><a href="">NCNN</a></td>
+          <td>Tencent</td>
+          <td>Android/IOS</td>
+          <td>支持大部分CNN网络，<strong>已经落地的应用多</strong></td>
+      </tr>
+      <tr>
+          <td><a href="https://github.com/XiaoMi/mace">MACE</a></td>
+          <td>小米</td>
+          <td>Android</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><a href="">MNN</a></td>
+          <td>阿里</td>
+          <td>Android/IOS</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>利用Caffe2进行手写数字识别在Android端的部署</li>
+</ul>
+<p><img alt="mnist_cnn_demo.gif" loading="lazy" src="https://cdn.nlark.com/yuque/0/2019/gif/415939/1564675047982-2a1b1c17-a309-4cc4-9c83-90cf7617a79b.gif#align=left&display=inline&height=393&name=mnist_cnn_demo.gif&originHeight=1280&originWidth=720&size=728880&status=done&width=221">
+<a name="b84c764d"></a></p>
+<h2 id="五参考">五、参考</h2>
+<ul>
+<li>[Paper] <a href="https://arxiv.org/abs/1710.09282">A Survey of Model Compression and Acceleration</a><br /><a href="https://arxiv.org/abs/1710.09282">
+for Deep Neural Networks</a></li>
+<li>[Book] <a href="http://lamda.nju.edu.cn/weixs/book/CNN_book.html">解析卷积神经网络&ndash;深度学习实践手册</a></li>
+<li>[Video] <a href="https://www.bilibili.com/video/av19001663?from=search&amp;seid=3363657589379253237">Toward Efficient Deep Neural Network Deployment: Deep Compression and EIE</a></li>
+<li>[Video] <a href="https://www.youtube.com/watch?v=dPp8rCAnU_A&amp;list=PLJV_el3uVTsOK_ZK5L0Iv_EQoL1JefRL4&amp;index=52&amp;t=0s">李宏毅-Network Compression</a></li>
+<li>[Github] <a href="https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch17_%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E3%80%81%E5%8A%A0%E9%80%9F%E5%8F%8A%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%83%A8%E7%BD%B2/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0_%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E3%80%81%E5%8A%A0%E9%80%9F%E5%8F%8A%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%83%A8%E7%BD%B2.md">模型压缩及移动端部署</a></li>
+</ul>]]></content:encoded>
+    </item>
+    <item>
+      <title>算法工程师到底是做什么的</title>
+      <link>http://localhost:1313/zh/posts/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/</link>
+      <pubDate>Sun, 07 Apr 2019 20:20:38 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/</guid>
+      <description>&lt;p&gt;还记得刚毕业那会找工作，那是一定要找法工程师这个岗位，当时就只是觉得这个岗位牛逼是公司的核心岗位，但是可能对于算法工程师与一般的软件工程有什么区别其实心理也说不清楚。作为一个到今年6月份就工作满5年了的老菜鸟，这期间工作的title也是算法工程师（虽然有些并不是真的在做算法），反正在以算法工程师的title在企业工作的感受与毕业那会想像中上的算法工程师的工作完全不一样。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>还记得刚毕业那会找工作，那是一定要找法工程师这个岗位，当时就只是觉得这个岗位牛逼是公司的核心岗位，但是可能对于算法工程师与一般的软件工程有什么区别其实心理也说不清楚。作为一个到今年6月份就工作满5年了的老菜鸟，这期间工作的title也是算法工程师（虽然有些并不是真的在做算法），反正在以算法工程师的title在企业工作的感受与毕业那会想像中上的算法工程师的工作完全不一样。</p>
+<p>我觉得所谓的算法工程师应该叫算法应用工程师会更合适一些。因为算法工程师的工作流程大概是这样的（以我自身的经历为例，可能不同公司有不同的工作方式），接到一个功能需求，然后开始调研实现这个功能需要的算法，研究过程中挑选两三种可能的方案，对这些挑选的方案进行实现（也可能是github clone），分析对比这几种方案。最后从中选出一种方案，作为最后的方案。接下来就是对最终的算法方案针对自己的功能需求和业务场景进行做优化，这期间你会对这个算法方案进行原理研究，参数调整，性能优化等等，最终的目标就是尽可能满足业务需求方的要求。</p>
+<p>知乎上@Jackpop的回答应该是符合大多数算法工程师的实际工作状态，而我们毕业那会想象中的算法工程师，天天手推工式那种，应该叫科学家或者研究员更合适些。<strong>总结一下，我觉得一个优秀的算法工程师应该是能够针对不同的业务场景选择最优的算法方案，并能对现有的算法针对业务场景做一些微调和优化，以更进一步适合业务场景。因为对于企业来说不能落地的算法，是丝毫没有价值的。</strong></p>
+<blockquote>
+<p>以下转载自知乎：https://www.zhihu.com/question/310484101/answer/644079765</p>
+</blockquote>
+<h3 id="算法工程师大致做什么的">算法工程师大致做什么的？</h3>
+<p>算法，对于大多数理工科学生并不陌生。无论是学计算机还是学数学，或者其他理工科，我们都会接触很多成熟、经过十几年甚至几十年考验的算法。
+算法工程师的关键点在“工程师”这三个字，日常所做的工作无非是选择一种或几种成熟、优秀的算法进行组合、验证，来解决特定场景下的问题。在大多数企业里面这一点体现更为明显，**在企业里作为算法工程师是不会创造算法，只是使用经过多年考验的成熟、稳定算法。**其实现在不仅是企业界，就连学术界，创新可用的新算法也是寥寥可数，就拿人工智能常用的优化算法来说：</p>
+<ul>
+<li>随机梯度</li>
+<li>共轭梯度</li>
+<li>牛顿法粒子群</li>
+<li>遗传</li>
+<li>贝叶斯</li>
+<li>进化策略</li>
+</ul>
+<p>这些算法每一个都是经过多年考验的，有的甚至几十年。
+再拿计算机视觉来说：</p>
+<ul>
+<li>R-CNN系列</li>
+<li>yolo系列</li>
+<li>mobilenet</li>
+<li>&hellip;.</li>
+</ul>
+<p>目前大多数机器视觉算法工程师所做的工作基本也是围绕这些成熟的算法做微调，结合特定场景做迁移。**所以，作为算法工程师是不会创造新算法，作为算法工程师日常工作内容无非是根据具体的业务场景，根据自己的知识积累拿出几种成熟、好用的算法提出一个可用的解决方案，去解决业务上的问题。**所以很多答主所说的需要这样那样的知识，我觉得有点夸张了。</p>
+<p>有些答主说需要深入的数学知识，把算法说的神乎其神，作为本硕均为数学系的学生来说，对于日常算法，本科阶段的通识数学知识足够使用了，数学很有价值，但是过于脱离实际，实现难度也比较大，吴恩达在他的教学视频曾提到过共轭梯度法，吴恩达说“共轭梯度法效果不错，但是实现过程复杂，所以人工智能中很少被使用。”共轭梯度法在数学里面已经算是比较基础得了。</p>
+<h3 id="算法工程师需要哪些能力">算法工程师需要哪些能力？</h3>
+<ul>
+<li>业务学习能力</li>
+</ul>
+<p>算法工程师是不可能脱离业务背景的，人工智能算法工程师、交通算法工程师、图像处理算法工程师等等。
+在针对一个业务场景设计一个合理的算法，业务知识是非常重要的，**需要结合业务的实际情况、限定条件、各种专业词汇和知识都要有一定的了解，如果脱离场景而一味地琢磨算法，效果不会太好，**比如，做交通算法，需要对交通组织、交通管理、通行损失、周期延误等有所认知。比如，做图像处理，需要对各种图像去噪、图像增广、图像分割、物理成像有所了解，知道像素底层是怎么回事。</p>
+<ul>
+<li>持续学习能力</li>
+</ul>
+<p>就像我前面所说的**，算法工程师的主要工作就是拿着现有成熟的算法，结合面临业务场景去做一个合理的方案，<strong>如果我们知识面太窄，那显然当用到的时候会有点拮据，眼界也被限制住，不知道还有没有更好效果的算法、目前算法有哪些不足之处、在这个业务中能不能发挥作用，只有持续学习，了解足够多的知识</strong>，当我们面临问题的时候能够快速对比、选择，找出最合适的一种算法。**</p>
+<ul>
+<li>灵活的思维</li>
+</ul>
+<p>当我们选择一种算法去解决一个问题时，效果肯定无法达到我们预期的那样，比如我们拿mask rcnn做医学图像语义分割，我们看着它在自然图像方面表现效果很好，就拿来用于医学图像，但是医学图像有它的难点和特殊性，当跑出效果时会发现结果不如人意，这时候就需要灵活的思维去发现问题，去调优、改进，或者从数据入手或者从网络模型入手或者从超参数入手。</p>
+<ul>
+<li>编程能力</li>
+</ul>
+<p>不同公司对于算法工程师的定位有所差别，比如有些朋友在某公司算法工程师只负责方案的设计，开发由专门的开发人员实施。有的公司算法工程师要完成算法设计到开发全部工作。我认为无论是哪一种形式，编程能力都是必要的，就算是前者这样的形式，有专门的开发人员，那在算法的设计过程中需要验证、对比，对每一个小模块算法进行指标评价，你不可能事事都找别人来帮你做，这样效率低，而且开展工作困难。</p>
+<ul>
+<li>算法验证能力</li>
+</ul>
+<p>就像前面提到的那样，**算法验证在算法工程师日常工作中占据很大的比重，**我们拿到一些成熟、优秀的算法后，它的效果如何？能否起作用是未知的，我们需要对它进行验证，包括效率、精度等方面。这就要求算法工程师拥有算法验证能力，能够在众多算法中挑选出一种合适的算法来解决相应问题。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>音乐人声分离小结</title>
+      <link>http://localhost:1313/zh/posts/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/</link>
+      <pubDate>Sun, 31 Mar 2019 22:18:43 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/</guid>
+      <description>&lt;h3 id=&#34;音乐人声分离概况&#34;&gt;音乐人声分离概况&lt;/h3&gt;
+&lt;p&gt;音乐人声分离的目的是，从一首歌曲中分离出人声和伴奏声。&lt;a href=&#34;https://www.math.ucdavis.edu/~aberrian/research/voice_separation/index.html&#34;&gt;Project on Music/Voice Separation&lt;/a&gt;这个网站比较了一些基于传统方法的效果，但是由于基于了一些假设（比如REPET就假伴奏都是周期重复信号），这些算法在实际测试过程中效果都差强人意。随着深度学习的流行，音乐人声分离这个领域也开始被基于深度学习的方法所占领。在&lt;a href=&#34;http://www.sisec17.audiolabs-erlangen.de/#/results/1/4/2&#34;&gt;SiSEC MUS&lt;/a&gt;上可以看到效果比较好的都是基于深度学习的方法。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<h3 id="音乐人声分离概况">音乐人声分离概况</h3>
+<p>音乐人声分离的目的是，从一首歌曲中分离出人声和伴奏声。<a href="https://www.math.ucdavis.edu/~aberrian/research/voice_separation/index.html">Project on Music/Voice Separation</a>这个网站比较了一些基于传统方法的效果，但是由于基于了一些假设（比如REPET就假伴奏都是周期重复信号），这些算法在实际测试过程中效果都差强人意。随着深度学习的流行，音乐人声分离这个领域也开始被基于深度学习的方法所占领。在<a href="http://www.sisec17.audiolabs-erlangen.de/#/results/1/4/2">SiSEC MUS</a>上可以看到效果比较好的都是基于深度学习的方法。</p>
+<h3 id="基于深度学习方法的处理框架">基于深度学习方法的处理框架</h3>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180141-7b695b80-a644-11e9-9477-e2efd3197adb.jpg) -->
+<img src="/images/2019-03-31-001.jpg">
+- 训练数据   
+以DSD100数据集为例，下面是DSD100数据集的目录结构
+```
+|--DSD100
+  |--Mixtures
+     |--Dev
+        |--051 - AM Contra - Heart Peripheral
+            |--mixture.wav ==> 混合音频
+     |--Test
+  |--Sources
+    |--Dev
+        |--051 - AM Contra - Heart Peripheral
+            |--bass.wav ==> 各成分音频
+            |--drums.wav
+            |--other.wav
+            |--vocals.wav ==> 人声部分音频
+    |--Test
+```
+- 训练流程  
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180143-802e0f80-a644-11e9-8675-dcd4199e0e24.jpg) -->
+<img src="/images/2019-03-31-002.jpg">
+<ul>
+<li>训练目标<br>
+在本任务中的训练目标是对应输入混合音频幅度谱的一个Mask，通过这个Mask与混合音频幅度谱做mask乘法，就可以得到目标音频的幅度谱，再结合混合音频相位谱，做ISTFT就可以得到目标音频。下面是本任务的损失函数，其中X代表混合音频幅度谱，Y代表目标音频幅度谱，f(X,&amp;)代表模型输出的Mask。</li>
+</ul>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180144-83290000-a644-11e9-97b1-af0f014a5588.jpg) -->
+<img src="/images/2019-03-31-003.jpg">
+<p><em>Idea Binary Mask</em><br>
+理想二值掩蔽”（Ideal Binary Mask）中的分离任务就成为了一个二分类问题。这类方法根据听觉感知特性，把音频信号分成不同的子带，根据每个时频单元上的信噪比，把对应的时频单元的能量设为0（噪音占主导的情况下）或者保持原样（目标语音占主导的情况下）。</p>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180147-858b5a00-a644-11e9-8aef-2d2811e5b4eb.jpg) -->
+<img src="/images/2019-03-31-004.jpg">
+<p><em>Idea Ratio Mask</em><br>
+IRM（Ideal Ratio Mask），它同样对每个时频单元进行计算，但不同于IBM的“非零即一”，IRM中会计算语音信号和噪音之间的能量比，得到介于0到1之间的一个数，然后据此改变时频单元的能量大小。IRM是对IBM的演进，反映了各个时频单元上对噪声的抑制程度，可以进一步提高分离后语音的质量和可懂度。<br>
+<img alt="image" loading="lazy" src="https://user-images.githubusercontent.com/3350865/61180148-891ee100-a644-11e9-9df2-8c9683fe8306.jpg">
+<img src="/images/2019-03-31-005.jpg"></p>
+<h3 id="deep-u-net方法介绍">Deep U-Net方法介绍</h3>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180149-8cb26800-a644-11e9-8e2c-cf514a65edca.jpg) -->
+<img src="/images/2019-03-31-006.jpg">
+```
+卷积层参数个数 = (kernel_w * kernel_h + 1) * output_channel   
+归一化层参数个数 = 4 * input_channel ; (gamma, beta, moving_mean, moving_variance)
+```
+<ul>
+<li>Encode-Decode结构<br>
+U-Net中使用的Encode-Decode结构有点类似于图像中的多尺度金字塔，在高分辨率图像中更多关注的是图像的细节纹理，而在低分辨率图像中则更多关注的是图像的轮廓信息，这样就可以对不同层级的信息进行分开建模。</li>
+<li>跳跃连接（Skip-connection）<br>
+skip-connection使得每个节点在进行建模时，能够同时利用到本层的信息和来自下一层的信息</li>
+</ul>
+<h3 id="相关尝试">相关尝试</h3>
+<ul>
+<li>
+<h4 id="more-skip-connection">More Skip-Connection</h4>
+</li>
+</ul>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180151-90de8580-a644-11e9-97ac-3e7b2fcce8c6.jpg) -->
+<img src="/images/2019-03-31-007.jpg">
+<blockquote>
+<p>UNet++网络结构将Skip-Connection发挥到了极致，每个节点不单单只跟同层相邻节点连接，而是跟同层所有节点进行相连。同时一个大的UNet++网络结构其内部又可以一层层拆分成小的UNet++网络结构，这个特点使得其在做剪枝优化的时候非常简单方便，如图UNet++ L4到UNet++ L1就是简化过程。</p>
+</blockquote>
+<blockquote>
+<p>由于UNet++相对于UNet结构增加了大概20%的参数，而训练数据并没有相应增强，最后的效果还没达到UNet的结果。</p>
+</blockquote>
+<ul>
+<li>
+<h4 id="结合相位信息">结合相位信息</h4>
+</li>
+</ul>
+<h5 id="deep-complex-network">Deep Complex Network</h5>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180152-93d97600-a644-11e9-85b5-66faef80672c.jpg) -->
+<img src="/images/2019-03-31-008.jpg">
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180155-976cfd00-a644-11e9-8405-44602817d1c8.jpg) -->
+<img src="/images/2019-03-31-009.jpg">
+<h5 id="实验验证相位在分离任务中的作用">实验验证相位在分离任务中的作用</h5>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180157-99cf5700-a644-11e9-9fd8-560b11e04dd7.jpg) -->
+<img src="/images/2019-03-31-010.jpg">
+<table>
+  <thead>
+      <tr>
+          <th>方法</th>
+          <th style="text-align: center">效果（1-10分，分数越高效果越好）</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>理想结果</td>
+          <td style="text-align: center">10</td>
+      </tr>
+      <tr>
+          <td>基于幅度谱方法的结果</td>
+          <td style="text-align: center">8</td>
+      </tr>
+      <tr>
+          <td>基于幅度谱和相位谱方法的结果</td>
+          <td style="text-align: center">7</td>
+      </tr>
+      <tr>
+          <td>忽略相位的结果</td>
+          <td style="text-align: center">0</td>
+      </tr>
+      <tr>
+          <td>基于幅度谱方法的理想结果</td>
+          <td style="text-align: center">8</td>
+      </tr>
+  </tbody>
+</table>
+<blockquote>
+<p>相位对于音源分类任务的影响极小，更准确的幅度谱估计才能提升效果，相位沿用混合音频的相位就好。</p>
+</blockquote>
+<h3 id="一些可能的方向">一些可能的方向</h3>
+<ul>
+<li>WAVE U-Net直接在时域上进行分离</li>
+</ul>
+<blockquote>
+<p>WAVE U-Net分离的结果中伴奏都很弱</p>
+</blockquote>
+<ul>
+<li>Multi-Scale Multi-band</li>
+</ul>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180158-9c31b100-a644-11e9-9c10-7aff1248ab86.jpg) -->
+<img src="/images/2019-03-31-011.jpg">
+<ul>
+<li>借鉴图像分割领域的一些想法和进展<br>
+对音频信号的短时幅度谱进行分割与对图像进行语义分割一个很大的不同在于，音频信号在幅度谱上是有位置差异的，也就是说同样形状的的信号在不同位置，它代表就是不同的音频内容；而在图像语义分割中，分割的对象是没有位置这个信息的，分割对象是可以存在于图像中不同的位置。</li>
+</ul>
+<h3 id="公开的数据集">公开的数据集</h3>
+<table>
+  <thead>
+      <tr>
+          <th>名称</th>
+          <th>数据量</th>
+          <th>时长</th>
+          <th>年份</th>
+          <th>链接</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>DSD100</td>
+          <td>100首</td>
+          <td>6h58m20s</td>
+          <td>2015</td>
+          <td><a href="https://sigsep.github.io/datasets/dsd100.html">https://sigsep.github.io/datasets/dsd100.html</a></td>
+      </tr>
+      <tr>
+          <td>ccMixter</td>
+          <td>50首</td>
+          <td>3h12m30s</td>
+          <td>2014</td>
+          <td><a href="https://members.loria.fr/ALiutkus/kam/">https://members.loria.fr/ALiutkus/kam/</a></td>
+      </tr>
+      <tr>
+          <td>MUSDB18</td>
+          <td>150首</td>
+          <td>9h50m</td>
+          <td>2017</td>
+          <td><a href="https://sigsep.github.io/datasets/musdb.html">https://sigsep.github.io/datasets/musdb.html</a></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="参考">参考</h3>
+<p>[1] <a href="https://www.math.ucdavis.edu/~aberrian/research/voice_separation/index.html">Project on Music/Voice Separation:  一些传统方法</a><br>
+[2] <a href="https://sigsep.github.io/">SigSep：关于音乐人声分离的公开数据集和开源实现方法</a> <br>
+[3] <a href="">Paper: Singing Voice Separation With Deep U-Net Convolution Networks</a><br>
+[4] <a href="">Paper: UNet++: A Nested U-Net Architecture for Medical Image Segmentation</a><br>
+[5] <a href="UNet-VocalSeparation-Chainer">Github: UNet-VocalSeparation-Chainer</a><br>
+[6] <a href="https://github.com/MrGiovanni/UNetPlusPlus">Github: UNetPlusPlus</a><br>
+[7] <a href="https://github.com/f90/Wave-U-Net">Github: Wave-U-Net</a>  <br>
+[8] <a href="https://github.com/ChihebTrabelsi/deep_complex_networks">Github: Deep-Complex-Networks</a>  <br>
+[9] <a href="">Paper: Multi-Scale Multi-Band Densenets For Audio Source Separation</a> <br>
+[10] <a href="https://sigsep.github.io/tutorials/">SigSep&ndash;Tutorial&ndash;&ldquo;Music Source Separation with DNNs, Making it work&rdquo;</a><br>
+[11] <a href="https://yq.aliyun.com/articles/228864">搜狗研究员讲解基于深度学习的语音分离</a><br>
+[12] <a href="">Paper: Phase-Aware Speech Enhancement With Deep Complex U-Net</a>  <br>
+[13] <a href="http://www.sisec17.audiolabs-erlangen.de/#/methods">SiSEC MUS: 音乐人声分离竞赛</a><br>
+[14] <a href="https://www.math.ucdavis.edu/~aberrian/research/voice_separation/index.html">Project on Music/Voice Separation: 一些传统方法</a></p>]]></content:encoded>
+    </item>
+  </channel>
+</rss>

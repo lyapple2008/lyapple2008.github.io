@@ -1,0 +1,887 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>DeepLearning on BeYoung</title>
+    <link>http://localhost:1313/zh/tags/deeplearning/</link>
+    <description>Recent content in DeepLearning on BeYoung</description>
+    <image>
+      <title>BeYoung</title>
+      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.140.1</generator>
+    <language>zh</language>
+    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
+    <lastBuildDate>Mon, 10 Jun 2024 22:20:31 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/zh/tags/deeplearning/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MacOS M2 Tensorflow GPU环境搭建</title>
+      <link>http://localhost:1313/zh/posts/2024-06-10-macos-m2-tensorflow-gpu%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Mon, 10 Jun 2024 22:20:31 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/2024-06-10-macos-m2-tensorflow-gpu%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <description>&lt;!-- {% asset_img title.gif %} --&gt;
+&lt;img src=&#34;http://localhost:1313/images/2024-06-10-title.gif&#34;/&gt;
+本文记录在mac mini m2 pro上搭建tensorflow gpu版本的过程，中间因为一些坑，导致环境搭建过程有点反复，希望对有相同需求的同学有帮助。</description>
+      <content:encoded><![CDATA[<!-- {% asset_img title.gif %} -->
+<img src="/images/2024-06-10-title.gif"/>
+本文记录在mac mini m2 pro上搭建tensorflow gpu版本的过程，中间因为一些坑，导致环境搭建过程有点反复，希望对有相同需求的同学有帮助。
+<h2 id="1-安装conda环境">1. 安装conda环境</h2>
+<p>这里创建conda环境的时候需要指定python版本为3.9，这是因为后面需要安装的tensorflow需要python 3.6~3.9</p>
+<!-- {% asset_img tensorflow_python_version.png %} -->
+<img src="/images/2024-06-10-tensorflow_python_version.png"/>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">conda create -n tf_gpu python=3.9
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2-安装tensorflow">2. 安装tensorflow</h2>
+<p>安装tensorflow的时候，需要指定版本为2.14.1，这里是因为后面需要安装的tensorflow-metal，最新版本只支持2.14</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pip install tensorflow==2.14.1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><!-- {% asset_img tensorflow_metal.png %} -->
+<img src="/images/2024-06-10-tensorflow_metal.png"/>
+<h2 id="3-安装tensorflow-metal">3. 安装tensorflow-metal</h2>
+<p>目前tensorflow官方没有支持apple gpu，需要通过<a href="https://developer.apple.com/metal/tensorflow-plugin/">tensorflow-metal</a>插件来支持使用apple gpu</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pip install tensorflow-metal==1.1.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="4-测试验证">4. 测试验证</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import tensorflow.keras
+</span></span><span class="line"><span class="cl">import tensorflow as tf
+</span></span><span class="line"><span class="cl">print(f&#34;Tensor Flow Version: {tf.__version__}&#34;)
+</span></span><span class="line"><span class="cl">gpu = len(tf.config.list_physical_devices(&#39;GPU&#39;))&gt;0
+</span></span><span class="line"><span class="cl">print(&#34;GPU is&#34;, &#34;available&#34; if gpu else &#34;NOT AVAILABLE&#34;)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>成功后会得到下面的输出</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Tensor Flow Version: 2.14.1
+</span></span><span class="line"><span class="cl">Scikit-Learn 1.5.0
+</span></span><span class="line"><span class="cl">SciPy 1.13.1
+</span></span><span class="line"><span class="cl">GPU is available
+</span></span></code></pre></td></tr></table>
+</div>
+</div>]]></content:encoded>
+    </item>
+    <item>
+      <title>算子融合</title>
+      <link>http://localhost:1313/zh/posts/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</link>
+      <pubDate>Fri, 17 May 2024 22:58:36 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</guid>
+      <description>&lt;h2 id=&#34;什么是算子融合&#34;&gt;什么是算子融合&lt;/h2&gt;
+&lt;p&gt;算子融合是一种通过合并计算图中多个算子到一个算子，达到减少计算量和内存访问的优化方法。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Conv + BatchNormalization + ReLu融合&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- {% asset_img conv_bn_relu.png %} --&gt;
+&lt;img src=&#34;http://localhost:1313/images/2024-05-17-conv_bn_relu.png&#34;/&gt;
+&lt;p&gt;从融合后的最终公式可以看出，可以在初始阶段就通过BN的均值和方差（推理阶段BN的均值和方差是常量）更新Conv层的weights和bias参数，这样融合后的算子相当少了一个BN层的操作，既减少了内存访问，也减少了计算量&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<h2 id="什么是算子融合">什么是算子融合</h2>
+<p>算子融合是一种通过合并计算图中多个算子到一个算子，达到减少计算量和内存访问的优化方法。</p>
+<ul>
+<li>Conv + BatchNormalization + ReLu融合</li>
+</ul>
+<!-- {% asset_img conv_bn_relu.png %} -->
+<img src="/images/2024-05-17-conv_bn_relu.png"/>
+<p>从融合后的最终公式可以看出，可以在初始阶段就通过BN的均值和方差（推理阶段BN的均值和方差是常量）更新Conv层的weights和bias参数，这样融合后的算子相当少了一个BN层的操作，既减少了内存访问，也减少了计算量</p>
+<h2 id="如何做算子融合">如何做算子融合</h2>
+<h3 id="算子分类">算子分类</h3>
+<!-- {% asset_img operator_category.png %} -->
+<img src="/images/2024-05-17-conv_bn_relu.png"/>
+<p>当存在多个输入，同时存在多种输入-输出映射关系时，最终的Mapping type由最复杂的那一个决定。Mapping type复杂度递增顺序：One-to-One，Reorganize，Shuffle，One-to-Many，Many-to-Many
+注：Many-to-Many包含Many-to-One的类型</p>
+<h3 id="算子可融合性">算子可融合性</h3>
+<!-- {% asset_img fusion_ability.png %} -->
+<img src="/images/2024-05-17-fusion_ability.png"/>
+<p>绿色：可以融合，且有收益
+黄色：要做profile才能确定是否有收益
+红色：没有收益，不融合</p>
+<h3 id="计算图基于融合性分块">计算图基于融合性分块</h3>
+<!-- {% asset_img graph_partition.png %} -->
+<img src="/images/2024-05-17-graph_partition.png"/>
+<p>分块过程：</p>
+<ol>
+<li>随机挑选一个One-to-One 算子节点做为种子节点</li>
+<li>从种子节点往后进行融合，直到没有可以融合的节点，并更新块的Mapping Type</li>
+<li>从种子节点往前进行融合，直到没有可以融合的节点，并更新块的Mapping Type</li>
+<li>重复执行1、2、3，直到没有可用的种子节点</li>
+</ol>
+<h3 id="融合代码生成">融合代码生成</h3>
+<p>基于编译生成融合代码（DNNFusion、TVM）</p>
+<!-- {% asset_img code_gen.png %} -->
+<img src="/images/2024-05-17-code_gen.png"/>
+<p>参考</p>
+<ol>
+<li><a href="https://dl.acm.org/doi/10.1145/3453483.3454083">DNNFusion: accelerating deep neural networks execution with advanced operator fusion</a></li>
+</ol>]]></content:encoded>
+    </item>
+    <item>
+      <title>代码优化方法论</title>
+      <link>http://localhost:1313/zh/posts/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/</link>
+      <pubDate>Sun, 04 Aug 2019 10:44:29 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/</guid>
+      <description>&lt;p&gt;&lt;a name=&#34;01ca666c&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;为什么需要代码优化&#34;&gt;为什么需要代码优化&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;提升体验，扩展玩法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418824-63b24f80-b6a5-11e9-9bde-6cd6de0cc6a5.PNG) --&gt;
+&lt;img src=&#34;http://localhost:1313/images/2019-08-04-001.png&#34;/&gt;</description>
+      <content:encoded><![CDATA[<p><a name="01ca666c"></a></p>
+<h2 id="为什么需要代码优化">为什么需要代码优化</h2>
+<ul>
+<li>提升体验，扩展玩法</li>
+</ul>
+<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418824-63b24f80-b6a5-11e9-9bde-6cd6de0cc6a5.PNG) -->
+<img src="/images/2019-08-04-001.png"/>
+<ul>
+<li>减少限制跟要求，降低门槛 ，覆盖更多群体</li>
+</ul>
+<blockquote>
+<p>在谷歌内部，打造AI应用有两条思路，一是让更多人受惠，二是尽可能减少限制和要求</p>
+</blockquote>
+<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418833-90666700-b6a5-11e9-88f9-760391e1fe61.PNG) -->
+<img src="/images/2019-08-04-002.png"/>
+<ul>
+<li>场景限制必须进行优化</li>
+</ul>
+<blockquote>
+<p>个人隐私越来越被重视，以往的云端处理方案存在局限性
+一些场景要求算法要有极低的延时，如实时通信项目</p>
+</blockquote>
+<p><em><strong>Flag终极目标：让算法随手可得</strong></em>
+<a name="6a1p8"></a></p>
+<!---more--->
+<h2 id="传统代码优化">传统代码优化</h2>
+<!-- ![](https://cdn.nlark.com/yuque/0/2019/png/415939/1564710217474-4d6dc083-2132-4a85-af87-a61f6fdfc0d8.png) -->
+<img src="/images/2019-08-04-003.png"/>
+<p><strong>rnnoise优化举例</strong></p>
+<ul>
+<li><strong>函数近似和查表优化sigmoid函数计算</strong>
+<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418848-dae7e380-b6a5-11e9-9ffa-0734de7bcbf4.png) -->
+<img src="/images/2019-08-04-004.png"/>    
+</li>
+</ul>
+<p><img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/62418862-33b77c00-b6a6-11e9-8ecf-2f1388e24ab7.png"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">static</span> <span class="n">OPUS_INLINE</span> <span class="kt">float</span> <span class="nf">tansig_approx</span><span class="p">(</span><span class="kt">float</span> <span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">y</span><span class="p">,</span> <span class="n">dy</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">sign</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Tests are reversed to catch NaNs */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="mi">8</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;-</span><span class="mi">8</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#ifndef FIXED_POINT
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cm">/* Another check in case of -ffast-math */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">celt_isnan</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">       <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">       <span class="n">x</span><span class="o">=-</span><span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">       <span class="n">sign</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="nf">floor</span><span class="p">(</span><span class="mf">.5f</span><span class="o">+</span><span class="mi">25</span><span class="o">*</span><span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">-=</span> <span class="mf">.04f</span><span class="o">*</span><span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y</span> <span class="o">=</span> <span class="n">tansig_table</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dy</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">dy</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y</span><span class="o">*</span><span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">sign</span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="n">OPUS_INLINE</span> <span class="kt">float</span> <span class="nf">sigmoid_approx</span><span class="p">(</span><span class="kt">float</span> <span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="mf">.5</span> <span class="o">+</span> <span class="mf">.5</span><span class="o">*</span><span class="nf">tansig_approx</span><span class="p">(</span><span class="mf">.5</span><span class="o">*</span><span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>最粗暴的函数近似方法：</strong><br /></p>
+<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418851-edfab380-b6a5-11e9-8e3f-75a65d5656c7.png) -->
+<img src="/images/2019-08-04-005.png"/>
+<br />    
+ <!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418868-619cc080-b6a6-11e9-8fa1-67751a95dc11.png) -->
+<img src="/images/2019-08-04-006.png"/>
+```
+atan(pi*x/2)*2/pi   24.1 ns
+atan(x)             23.0 ns
+1/(1+exp(-x))       20.4 ns
+1/sqrt(1+x^2)       13.4 ns
+erf(sqrt(pi)*x/2)    6.7 ns
+tanh(x)              5.5 ns
+x/(1+|x|)            5.5 ns
+```
+<ul>
+<li><strong>减少程序跳转优化RNN计算</strong></li>
+</ul>
+<p>CPU多级Cache机制 <br>
+<br /></p>
+<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418870-6feadc80-b6a6-11e9-977e-8aad80618706.png) -->
+<img src="/images/2019-08-04-007.png"/>
+<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418871-78431780-b6a6-11e9-91fe-5b034731dc05.png) -->
+<img src="/images/2019-08-04-008.png"/>
+<a name="6441fc2a"></a>
+<h2 id="深度学习移动端优化">深度学习移动端优化</h2>
+<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418875-9741a980-b6a6-11e9-8708-accea0d5a08c.png) -->
+<img src="/images/2019-08-04-009.png"/>
+<h3 id="网络剪枝">网络剪枝</h3>
+<ul>
+<li><strong>网络的参数都存在冗余的，所以可以进行网络剪枝</strong></li>
+</ul>
+<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418876-ad4f6a00-b6a6-11e9-849d-3df81cb40be5.png) -->
+<img src="/images/2019-08-04-010.png"/>
+<ul>
+<li><strong>网络剪枝的流程</strong>
+权值的重要性：计算L1或者L2<br />神经元的重要性：不为零的次数
+<!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418880-be987680-b6a6-11e9-972d-d921aebc6ef0.png) -->
+<img src="/images/2019-08-04-011.png"/>
+</li>
+<li><strong>剪权值VS剪神经元</strong></li>
+</ul>
+<p><img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/62418882-ceb05600-b6a6-11e9-86f1-cce3ce5f093e.png#align=left&display=inline&height=223&name=image.png&originHeight=398&originWidth=436&size=39885&status=done&width=244"><br />剪权值                                                                           剪神经元<br />             <img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/62418885-e091f900-b6a6-11e9-9cec-a63afc827b12.png#align=left&display=inline&height=214&name=image.png&originHeight=381&originWidth=414&size=28847&status=done&width=233">                                  <img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/62418889-eab3f780-b6a6-11e9-9820-0de73ee3f997.png#align=left&display=inline&height=209&name=image.png&originHeight=381&originWidth=425&size=35671&status=done&width=233"><br /><em>剪权值：模型不规则，不便于实现和加速</em><br /><em>剪神经元：模型规则，便于实现和加速</em></p>
+<p><a name="iaztJ"></a></p>
+<h3 id="精简模型设计">精简模型设计</h3>
+<ul>
+<li><strong>标准CNN</strong></li>
+</ul>
+<p><img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/77837266-c8bd3700-7199-11ea-9d28-95222493a1ed.png#align=left&display=inline&height=448&name=image.png&originHeight=766&originWidth=981&size=39311&status=done&width=574"></p>
+<ul>
+<li><strong>深度分离卷积Depthwise Separable Convolution 【参见MobileNet】</strong></li>
+</ul>
+<p><img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/77837270-d2df3580-7199-11ea-9b2b-704966a3c19d.png#align=left&display=inline&height=438&name=image.png&originHeight=739&originWidth=1042&size=49003&status=done&width=618"></p>
+<p><img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/77837270-d2df3580-7199-11ea-9b2b-704966a3c19d.png#align=left&display=inline&height=436&name=image.png&originHeight=777&originWidth=1016&size=53791&status=done&width=570"></p>
+<ul>
+<li><strong>参数比较</strong></li>
+</ul>
+<p><img alt="image.png" loading="lazy" src="https://user-images.githubusercontent.com/3350865/77837275-e094bb00-7199-11ea-933e-265825830d3b.png#align=left&display=inline&height=425&name=image.png&originHeight=782&originWidth=1061&size=115587&status=done&width=576"></p>
+<p><a name="a465ce02"></a></p>
+<h2 id="四深度学习移动端部署工具">四、深度学习移动端部署工具</h2>
+<p>      与PC端深度学习环境被大厂垄断不同，移动端的部署工具可以说是百家争鸣，很多深度学习的厂商都会推出自家的推理加速工具。
+<a name="10665c4b"></a></p>
+<h4 id="41-硬件厂商">4.1 硬件厂商</h4>
+<table>
+  <thead>
+      <tr>
+          <th>公司</th>
+          <th>硬件架构</th>
+          <th>开发工具</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>海思</td>
+          <td>NPU</td>
+          <td><a href="https://developer.huawei.com/consumer/cn/hiai">HiAI Foundation</a></td>
+      </tr>
+      <tr>
+          <td>高通</td>
+          <td>CPU/GPU/DSP</td>
+          <td><a href="https://developer.qualcomm.com/docs/snpe/index.html">Snapdragon Neural Processing Engine SDK</a></td>
+      </tr>
+      <tr>
+          <td>Apple</td>
+          <td>CPU/GPU/NeualEngine</td>
+          <td><a href="https://developer.apple.com/machine-learning/">CoreML</a></td>
+      </tr>
+      <tr>
+          <td>ARM</td>
+          <td>CPU/GPU</td>
+          <td><a href="https://github.com/ARM-software/armnn">ARM NN SDK</a></td>
+      </tr>
+      <tr>
+          <td>MediaTek</td>
+          <td>CPU/GPU/APU</td>
+          <td>NeuroPilot SDK</td>
+      </tr>
+  </tbody>
+</table>
+<p><a name="ca557462"></a></p>
+<h4 id="42-软件厂商">4.2 软件厂商</h4>
+<table>
+  <thead>
+      <tr>
+          <th>工具</th>
+          <th>公司</th>
+          <th>系统支持情况</th>
+          <th>特点</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><a href="">TensorFlow Lite</a></td>
+          <td>Google</td>
+          <td>Android/IOS</td>
+          <td>Android结合比较密，支持GPU加速</td>
+      </tr>
+      <tr>
+          <td><a href="">CoreML</a></td>
+          <td>Apple</td>
+          <td>IOS</td>
+          <td>软件硬件结合紧密，更新快</td>
+      </tr>
+      <tr>
+          <td><a href="">Caffe2</a></td>
+          <td>Facebook</td>
+          <td>Android/IOS</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><a href="">NCNN</a></td>
+          <td>Tencent</td>
+          <td>Android/IOS</td>
+          <td>支持大部分CNN网络，<strong>已经落地的应用多</strong></td>
+      </tr>
+      <tr>
+          <td><a href="https://github.com/XiaoMi/mace">MACE</a></td>
+          <td>小米</td>
+          <td>Android</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td><a href="">MNN</a></td>
+          <td>阿里</td>
+          <td>Android/IOS</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>利用Caffe2进行手写数字识别在Android端的部署</li>
+</ul>
+<p><img alt="mnist_cnn_demo.gif" loading="lazy" src="https://cdn.nlark.com/yuque/0/2019/gif/415939/1564675047982-2a1b1c17-a309-4cc4-9c83-90cf7617a79b.gif#align=left&display=inline&height=393&name=mnist_cnn_demo.gif&originHeight=1280&originWidth=720&size=728880&status=done&width=221">
+<a name="b84c764d"></a></p>
+<h2 id="五参考">五、参考</h2>
+<ul>
+<li>[Paper] <a href="https://arxiv.org/abs/1710.09282">A Survey of Model Compression and Acceleration</a><br /><a href="https://arxiv.org/abs/1710.09282">
+for Deep Neural Networks</a></li>
+<li>[Book] <a href="http://lamda.nju.edu.cn/weixs/book/CNN_book.html">解析卷积神经网络&ndash;深度学习实践手册</a></li>
+<li>[Video] <a href="https://www.bilibili.com/video/av19001663?from=search&amp;seid=3363657589379253237">Toward Efficient Deep Neural Network Deployment: Deep Compression and EIE</a></li>
+<li>[Video] <a href="https://www.youtube.com/watch?v=dPp8rCAnU_A&amp;list=PLJV_el3uVTsOK_ZK5L0Iv_EQoL1JefRL4&amp;index=52&amp;t=0s">李宏毅-Network Compression</a></li>
+<li>[Github] <a href="https://github.com/scutan90/DeepLearning-500-questions/blob/master/ch17_%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E3%80%81%E5%8A%A0%E9%80%9F%E5%8F%8A%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%83%A8%E7%BD%B2/%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0_%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E3%80%81%E5%8A%A0%E9%80%9F%E5%8F%8A%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%83%A8%E7%BD%B2.md">模型压缩及移动端部署</a></li>
+</ul>]]></content:encoded>
+    </item>
+    <item>
+      <title>音乐人声分离小结</title>
+      <link>http://localhost:1313/zh/posts/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/</link>
+      <pubDate>Sun, 31 Mar 2019 22:18:43 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/</guid>
+      <description>&lt;h3 id=&#34;音乐人声分离概况&#34;&gt;音乐人声分离概况&lt;/h3&gt;
+&lt;p&gt;音乐人声分离的目的是，从一首歌曲中分离出人声和伴奏声。&lt;a href=&#34;https://www.math.ucdavis.edu/~aberrian/research/voice_separation/index.html&#34;&gt;Project on Music/Voice Separation&lt;/a&gt;这个网站比较了一些基于传统方法的效果，但是由于基于了一些假设（比如REPET就假伴奏都是周期重复信号），这些算法在实际测试过程中效果都差强人意。随着深度学习的流行，音乐人声分离这个领域也开始被基于深度学习的方法所占领。在&lt;a href=&#34;http://www.sisec17.audiolabs-erlangen.de/#/results/1/4/2&#34;&gt;SiSEC MUS&lt;/a&gt;上可以看到效果比较好的都是基于深度学习的方法。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<h3 id="音乐人声分离概况">音乐人声分离概况</h3>
+<p>音乐人声分离的目的是，从一首歌曲中分离出人声和伴奏声。<a href="https://www.math.ucdavis.edu/~aberrian/research/voice_separation/index.html">Project on Music/Voice Separation</a>这个网站比较了一些基于传统方法的效果，但是由于基于了一些假设（比如REPET就假伴奏都是周期重复信号），这些算法在实际测试过程中效果都差强人意。随着深度学习的流行，音乐人声分离这个领域也开始被基于深度学习的方法所占领。在<a href="http://www.sisec17.audiolabs-erlangen.de/#/results/1/4/2">SiSEC MUS</a>上可以看到效果比较好的都是基于深度学习的方法。</p>
+<h3 id="基于深度学习方法的处理框架">基于深度学习方法的处理框架</h3>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180141-7b695b80-a644-11e9-9477-e2efd3197adb.jpg) -->
+<img src="/images/2019-03-31-001.jpg">
+- 训练数据   
+以DSD100数据集为例，下面是DSD100数据集的目录结构
+```
+|--DSD100
+  |--Mixtures
+     |--Dev
+        |--051 - AM Contra - Heart Peripheral
+            |--mixture.wav ==> 混合音频
+     |--Test
+  |--Sources
+    |--Dev
+        |--051 - AM Contra - Heart Peripheral
+            |--bass.wav ==> 各成分音频
+            |--drums.wav
+            |--other.wav
+            |--vocals.wav ==> 人声部分音频
+    |--Test
+```
+- 训练流程  
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180143-802e0f80-a644-11e9-8675-dcd4199e0e24.jpg) -->
+<img src="/images/2019-03-31-002.jpg">
+<ul>
+<li>训练目标<br>
+在本任务中的训练目标是对应输入混合音频幅度谱的一个Mask，通过这个Mask与混合音频幅度谱做mask乘法，就可以得到目标音频的幅度谱，再结合混合音频相位谱，做ISTFT就可以得到目标音频。下面是本任务的损失函数，其中X代表混合音频幅度谱，Y代表目标音频幅度谱，f(X,&amp;)代表模型输出的Mask。</li>
+</ul>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180144-83290000-a644-11e9-97b1-af0f014a5588.jpg) -->
+<img src="/images/2019-03-31-003.jpg">
+<p><em>Idea Binary Mask</em><br>
+理想二值掩蔽”（Ideal Binary Mask）中的分离任务就成为了一个二分类问题。这类方法根据听觉感知特性，把音频信号分成不同的子带，根据每个时频单元上的信噪比，把对应的时频单元的能量设为0（噪音占主导的情况下）或者保持原样（目标语音占主导的情况下）。</p>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180147-858b5a00-a644-11e9-8aef-2d2811e5b4eb.jpg) -->
+<img src="/images/2019-03-31-004.jpg">
+<p><em>Idea Ratio Mask</em><br>
+IRM（Ideal Ratio Mask），它同样对每个时频单元进行计算，但不同于IBM的“非零即一”，IRM中会计算语音信号和噪音之间的能量比，得到介于0到1之间的一个数，然后据此改变时频单元的能量大小。IRM是对IBM的演进，反映了各个时频单元上对噪声的抑制程度，可以进一步提高分离后语音的质量和可懂度。<br>
+<img alt="image" loading="lazy" src="https://user-images.githubusercontent.com/3350865/61180148-891ee100-a644-11e9-9df2-8c9683fe8306.jpg">
+<img src="/images/2019-03-31-005.jpg"></p>
+<h3 id="deep-u-net方法介绍">Deep U-Net方法介绍</h3>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180149-8cb26800-a644-11e9-8e2c-cf514a65edca.jpg) -->
+<img src="/images/2019-03-31-006.jpg">
+```
+卷积层参数个数 = (kernel_w * kernel_h + 1) * output_channel   
+归一化层参数个数 = 4 * input_channel ; (gamma, beta, moving_mean, moving_variance)
+```
+<ul>
+<li>Encode-Decode结构<br>
+U-Net中使用的Encode-Decode结构有点类似于图像中的多尺度金字塔，在高分辨率图像中更多关注的是图像的细节纹理，而在低分辨率图像中则更多关注的是图像的轮廓信息，这样就可以对不同层级的信息进行分开建模。</li>
+<li>跳跃连接（Skip-connection）<br>
+skip-connection使得每个节点在进行建模时，能够同时利用到本层的信息和来自下一层的信息</li>
+</ul>
+<h3 id="相关尝试">相关尝试</h3>
+<ul>
+<li>
+<h4 id="more-skip-connection">More Skip-Connection</h4>
+</li>
+</ul>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180151-90de8580-a644-11e9-97ac-3e7b2fcce8c6.jpg) -->
+<img src="/images/2019-03-31-007.jpg">
+<blockquote>
+<p>UNet++网络结构将Skip-Connection发挥到了极致，每个节点不单单只跟同层相邻节点连接，而是跟同层所有节点进行相连。同时一个大的UNet++网络结构其内部又可以一层层拆分成小的UNet++网络结构，这个特点使得其在做剪枝优化的时候非常简单方便，如图UNet++ L4到UNet++ L1就是简化过程。</p>
+</blockquote>
+<blockquote>
+<p>由于UNet++相对于UNet结构增加了大概20%的参数，而训练数据并没有相应增强，最后的效果还没达到UNet的结果。</p>
+</blockquote>
+<ul>
+<li>
+<h4 id="结合相位信息">结合相位信息</h4>
+</li>
+</ul>
+<h5 id="deep-complex-network">Deep Complex Network</h5>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180152-93d97600-a644-11e9-85b5-66faef80672c.jpg) -->
+<img src="/images/2019-03-31-008.jpg">
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180155-976cfd00-a644-11e9-8405-44602817d1c8.jpg) -->
+<img src="/images/2019-03-31-009.jpg">
+<h5 id="实验验证相位在分离任务中的作用">实验验证相位在分离任务中的作用</h5>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180157-99cf5700-a644-11e9-9fd8-560b11e04dd7.jpg) -->
+<img src="/images/2019-03-31-010.jpg">
+<table>
+  <thead>
+      <tr>
+          <th>方法</th>
+          <th style="text-align: center">效果（1-10分，分数越高效果越好）</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>理想结果</td>
+          <td style="text-align: center">10</td>
+      </tr>
+      <tr>
+          <td>基于幅度谱方法的结果</td>
+          <td style="text-align: center">8</td>
+      </tr>
+      <tr>
+          <td>基于幅度谱和相位谱方法的结果</td>
+          <td style="text-align: center">7</td>
+      </tr>
+      <tr>
+          <td>忽略相位的结果</td>
+          <td style="text-align: center">0</td>
+      </tr>
+      <tr>
+          <td>基于幅度谱方法的理想结果</td>
+          <td style="text-align: center">8</td>
+      </tr>
+  </tbody>
+</table>
+<blockquote>
+<p>相位对于音源分类任务的影响极小，更准确的幅度谱估计才能提升效果，相位沿用混合音频的相位就好。</p>
+</blockquote>
+<h3 id="一些可能的方向">一些可能的方向</h3>
+<ul>
+<li>WAVE U-Net直接在时域上进行分离</li>
+</ul>
+<blockquote>
+<p>WAVE U-Net分离的结果中伴奏都很弱</p>
+</blockquote>
+<ul>
+<li>Multi-Scale Multi-band</li>
+</ul>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180158-9c31b100-a644-11e9-9c10-7aff1248ab86.jpg) -->
+<img src="/images/2019-03-31-011.jpg">
+<ul>
+<li>借鉴图像分割领域的一些想法和进展<br>
+对音频信号的短时幅度谱进行分割与对图像进行语义分割一个很大的不同在于，音频信号在幅度谱上是有位置差异的，也就是说同样形状的的信号在不同位置，它代表就是不同的音频内容；而在图像语义分割中，分割的对象是没有位置这个信息的，分割对象是可以存在于图像中不同的位置。</li>
+</ul>
+<h3 id="公开的数据集">公开的数据集</h3>
+<table>
+  <thead>
+      <tr>
+          <th>名称</th>
+          <th>数据量</th>
+          <th>时长</th>
+          <th>年份</th>
+          <th>链接</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>DSD100</td>
+          <td>100首</td>
+          <td>6h58m20s</td>
+          <td>2015</td>
+          <td><a href="https://sigsep.github.io/datasets/dsd100.html">https://sigsep.github.io/datasets/dsd100.html</a></td>
+      </tr>
+      <tr>
+          <td>ccMixter</td>
+          <td>50首</td>
+          <td>3h12m30s</td>
+          <td>2014</td>
+          <td><a href="https://members.loria.fr/ALiutkus/kam/">https://members.loria.fr/ALiutkus/kam/</a></td>
+      </tr>
+      <tr>
+          <td>MUSDB18</td>
+          <td>150首</td>
+          <td>9h50m</td>
+          <td>2017</td>
+          <td><a href="https://sigsep.github.io/datasets/musdb.html">https://sigsep.github.io/datasets/musdb.html</a></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="参考">参考</h3>
+<p>[1] <a href="https://www.math.ucdavis.edu/~aberrian/research/voice_separation/index.html">Project on Music/Voice Separation:  一些传统方法</a><br>
+[2] <a href="https://sigsep.github.io/">SigSep：关于音乐人声分离的公开数据集和开源实现方法</a> <br>
+[3] <a href="">Paper: Singing Voice Separation With Deep U-Net Convolution Networks</a><br>
+[4] <a href="">Paper: UNet++: A Nested U-Net Architecture for Medical Image Segmentation</a><br>
+[5] <a href="UNet-VocalSeparation-Chainer">Github: UNet-VocalSeparation-Chainer</a><br>
+[6] <a href="https://github.com/MrGiovanni/UNetPlusPlus">Github: UNetPlusPlus</a><br>
+[7] <a href="https://github.com/f90/Wave-U-Net">Github: Wave-U-Net</a>  <br>
+[8] <a href="https://github.com/ChihebTrabelsi/deep_complex_networks">Github: Deep-Complex-Networks</a>  <br>
+[9] <a href="">Paper: Multi-Scale Multi-Band Densenets For Audio Source Separation</a> <br>
+[10] <a href="https://sigsep.github.io/tutorials/">SigSep&ndash;Tutorial&ndash;&ldquo;Music Source Separation with DNNs, Making it work&rdquo;</a><br>
+[11] <a href="https://yq.aliyun.com/articles/228864">搜狗研究员讲解基于深度学习的语音分离</a><br>
+[12] <a href="">Paper: Phase-Aware Speech Enhancement With Deep Complex U-Net</a>  <br>
+[13] <a href="http://www.sisec17.audiolabs-erlangen.de/#/methods">SiSEC MUS: 音乐人声分离竞赛</a><br>
+[14] <a href="https://www.math.ucdavis.edu/~aberrian/research/voice_separation/index.html">Project on Music/Voice Separation: 一些传统方法</a></p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Android端实现手写数字识别</title>
+      <link>http://localhost:1313/zh/posts/2018-04-29-android%E7%AB%AF%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/</link>
+      <pubDate>Sun, 29 Apr 2018 10:56:38 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/2018-04-29-android%E7%AB%AF%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/</guid>
+      <description>&lt;p&gt;  对DeepLearning最初的印象是，大量的训练样本+机器学习，也就是说原来传统的机器学习会遇到的问题，不能解决的问题，换成DeepLearning同样解决不了。比如目标识别中因为光照变化，目标被遮挡，目标的几何变化造成的识别率大幅下降，在DeepLearning中同样也不能很好解决。但是不是说DeepLearning就一无事处，最近几年这么热也决不是因为名字取得好。DeepLearning比较明显的优势就是在特征选择上，想想之前做生物特征识别时，各种找特征，还得考虑什么光照不变，旋转不变，抗尺寸变换，抗遮挡，那叫一个累呀。现在可好啦，一个Convolution   Layer，再配Fully Connected Layer，最后来个Softmax，丢一堆带标签的样本进去自动给你找出特征。当然这个只是一个接触DeepLearning不到一个月的小白的肤浅认识，大家听听就好。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>  对DeepLearning最初的印象是，大量的训练样本+机器学习，也就是说原来传统的机器学习会遇到的问题，不能解决的问题，换成DeepLearning同样解决不了。比如目标识别中因为光照变化，目标被遮挡，目标的几何变化造成的识别率大幅下降，在DeepLearning中同样也不能很好解决。但是不是说DeepLearning就一无事处，最近几年这么热也决不是因为名字取得好。DeepLearning比较明显的优势就是在特征选择上，想想之前做生物特征识别时，各种找特征，还得考虑什么光照不变，旋转不变，抗尺寸变换，抗遮挡，那叫一个累呀。现在可好啦，一个Convolution   Layer，再配Fully Connected Layer，最后来个Softmax，丢一堆带标签的样本进去自动给你找出特征。当然这个只是一个接触DeepLearning不到一个月的小白的肤浅认识，大家听听就好。</p>
+<p>  本文算是最近1个月学习DeepLearning的入门小作业，选择的例子也是DeepLearning最流行的HelloWorld程序MNIST手写数字识别，采用Caffe2进行训练，并在Android端实现一个Demo样例。</p>
+<!---more--->
+<h3 id="deeplearning基础">DeepLearning基础</h3>
+<p>  这里推荐下台大李宏毅老师的DeepLearning课程，讲解风趣幽默，生动详细，力荐。<a href="https://www.bilibili.com/video/av15889450">B站链接</a>
+深度学习框架：caffe2</p>
+<h3 id="模型训练">模型训练</h3>
+<p>整个模型训练过程主要包括数据准备、模型建立、模型训练，参考caffe2官网的<a href="https://github.com/caffe2/tutorials/blob/master/MNIST.ipynb">tutorial</a></p>
+<h4 id="1-数据准备">1. 数据准备</h4>
+<p>数据准备在MachineLearning类的应用中起到致关重要的作用，相当于煮饭的时候用到的米。再利害的算法，如果没有足够的数据，那也是巧妇难为无米之炊，难道马云会称现在是DT时代。另外DeepLearning作为MachineLearning的一个分支，目前了解到的大部分的DeepLearning算法更多的还是属于SuperviseLearning。SuperviseLearning一个明显的特征是非常依赖数据，而且是人工标注的数据，这也难怪一些DeepLearning大大们说在AI应用中，有多少人工就有多少智能。本文用到的数据链接地址：<a href="http://yann.lecun.com/exdb/mnist/">MNIST手写数字数据集</a></p>
+<h5 id="2-模型建立">2. 模型建立</h5>
+<p>这个例子采用的是DeepLearning中的经典网络LeNet，关于LeNet可以参考<a href="https://ujjwalkarn.me/2016/08/11/intuitive-explanation-convnets/">这篇文章</a>。</p>
+<h5 id="3-模型训练">3. 模型训练</h5>
+<p>这里模型训练采用caffe2框架，</p>
+<h3 id="模型在android端的部署">模型在Android端的部署</h3>
+<p>参考caffe2官网给的AICamera例子，建立Android Studio工程（github工程地址：https://github.com/lyapple2008/MNIST_CNN_APP ），其中最主要的代码如下所示</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">void</span> <span class="n">loadToNetDef</span><span class="p">(</span><span class="n">AAssetManager</span> <span class="o">*</span><span class="n">mgr</span><span class="p">,</span> <span class="n">caffe2</span><span class="p">::</span><span class="n">NetDef</span> <span class="o">*</span><span class="n">net</span><span class="p">,</span> <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">AAsset</span> <span class="o">*</span><span class="n">asset</span> <span class="o">=</span> <span class="n">AAssetManager_open</span><span class="p">(</span><span class="n">mgr</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">AASSET_MODE_BUFFER</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">assert</span><span class="p">(</span><span class="n">asset</span> <span class="o">!=</span> <span class="n">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">void</span> <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="n">AAsset_getBuffer</span><span class="p">(</span><span class="n">asset</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">assert</span><span class="p">(</span><span class="n">data</span> <span class="o">!=</span> <span class="n">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">off_t</span> <span class="n">len</span> <span class="o">=</span> <span class="n">AAsset_getLength</span><span class="p">(</span><span class="n">asset</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">assert</span><span class="p">(</span><span class="n">len</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">net</span><span class="o">-&gt;</span><span class="n">ParseFromArray</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">len</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">alog</span><span class="p">(</span><span class="s2">&#34;Couldn&#39;t parse net from data.</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">AAsset_close</span><span class="p">(</span><span class="n">asset</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">extern</span> <span class="s2">&#34;C&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">Java_com_example_beyoung_handwrittendigit_MainActivity_initCaffe2</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">jobject</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">jobject</span> <span class="n">assetManager</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">AAssetManager</span> <span class="o">*</span><span class="n">mgr</span> <span class="o">=</span> <span class="n">AAssetManager_fromJava</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">assetManager</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">alog</span><span class="p">(</span><span class="s2">&#34;Attempting to load protobuf netdefs...&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">loadToNetDef</span><span class="p">(</span><span class="n">mgr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">_initNet</span><span class="p">,</span> <span class="s2">&#34;mnist/init_net.pb&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">loadToNetDef</span><span class="p">(</span><span class="n">mgr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">_predictNet</span><span class="p">,</span> <span class="s2">&#34;mnist/predict_net.pb&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">alog</span><span class="p">(</span><span class="s2">&#34;done.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">alog</span><span class="p">(</span><span class="s2">&#34;Instantiating predictor...&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_predictor</span> <span class="o">=</span> <span class="n">new</span> <span class="n">caffe2</span><span class="p">::</span><span class="n">Predictor</span><span class="p">(</span><span class="n">_initNet</span><span class="p">,</span> <span class="n">_predictNet</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">_predictor</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">alog</span><span class="p">(</span><span class="s2">&#34;done...&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">alog</span><span class="p">(</span><span class="s2">&#34;fail to instantiat predictor...&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">extern</span> <span class="s2">&#34;C&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">JNIEXPORT</span> <span class="n">jstring</span> <span class="n">JNICALL</span>
+</span></span><span class="line"><span class="cl"><span class="n">Java_com_example_beyoung_handwrittendigit_MainActivity_recognitionFromCaffe2</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">jobject</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">jint</span> <span class="n">h</span><span class="p">,</span> <span class="n">jint</span> <span class="n">w</span><span class="p">,</span> <span class="n">jintArray</span> <span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_predictor</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">env</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="s2">&#34;Loading...&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">jsize</span> <span class="n">len</span> <span class="o">=</span> <span class="n">env</span><span class="o">-&gt;</span><span class="n">GetArrayLength</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">jint</span> <span class="o">*</span><span class="n">img_data</span> <span class="o">=</span> <span class="n">env</span><span class="o">-&gt;</span><span class="n">GetIntArrayElements</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">jint</span> <span class="n">img_size</span> <span class="o">=</span> <span class="n">h</span> <span class="o">*</span> <span class="n">w</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">assert</span><span class="p">(</span><span class="n">img_size</span> <span class="o">&lt;=</span> <span class="n">INPUT_DATA_SIZE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="nb">convert</span> <span class="n">rgb</span> <span class="n">image</span> <span class="n">to</span> <span class="n">grey</span> <span class="n">image</span> <span class="ow">and</span> <span class="n">normalize</span> <span class="n">to</span> <span class="mi">0</span><span class="o">~</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">h</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="p">::</span><span class="n">ostringstream</span> <span class="n">stringStream</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">auto</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">w</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="ne">int</span> <span class="n">color</span> <span class="o">=</span> <span class="n">img_data</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">w</span> <span class="o">+</span> <span class="n">j</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span><span class="ne">int</span> <span class="n">red</span> <span class="o">=</span> <span class="p">((</span><span class="n">color</span> <span class="o">&amp;</span> <span class="mh">0x00FF0000</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">16</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span><span class="ne">int</span> <span class="n">green</span> <span class="o">=</span> <span class="p">((</span><span class="n">color</span> <span class="o">&amp;</span> <span class="mh">0x0000FF00</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span><span class="ne">int</span> <span class="n">blue</span> <span class="o">=</span> <span class="n">color</span> <span class="o">&amp;</span> <span class="mh">0x000000FF</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span><span class="ne">float</span> <span class="n">grey</span> <span class="o">=</span> <span class="n">red</span> <span class="o">*</span> <span class="mf">0.3</span> <span class="o">+</span> <span class="n">green</span> <span class="o">*</span> <span class="mf">0.59</span> <span class="o">+</span> <span class="n">blue</span> <span class="o">*</span> <span class="mf">0.11</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="ne">float</span> <span class="n">grey</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">color</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">grey</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">input_data</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">w</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">grey</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span><span class="n">alog</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%f</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">grey</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span><span class="n">alog</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%d</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">color</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">color</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">color</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">stringStream</span> <span class="o">&lt;&lt;</span> <span class="n">color</span> <span class="o">&lt;&lt;</span> <span class="s2">&#34; &#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">//</span><span class="n">alog</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">alog</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%s</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">stringStream</span><span class="o">.</span><span class="n">str</span><span class="p">()</span><span class="o">.</span><span class="n">c_str</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">caffe2</span><span class="p">::</span><span class="n">TensorCPU</span> <span class="n">input</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">input</span><span class="o">.</span><span class="n">Resize</span><span class="p">(</span><span class="n">std</span><span class="p">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="ne">int</span><span class="o">&gt;</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="n">IMG_C</span><span class="p">,</span> <span class="n">IMG_H</span><span class="p">,</span> <span class="n">IMG_W</span><span class="p">}));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">memcpy</span><span class="p">(</span><span class="n">input</span><span class="o">.</span><span class="n">mutable_data</span><span class="o">&lt;</span><span class="ne">float</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">input_data</span><span class="p">,</span> <span class="n">INPUT_DATA_SIZE</span> <span class="o">*</span> <span class="n">sizeof</span><span class="p">(</span><span class="ne">float</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">caffe2</span><span class="p">::</span><span class="n">Predictor</span><span class="p">::</span><span class="n">TensorVector</span> <span class="n">input_vec</span><span class="p">{</span><span class="o">&amp;</span><span class="n">input</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="n">caffe2</span><span class="p">::</span><span class="n">Predictor</span><span class="p">::</span><span class="n">TensorVector</span> <span class="n">output_vec</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_predictor</span><span class="o">-&gt;</span><span class="n">run</span><span class="p">(</span><span class="n">input_vec</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">output_vec</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">constexpr</span> <span class="ne">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="ne">float</span> <span class="nb">max</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="ne">int</span> <span class="n">max_index</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="n">Find</span> <span class="n">the</span> <span class="n">top</span><span class="o">-</span><span class="n">k</span> <span class="n">result</span> <span class="n">manually</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">output_vec</span><span class="o">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="n">auto</span> <span class="n">output</span> <span class="p">:</span> <span class="n">output_vec</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="n">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">output</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="p">(</span><span class="n">auto</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="p">(</span><span class="n">output</span><span class="o">-&gt;</span><span class="n">template</span> <span class="n">data</span><span class="o">&lt;</span><span class="ne">float</span><span class="o">&gt;</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nb">max</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">for</span> <span class="p">(</span><span class="n">auto</span> <span class="n">_j</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">_j</span> <span class="o">&gt;</span> <span class="n">j</span><span class="p">;</span> <span class="o">--</span><span class="n">_j</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                            <span class="nb">max</span><span class="p">[</span><span class="n">_j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">[</span><span class="n">_j</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">max_index</span><span class="p">[</span><span class="n">_j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_index</span><span class="p">[</span><span class="n">_j</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                        <span class="nb">max</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">output</span><span class="o">-&gt;</span><span class="n">template</span> <span class="n">data</span><span class="o">&lt;</span><span class="ne">float</span><span class="o">&gt;</span><span class="p">()[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">max_index</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">goto</span> <span class="n">skip</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="n">skip</span><span class="p">:;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="p">::</span><span class="n">ostringstream</span> <span class="n">stringStream</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">auto</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stringStream</span> <span class="o">&lt;&lt;</span> <span class="n">max_index</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s2">&#34;: &#34;</span> <span class="o">&lt;&lt;</span> <span class="nb">max</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span> <span class="o">&lt;&lt;</span> <span class="s2">&#34;%</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">//</span>    <span class="k">if</span> <span class="p">(</span><span class="n">output_vec</span><span class="o">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span>        <span class="k">for</span> <span class="p">(</span><span class="n">auto</span> <span class="n">output</span><span class="p">:</span> <span class="n">output_vec</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span>            <span class="k">for</span> <span class="p">(</span><span class="n">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">output</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">();</span><span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span>                <span class="n">stringStream</span> <span class="o">&lt;&lt;</span> <span class="n">output</span><span class="o">-&gt;</span><span class="n">template</span> <span class="n">data</span><span class="o">&lt;</span><span class="ne">float</span><span class="o">&gt;</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">env</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="n">stringStream</span><span class="o">.</span><span class="n">str</span><span class="p">()</span><span class="o">.</span><span class="n">c_str</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><!-- <img src="https://user-images.githubusercontent.com/3350865/61178567-ece3e280-a621-11e9-9af3-08da3def9b98.gif" width=240 height=427/> -->
+<!-- ![Image Caption](/images/2018-04-29-001.gif){width=240 height=427} -->
+<img src="/images/2018-04-29-001.gif" width=240 height=427 />
+<h2 id="总结">总结</h2>
+<p>  通过上面的Demo可以看出，通过MNIST数据训练出来的模型在实际运行的准确率还是很堪忧的。所以一个算法从实验室数据到实际应用还有很长的路要走，虽然最近应用于各个领域的深度学习模型层出不穷，测试数据也很好看，但是在实际应用过程中还有很多路要走。虽然DeepLearning已经表现出很强大的黑魔法属性，在实际应用过程中还是有很多工作要做，不然只能停留在Demo阶段。以本文的手写数字识别为例，实际过程的准确率与测试集上的准确率相差甚远，这时候就需要进行大量的优化工作。由于学习深度学习没多久，暂时只能根据以往在机器学习上的经验来进行优化，目前能想到的优化方向有：训练集与实际运行环境要一致、准备更多的训练集、深度另外的模型方法。</p>
+]]></content:encoded>
+    </item>
+  </channel>
+</rss>

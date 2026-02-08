@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Tags on BeYoung</title>
+    <link>http://localhost:1313/zh/tags/</link>
+    <description>Recent content in Tags on BeYoung</description>
+    <image>
+      <title>BeYoung</title>
+      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.140.1</generator>
+    <language>zh</language>
+    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
+    <lastBuildDate>Mon, 10 Jun 2024 22:20:31 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/zh/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DeepLearning</title>
+      <link>http://localhost:1313/zh/tags/deeplearning/</link>
+      <pubDate>Mon, 10 Jun 2024 22:20:31 +0000</pubDate>
+      <guid>http://localhost:1313/zh/tags/deeplearning/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>技术</title>
+      <link>http://localhost:1313/zh/tags/%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Mon, 10 Jun 2024 22:20:31 +0000</pubDate>
+      <guid>http://localhost:1313/zh/tags/%E6%8A%80%E6%9C%AF/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>InferenceEngine</title>
+      <link>http://localhost:1313/zh/tags/inferenceengine/</link>
+      <pubDate>Fri, 17 May 2024 22:58:36 +0000</pubDate>
+      <guid>http://localhost:1313/zh/tags/inferenceengine/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Android</title>
+      <link>http://localhost:1313/zh/tags/android/</link>
+      <pubDate>Sat, 24 Sep 2022 17:03:48 +0000</pubDate>
+      <guid>http://localhost:1313/zh/tags/android/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Audio</title>
+      <link>http://localhost:1313/zh/tags/audio/</link>
+      <pubDate>Thu, 03 Feb 2022 11:35:16 +0000</pubDate>
+      <guid>http://localhost:1313/zh/tags/audio/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>WebRTC</title>
+      <link>http://localhost:1313/zh/tags/webrtc/</link>
+      <pubDate>Thu, 03 Feb 2022 11:35:16 +0000</pubDate>
+      <guid>http://localhost:1313/zh/tags/webrtc/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>GitPage</title>
+      <link>http://localhost:1313/zh/tags/gitpage/</link>
+      <pubDate>Sat, 25 Apr 2020 09:34:29 +0000</pubDate>
+      <guid>http://localhost:1313/zh/tags/gitpage/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>生活</title>
+      <link>http://localhost:1313/zh/tags/%E7%94%9F%E6%B4%BB/</link>
+      <pubDate>Sun, 07 Apr 2019 20:20:38 +0000</pubDate>
+      <guid>http://localhost:1313/zh/tags/%E7%94%9F%E6%B4%BB/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AudioProcessing</title>
+      <link>http://localhost:1313/zh/tags/audioprocessing/</link>
+      <pubDate>Sun, 10 Mar 2019 10:16:27 +0000</pubDate>
+      <guid>http://localhost:1313/zh/tags/audioprocessing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>JNI</title>
+      <link>http://localhost:1313/zh/tags/jni/</link>
+      <pubDate>Sun, 03 Mar 2019 22:51:59 +0000</pubDate>
+      <guid>http://localhost:1313/zh/tags/jni/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

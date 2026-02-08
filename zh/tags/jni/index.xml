@@ -1,0 +1,1233 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>JNI on BeYoung</title>
+    <link>http://localhost:1313/zh/tags/jni/</link>
+    <description>Recent content in JNI on BeYoung</description>
+    <image>
+      <title>BeYoung</title>
+      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.140.1</generator>
+    <language>zh</language>
+    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
+    <lastBuildDate>Sun, 03 Mar 2019 22:51:59 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/zh/tags/jni/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JavaNativeInterface笔记</title>
+      <link>http://localhost:1313/zh/posts/2019-03-03-javanativeinterface%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Sun, 03 Mar 2019 22:51:59 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/2019-03-03-javanativeinterface%E7%AC%94%E8%AE%B0/</guid>
+      <description>&lt;p&gt;最近由于公司项目的原因开始接触WebRTC，其中Android相关部分由于需要跨越了两种不同的语
+言，因此需要一种机制能够让C/C++和JAVA之间进行交互，而JNI就是这样一种机制。通过JNI可
+以实现C/C++和JAVA之前需要交互。本篇笔记的首先从一个实际的例子开始介绍JNI操作的完整流
+程是怎样的；接着将就这个例子完整介绍JNI中需要注意的点。
+&lt;img alt=&#34;image&#34; loading=&#34;lazy&#34; src=&#34;https://user-images.githubusercontent.com/3350865/61180103-91c2e780-a643-11e9-8132-f85c7a83f8da.jpg&#34;&gt;
+&lt;img src=&#34;http://localhost:1313/images/2019-03-03-001.jpg&#34;&gt;&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>最近由于公司项目的原因开始接触WebRTC，其中Android相关部分由于需要跨越了两种不同的语
+言，因此需要一种机制能够让C/C++和JAVA之间进行交互，而JNI就是这样一种机制。通过JNI可
+以实现C/C++和JAVA之前需要交互。本篇笔记的首先从一个实际的例子开始介绍JNI操作的完整流
+程是怎样的；接着将就这个例子完整介绍JNI中需要注意的点。
+<img alt="image" loading="lazy" src="https://user-images.githubusercontent.com/3350865/61180103-91c2e780-a643-11e9-8132-f85c7a83f8da.jpg">
+<img src="/images/2019-03-03-001.jpg"></p>
+<h3 id="jni操作完整流程介绍">JNI操作完整流程介绍</h3>
+<ul>
+<li>编写Java类及声明Native方法</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">public</span> <span class="k">class</span> <span class="n">Java2C</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="n">loadLibrary</span><span class="p">(</span><span class="s2">&#34;jni&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="err">成员变量</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="ne">int</span> <span class="n">number</span> <span class="o">=</span> <span class="mi">88</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="k">static</span> <span class="n">double</span> <span class="n">speed</span> <span class="o">=</span> <span class="mf">55.66</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="ne">String</span> <span class="n">message</span> <span class="o">=</span> <span class="s2">&#34;Hello from Java.&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="err">基本数据类型</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">native</span> <span class="n">double</span> <span class="n">average</span><span class="p">(</span><span class="ne">int</span> <span class="n">n1</span><span class="p">,</span> <span class="ne">int</span> <span class="n">n2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="err">引用类型</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">native</span> <span class="ne">String</span> <span class="n">sayHello</span><span class="p">(</span><span class="ne">String</span> <span class="n">msg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="err">基本数据类型数组</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">native</span> <span class="n">double</span><span class="p">[]</span> <span class="n">sumAndAverage</span><span class="p">(</span><span class="ne">int</span><span class="p">[]</span> <span class="n">numbers</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="err">引用类型数组</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">native</span> <span class="ne">String</span><span class="p">[]</span> <span class="n">num2Str</span><span class="p">(</span><span class="ne">int</span><span class="p">[]</span> <span class="n">numbers</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="err">操作</span><span class="n">java成员变量</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">native</span> <span class="n">void</span> <span class="n">modifyJavaVariable</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="n">java成员方法</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">void</span> <span class="n">callback</span><span class="p">(</span><span class="ne">String</span> <span class="n">message</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&#34;In Java with &#34;</span> <span class="o">+</span> <span class="n">message</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">double</span> <span class="n">callbackAverage</span><span class="p">(</span><span class="ne">int</span> <span class="n">n1</span><span class="p">,</span> <span class="ne">int</span> <span class="n">n2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">((</span><span class="n">double</span><span class="p">)</span><span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="err">静态成员方法</span>
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="k">static</span> <span class="ne">String</span> <span class="n">callbackStatic</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s2">&#34;From static Java method.&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">private</span> <span class="n">native</span> <span class="n">void</span> <span class="n">testCallbackMethod</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="k">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="ne">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Java2C</span> <span class="n">javaClass</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Java2C</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">double</span> <span class="n">aver</span> <span class="o">=</span> <span class="n">javaClass</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&#34;primitive type: the average of 5 and 6 is &#34;</span> <span class="o">+</span> <span class="n">aver</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&#34;Reference type: &#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="ne">String</span> <span class="n">javaString</span> <span class="o">=</span> <span class="n">javaClass</span><span class="o">.</span><span class="n">sayHello</span><span class="p">(</span><span class="s2">&#34;Hello From Java&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="n">javaString</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&#34;primitive type array: &#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="ne">int</span><span class="p">[]</span> <span class="n">numbers</span> <span class="o">=</span> <span class="p">{</span><span class="mi">11</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">33</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="n">double</span><span class="p">[]</span> <span class="n">results</span> <span class="o">=</span> <span class="n">javaClass</span><span class="o">.</span><span class="n">sumAndAverage</span><span class="p">(</span><span class="n">numbers</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&#34;In Java, the sum is &#34;</span> <span class="o">+</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&#34;In Java, the average is &#34;</span> <span class="o">+</span> <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&#34;reference type array: &#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="ne">String</span><span class="p">[]</span> <span class="n">numStrs</span> <span class="o">=</span> <span class="n">javaClass</span><span class="o">.</span><span class="n">num2Str</span><span class="p">(</span><span class="n">numbers</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&#34;In Java the string is &#34;</span> <span class="o">+</span> <span class="n">numStrs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&#34; &#34;</span> <span class="o">+</span> <span class="n">numStrs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&#34; &#34;</span> <span class="o">+</span> <span class="n">numStrs</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&#34;Operate java variable: &#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">javaClass</span><span class="o">.</span><span class="n">modifyJavaVariable</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&#34;C/C++　call java viarable and method&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">javaClass</span><span class="o">.</span><span class="n">testCallbackMethod</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>生成jni native头文件</li>
+</ul>
+<blockquote>
+<p>javac -h &lt;头文件存放路径&gt; &lt;java类&gt;</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* DO NOT EDIT THIS FILE - it is machine generated */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;jni.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="cm">/* Header for class Java2C */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#ifndef _Included_Java2C
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define _Included_Java2C
+</span></span></span><span class="line"><span class="cl"><span class="cp">#ifdef __cplusplus
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">extern</span> <span class="s">&#34;C&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Class:     Java2C
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Method:    average
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Signature: (II)D
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="n">JNIEXPORT</span> <span class="n">jdouble</span> <span class="n">JNICALL</span> <span class="nf">Java_Java2C_average</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="p">,</span> <span class="n">jobject</span><span class="p">,</span> <span class="n">jint</span><span class="p">,</span> <span class="n">jint</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Class:     Java2C
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Method:    sayHello
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Signature: (Ljava/lang/String;)Ljava/lang/String;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="n">JNIEXPORT</span> <span class="n">jstring</span> <span class="n">JNICALL</span> <span class="nf">Java_Java2C_sayHello</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="p">,</span> <span class="n">jobject</span><span class="p">,</span> <span class="n">jstring</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Class:     Java2C
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Method:    sumAndAverage
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Signature: ([I)[D
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="n">JNIEXPORT</span> <span class="n">jdoubleArray</span> <span class="n">JNICALL</span> <span class="nf">Java_Java2C_sumAndAverage</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="p">,</span> <span class="n">jobject</span><span class="p">,</span> <span class="n">jintArray</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Class:     Java2C
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Method:    num2Str
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Signature: ([I)[Ljava/lang/String;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="n">JNIEXPORT</span> <span class="n">jobjectArray</span> <span class="n">JNICALL</span> <span class="nf">Java_Java2C_num2Str</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="p">,</span> <span class="n">jobject</span><span class="p">,</span> <span class="n">jintArray</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Class:     Java2C
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Method:    modifyJavaVariable
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Signature: ()V
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="n">JNIEXPORT</span> <span class="kt">void</span> <span class="n">JNICALL</span> <span class="nf">Java_Java2C_modifyJavaVariable</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="p">,</span> <span class="n">jobject</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Class:     Java2C
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Method:    testCallbackMethod
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Signature: ()V
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="n">JNIEXPORT</span> <span class="kt">void</span> <span class="n">JNICALL</span> <span class="nf">Java_Java2C_testCallbackMethod</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="p">,</span> <span class="n">jobject</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#ifdef __cplusplus
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>在C文件中编写相关jni native方法的实现</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="c1">#include &lt;jni.h&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#include &lt;stdio.h&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#include &#34;Java2C.h&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">JNIEXPORT</span> <span class="n">jdouble</span> <span class="n">JNICALL</span> <span class="n">Java_Java2C_average</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jobject</span> <span class="n">thisObj</span><span class="p">,</span> <span class="n">jint</span> <span class="n">n1</span><span class="p">,</span> <span class="n">jint</span> <span class="n">n2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">jdouble</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">printf</span><span class="p">(</span><span class="s2">&#34;In C, the numbers are </span><span class="si">%d</span><span class="s2"> and </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">result</span> <span class="o">=</span> <span class="p">((</span><span class="n">jdouble</span><span class="p">)</span><span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">JNIEXPORT</span> <span class="n">jstring</span> <span class="n">JNICALL</span> <span class="n">Java_Java2C_sayHello</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jobject</span> <span class="n">thisObj</span><span class="p">,</span> <span class="n">jstring</span> <span class="n">inJNIStr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">inCStr</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetStringUTFChars</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">inJNIStr</span><span class="p">,</span> <span class="n">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">NULL</span> <span class="o">==</span> <span class="n">inCStr</span><span class="p">)</span> <span class="k">return</span> <span class="n">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">printf</span><span class="p">(</span><span class="s2">&#34;In C, the receiving string is: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">inCStr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">ReleaseStringUTFChars</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">inJNIStr</span><span class="p">,</span> <span class="n">inCStr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">char</span> <span class="n">outCStr</span><span class="p">[</span><span class="mi">128</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;Out string from C&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">outCStr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">JNIEXPORT</span> <span class="n">jdoubleArray</span> <span class="n">JNICALL</span> <span class="n">Java_Java2C_sumAndAverage</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jobject</span> <span class="n">thisObj</span><span class="p">,</span> <span class="n">jintArray</span> <span class="n">inJNIArray</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">jint</span> <span class="o">*</span><span class="n">inCArray</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetIntArrayElements</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">inJNIArray</span><span class="p">,</span> <span class="n">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">NULL</span> <span class="o">==</span> <span class="n">inCArray</span><span class="p">)</span> <span class="k">return</span> <span class="n">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">jsize</span> <span class="n">length</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetArrayLength</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">inJNIArray</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">jint</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="ne">int</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">length</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="n">sum</span> <span class="o">+=</span> <span class="n">inCArray</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="n">jdouble</span> <span class="n">average</span> <span class="o">=</span> <span class="p">(</span><span class="n">jdouble</span><span class="p">)</span><span class="n">sum</span> <span class="o">/</span> <span class="n">length</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">ReleaseIntArrayElements</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">inJNIArray</span><span class="p">,</span> <span class="n">inCArray</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">jdouble</span> <span class="n">outArray</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">sum</span><span class="p">,</span> <span class="n">average</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">jdoubleArray</span> <span class="n">outJNIArray</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">NewDoubleArray</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">NULL</span> <span class="o">==</span> <span class="n">outJNIArray</span><span class="p">)</span> <span class="k">return</span> <span class="n">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">SetDoubleArrayRegion</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">outJNIArray</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">outArray</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">outJNIArray</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">JNIEXPORT</span> <span class="n">jobjectArray</span> <span class="n">JNICALL</span> <span class="n">Java_Java2C_num2Str</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jobject</span> <span class="n">thisObj</span><span class="p">,</span> <span class="n">jintArray</span> <span class="n">inJNIArray</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">jobjectArray</span> <span class="n">ret</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">jint</span> <span class="o">*</span><span class="n">inCArray</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetIntArrayElements</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">inJNIArray</span><span class="p">,</span> <span class="n">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">NULL</span> <span class="o">==</span> <span class="n">inCArray</span><span class="p">)</span> <span class="k">return</span> <span class="n">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">jsize</span> <span class="n">length</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetArrayLength</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">inJNIArray</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">char</span> <span class="n">cStrArray</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="mi">128</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">      <span class="ne">int</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="n">snprintf</span><span class="p">(</span><span class="n">cStrArray</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">128</span><span class="p">,</span> <span class="s2">&#34;</span><span class="si">%d</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">inCArray</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">jclass</span> <span class="n">strClass</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">FindClass</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s2">&#34;java/lang/String&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">ret</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">NewObjectArray</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">strClass</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">      <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">length</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">SetObjectArrayElement</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">ret</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">cStrArray</span><span class="p">[</span><span class="n">i</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">JNIEXPORT</span> <span class="n">void</span> <span class="n">JNICALL</span> <span class="n">Java_Java2C_modifyJavaVariable</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jobject</span> <span class="n">thisObj</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">jclass</span> <span class="n">thisClass</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetObjectClass</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">thisObj</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">jfieldID</span> <span class="n">fidNumber</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetFieldID</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">thisClass</span><span class="p">,</span> <span class="s2">&#34;number&#34;</span><span class="p">,</span> <span class="s2">&#34;I&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">NULL</span> <span class="o">==</span> <span class="n">fidNumber</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">jint</span> <span class="n">number</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetIntField</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">thisObj</span><span class="p">,</span> <span class="n">fidNumber</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">printf</span><span class="p">(</span><span class="s2">&#34;In C, thi int is </span><span class="si">%d</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">number</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">number</span> <span class="o">=</span> <span class="mi">99</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">SetIntField</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">thisObj</span><span class="p">,</span> <span class="n">fidNumber</span><span class="p">,</span> <span class="n">number</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">jfieldID</span> <span class="n">fidMessage</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetFieldID</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">thisClass</span><span class="p">,</span> <span class="s2">&#34;message&#34;</span><span class="p">,</span> <span class="s2">&#34;Ljava/lang/String;&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">NULL</span> <span class="o">==</span> <span class="n">fidMessage</span><span class="p">)</span> <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">jstring</span> <span class="n">message</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetObjectField</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">thisObj</span><span class="p">,</span> <span class="n">fidMessage</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="k">const</span> <span class="n">char</span><span class="o">*</span> <span class="n">cStr</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetStringUTFChars</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">NULL</span> <span class="o">==</span> <span class="n">cStr</span><span class="p">)</span> <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">printf</span><span class="p">(</span><span class="s2">&#34;In C, the string is </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">cStr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">ReleaseStringUTFChars</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">cStr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">message</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s2">&#34;Hello from C&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">NULL</span> <span class="o">==</span> <span class="n">message</span><span class="p">)</span> <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">SetObjectField</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">thisObj</span><span class="p">,</span> <span class="n">fidMessage</span><span class="p">,</span> <span class="n">message</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">jfieldID</span> <span class="n">fidSpeed</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetStaticFieldID</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">thisClass</span><span class="p">,</span> <span class="s2">&#34;speed&#34;</span><span class="p">,</span> <span class="s2">&#34;D&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">NULL</span> <span class="o">==</span> <span class="n">fidSpeed</span><span class="p">)</span> <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">jdouble</span> <span class="n">speed</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetStaticDoubleField</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">thisClass</span><span class="p">,</span> <span class="n">fidSpeed</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">printf</span><span class="p">(</span><span class="s2">&#34;In C, the speed is </span><span class="si">%f</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">speed</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">speed</span> <span class="o">=</span> <span class="mf">77.99</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">SetStaticDoubleField</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">thisClass</span><span class="p">,</span> <span class="n">fidSpeed</span><span class="p">,</span> <span class="n">speed</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">JNIEXPORT</span> <span class="n">void</span> <span class="n">JNICALL</span> <span class="n">Java_Java2C_testCallbackMethod</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jobject</span> <span class="n">thisObj</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">jclass</span> <span class="n">thisClass</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetObjectClass</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">thisObj</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">jmethodID</span> <span class="n">midCallback</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetMethodID</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">thisClass</span><span class="p">,</span> <span class="s2">&#34;callback&#34;</span><span class="p">,</span> <span class="s2">&#34;(Ljava/lang/String;)V&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">NULL</span> <span class="o">==</span> <span class="n">midCallback</span><span class="p">)</span> <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">printf</span><span class="p">(</span><span class="s2">&#34;In C, call back Java&#39;s callback(String)</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">jstring</span> <span class="n">message</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s2">&#34;Hello from C&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">CallVoidMethod</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">thisObj</span><span class="p">,</span> <span class="n">midCallback</span><span class="p">,</span> <span class="n">message</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">jmethodID</span> <span class="n">midCallbackAverage</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetMethodID</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">thisClass</span><span class="p">,</span> <span class="s2">&#34;callbackAverage&#34;</span><span class="p">,</span> <span class="s2">&#34;(II)D&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">NULL</span> <span class="o">==</span> <span class="n">midCallbackAverage</span><span class="p">)</span> <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">printf</span><span class="p">(</span><span class="s2">&#34;In C, call back Java&#39;s callbackAverage</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">jdouble</span> <span class="n">average</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">CallDoubleMethod</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">thisObj</span><span class="p">,</span> <span class="n">midCallbackAverage</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">printf</span><span class="p">(</span><span class="s2">&#34;In C, the average is </span><span class="si">%f</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">average</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">jmethodID</span> <span class="n">midCallbackStatic</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetStaticMethodID</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">thisClass</span><span class="p">,</span> <span class="s2">&#34;callbackStatic&#34;</span><span class="p">,</span> <span class="s2">&#34;()Ljava/lang/String;&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">NULL</span> <span class="o">==</span> <span class="n">midCallbackStatic</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="n">printf</span><span class="p">(</span><span class="s2">&#34;1111</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="n">jstring</span> <span class="n">resultJNIStr</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">CallStaticObjectMethod</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">thisClass</span><span class="p">,</span> <span class="n">midCallbackStatic</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">NULL</span> <span class="o">==</span> <span class="n">resultJNIStr</span><span class="p">)</span> <span class="k">return</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">const</span> <span class="n">char</span><span class="o">*</span> <span class="n">resultCStr</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetStringUTFChars</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">resultJNIStr</span><span class="p">,</span> <span class="n">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">NULL</span> <span class="o">==</span> <span class="n">resultCStr</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">printf</span><span class="p">(</span><span class="s2">&#34;In C, the returned string is </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">resultCStr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>通过gcc/g++ 生成动态库</li>
+</ul>
+<blockquote>
+<p>gcc -fPIC -I&quot;$JAVA_HOME/include&quot; -I&quot;$JAVA_HOME/include/linux&quot; -shared -o libjni.so Java2C.c</p>
+</blockquote>
+<ul>
+<li>运行进行测试</li>
+</ul>
+<blockquote>
+<p>java -Djava.library.path=. Java2C <br>
+这里需要使用-D指定前面生的动态库路径，否则运行的时候会提示找不到动态库的错误</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">In</span> <span class="n">C</span><span class="p">,</span> <span class="n">the</span> <span class="n">numbers</span> <span class="n">are</span> <span class="mi">5</span> <span class="ow">and</span> <span class="mi">6</span>
+</span></span><span class="line"><span class="cl"><span class="n">primitive</span> <span class="n">type</span><span class="p">:</span> <span class="n">the</span> <span class="n">average</span> <span class="n">of</span> <span class="mi">5</span> <span class="ow">and</span> <span class="mi">6</span> <span class="n">is</span> <span class="mf">5.5</span>
+</span></span><span class="line"><span class="cl"><span class="ne">Reference</span> <span class="n">type</span><span class="p">:</span> 
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="n">C</span><span class="p">,</span> <span class="n">the</span> <span class="n">receiving</span> <span class="n">string</span> <span class="n">is</span><span class="p">:</span> <span class="n">Hello</span> <span class="n">From</span> <span class="n">Java</span>
+</span></span><span class="line"><span class="cl"><span class="n">Out</span> <span class="n">string</span> <span class="n">from</span> <span class="n">C</span>
+</span></span><span class="line"><span class="cl"><span class="n">primitive</span> <span class="n">type</span> <span class="n">array</span><span class="p">:</span> 
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="n">Java</span><span class="p">,</span> <span class="n">the</span> <span class="n">sum</span> <span class="n">is</span> <span class="mf">66.0</span>
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="n">Java</span><span class="p">,</span> <span class="n">the</span> <span class="n">average</span> <span class="n">is</span> <span class="mf">22.0</span>
+</span></span><span class="line"><span class="cl"><span class="n">reference</span> <span class="n">type</span> <span class="n">array</span><span class="p">:</span> 
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="n">Java</span> <span class="n">the</span> <span class="n">string</span> <span class="n">is</span> <span class="mi">11</span> <span class="mi">22</span> <span class="mi">33</span>
+</span></span><span class="line"><span class="cl"><span class="n">Operate</span> <span class="n">java</span> <span class="n">variable</span><span class="p">:</span> 
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="n">C</span><span class="p">,</span> <span class="n">thi</span> <span class="ne">int</span> <span class="n">is</span> <span class="mi">88</span>
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="n">C</span><span class="p">,</span> <span class="n">the</span> <span class="n">string</span> <span class="n">is</span> <span class="n">Hello</span> <span class="n">from</span> <span class="n">Java</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="n">C</span><span class="p">,</span> <span class="n">the</span> <span class="n">speed</span> <span class="n">is</span> <span class="mf">55.660000</span>
+</span></span><span class="line"><span class="cl"><span class="n">C</span><span class="o">/</span><span class="n">C</span><span class="o">++</span>　<span class="n">call</span> <span class="n">java</span> <span class="n">viarable</span> <span class="ow">and</span> <span class="n">method</span>
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="n">C</span><span class="p">,</span> <span class="n">call</span> <span class="n">back</span> <span class="n">Java</span><span class="s1">&#39;s callback(String)</span>
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="n">Java</span> <span class="n">with</span> <span class="n">Hello</span> <span class="n">from</span> <span class="n">C</span>
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="n">C</span><span class="p">,</span> <span class="n">call</span> <span class="n">back</span> <span class="n">Java</span><span class="s1">&#39;s callbackAverage</span>
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="n">C</span><span class="p">,</span> <span class="n">the</span> <span class="n">average</span> <span class="n">is</span> <span class="mf">2.500000</span>
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="n">C</span><span class="p">,</span> <span class="n">the</span> <span class="n">returned</span> <span class="n">string</span> <span class="n">is</span> <span class="n">From</span> <span class="k">static</span> <span class="n">Java</span> <span class="n">method</span><span class="o">.</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="jni中类型的对应关系与转换">JNI中类型的对应关系与转换</h3>
+<ul>
+<li>基于数据类型</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th>Java类型</th>
+          <th>Native Type</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>boolean</td>
+          <td>jboolean</td>
+          <td>C/C++无符号的8位整型（unsigned char）</td>
+      </tr>
+      <tr>
+          <td>byte</td>
+          <td>jbyte</td>
+          <td>C/C++带符号的8位整型（char）</td>
+      </tr>
+      <tr>
+          <td>char</td>
+          <td>jchar</td>
+          <td>C/C++无符号的16位整型（unsigned short）</td>
+      </tr>
+      <tr>
+          <td>short</td>
+          <td>jshort</td>
+          <td>C/C++带符号的16位整型 （signed short)</td>
+      </tr>
+      <tr>
+          <td>int</td>
+          <td>jint</td>
+          <td>C/C++带符号的32位整型（int）</td>
+      </tr>
+      <tr>
+          <td>long</td>
+          <td>jlong</td>
+          <td>C/C++带符号的64位整型（long）</td>
+      </tr>
+      <tr>
+          <td>float</td>
+          <td>jfloat</td>
+          <td>C/C++32位浮点型（float）</td>
+      </tr>
+      <tr>
+          <td>double</td>
+          <td>jdouble</td>
+          <td>C/C++64位浮点型（double）</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>引用数据类型</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th>Java类型</th>
+          <th>Native Type</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Object</td>
+          <td>jobject</td>
+          <td>任何Java对象，或者没有对应java类型的对象</td>
+      </tr>
+      <tr>
+          <td>Class</td>
+          <td>jclass</td>
+          <td>Class类对象</td>
+      </tr>
+      <tr>
+          <td>String</td>
+          <td>jstring</td>
+          <td>字符串对象</td>
+      </tr>
+      <tr>
+          <td>Object[]</td>
+          <td>jobjectArray</td>
+          <td>任何对象的数组</td>
+      </tr>
+      <tr>
+          <td>boolean[]</td>
+          <td>jbooleanArray</td>
+          <td>布尔型数组</td>
+      </tr>
+      <tr>
+          <td>byte[]</td>
+          <td>jbyteArray</td>
+          <td>比特型数组</td>
+      </tr>
+      <tr>
+          <td>char[]</td>
+          <td>jcharArray</td>
+          <td>字符型数组</td>
+      </tr>
+      <tr>
+          <td>short[]</td>
+          <td>jshortArray</td>
+          <td>短整型数组</td>
+      </tr>
+      <tr>
+          <td>int[]</td>
+          <td>jintArray</td>
+          <td>整型数组</td>
+      </tr>
+      <tr>
+          <td>long[]</td>
+          <td>jlongArray</td>
+          <td>长整型数组</td>
+      </tr>
+      <tr>
+          <td>float[]</td>
+          <td>jfloatArray</td>
+          <td>单精度浮点型数组</td>
+      </tr>
+      <tr>
+          <td>double[]</td>
+          <td>jdouble</td>
+          <td>双精度浮点型数组</td>
+      </tr>
+      <tr>
+          <td>void</td>
+          <td>void</td>
+          <td>n/a</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>引用类型的继承关系<br>
+<img alt="image" loading="lazy" src="https://user-images.githubusercontent.com/3350865/61180104-94254180-a643-11e9-815b-2f3460940ae2.jpg"></li>
+<li>注意</li>
+</ul>
+<blockquote>
+<ol>
+<li>基本数据类型可以在native层直接使用</li>
+<li>引用数据类型则不能直接使用，需要根据JNI函数进行相应的转换才能使用</li>
+<li>多维数据（包括二维数组）都是引用类型，需要使用jobjectArray类型存取其值</li>
+</ol>
+</blockquote>
+<ul>
+<li>JNI相关操作方法</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="n">native</span> <span class="n">string方法</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">UTF</span><span class="o">-</span><span class="mi">8</span> <span class="ne">String</span> <span class="p">(</span><span class="n">encoded</span> <span class="n">to</span> <span class="mi">1</span><span class="o">-</span><span class="mi">3</span> <span class="n">byte</span><span class="p">,</span> <span class="n">backward</span> <span class="n">compatible</span> <span class="n">with</span> <span class="mi">7</span><span class="o">-</span><span class="n">bit</span> <span class="n">ASCII</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Can</span> <span class="n">be</span> <span class="n">mapped</span> <span class="n">to</span> <span class="n">null</span><span class="o">-</span><span class="n">terminated</span> <span class="n">char</span><span class="o">-</span><span class="n">array</span> <span class="n">C</span><span class="o">-</span><span class="n">string</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">char</span> <span class="o">*</span> <span class="n">GetStringUTFChars</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jstring</span> <span class="n">string</span><span class="p">,</span> <span class="n">jboolean</span> <span class="o">*</span><span class="n">isCopy</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Returns</span> <span class="n">a</span> <span class="n">pointer</span> <span class="n">to</span> <span class="n">an</span> <span class="n">array</span> <span class="n">of</span> <span class="n">bytes</span> <span class="n">representing</span> <span class="n">the</span> <span class="n">string</span> <span class="ow">in</span> <span class="n">modified</span> <span class="n">UTF</span><span class="o">-</span><span class="mi">8</span> <span class="n">encoding</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">ReleaseStringUTFChars</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jstring</span> <span class="n">string</span><span class="p">,</span> <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">utf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Informs</span> <span class="n">the</span> <span class="n">VM</span> <span class="n">that</span> <span class="n">the</span> <span class="n">native</span> <span class="n">code</span> <span class="n">no</span> <span class="n">longer</span> <span class="n">needs</span> <span class="n">access</span> <span class="n">to</span> <span class="n">utf</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">jstring</span> <span class="n">NewStringUTF</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">bytes</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Constructs</span> <span class="n">a</span> <span class="n">new</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">String</span> <span class="n">object</span> <span class="n">from</span> <span class="n">an</span> <span class="n">array</span> <span class="n">of</span> <span class="n">characters</span> <span class="ow">in</span> <span class="n">modified</span> <span class="n">UTF</span><span class="o">-</span><span class="mi">8</span> <span class="n">encoding</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">jsize</span> <span class="n">GetStringUTFLength</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jstring</span> <span class="n">string</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Returns</span> <span class="n">the</span> <span class="n">length</span> <span class="ow">in</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">the</span> <span class="n">modified</span> <span class="n">UTF</span><span class="o">-</span><span class="mi">8</span> <span class="n">representation</span> <span class="n">of</span> <span class="n">a</span> <span class="n">string</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">GetStringUTFRegion</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jstring</span> <span class="nb">str</span><span class="p">,</span> <span class="n">jsize</span> <span class="n">start</span><span class="p">,</span> <span class="n">jsize</span> <span class="n">length</span><span class="p">,</span> <span class="n">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Translates</span> <span class="n">len</span> <span class="n">number</span> <span class="n">of</span> <span class="n">Unicode</span> <span class="n">characters</span> <span class="n">beginning</span> <span class="n">at</span> <span class="n">offset</span> <span class="n">start</span> <span class="n">into</span> <span class="n">modified</span> <span class="n">UTF</span><span class="o">-</span><span class="mi">8</span> <span class="n">encoding</span> 
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="ow">and</span> <span class="n">place</span> <span class="n">the</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">given</span> <span class="n">buffer</span> <span class="n">buf</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Unicode</span> <span class="n">Strings</span> <span class="p">(</span><span class="mi">16</span><span class="o">-</span><span class="n">bit</span> <span class="n">character</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">jchar</span> <span class="o">*</span> <span class="n">GetStringChars</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jstring</span> <span class="n">string</span><span class="p">,</span> <span class="n">jboolean</span> <span class="o">*</span><span class="n">isCopy</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Returns</span> <span class="n">a</span> <span class="n">pointer</span> <span class="n">to</span> <span class="n">the</span> <span class="n">array</span> <span class="n">of</span> <span class="n">Unicode</span> <span class="n">characters</span>
+</span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">ReleaseStringChars</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jstring</span> <span class="n">string</span><span class="p">,</span> <span class="k">const</span> <span class="n">jchar</span> <span class="o">*</span><span class="n">chars</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Informs</span> <span class="n">the</span> <span class="n">VM</span> <span class="n">that</span> <span class="n">the</span> <span class="n">native</span> <span class="n">code</span> <span class="n">no</span> <span class="n">longer</span> <span class="n">needs</span> <span class="n">access</span> <span class="n">to</span> <span class="n">chars</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">jstring</span> <span class="n">NewString</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="k">const</span> <span class="n">jchar</span> <span class="o">*</span><span class="n">unicodeChars</span><span class="p">,</span> <span class="n">jsize</span> <span class="n">length</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Constructs</span> <span class="n">a</span> <span class="n">new</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">String</span> <span class="n">object</span> <span class="n">from</span> <span class="n">an</span> <span class="n">array</span> <span class="n">of</span> <span class="n">Unicode</span> <span class="n">characters</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">jsize</span> <span class="n">GetStringLength</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jstring</span> <span class="n">string</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Returns</span> <span class="n">the</span> <span class="n">length</span> <span class="p">(</span><span class="n">the</span> <span class="n">count</span> <span class="n">of</span> <span class="n">Unicode</span> <span class="n">characters</span><span class="p">)</span> <span class="n">of</span> <span class="n">a</span> <span class="n">Java</span> <span class="n">string</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">GetStringRegion</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jstring</span> <span class="nb">str</span><span class="p">,</span> <span class="n">jsize</span> <span class="n">start</span><span class="p">,</span> <span class="n">jsize</span> <span class="n">length</span><span class="p">,</span> <span class="n">jchar</span> <span class="o">*</span><span class="n">buf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Copies</span> <span class="n">len</span> <span class="n">number</span> <span class="n">of</span> <span class="n">Unicode</span> <span class="n">characters</span> <span class="n">beginning</span> <span class="n">at</span> <span class="n">offset</span> <span class="n">start</span> <span class="n">to</span> <span class="n">the</span> <span class="n">given</span> <span class="n">buffer</span> <span class="n">buf</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="n">JNI</span> <span class="n">Primitive</span> <span class="ne">Array</span> <span class="n">Function</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">ArrayType</span><span class="p">:</span> <span class="n">jintArray</span><span class="p">,</span> <span class="n">jbyteArray</span><span class="p">,</span> <span class="n">jshortArray</span><span class="p">,</span> <span class="n">jlongArray</span><span class="p">,</span> <span class="n">jfloatArray</span><span class="p">,</span> <span class="n">jdoubleArray</span><span class="p">,</span> <span class="n">jcharArray</span><span class="p">,</span> <span class="n">jbooleanArray</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">PrimitiveType</span><span class="p">:</span> <span class="ne">int</span><span class="p">,</span> <span class="n">byte</span><span class="p">,</span> <span class="n">short</span><span class="p">,</span> <span class="n">long</span><span class="p">,</span> <span class="ne">float</span><span class="p">,</span> <span class="n">double</span><span class="p">,</span> <span class="n">char</span><span class="p">,</span> <span class="n">boolean</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">NativeType</span><span class="p">:</span> <span class="n">jint</span><span class="p">,</span> <span class="n">jbyte</span><span class="p">,</span> <span class="n">jshort</span><span class="p">,</span> <span class="n">jlong</span><span class="p">,</span> <span class="n">jfloat</span><span class="p">,</span> <span class="n">jdouble</span><span class="p">,</span> <span class="n">jchar</span><span class="p">,</span> <span class="n">jboolean</span>
+</span></span><span class="line"><span class="cl"><span class="n">NativeType</span> <span class="o">*</span> <span class="n">Get</span><span class="o">&lt;</span><span class="n">PrimitiveType</span><span class="o">&gt;</span><span class="n">ArrayElements</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">ArrayType</span> <span class="n">array</span><span class="p">,</span> <span class="n">jboolean</span> <span class="o">*</span><span class="n">isCopy</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">Release</span><span class="o">&lt;</span><span class="n">PrimitiveType</span><span class="o">&gt;</span><span class="n">ArrayElements</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">ArrayType</span> <span class="n">array</span><span class="p">,</span> <span class="n">NativeType</span> <span class="o">*</span><span class="n">elems</span><span class="p">,</span> <span class="n">jint</span> <span class="n">mode</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">Get</span><span class="o">&lt;</span><span class="n">PrimitiveType</span><span class="o">&gt;</span><span class="n">ArrayRegion</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">ArrayType</span> <span class="n">array</span><span class="p">,</span> <span class="n">jsize</span> <span class="n">start</span><span class="p">,</span> <span class="n">jsize</span> <span class="n">length</span><span class="p">,</span> <span class="n">NativeType</span> <span class="o">*</span><span class="n">buffer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">PrimitiveType</span><span class="o">&gt;</span><span class="n">ArrayRegion</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">ArrayType</span> <span class="n">array</span><span class="p">,</span> <span class="n">jsize</span> <span class="n">start</span><span class="p">,</span> <span class="n">jsize</span> <span class="n">length</span><span class="p">,</span> <span class="k">const</span> <span class="n">NativeType</span> <span class="o">*</span><span class="n">buffer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">ArrayType</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">PrimitiveType</span><span class="o">&gt;</span><span class="ne">Array</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jsize</span> <span class="n">length</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="o">*</span> <span class="n">GetPrimitiveArrayCritical</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jarray</span> <span class="n">array</span><span class="p">,</span> <span class="n">jboolean</span> <span class="o">*</span><span class="n">isCopy</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">ReleasePrimitiveArrayCritical</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jarray</span> <span class="n">array</span><span class="p">,</span> <span class="n">void</span> <span class="o">*</span><span class="n">carray</span><span class="p">,</span> <span class="n">jint</span> <span class="n">mode</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="cc调用java类中的成员变量">C/C++调用Java类中的成员变量</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="n">JNI操作成员变量变量</span>
+</span></span><span class="line"><span class="cl"><span class="n">jclass</span> <span class="n">GetObjectClass</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jobject</span> <span class="n">obj</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Returns</span> <span class="n">the</span> <span class="k">class</span> <span class="n">of</span> <span class="n">an</span> <span class="n">object</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl"><span class="n">jfieldID</span> <span class="n">GetFieldID</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jclass</span> <span class="n">cls</span><span class="p">,</span> <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">name</span><span class="p">,</span> <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">sig</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="o">//</span> <span class="n">Returns</span> <span class="n">the</span> <span class="n">field</span> <span class="n">ID</span> <span class="k">for</span> <span class="n">an</span> <span class="n">instance</span> <span class="n">variable</span> <span class="n">of</span> <span class="n">a</span> <span class="k">class</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="n">NativeType</span> <span class="n">Get</span><span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span><span class="n">Field</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jobject</span> <span class="n">obj</span><span class="p">,</span> <span class="n">jfieldID</span> <span class="n">fieldID</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span><span class="n">Field</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jobject</span> <span class="n">obj</span><span class="p">,</span> <span class="n">jfieldID</span> <span class="n">fieldID</span><span class="p">,</span> <span class="n">NativeType</span> <span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="o">//</span> <span class="n">Get</span><span class="o">/</span><span class="n">Set</span> <span class="n">the</span> <span class="n">value</span> <span class="n">of</span> <span class="n">an</span> <span class="n">instance</span> <span class="n">variable</span> <span class="n">of</span> <span class="n">an</span> <span class="n">object</span>
+</span></span><span class="line"><span class="cl">  <span class="o">//</span> <span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span> <span class="n">includes</span> <span class="n">each</span> <span class="n">of</span> <span class="n">the</span> <span class="n">eight</span> <span class="n">primitive</span> <span class="n">types</span> <span class="n">plus</span> <span class="ne">Object</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="n">jfieldID</span> <span class="n">GetStaticFieldID</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jclass</span> <span class="n">cls</span><span class="p">,</span> <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">name</span><span class="p">,</span> <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">sig</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="o">//</span> <span class="n">Returns</span> <span class="n">the</span> <span class="n">field</span> <span class="n">ID</span> <span class="k">for</span> <span class="n">a</span> <span class="k">static</span> <span class="n">variable</span> <span class="n">of</span> <span class="n">a</span> <span class="k">class</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="n">NativeType</span> <span class="n">GetStatic</span><span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span><span class="n">Field</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jclass</span> <span class="n">clazz</span><span class="p">,</span> <span class="n">jfieldID</span> <span class="n">fieldID</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">SetStatic</span><span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span><span class="n">Field</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jclass</span> <span class="n">clazz</span><span class="p">,</span> <span class="n">jfieldID</span> <span class="n">fieldID</span><span class="p">,</span> <span class="n">NativeType</span> <span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="o">//</span> <span class="n">Get</span><span class="o">/</span><span class="n">Set</span> <span class="n">the</span> <span class="n">value</span> <span class="n">of</span> <span class="n">a</span> <span class="k">static</span> <span class="n">variable</span> <span class="n">of</span> <span class="n">a</span> <span class="k">class</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">  <span class="o">//</span> <span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span> <span class="n">includes</span> <span class="n">each</span> <span class="n">of</span> <span class="n">the</span> <span class="n">eight</span> <span class="n">primitive</span> <span class="n">types</span> <span class="n">plus</span> <span class="ne">Object</span><span class="o">.</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="cc调用java类中的成员方法">C/C++调用Java类中的成员方法</h3>
+<p>通过下面这条命令可以获取到java中方法的签名</p>
+<blockquote>
+<p>javas -s -p Java2C</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Compiled from &#34;Java2C.java&#34;
+</span></span><span class="line"><span class="cl">public class Java2C {
+</span></span><span class="line"><span class="cl">  private int number;
+</span></span><span class="line"><span class="cl">    descriptor: I
+</span></span><span class="line"><span class="cl">  private static double speed;
+</span></span><span class="line"><span class="cl">    descriptor: D
+</span></span><span class="line"><span class="cl">  private java.lang.String message;
+</span></span><span class="line"><span class="cl">    descriptor: Ljava/lang/String;
+</span></span><span class="line"><span class="cl">  public Java2C();
+</span></span><span class="line"><span class="cl">    descriptor: ()V
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  private native double average(int, int);
+</span></span><span class="line"><span class="cl">    descriptor: (II)D
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  private native java.lang.String sayHello(java.lang.String);
+</span></span><span class="line"><span class="cl">    descriptor: (Ljava/lang/String;)Ljava/lang/String;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  private native double[] sumAndAverage(int[]);
+</span></span><span class="line"><span class="cl">    descriptor: ([I)[D
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  private native java.lang.String[] num2Str(int[]);
+</span></span><span class="line"><span class="cl">    descriptor: ([I)[Ljava/lang/String;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  private native void modifyJavaVariable();
+</span></span><span class="line"><span class="cl">    descriptor: ()V
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  private void callback(java.lang.String);
+</span></span><span class="line"><span class="cl">    descriptor: (Ljava/lang/String;)V
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  private double callbackAverage(int, int);
+</span></span><span class="line"><span class="cl">    descriptor: (II)D
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  private static java.lang.String callbackStatic();
+</span></span><span class="line"><span class="cl">    descriptor: ()Ljava/lang/String;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  private native void testCallbackMethod();
+</span></span><span class="line"><span class="cl">    descriptor: ()V
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  public static void main(java.lang.String[]);
+</span></span><span class="line"><span class="cl">    descriptor: ([Ljava/lang/String;)V
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  static {};
+</span></span><span class="line"><span class="cl">    descriptor: ()V
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>再通过下面这些JNI方法变可以在C/C++代码中调用到JAVA类的成员方法了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">jmethodID</span> <span class="n">GetMethodID</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jclass</span> <span class="n">cls</span><span class="p">,</span> <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">name</span><span class="p">,</span> <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">sig</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Returns</span> <span class="n">the</span> <span class="n">method</span> <span class="n">ID</span> <span class="k">for</span> <span class="n">an</span> <span class="n">instance</span> <span class="n">method</span> <span class="n">of</span> <span class="n">a</span> <span class="k">class</span> <span class="ow">or</span> <span class="n">interface</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl"><span class="n">NativeType</span> <span class="n">Call</span><span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span><span class="n">Method</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jobject</span> <span class="n">obj</span><span class="p">,</span> <span class="n">jmethodID</span> <span class="n">methodID</span><span class="p">,</span> <span class="o">...</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">NativeType</span> <span class="n">Call</span><span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span><span class="n">MethodA</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jobject</span> <span class="n">obj</span><span class="p">,</span> <span class="n">jmethodID</span> <span class="n">methodID</span><span class="p">,</span> <span class="k">const</span> <span class="n">jvalue</span> <span class="o">*</span><span class="n">args</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">NativeType</span> <span class="n">Call</span><span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span><span class="n">MethodV</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jobject</span> <span class="n">obj</span><span class="p">,</span> <span class="n">jmethodID</span> <span class="n">methodID</span><span class="p">,</span> <span class="n">va_list</span> <span class="n">args</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Invoke</span> <span class="n">an</span> <span class="n">instance</span> <span class="n">method</span> <span class="n">of</span> <span class="n">the</span> <span class="n">object</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">The</span> <span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span> <span class="n">includes</span> <span class="n">each</span> <span class="n">of</span> <span class="n">the</span> <span class="n">eight</span> <span class="n">primitive</span> <span class="ow">and</span> <span class="ne">Object</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl"><span class="n">jmethodID</span> <span class="n">GetStaticMethodID</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jclass</span> <span class="n">cls</span><span class="p">,</span> <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">name</span><span class="p">,</span> <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">sig</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Returns</span> <span class="n">the</span> <span class="n">method</span> <span class="n">ID</span> <span class="k">for</span> <span class="n">an</span> <span class="n">instance</span> <span class="n">method</span> <span class="n">of</span> <span class="n">a</span> <span class="k">class</span> <span class="ow">or</span> <span class="n">interface</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl"><span class="n">NativeType</span> <span class="n">CallStatic</span><span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span><span class="n">Method</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jclass</span> <span class="n">clazz</span><span class="p">,</span> <span class="n">jmethodID</span> <span class="n">methodID</span><span class="p">,</span> <span class="o">...</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">NativeType</span> <span class="n">CallStatic</span><span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span><span class="n">MethodA</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jclass</span> <span class="n">clazz</span><span class="p">,</span> <span class="n">jmethodID</span> <span class="n">methodID</span><span class="p">,</span> <span class="k">const</span> <span class="n">jvalue</span> <span class="o">*</span><span class="n">args</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">NativeType</span> <span class="n">CallStatic</span><span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span><span class="n">MethodV</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jclass</span> <span class="n">clazz</span><span class="p">,</span> <span class="n">jmethodID</span> <span class="n">methodID</span><span class="p">,</span> <span class="n">va_list</span> <span class="n">args</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Invoke</span> <span class="n">an</span> <span class="n">instance</span> <span class="n">method</span> <span class="n">of</span> <span class="n">the</span> <span class="n">object</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">The</span> <span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span> <span class="n">includes</span> <span class="n">each</span> <span class="n">of</span> <span class="n">the</span> <span class="n">eight</span> <span class="n">primitive</span> <span class="ow">and</span> <span class="ne">Object</span><span class="o">.</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="参考">参考</h3>
+<p>[1] <a href="https://www3.ntu.edu.sg/home/ehchua/programming/java/JavaNativeInterface.html">Java Programming Tutorial Java Native Interface (JNI)</a></p>]]></content:encoded>
+    </item>
+    <item>
+      <title>JNI入门之HelloWorld篇</title>
+      <link>http://localhost:1313/zh/posts/2018-2-15-jni%E5%85%A5%E9%97%A8%E4%B9%8Bhelloworld%E7%AF%87/</link>
+      <pubDate>Thu, 15 Feb 2018 22:35:37 +0000</pubDate>
+      <guid>http://localhost:1313/zh/posts/2018-2-15-jni%E5%85%A5%E9%97%A8%E4%B9%8Bhelloworld%E7%AF%87/</guid>
+      <description>&lt;h4 id=&#34;1-jni的作用&#34;&gt;1. JNI的作用&lt;/h4&gt;
+&lt;p&gt;JNI（Java Native Interface）提供了一种java与C/C++ 代码进行交互的方式，可以通过java方法调用C/C++ 的实现，和已有的C/C++ 库。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<h4 id="1-jni的作用">1. JNI的作用</h4>
+<p>JNI（Java Native Interface）提供了一种java与C/C++ 代码进行交互的方式，可以通过java方法调用C/C++ 的实现，和已有的C/C++ 库。</p>
+<h4 id="2-jni使用方法">2. JNI使用方法</h4>
+<ul>
+<li>首先在java类中声明native方法，与一般的函数声明类似，只是多了个native关键字</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">package</span> <span class="n">com</span><span class="o">.</span><span class="n">hello</span><span class="o">.</span><span class="n">jni</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">public</span> <span class="k">class</span> <span class="n">HelloJNI</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="k">static</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">System</span><span class="o">.</span><span class="n">loadLibrary</span><span class="p">(</span><span class="s2">&#34;hello&#34;</span><span class="p">);</span> <span class="o">//</span> <span class="n">Load</span> <span class="n">native</span> <span class="n">library</span> <span class="n">at</span> <span class="n">runtime</span>
+</span></span><span class="line"><span class="cl">                                   <span class="o">//</span> <span class="n">hello</span><span class="o">.</span><span class="n">dll</span> <span class="p">(</span><span class="n">Windows</span><span class="p">)</span> <span class="ow">or</span> <span class="n">libhello</span><span class="o">.</span><span class="n">so</span> <span class="p">(</span><span class="n">Unixes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Declare</span> <span class="n">a</span> <span class="n">native</span> <span class="n">method</span> <span class="n">sayHello</span><span class="p">()</span> <span class="n">that</span> <span class="n">receives</span> <span class="n">nothing</span> <span class="ow">and</span> <span class="n">returns</span> <span class="n">void</span>
+</span></span><span class="line"><span class="cl">   <span class="n">private</span> <span class="n">native</span> <span class="n">void</span> <span class="n">sayHello</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Test</span> <span class="n">Driver</span>
+</span></span><span class="line"><span class="cl">   <span class="n">public</span> <span class="k">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="ne">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">new</span> <span class="n">HelloJNI</span><span class="p">()</span><span class="o">.</span><span class="n">sayHello</span><span class="p">();</span>  <span class="o">//</span> <span class="n">invoke</span> <span class="n">the</span> <span class="n">native</span> <span class="n">method</span>
+</span></span><span class="line"><span class="cl">   <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>使用javah命令生成相应的头文件（到elipse工程的bin目录下，打开命令行，注意不用带class后缀）</li>
+</ul>
+<blockquote>
+<p>javah com.hello.jni.HelloJNI
+这时在bin目录下会生成对应的头文件<em>com_hello_jni_HelloJNI.h</em></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* DO NOT EDIT THIS FILE - it is machine generated */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;jni.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="cm">/* Header for class com_hello_jni_HelloJNI */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#ifndef _Included_com_hello_jni_HelloJNI
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define _Included_com_hello_jni_HelloJNI
+</span></span></span><span class="line"><span class="cl"><span class="cp">#ifdef __cplusplus
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">extern</span> <span class="s">&#34;C&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Class:     com_hello_jni_HelloJNI
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Method:    sayHello
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Signature: ()V
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="n">JNIEXPORT</span> <span class="kt">void</span> <span class="n">JNICALL</span> <span class="nf">Java_com_hello_jni_HelloJNI_sayHello</span>
+</span></span><span class="line"><span class="cl">  <span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="p">,</span> <span class="n">jobject</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#ifdef __cplusplus
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>然后就是要去实现之前声明的native方法，这里我们使用Visual Studio新建一个dll工程，
+这里需要将之前头文件所依赖的jni.h和jni_md.h所在的jdk目录添加到包含目录中，并将项目类型切换到与平台类型一致，否则会出现这样的不匹配错误</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;com_hello_jni_HelloJNI.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="n">JNIEXPORT</span> <span class="kt">void</span> <span class="n">JNICALL</span> <span class="nf">Java_com_hello_jni_HelloJNI_sayHello</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="p">,</span> <span class="n">jobject</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Hello World&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">Exception</span> <span class="ow">in</span> <span class="n">thread</span> <span class="s2">&#34;main&#34;</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">UnsatisfiedLinkError</span><span class="p">:</span> <span class="n">D</span><span class="p">:</span>\<span class="n">Workspace</span>\<span class="n">AppProject</span>\<span class="n">MyProjects</span>\<span class="n">Debug</span>\<span class="n">hello</span><span class="o">.</span><span class="n">dll</span><span class="p">:</span> <span class="n">Can</span><span class="s1">&#39;t load IA 32-bit .dll on a AMD 64-bit platform</span>
+</span></span><span class="line"><span class="cl">	<span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">ClassLoader</span><span class="o">$</span><span class="n">NativeLibrary</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">Native</span> <span class="n">Method</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">ClassLoader</span><span class="o">.</span><span class="n">loadLibrary0</span><span class="p">(</span><span class="n">Unknown</span> <span class="n">Source</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">ClassLoader</span><span class="o">.</span><span class="n">loadLibrary</span><span class="p">(</span><span class="n">Unknown</span> <span class="n">Source</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">Runtime</span><span class="o">.</span><span class="n">loadLibrary0</span><span class="p">(</span><span class="n">Unknown</span> <span class="n">Source</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">System</span><span class="o">.</span><span class="n">loadLibrary</span><span class="p">(</span><span class="n">Unknown</span> <span class="n">Source</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="n">at</span> <span class="n">com</span><span class="o">.</span><span class="n">hello</span><span class="o">.</span><span class="n">jni</span><span class="o">.</span><span class="n">HelloJNI</span><span class="o">.&lt;</span><span class="n">clinit</span><span class="o">&gt;</span><span class="p">(</span><span class="n">HelloJNI</span><span class="o">.</span><span class="n">java</span><span class="p">:</span><span class="mi">5</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>将生成的dll文件的路径添加到环境变量中，这样JAVA类就可以调用dll中的C实现方法了</li>
+</ul>
+<blockquote>
+<p>Hello World</p>
+</blockquote>]]></content:encoded>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>生活 on BeYoung</title>
+    <link>http://localhost:1313/tags/%E7%94%9F%E6%B4%BB/</link>
+    <description>Recent content in 生活 on BeYoung</description>
+    <image>
+      <title>BeYoung</title>
+      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.147.9</generator>
+    <language>zh</language>
+    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
+    <lastBuildDate>Sun, 07 Apr 2019 20:20:38 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E7%94%9F%E6%B4%BB/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>算法工程师到底是做什么的</title>
+      <link>http://localhost:1313/posts/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/</link>
+      <pubDate>Sun, 07 Apr 2019 20:20:38 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/</guid>
+      <description>&lt;p&gt;还记得刚毕业那会找工作，那是一定要找法工程师这个岗位，当时就只是觉得这个岗位牛逼是公司的核心岗位，但是可能对于算法工程师与一般的软件工程有什么区别其实心理也说不清楚。作为一个到今年6月份就工作满5年了的老菜鸟，这期间工作的title也是算法工程师（虽然有些并不是真的在做算法），反正在以算法工程师的title在企业工作的感受与毕业那会想像中上的算法工程师的工作完全不一样。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>还记得刚毕业那会找工作，那是一定要找法工程师这个岗位，当时就只是觉得这个岗位牛逼是公司的核心岗位，但是可能对于算法工程师与一般的软件工程有什么区别其实心理也说不清楚。作为一个到今年6月份就工作满5年了的老菜鸟，这期间工作的title也是算法工程师（虽然有些并不是真的在做算法），反正在以算法工程师的title在企业工作的感受与毕业那会想像中上的算法工程师的工作完全不一样。</p>
+<p>我觉得所谓的算法工程师应该叫算法应用工程师会更合适一些。因为算法工程师的工作流程大概是这样的（以我自身的经历为例，可能不同公司有不同的工作方式），接到一个功能需求，然后开始调研实现这个功能需要的算法，研究过程中挑选两三种可能的方案，对这些挑选的方案进行实现（也可能是github clone），分析对比这几种方案。最后从中选出一种方案，作为最后的方案。接下来就是对最终的算法方案针对自己的功能需求和业务场景进行做优化，这期间你会对这个算法方案进行原理研究，参数调整，性能优化等等，最终的目标就是尽可能满足业务需求方的要求。</p>
+<p>知乎上@Jackpop的回答应该是符合大多数算法工程师的实际工作状态，而我们毕业那会想象中的算法工程师，天天手推工式那种，应该叫科学家或者研究员更合适些。<strong>总结一下，我觉得一个优秀的算法工程师应该是能够针对不同的业务场景选择最优的算法方案，并能对现有的算法针对业务场景做一些微调和优化，以更进一步适合业务场景。因为对于企业来说不能落地的算法，是丝毫没有价值的。</strong></p>
+<blockquote>
+<p>以下转载自知乎：https://www.zhihu.com/question/310484101/answer/644079765</p></blockquote>
+<h3 id="算法工程师大致做什么的">算法工程师大致做什么的？</h3>
+<p>算法，对于大多数理工科学生并不陌生。无论是学计算机还是学数学，或者其他理工科，我们都会接触很多成熟、经过十几年甚至几十年考验的算法。
+算法工程师的关键点在“工程师”这三个字，日常所做的工作无非是选择一种或几种成熟、优秀的算法进行组合、验证，来解决特定场景下的问题。在大多数企业里面这一点体现更为明显，**在企业里作为算法工程师是不会创造算法，只是使用经过多年考验的成熟、稳定算法。**其实现在不仅是企业界，就连学术界，创新可用的新算法也是寥寥可数，就拿人工智能常用的优化算法来说：</p>
+<ul>
+<li>随机梯度</li>
+<li>共轭梯度</li>
+<li>牛顿法粒子群</li>
+<li>遗传</li>
+<li>贝叶斯</li>
+<li>进化策略</li>
+</ul>
+<p>这些算法每一个都是经过多年考验的，有的甚至几十年。
+再拿计算机视觉来说：</p>
+<ul>
+<li>R-CNN系列</li>
+<li>yolo系列</li>
+<li>mobilenet</li>
+<li>&hellip;.</li>
+</ul>
+<p>目前大多数机器视觉算法工程师所做的工作基本也是围绕这些成熟的算法做微调，结合特定场景做迁移。**所以，作为算法工程师是不会创造新算法，作为算法工程师日常工作内容无非是根据具体的业务场景，根据自己的知识积累拿出几种成熟、好用的算法提出一个可用的解决方案，去解决业务上的问题。**所以很多答主所说的需要这样那样的知识，我觉得有点夸张了。</p>
+<p>有些答主说需要深入的数学知识，把算法说的神乎其神，作为本硕均为数学系的学生来说，对于日常算法，本科阶段的通识数学知识足够使用了，数学很有价值，但是过于脱离实际，实现难度也比较大，吴恩达在他的教学视频曾提到过共轭梯度法，吴恩达说“共轭梯度法效果不错，但是实现过程复杂，所以人工智能中很少被使用。”共轭梯度法在数学里面已经算是比较基础得了。</p>
+<h3 id="算法工程师需要哪些能力">算法工程师需要哪些能力？</h3>
+<ul>
+<li>业务学习能力</li>
+</ul>
+<p>算法工程师是不可能脱离业务背景的，人工智能算法工程师、交通算法工程师、图像处理算法工程师等等。
+在针对一个业务场景设计一个合理的算法，业务知识是非常重要的，**需要结合业务的实际情况、限定条件、各种专业词汇和知识都要有一定的了解，如果脱离场景而一味地琢磨算法，效果不会太好，**比如，做交通算法，需要对交通组织、交通管理、通行损失、周期延误等有所认知。比如，做图像处理，需要对各种图像去噪、图像增广、图像分割、物理成像有所了解，知道像素底层是怎么回事。</p>
+<ul>
+<li>持续学习能力</li>
+</ul>
+<p>就像我前面所说的**，算法工程师的主要工作就是拿着现有成熟的算法，结合面临业务场景去做一个合理的方案，<strong>如果我们知识面太窄，那显然当用到的时候会有点拮据，眼界也被限制住，不知道还有没有更好效果的算法、目前算法有哪些不足之处、在这个业务中能不能发挥作用，只有持续学习，了解足够多的知识</strong>，当我们面临问题的时候能够快速对比、选择，找出最合适的一种算法。**</p>
+<ul>
+<li>灵活的思维</li>
+</ul>
+<p>当我们选择一种算法去解决一个问题时，效果肯定无法达到我们预期的那样，比如我们拿mask rcnn做医学图像语义分割，我们看着它在自然图像方面表现效果很好，就拿来用于医学图像，但是医学图像有它的难点和特殊性，当跑出效果时会发现结果不如人意，这时候就需要灵活的思维去发现问题，去调优、改进，或者从数据入手或者从网络模型入手或者从超参数入手。</p>
+<ul>
+<li>编程能力</li>
+</ul>
+<p>不同公司对于算法工程师的定位有所差别，比如有些朋友在某公司算法工程师只负责方案的设计，开发由专门的开发人员实施。有的公司算法工程师要完成算法设计到开发全部工作。我认为无论是哪一种形式，编程能力都是必要的，就算是前者这样的形式，有专门的开发人员，那在算法的设计过程中需要验证、对比，对每一个小模块算法进行指标评价，你不可能事事都找别人来帮你做，这样效率低，而且开展工作困难。</p>
+<ul>
+<li>算法验证能力</li>
+</ul>
+<p>就像前面提到的那样，**算法验证在算法工程师日常工作中占据很大的比重，**我们拿到一些成熟、优秀的算法后，它的效果如何？能否起作用是未知的，我们需要对它进行验证，包括效率、精度等方面。这就要求算法工程师拥有算法验证能力，能够在众多算法中挑选出一种合适的算法来解决相应问题。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>2019小目标--重新开始打脸之路</title>
+      <link>http://localhost:1313/posts/2019-01-26-2019%E5%B0%8F%E7%9B%AE%E6%A0%87/</link>
+      <pubDate>Sat, 26 Jan 2019 19:58:18 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2019-01-26-2019%E5%B0%8F%E7%9B%AE%E6%A0%87/</guid>
+      <description>&lt;h1 id=&#34;2018回顾&#34;&gt;2018回顾&lt;/h1&gt;
+&lt;p&gt;先看下2018初始的时候自己立下的flag吧，看看脸被打得有多痛&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image&#34; loading=&#34;lazy&#34; src=&#34;https://user-images.githubusercontent.com/3350865/61180087-427cb700-a643-11e9-8bfd-354561f9d0e2.jpg&#34;&gt;
+&lt;img src=&#34;http://localhost:1313/images/2019-01-26-001.jpg&#34; /&gt;&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<h1 id="2018回顾">2018回顾</h1>
+<p>先看下2018初始的时候自己立下的flag吧，看看脸被打得有多痛</p>
+<p><img alt="image" loading="lazy" src="https://user-images.githubusercontent.com/3350865/61180087-427cb700-a643-11e9-8bfd-354561f9d0e2.jpg">
+<img src="/images/2019-01-26-001.jpg" /></p>
+<!-- ![image](https://user-images.githubusercontent.com/3350865/61180088-4577a780-a643-11e9-80b5-dcece931421b.jpg) -->
+<img src="/images/2019-01-26-002.jpg" />
+<p>咱们一个脸一个脸地来打，轻拍：</p>
+<ol>
+<li>健身</li>
+</ol>
+<ul>
+<li>最近一次记录的体重是64.3Kg，距离55Kg还是有很大距离，初始体重是65.9Kg</li>
+</ul>
+<blockquote>
+<p>这一项完成度是<strong>14.68%</strong></p></blockquote>
+<ul>
+<li>跑里程达到400Km，这里有记录的数据是8.20Km</li>
+</ul>
+<blockquote>
+<p>太可怜了，我不算了，直接写**0%**好了</p></blockquote>
+<ol start="2">
+<li>小爱好</li>
+</ol>
+<ul>
+<li>现在连一首&laquo;纸短情长&raquo;都还没练会，太笨了。。。。</li>
+</ul>
+<blockquote>
+<p>完成度是<strong>0%</strong></p></blockquote>
+<ul>
+<li>今年书是看了《小岛经济学》《九败一胜：美团创始人王兴》《跃迁：成为高手的技术》</li>
+</ul>
+<blockquote>
+<p>这个完成度也算是<strong>0%</strong>，没有输出的阅读，相当于是无效的努力</p></blockquote>
+<ol start="3">
+<li>技术</li>
+</ol>
+<blockquote>
+<p>音视频应用开发：这个也没有继续跟进下去，然后最后还是逃不掉<br>
+深度学习方面：由于新工作的原因，开始接触实际项目，算是个入门吧</p></blockquote>
+<ol start="4">
+<li>写博客</li>
+</ol>
+<blockquote>
+<p>2018一共写了7篇文章，也是一个远不及格的成绩，没有输出相当于没有成长。</p></blockquote>
+<h1 id="2019新的flag">2019新的Flag</h1>
+<p>虽然脸已经被打肿了，但是flag还是不能倒呀，2019-猪年-新的flag还是要立起来。通过回顾2018年flag的完成情况，可以深刻的把自己定位为一个执行力弱不爆的人士了。作为一个立志成为海贼王的男人，怎么可以这样呢，2019必须成长了呀，才能成为海贼王的男人。在成为海贼王的男人前，先把2019年的flag完成好吗，脸真的痛好吗</p>
+<ol>
+<li>健身</li>
+</ol>
+<ul>
+<li><input disabled="" type="checkbox"> 体重降到58Kg</li>
+</ul>
+<ol start="2">
+<li>小爱好</li>
+</ol>
+<ul>
+<li><input disabled="" type="checkbox"> 录制《纸短情长ukelele》的小视频</li>
+<li><input disabled="" type="checkbox"> 非技术读书笔记2篇</li>
+<li><input disabled="" type="checkbox"> 海贼王系列视频特效准备</li>
+</ul>
+<ol start="3">
+<li>技术</li>
+</ol>
+<ul>
+<li><input disabled="" type="checkbox"> WebRTC音视频通讯开发</li>
+<li><input disabled="" type="checkbox"> 输出一篇移动端布署深度学习应用的文章</li>
+</ul>
+<ol start="4">
+<li>写博客</li>
+</ol>
+<ul>
+<li><input disabled="" type="checkbox"> 每月一篇博客，不限主题</li>
+</ul>]]></content:encoded>
+    </item>
+    <item>
+      <title>2018健身记录</title>
+      <link>http://localhost:1313/posts/2018-10-15-2018%E5%81%A5%E8%BA%AB%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Mon, 15 Oct 2018 22:11:34 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2018-10-15-2018%E5%81%A5%E8%BA%AB%E8%AE%B0%E5%BD%95/</guid>
+      <description>&lt;p&gt;  今天又一次重新开始健身计划，这次到这里来做个记录，看看能坚持多久！为了更好的身体，为了腹肌，加油，少年，你是要成为海贼王的男人！！！&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;器械：瑜伽垫一张&lt;/li&gt;
+&lt;li&gt;课程：Fit健身&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;今天买了课程，花了大价钱，达不成目标就要打水漂了！！！&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>  今天又一次重新开始健身计划，这次到这里来做个记录，看看能坚持多久！为了更好的身体，为了腹肌，加油，少年，你是要成为海贼王的男人！！！</p>
+<ul>
+<li>器械：瑜伽垫一张</li>
+<li>课程：Fit健身</li>
+</ul>
+<blockquote>
+<p>今天买了课程，花了大价钱，达不成目标就要打水漂了！！！</p></blockquote>
+<center>
+<!-- <img src="https://user-images.githubusercontent.com/3350865/61180053-a357bf80-a642-11e9-914e-529f460e4445.jpg" width="50%" height="50%"/> -->
+<img src="/images/2018-10-15-001.jpg" width="50%" height="50%"/>
+</center>
+<!---more--->
+<ul>
+<li>
+<h3 id="十月运动记录">十月运动记录</h3>
+</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th>日期</th>
+          <th style="text-align: center">体重（Kg）</th>
+          <th style="text-align: center">运动内容</th>
+          <th style="text-align: center">运动时间（分钟）</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>2018-10-15</td>
+          <td style="text-align: center">65.9</td>
+          <td style="text-align: center">HIIT-畅快流汗</td>
+          <td style="text-align: center">20</td>
+      </tr>
+      <tr>
+          <td>2018-10-16</td>
+          <td style="text-align: center">65.0</td>
+          <td style="text-align: center">HIIT-畅快流汗</td>
+          <td style="text-align: center">20</td>
+      </tr>
+      <tr>
+          <td>2018-10-17</td>
+          <td style="text-align: center">65.3</td>
+          <td style="text-align: center">HIIT-腹部燃脂</td>
+          <td style="text-align: center">29</td>
+      </tr>
+      <tr>
+          <td>2018-10-18</td>
+          <td style="text-align: center">65.1</td>
+          <td style="text-align: center">HIIT-脂肪ByeBye</td>
+          <td style="text-align: center">14</td>
+      </tr>
+      <tr>
+          <td>2018-10-19</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-10-20</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-10-21</td>
+          <td style="text-align: center">64.7</td>
+          <td style="text-align: center">FIT健身体能测试</td>
+          <td style="text-align: center">10</td>
+      </tr>
+      <tr>
+          <td>2018-10-22</td>
+          <td style="text-align: center">65.4</td>
+          <td style="text-align: center">腹肌撕裂者初级<br>HIIT-进击的Burpee</td>
+          <td style="text-align: center">25</td>
+      </tr>
+      <tr>
+          <td>2018-10-23</td>
+          <td style="text-align: center">65.7</td>
+          <td style="text-align: center">打篮球</td>
+          <td style="text-align: center">60</td>
+      </tr>
+      <tr>
+          <td>2018-10-24</td>
+          <td style="text-align: center">65.4</td>
+          <td style="text-align: center">休息恢复</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>2018-10-25</td>
+          <td style="text-align: center">65.6</td>
+          <td style="text-align: center">HIIT-腹部燃脂</td>
+          <td style="text-align: center">29</td>
+      </tr>
+      <tr>
+          <td>2018-10-26</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>2018-10-27</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center">HIIT-全身活力燃脂</td>
+          <td style="text-align: center">22</td>
+      </tr>
+      <tr>
+          <td>2018-10-28</td>
+          <td style="text-align: center">64.1</td>
+          <td style="text-align: center">HIIT-畅快流汗<br>入门瑜伽伸展</td>
+          <td style="text-align: center">30</td>
+      </tr>
+      <tr>
+          <td>2018-10-29</td>
+          <td style="text-align: center">65.1</td>
+          <td style="text-align: center">核心力量初级训练<br>Tabata-碎脂机进阶</td>
+          <td style="text-align: center">24</td>
+      </tr>
+      <tr>
+          <td>2018-10-30</td>
+          <td style="text-align: center">65.3</td>
+          <td style="text-align: center">打篮球</td>
+          <td style="text-align: center">60</td>
+      </tr>
+      <tr>
+          <td>2018-10-26</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">运动天数</th>
+          <th style="text-align: center">开始体重</th>
+          <th style="text-align: center">结束体重</th>
+          <th style="text-align: center">体重变化（Kg）</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">13</td>
+          <td style="text-align: center">65.9</td>
+          <td style="text-align: center">65.3</td>
+          <td style="text-align: center">-0.6</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<ul>
+<li>
+<h3 id="十一月运动记录">十一月运动记录</h3>
+</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th>日期</th>
+          <th style="text-align: center">体重（Kg）</th>
+          <th style="text-align: center">运动内容</th>
+          <th style="text-align: center">运动时间（分钟）</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>2018-11-1</td>
+          <td style="text-align: center">64.7</td>
+          <td style="text-align: center">腹肌撕裂者初级<br>HIIT-减脂巨星</td>
+          <td style="text-align: center">41</td>
+      </tr>
+      <tr>
+          <td>2018-11-2</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-11-3</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-11-4</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-11-5</td>
+          <td style="text-align: center">64.6</td>
+          <td style="text-align: center">HIIT-畅快流汗<br>核心进阶减脂训练</td>
+          <td style="text-align: center">36</td>
+      </tr>
+      <tr>
+          <td>2018-11-6</td>
+          <td style="text-align: center">64.3</td>
+          <td style="text-align: center">强力带全身焕活-减脂初级</td>
+          <td style="text-align: center">49</td>
+      </tr>
+      <tr>
+          <td>2018-11-7</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>2018-11-8</td>
+          <td style="text-align: center">64.7</td>
+          <td style="text-align: center">HIIT-全身活力燃脂<br>腹肌撕裂者进阶</td>
+          <td style="text-align: center">40</td>
+      </tr>
+      <tr>
+          <td>2018-11-9</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-11-10</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-11-11</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-11-12</td>
+          <td style="text-align: center">64.1</td>
+          <td style="text-align: center">Tabata-碎脂机进阶<br>核心进阶减脂训练</td>
+          <td style="text-align: center">29</td>
+      </tr>
+      <tr>
+          <td>2018-11-13</td>
+          <td style="text-align: center">64.2</td>
+          <td style="text-align: center">打篮球</td>
+          <td style="text-align: center">60</td>
+      </tr>
+      <tr>
+          <td>2018-11-14</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>2018-11-15</td>
+          <td style="text-align: center">64.6</td>
+          <td style="text-align: center">HIIT-腹部燃脂</td>
+          <td style="text-align: center">28</td>
+      </tr>
+      <tr>
+          <td>2018-11-16</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-11-17</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-11-18</td>
+          <td style="text-align: center">64.6</td>
+          <td style="text-align: center"><a href="https://www.youtube.com/watch?v=bTHnzGSgkqk">十分鐘家中腹肌訓練</a></td>
+          <td style="text-align: center">10</td>
+      </tr>
+      <tr>
+          <td>2018-11-19</td>
+          <td style="text-align: center">64.7</td>
+          <td style="text-align: center">HIIT-进击的Burpee</td>
+          <td style="text-align: center">22</td>
+      </tr>
+      <tr>
+          <td>2018-11-20</td>
+          <td style="text-align: center">64.3</td>
+          <td style="text-align: center">打篮球</td>
+          <td style="text-align: center">60</td>
+      </tr>
+      <tr>
+          <td>2018-11-21</td>
+          <td style="text-align: center">64.4</td>
+          <td style="text-align: center">HIIT-腹部燃脂</td>
+          <td style="text-align: center">29</td>
+      </tr>
+      <tr>
+          <td>2018-11-22</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-11-23</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-11-24</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-11-25</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-11-26</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-11-27</td>
+          <td style="text-align: center">63.6</td>
+          <td style="text-align: center">打篮球</td>
+          <td style="text-align: center">60</td>
+      </tr>
+      <tr>
+          <td>2018-11-28</td>
+          <td style="text-align: center">63.7</td>
+          <td style="text-align: center">十分鐘家中腹肌訓練</td>
+          <td style="text-align: center">10</td>
+      </tr>
+      <tr>
+          <td>2018-11-29</td>
+          <td style="text-align: center">63.8</td>
+          <td style="text-align: center">HIIT-全身活力燃脂</td>
+          <td style="text-align: center">22</td>
+      </tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">运动天数</th>
+          <th style="text-align: center">开始体重</th>
+          <th style="text-align: center">结束体重</th>
+          <th style="text-align: center">体重变化（Kg）</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">14</td>
+          <td style="text-align: center">65.3</td>
+          <td style="text-align: center">63.8</td>
+          <td style="text-align: center">-1.5</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<ul>
+<li>
+<h3 id="十二月运动记录">十二月运动记录</h3>
+</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th>日期</th>
+          <th style="text-align: center">体重（Kg）</th>
+          <th style="text-align: center">运动内容</th>
+          <th style="text-align: center">运动时间（分钟）</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>2018-12-1</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-12-2</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-12-3</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-12-4</td>
+          <td style="text-align: center">64.4</td>
+          <td style="text-align: center">打篮球</td>
+          <td style="text-align: center">60</td>
+      </tr>
+      <tr>
+          <td>2018-12-5</td>
+          <td style="text-align: center">63.9</td>
+          <td style="text-align: center">腹肌撕裂者进阶</td>
+          <td style="text-align: center">18</td>
+      </tr>
+      <tr>
+          <td>2018-12-6</td>
+          <td style="text-align: center">64.0</td>
+          <td style="text-align: center">HIIT-进击的Burpee</td>
+          <td style="text-align: center">22</td>
+      </tr>
+      <tr>
+          <td>2018-12-7</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-12-8</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-12-9</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-12-10</td>
+          <td style="text-align: center">63.6</td>
+          <td style="text-align: center"><a href="https://www.youtube.com/watch?v=bTHnzGSgkqk">十分鐘家中腹肌訓練</a></td>
+          <td style="text-align: center">10</td>
+      </tr>
+      <tr>
+          <td>2018-12-11</td>
+          <td style="text-align: center">64.3</td>
+          <td style="text-align: center">打篮球</td>
+          <td style="text-align: center">60</td>
+      </tr>
+      <tr>
+          <td>2018-12-12</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-12-13</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-12-14</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-12-15</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-12-16</td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td>2018-12-17</td>
+          <td style="text-align: center">64.3</td>
+          <td style="text-align: center">HIIT-减脂巨星</td>
+          <td style="text-align: center">27</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>爆开始前的照片</li>
+</ul>
+<center>
+<!-- <img src="https://user-images.githubusercontent.com/3350865/61180060-b8345300-a642-11e9-9859-536be6249df6.jpg" width="50%" height="50%"/> -->
+<img src="/images/2018-10-15-002.jpg" width="50%" height="50%"/>
+</center>]]></content:encoded>
+    </item>
+    <item>
+      <title>2018小目标</title>
+      <link>http://localhost:1313/posts/2018-2-19-2018%E5%B0%8F%E7%9B%AE%E6%A0%87/</link>
+      <pubDate>Mon, 19 Feb 2018 22:46:21 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2018-2-19-2018%E5%B0%8F%E7%9B%AE%E6%A0%87/</guid>
+      <description>&lt;p&gt;大年初四立个flag，明年来看看能完成多少，看看脸会不会被打肿。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>大年初四立个flag，明年来看看能完成多少，看看脸会不会被打肿。</p>
+<h2 id="1-健身">1. 健身</h2>
+<blockquote>
+<p>体重：55Kg
+跑步里程：400Km</p></blockquote>
+<h2 id="2-小爱好">2. 小爱好</h2>
+<blockquote>
+<p>Ukelele弹： 《活着》《带你去旅行》<br>
+阅读：5篇读书总结</p></blockquote>
+<h2 id="3-技术">3. 技术</h2>
+<blockquote>
+<p>短视频应用开发
+深度学习</p></blockquote>
+<h2 id="4-写博客">4. 写博客</h2>
+<blockquote>
+<p>至少每月一篇博客</p></blockquote>]]></content:encoded>
+    </item>
+  </channel>
+</rss>
