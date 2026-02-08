@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>GitPage on BeYoung</title>
-    <link>http://localhost:1313/tags/gitpage/</link>
+    <link>https://lyapple2008.github.io/tags/gitpage/</link>
     <description>Recent content in GitPage on BeYoung</description>
     <image>
       <title>BeYoung</title>
-      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Sat, 25 Apr 2020 09:34:29 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/gitpage/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://lyapple2008.github.io/tags/gitpage/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>github.io博客无法访问问题</title>
-      <link>http://localhost:1313/posts/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/</link>
+      <link>https://lyapple2008.github.io/posts/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/</link>
       <pubDate>Sat, 25 Apr 2020 09:34:29 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/</guid>
+      <guid>https://lyapple2008.github.io/posts/2020-04-25-github-io%E5%8D%9A%E5%AE%A2%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E9%97%AE%E9%A2%98/</guid>
       <description>&lt;h3 id=&#34;问题描述&#34;&gt;问题描述&lt;/h3&gt;
 &lt;p&gt;原来的github.io自定义域名博客不能访问，提示如下信息&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;

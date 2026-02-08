@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>AudioProcessing on BeYoung</title>
-    <link>http://localhost:1313/tags/audioprocessing/</link>
+    <link>https://lyapple2008.github.io/tags/audioprocessing/</link>
     <description>Recent content in AudioProcessing on BeYoung</description>
     <image>
       <title>BeYoung</title>
-      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Sun, 10 Mar 2019 10:16:27 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/audioprocessing/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://lyapple2008.github.io/tags/audioprocessing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>音频开发资源</title>
-      <link>http://localhost:1313/posts/2019-03-10-%E9%9F%B3%E9%A2%91%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/</link>
+      <link>https://lyapple2008.github.io/posts/2019-03-10-%E9%9F%B3%E9%A2%91%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/</link>
       <pubDate>Sun, 10 Mar 2019 10:16:27 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2019-03-10-%E9%9F%B3%E9%A2%91%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/</guid>
+      <guid>https://lyapple2008.github.io/posts/2019-03-10-%E9%9F%B3%E9%A2%91%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/</guid>
       <description>&lt;p&gt;记录一些音频开发过程中会用到的优质资源&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://webrtc.org/&#34;&gt;WebRTC&lt;/a&gt;&lt;/li&gt;

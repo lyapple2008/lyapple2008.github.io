@@ -2,28 +2,28 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Android on BeYoung</title>
-    <link>http://localhost:1313/tags/android/</link>
+    <link>https://lyapple2008.github.io/tags/android/</link>
     <description>Recent content in Android on BeYoung</description>
     <image>
       <title>BeYoung</title>
-      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Sat, 24 Sep 2022 17:03:48 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/android/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://lyapple2008.github.io/tags/android/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Android中几种sdkVersion的区别</title>
-      <link>http://localhost:1313/posts/2022-08-24-android%E4%B8%AD%E5%87%A0%E7%A7%8Dsdkversion%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <link>https://lyapple2008.github.io/posts/2022-08-24-android%E4%B8%AD%E5%87%A0%E7%A7%8Dsdkversion%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
       <pubDate>Sat, 24 Sep 2022 17:03:48 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2022-08-24-android%E4%B8%AD%E5%87%A0%E7%A7%8Dsdkversion%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <guid>https://lyapple2008.github.io/posts/2022-08-24-android%E4%B8%AD%E5%87%A0%E7%A7%8Dsdkversion%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
       <description>&lt;h1 id=&#34;android中几种sdkversion的区别&#34;&gt;Android中几种sdkVersion的区别&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;最近遇到一个由于升级了targetSdkVersion而引起的线上crash，之前一直对于Android里面几个sdkVersion的含义和作用很模糊，正好这次把这几个不同的sdkVersion理清楚。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;!-- {% asset_img 001.png %} --&gt;
-&lt;img src=&#34;http://localhost:1313/images/2022-08-24-001.png&#34;/&gt;</description>
+&lt;img src=&#34;https://lyapple2008.github.io/images/2022-08-24-001.png&#34;/&gt;</description>
       <content:encoded><![CDATA[<h1 id="android中几种sdkversion的区别">Android中几种sdkVersion的区别</h1>
 <blockquote>
 <p>最近遇到一个由于升级了targetSdkVersion而引起的线上crash，之前一直对于Android里面几个sdkVersion的含义和作用很模糊，正好这次把这几个不同的sdkVersion理清楚。</p></blockquote>
@@ -60,9 +60,9 @@
     </item>
     <item>
       <title>WebRTC系列-WebRTC_Android源码编译</title>
-      <link>http://localhost:1313/posts/2020-09-07-webrtc-android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/</link>
+      <link>https://lyapple2008.github.io/posts/2020-09-07-webrtc-android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/</link>
       <pubDate>Mon, 07 Sep 2020 23:19:37 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2020-09-07-webrtc-android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/</guid>
+      <guid>https://lyapple2008.github.io/posts/2020-09-07-webrtc-android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/</guid>
       <description>&lt;h1 id=&#34;webrtc-android源码编译&#34;&gt;WebRTC Android源码编译&lt;/h1&gt;
 &lt;p&gt;对于WebRTC的学习来说，首先需要搞定的是源码的编译，由于国内的特殊环境和WebRTC本身的复杂性，导致WebRTC源码编译成了WebRTC学习的第一道门槛。这里把自己在编译WebRTC源码过程中遇到的一些坑进行总结分享，希望对大家有帮助。主要参考官网和WebRTC的编译配置脚本，整个操作过程需要具备科学上学的环境，第一次下载好环境和源码后，后面就不需要了。这里以Android端为例，编译环境为Ubuntu 18.04（再高版本会提示不支持），WebRTC官网有提到Android端暂时只支持在Linux下编译。虽然网上也有资源介绍在Mac环境下编译的，但是用虚拟机装个Ubuntu还是挺方便的，咱就不折腾了。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<h1 id="webrtc-android源码编译">WebRTC Android源码编译</h1>
@@ -183,9 +183,9 @@ clang.gni中关闭chromium style检查，这里只是暂时关闭，为了代码
     </item>
     <item>
       <title>音频开发资源</title>
-      <link>http://localhost:1313/posts/2019-03-10-%E9%9F%B3%E9%A2%91%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/</link>
+      <link>https://lyapple2008.github.io/posts/2019-03-10-%E9%9F%B3%E9%A2%91%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/</link>
       <pubDate>Sun, 10 Mar 2019 10:16:27 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2019-03-10-%E9%9F%B3%E9%A2%91%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/</guid>
+      <guid>https://lyapple2008.github.io/posts/2019-03-10-%E9%9F%B3%E9%A2%91%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/</guid>
       <description>&lt;p&gt;记录一些音频开发过程中会用到的优质资源&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://webrtc.org/&#34;&gt;WebRTC&lt;/a&gt;&lt;/li&gt;
@@ -211,15 +211,15 @@ clang.gni中关闭chromium style检查，这里只是暂时关闭，为了代码
     </item>
     <item>
       <title>JavaNativeInterface笔记</title>
-      <link>http://localhost:1313/posts/2019-03-03-javanativeinterface%E7%AC%94%E8%AE%B0/</link>
+      <link>https://lyapple2008.github.io/posts/2019-03-03-javanativeinterface%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Sun, 03 Mar 2019 22:51:59 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2019-03-03-javanativeinterface%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://lyapple2008.github.io/posts/2019-03-03-javanativeinterface%E7%AC%94%E8%AE%B0/</guid>
       <description>&lt;p&gt;最近由于公司项目的原因开始接触WebRTC，其中Android相关部分由于需要跨越了两种不同的语
 言，因此需要一种机制能够让C/C++和JAVA之间进行交互，而JNI就是这样一种机制。通过JNI可
 以实现C/C++和JAVA之前需要交互。本篇笔记的首先从一个实际的例子开始介绍JNI操作的完整流
 程是怎样的；接着将就这个例子完整介绍JNI中需要注意的点。
 &lt;img alt=&#34;image&#34; loading=&#34;lazy&#34; src=&#34;https://user-images.githubusercontent.com/3350865/61180103-91c2e780-a643-11e9-8132-f85c7a83f8da.jpg&#34;&gt;
-&lt;img src=&#34;http://localhost:1313/images/2019-03-03-001.jpg&#34;&gt;&lt;/p&gt;</description>
+&lt;img src=&#34;https://lyapple2008.github.io/images/2019-03-03-001.jpg&#34;&gt;&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>最近由于公司项目的原因开始接触WebRTC，其中Android相关部分由于需要跨越了两种不同的语
 言，因此需要一种机制能够让C/C++和JAVA之间进行交互，而JNI就是这样一种机制。通过JNI可
 以实现C/C++和JAVA之前需要交互。本篇笔记的首先从一个实际的例子开始介绍JNI操作的完整流
@@ -1264,9 +1264,9 @@ clang.gni中关闭chromium style检查，这里只是暂时关闭，为了代码
     </item>
     <item>
       <title>Android端实现手写数字识别</title>
-      <link>http://localhost:1313/posts/2018-04-29-android%E7%AB%AF%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/</link>
+      <link>https://lyapple2008.github.io/posts/2018-04-29-android%E7%AB%AF%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/</link>
       <pubDate>Sun, 29 Apr 2018 10:56:38 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-04-29-android%E7%AB%AF%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/</guid>
+      <guid>https://lyapple2008.github.io/posts/2018-04-29-android%E7%AB%AF%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/</guid>
       <description>&lt;p&gt;  对DeepLearning最初的印象是，大量的训练样本+机器学习，也就是说原来传统的机器学习会遇到的问题，不能解决的问题，换成DeepLearning同样解决不了。比如目标识别中因为光照变化，目标被遮挡，目标的几何变化造成的识别率大幅下降，在DeepLearning中同样也不能很好解决。但是不是说DeepLearning就一无事处，最近几年这么热也决不是因为名字取得好。DeepLearning比较明显的优势就是在特征选择上，想想之前做生物特征识别时，各种找特征，还得考虑什么光照不变，旋转不变，抗尺寸变换，抗遮挡，那叫一个累呀。现在可好啦，一个Convolution   Layer，再配Fully Connected Layer，最后来个Softmax，丢一堆带标签的样本进去自动给你找出特征。当然这个只是一个接触DeepLearning不到一个月的小白的肤浅认识，大家听听就好。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>  对DeepLearning最初的印象是，大量的训练样本+机器学习，也就是说原来传统的机器学习会遇到的问题，不能解决的问题，换成DeepLearning同样解决不了。比如目标识别中因为光照变化，目标被遮挡，目标的几何变化造成的识别率大幅下降，在DeepLearning中同样也不能很好解决。但是不是说DeepLearning就一无事处，最近几年这么热也决不是因为名字取得好。DeepLearning比较明显的优势就是在特征选择上，想想之前做生物特征识别时，各种找特征，还得考虑什么光照不变，旋转不变，抗尺寸变换，抗遮挡，那叫一个累呀。现在可好啦，一个Convolution   Layer，再配Fully Connected Layer，最后来个Softmax，丢一堆带标签的样本进去自动给你找出特征。当然这个只是一个接触DeepLearning不到一个月的小白的肤浅认识，大家听听就好。</p>
 <p>  本文算是最近1个月学习DeepLearning的入门小作业，选择的例子也是DeepLearning最流行的HelloWorld程序MNIST手写数字识别，采用Caffe2进行训练，并在Android端实现一个Demo样例。</p>
@@ -1533,9 +1533,9 @@ clang.gni中关闭chromium style检查，这里只是暂时关闭，为了代码
     </item>
     <item>
       <title>JNI入门之HelloWorld篇</title>
-      <link>http://localhost:1313/posts/2018-2-15-jni%E5%85%A5%E9%97%A8%E4%B9%8Bhelloworld%E7%AF%87/</link>
+      <link>https://lyapple2008.github.io/posts/2018-2-15-jni%E5%85%A5%E9%97%A8%E4%B9%8Bhelloworld%E7%AF%87/</link>
       <pubDate>Thu, 15 Feb 2018 22:35:37 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-2-15-jni%E5%85%A5%E9%97%A8%E4%B9%8Bhelloworld%E7%AF%87/</guid>
+      <guid>https://lyapple2008.github.io/posts/2018-2-15-jni%E5%85%A5%E9%97%A8%E4%B9%8Bhelloworld%E7%AF%87/</guid>
       <description>&lt;h4 id=&#34;1-jni的作用&#34;&gt;1. JNI的作用&lt;/h4&gt;
 &lt;p&gt;JNI（Java Native Interface）提供了一种java与C/C++ 代码进行交互的方式，可以通过java方法调用C/C++ 的实现，和已有的C/C++ 库。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<h4 id="1-jni的作用">1. JNI的作用</h4>

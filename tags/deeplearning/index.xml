@@ -2,25 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>DeepLearning on BeYoung</title>
-    <link>http://localhost:1313/tags/deeplearning/</link>
+    <link>https://lyapple2008.github.io/tags/deeplearning/</link>
     <description>Recent content in DeepLearning on BeYoung</description>
     <image>
       <title>BeYoung</title>
-      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Mon, 10 Jun 2024 22:20:31 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/deeplearning/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://lyapple2008.github.io/tags/deeplearning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>MacOS M2 Tensorflow GPU环境搭建</title>
-      <link>http://localhost:1313/posts/2024-06-10-macos-m2-tensorflow-gpu%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <link>https://lyapple2008.github.io/posts/2024-06-10-macos-m2-tensorflow-gpu%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
       <pubDate>Mon, 10 Jun 2024 22:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-06-10-macos-m2-tensorflow-gpu%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <guid>https://lyapple2008.github.io/posts/2024-06-10-macos-m2-tensorflow-gpu%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
       <description>&lt;!-- {% asset_img title.gif %} --&gt;
-&lt;img src=&#34;http://localhost:1313/images/2024-06-10-title.gif&#34;/&gt;
+&lt;img src=&#34;https://lyapple2008.github.io/images/2024-06-10-title.gif&#34;/&gt;
 本文记录在mac mini m2 pro上搭建tensorflow gpu版本的过程，中间因为一些坑，导致环境搭建过程有点反复，希望对有相同需求的同学有帮助。</description>
       <content:encoded><![CDATA[<!-- {% asset_img title.gif %} -->
 <img src="/images/2024-06-10-title.gif"/>
@@ -95,16 +95,16 @@
     </item>
     <item>
       <title>算子融合</title>
-      <link>http://localhost:1313/posts/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</link>
+      <link>https://lyapple2008.github.io/posts/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</link>
       <pubDate>Fri, 17 May 2024 22:58:36 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</guid>
+      <guid>https://lyapple2008.github.io/posts/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</guid>
       <description>&lt;h2 id=&#34;什么是算子融合&#34;&gt;什么是算子融合&lt;/h2&gt;
 &lt;p&gt;算子融合是一种通过合并计算图中多个算子到一个算子，达到减少计算量和内存访问的优化方法。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Conv + BatchNormalization + ReLu融合&lt;/li&gt;
 &lt;/ul&gt;
 &lt;!-- {% asset_img conv_bn_relu.png %} --&gt;
-&lt;img src=&#34;http://localhost:1313/images/2024-05-17-conv_bn_relu.png&#34;/&gt;
+&lt;img src=&#34;https://lyapple2008.github.io/images/2024-05-17-conv_bn_relu.png&#34;/&gt;
 &lt;p&gt;从融合后的最终公式可以看出，可以在初始阶段就通过BN的均值和方差（推理阶段BN的均值和方差是常量）更新Conv层的weights和bias参数，这样融合后的算子相当少了一个BN层的操作，既减少了内存访问，也减少了计算量&lt;/p&gt;</description>
       <content:encoded><![CDATA[<h2 id="什么是算子融合">什么是算子融合</h2>
 <p>算子融合是一种通过合并计算图中多个算子到一个算子，达到减少计算量和内存访问的优化方法。</p>
@@ -147,16 +147,16 @@
     </item>
     <item>
       <title>代码优化方法论</title>
-      <link>http://localhost:1313/posts/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/</link>
+      <link>https://lyapple2008.github.io/posts/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/</link>
       <pubDate>Sun, 04 Aug 2019 10:44:29 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/</guid>
+      <guid>https://lyapple2008.github.io/posts/2019-08-04-%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E8%AE%BA/</guid>
       <description>&lt;p&gt;&lt;a name=&#34;01ca666c&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;为什么需要代码优化&#34;&gt;为什么需要代码优化&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;提升体验，扩展玩法&lt;/li&gt;
 &lt;/ul&gt;
 &lt;!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418824-63b24f80-b6a5-11e9-9bde-6cd6de0cc6a5.PNG) --&gt;
-&lt;img src=&#34;http://localhost:1313/images/2019-08-04-001.png&#34;/&gt;</description>
+&lt;img src=&#34;https://lyapple2008.github.io/images/2019-08-04-001.png&#34;/&gt;</description>
       <content:encoded><![CDATA[<p><a name="01ca666c"></a></p>
 <h2 id="为什么需要代码优化">为什么需要代码优化</h2>
 <ul>
@@ -427,9 +427,9 @@ for Deep Neural Networks</a></li>
     </item>
     <item>
       <title>音乐人声分离小结</title>
-      <link>http://localhost:1313/posts/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/</link>
+      <link>https://lyapple2008.github.io/posts/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/</link>
       <pubDate>Sun, 31 Mar 2019 22:18:43 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/</guid>
+      <guid>https://lyapple2008.github.io/posts/2019-03-31-%E9%9F%B3%E4%B9%90%E4%BA%BA%E5%A3%B0%E5%88%86%E7%A6%BB%E5%B0%8F%E7%BB%93/</guid>
       <description>&lt;h3 id=&#34;音乐人声分离概况&#34;&gt;音乐人声分离概况&lt;/h3&gt;
 &lt;p&gt;音乐人声分离的目的是，从一首歌曲中分离出人声和伴奏声。&lt;a href=&#34;https://www.math.ucdavis.edu/~aberrian/research/voice_separation/index.html&#34;&gt;Project on Music/Voice Separation&lt;/a&gt;这个网站比较了一些基于传统方法的效果，但是由于基于了一些假设（比如REPET就假伴奏都是周期重复信号），这些算法在实际测试过程中效果都差强人意。随着深度学习的流行，音乐人声分离这个领域也开始被基于深度学习的方法所占领。在&lt;a href=&#34;http://www.sisec17.audiolabs-erlangen.de/#/results/1/4/2&#34;&gt;SiSEC MUS&lt;/a&gt;上可以看到效果比较好的都是基于深度学习的方法。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<h3 id="音乐人声分离概况">音乐人声分离概况</h3>
@@ -610,9 +610,9 @@ skip-connection使得每个节点在进行建模时，能够同时利用到本�
     </item>
     <item>
       <title>Android端实现手写数字识别</title>
-      <link>http://localhost:1313/posts/2018-04-29-android%E7%AB%AF%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/</link>
+      <link>https://lyapple2008.github.io/posts/2018-04-29-android%E7%AB%AF%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/</link>
       <pubDate>Sun, 29 Apr 2018 10:56:38 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-04-29-android%E7%AB%AF%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/</guid>
+      <guid>https://lyapple2008.github.io/posts/2018-04-29-android%E7%AB%AF%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/</guid>
       <description>&lt;p&gt;  对DeepLearning最初的印象是，大量的训练样本+机器学习，也就是说原来传统的机器学习会遇到的问题，不能解决的问题，换成DeepLearning同样解决不了。比如目标识别中因为光照变化，目标被遮挡，目标的几何变化造成的识别率大幅下降，在DeepLearning中同样也不能很好解决。但是不是说DeepLearning就一无事处，最近几年这么热也决不是因为名字取得好。DeepLearning比较明显的优势就是在特征选择上，想想之前做生物特征识别时，各种找特征，还得考虑什么光照不变，旋转不变，抗尺寸变换，抗遮挡，那叫一个累呀。现在可好啦，一个Convolution   Layer，再配Fully Connected Layer，最后来个Softmax，丢一堆带标签的样本进去自动给你找出特征。当然这个只是一个接触DeepLearning不到一个月的小白的肤浅认识，大家听听就好。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>  对DeepLearning最初的印象是，大量的训练样本+机器学习，也就是说原来传统的机器学习会遇到的问题，不能解决的问题，换成DeepLearning同样解决不了。比如目标识别中因为光照变化，目标被遮挡，目标的几何变化造成的识别率大幅下降，在DeepLearning中同样也不能很好解决。但是不是说DeepLearning就一无事处，最近几年这么热也决不是因为名字取得好。DeepLearning比较明显的优势就是在特征选择上，想想之前做生物特征识别时，各种找特征，还得考虑什么光照不变，旋转不变，抗尺寸变换，抗遮挡，那叫一个累呀。现在可好啦，一个Convolution   Layer，再配Fully Connected Layer，最后来个Softmax，丢一堆带标签的样本进去自动给你找出特征。当然这个只是一个接触DeepLearning不到一个月的小白的肤浅认识，大家听听就好。</p>
 <p>  本文算是最近1个月学习DeepLearning的入门小作业，选择的例子也是DeepLearning最流行的HelloWorld程序MNIST手写数字识别，采用Caffe2进行训练，并在Android端实现一个Demo样例。</p>

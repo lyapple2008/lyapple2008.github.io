@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>InferenceEngine on BeYoung</title>
-    <link>http://localhost:1313/tags/inferenceengine/</link>
+    <link>https://lyapple2008.github.io/tags/inferenceengine/</link>
     <description>Recent content in InferenceEngine on BeYoung</description>
     <image>
       <title>BeYoung</title>
-      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Fri, 17 May 2024 22:58:36 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/inferenceengine/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://lyapple2008.github.io/tags/inferenceengine/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>算子融合</title>
-      <link>http://localhost:1313/posts/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</link>
+      <link>https://lyapple2008.github.io/posts/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</link>
       <pubDate>Fri, 17 May 2024 22:58:36 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</guid>
+      <guid>https://lyapple2008.github.io/posts/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</guid>
       <description>&lt;h2 id=&#34;什么是算子融合&#34;&gt;什么是算子融合&lt;/h2&gt;
 &lt;p&gt;算子融合是一种通过合并计算图中多个算子到一个算子，达到减少计算量和内存访问的优化方法。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Conv + BatchNormalization + ReLu融合&lt;/li&gt;
 &lt;/ul&gt;
 &lt;!-- {% asset_img conv_bn_relu.png %} --&gt;
-&lt;img src=&#34;http://localhost:1313/images/2024-05-17-conv_bn_relu.png&#34;/&gt;
+&lt;img src=&#34;https://lyapple2008.github.io/images/2024-05-17-conv_bn_relu.png&#34;/&gt;
 &lt;p&gt;从融合后的最终公式可以看出，可以在初始阶段就通过BN的均值和方差（推理阶段BN的均值和方差是常量）更新Conv层的weights和bias参数，这样融合后的算子相当少了一个BN层的操作，既减少了内存访问，也减少了计算量&lt;/p&gt;</description>
       <content:encoded><![CDATA[<h2 id="什么是算子融合">什么是算子融合</h2>
 <p>算子融合是一种通过合并计算图中多个算子到一个算子，达到减少计算量和内存访问的优化方法。</p>

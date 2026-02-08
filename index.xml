@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>BeYoung</title>
-    <link>http://localhost:1313/</link>
+    <link>https://lyapple2008.github.io/</link>
     <description>Recent content on BeYoung</description>
     <image>
       <title>BeYoung</title>
-      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Sun, 01 Feb 2026 09:28:45 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://lyapple2008.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>关于AICoding的一些感想和后续的规划</title>
-      <link>http://localhost:1313/posts/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/</link>
+      <link>https://lyapple2008.github.io/posts/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/</link>
       <pubDate>Sun, 01 Feb 2026 09:28:45 +0800</pubDate>
-      <guid>http://localhost:1313/posts/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/</guid>
+      <guid>https://lyapple2008.github.io/posts/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;最近要说最热最火的话题，那一定是 AI，而其中 AI 应用场景 AI Coding 也是发展迅速，大有替代程序员的势头。最近几个月一直在使用 AI Coding，心态上经历了最初的「完了，失业要提前了」，到「稳了，还能苟几年」。下面就分享一些使用上的感受，以及面对 AI Coding 这股后浪，这个号后面的一些规划。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<blockquote>
@@ -55,9 +55,9 @@
     </item>
     <item>
       <title>使用ORT进行语音降噪模型推理</title>
-      <link>http://localhost:1313/posts/2025-11-03-%E4%BD%BF%E7%94%A8ort%E8%BF%9B%E8%A1%8C%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E6%8E%A8%E7%90%86/</link>
+      <link>https://lyapple2008.github.io/posts/2025-11-03-%E4%BD%BF%E7%94%A8ort%E8%BF%9B%E8%A1%8C%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E6%8E%A8%E7%90%86/</link>
       <pubDate>Mon, 03 Nov 2025 19:39:53 +0800</pubDate>
-      <guid>http://localhost:1313/posts/2025-11-03-%E4%BD%BF%E7%94%A8ort%E8%BF%9B%E8%A1%8C%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E6%8E%A8%E7%90%86/</guid>
+      <guid>https://lyapple2008.github.io/posts/2025-11-03-%E4%BD%BF%E7%94%A8ort%E8%BF%9B%E8%A1%8C%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E6%8E%A8%E7%90%86/</guid>
       <description>&lt;p&gt;在深度学习语音降噪模型的部署过程中，选择合适的推理引擎至关重要。ONNX Runtime（ORT）作为微软开源的跨平台推理引擎，在性能、兼容性和易用性方面表现出色，已成为许多生产环境的首选。本文将介绍为什么选择ORT，ORT的核心概念和使用流程，以及在使用ORT进行语音降噪推理时需要注意的关键事项，特别是针对时序模型（如GRU/LSTM）的隐状态管理。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>在深度学习语音降噪模型的部署过程中，选择合适的推理引擎至关重要。ONNX Runtime（ORT）作为微软开源的跨平台推理引擎，在性能、兼容性和易用性方面表现出色，已成为许多生产环境的首选。本文将介绍为什么选择ORT，ORT的核心概念和使用流程，以及在使用ORT进行语音降噪推理时需要注意的关键事项，特别是针对时序模型（如GRU/LSTM）的隐状态管理。</p>
 <h2 id="一为什么选择ort">一、为什么选择ORT？</h2>
@@ -1796,9 +1796,9 @@
     </item>
     <item>
       <title>语音增强算法评估指南</title>
-      <link>http://localhost:1313/posts/2025-08-11-%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95%E8%AF%84%E4%BC%B0/</link>
+      <link>https://lyapple2008.github.io/posts/2025-08-11-%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95%E8%AF%84%E4%BC%B0/</link>
       <pubDate>Mon, 11 Aug 2025 22:27:28 +0800</pubDate>
-      <guid>http://localhost:1313/posts/2025-08-11-%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95%E8%AF%84%E4%BC%B0/</guid>
+      <guid>https://lyapple2008.github.io/posts/2025-08-11-%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95%E8%AF%84%E4%BC%B0/</guid>
       <description>&lt;h1 id=&#34;语音增强算法评估指南&#34;&gt;语音增强算法评估指南&lt;/h1&gt;
 &lt;p&gt;如今语音增强算法已成为智能设备、视频会议和助听器等应用的核心，它能从嘈杂环境中“拯救”清晰的语音信号，但如何判断一个算法的好坏？这就是评估的意义所在。今天，我们来聊聊语音增强算法的评估体系，通过一个国际挑战赛作为切入点，带你一步步了解关键指标和计算方法。无论你是初学者还是从业者，这篇文章都能帮你理清思路。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<h1 id="语音增强算法评估指南">语音增强算法评估指南</h1>
@@ -2062,9 +2062,9 @@
     </item>
     <item>
       <title>WebRTC语音降噪之Wiener滤波</title>
-      <link>http://localhost:1313/posts/2025-07-13-webrtc%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E4%B9%8Bwiener%E6%BB%A4%E6%B3%A2/</link>
+      <link>https://lyapple2008.github.io/posts/2025-07-13-webrtc%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E4%B9%8Bwiener%E6%BB%A4%E6%B3%A2/</link>
       <pubDate>Mon, 07 Jul 2025 21:59:22 +0800</pubDate>
-      <guid>http://localhost:1313/posts/2025-07-13-webrtc%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E4%B9%8Bwiener%E6%BB%A4%E6%B3%A2/</guid>
+      <guid>https://lyapple2008.github.io/posts/2025-07-13-webrtc%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E4%B9%8Bwiener%E6%BB%A4%E6%B3%A2/</guid>
       <description>&lt;h1 id=&#34;webrtc中的wiener滤波降噪算法&#34;&gt;WebRTC中的Wiener滤波降噪算法&lt;/h1&gt;
 &lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;
 &lt;p&gt;在实时语音通信系统中，背景噪声的抑制对于提升通话清晰度至关重要。Google 的 WebRTC 项目在其开源语音引擎中实现了高质量的语音降噪模块，其中 Wiener 滤波器作为核心组成部分，结合语音概率估计、多特征建模、噪声谱跟踪等模块构建了一个高度实用的增强框架。&lt;/p&gt;</description>
@@ -2420,9 +2420,9 @@ $$</p>
     </item>
     <item>
       <title>WebRTC语音降噪之语音概率估计</title>
-      <link>http://localhost:1313/posts/2025-06-30-%E8%AF%AD%E9%9F%B3%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/</link>
+      <link>https://lyapple2008.github.io/posts/2025-06-30-%E8%AF%AD%E9%9F%B3%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/</link>
       <pubDate>Mon, 30 Jun 2025 21:36:39 +0800</pubDate>
-      <guid>http://localhost:1313/posts/2025-06-30-%E8%AF%AD%E9%9F%B3%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/</guid>
+      <guid>https://lyapple2008.github.io/posts/2025-06-30-%E8%AF%AD%E9%9F%B3%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/</guid>
       <description>&lt;p&gt;WebRTC的语音降噪算法中实现了一个频点维度的语音概率估计器SpeechProbabilityEstimator，本质是一个多特征融合的线性分类器。统计计算以下三种特征，&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>WebRTC的语音降噪算法中实现了一个频点维度的语音概率估计器SpeechProbabilityEstimator，本质是一个多特征融合的线性分类器。统计计算以下三种特征，</p>
 <ul>
@@ -3017,9 +3017,9 @@ $$</p>
     </item>
     <item>
       <title>WebRTC语音降噪之基于分位数的噪声估计</title>
-      <link>http://localhost:1313/posts/2025-06-28-%E5%9F%BA%E4%BA%8E%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E5%99%AA%E5%A3%B0%E4%BC%B0%E8%AE%A1/</link>
+      <link>https://lyapple2008.github.io/posts/2025-06-28-%E5%9F%BA%E4%BA%8E%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E5%99%AA%E5%A3%B0%E4%BC%B0%E8%AE%A1/</link>
       <pubDate>Sat, 28 Jun 2025 15:38:44 +0800</pubDate>
-      <guid>http://localhost:1313/posts/2025-06-28-%E5%9F%BA%E4%BA%8E%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E5%99%AA%E5%A3%B0%E4%BC%B0%E8%AE%A1/</guid>
+      <guid>https://lyapple2008.github.io/posts/2025-06-28-%E5%9F%BA%E4%BA%8E%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E5%99%AA%E5%A3%B0%E4%BC%B0%E8%AE%A1/</guid>
       <description>&lt;h2 id=&#34;噪声估计的作用&#34;&gt;噪声估计的作用&lt;/h2&gt;
 &lt;p&gt;噪声估计算法在整个语音降噪系统中起到核心支撑作用，先验SNR和后验SNR的计算都依赖于当前帧的噪声功率谱估计。若噪声估计偏低，会导致保留太多噪声（过度保留）；若噪声估计偏高，会把语音当作噪声过滤掉（语音失真）； 更新不稳定，整体听感时好时坏，忽大忽小，出现”泵声“、”音乐噪声“现象。本文介绍WebRTC中目前使用的基于分位数的噪声估计算法，及其在工程实现中的巧妙之处。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<h2 id="噪声估计的作用">噪声估计的作用</h2>
@@ -3277,9 +3277,9 @@ $$</p>
     </item>
     <item>
       <title>程序员的基本修养之代码编译</title>
-      <link>http://localhost:1313/posts/2025-03-27-%E4%BB%A3%E7%A0%81%E7%BC%96%E8%AF%91/</link>
+      <link>https://lyapple2008.github.io/posts/2025-03-27-%E4%BB%A3%E7%A0%81%E7%BC%96%E8%AF%91/</link>
       <pubDate>Thu, 27 Mar 2025 22:43:58 +0800</pubDate>
-      <guid>http://localhost:1313/posts/2025-03-27-%E4%BB%A3%E7%A0%81%E7%BC%96%E8%AF%91/</guid>
+      <guid>https://lyapple2008.github.io/posts/2025-03-27-%E4%BB%A3%E7%A0%81%E7%BC%96%E8%AF%91/</guid>
       <description>&lt;h1 id=&#34;程序员的基本修养之代码编译&#34;&gt;程序员的基本修养之代码编译&lt;/h1&gt;
 &lt;p&gt;| 代码编译过程介绍，避坑指南，一些常用代码查看工具使用介绍&lt;/p&gt;
 &lt;h2 id=&#34;预处理&#34;&gt;预处理&lt;/h2&gt;
@@ -3581,11 +3581,11 @@ llvm-objdump -d 目标文件
     </item>
     <item>
       <title>MacOS M2 Tensorflow GPU环境搭建</title>
-      <link>http://localhost:1313/posts/2024-06-10-macos-m2-tensorflow-gpu%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <link>https://lyapple2008.github.io/posts/2024-06-10-macos-m2-tensorflow-gpu%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
       <pubDate>Mon, 10 Jun 2024 22:20:31 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-06-10-macos-m2-tensorflow-gpu%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <guid>https://lyapple2008.github.io/posts/2024-06-10-macos-m2-tensorflow-gpu%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
       <description>&lt;!-- {% asset_img title.gif %} --&gt;
-&lt;img src=&#34;http://localhost:1313/images/2024-06-10-title.gif&#34;/&gt;
+&lt;img src=&#34;https://lyapple2008.github.io/images/2024-06-10-title.gif&#34;/&gt;
 本文记录在mac mini m2 pro上搭建tensorflow gpu版本的过程，中间因为一些坑，导致环境搭建过程有点反复，希望对有相同需求的同学有帮助。</description>
       <content:encoded><![CDATA[<!-- {% asset_img title.gif %} -->
 <img src="/images/2024-06-10-title.gif"/>
@@ -3660,16 +3660,16 @@ llvm-objdump -d 目标文件
     </item>
     <item>
       <title>算子融合</title>
-      <link>http://localhost:1313/posts/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</link>
+      <link>https://lyapple2008.github.io/posts/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</link>
       <pubDate>Fri, 17 May 2024 22:58:36 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</guid>
+      <guid>https://lyapple2008.github.io/posts/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</guid>
       <description>&lt;h2 id=&#34;什么是算子融合&#34;&gt;什么是算子融合&lt;/h2&gt;
 &lt;p&gt;算子融合是一种通过合并计算图中多个算子到一个算子，达到减少计算量和内存访问的优化方法。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Conv + BatchNormalization + ReLu融合&lt;/li&gt;
 &lt;/ul&gt;
 &lt;!-- {% asset_img conv_bn_relu.png %} --&gt;
-&lt;img src=&#34;http://localhost:1313/images/2024-05-17-conv_bn_relu.png&#34;/&gt;
+&lt;img src=&#34;https://lyapple2008.github.io/images/2024-05-17-conv_bn_relu.png&#34;/&gt;
 &lt;p&gt;从融合后的最终公式可以看出，可以在初始阶段就通过BN的均值和方差（推理阶段BN的均值和方差是常量）更新Conv层的weights和bias参数，这样融合后的算子相当少了一个BN层的操作，既减少了内存访问，也减少了计算量&lt;/p&gt;</description>
       <content:encoded><![CDATA[<h2 id="什么是算子融合">什么是算子融合</h2>
 <p>算子融合是一种通过合并计算图中多个算子到一个算子，达到减少计算量和内存访问的优化方法。</p>
@@ -3712,9 +3712,9 @@ llvm-objdump -d 目标文件
     </item>
     <item>
       <title>关于我</title>
-      <link>http://localhost:1313/about_me/</link>
+      <link>https://lyapple2008.github.io/about_me/</link>
       <pubDate>Sun, 14 May 2023 12:32:00 -0700</pubDate>
-      <guid>http://localhost:1313/about_me/</guid>
+      <guid>https://lyapple2008.github.io/about_me/</guid>
       <description>&lt;h3 id=&#34;正在研究的项目&#34;&gt;正在研究的项目&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://xiaolai.co/books/c558c667ad9f05ddce38f06df2d15aa3/chapter1.html&#34;&gt;《人人都用能英语》&lt;/a&gt;&lt;/li&gt;

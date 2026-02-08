@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>FFmpeg on BeYoung</title>
-    <link>http://localhost:1313/tags/ffmpeg/</link>
+    <link>https://lyapple2008.github.io/tags/ffmpeg/</link>
     <description>Recent content in FFmpeg on BeYoung</description>
     <image>
       <title>BeYoung</title>
-      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Sat, 18 Aug 2018 12:19:55 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/ffmpeg/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://lyapple2008.github.io/tags/ffmpeg/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Windows下载编译FFmpeg动态库指北</title>
-      <link>http://localhost:1313/posts/2018-08-18-windows%E4%B8%8B%E8%BD%BD%E7%BC%96%E8%AF%91ffmpeg%E5%8A%A8%E6%80%81%E5%BA%93%E6%8C%87%E5%8C%97/</link>
+      <link>https://lyapple2008.github.io/posts/2018-08-18-windows%E4%B8%8B%E8%BD%BD%E7%BC%96%E8%AF%91ffmpeg%E5%8A%A8%E6%80%81%E5%BA%93%E6%8C%87%E5%8C%97/</link>
       <pubDate>Sat, 18 Aug 2018 12:19:55 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-08-18-windows%E4%B8%8B%E8%BD%BD%E7%BC%96%E8%AF%91ffmpeg%E5%8A%A8%E6%80%81%E5%BA%93%E6%8C%87%E5%8C%97/</guid>
+      <guid>https://lyapple2008.github.io/posts/2018-08-18-windows%E4%B8%8B%E8%BD%BD%E7%BC%96%E8%AF%91ffmpeg%E5%8A%A8%E6%80%81%E5%BA%93%E6%8C%87%E5%8C%97/</guid>
       <description>&lt;p&gt;  在踩了无数坑之后，才有了这篇文章，现在就一个想法还是Linux系统好呀。编译什么东西都是一个套路，configure/make/make install。之前不知道为什么那么程序员会推崇用mac做开发，编译的这个问题上Mac绝对完胜Windows。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>  在踩了无数坑之后，才有了这篇文章，现在就一个想法还是Linux系统好呀。编译什么东西都是一个套路，configure/make/make install。之前不知道为什么那么程序员会推崇用mac做开发，编译的这个问题上Mac绝对完胜Windows。</p>
 <!---more--->
@@ -95,9 +95,9 @@
     </item>
     <item>
       <title>FFmpeg中AVFilter模块实践指南</title>
-      <link>http://localhost:1313/posts/2018-3-24-ffmpeg%E4%B8%ADavfilter%E6%A8%A1%E5%9D%97%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/</link>
+      <link>https://lyapple2008.github.io/posts/2018-3-24-ffmpeg%E4%B8%ADavfilter%E6%A8%A1%E5%9D%97%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/</link>
       <pubDate>Sat, 24 Mar 2018 22:55:27 +0000</pubDate>
-      <guid>http://localhost:1313/posts/2018-3-24-ffmpeg%E4%B8%ADavfilter%E6%A8%A1%E5%9D%97%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/</guid>
+      <guid>https://lyapple2008.github.io/posts/2018-3-24-ffmpeg%E4%B8%ADavfilter%E6%A8%A1%E5%9D%97%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97/</guid>
       <description>&lt;p&gt;在做音视频相关的开发过程大体如下所示，对于其中的编码/解码，整个流程相对比较固定，使用ffmpeg可以很好的完成这部分的开发。对其中的帧数据处理（包括音频和视频数据）则相对要多样化一些，比如对视频做尺寸变换，进行音频音量均衡，直播中的美颜处理，多路流合成等等，这些都是属于流程中的帧数据处理。今天要介绍FFmpeg中的AVFilter模块进行帧数据处理的开发，AVFilter模块对帧数据处理进行了很好的抽象。AVFilter中的filter graph（滤波器图）概念非常适合帧数据处理中的多级滤波处理，同时对滤波器的接口进行了规定，后期添加一些自定义的滤波器也是很方便。网上关于AVFilter的介绍大多是基于ffmpeg的命令使用，基于代码实现的很少，最近项目中正好要使用到了AVFilter，写个小结，希望对有同样需求的小伙伴有帮助。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>在做音视频相关的开发过程大体如下所示，对于其中的编码/解码，整个流程相对比较固定，使用ffmpeg可以很好的完成这部分的开发。对其中的帧数据处理（包括音频和视频数据）则相对要多样化一些，比如对视频做尺寸变换，进行音频音量均衡，直播中的美颜处理，多路流合成等等，这些都是属于流程中的帧数据处理。今天要介绍FFmpeg中的AVFilter模块进行帧数据处理的开发，AVFilter模块对帧数据处理进行了很好的抽象。AVFilter中的filter graph（滤波器图）概念非常适合帧数据处理中的多级滤波处理，同时对滤波器的接口进行了规定，后期添加一些自定义的滤波器也是很方便。网上关于AVFilter的介绍大多是基于ffmpeg的命令使用，基于代码实现的很少，最近项目中正好要使用到了AVFilter，写个小结，希望对有同样需求的小伙伴有帮助。</p>
 <blockquote>
