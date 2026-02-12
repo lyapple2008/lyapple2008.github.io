@@ -22,6 +22,27 @@
       <description></description>
     </item>
     <item>
+      <title>IOS开发</title>
+      <link>https://lyapple2008.github.io/tags/ios%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Sun, 25 Jan 2026 07:52:25 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/ios%E5%BC%80%E5%8F%91/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>开发日志</title>
+      <link>https://lyapple2008.github.io/tags/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</link>
+      <pubDate>Sun, 25 Jan 2026 07:52:25 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>双语字幕</title>
+      <link>https://lyapple2008.github.io/tags/%E5%8F%8C%E8%AF%AD%E5%AD%97%E5%B9%95/</link>
+      <pubDate>Sun, 25 Jan 2026 07:52:25 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/%E5%8F%8C%E8%AF%AD%E5%AD%97%E5%B9%95/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Onnx Runtime</title>
       <link>https://lyapple2008.github.io/tags/onnx-runtime/</link>
       <pubDate>Mon, 03 Nov 2025 19:39:53 +0800</pubDate>
@@ -61,27 +82,6 @@
       <link>https://lyapple2008.github.io/tags/deeplearning/</link>
       <pubDate>Mon, 10 Jun 2024 22:20:31 +0000</pubDate>
       <guid>https://lyapple2008.github.io/tags/deeplearning/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>InferenceEngine</title>
-      <link>https://lyapple2008.github.io/tags/inferenceengine/</link>
-      <pubDate>Fri, 17 May 2024 22:58:36 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/tags/inferenceengine/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Android</title>
-      <link>https://lyapple2008.github.io/tags/android/</link>
-      <pubDate>Sat, 24 Sep 2022 17:03:48 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/tags/android/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Audio</title>
-      <link>https://lyapple2008.github.io/tags/audio/</link>
-      <pubDate>Thu, 03 Feb 2022 11:35:16 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/tags/audio/</guid>
       <description></description>
     </item>
   </channel>

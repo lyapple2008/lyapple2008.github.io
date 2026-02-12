@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>语音识别 on BeYoung</title>
+    <link>http://localhost:1313/tags/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/</link>
+    <description>Recent content in 语音识别 on BeYoung</description>
+    <image>
+      <title>BeYoung</title>
+      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.147.9</generator>
+    <language>zh</language>
+    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
+    <lastBuildDate>Fri, 30 Jan 2026 23:10:57 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LowFrameRate在语音识别中的原理和作用</title>
+      <link>http://localhost:1313/posts/2026-01-30-lowframerate%E5%9C%A8%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%B8%AD%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E4%BD%9C%E7%94%A8/</link>
+      <pubDate>Fri, 30 Jan 2026 23:10:57 +0800</pubDate>
+      <guid>http://localhost:1313/posts/2026-01-30-lowframerate%E5%9C%A8%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%B8%AD%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E4%BD%9C%E7%94%A8/</guid>
+      <description>&lt;h1 id=&#34;low-frame-ratelfr在语音识别中的原理与作用&#34;&gt;Low Frame Rate（LFR）在语音识别中的原理与作用&lt;/h1&gt;
+&lt;h2 id=&#34;一什么是-low-frame-ratelfr&#34;&gt;一、什么是 Low Frame Rate（LFR）&lt;/h2&gt;
+&lt;p&gt;在自动语音识别（ASR）中，&lt;strong&gt;Low Frame Rate（低帧率，简称 LFR）&lt;strong&gt;是一种&lt;/strong&gt;时域特征重组织方法&lt;/strong&gt;，其核心思想是：&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<h1 id="low-frame-ratelfr在语音识别中的原理与作用">Low Frame Rate（LFR）在语音识别中的原理与作用</h1>
+<h2 id="一什么是-low-frame-ratelfr">一、什么是 Low Frame Rate（LFR）</h2>
+<p>在自动语音识别（ASR）中，<strong>Low Frame Rate（低帧率，简称 LFR）<strong>是一种</strong>时域特征重组织方法</strong>，其核心思想是：</p>
+<blockquote>
+<p><strong>将原本高时间分辨率的声学特征帧进行拼接（Frame Stacking），
+再按一定步长进行下采样（Subsampling），
+从而用更少的时间步表示同一段语音。</strong></p></blockquote>
+<p>在不使用 LFR 的情况下，常见声学特征（如 MFCC、FBANK）通常以 <strong>10 ms</strong> 为帧移（frame shift）提取：</p>
+<ul>
+<li>1 秒音频 ≈ 100 帧</li>
+<li>特征形状为 <code>[T, D]</code></li>
+</ul>
+<p>引入 LFR 后：</p>
+<ul>
+<li>多个连续帧被合并成一个“厚帧”</li>
+<li>模型看到的时间步数明显减少</li>
+<li>特征形状变为 <code>[T', D']</code>，其中 <code>T' &lt; T</code></li>
+</ul>
+<hr>
+<h2 id="二lfr-的典型适用场景">二、LFR 的典型适用场景</h2>
+<p>LFR 并不是一个“可选优化”，而是<strong>现代 ASR 系统中的标准配置</strong>，尤其适用于以下场景：</p>
+<h3 id="1-长序列建模的声学模型">1. 长序列建模的声学模型</h3>
+<ul>
+<li>Transformer / Conformer</li>
+<li>RNN / LSTM / GRU</li>
+<li>CTC / RNN-T / Attention Encoder</li>
+</ul>
+<p>这些模型的计算复杂度都与<strong>时间步长度 T 强相关</strong>。</p>
+<hr>
+<h3 id="2-流式语音识别streaming-asr">2. 流式语音识别（Streaming ASR）</h3>
+<ul>
+<li>实时字幕</li>
+<li>语音助手</li>
+<li>低延迟语音交互</li>
+</ul>
+<p>LFR 可以：</p>
+<ul>
+<li>降低每秒需要处理的帧数</li>
+<li>提高解码稳定性</li>
+<li>减少无意义的高频决策</li>
+</ul>
+<hr>
+<h3 id="3-移动端--边缘端推理">3. 移动端 / 边缘端推理</h3>
+<ul>
+<li>CPU / NPU 算力受限</li>
+<li>内存与功耗敏感</li>
+</ul>
+<p>LFR 是<strong>性价比极高的性能优化手段</strong>。</p>
+<hr>
+<h2 id="三为什么需要-lfr">三、为什么需要 LFR</h2>
+<h3 id="1-原始帧率过高信息冗余严重">1. 原始帧率过高，信息冗余严重</h3>
+<p>10 ms 帧移意味着：</p>
+<ul>
+<li>相邻帧高度相关</li>
+<li>连续多帧往往属于同一个音素</li>
+<li>模型需要做大量“无效但昂贵”的时间步计算</li>
+</ul>
+<p>从语音学角度看：</p>
+<ul>
+<li>音素时长通常在 <strong>50–100 ms</strong></li>
+<li>以 10 ms 为单位建模，时间分辨率明显过细</li>
+</ul>
+<hr>
+<h3 id="2-长时间序列是-asr-的主要性能瓶颈">2. 长时间序列是 ASR 的主要性能瓶颈</h3>
+<p>在 ASR 模型中：</p>
+<ul>
+<li>Transformer 的 Self-Attention 复杂度为 <code>O(T²)</code></li>
+<li>RNN 需要按时间步循环计算</li>
+<li>CTC / RNN-T 的前向后向算法与 T 成正比</li>
+</ul>
+<p>因此，<strong>时间步数 T 往往是系统性能的第一瓶颈</strong>。</p>
+<hr>
+<h3 id="3-lfr-提供了更合理的时间建模粒度">3. LFR 提供了更合理的“时间建模粒度”</h3>
+<p>LFR 后：</p>
+<ul>
+<li>每一个时间步不再代表 10 ms</li>
+<li>而是代表 30–40 ms 的语音上下文</li>
+<li>更接近“音素级”时间尺度</li>
+</ul>
+<p>这让模型：</p>
+<ul>
+<li>更容易学习稳定对齐</li>
+<li>减少抖动与频繁修正</li>
+<li>提高整体鲁棒性</li>
+</ul>
+<hr>
+<h2 id="四lfr-的核心算法frame-stacking--subsampling">四、LFR 的核心算法：Frame Stacking + Subsampling</h2>
+<h3 id="1-frame-stacking帧拼接">1. Frame Stacking（帧拼接）</h3>
+<p>将连续的 <code>m</code> 帧特征拼接在一起：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">y = concat(x_t, x_{t+1}, ..., x_{t+m-1})
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>作用：</p>
+<ul>
+<li>显式引入短时上下文</li>
+<li>保留完整的频谱信息</li>
+<li>不引入不可逆的信息损失</li>
+</ul>
+<hr>
+<h3 id="2-subsampling下采样">2. Subsampling（下采样）</h3>
+<p>每隔 <code>n</code> 帧生成一个 LFR 帧：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">t = 0, n, 2n, 3n, ...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>作用：</p>
+<ul>
+<li>减少时间步数量</li>
+<li>控制计算量</li>
+<li>与 stacking 配合使用，避免信息断裂</li>
+</ul>
+<hr>
+<h3 id="3-lfr-的输出形态">3. LFR 的输出形态</h3>
+<p>假设：</p>
+<ul>
+<li>原始特征：<code>[T, D]</code></li>
+<li>LFR 参数：<code>m = 4, n = 4</code></li>
+</ul>
+<p>则：</p>
+<ul>
+<li>输出时间步数：<code>T' ≈ T / 4</code></li>
+<li>输出维度：<code>D' = 4 × D</code></li>
+</ul>
+<hr>
+<h3 id="4-用压缩视角看更直观">4. 用“压缩视角”看更直观</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">原始帧 (10ms):
+</span></span><span class="line"><span class="cl">f0  f1  f2  f3  f4  f5  f6  f7  f8  f9  f10 ...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">LFR 帧 (≈30ms step):
+</span></span><span class="line"><span class="cl">|---- LFR_0 ----|
+</span></span><span class="line"><span class="cl">          |---- LFR_1 ----|
+</span></span><span class="line"><span class="cl">                    |---- LFR_2 ----|
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者画成块状：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">LFR_0: [ f0 | f1 | f2 | f3 ]
+</span></span><span class="line"><span class="cl">LFR_1:            [ f3 | f4 | f5 | f6 ]
+</span></span><span class="line"><span class="cl">LFR_2:                      [ f6 | f7 | f8 | f9 ]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="五lfr-为什么可以降低计算量关键问题">五、LFR 为什么可以降低计算量（关键问题）</h2>
+<p>一个常见疑问是：</p>
+<blockquote>
+<p><strong>LFR 并没有减少特征总数，为什么能提升性能？</strong></p></blockquote>
+<p>关键在于：
+<strong>ASR 中的“序列长度”指的是时间步数 T，而不是特征维度 D。</strong></p>
+<hr>
+<h3 id="1-时间步数显著减少">1. 时间步数显著减少</h3>
+<p>示例（1 秒音频）：</p>
+<table>
+  <thead>
+      <tr>
+          <th>项目</th>
+          <th>原始</th>
+          <th>LFR 后</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>时间步数 T</td>
+          <td>100</td>
+          <td>25</td>
+      </tr>
+      <tr>
+          <td>单帧维度 D</td>
+          <td>80</td>
+          <td>320</td>
+      </tr>
+      <tr>
+          <td>特征总数</td>
+          <td>8000</td>
+          <td>8000</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li><strong>特征总量近似不变</strong></li>
+<li><strong>时间步数减少 4 倍</strong></li>
+</ul>
+<hr>
+<h3 id="2-对模型计算复杂度的影响">2. 对模型计算复杂度的影响</h3>
+<h4 id="transformer">Transformer</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Self-Attention: O(T² · D)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>T 减少 4 倍 → 计算量 ≈ 1/16</li>
+<li>D 增加 4 倍 → 抵消一部分</li>
+<li><strong>整体计算量仍显著下降</strong></li>
+</ul>
+<hr>
+<h4 id="rnn--lstm">RNN / LSTM</h4>
+<ul>
+<li>每个时间步一次矩阵运算</li>
+<li>时间步减少 → 直接加速</li>
+</ul>
+<hr>
+<h4 id="ctc--rnn-t-解码">CTC / RNN-T 解码</h4>
+<ul>
+<li>forward-backward 按时间展开</li>
+<li>blank 插入点减少</li>
+<li>对齐更稳定，延迟更低</li>
+</ul>
+<hr>
+<h3 id="3-更少的决策点">3. 更少的“决策点”</h3>
+<p>LFR 后：</p>
+<ul>
+<li>模型不需要每 10 ms 决策一次</li>
+<li>每个输出时间点更有语义意义</li>
+<li>beam search 状态空间显著缩小</li>
+</ul>
+<hr>
+<h2 id="六lfr-的工程意义总结">六、LFR 的工程意义总结</h2>
+<p>从工程视角看，LFR的本质是：</p>
+<blockquote>
+<p><strong>用更高维的“时间块特征”，
+换取更短的时间序列，
+从而在保证信息量的前提下降低计算成本。</strong></p></blockquote>
+<p>它带来的收益包括：</p>
+<ul>
+<li>计算量下降</li>
+<li>内存访问减少</li>
+<li>解码稳定性提升</li>
+<li>流式系统更易控延迟</li>
+</ul>
+<hr>
+<h2 id="七一句话总结">七、一句话总结</h2>
+<blockquote>
+<p><strong>Low Frame Rate 并不是减少信息，
+而是重新组织时间维度，
+让语音识别模型用更合理的方式“看时间”。</strong></p></blockquote>
+]]></content:encoded>
+    </item>
+  </channel>
+</rss>
