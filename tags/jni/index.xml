@@ -176,10 +176,10 @@
 </span></span><span class="line"><span class="cl">        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&#34;C/C++　call java viarable and method&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="n">javaClass</span><span class="o">.</span><span class="n">testCallbackMethod</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
+</div>
+<ul>
 <li>生成jni native头文件</li>
 </ul>
 <blockquote>
@@ -309,10 +309,10 @@
 </span></span><span class="line"><span class="cl"><span class="cp">#ifdef __cplusplus
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="cp">#endif</span></span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
+</div>
+<ul>
 <li>在C文件中编写相关jni native方法的实现</li>
 </ul>
 <div class="highlight"><div class="chroma">
@@ -586,10 +586,10 @@
 </span></span><span class="line"><span class="cl">      <span class="k">const</span> <span class="n">char</span><span class="o">*</span> <span class="n">resultCStr</span> <span class="o">=</span> <span class="p">(</span><span class="o">*</span><span class="n">env</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">GetStringUTFChars</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">resultJNIStr</span><span class="p">,</span> <span class="n">NULL</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">NULL</span> <span class="o">==</span> <span class="n">resultCStr</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">      <span class="n">printf</span><span class="p">(</span><span class="s2">&#34;In C, the returned string is </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">resultCStr</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
+</div>
+<ul>
 <li>通过gcc/g++ 生成动态库</li>
 </ul>
 <blockquote>
@@ -643,10 +643,10 @@
 </span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="n">Java</span> <span class="n">with</span> <span class="n">Hello</span> <span class="n">from</span> <span class="n">C</span>
 </span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="n">C</span><span class="p">,</span> <span class="n">call</span> <span class="n">back</span> <span class="n">Java</span><span class="s1">&#39;s callbackAverage</span>
 </span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="n">C</span><span class="p">,</span> <span class="n">the</span> <span class="n">average</span> <span class="n">is</span> <span class="mf">2.500000</span>
-</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="n">C</span><span class="p">,</span> <span class="n">the</span> <span class="n">returned</span> <span class="n">string</span> <span class="n">is</span> <span class="n">From</span> <span class="k">static</span> <span class="n">Java</span> <span class="n">method</span><span class="o">.</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="n">In</span> <span class="n">C</span><span class="p">,</span> <span class="n">the</span> <span class="n">returned</span> <span class="n">string</span> <span class="n">is</span> <span class="n">From</span> <span class="k">static</span> <span class="n">Java</span> <span class="n">method</span><span class="o">.</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="jni中类型的对应关系与转换">JNI中类型的对应关系与转换</h3>
+</div>
+<h3 id="jni中类型的对应关系与转换">JNI中类型的对应关系与转换</h3>
 <ul>
 <li>基于数据类型</li>
 </ul>
@@ -849,10 +849,10 @@
 </span></span><span class="line"><span class="cl"><span class="n">jsize</span> <span class="n">GetStringLength</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jstring</span> <span class="n">string</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Returns</span> <span class="n">the</span> <span class="n">length</span> <span class="p">(</span><span class="n">the</span> <span class="n">count</span> <span class="n">of</span> <span class="n">Unicode</span> <span class="n">characters</span><span class="p">)</span> <span class="n">of</span> <span class="n">a</span> <span class="n">Java</span> <span class="n">string</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">GetStringRegion</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jstring</span> <span class="nb">str</span><span class="p">,</span> <span class="n">jsize</span> <span class="n">start</span><span class="p">,</span> <span class="n">jsize</span> <span class="n">length</span><span class="p">,</span> <span class="n">jchar</span> <span class="o">*</span><span class="n">buf</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Copies</span> <span class="n">len</span> <span class="n">number</span> <span class="n">of</span> <span class="n">Unicode</span> <span class="n">characters</span> <span class="n">beginning</span> <span class="n">at</span> <span class="n">offset</span> <span class="n">start</span> <span class="n">to</span> <span class="n">the</span> <span class="n">given</span> <span class="n">buffer</span> <span class="n">buf</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Copies</span> <span class="n">len</span> <span class="n">number</span> <span class="n">of</span> <span class="n">Unicode</span> <span class="n">characters</span> <span class="n">beginning</span> <span class="n">at</span> <span class="n">offset</span> <span class="n">start</span> <span class="n">to</span> <span class="n">the</span> <span class="n">given</span> <span class="n">buffer</span> <span class="n">buf</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -877,10 +877,10 @@
 </span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">Set</span><span class="o">&lt;</span><span class="n">PrimitiveType</span><span class="o">&gt;</span><span class="n">ArrayRegion</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">ArrayType</span> <span class="n">array</span><span class="p">,</span> <span class="n">jsize</span> <span class="n">start</span><span class="p">,</span> <span class="n">jsize</span> <span class="n">length</span><span class="p">,</span> <span class="k">const</span> <span class="n">NativeType</span> <span class="o">*</span><span class="n">buffer</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">ArrayType</span> <span class="n">New</span><span class="o">&lt;</span><span class="n">PrimitiveType</span><span class="o">&gt;</span><span class="ne">Array</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jsize</span> <span class="n">length</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="o">*</span> <span class="n">GetPrimitiveArrayCritical</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jarray</span> <span class="n">array</span><span class="p">,</span> <span class="n">jboolean</span> <span class="o">*</span><span class="n">isCopy</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">ReleasePrimitiveArrayCritical</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jarray</span> <span class="n">array</span><span class="p">,</span> <span class="n">void</span> <span class="o">*</span><span class="n">carray</span><span class="p">,</span> <span class="n">jint</span> <span class="n">mode</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">ReleasePrimitiveArrayCritical</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jarray</span> <span class="n">array</span><span class="p">,</span> <span class="n">void</span> <span class="o">*</span><span class="n">carray</span><span class="p">,</span> <span class="n">jint</span> <span class="n">mode</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="cc调用java类中的成员变量">C/C++调用Java类中的成员变量</h3>
+</div>
+<h3 id="cc调用java类中的成员变量">C/C++调用Java类中的成员变量</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -922,10 +922,10 @@
 </span></span><span class="line"><span class="cl"><span class="n">NativeType</span> <span class="n">GetStatic</span><span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span><span class="n">Field</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jclass</span> <span class="n">clazz</span><span class="p">,</span> <span class="n">jfieldID</span> <span class="n">fieldID</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">void</span> <span class="n">SetStatic</span><span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span><span class="n">Field</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jclass</span> <span class="n">clazz</span><span class="p">,</span> <span class="n">jfieldID</span> <span class="n">fieldID</span><span class="p">,</span> <span class="n">NativeType</span> <span class="n">value</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="o">//</span> <span class="n">Get</span><span class="o">/</span><span class="n">Set</span> <span class="n">the</span> <span class="n">value</span> <span class="n">of</span> <span class="n">a</span> <span class="k">static</span> <span class="n">variable</span> <span class="n">of</span> <span class="n">a</span> <span class="k">class</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl">  <span class="o">//</span> <span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span> <span class="n">includes</span> <span class="n">each</span> <span class="n">of</span> <span class="n">the</span> <span class="n">eight</span> <span class="n">primitive</span> <span class="n">types</span> <span class="n">plus</span> <span class="ne">Object</span><span class="o">.</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">  <span class="o">//</span> <span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span> <span class="n">includes</span> <span class="n">each</span> <span class="n">of</span> <span class="n">the</span> <span class="n">eight</span> <span class="n">primitive</span> <span class="n">types</span> <span class="n">plus</span> <span class="ne">Object</span><span class="o">.</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="cc调用java类中的成员方法">C/C++调用Java类中的成员方法</h3>
+</div>
+<h3 id="cc调用java类中的成员方法">C/C++调用Java类中的成员方法</h3>
 <p>通过下面这条命令可以获取到java中方法的签名</p>
 <blockquote>
 <p>javas -s -p Java2C</p></blockquote>
@@ -1020,10 +1020,10 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  static {};
 </span></span><span class="line"><span class="cl">    descriptor: ()V
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">}</span></span></code></pre></td></tr></table>
 </div>
-</div><p>再通过下面这些JNI方法变可以在C/C++代码中调用到JAVA类的成员方法了</p>
+</div>
+<p>再通过下面这些JNI方法变可以在C/C++代码中调用到JAVA类的成员方法了</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1061,10 +1061,10 @@
 </span></span><span class="line"><span class="cl"><span class="n">NativeType</span> <span class="n">CallStatic</span><span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span><span class="n">MethodA</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jclass</span> <span class="n">clazz</span><span class="p">,</span> <span class="n">jmethodID</span> <span class="n">methodID</span><span class="p">,</span> <span class="k">const</span> <span class="n">jvalue</span> <span class="o">*</span><span class="n">args</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">NativeType</span> <span class="n">CallStatic</span><span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span><span class="n">MethodV</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="n">env</span><span class="p">,</span> <span class="n">jclass</span> <span class="n">clazz</span><span class="p">,</span> <span class="n">jmethodID</span> <span class="n">methodID</span><span class="p">,</span> <span class="n">va_list</span> <span class="n">args</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">Invoke</span> <span class="n">an</span> <span class="n">instance</span> <span class="n">method</span> <span class="n">of</span> <span class="n">the</span> <span class="n">object</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">The</span> <span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span> <span class="n">includes</span> <span class="n">each</span> <span class="n">of</span> <span class="n">the</span> <span class="n">eight</span> <span class="n">primitive</span> <span class="ow">and</span> <span class="ne">Object</span><span class="o">.</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">   <span class="o">//</span> <span class="n">The</span> <span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span> <span class="n">includes</span> <span class="n">each</span> <span class="n">of</span> <span class="n">the</span> <span class="n">eight</span> <span class="n">primitive</span> <span class="ow">and</span> <span class="ne">Object</span><span class="o">.</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="参考">参考</h3>
+</div>
+<h3 id="参考">参考</h3>
 <p>[1] <a href="https://www3.ntu.edu.sg/home/ehchua/programming/java/JavaNativeInterface.html">Java Programming Tutorial Java Native Interface (JNI)</a></p>]]></content:encoded>
     </item>
     <item>
@@ -1115,10 +1115,10 @@
 </span></span><span class="line"><span class="cl">   <span class="n">public</span> <span class="k">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="ne">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="n">new</span> <span class="n">HelloJNI</span><span class="p">()</span><span class="o">.</span><span class="n">sayHello</span><span class="p">();</span>  <span class="o">//</span> <span class="n">invoke</span> <span class="n">the</span> <span class="n">native</span> <span class="n">method</span>
 </span></span><span class="line"><span class="cl">   <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
+</div>
+<ul>
 <li>使用javah命令生成相应的头文件（到elipse工程的bin目录下，打开命令行，注意不用带class后缀）</li>
 </ul>
 <blockquote>
@@ -1169,10 +1169,10 @@
 </span></span><span class="line"><span class="cl"><span class="cp">#ifdef __cplusplus
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="cp">#endif</span></span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
+</div>
+<ul>
 <li>然后就是要去实现之前声明的native方法，这里我们使用Visual Studio新建一个dll工程，
 这里需要将之前头文件所依赖的jni.h和jni_md.h所在的jdk目录添加到包含目录中，并将项目类型切换到与平台类型一致，否则会出现这样的不匹配错误</li>
 </ul>
@@ -1193,10 +1193,10 @@
 </span></span><span class="line"><span class="cl"><span class="n">JNIEXPORT</span> <span class="kt">void</span> <span class="n">JNICALL</span> <span class="nf">Java_com_hello_jni_HelloJNI_sayHello</span><span class="p">(</span><span class="n">JNIEnv</span> <span class="o">*</span><span class="p">,</span> <span class="n">jobject</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Hello World&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1213,10 +1213,10 @@
 </span></span><span class="line"><span class="cl">	<span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">ClassLoader</span><span class="o">.</span><span class="n">loadLibrary</span><span class="p">(</span><span class="n">Unknown</span> <span class="n">Source</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">	<span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">Runtime</span><span class="o">.</span><span class="n">loadLibrary0</span><span class="p">(</span><span class="n">Unknown</span> <span class="n">Source</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">	<span class="n">at</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">System</span><span class="o">.</span><span class="n">loadLibrary</span><span class="p">(</span><span class="n">Unknown</span> <span class="n">Source</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="n">at</span> <span class="n">com</span><span class="o">.</span><span class="n">hello</span><span class="o">.</span><span class="n">jni</span><span class="o">.</span><span class="n">HelloJNI</span><span class="o">.&lt;</span><span class="n">clinit</span><span class="o">&gt;</span><span class="p">(</span><span class="n">HelloJNI</span><span class="o">.</span><span class="n">java</span><span class="p">:</span><span class="mi">5</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">	<span class="n">at</span> <span class="n">com</span><span class="o">.</span><span class="n">hello</span><span class="o">.</span><span class="n">jni</span><span class="o">.</span><span class="n">HelloJNI</span><span class="o">.&lt;</span><span class="n">clinit</span><span class="o">&gt;</span><span class="p">(</span><span class="n">HelloJNI</span><span class="o">.</span><span class="n">java</span><span class="p">:</span><span class="mi">5</span><span class="p">)</span></span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
+</div>
+<ul>
 <li>将生成的dll文件的路径添加到环境变量中，这样JAVA类就可以调用dll中的C实现方法了</li>
 </ul>
 <blockquote>

@@ -90,10 +90,10 @@
 </span></span><span class="line"><span class="cl">   │ ├─ 输入 OrtValue (Tensor 等)           │
 </span></span><span class="line"><span class="cl">   │ ├─ 输出 OrtValue                      │
 </span></span><span class="line"><span class="cl">   │ └─ 在 Env/Session 的线程池中执行      │
-</span></span><span class="line"><span class="cl">   └────────────────────────────────────────┘
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">   └────────────────────────────────────────┘</span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="ortenv运行时环境">OrtEnv（运行时环境）</h4>
+</div>
+<h4 id="ortenv运行时环境">OrtEnv（运行时环境）</h4>
 <p><code>OrtEnv</code>是ORT的全局运行时环境，负责管理线程池、日志等全局资源。通常一个进程只需要创建一个<code>OrtEnv</code>实例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -118,10 +118,10 @@
 </span></span><span class="line"><span class="cl">    <span class="c1">// 错误处理
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">msg</span> <span class="o">=</span> <span class="nf">OrtGetErrorMessage</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">OrtReleaseStatus</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="ortsession推理会话">OrtSession（推理会话）</h4>
+</div>
+<h4 id="ortsession推理会话">OrtSession（推理会话）</h4>
 <p><code>OrtSession</code>负责加载ONNX模型并执行推理。创建会话需要先创建会话选项：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -166,10 +166,10 @@
 </span></span><span class="line"><span class="cl"><span class="c1">// 3. 释放资源（使用完毕后）
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtReleaseSessionOptions</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseSession</span><span class="p">(</span><span class="n">session</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseEnv</span><span class="p">(</span><span class="n">env</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseEnv</span><span class="p">(</span><span class="n">env</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="execution-provider-ep">Execution Provider (EP)</h4>
+</div>
+<h4 id="execution-provider-ep">Execution Provider (EP)</h4>
 <p>执行提供者决定了模型在哪个硬件上运行。在C API中，通过<code>OrtSessionOptionsAppendExecutionProvider</code>添加EP：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -204,10 +204,10 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtSessionOptionsAppendExecutionProvider_CoreML</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 创建会话（会按顺序尝试EP，失败则回退到下一个）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtCreateSession</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">session</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtCreateSession</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">session</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="inputoutput">Input/Output</h4>
+</div>
+<h4 id="inputoutput">Input/Output</h4>
 <p>模型的输入输出通过<code>OrtValue</code>传递，需要手动创建和管理：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -298,10 +298,10 @@
 </span></span><span class="line"><span class="cl"><span class="c1">// 5. 释放资源
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtReleaseValue</span><span class="p">(</span><span class="n">output_tensor</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseValue</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseMemoryInfo</span><span class="p">(</span><span class="n">memory_info</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseMemoryInfo</span><span class="p">(</span><span class="n">memory_info</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="22-性能优化选项">2.2 性能优化选项</h3>
+</div>
+<h3 id="22-性能优化选项">2.2 性能优化选项</h3>
 <p>ORT提供了多种性能优化选项，在C API中通过<code>OrtSessionOptions</code>进行配置：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -360,10 +360,10 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtCreateSession</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">session</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 使用完毕后释放
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtReleaseSessionOptions</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtReleaseSessionOptions</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="三语音降噪推理的特殊注意事项">三、语音降噪推理的特殊注意事项</h2>
+</div>
+<h2 id="三语音降噪推理的特殊注意事项">三、语音降噪推理的特殊注意事项</h2>
 <p>语音降噪模型通常使用时序建模网络（如GRU、LSTM），这些网络具有隐状态（hidden state），在实时推理时需要特别注意状态管理。</p>
 <h3 id="31-为什么ort不保存隐状态">3.1 为什么ORT不保存隐状态？</h3>
 <p>ORT（ONNX Runtime）采用**无状态（stateless）**的设计理念，即每次推理调用都是独立的，ORT不会在内部保存任何状态信息。这种设计有以下几个重要原因：</p>
@@ -392,10 +392,10 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># PyTorch训练时的行为</span>
 </span></span><span class="line"><span class="cl"><span class="n">lstm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">output</span><span class="p">,</span> <span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span> <span class="o">=</span> <span class="n">lstm</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="n">cell</span><span class="p">))</span>  <span class="c1"># 状态在层内部管理</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="n">output</span><span class="p">,</span> <span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span> <span class="o">=</span> <span class="n">lstm</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="n">cell</span><span class="p">))</span>  <span class="c1"># 状态在层内部管理</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>但在ONNX导出和ORT推理时，隐状态被<strong>显式化</strong>为模型的输入和输出：</p>
+</div>
+<p>但在ONNX导出和ORT推理时，隐状态被<strong>显式化</strong>为模型的输入和输出：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -408,7 +408,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 输出: [denoised_features, new_hidden_state, new_cell_state]  // 显式输出
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>这种显式化的设计使得：</p>
+</div>
+<p>这种显式化的设计使得：</p>
 <ul>
 <li>状态在模型外部可见和可控</li>
 <li>可以跨框架、跨平台保持一致的行为</li>
@@ -932,10 +933,10 @@
 </span></span><span class="line"><span class="cl">    <span class="n">convert</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">opset</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">opset</span><span class="p">,</span> <span class="n">auto_rebuild</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">auto_rebuild</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="322-推理时对隐状态进行管理">3.2.2 推理时对隐状态进行管理</h4>
+</div>
+<h4 id="322-推理时对隐状态进行管理">3.2.2 推理时对隐状态进行管理</h4>
 <p>前面导出onnx模型时，已经为每个GRU节点导出了隐状态的输入和输出端口，因此在每一次帧的时候，只需要将上一次推理保存的隐状态信息输入到对应的隐状态输入端口，同时在推理后对GRU节点的隐状态输出端口进行保存，就可以实现流式推理GRU保留历史信息了。</p>
 <p>以下是部分核心函数实现，只需要将其嵌入到原rnnoise降噪代码中就可以实现ort推理了。</p>
 <div class="highlight"><div class="chroma">
@@ -1699,10 +1700,10 @@
 </span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">ReleaseMemoryInfo</span><span class="p">(</span><span class="n">memory_info</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="33-推理性能对比">3.3 推理性能对比</h3>
+</div>
+<h3 id="33-推理性能对比">3.3 推理性能对比</h3>
 <p>可以看到在不需要自己手搓各个算子的C实现，借助ORT就可以实现接近5倍的性能提升，这投入回报比可是不要太高了。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1739,10 +1740,10 @@
 </span></span><span class="line"><span class="cl">Comparison:
 </span></span><span class="line"><span class="cl">  ONNX / C ratio: 0.21x
 </span></span><span class="line"><span class="cl">  Speedup: 4.76x (ONNX faster)
-</span></span><span class="line"><span class="cl">==========================================
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">==========================================</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="四总结">四、总结</h2>
+</div>
+<h2 id="四总结">四、总结</h2>
 <p>ORT作为跨平台的推理引擎，在语音降噪模型部署中具有显著优势。正确使用ORT需要：</p>
 <ol>
 <li><strong>理解基本概念</strong>：掌握InferenceSession、Execution Provider等核心概念</li>

@@ -128,10 +128,10 @@ WebRTC中的实现</p>
 </span></span><span class="line"><span class="cl">        <span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">filter1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">filter2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1024</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">11</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="n">high_band</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">WebRtcSpl_SatW32ToW16</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>上面是WebRTC中关于分析滤波器部分的实现，从代码中可以看出WebRTC中的分析综合滤波器是基于全通滤波器的QMF多相实现，其中的全通滤器采用了IIR实现，即其中的P0(z)和P1(z)都是全通滤波器。通过参考[2]我们可以梳理这个问题的处理流程，通过分析QMF分析综合滤波器满足完美重构的条件，可以得到H0、H1、G0、G1之间的关系，同时H0和H1是基于pi/2，因此只需要知道H0，最终转化成H0低通滤波器的设计问题。进一步的由于采用了基于IIR的全通滤波器，因此只需要考虑相位失真问题，最终QMF分析综合滤波器问题转换成了滤波器的相位均衡问题。虽然我们知道了设计QMF分析综合滤波器的原理和思路，但是想设计一个完全可用的滤波器还是很有难度的，下面我们直接看下WebRTC中QMF分析综合滤波器的效果，如下图所示，可以看到对应的低通滤波器和高通滤波器都有很窄的过渡带，整个系统的幅值响应几乎接近0dB的，同时除了pi/2附近的频带都是近似线性相位的。</p>
+</div>
+<p>上面是WebRTC中关于分析滤波器部分的实现，从代码中可以看出WebRTC中的分析综合滤波器是基于全通滤波器的QMF多相实现，其中的全通滤器采用了IIR实现，即其中的P0(z)和P1(z)都是全通滤波器。通过参考[2]我们可以梳理这个问题的处理流程，通过分析QMF分析综合滤波器满足完美重构的条件，可以得到H0、H1、G0、G1之间的关系，同时H0和H1是基于pi/2，因此只需要知道H0，最终转化成H0低通滤波器的设计问题。进一步的由于采用了基于IIR的全通滤波器，因此只需要考虑相位失真问题，最终QMF分析综合滤波器问题转换成了滤波器的相位均衡问题。虽然我们知道了设计QMF分析综合滤波器的原理和思路，但是想设计一个完全可用的滤波器还是很有难度的，下面我们直接看下WebRTC中QMF分析综合滤波器的效果，如下图所示，可以看到对应的低通滤波器和高通滤波器都有很窄的过渡带，整个系统的幅值响应几乎接近0dB的，同时除了pi/2附近的频带都是近似线性相位的。</p>
 <!-- {% asset_img 007.png %} -->
 <img src="/images/2022-02-03-007.png"/>
 <div class="highlight"><div class="chroma">
@@ -245,10 +245,10 @@ WebRTC中的实现</p>
 </span></span><span class="line"><span class="cl">    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">highpass_w</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">highpass_h</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="n">True</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_w</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">20</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">t_h</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_w</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">t_h</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="n">True</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h1 id="最近的一些心得">最近的一些心得</h1>
+</div>
+<h1 id="最近的一些心得">最近的一些心得</h1>
 <p>最后说下近期的两点小心得：</p>
 <ol>
 <li>不懂的知识点请尽早弄懂它。其实对于QMF分析综合滤波器组，在最开始学习音频编码时就遇到了，但是当时没有深入的去搞清楚，最后还是没有躲过去。所以最近也是恶补了很多基础知识，才大致了解了QMF的设计思路。</li>

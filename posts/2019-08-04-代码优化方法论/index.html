@@ -79,8 +79,7 @@
 </span></span><span class=line><span class=cl><span class=k>static</span> <span class=n>OPUS_INLINE</span> <span class=kt>float</span> <span class=nf>sigmoid_approx</span><span class=p>(</span><span class=kt>float</span> <span class=n>x</span><span class=p>)</span>
 </span></span><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>   <span class=k>return</span> <span class=mf>.5</span> <span class=o>+</span> <span class=mf>.5</span><span class=o>*</span><span class=nf>tansig_approx</span><span class=p>(</span><span class=mf>.5</span><span class=o>*</span><span class=n>x</span><span class=p>);</span>
-</span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><p><strong>最粗暴的函数近似方法：</strong><br></p><img src=/images/2019-08-04-005.png><br><img src=/images/2019-08-04-006.png>
+</span></span><span class=line><span class=cl><span class=p>}</span></span></span></code></pre></td></tr></table></div></div><p><strong>最粗暴的函数近似方法：</strong><br></p><img src=/images/2019-08-04-005.png><br><img src=/images/2019-08-04-006.png>
 ```
 atan(pi*x/2)*2/pi 24.1 ns
 atan(x) 23.0 ns

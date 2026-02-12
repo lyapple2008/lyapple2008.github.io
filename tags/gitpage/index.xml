@@ -28,8 +28,7 @@
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Fastly error: unknown domain: beyoung.xyz. Please check that this domain has been added to a service.
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Details: cache-lax8629-LAX
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Details: cache-lax8629-LAX&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
       <content:encoded><![CDATA[<h3 id="问题描述">问题描述</h3>
@@ -41,10 +40,10 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Fastly error: unknown domain: beyoung.xyz. Please check that this domain has been added to a service.
-</span></span><span class="line"><span class="cl">Details: cache-lax8629-LAX
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">Details: cache-lax8629-LAX</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="问题原因">问题原因</h3>
+</div>
+<h3 id="问题原因">问题原因</h3>
 <p>Github Pages修改了公布的IP，可以到这个网址查到Github Pages目前公布的最新IP</p>
 <p><a href="https://help.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site">https://help.github.com/en/github/working-with-github-pages/managing-a-custom-domain-for-your-github-pages-site</a></p>
 <h3 id="解决方案">解决方案</h3>

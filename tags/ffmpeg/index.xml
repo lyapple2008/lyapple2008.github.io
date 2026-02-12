@@ -83,10 +83,10 @@
 </span></span><span class="line"><span class="cl">  <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">shared</span> \                <span class="o">====&gt;</span> <span class="err">【必须】设置输出动态库</span>
 </span></span><span class="line"><span class="cl">  <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="k">static</span> \               <span class="o">====&gt;</span> <span class="err">【可选】设置关闭输出静态库</span>
 </span></span><span class="line"><span class="cl">  <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">d3d11va</span> \               <span class="o">====&gt;</span> <span class="err">【可选】设置使能</span><span class="n">d3d11硬件加速</span> 
-</span></span><span class="line"><span class="cl">  <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">dxva2</span>                   <span class="o">====&gt;</span> <span class="err">【可选】设置便能</span><span class="n">dxva2接口的硬件加速</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">  <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">dxva2</span>                   <span class="o">====&gt;</span> <span class="err">【可选】设置便能</span><span class="n">dxva2接口的硬件加速</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h5 id="3-执行make命令这个过程可能会有一些错误提示可以根据提示上网进搜索相关问题">3. 执行make命令，这个过程可能会有一些错误提示，可以根据提示上网进搜索相关问题，</h5>
+</div>
+<h5 id="3-执行make命令这个过程可能会有一些错误提示可以根据提示上网进搜索相关问题">3. 执行make命令，这个过程可能会有一些错误提示，可以根据提示上网进搜索相关问题，</h5>
 <blockquote>
 <p>如编译ffmpeg4.0.1需要注释与变量CC_IDENT相关的语句，存在于cmdutils.c和ff_probe.c文件中</p></blockquote>
 <h5 id="4-执行make-install命令将生成的动态库复制到configure时指定的目录中">4. 执行make install命令，将生成的动态库复制到configure时指定的目录中</h5>
@@ -119,10 +119,10 @@
 </span></span><span class="line"><span class="cl">{
 </span></span><span class="line"><span class="cl">    AVFilterContext **filters;
 </span></span><span class="line"><span class="cl">    unsigned nb_filters;
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">}</span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -139,10 +139,10 @@
 </span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">AVFilterPad</span> <span class="o">*</span><span class="n">inputs</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">AVFilterPad</span> <span class="o">*</span><span class="n">outputs</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -177,10 +177,10 @@
 </span></span><span class="line"><span class="cl">    <span class="n">unsigned</span> <span class="n">nb_outputs</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="n">struct</span> <span class="n">AVFilterGraph</span> <span class="o">*</span><span class="n">graph</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -205,10 +205,10 @@
 </span></span><span class="line"><span class="cl">    AVFilterPad *dstpad;
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    struct AVFilterGraph *graph;
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">}</span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -229,10 +229,10 @@
 </span></span><span class="line"><span class="cl">    <span class="n">AVFrame</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">get_audio_buffer</span><span class="p">)(</span><span class="n">AVFilterLink</span> <span class="o">*</span><span class="n">link</span><span class="p">,</span> <span class="ne">int</span> <span class="n">nb_samples</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="ne">int</span> <span class="p">(</span><span class="o">*</span><span class="n">filter_frame</span><span class="p">)(</span><span class="n">AVFilterLink</span> <span class="o">*</span><span class="n">link</span><span class="p">,</span> <span class="n">AVFrame</span> <span class="o">*</span><span class="n">frame</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="ne">int</span> <span class="p">(</span><span class="o">*</span><span class="n">request_frame</span><span class="p">)(</span><span class="n">AVFilterLink</span> <span class="o">*</span><span class="n">link</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -249,10 +249,10 @@
 </span></span><span class="line"><span class="cl">    AVFilterContext *filter_ctx;
 </span></span><span class="line"><span class="cl">    int pad_idx;
 </span></span><span class="line"><span class="cl">    struct AVFilterInOut *next;
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">}</span></span></code></pre></td></tr></table>
 </div>
-</div><blockquote>
+</div>
+<blockquote>
 <p><em>在AVFilter模块中定义了AVFilter结构，很个AVFilter都是具有独立功能的节点，如scale filter的作用就是进行图像尺寸变换，overlay filter的作用就是进行图像的叠加，这里需要重点提的是两个特别的filter，一个是buffer，一个是buffersink，滤波器buffer代表filter graph中的源头，原始数据就往这个filter节点输入的；而滤波器buffersink代表filter graph中的输出节点，处理完成的数据从这个filter节点输出。</em></p></blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -297,10 +297,10 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">连接两个滤波器节点</span>
 </span></span><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">avfilter_link</span><span class="p">(</span><span class="n">AVFilterContext</span> <span class="o">*</span><span class="n">src</span><span class="p">,</span> <span class="n">unsigned</span> <span class="n">srcpad</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                  <span class="n">AVFilterContext</span> <span class="o">*</span><span class="n">dst</span><span class="p">,</span> <span class="n">unsigned</span> <span class="n">dstpad</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">                  <span class="n">AVFilterContext</span> <span class="o">*</span><span class="n">dst</span><span class="p">,</span> <span class="n">unsigned</span> <span class="n">dstpad</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="2-avfilter主体框架流程">2. AVFilter主体框架流程</h2>
+</div>
+<h2 id="2-avfilter主体框架流程">2. AVFilter主体框架流程</h2>
 <p>在利用AVFilter进行音视频数据处理前先将在进行的处理流程绘制出来，现在以<a href="https://ffmpeg.org/ffmpeg-filters.html#Filtering-Introduction">FFmpeg filter官方文档</a>中的一个例子为例进行说明。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -315,10 +315,10 @@
 </span></span><span class="line"><span class="cl">input --&gt; split ---------------------&gt; overlay --&gt; output
 </span></span><span class="line"><span class="cl">            |                             ^
 </span></span><span class="line"><span class="cl">            |[tmp]                  [flip]|
-</span></span><span class="line"><span class="cl">            +-----&gt; crop --&gt; vflip -------+
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">            +-----&gt; crop --&gt; vflip -------+</span></span></code></pre></td></tr></table>
 </div>
-</div><p>这个例子的处理流程如上所示，首先使用split滤波器将input流分成两路流（main和tmp），然后分别对两路流进行处理。对于tmp流，先经过crop滤波器进行裁剪处理，再经过flip滤波器进行垂直方向上的翻转操作，输出的结果命名为flip流。再将main流和flip流输入到overlay滤波器进行合成操作。上图的input就是上面提过的buffer源滤波器，output就是上面的提过的buffersink滤波器。上图中每个节点都是一个AVFilterContext，每个连线就是AVFliterLink。所有这些信息都统一由AVFilterGraph来管理。</p>
+</div>
+<p>这个例子的处理流程如上所示，首先使用split滤波器将input流分成两路流（main和tmp），然后分别对两路流进行处理。对于tmp流，先经过crop滤波器进行裁剪处理，再经过flip滤波器进行垂直方向上的翻转操作，输出的结果命名为flip流。再将main流和flip流输入到overlay滤波器进行合成操作。上图的input就是上面提过的buffer源滤波器，output就是上面的提过的buffersink滤波器。上图中每个节点都是一个AVFilterContext，每个连线就是AVFliterLink。所有这些信息都统一由AVFilterGraph来管理。</p>
 <p><img alt="image" loading="lazy" src="http://oxfmz0qm8.bkt.clouddn.com/ffmpeg/split_crop_vflip.png"></p>
 <h2 id="3-实例实现">3. 实例实现</h2>
 <div class="highlight"><div class="chroma">
@@ -752,10 +752,10 @@
 </span></span><span class="line"><span class="cl">	<span class="n">av_frame_free</span><span class="p">(</span><span class="o">&amp;</span><span class="n">frame_out</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">	<span class="n">avfilter_graph_free</span><span class="p">(</span><span class="o">&amp;</span><span class="n">filter_graph</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><blockquote>
+</div>
+<blockquote>
 <p><a href="https://github.com/lyapple2008/FFmpegExams">github代码仓库</a></p></blockquote>
 <h2 id="4-建立定义filter滤波器">4. 建立定义Filter滤波器</h2>
 <p>这部分暂时还没有实践，参考ffmpeg源码中已有的filter和ffmpeg源码中的文档writing_filter.txt，应该实践起来也来难，等后面有时间再补上这部分介绍。</p>

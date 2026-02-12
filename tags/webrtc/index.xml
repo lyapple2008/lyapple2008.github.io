@@ -38,31 +38,17 @@ $$</p>
 <p>此增益用于对输入频谱进行缩放，从而滤除噪声成分。</p>
 <h2 id="二webrtc中的wiener滤波结构">二、WebRTC中的Wiener滤波结构</h2>
 <p>在 WebRTC 降噪模块中，Wiener 滤波不是孤立运行，而是集成在一套完整的噪声估计与语音概率建模框架中：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">graph TD
-</span></span><span class="line"><span class="cl">    A[输入音频帧] --&gt; B[STFT 分帧]
-</span></span><span class="line"><span class="cl">    B --&gt; C[信号谱 + 噪声谱]
-</span></span><span class="line"><span class="cl">    C --&gt; D[SNR估计（后验+先验）]
-</span></span><span class="line"><span class="cl">    C --&gt; E[LRT / Flatness / Diff 特征提取]
-</span></span><span class="line"><span class="cl">    D &amp; E --&gt; F[Wiener 滤波增益计算]
-</span></span><span class="line"><span class="cl">    F --&gt; G[基于语音概率微调增益]
-</span></span><span class="line"><span class="cl">    G --&gt; H[频谱乘以增益后逆变换]
-</span></span><span class="line"><span class="cl">    H --&gt; I[输出增强语音]
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="三核心增益计算逻辑">三、核心增益计算逻辑</h2>
+
+<div class="mermaid">graph TD
+    A[输入音频帧] --&gt; B[STFT 分帧]
+    B --&gt; C[信号谱 &#43; 噪声谱]
+    C --&gt; D[SNR估计（后验&#43;先验）]
+    C --&gt; E[LRT / Flatness / Diff 特征提取]
+    D &amp; E --&gt; F[Wiener 滤波增益计算]
+    F --&gt; G[基于语音概率微调增益]
+    G --&gt; H[频谱乘以增益后逆变换]
+    H --&gt; I[输出增强语音]</div>
+<h2 id="三核心增益计算逻辑">三、核心增益计算逻辑</h2>
 <ol>
 <li>后验SNR与先验SNR估计
 •	后验SNR：使用当前帧信号谱与噪声谱之比
@@ -80,10 +66,10 @@ $$</p>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">    <span class="c1">// Previous estimate based on previous frame with gain filter.
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">float</span> <span class="n">prev_tsa</span> <span class="o">=</span> <span class="n">spectrum_prev_process_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span>
-</span></span><span class="line"><span class="cl">                     <span class="p">(</span><span class="n">prev_noise_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.0001f</span><span class="p">)</span> <span class="o">*</span> <span class="n">filter_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">                     <span class="p">(</span><span class="n">prev_noise_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.0001f</span><span class="p">)</span> <span class="o">*</span> <span class="n">filter_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span></span></span></code></pre></td></tr></table>
 </div>
-</div><blockquote>
+</div>
+<blockquote>
 <p>spectrum_prev_process_[i] 为前一帧信号的幅度谱，filter_[i]为前帧的Wiener滤波器增益，两者相乘后就是估计的纯净语音信号，因此prev_tsa就是前一帧的TSA (time-smoothed a priori SNR)</p></blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -100,20 +86,20 @@ $$</p>
 </span></span><span class="line"><span class="cl">      <span class="n">post_snr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">noise_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.0001f</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.f</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="n">post_snr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><blockquote>
+</div>
+<blockquote>
 <p>只有当信号幅度大于噪声幅度时，才认为有语音信号存在，避免负增益</p></blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">prior_snr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.98f</span> <span class="o">*</span> <span class="n">prev_estimate</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.f</span> <span class="o">-</span> <span class="mf">0.98f</span><span class="p">)</span> <span class="o">*</span> <span class="n">post_snr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">prior_snr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.98f</span> <span class="o">*</span> <span class="n">prev_estimate</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.f</span> <span class="o">-</span> <span class="mf">0.98f</span><span class="p">)</span> <span class="o">*</span> <span class="n">post_snr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span></span></span></code></pre></td></tr></table>
 </div>
-</div><blockquote>
+</div>
+<blockquote>
 <p>0.98 是平滑因子，表示以历史先验估计为主，防止突变</p></blockquote>
 <ol start="2">
 <li>基本增益计算</li>
@@ -131,10 +117,10 @@ $$</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">filter_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span>
 </span></span><span class="line"><span class="cl">        <span class="n">snr_prior</span> <span class="o">/</span> <span class="p">(</span><span class="n">suppression_params_</span><span class="p">.</span><span class="n">over_subtraction_factor</span> <span class="o">+</span> <span class="n">snr_prior</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">filter_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="nf">max</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="nf">min</span><span class="p">(</span><span class="n">filter_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mf">1.f</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">                          <span class="n">suppression_params_</span><span class="p">.</span><span class="n">minimum_attenuating_gain</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">                          <span class="n">suppression_params_</span><span class="p">.</span><span class="n">minimum_attenuating_gain</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><img src="/images/2025-07-13/wiener_over_subtraction_factor.png"/>
+</div>
+<img src="/images/2025-07-13/wiener_over_subtraction_factor.png"/>
 <h2 id="四增益微调语音概率辅助因子">四、增益微调：语音概率辅助因子</h2>
 <p>虽然 Wiener 滤波器理论上是最优的，但其在以下情况下仍存在问题：
 •	SNR 估计不准确
@@ -255,10 +241,10 @@ $$</p>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Make sure gain is within flooring range.
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="nf">min</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="nf">max</span><span class="p">(</span><span class="n">gain</span><span class="p">,</span> <span class="n">minimum_attenuating_gain</span><span class="p">),</span> <span class="mf">1.f</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><ol>
+</div>
+<ol>
 <li>选取低带频谱中最后32个bin（即靠近8kHz的部分），计算平均语音概率和平均Wiener滤波器增益</li>
 </ol>
 <div class="highlight"><div class="chroma">
@@ -268,10 +254,10 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">avg_prob_speech：语音存在的可能性（0~1）
-</span></span><span class="line"><span class="cl">avg_filter_gain：低带最后段的增益（代表频谱高频变化）
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">avg_filter_gain：低带最后段的增益（代表频谱高频变化）</span></span></code></pre></td></tr></table>
 </div>
-</div><ol start="2">
+</div>
+<ol start="2">
 <li>处理前后谱能量比修正语音概率</li>
 </ol>
 <div class="highlight"><div class="chroma">
@@ -279,10 +265,10 @@ $$</p>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">avg_prob_speech</span> <span class="o">*=</span> <span class="n">sum_processing_spectrum</span> <span class="o">/</span> <span class="n">sum_analysis_spectrum</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">avg_prob_speech</span> <span class="o">*=</span> <span class="n">sum_processing_spectrum</span> <span class="o">/</span> <span class="n">sum_analysis_spectrum</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
+</div>
+<ul>
 <li>sum_analysis_spectrum：分析阶段的谱（原始 noisy 语音）</li>
 <li>sum_processing_spectrum：处理阶段的谱（可能被 AEC、AGC 等处理）
 ⚠️ 如果语音信号被其他模块（比如回声消除）削弱了，而估计器没注意到，就会过度抑制高带，这里通过能量比进行修正，防止“假静音”影响高频压制判断。</li>
@@ -295,10 +281,10 @@ $$</p>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">gain</span> <span class="o">=</span> <span class="mf">0.5f</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.f</span> <span class="o">+</span> <span class="nf">tanh</span><span class="p">(</span><span class="mf">2.f</span> <span class="o">*</span> <span class="n">avg_prob_speech</span> <span class="o">-</span> <span class="mf">1.f</span><span class="p">));</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">gain</span> <span class="o">=</span> <span class="mf">0.5f</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.f</span> <span class="o">+</span> <span class="nf">tanh</span><span class="p">(</span><span class="mf">2.f</span> <span class="o">*</span> <span class="n">avg_prob_speech</span> <span class="o">-</span> <span class="mf">1.f</span><span class="p">));</span></span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
+</div>
+<ul>
 <li>tanh 函数做了一个S型映射：使得 01 的 avg_prob_speech 映射为 01 的增益，但中心更敏感，平滑、可导。</li>
 <li>当语音概率高于 0.5 时增益快速上升；低于 0.5 时快速下降。</li>
 </ul>
@@ -316,10 +302,10 @@ $$</p>
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">avg_prob_speech</span> <span class="o">&gt;=</span> <span class="mf">0.5f</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">  <span class="n">gain</span> <span class="o">=</span> <span class="mf">0.25f</span> <span class="o">*</span> <span class="n">gain</span> <span class="o">+</span> <span class="mf">0.75f</span> <span class="o">*</span> <span class="n">avg_filter_gain</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">else</span>
-</span></span><span class="line"><span class="cl">  <span class="n">gain</span> <span class="o">=</span> <span class="mf">0.5f</span> <span class="o">*</span> <span class="n">gain</span> <span class="o">+</span> <span class="mf">0.5f</span> <span class="o">*</span> <span class="n">avg_filter_gain</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">  <span class="n">gain</span> <span class="o">=</span> <span class="mf">0.5f</span> <span class="o">*</span> <span class="n">gain</span> <span class="o">+</span> <span class="mf">0.5f</span> <span class="o">*</span> <span class="n">avg_filter_gain</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
+</div>
+<ul>
 <li>当语音概率较高，以低带滤波器为主（强调保留语音的高频特征）</li>
 <li>当语音概率较低，用概率增益和滤波增益各一半权重</li>
 </ul>
@@ -331,10 +317,10 @@ $$</p>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="nf">DelaySignal</span><span class="p">(</span><span class="n">y_band</span><span class="p">,</span> <span class="n">channels_</span><span class="p">[</span><span class="n">ch</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">process_delay_memory</span><span class="p">[</span><span class="n">b</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">delayed_frame</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="nf">DelaySignal</span><span class="p">(</span><span class="n">y_band</span><span class="p">,</span> <span class="n">channels_</span><span class="p">[</span><span class="n">ch</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">process_delay_memory</span><span class="p">[</span><span class="n">b</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">delayed_frame</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>低带由于滤波器组分析→合成，会产生系统延时，因此在低带和高带合成前，需要将高带信号进行延时操作，与低带信号进行对齐。</p>
+</div>
+<p>低带由于滤波器组分析→合成，会产生系统延时，因此在低带和高带合成前，需要将高带信号进行延时操作，与低带信号进行对齐。</p>
 <h2 id="六小结与启发">六、小结与启发</h2>
 <p>WebRTC 的 Wiener 降噪模块体现了“理论 + 工程”的完美结合：</p>
 <table>
@@ -399,10 +385,10 @@ $$</p>
 </span></span><span class="line"><span class="cl"><span class="n">modules</span><span class="o">/</span><span class="n">audio_processing</span><span class="o">/</span><span class="n">ns</span><span class="o">/</span><span class="n">speech_probability_estimator</span><span class="o">.</span><span class="n">h</span>
 </span></span><span class="line"><span class="cl"><span class="n">modules</span><span class="o">/</span><span class="n">audio_processing</span><span class="o">/</span><span class="n">ns</span><span class="o">/</span><span class="n">speech_probability_estimator</span><span class="o">.</span><span class="n">cc</span>
 </span></span><span class="line"><span class="cl"><span class="n">modules</span><span class="o">/</span><span class="n">audio_processing</span><span class="o">/</span><span class="n">ns</span><span class="o">/</span><span class="n">signal_model_estimator</span><span class="o">.</span><span class="n">cc</span>
-</span></span><span class="line"><span class="cl"><span class="n">modules</span><span class="o">/</span><span class="n">audio_processing</span><span class="o">/</span><span class="n">ns</span><span class="o">/</span><span class="n">signal_model_estimator</span><span class="o">.</span><span class="n">h</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="n">modules</span><span class="o">/</span><span class="n">audio_processing</span><span class="o">/</span><span class="n">ns</span><span class="o">/</span><span class="n">signal_model_estimator</span><span class="o">.</span><span class="n">h</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="indicator0-likelihood-ratio-test-lrt">indicator0: Likelihood Ratio Test (LRT)</h2>
+</div>
+<h2 id="indicator0-likelihood-ratio-test-lrt">indicator0: Likelihood Ratio Test (LRT)</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -448,10 +434,10 @@ $$</p>
 </span></span><span class="line"><span class="cl">    <span class="n">log_lrt_time_avg_k_sum</span> <span class="o">+=</span> <span class="n">avg_log_lrt</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="o">*</span><span class="n">lrt</span> <span class="o">=</span> <span class="n">log_lrt_time_avg_k_sum</span> <span class="o">*</span> <span class="n">kOneByFftSizeBy2Plus1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>LRT衡量的是，当前观察到的频谱，更像是语音信号，还是更像噪声，是在两种假设之间进行比较：</p>
+</div>
+<p>LRT衡量的是，当前观察到的频谱，更像是语音信号，还是更像噪声，是在两种假设之间进行比较：</p>
 <ul>
 <li>$H_0$: 当前帧是纯噪声帧</li>
 <li>$H_1$: 当前帧是语音 + 噪声帧</li>
@@ -502,10 +488,10 @@ $$</p>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Compute indicator function: sigmoid map.
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">indicator0</span> <span class="o">=</span>
-</span></span><span class="line"><span class="cl">      <span class="mf">0.5f</span> <span class="o">*</span> <span class="p">(</span><span class="nf">tanh</span><span class="p">(</span><span class="n">width_prior</span> <span class="o">*</span> <span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">lrt</span> <span class="o">-</span> <span class="n">prior_model</span><span class="p">.</span><span class="n">lrt</span><span class="p">))</span> <span class="o">+</span> <span class="mf">1.f</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">      <span class="mf">0.5f</span> <span class="o">*</span> <span class="p">(</span><span class="nf">tanh</span><span class="p">(</span><span class="n">width_prior</span> <span class="o">*</span> <span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">lrt</span> <span class="o">-</span> <span class="n">prior_model</span><span class="p">.</span><span class="n">lrt</span><span class="p">))</span> <span class="o">+</span> <span class="mf">1.f</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="indicator1-spectral-flatness-谱平坦度">indicator1: Spectral Flatness 谱平坦度</h2>
+</div>
+<h2 id="indicator1-spectral-flatness-谱平坦度">indicator1: Spectral Flatness 谱平坦度</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -575,10 +561,10 @@ $$</p>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Time-avg update of spectral flatness feature.
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="o">*</span><span class="n">spectral_flatness</span> <span class="o">+=</span> <span class="n">kAveraging</span> <span class="o">*</span> <span class="p">(</span><span class="n">spectral_tmp</span> <span class="o">-</span> <span class="o">*</span><span class="n">spectral_flatness</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
+</div>
+<ul>
 <li>
 <p>谱平坦度的定义
 $$
@@ -619,10 +605,10 @@ $$</p>
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">avg_spect_flatness_num</span> <span class="o">+=</span> <span class="nf">LogApproximation</span><span class="p">(</span><span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="n">avg_spect_flatness_num</span> <span class="o">=</span> <span class="n">avg_spect_flatness_num</span> <span class="o">*</span> <span class="n">kOneByFftSizeBy2Plus1</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">  <span class="n">avg_spect_flatness_num</span> <span class="o">=</span> <span class="n">avg_spect_flatness_num</span> <span class="o">*</span> <span class="n">kOneByFftSizeBy2Plus1</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>等价于下面的式子，先算log版本</p>
+</div>
+<p>等价于下面的式子，先算log版本</p>
 <p>$$
 \exp\left( \frac{1}{N} \sum \log(X_i) \right)
 $$</p>
@@ -632,10 +618,10 @@ $$</p>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="nf">ExpApproximation</span><span class="p">(</span><span class="n">avg_spect_flatness_num</span><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="nf">ExpApproximation</span><span class="p">(</span><span class="n">avg_spect_flatness_num</span><span class="p">)</span></span></span></code></pre></td></tr></table>
 </div>
-</div><ol start="2">
+</div>
+<ol start="2">
 <li>计算算数均值（去掉DC分量）</li>
 </ol>
 <div class="highlight"><div class="chroma">
@@ -647,10 +633,10 @@ $$</p>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">avg_spect_flatness_denom</span> <span class="o">=</span> <span class="n">signal_spectral_sum</span> <span class="o">-</span> <span class="n">signal_spectrum</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="n">avg_spect_flatness_denom</span> <span class="o">=</span> <span class="n">avg_spect_flatness_denom</span> <span class="o">*</span> <span class="n">kOneByFftSizeBy2Plus1</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">  <span class="n">avg_spect_flatness_denom</span> <span class="o">=</span> <span class="n">avg_spect_flatness_denom</span> <span class="o">*</span> <span class="n">kOneByFftSizeBy2Plus1</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><ol start="3">
+</div>
+<ol start="3">
 <li>得到谱平坦度</li>
 </ol>
 <div class="highlight"><div class="chroma">
@@ -660,10 +646,10 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">spectral_tmp</span> <span class="o">=</span>
-</span></span><span class="line"><span class="cl">      <span class="nf">ExpApproximation</span><span class="p">(</span><span class="n">avg_spect_flatness_num</span><span class="p">)</span> <span class="o">/</span> <span class="n">avg_spect_flatness_denom</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">      <span class="nf">ExpApproximation</span><span class="p">(</span><span class="n">avg_spect_flatness_num</span><span class="p">)</span> <span class="o">/</span> <span class="n">avg_spect_flatness_denom</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><ol start="4">
+</div>
+<ol start="4">
 <li>平滑更新</li>
 </ol>
 <div class="highlight"><div class="chroma">
@@ -673,10 +659,10 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="c1">// Time-avg update of spectral flatness feature.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="o">*</span><span class="n">spectral_flatness</span> <span class="o">+=</span> <span class="n">kAveraging</span> <span class="o">*</span> <span class="p">(</span><span class="n">spectral_tmp</span> <span class="o">-</span> <span class="o">*</span><span class="n">spectral_flatness</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="o">*</span><span class="n">spectral_flatness</span> <span class="o">+=</span> <span class="n">kAveraging</span> <span class="o">*</span> <span class="p">(</span><span class="n">spectral_tmp</span> <span class="o">-</span> <span class="o">*</span><span class="n">spectral_flatness</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="indicator2-spectral-difference-谱模板差异">indicator2: Spectral Difference 谱模板差异</h2>
+</div>
+<h2 id="indicator2-spectral-difference-谱模板差异">indicator2: Spectral Difference 谱模板差异</h2>
 <p>Spectral Difference频谱差异是用于衡量当前帧的频谱与已学习噪声模板之间的差异程度。其基本思想是：</p>
 <blockquote>
 <p>如果当前帧的频谱结构与噪声模板相似，则可能是噪声；如果差异大，则可能是语音。</p></blockquote>
@@ -714,10 +700,10 @@ $$</li>
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="c1">// Combine the indicator function with the feature weights.
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">ind_prior</span> <span class="o">=</span> <span class="n">prior_model</span><span class="p">.</span><span class="n">lrt_weighting</span> <span class="o">*</span> <span class="n">indicator0</span> <span class="o">+</span>
 </span></span><span class="line"><span class="cl">                    <span class="n">prior_model</span><span class="p">.</span><span class="n">flatness_weighting</span> <span class="o">*</span> <span class="n">indicator1</span> <span class="o">+</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">prior_model</span><span class="p">.</span><span class="n">difference_weighting</span> <span class="o">*</span> <span class="n">indicator2</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">                    <span class="n">prior_model</span><span class="p">.</span><span class="n">difference_weighting</span> <span class="o">*</span> <span class="n">indicator2</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>最终组合这三个指标：</p>
+</div>
+<p>最终组合这三个指标：</p>
 <ul>
 <li>每个特征都有独立的权重</li>
 <li>互补性强，提升稳健性</li>
@@ -774,10 +760,10 @@ $$</li>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">prior_speech_prob_</span> <span class="o">+=</span> <span class="mf">0.1f</span> <span class="o">*</span> <span class="p">(</span><span class="n">ind_prior</span> <span class="o">-</span> <span class="n">prior_speech_prob_</span><span class="p">);</span> 
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Make sure probabilities are within range: keep floor to 0.01.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">prior_speech_prob_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="nf">max</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="nf">min</span><span class="p">(</span><span class="n">prior_speech_prob_</span><span class="p">,</span> <span class="mf">1.f</span><span class="p">),</span> <span class="mf">0.01f</span><span class="p">);</span>
-</span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">prior_speech_prob_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="nf">max</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="nf">min</span><span class="p">(</span><span class="n">prior_speech_prob_</span><span class="p">,</span> <span class="mf">1.f</span><span class="p">),</span> <span class="mf">0.01f</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
+</div>
+<ul>
 <li>计算后验语音概率
 因为prior_speech_prob_是通过历史信息估计的当前帧语音概率，因此这个概率称为先验语音概率。实际使用时我们不需要我们观察到当帧后给出的概率，即后验语音概率。</li>
 </ul>
@@ -815,10 +801,10 @@ $$</p>
 </span></span><span class="line"><span class="cl">  <span class="nf">ExpApproximationSignFlip</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">avg_log_lrt</span><span class="p">,</span> <span class="n">inv_lrt</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">speech_probability_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.f</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.f</span> <span class="o">+</span> <span class="n">gain_prior</span> <span class="o">*</span> <span class="n">inv_lrt</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>其中：
+</div>
+<p>其中：
 •	gain_prior = (1 - prior_speech_prob_) / (prior_speech_prob_ + ε)
 •	inv_lrt[i] = e^{-avg_log_lrt[i]} ≈ 1 / LRT （指数近似）</p>
 <h2 id="利用语音概率辅助更新噪声谱">利用语音概率辅助更新噪声谱</h2>
@@ -915,10 +901,10 @@ $$</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="n">noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="nf">min</span><span class="p">(</span><span class="n">noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">noise_update_tmp</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>上面这段代码是webrtc中结合语音概率，对之前基于分位数估计得到的噪声谱，进行进一步修正的过程。</p>
+</div>
+<p>上面这段代码是webrtc中结合语音概率，对之前基于分位数估计得到的噪声谱，进行进一步修正的过程。</p>
 <p>那为什么已经有了基于分位数的噪声估计，还需要在PostUpdate()中进行进一步修正呢？</p>
 <p>如下表，我们对比与初始分位数估计的关系和区别</p>
 <table>
@@ -990,10 +976,10 @@ $$</p>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 代码位置
 </span></span><span class="line"><span class="cl">modules/audio_processing/ns/quantile_noise_estimator.h 
-</span></span><span class="line"><span class="cl">modules/audio_processing/ns/quantile_noise_estimator.cc
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">modules/audio_processing/ns/quantile_noise_estimator.cc</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="分位数计算">分位数计算</h3>
+</div>
+<h3 id="分位数计算">分位数计算</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1007,10 +993,10 @@ $$</p>
 </span></span><span class="line"><span class="cl">    <span class="n">log_quantile_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.25f</span> <span class="o">*</span> <span class="n">multiplier</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">log_quantile_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="mf">0.75f</span> <span class="o">*</span> <span class="n">multiplier</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>以上是WebRTC中分位数计算的代码，它表示25%分位数估计，下面我们来逐步说明为什么这段代码可以计算25%分位数。</p>
+</div>
+<p>以上是WebRTC中分位数计算的代码，它表示25%分位数估计，下面我们来逐步说明为什么这段代码可以计算25%分位数。</p>
 <h4 id="什么是分位数">什么是分位数？</h4>
 <p>以25%分位数为例，它表示：如果你观察一组数，有25%是小于它的，有75%是大于它的。
 比如：</p>
@@ -1021,10 +1007,10 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">数据（已排序）：[1, 2, 3, 4, 5, 6, 7, 8, 9]
-</span></span><span class="line"><span class="cl">0.25分位数 ≈ 第3个数 = 3
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">0.25分位数 ≈ 第3个数 = 3</span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="非对称更新的数学直觉">非对称更新的数学直觉</h4>
+</div>
+<h4 id="非对称更新的数学直觉">非对称更新的数学直觉</h4>
 <p>设：当前估计值为Q，当前观测值为X</p>
 <p>我们每帧更新规则如下：</p>
 <table>
@@ -1134,10 +1120,10 @@ $$</p>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="o">++</span><span class="n">counter_</span><span class="p">[</span><span class="n">s</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>kLongStartupPhaseBlocks=200，意味着分位数估计在200帧后，即2秒，才会更新重置输出估计结果。webrtc为了减少响应延迟，设置了三个错位的独立分位数估计器，如下代码，可以看到每一个分位数估计器的更新计数是错开的，这样可以达到每67帧，即670ms，就会有一个分位数估计器进行重置更新输出估计结果，从而达到快速响应的效果。</p>
+</div>
+<p>kLongStartupPhaseBlocks=200，意味着分位数估计在200帧后，即2秒，才会更新重置输出估计结果。webrtc为了减少响应延迟，设置了三个错位的独立分位数估计器，如下代码，可以看到每一个分位数估计器的更新计数是错开的，这样可以达到每67帧，即670ms，就会有一个分位数估计器进行重置更新输出估计结果，从而达到快速响应的效果。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1149,10 +1135,10 @@ $$</p>
 <pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">  <span class="n">constexpr</span> <span class="ne">float</span> <span class="n">kOneBySimult</span> <span class="o">=</span> <span class="mf">1.</span><span class="n">f</span> <span class="o">/</span> <span class="n">kSimult</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="n">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kSimult</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">counter_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">floor</span><span class="p">(</span><span class="n">kLongStartupPhaseBlocks</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mf">1.</span><span class="n">f</span><span class="p">)</span> <span class="o">*</span> <span class="n">kOneBySimult</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="利用密度估计实现自适应步长">利用”密度“估计实现自适应步长</h3>
+</div>
+<h3 id="利用密度估计实现自适应步长">利用”密度“估计实现自适应步长</h3>
 <p>分位数估计器在更新的时候，其更新步长与这个density_变量直接相关，现在我们来看下webrtc的实现是如何做到自适应步长的。</p>
 <blockquote>
 <p>density_[j]表示: 当前分位数估计点附近的”局部密度估计“，近似表示这个log频谱点的概率密度函数值。</p></blockquote>
@@ -1177,10 +1163,10 @@ $$</p>
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">log_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">log_quantile_</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">kWidth</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="n">density_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">counter_</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">*</span> <span class="n">density_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">kOneByWidthPlus2</span><span class="p">)</span> <span class="o">*</span>
 </span></span><span class="line"><span class="cl">                <span class="n">one_by_counter_plus_1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>这是一种滑动窗口统计估计法：</p>
+</div>
+<p>这是一种滑动窗口统计估计法：</p>
 <table>
   <thead>
       <tr>
@@ -1216,10 +1202,10 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="ne">float</span> <span class="n">delta</span> <span class="o">=</span> <span class="n">density_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">1.</span><span class="n">f</span> <span class="err">?</span> <span class="mf">40.</span><span class="n">f</span> <span class="o">/</span> <span class="n">density_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="p">:</span> <span class="mf">40.</span><span class="n">f</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="ne">float</span> <span class="n">multiplier</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">*</span> <span class="n">one_by_counter_plus_1</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="ne">float</span> <span class="n">multiplier</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">*</span> <span class="n">one_by_counter_plus_1</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>density_变量直接影响了分位数估计的步长，也就是说</p>
+</div>
+<p>density_变量直接影响了分位数估计的步长，也就是说</p>
 <ul>
 <li>如果 density_ 高：说明这个频率点的能量比较“稳定”，变化较小 → delta 会小 → 更新变慢</li>
 <li>如果 density_ 低：说明这个点的能量波动大 → delta 会大 → 更新更激进</li>
@@ -1343,10 +1329,10 @@ WebRTC中的实现</p>
 </span></span><span class="line"><span class="cl">        <span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">filter1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">filter2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1024</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">11</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="n">high_band</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">WebRtcSpl_SatW32ToW16</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>上面是WebRTC中关于分析滤波器部分的实现，从代码中可以看出WebRTC中的分析综合滤波器是基于全通滤波器的QMF多相实现，其中的全通滤器采用了IIR实现，即其中的P0(z)和P1(z)都是全通滤波器。通过参考[2]我们可以梳理这个问题的处理流程，通过分析QMF分析综合滤波器满足完美重构的条件，可以得到H0、H1、G0、G1之间的关系，同时H0和H1是基于pi/2，因此只需要知道H0，最终转化成H0低通滤波器的设计问题。进一步的由于采用了基于IIR的全通滤波器，因此只需要考虑相位失真问题，最终QMF分析综合滤波器问题转换成了滤波器的相位均衡问题。虽然我们知道了设计QMF分析综合滤波器的原理和思路，但是想设计一个完全可用的滤波器还是很有难度的，下面我们直接看下WebRTC中QMF分析综合滤波器的效果，如下图所示，可以看到对应的低通滤波器和高通滤波器都有很窄的过渡带，整个系统的幅值响应几乎接近0dB的，同时除了pi/2附近的频带都是近似线性相位的。</p>
+</div>
+<p>上面是WebRTC中关于分析滤波器部分的实现，从代码中可以看出WebRTC中的分析综合滤波器是基于全通滤波器的QMF多相实现，其中的全通滤器采用了IIR实现，即其中的P0(z)和P1(z)都是全通滤波器。通过参考[2]我们可以梳理这个问题的处理流程，通过分析QMF分析综合滤波器满足完美重构的条件，可以得到H0、H1、G0、G1之间的关系，同时H0和H1是基于pi/2，因此只需要知道H0，最终转化成H0低通滤波器的设计问题。进一步的由于采用了基于IIR的全通滤波器，因此只需要考虑相位失真问题，最终QMF分析综合滤波器问题转换成了滤波器的相位均衡问题。虽然我们知道了设计QMF分析综合滤波器的原理和思路，但是想设计一个完全可用的滤波器还是很有难度的，下面我们直接看下WebRTC中QMF分析综合滤波器的效果，如下图所示，可以看到对应的低通滤波器和高通滤波器都有很窄的过渡带，整个系统的幅值响应几乎接近0dB的，同时除了pi/2附近的频带都是近似线性相位的。</p>
 <!-- {% asset_img 007.png %} -->
 <img src="/images/2022-02-03-007.png"/>
 <div class="highlight"><div class="chroma">
@@ -1460,10 +1446,10 @@ WebRTC中的实现</p>
 </span></span><span class="line"><span class="cl">    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">highpass_w</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">highpass_h</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="n">True</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_w</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">20</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">t_h</span><span class="p">)))</span>
 </span></span><span class="line"><span class="cl">    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_w</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">t_h</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="n">True</span><span class="p">)))</span>
-</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h1 id="最近的一些心得">最近的一些心得</h1>
+</div>
+<h1 id="最近的一些心得">最近的一些心得</h1>
 <p>最后说下近期的两点小心得：</p>
 <ol>
 <li>不懂的知识点请尽早弄懂它。其实对于QMF分析综合滤波器组，在最开始学习音频编码时就遇到了，但是当时没有深入的去搞清楚，最后还是没有躲过去。所以最近也是恶补了很多基础知识，才大致了解了QMF的设计思路。</li>
@@ -1543,10 +1529,10 @@ WebRTC中的实现</p>
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git</span></span></code></pre></td></tr></table>
 </div>
-</div><p>将depot_tools目录添加到环境变量PATH中</p>
+</div>
+<p>将depot_tools目录添加到环境变量PATH中</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1556,19 +1542,19 @@ WebRTC中的实现</p>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vim ~/.profile
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$PATH</span><span class="s2">:/path/to/depot_tools&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="nb">source</span> ~/.profile
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="nb">source</span> ~/.profile</span></span></code></pre></td></tr></table>
 </div>
-</div><h1 id="下载webrtc源码">下载WebRTC源码</h1>
+</div>
+<h1 id="下载webrtc源码">下载WebRTC源码</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">fetch --nohooks webrtc_android
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">fetch --nohooks webrtc_android</span></span></code></pre></td></tr></table>
 </div>
-</div><blockquote>
+</div>
+<blockquote>
 <p>由于WebRTC源码比较大，中间网络问题可能会出错，出错的时候用gclient sync继续就可以了</p></blockquote>
 <h1 id="下载编译所需依赖包和工具">下载编译所需依赖包和工具</h1>
 <div class="highlight"><div class="chroma">
@@ -1578,10 +1564,10 @@ WebRTC中的实现</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./build/install-build-deps.sh --no-chromeos-fonts
-</span></span><span class="line"><span class="cl">. /build/install-build-deps-android.sh
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">. /build/install-build-deps-android.sh</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="下载指定分支">下载指定分支</h2>
+</div>
+<h2 id="下载指定分支">下载指定分支</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1589,10 +1575,10 @@ WebRTC中的实现</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git checkout -b my_branch refs/remotes/branch-heads/83
-</span></span><span class="line"><span class="cl">$ gclient sync
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">$ gclient sync</span></span></code></pre></td></tr></table>
 </div>
-</div><h1 id="源码编译">源码编译</h1>
+</div>
+<h1 id="源码编译">源码编译</h1>
 <p>第一条命令是生成编译工程的，可以添加一些参数来控制编译生成，这里可以研究下源码里的webrtc.gni文件，里面有可以指定的参数，这里主要介绍三个：</p>
 <blockquote>
 <p>target_os：因为是在Android平台上运行的，因此这里指定为&quot;android&quot;
@@ -1606,10 +1592,10 @@ is_debug：表示生成是否是debug包</p></blockquote>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">gn gen out_arm/debug --args<span class="o">=</span><span class="s1">&#39;is_debug=true target_os=&#34;android&#34; target_cpu=&#34;arm&#34; rtc_include_tests=false rtc_build_tools=false rtc_build_examples=false&#39;</span>
-</span></span><span class="line"><span class="cl">ninja -C out_arm/debug
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">ninja -C out_arm/debug</span></span></code></pre></td></tr></table>
 </div>
-</div><h1 id="编译问题解决">编译问题解决</h1>
+</div>
+<h1 id="编译问题解决">编译问题解决</h1>
 <ul>
 <li>问题一：gn.py运行失败</li>
 </ul>
@@ -1643,10 +1629,10 @@ clang.gni中关闭chromium style检查，这里只是暂时关闭，为了代码
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  clang_use_chrome_plugins = false # is_clang &amp;&amp; !is_nacl &amp;&amp; !use_xcode_clang
 </span></span><span class="line"><span class="cl">  clang_base_path = default_clang_base_path
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">}</span></span></code></pre></td></tr></table>
 </div>
-</div><p>参考：</p>
+</div>
+<p>参考：</p>
 <ol>
 <li><a href="https://webrtc.github.io/webrtc-org/native-code/development/">WebRTC官网</a></li>
 </ol>]]></content:encoded>

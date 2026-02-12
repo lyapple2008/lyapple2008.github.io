@@ -34,20 +34,20 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">conda create -n tf_gpu python=3.9
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">conda create -n tf_gpu python=3.9</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="2-安装tensorflow">2. 安装tensorflow</h2>
+</div>
+<h2 id="2-安装tensorflow">2. 安装tensorflow</h2>
 <p>安装tensorflow的时候，需要指定版本为2.14.1，这里是因为后面需要安装的tensorflow-metal，最新版本只支持2.14</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pip install tensorflow==2.14.1
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pip install tensorflow==2.14.1</span></span></code></pre></td></tr></table>
 </div>
-</div><!-- {% asset_img tensorflow_metal.png %} -->
+</div>
+<!-- {% asset_img tensorflow_metal.png %} -->
 <img src="/images/2024-06-10-tensorflow_metal.png"/>
 <h2 id="3-安装tensorflow-metal">3. 安装tensorflow-metal</h2>
 <p>目前tensorflow官方没有支持apple gpu，需要通过<a href="https://developer.apple.com/metal/tensorflow-plugin/">tensorflow-metal</a>插件来支持使用apple gpu</p>
@@ -56,10 +56,10 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pip install tensorflow-metal==1.1.0
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pip install tensorflow-metal==1.1.0</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="4-测试验证">4. 测试验证</h2>
+</div>
+<h2 id="4-测试验证">4. 测试验证</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -73,10 +73,10 @@
 </span></span><span class="line"><span class="cl">import tensorflow as tf
 </span></span><span class="line"><span class="cl">print(f&#34;Tensor Flow Version: {tf.__version__}&#34;)
 </span></span><span class="line"><span class="cl">gpu = len(tf.config.list_physical_devices(&#39;GPU&#39;))&gt;0
-</span></span><span class="line"><span class="cl">print(&#34;GPU is&#34;, &#34;available&#34; if gpu else &#34;NOT AVAILABLE&#34;)
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">print(&#34;GPU is&#34;, &#34;available&#34; if gpu else &#34;NOT AVAILABLE&#34;)</span></span></code></pre></td></tr></table>
 </div>
-</div><p>成功后会得到下面的输出</p>
+</div>
+<p>成功后会得到下面的输出</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -88,8 +88,7 @@
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Tensor Flow Version: 2.14.1
 </span></span><span class="line"><span class="cl">Scikit-Learn 1.5.0
 </span></span><span class="line"><span class="cl">SciPy 1.13.1
-</span></span><span class="line"><span class="cl">GPU is available
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">GPU is available</span></span></code></pre></td></tr></table>
 </div>
 </div>]]></content:encoded>
     </item>
@@ -258,10 +257,10 @@
 </span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="n">OPUS_INLINE</span> <span class="kt">float</span> <span class="nf">sigmoid_approx</span><span class="p">(</span><span class="kt">float</span> <span class="n">x</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="mf">.5</span> <span class="o">+</span> <span class="mf">.5</span><span class="o">*</span><span class="nf">tansig_approx</span><span class="p">(</span><span class="mf">.5</span><span class="o">*</span><span class="n">x</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>最粗暴的函数近似方法：</strong><br /></p>
+</div>
+<p><strong>最粗暴的函数近似方法：</strong><br /></p>
 <!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418851-edfab380-b6a5-11e9-8e3f-75a65d5656c7.png) -->
 <img src="/images/2019-08-04-005.png"/>
 <br />    
@@ -867,10 +866,10 @@ skip-connection使得每个节点在进行建模时，能够同时利用到本�
 </span></span><span class="line"><span class="cl"><span class="o">//</span>    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">env</span><span class="o">-&gt;</span><span class="n">NewStringUTF</span><span class="p">(</span><span class="n">stringStream</span><span class="o">.</span><span class="n">str</span><span class="p">()</span><span class="o">.</span><span class="n">c_str</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><!-- <img src="https://user-images.githubusercontent.com/3350865/61178567-ece3e280-a621-11e9-9af3-08da3def9b98.gif" width=240 height=427/> -->
+</div>
+<!-- <img src="https://user-images.githubusercontent.com/3350865/61178567-ece3e280-a621-11e9-9af3-08da3def9b98.gif" width=240 height=427/> -->
 <!-- ![Image Caption](/images/2018-04-29-001.gif){width=240 height=427} -->
 <img src="/images/2018-04-29-001.gif" width=240 height=427 />
 <h2 id="总结">总结</h2>
