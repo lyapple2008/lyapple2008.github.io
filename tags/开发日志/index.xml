@@ -16,9 +16,9 @@
     <atom:link href="https://lyapple2008.github.io/tags/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>iOS音频捕获</title>
-      <link>https://lyapple2008.github.io/posts/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/</link>
+      <link>https://lyapple2008.github.io/posts/202601/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/</link>
       <pubDate>Sun, 25 Jan 2026 07:52:25 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/</guid>
+      <guid>https://lyapple2008.github.io/posts/202601/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;这篇是iOS双语字幕软件的开发日志，目标是在iOS端实现，在观看视频时，实时对播放的内容进行识别和翻译，显示双语字幕，用于打破外语视频内容观看门槛。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<blockquote>
@@ -34,18 +34,18 @@
 <p>本文介绍iOS系统音频捕获的实现方案，使用Broadcast Upload Extension捕获系统播放的音频，并通过App Group与主应用共享数据。</p>
 <h2 id="目录">目录</h2>
 <ul>
-<li><a href="/posts/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/#%e4%b8%80%e7%b3%bb%e7%bb%9f%e9%9f%b3%e9%a2%91%e6%8d%95%e8%8e%b7">一、系统音频捕获</a>
+<li><a href="/posts/202601/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/#%e4%b8%80%e7%b3%bb%e7%bb%9f%e9%9f%b3%e9%a2%91%e6%8d%95%e8%8e%b7">一、系统音频捕获</a>
 <ul>
-<li><a href="/posts/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/#broadcast-upload-extension%e9%85%8d%e7%bd%ae">Broadcast Upload Extension配置</a></li>
-<li><a href="/posts/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/#%e5%90%af%e5%8a%a8%e4%b8%8e%e5%85%b3%e9%97%ad">启动与关闭</a></li>
-<li><a href="/posts/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/#%e9%9f%b3%e9%a2%91%e6%a0%bc%e5%bc%8f%e8%bd%ac%e6%8d%a2">音频格式转换</a></li>
+<li><a href="/posts/202601/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/#broadcast-upload-extension%e9%85%8d%e7%bd%ae">Broadcast Upload Extension配置</a></li>
+<li><a href="/posts/202601/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/#%e5%90%af%e5%8a%a8%e4%b8%8e%e5%85%b3%e9%97%ad">启动与关闭</a></li>
+<li><a href="/posts/202601/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/#%e9%9f%b3%e9%a2%91%e6%a0%bc%e5%bc%8f%e8%bd%ac%e6%8d%a2">音频格式转换</a></li>
 </ul>
 </li>
-<li><a href="/posts/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/#%e4%ba%8cextension%e4%b8%8e%e4%b8%bb%e5%ba%94%e7%94%a8%e6%95%b0%e6%8d%ae%e5%85%b1%e4%ba%ab">二、Extension与主应用数据共享</a>
+<li><a href="/posts/202601/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/#%e4%ba%8cextension%e4%b8%8e%e4%b8%bb%e5%ba%94%e7%94%a8%e6%95%b0%e6%8d%ae%e5%85%b1%e4%ba%ab">二、Extension与主应用数据共享</a>
 <ul>
-<li><a href="/posts/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/#app-group%e9%85%8d%e7%bd%ae">App Group配置</a></li>
-<li><a href="/posts/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/#%e6%95%b0%e6%8d%ae%e8%af%bb%e5%86%99%e5%ae%9e%e7%8e%b0">数据读写实现</a></li>
-<li><a href="/posts/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/#darwin%e9%80%9a%e7%9f%a5">Darwin通知</a></li>
+<li><a href="/posts/202601/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/#app-group%e9%85%8d%e7%bd%ae">App Group配置</a></li>
+<li><a href="/posts/202601/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/#%e6%95%b0%e6%8d%ae%e8%af%bb%e5%86%99%e5%ae%9e%e7%8e%b0">数据读写实现</a></li>
+<li><a href="/posts/202601/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/#darwin%e9%80%9a%e7%9f%a5">Darwin通知</a></li>
 </ul>
 </li>
 </ul>

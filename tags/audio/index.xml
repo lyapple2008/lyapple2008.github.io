@@ -16,9 +16,9 @@
     <atom:link href="https://lyapple2008.github.io/tags/audio/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>QMF分析综合滤波器</title>
-      <link>https://lyapple2008.github.io/posts/2022-02-03-qmf%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/</link>
+      <link>https://lyapple2008.github.io/posts/202202/2022-02-03-qmf%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/</link>
       <pubDate>Thu, 03 Feb 2022 11:35:16 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/posts/2022-02-03-qmf%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/</guid>
+      <guid>https://lyapple2008.github.io/posts/202202/2022-02-03-qmf%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/</guid>
       <description>&lt;h1 id=&#34;分析综合滤波器组的作用&#34;&gt;分析综合滤波器组的作用&lt;/h1&gt;
 &lt;p&gt;由于音频信号在不同的频率范围具有不同的特性，因此在音频处理之前通常都会使用分析综合滤波器组将音频信号分成不同的频率子带，再分别进行处理。比如，音频编码中常用到的子带编码（Subband coding）；webrtc的VAD中，会对不同的频率子带计算特征，再综合这些特征计算语音概率。&lt;/p&gt;
 &lt;!-- {% asset_img 001.png %} --&gt;
@@ -264,9 +264,9 @@ WebRTC中的实现</p>
     </item>
     <item>
       <title>WebRTC中的音频处理概览</title>
-      <link>https://lyapple2008.github.io/posts/2021-12-22-webrtc%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/</link>
+      <link>https://lyapple2008.github.io/posts/202112/2021-12-22-webrtc%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/</link>
       <pubDate>Sat, 22 Jan 2022 10:53:15 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/posts/2021-12-22-webrtc%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/</guid>
+      <guid>https://lyapple2008.github.io/posts/202112/2021-12-22-webrtc%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/</guid>
       <description>&lt;!-- {% asset_img 001.png %} --&gt;
 &lt;img src=&#34;https://lyapple2008.github.io/images/2021-12-22-001.png&#34;/&gt;
 &lt;p&gt;WebRTC由音频引擎、视频引擎和传输模块，音频处理在WebRTC占了很大一块，本文主要对WebRTC中涉及的音频处理进行简单介绍，不会对具体的实现进行介绍。上图是WebRTC中音频处理的流水线（上面的图是网上的图，如有侵权，通知即删），可以看出主要包含了音频采集播放、音频处理、音频编解码和音频传输。下面对这些模块逐一进行介绍。&lt;/p&gt;</description>
@@ -315,9 +315,9 @@ WebRTC中的实现</p>
     </item>
     <item>
       <title>收集音频技术应用公司与实验室</title>
-      <link>https://lyapple2008.github.io/posts/2018-10-29-%E6%94%B6%E9%9B%86%E9%9F%B3%E9%A2%91%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%E5%85%AC%E5%8F%B8%E4%B8%8E%E5%AE%9E%E9%AA%8C%E5%AE%A4/</link>
+      <link>https://lyapple2008.github.io/posts/201810/2018-10-29-%E6%94%B6%E9%9B%86%E9%9F%B3%E9%A2%91%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%E5%85%AC%E5%8F%B8%E4%B8%8E%E5%AE%9E%E9%AA%8C%E5%AE%A4/</link>
       <pubDate>Mon, 29 Oct 2018 23:34:05 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/posts/2018-10-29-%E6%94%B6%E9%9B%86%E9%9F%B3%E9%A2%91%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%E5%85%AC%E5%8F%B8%E4%B8%8E%E5%AE%9E%E9%AA%8C%E5%AE%A4/</guid>
+      <guid>https://lyapple2008.github.io/posts/201810/2018-10-29-%E6%94%B6%E9%9B%86%E9%9F%B3%E9%A2%91%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8%E5%85%AC%E5%8F%B8%E4%B8%8E%E5%AE%9E%E9%AA%8C%E5%AE%A4/</guid>
       <description>&lt;!-- ![](https://user-images.githubusercontent.com/3350865/61180076-fe89b200-a642-11e9-81a7-697446a0860a.jpg)    --&gt;
 &lt;p&gt;&lt;img alt=&#34;Image Caption&#34; loading=&#34;lazy&#34; src=&#34;https://lyapple2008.github.io/images/2018-10-29-001.jpg&#34;&gt;&lt;/p&gt;
 &lt;p&gt;  收集一些音频相关的公司和实验室，另外还有一些个人博客，用来了解行业的最新动态。&lt;/p&gt;</description>

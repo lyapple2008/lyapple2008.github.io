@@ -16,9 +16,9 @@
     <atom:link href="https://lyapple2008.github.io/tags/webrtc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>WebRTC语音降噪之Wiener滤波</title>
-      <link>https://lyapple2008.github.io/posts/2025-07-13-webrtc%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E4%B9%8Bwiener%E6%BB%A4%E6%B3%A2/</link>
+      <link>https://lyapple2008.github.io/posts/202507/2025-07-13-webrtc%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E4%B9%8Bwiener%E6%BB%A4%E6%B3%A2/</link>
       <pubDate>Mon, 07 Jul 2025 21:59:22 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/2025-07-13-webrtc%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E4%B9%8Bwiener%E6%BB%A4%E6%B3%A2/</guid>
+      <guid>https://lyapple2008.github.io/posts/202507/2025-07-13-webrtc%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E4%B9%8Bwiener%E6%BB%A4%E6%B3%A2/</guid>
       <description>&lt;h1 id=&#34;webrtc中的wiener滤波降噪算法&#34;&gt;WebRTC中的Wiener滤波降噪算法&lt;/h1&gt;
 &lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;
 &lt;p&gt;在实时语音通信系统中，背景噪声的抑制对于提升通话清晰度至关重要。Google 的 WebRTC 项目在其开源语音引擎中实现了高质量的语音降噪模块，其中 Wiener 滤波器作为核心组成部分，结合语音概率估计、多特征建模、噪声谱跟踪等模块构建了一个高度实用的增强框架。&lt;/p&gt;</description>
@@ -360,9 +360,9 @@ $$</p>
     </item>
     <item>
       <title>WebRTC语音降噪之语音概率估计</title>
-      <link>https://lyapple2008.github.io/posts/2025-06-30-%E8%AF%AD%E9%9F%B3%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/</link>
+      <link>https://lyapple2008.github.io/posts/202506/2025-06-30-%E8%AF%AD%E9%9F%B3%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/</link>
       <pubDate>Mon, 30 Jun 2025 21:36:39 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/2025-06-30-%E8%AF%AD%E9%9F%B3%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/</guid>
+      <guid>https://lyapple2008.github.io/posts/202506/2025-06-30-%E8%AF%AD%E9%9F%B3%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/</guid>
       <description>&lt;p&gt;WebRTC的语音降噪算法中实现了一个频点维度的语音概率估计器SpeechProbabilityEstimator，本质是一个多特征融合的线性分类器。统计计算以下三种特征，&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>WebRTC的语音降噪算法中实现了一个频点维度的语音概率估计器SpeechProbabilityEstimator，本质是一个多特征融合的线性分类器。统计计算以下三种特征，</p>
 <ul>
@@ -957,9 +957,9 @@ $$</p>
     </item>
     <item>
       <title>WebRTC语音降噪之基于分位数的噪声估计</title>
-      <link>https://lyapple2008.github.io/posts/2025-06-28-%E5%9F%BA%E4%BA%8E%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E5%99%AA%E5%A3%B0%E4%BC%B0%E8%AE%A1/</link>
+      <link>https://lyapple2008.github.io/posts/202506/2025-06-28-%E5%9F%BA%E4%BA%8E%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E5%99%AA%E5%A3%B0%E4%BC%B0%E8%AE%A1/</link>
       <pubDate>Sat, 28 Jun 2025 15:38:44 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/2025-06-28-%E5%9F%BA%E4%BA%8E%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E5%99%AA%E5%A3%B0%E4%BC%B0%E8%AE%A1/</guid>
+      <guid>https://lyapple2008.github.io/posts/202506/2025-06-28-%E5%9F%BA%E4%BA%8E%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E5%99%AA%E5%A3%B0%E4%BC%B0%E8%AE%A1/</guid>
       <description>&lt;h2 id=&#34;噪声估计的作用&#34;&gt;噪声估计的作用&lt;/h2&gt;
 &lt;p&gt;噪声估计算法在整个语音降噪系统中起到核心支撑作用，先验SNR和后验SNR的计算都依赖于当前帧的噪声功率谱估计。若噪声估计偏低，会导致保留太多噪声（过度保留）；若噪声估计偏高，会把语音当作噪声过滤掉（语音失真）； 更新不稳定，整体听感时好时坏，忽大忽小，出现”泵声“、”音乐噪声“现象。本文介绍WebRTC中目前使用的基于分位数的噪声估计算法，及其在工程实现中的巧妙之处。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<h2 id="噪声估计的作用">噪声估计的作用</h2>
@@ -1217,9 +1217,9 @@ $$</p>
     </item>
     <item>
       <title>QMF分析综合滤波器</title>
-      <link>https://lyapple2008.github.io/posts/2022-02-03-qmf%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/</link>
+      <link>https://lyapple2008.github.io/posts/202202/2022-02-03-qmf%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/</link>
       <pubDate>Thu, 03 Feb 2022 11:35:16 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/posts/2022-02-03-qmf%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/</guid>
+      <guid>https://lyapple2008.github.io/posts/202202/2022-02-03-qmf%E5%88%86%E6%9E%90%E7%BB%BC%E5%90%88%E6%BB%A4%E6%B3%A2%E5%99%A8/</guid>
       <description>&lt;h1 id=&#34;分析综合滤波器组的作用&#34;&gt;分析综合滤波器组的作用&lt;/h1&gt;
 &lt;p&gt;由于音频信号在不同的频率范围具有不同的特性，因此在音频处理之前通常都会使用分析综合滤波器组将音频信号分成不同的频率子带，再分别进行处理。比如，音频编码中常用到的子带编码（Subband coding）；webrtc的VAD中，会对不同的频率子带计算特征，再综合这些特征计算语音概率。&lt;/p&gt;
 &lt;!-- {% asset_img 001.png %} --&gt;
@@ -1465,9 +1465,9 @@ WebRTC中的实现</p>
     </item>
     <item>
       <title>WebRTC中的音频处理概览</title>
-      <link>https://lyapple2008.github.io/posts/2021-12-22-webrtc%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/</link>
+      <link>https://lyapple2008.github.io/posts/202112/2021-12-22-webrtc%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/</link>
       <pubDate>Sat, 22 Jan 2022 10:53:15 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/posts/2021-12-22-webrtc%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/</guid>
+      <guid>https://lyapple2008.github.io/posts/202112/2021-12-22-webrtc%E4%B8%AD%E7%9A%84%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E6%A6%82%E8%A7%88/</guid>
       <description>&lt;!-- {% asset_img 001.png %} --&gt;
 &lt;img src=&#34;https://lyapple2008.github.io/images/2021-12-22-001.png&#34;/&gt;
 &lt;p&gt;WebRTC由音频引擎、视频引擎和传输模块，音频处理在WebRTC占了很大一块，本文主要对WebRTC中涉及的音频处理进行简单介绍，不会对具体的实现进行介绍。上图是WebRTC中音频处理的流水线（上面的图是网上的图，如有侵权，通知即删），可以看出主要包含了音频采集播放、音频处理、音频编解码和音频传输。下面对这些模块逐一进行介绍。&lt;/p&gt;</description>
@@ -1516,9 +1516,9 @@ WebRTC中的实现</p>
     </item>
     <item>
       <title>WebRTC系列-WebRTC_Android源码编译</title>
-      <link>https://lyapple2008.github.io/posts/2020-09-07-webrtc-android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/</link>
+      <link>https://lyapple2008.github.io/posts/202009/2020-09-07-webrtc-android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/</link>
       <pubDate>Mon, 07 Sep 2020 23:19:37 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/posts/2020-09-07-webrtc-android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/</guid>
+      <guid>https://lyapple2008.github.io/posts/202009/2020-09-07-webrtc-android%E6%BA%90%E7%A0%81%E7%BC%96%E8%AF%91/</guid>
       <description>&lt;h1 id=&#34;webrtc-android源码编译&#34;&gt;WebRTC Android源码编译&lt;/h1&gt;
 &lt;p&gt;对于WebRTC的学习来说，首先需要搞定的是源码的编译，由于国内的特殊环境和WebRTC本身的复杂性，导致WebRTC源码编译成了WebRTC学习的第一道门槛。这里把自己在编译WebRTC源码过程中遇到的一些坑进行总结分享，希望对大家有帮助。主要参考官网和WebRTC的编译配置脚本，整个操作过程需要具备科学上学的环境，第一次下载好环境和源码后，后面就不需要了。这里以Android端为例，编译环境为Ubuntu 18.04（再高版本会提示不支持），WebRTC官网有提到Android端暂时只支持在Linux下编译。虽然网上也有资源介绍在Mac环境下编译的，但是用虚拟机装个Ubuntu还是挺方便的，咱就不折腾了。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<h1 id="webrtc-android源码编译">WebRTC Android源码编译</h1>

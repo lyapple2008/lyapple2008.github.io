@@ -16,9 +16,9 @@
     <atom:link href="https://lyapple2008.github.io/tags/%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用ORT进行语音降噪模型推理</title>
-      <link>https://lyapple2008.github.io/posts/2025-11-03-%E4%BD%BF%E7%94%A8ort%E8%BF%9B%E8%A1%8C%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E6%8E%A8%E7%90%86/</link>
+      <link>https://lyapple2008.github.io/posts/202511/2025-11-03-%E4%BD%BF%E7%94%A8ort%E8%BF%9B%E8%A1%8C%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E6%8E%A8%E7%90%86/</link>
       <pubDate>Mon, 03 Nov 2025 19:39:53 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/2025-11-03-%E4%BD%BF%E7%94%A8ort%E8%BF%9B%E8%A1%8C%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E6%8E%A8%E7%90%86/</guid>
+      <guid>https://lyapple2008.github.io/posts/202511/2025-11-03-%E4%BD%BF%E7%94%A8ort%E8%BF%9B%E8%A1%8C%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E6%8E%A8%E7%90%86/</guid>
       <description>&lt;p&gt;在深度学习语音降噪模型的部署过程中，选择合适的推理引擎至关重要。ONNX Runtime（ORT）作为微软开源的跨平台推理引擎，在性能、兼容性和易用性方面表现出色，已成为许多生产环境的首选。本文将介绍为什么选择ORT，ORT的核心概念和使用流程，以及在使用ORT进行语音降噪推理时需要注意的关键事项，特别是针对时序模型（如GRU/LSTM）的隐状态管理。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>在深度学习语音降噪模型的部署过程中，选择合适的推理引擎至关重要。ONNX Runtime（ORT）作为微软开源的跨平台推理引擎，在性能、兼容性和易用性方面表现出色，已成为许多生产环境的首选。本文将介绍为什么选择ORT，ORT的核心概念和使用流程，以及在使用ORT进行语音降噪推理时需要注意的关键事项，特别是针对时序模型（如GRU/LSTM）的隐状态管理。</p>
 <h2 id="一为什么选择ort">一、为什么选择ORT？</h2>
@@ -1758,9 +1758,9 @@
     </item>
     <item>
       <title>语音增强算法评估指南</title>
-      <link>https://lyapple2008.github.io/posts/2025-08-11-%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95%E8%AF%84%E4%BC%B0/</link>
+      <link>https://lyapple2008.github.io/posts/202508/2025-08-11-%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95%E8%AF%84%E4%BC%B0/</link>
       <pubDate>Mon, 11 Aug 2025 22:27:28 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/2025-08-11-%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95%E8%AF%84%E4%BC%B0/</guid>
+      <guid>https://lyapple2008.github.io/posts/202508/2025-08-11-%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95%E8%AF%84%E4%BC%B0/</guid>
       <description>&lt;h1 id=&#34;语音增强算法评估指南&#34;&gt;语音增强算法评估指南&lt;/h1&gt;
 &lt;p&gt;如今语音增强算法已成为智能设备、视频会议和助听器等应用的核心，它能从嘈杂环境中“拯救”清晰的语音信号，但如何判断一个算法的好坏？这就是评估的意义所在。今天，我们来聊聊语音增强算法的评估体系，通过一个国际挑战赛作为切入点，带你一步步了解关键指标和计算方法。无论你是初学者还是从业者，这篇文章都能帮你理清思路。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<h1 id="语音增强算法评估指南">语音增强算法评估指南</h1>

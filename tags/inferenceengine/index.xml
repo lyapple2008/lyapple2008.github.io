@@ -16,9 +16,9 @@
     <atom:link href="https://lyapple2008.github.io/tags/inferenceengine/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>算子融合</title>
-      <link>https://lyapple2008.github.io/posts/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</link>
+      <link>https://lyapple2008.github.io/posts/202405/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</link>
       <pubDate>Fri, 17 May 2024 22:58:36 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/posts/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</guid>
+      <guid>https://lyapple2008.github.io/posts/202405/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</guid>
       <description>&lt;h2 id=&#34;什么是算子融合&#34;&gt;什么是算子融合&lt;/h2&gt;
 &lt;p&gt;算子融合是一种通过合并计算图中多个算子到一个算子，达到减少计算量和内存访问的优化方法。&lt;/p&gt;
 &lt;ul&gt;

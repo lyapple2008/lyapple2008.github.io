@@ -16,9 +16,9 @@
     <atom:link href="https://lyapple2008.github.io/tags/jni/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>JavaNativeInterface笔记</title>
-      <link>https://lyapple2008.github.io/posts/2019-03-03-javanativeinterface%E7%AC%94%E8%AE%B0/</link>
+      <link>https://lyapple2008.github.io/posts/201903/2019-03-03-javanativeinterface%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Sun, 03 Mar 2019 22:51:59 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/posts/2019-03-03-javanativeinterface%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://lyapple2008.github.io/posts/201903/2019-03-03-javanativeinterface%E7%AC%94%E8%AE%B0/</guid>
       <description>&lt;p&gt;最近由于公司项目的原因开始接触WebRTC，其中Android相关部分由于需要跨越了两种不同的语
 言，因此需要一种机制能够让C/C++和JAVA之间进行交互，而JNI就是这样一种机制。通过JNI可
 以实现C/C++和JAVA之前需要交互。本篇笔记的首先从一个实际的例子开始介绍JNI操作的完整流
@@ -1069,9 +1069,9 @@
     </item>
     <item>
       <title>JNI入门之HelloWorld篇</title>
-      <link>https://lyapple2008.github.io/posts/2018-2-15-jni%E5%85%A5%E9%97%A8%E4%B9%8Bhelloworld%E7%AF%87/</link>
+      <link>https://lyapple2008.github.io/posts/201802/2018-2-15-jni%E5%85%A5%E9%97%A8%E4%B9%8Bhelloworld%E7%AF%87/</link>
       <pubDate>Thu, 15 Feb 2018 22:35:37 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/posts/2018-2-15-jni%E5%85%A5%E9%97%A8%E4%B9%8Bhelloworld%E7%AF%87/</guid>
+      <guid>https://lyapple2008.github.io/posts/201802/2018-2-15-jni%E5%85%A5%E9%97%A8%E4%B9%8Bhelloworld%E7%AF%87/</guid>
       <description>&lt;h4 id=&#34;1-jni的作用&#34;&gt;1. JNI的作用&lt;/h4&gt;
 &lt;p&gt;JNI（Java Native Interface）提供了一种java与C/C++ 代码进行交互的方式，可以通过java方法调用C/C++ 的实现，和已有的C/C++ 库。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<h4 id="1-jni的作用">1. JNI的作用</h4>
