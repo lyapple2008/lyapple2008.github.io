@@ -12,8 +12,456 @@
     <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Sun, 01 Feb 2026 09:28:45 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 14 Feb 2026 17:59:07 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ASR任务初体验</title>
+      <link>https://lyapple2008.github.io/posts/202602/2026-02-14-asr%E4%BB%BB%E5%8A%A1%E5%88%9D%E4%BD%93%E9%AA%8C/</link>
+      <pubDate>Sat, 14 Feb 2026 17:59:07 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202602/2026-02-14-asr%E4%BB%BB%E5%8A%A1%E5%88%9D%E4%BD%93%E9%AA%8C/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<blockquote>
+<p>这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。</p></blockquote>
+<h3 id="模块流程">模块流程</h3>
+
+<div class="mermaid">graph LR
+    A[捕获系统播放音频] --&gt; B[语音识别ASR]
+    B --&gt; C[语言翻译]
+    B --&gt; D[双语字幕]
+    C --&gt; D</div>
+<h1 id="什么是asr任务">什么是ASR任务</h1>
+<p>ASR（Automatic Speech Recognition，自动语音识别）任务，指的是将连续的音频信号转换为对应的文本序列的过程。这是一种典型的序列到序列（Sequence-to-Sequence）的转换任务：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">audio (连续信号)  →  text (离散 token)</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>从信号处理的角度来看，传统ASR需要解决以下核心问题：</p>
+<ol>
+<li><strong>声学建模</strong>：将音频特征映射到音素或字符</li>
+<li><strong>语言建模</strong>：捕捉词汇之间的概率关系</li>
+<li><strong>对齐问题</strong>：音频帧与输出token之间的对齐</li>
+</ol>
+<p>不过，在现代端到端深度学习方案中，这三个问题都被统一在一个神经网络中解决，不再需要独立的声学模型和语言模型。模型通过端到端训练自动学习如何从音频特征直接映射到文本输出。</p>
+<h1 id="与降噪任务的区别">与降噪任务的区别</h1>
+<p>在开发iOS双语字幕的过程中，我之前可能接触过降噪任务，这两者有本质区别：</p>
+<table>
+  <thead>
+      <tr>
+          <th>维度</th>
+          <th>降噪任务</th>
+          <th>ASR任务</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>输入输出</strong></td>
+          <td>音频 → 音频</td>
+          <td>音频 → 文本</td>
+      </tr>
+      <tr>
+          <td><strong>任务类型</strong></td>
+          <td>信号回归</td>
+          <td>序列到序列</td>
+      </tr>
+      <tr>
+          <td><strong>评估指标</strong></td>
+          <td>SNR、PESQ</td>
+          <td>WER、CER</td>
+      </tr>
+      <tr>
+          <td><strong>难点</strong></td>
+          <td>保留语音质量</td>
+          <td>识别准确性</td>
+      </tr>
+      <tr>
+          <td><strong>模型结构</strong></td>
+          <td>Encoder</td>
+          <td>Encoder-Decoder</td>
+      </tr>
+  </tbody>
+</table>
+<p>简单来说：</p>
+<ul>
+<li><strong>降噪任务</strong>：输入一段有噪声的音频，输出干净的音频（同类转换）</li>
+<li><strong>ASR任务</strong>：输入音频，输出文字（跨模态转换）</li>
+</ul>
+<p>ASR的难点在于它需要&quot;理解&quot;音频内容并转换为语义符号，而不是简单地处理信号波形。同时，ASR任务的输入和输出也不像降噪任务那样是一一对应的关系，还需要处理对齐问题。</p>
+<h1 id="目前主流的实现方案">目前主流的实现方案</h1>
+<p>主流的ASR实现方案主要有三种：CTC、RNN-T和基于Attention的Seq2Seq。</p>
+<h2 id="ctc-connectionist-temporal-classification">CTC (Connectionist Temporal Classification)</h2>
+<p>CTC是一种经典的对齐方法，核心思想是<strong>不需要显式的对齐标签</strong>，而是通过&quot;blank&quot;机制自动学习对齐。</p>
+<p>CTC引入了空白符（blank）和折叠机制：</p>
+<ul>
+<li>重复的字符会被折叠（如 &ldquo;aaabbb&rdquo; → &ldquo;ab&rdquo;）</li>
+<li>blank符号不产生任何输出</li>
+<li>通过动态规划计算所有可能路径的概率</li>
+</ul>
+<p><a href="https://distill.pub/2017/ctc/">Sequence Modeling With CTC</a> 详细原理可参考这篇文章。</p>
+<p>训练阶段就是使目标token序列路径的概率最大，而推理阶段就是搜索概率最大的token路径并输出，这里通常有两种方法：</p>
+<table>
+  <thead>
+      <tr>
+          <th>方法</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Greedy Search</strong></td>
+          <td>每一步都选择概率最大的token输出</td>
+      </tr>
+      <tr>
+          <td><strong>Beam Search</strong></td>
+          <td>每一步保留top-N概率的token结果，输出token序列路径概率最大的结果</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="rnn-t-recurrent-neural-network-transducer">RNN-T (Recurrent Neural Network Transducer)</h2>
+<p>RNN-T是CTC的扩展，引入了一个额外的预测网络（Prediction Network）来建模输出token之间的依赖关系。</p>
+<p>RNN-T由三部分组成：</p>
+<ol>
+<li><strong>编码器（Encoder）</strong>：将音频特征转换为声学表征</li>
+<li><strong>预测网络（Prediction Network）</strong>：基于已输出的token预测下一个token</li>
+<li><strong>联合网络（Joint Network）</strong>：结合Encoder和Prediction的输出，预测下一个token</li>
+</ol>
+<p>RNN-T在输出时，不仅会输入当前帧音频数据，还会输入历史输出作为参考</p>
+<h2 id="seq2seq-with-attention">Seq2Seq with Attention</h2>
+<p>基于Attention机制的序列到序列模型是目前最流行的方案，被广泛用于Whisper、Paraformer等现代ASR系统。</p>
+<h3 id="原理">原理</h3>
+<p>经典结构：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Encoder → Attention → Decoder → Output</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<ul>
+<li><strong>Encoder</strong>：将音频特征编码为高维表征（通常使用Transformer或Conformer）</li>
+<li><strong>Attention</strong>：让Decoder在生成每个token时&quot;关注&quot;输入的不同部分</li>
+<li><strong>Decoder</strong>：自回归生成输出文本</li>
+</ul>
+<h3 id="优缺点">优缺点</h3>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>可以建模任意长度序列的依赖关系</li>
+<li>识别准确率高</li>
+<li>易于添加语言模型集成</li>
+<li>适合大规模预训练</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>推理延迟较高（需要完整音频或较大chunk）</li>
+<li>流式识别实现复杂</li>
+<li>计算资源需求大</li>
+</ul>
+<h1 id="流式模型和非流式模型">流式模型和非流式模型</h1>
+<p>流式（Streaming）和非流式（Offline）是ASR系统根据实时性要求的两种设计模式。</p>
+<h2 id="什么是非流式模型">什么是非流式模型</h2>
+<p>非流式模型（Offline ASR）需要<strong>等待完整音频输入后才能开始识别</strong>。</p>
+<p>特点：</p>
+<ul>
+<li>输入：完整的音频文件或长音频段</li>
+<li>延迟：较高，需要等待音频结束</li>
+<li>准确率：通常较高，因为可以看到完整的上下文</li>
+<li>适用场景：视频字幕生成、会议转录、录音文件处理</li>
+</ul>
+<h2 id="什么是流式模型">什么是流式模型</h2>
+<p>流式模型（Streaming ASR）可以<strong>边接收音频输入边输出识别结果</strong>，实现实时识别。</p>
+<p>特点：</p>
+<ul>
+<li>输入：连续的音频流（通常是短片段，如30ms一帧）</li>
+<li>延迟：低，可以做到几百毫秒内输出</li>
+<li>准确率：通常略低于非流式，因为只有历史和部分未来上下文</li>
+<li>适用场景：实时语音对话、语音助手、直播字幕</li>
+</ul>
+<h2 id="技术实现差异">技术实现差异</h2>
+<table>
+  <thead>
+      <tr>
+          <th>维度</th>
+          <th>流式模型</th>
+          <th>非流式模型</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>上下文</strong></td>
+          <td>有限上下文（lookahead）</td>
+          <td>完整上下文</td>
+      </tr>
+      <tr>
+          <td><strong>延迟</strong></td>
+          <td>低（&lt;500ms）</td>
+          <td>高</td>
+      </tr>
+      <tr>
+          <td><strong>准确率</strong></td>
+          <td>略低</td>
+          <td>较高</td>
+      </tr>
+      <tr>
+          <td><strong>模型复杂度</strong></td>
+          <td>较高（需处理分段）</td>
+          <td>较低</td>
+      </tr>
+      <tr>
+          <td><strong>内存占用</strong></td>
+          <td>较小</td>
+          <td>较大</td>
+      </tr>
+  </tbody>
+</table>
+<p>流式模型通常需要特殊设计，如：</p>
+<ul>
+<li><strong>Chunked Attention</strong>：将音频分成小块处理</li>
+<li><strong>CTC Prefix</strong>：使用CTC的前缀解码</li>
+<li><strong>Lookahead</strong>：只考虑有限的未来帧</li>
+</ul>
+<hr>
+<h1 id="自回归解码和非自回归解码">自回归解码和非自回归解码</h1>
+<p>解码方式决定了模型如何生成输出文本。</p>
+<h2 id="自回归解码-autoregressive-decoding">自回归解码 (Autoregressive Decoding)</h2>
+<p>自回归解码是目前最主流的方式，特点是<strong>逐 token 生成，每个 token 的生成依赖之前所有生成的 token</strong>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">输出: &#34;hello world&#34;
+</span></span><span class="line"><span class="cl">生成过程:
+</span></span><span class="line"><span class="cl">  1. 生成 &#34;h&#34;
+</span></span><span class="line"><span class="cl">  2. 基于 &#34;h&#34; 生成 &#34;he&#34;
+</span></span><span class="line"><span class="cl">  3. 基于 &#34;he&#34; 生成 &#34;hel&#34;
+</span></span><span class="line"><span class="cl">  4. ...</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>特点：</p>
+<ul>
+<li><strong>优点</strong>：生成质量高，可以建模长期依赖</li>
+<li><strong>缺点</strong>：串行生成，推理速度慢（O(n) 复杂度，n为输出长度）</li>
+<li>典型模型：Transformer Decoder、RNN-T</li>
+</ul>
+<h2 id="非自回归解码-non-autoregressive-decoding">非自回归解码 (Non-autoregressive Decoding)</h2>
+<p>非自回归解码是一种<strong>并行生成</strong>方式，一次性输出整个序列。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">输出: &#34;hello world&#34;
+</span></span><span class="line"><span class="cl">生成过程:
+</span></span><span class="line"><span class="cl">  1. 直接输出完整句子 &#34;hello world&#34;</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>特点：</p>
+<ul>
+<li><strong>优点</strong>：并行生成，推理速度快（O(1) 复杂度）</li>
+<li><strong>缺点</strong>：难以建模输出token之间的依赖，生成质量可能较低</li>
+<li>典型实现：CTC、FastCorrect、Mask-Predict</li>
+</ul>
+<h2 id="对比">对比</h2>
+<table>
+  <thead>
+      <tr>
+          <th>维度</th>
+          <th>自回归解码</th>
+          <th>非自回归解码</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>生成方式</strong></td>
+          <td>串行，逐token</td>
+          <td>并行，一次性输出</td>
+      </tr>
+      <tr>
+          <td><strong>推理速度</strong></td>
+          <td>慢</td>
+          <td>快</td>
+      </tr>
+      <tr>
+          <td><strong>生成质量</strong></td>
+          <td>高</td>
+          <td>略低</td>
+      </tr>
+      <tr>
+          <td><strong>依赖关系</strong></td>
+          <td>建模token间依赖</td>
+          <td>假设条件独立</td>
+      </tr>
+      <tr>
+          <td><strong>典型模型</strong></td>
+          <td>RNN-T、Seq2Seq</td>
+          <td>CTC、FastConformer</td>
+      </tr>
+  </tbody>
+</table>
+<h1 id="方案选择">方案选择</h1>
+<p>OK，前面了解了这么多，都是为了后续实现最小原型产品，选择语音识别方案做准备，目标不是要训练一个SOTA模型，因此这里暂时只是粗浅的了解。</p>
+<p>根据需求分析：</p>
+<ul>
+<li><strong>目标设备</strong>：iOS移动端（资源有限）</li>
+<li><strong>语言支持</strong>：多语言</li>
+<li><strong>实时性</strong>：实时输入音频，实时输出文字</li>
+</ul>
+<h2 id="选择优先级">选择优先级</h2>
+<ol>
+<li><strong>首先能跑</strong>：模型大小和计算量必须在移动端可承受范围内</li>
+<li><strong>然后多语言</strong>：需要支持多种语言识别</li>
+<li><strong>最后准确率</strong>：在功能可用后再优化性能</li>
+</ol>
+<h2 id="优先级一模型能在移动端跑起来">优先级一：模型能在移动端跑起来</h2>
+<h3 id="参数量选择">参数量选择</h3>
+<p>移动端资源有限，模型参数量直接决定了能否运行。这里暂时没有明确的数值界限，实际运行起来再看，后面也可以用量化技术缩小模型体积。</p>
+<p><strong>量化技术</strong>：INT8量化可将模型体积缩小约4倍，准确率损失通常&lt;5%；INT4可进一步缩小到1/8，但准确率下降更明显。</p>
+<h3 id="架构选择">架构选择</h3>
+<table>
+  <thead>
+      <tr>
+          <th>架构</th>
+          <th>计算量</th>
+          <th>内存占用</th>
+          <th>移动端适用性</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Transformer Encoder</strong></td>
+          <td>中</td>
+          <td>中</td>
+          <td>★★★★☆</td>
+      </tr>
+      <tr>
+          <td><strong>Conformer</strong></td>
+          <td>中高</td>
+          <td>中</td>
+          <td>★★★★☆</td>
+      </tr>
+      <tr>
+          <td><strong>RNN/LSTM</strong></td>
+          <td>低</td>
+          <td>低</td>
+          <td>★★★☆☆</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>建议</strong>：选择Encoder-only或轻量级的Conformer结构，参数量控制在50M以内。</p>
+<h2 id="优先级二支持多语言">优先级二：支持多语言</h2>
+<p>确认模型能在移动端运行后，需要考虑多语言支持能力。</p>
+<h3 id="不同模型架构的多语言能力">不同模型架构的多语言能力</h3>
+<table>
+  <thead>
+      <tr>
+          <th>模型架构</th>
+          <th>多语言支持</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>端到端Seq2Seq</strong></td>
+          <td>★★★★★</td>
+          <td>训练时使用多语言数据，自然支持多语言</td>
+      </tr>
+      <tr>
+          <td><strong>RNN-T</strong></td>
+          <td>★★★☆☆</td>
+          <td>可支持，但需要针对性训练多语言版本</td>
+      </tr>
+      <tr>
+          <td><strong>CTC</strong></td>
+          <td>★★☆☆☆</td>
+          <td>通常针对单一语言，多语言版本较少</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="结论">结论</h3>
+<p>需要支持多语言时，<strong>优先选择端到端Seq2Seq架构</strong>，这类模型的预训练版本通常已支持数十到上百种语言。</p>
+<h2 id="优先级三实时性要求">优先级三：实时性要求</h2>
+<p>实时字幕要求模型能够在接收音频的同时输出文字。</p>
+<h3 id="流式-vs-非流式">流式 vs 非流式</h3>
+<table>
+  <thead>
+      <tr>
+          <th>类型</th>
+          <th>延迟</th>
+          <th>实现难度</th>
+          <th>实时字幕适用性</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>流式模型</strong></td>
+          <td>&lt;500ms</td>
+          <td>高</td>
+          <td>★★★★★</td>
+      </tr>
+      <tr>
+          <td><strong>非流式模型</strong></td>
+          <td>&gt;1s</td>
+          <td>低</td>
+          <td>★★☆☆☆</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>折中方案</strong>：使用非流式模型时，可通过&quot;分块处理&quot;策略模拟流式效果：</p>
+<ul>
+<li>将音频切分为固定长度的chunk（如1秒）</li>
+<li>逐块识别并拼接结果</li>
+<li>通过缓存历史上下文减少误差</li>
+</ul>
+<h3 id="解码方式">解码方式</h3>
+<table>
+  <thead>
+      <tr>
+          <th>解码方式</th>
+          <th>延迟</th>
+          <th>实现复杂度</th>
+          <th>实时性</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>非自回归（Greedy）</strong></td>
+          <td>低</td>
+          <td>简单</td>
+          <td>★★★★★</td>
+      </tr>
+      <tr>
+          <td><strong>非自回归（Beam Search）</strong></td>
+          <td>中</td>
+          <td>中</td>
+          <td>★★★★☆</td>
+      </tr>
+      <tr>
+          <td><strong>自回归</strong></td>
+          <td>高</td>
+          <td>复杂</td>
+          <td>★★☆☆☆</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>建议</strong>：实时场景优先选择<strong>非自回归解码</strong>（Greedy），延迟最低。</p>
+<h2 id="总结">总结</h2>
+<p><strong>核心理念</strong>：先完成端到端流程验证，再根据实际体验进行针对性优化。移动端ASR是一个迭代过程，不必追求一步到位。</p>
+<p>后续我会记录在iOS端的具体实现过程，各位道友记得点赞追番哦。</p>
+<p><img alt="各位道友记得一键三连" loading="lazy" src="/images/%E4%B8%80%E9%94%AE%E4%B8%89%E8%BF%9E.jpg"></p>
+]]></content:encoded>
+    </item>
     <item>
       <title>关于AICoding的一些感想和后续的规划</title>
       <link>https://lyapple2008.github.io/posts/202601/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/</link>
@@ -4335,58 +4783,6 @@ llvm-objdump -d 目标文件
 </span></span><span class="line"><span class="cl">GPU is available</span></span></code></pre></td></tr></table>
 </div>
 </div>]]></content:encoded>
-    </item>
-    <item>
-      <title>算子融合</title>
-      <link>https://lyapple2008.github.io/posts/202405/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</link>
-      <pubDate>Fri, 17 May 2024 22:58:36 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/posts/202405/2024-05-17-%E7%AE%97%E5%AD%90%E8%9E%8D%E5%90%88/</guid>
-      <description>&lt;h2 id=&#34;什么是算子融合&#34;&gt;什么是算子融合&lt;/h2&gt;
-&lt;p&gt;算子融合是一种通过合并计算图中多个算子到一个算子，达到减少计算量和内存访问的优化方法。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Conv + BatchNormalization + ReLu融合&lt;/li&gt;
-&lt;/ul&gt;
-&lt;!-- {% asset_img conv_bn_relu.png %} --&gt;
-&lt;img src=&#34;https://lyapple2008.github.io/images/2024-05-17-conv_bn_relu.png&#34;/&gt;
-&lt;p&gt;从融合后的最终公式可以看出，可以在初始阶段就通过BN的均值和方差（推理阶段BN的均值和方差是常量）更新Conv层的weights和bias参数，这样融合后的算子相当少了一个BN层的操作，既减少了内存访问，也减少了计算量&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<h2 id="什么是算子融合">什么是算子融合</h2>
-<p>算子融合是一种通过合并计算图中多个算子到一个算子，达到减少计算量和内存访问的优化方法。</p>
-<ul>
-<li>Conv + BatchNormalization + ReLu融合</li>
-</ul>
-<!-- {% asset_img conv_bn_relu.png %} -->
-<img src="/images/2024-05-17-conv_bn_relu.png"/>
-<p>从融合后的最终公式可以看出，可以在初始阶段就通过BN的均值和方差（推理阶段BN的均值和方差是常量）更新Conv层的weights和bias参数，这样融合后的算子相当少了一个BN层的操作，既减少了内存访问，也减少了计算量</p>
-<h2 id="如何做算子融合">如何做算子融合</h2>
-<h3 id="算子分类">算子分类</h3>
-<!-- {% asset_img operator_category.png %} -->
-<img src="/images/2024-05-17-conv_bn_relu.png"/>
-<p>当存在多个输入，同时存在多种输入-输出映射关系时，最终的Mapping type由最复杂的那一个决定。Mapping type复杂度递增顺序：One-to-One，Reorganize，Shuffle，One-to-Many，Many-to-Many
-注：Many-to-Many包含Many-to-One的类型</p>
-<h3 id="算子可融合性">算子可融合性</h3>
-<!-- {% asset_img fusion_ability.png %} -->
-<img src="/images/2024-05-17-fusion_ability.png"/>
-<p>绿色：可以融合，且有收益
-黄色：要做profile才能确定是否有收益
-红色：没有收益，不融合</p>
-<h3 id="计算图基于融合性分块">计算图基于融合性分块</h3>
-<!-- {% asset_img graph_partition.png %} -->
-<img src="/images/2024-05-17-graph_partition.png"/>
-<p>分块过程：</p>
-<ol>
-<li>随机挑选一个One-to-One 算子节点做为种子节点</li>
-<li>从种子节点往后进行融合，直到没有可以融合的节点，并更新块的Mapping Type</li>
-<li>从种子节点往前进行融合，直到没有可以融合的节点，并更新块的Mapping Type</li>
-<li>重复执行1、2、3，直到没有可用的种子节点</li>
-</ol>
-<h3 id="融合代码生成">融合代码生成</h3>
-<p>基于编译生成融合代码（DNNFusion、TVM）</p>
-<!-- {% asset_img code_gen.png %} -->
-<img src="/images/2024-05-17-code_gen.png"/>
-<p>参考</p>
-<ol>
-<li><a href="https://dl.acm.org/doi/10.1145/3453483.3454083">DNNFusion: accelerating deep neural networks execution with advanced operator fusion</a></li>
-</ol>]]></content:encoded>
     </item>
   </channel>
 </rss>

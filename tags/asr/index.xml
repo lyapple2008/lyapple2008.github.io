@@ -2,160 +2,233 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>ASR on BeYoung</title>
-    <link>http://localhost:1313/tags/asr/</link>
+    <link>https://lyapple2008.github.io/tags/asr/</link>
     <description>Recent content in ASR on BeYoung</description>
     <image>
       <title>BeYoung</title>
-      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Fri, 30 Jan 2026 23:10:57 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/asr/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 14 Feb 2026 17:59:07 +0800</lastBuildDate>
+    <atom:link href="https://lyapple2008.github.io/tags/asr/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>LowFrameRate在语音识别中的原理和作用</title>
-      <link>http://localhost:1313/posts/2026-01-30-lowframerate%E5%9C%A8%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%B8%AD%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E4%BD%9C%E7%94%A8/</link>
-      <pubDate>Fri, 30 Jan 2026 23:10:57 +0800</pubDate>
-      <guid>http://localhost:1313/posts/2026-01-30-lowframerate%E5%9C%A8%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB%E4%B8%AD%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E4%BD%9C%E7%94%A8/</guid>
-      <description>&lt;h1 id=&#34;low-frame-ratelfr在语音识别中的原理与作用&#34;&gt;Low Frame Rate（LFR）在语音识别中的原理与作用&lt;/h1&gt;
-&lt;h2 id=&#34;一什么是-low-frame-ratelfr&#34;&gt;一、什么是 Low Frame Rate（LFR）&lt;/h2&gt;
-&lt;p&gt;在自动语音识别（ASR）中，&lt;strong&gt;Low Frame Rate（低帧率，简称 LFR）&lt;strong&gt;是一种&lt;/strong&gt;时域特征重组织方法&lt;/strong&gt;，其核心思想是：&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<h1 id="low-frame-ratelfr在语音识别中的原理与作用">Low Frame Rate（LFR）在语音识别中的原理与作用</h1>
-<h2 id="一什么是-low-frame-ratelfr">一、什么是 Low Frame Rate（LFR）</h2>
-<p>在自动语音识别（ASR）中，<strong>Low Frame Rate（低帧率，简称 LFR）<strong>是一种</strong>时域特征重组织方法</strong>，其核心思想是：</p>
-<blockquote>
-<p><strong>将原本高时间分辨率的声学特征帧进行拼接（Frame Stacking），
-再按一定步长进行下采样（Subsampling），
-从而用更少的时间步表示同一段语音。</strong></p></blockquote>
-<p>在不使用 LFR 的情况下，常见声学特征（如 MFCC、FBANK）通常以 <strong>10 ms</strong> 为帧移（frame shift）提取：</p>
-<ul>
-<li>1 秒音频 ≈ 100 帧</li>
-<li>特征形状为 <code>[T, D]</code></li>
-</ul>
-<p>引入 LFR 后：</p>
-<ul>
-<li>多个连续帧被合并成一个“厚帧”</li>
-<li>模型看到的时间步数明显减少</li>
-<li>特征形状变为 <code>[T', D']</code>，其中 <code>T' &lt; T</code></li>
-</ul>
-<hr>
-<h2 id="二lfr-的典型适用场景">二、LFR 的典型适用场景</h2>
-<p>LFR 并不是一个“可选优化”，而是<strong>现代 ASR 系统中的标准配置</strong>，尤其适用于以下场景：</p>
-<h3 id="1-长序列建模的声学模型">1. 长序列建模的声学模型</h3>
-<ul>
-<li>Transformer / Conformer</li>
-<li>RNN / LSTM / GRU</li>
-<li>CTC / RNN-T / Attention Encoder</li>
-</ul>
-<p>这些模型的计算复杂度都与<strong>时间步长度 T 强相关</strong>。</p>
-<hr>
-<h3 id="2-流式语音识别streaming-asr">2. 流式语音识别（Streaming ASR）</h3>
-<ul>
-<li>实时字幕</li>
-<li>语音助手</li>
-<li>低延迟语音交互</li>
-</ul>
-<p>LFR 可以：</p>
-<ul>
-<li>降低每秒需要处理的帧数</li>
-<li>提高解码稳定性</li>
-<li>减少无意义的高频决策</li>
-</ul>
-<hr>
-<h3 id="3-移动端--边缘端推理">3. 移动端 / 边缘端推理</h3>
-<ul>
-<li>CPU / NPU 算力受限</li>
-<li>内存与功耗敏感</li>
-</ul>
-<p>LFR 是<strong>性价比极高的性能优化手段</strong>。</p>
-<hr>
-<h2 id="三为什么需要-lfr">三、为什么需要 LFR</h2>
-<h3 id="1-原始帧率过高信息冗余严重">1. 原始帧率过高，信息冗余严重</h3>
-<p>10 ms 帧移意味着：</p>
-<ul>
-<li>相邻帧高度相关</li>
-<li>连续多帧往往属于同一个音素</li>
-<li>模型需要做大量“无效但昂贵”的时间步计算</li>
-</ul>
-<p>从语音学角度看：</p>
-<ul>
-<li>音素时长通常在 <strong>50–100 ms</strong></li>
-<li>以 10 ms 为单位建模，时间分辨率明显过细</li>
-</ul>
-<hr>
-<h3 id="2-长时间序列是-asr-的主要性能瓶颈">2. 长时间序列是 ASR 的主要性能瓶颈</h3>
-<p>在 ASR 模型中：</p>
-<ul>
-<li>Transformer 的 Self-Attention 复杂度为 <code>O(T²)</code></li>
-<li>RNN 需要按时间步循环计算</li>
-<li>CTC / RNN-T 的前向后向算法与 T 成正比</li>
-</ul>
-<p>因此，<strong>时间步数 T 往往是系统性能的第一瓶颈</strong>。</p>
-<hr>
-<h3 id="3-lfr-提供了更合理的时间建模粒度">3. LFR 提供了更合理的“时间建模粒度”</h3>
-<p>LFR 后：</p>
-<ul>
-<li>每一个时间步不再代表 10 ms</li>
-<li>而是代表 30–40 ms 的语音上下文</li>
-<li>更接近“音素级”时间尺度</li>
-</ul>
-<p>这让模型：</p>
-<ul>
-<li>更容易学习稳定对齐</li>
-<li>减少抖动与频繁修正</li>
-<li>提高整体鲁棒性</li>
-</ul>
-<hr>
-<h2 id="四lfr-的核心算法frame-stacking--subsampling">四、LFR 的核心算法：Frame Stacking + Subsampling</h2>
-<h3 id="1-frame-stacking帧拼接">1. Frame Stacking（帧拼接）</h3>
-<p>将连续的 <code>m</code> 帧特征拼接在一起：</p>
+      <title>ASR任务初体验</title>
+      <link>https://lyapple2008.github.io/posts/202602/2026-02-14-asr%E4%BB%BB%E5%8A%A1%E5%88%9D%E4%BD%93%E9%AA%8C/</link>
+      <pubDate>Sat, 14 Feb 2026 17:59:07 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202602/2026-02-14-asr%E4%BB%BB%E5%8A%A1%E5%88%9D%E4%BD%93%E9%AA%8C/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<blockquote>
+<p>这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。</p></blockquote>
+<h3 id="模块流程">模块流程</h3>
+
+<div class="mermaid">graph LR
+    A[捕获系统播放音频] --&gt; B[语音识别ASR]
+    B --&gt; C[语言翻译]
+    B --&gt; D[双语字幕]
+    C --&gt; D</div>
+<h1 id="什么是asr任务">什么是ASR任务</h1>
+<p>ASR（Automatic Speech Recognition，自动语音识别）任务，指的是将连续的音频信号转换为对应的文本序列的过程。这是一种典型的序列到序列（Sequence-to-Sequence）的转换任务：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">y = concat(x_t, x_{t+1}, ..., x_{t+m-1})
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">audio (连续信号)  →  text (离散 token)</span></span></code></pre></td></tr></table>
 </div>
-</div><p>作用：</p>
+</div>
+<p>从信号处理的角度来看，传统ASR需要解决以下核心问题：</p>
+<ol>
+<li><strong>声学建模</strong>：将音频特征映射到音素或字符</li>
+<li><strong>语言建模</strong>：捕捉词汇之间的概率关系</li>
+<li><strong>对齐问题</strong>：音频帧与输出token之间的对齐</li>
+</ol>
+<p>不过，在现代端到端深度学习方案中，这三个问题都被统一在一个神经网络中解决，不再需要独立的声学模型和语言模型。模型通过端到端训练自动学习如何从音频特征直接映射到文本输出。</p>
+<h1 id="与降噪任务的区别">与降噪任务的区别</h1>
+<p>在开发iOS双语字幕的过程中，我之前可能接触过降噪任务，这两者有本质区别：</p>
+<table>
+  <thead>
+      <tr>
+          <th>维度</th>
+          <th>降噪任务</th>
+          <th>ASR任务</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>输入输出</strong></td>
+          <td>音频 → 音频</td>
+          <td>音频 → 文本</td>
+      </tr>
+      <tr>
+          <td><strong>任务类型</strong></td>
+          <td>信号回归</td>
+          <td>序列到序列</td>
+      </tr>
+      <tr>
+          <td><strong>评估指标</strong></td>
+          <td>SNR、PESQ</td>
+          <td>WER、CER</td>
+      </tr>
+      <tr>
+          <td><strong>难点</strong></td>
+          <td>保留语音质量</td>
+          <td>识别准确性</td>
+      </tr>
+      <tr>
+          <td><strong>模型结构</strong></td>
+          <td>Encoder</td>
+          <td>Encoder-Decoder</td>
+      </tr>
+  </tbody>
+</table>
+<p>简单来说：</p>
 <ul>
-<li>显式引入短时上下文</li>
-<li>保留完整的频谱信息</li>
-<li>不引入不可逆的信息损失</li>
+<li><strong>降噪任务</strong>：输入一段有噪声的音频，输出干净的音频（同类转换）</li>
+<li><strong>ASR任务</strong>：输入音频，输出文字（跨模态转换）</li>
 </ul>
-<hr>
-<h3 id="2-subsampling下采样">2. Subsampling（下采样）</h3>
-<p>每隔 <code>n</code> 帧生成一个 LFR 帧：</p>
+<p>ASR的难点在于它需要&quot;理解&quot;音频内容并转换为语义符号，而不是简单地处理信号波形。同时，ASR任务的输入和输出也不像降噪任务那样是一一对应的关系，还需要处理对齐问题。</p>
+<h1 id="目前主流的实现方案">目前主流的实现方案</h1>
+<p>主流的ASR实现方案主要有三种：CTC、RNN-T和基于Attention的Seq2Seq。</p>
+<h2 id="ctc-connectionist-temporal-classification">CTC (Connectionist Temporal Classification)</h2>
+<p>CTC是一种经典的对齐方法，核心思想是<strong>不需要显式的对齐标签</strong>，而是通过&quot;blank&quot;机制自动学习对齐。</p>
+<p>CTC引入了空白符（blank）和折叠机制：</p>
+<ul>
+<li>重复的字符会被折叠（如 &ldquo;aaabbb&rdquo; → &ldquo;ab&rdquo;）</li>
+<li>blank符号不产生任何输出</li>
+<li>通过动态规划计算所有可能路径的概率</li>
+</ul>
+<p><a href="https://distill.pub/2017/ctc/">Sequence Modeling With CTC</a> 详细原理可参考这篇文章。</p>
+<p>训练阶段就是使目标token序列路径的概率最大，而推理阶段就是搜索概率最大的token路径并输出，这里通常有两种方法：</p>
+<table>
+  <thead>
+      <tr>
+          <th>方法</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Greedy Search</strong></td>
+          <td>每一步都选择概率最大的token输出</td>
+      </tr>
+      <tr>
+          <td><strong>Beam Search</strong></td>
+          <td>每一步保留top-N概率的token结果，输出token序列路径概率最大的结果</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="rnn-t-recurrent-neural-network-transducer">RNN-T (Recurrent Neural Network Transducer)</h2>
+<p>RNN-T是CTC的扩展，引入了一个额外的预测网络（Prediction Network）来建模输出token之间的依赖关系。</p>
+<p>RNN-T由三部分组成：</p>
+<ol>
+<li><strong>编码器（Encoder）</strong>：将音频特征转换为声学表征</li>
+<li><strong>预测网络（Prediction Network）</strong>：基于已输出的token预测下一个token</li>
+<li><strong>联合网络（Joint Network）</strong>：结合Encoder和Prediction的输出，预测下一个token</li>
+</ol>
+<p>RNN-T在输出时，不仅会输入当前帧音频数据，还会输入历史输出作为参考</p>
+<h2 id="seq2seq-with-attention">Seq2Seq with Attention</h2>
+<p>基于Attention机制的序列到序列模型是目前最流行的方案，被广泛用于Whisper、Paraformer等现代ASR系统。</p>
+<h3 id="原理">原理</h3>
+<p>经典结构：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">t = 0, n, 2n, 3n, ...
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Encoder → Attention → Decoder → Output</span></span></code></pre></td></tr></table>
 </div>
-</div><p>作用：</p>
+</div>
 <ul>
-<li>减少时间步数量</li>
-<li>控制计算量</li>
-<li>与 stacking 配合使用，避免信息断裂</li>
+<li><strong>Encoder</strong>：将音频特征编码为高维表征（通常使用Transformer或Conformer）</li>
+<li><strong>Attention</strong>：让Decoder在生成每个token时&quot;关注&quot;输入的不同部分</li>
+<li><strong>Decoder</strong>：自回归生成输出文本</li>
+</ul>
+<h3 id="优缺点">优缺点</h3>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>可以建模任意长度序列的依赖关系</li>
+<li>识别准确率高</li>
+<li>易于添加语言模型集成</li>
+<li>适合大规模预训练</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>推理延迟较高（需要完整音频或较大chunk）</li>
+<li>流式识别实现复杂</li>
+<li>计算资源需求大</li>
+</ul>
+<h1 id="流式模型和非流式模型">流式模型和非流式模型</h1>
+<p>流式（Streaming）和非流式（Offline）是ASR系统根据实时性要求的两种设计模式。</p>
+<h2 id="什么是非流式模型">什么是非流式模型</h2>
+<p>非流式模型（Offline ASR）需要<strong>等待完整音频输入后才能开始识别</strong>。</p>
+<p>特点：</p>
+<ul>
+<li>输入：完整的音频文件或长音频段</li>
+<li>延迟：较高，需要等待音频结束</li>
+<li>准确率：通常较高，因为可以看到完整的上下文</li>
+<li>适用场景：视频字幕生成、会议转录、录音文件处理</li>
+</ul>
+<h2 id="什么是流式模型">什么是流式模型</h2>
+<p>流式模型（Streaming ASR）可以<strong>边接收音频输入边输出识别结果</strong>，实现实时识别。</p>
+<p>特点：</p>
+<ul>
+<li>输入：连续的音频流（通常是短片段，如30ms一帧）</li>
+<li>延迟：低，可以做到几百毫秒内输出</li>
+<li>准确率：通常略低于非流式，因为只有历史和部分未来上下文</li>
+<li>适用场景：实时语音对话、语音助手、直播字幕</li>
+</ul>
+<h2 id="技术实现差异">技术实现差异</h2>
+<table>
+  <thead>
+      <tr>
+          <th>维度</th>
+          <th>流式模型</th>
+          <th>非流式模型</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>上下文</strong></td>
+          <td>有限上下文（lookahead）</td>
+          <td>完整上下文</td>
+      </tr>
+      <tr>
+          <td><strong>延迟</strong></td>
+          <td>低（&lt;500ms）</td>
+          <td>高</td>
+      </tr>
+      <tr>
+          <td><strong>准确率</strong></td>
+          <td>略低</td>
+          <td>较高</td>
+      </tr>
+      <tr>
+          <td><strong>模型复杂度</strong></td>
+          <td>较高（需处理分段）</td>
+          <td>较低</td>
+      </tr>
+      <tr>
+          <td><strong>内存占用</strong></td>
+          <td>较小</td>
+          <td>较大</td>
+      </tr>
+  </tbody>
+</table>
+<p>流式模型通常需要特殊设计，如：</p>
+<ul>
+<li><strong>Chunked Attention</strong>：将音频分成小块处理</li>
+<li><strong>CTC Prefix</strong>：使用CTC的前缀解码</li>
+<li><strong>Lookahead</strong>：只考虑有限的未来帧</li>
 </ul>
 <hr>
-<h3 id="3-lfr-的输出形态">3. LFR 的输出形态</h3>
-<p>假设：</p>
-<ul>
-<li>原始特征：<code>[T, D]</code></li>
-<li>LFR 参数：<code>m = 4, n = 4</code></li>
-</ul>
-<p>则：</p>
-<ul>
-<li>输出时间步数：<code>T' ≈ T / 4</code></li>
-<li>输出维度：<code>D' = 4 × D</code></li>
-</ul>
-<hr>
-<h3 id="4-用压缩视角看更直观">4. 用“压缩视角”看更直观</h3>
+<h1 id="自回归解码和非自回归解码">自回归解码和非自回归解码</h1>
+<p>解码方式决定了模型如何生成输出文本。</p>
+<h2 id="自回归解码-autoregressive-decoding">自回归解码 (Autoregressive Decoding)</h2>
+<p>自回归解码是目前最主流的方式，特点是<strong>逐 token 生成，每个 token 的生成依赖之前所有生成的 token</strong>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -164,19 +237,24 @@
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
-</span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">原始帧 (10ms):
-</span></span><span class="line"><span class="cl">f0  f1  f2  f3  f4  f5  f6  f7  f8  f9  f10 ...
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">LFR 帧 (≈30ms step):
-</span></span><span class="line"><span class="cl">|---- LFR_0 ----|
-</span></span><span class="line"><span class="cl">          |---- LFR_1 ----|
-</span></span><span class="line"><span class="cl">                    |---- LFR_2 ----|
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">输出: &#34;hello world&#34;
+</span></span><span class="line"><span class="cl">生成过程:
+</span></span><span class="line"><span class="cl">  1. 生成 &#34;h&#34;
+</span></span><span class="line"><span class="cl">  2. 基于 &#34;h&#34; 生成 &#34;he&#34;
+</span></span><span class="line"><span class="cl">  3. 基于 &#34;he&#34; 生成 &#34;hel&#34;
+</span></span><span class="line"><span class="cl">  4. ...</span></span></code></pre></td></tr></table>
 </div>
-</div><p>或者画成块状：</p>
+</div>
+<p>特点：</p>
+<ul>
+<li><strong>优点</strong>：生成质量高，可以建模长期依赖</li>
+<li><strong>缺点</strong>：串行生成，推理速度慢（O(n) 复杂度，n为输出长度）</li>
+<li>典型模型：Transformer Decoder、RNN-T</li>
+</ul>
+<h2 id="非自回归解码-non-autoregressive-decoding">非自回归解码 (Non-autoregressive Decoding)</h2>
+<p>非自回归解码是一种<strong>并行生成</strong>方式，一次性输出整个序列。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -184,107 +262,204 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">LFR_0: [ f0 | f1 | f2 | f3 ]
-</span></span><span class="line"><span class="cl">LFR_1:            [ f3 | f4 | f5 | f6 ]
-</span></span><span class="line"><span class="cl">LFR_2:                      [ f6 | f7 | f8 | f9 ]
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">输出: &#34;hello world&#34;
+</span></span><span class="line"><span class="cl">生成过程:
+</span></span><span class="line"><span class="cl">  1. 直接输出完整句子 &#34;hello world&#34;</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="五lfr-为什么可以降低计算量关键问题">五、LFR 为什么可以降低计算量（关键问题）</h2>
-<p>一个常见疑问是：</p>
-<blockquote>
-<p><strong>LFR 并没有减少特征总数，为什么能提升性能？</strong></p></blockquote>
-<p>关键在于：
-<strong>ASR 中的“序列长度”指的是时间步数 T，而不是特征维度 D。</strong></p>
-<hr>
-<h3 id="1-时间步数显著减少">1. 时间步数显著减少</h3>
-<p>示例（1 秒音频）：</p>
+</div>
+<p>特点：</p>
+<ul>
+<li><strong>优点</strong>：并行生成，推理速度快（O(1) 复杂度）</li>
+<li><strong>缺点</strong>：难以建模输出token之间的依赖，生成质量可能较低</li>
+<li>典型实现：CTC、FastCorrect、Mask-Predict</li>
+</ul>
+<h2 id="对比">对比</h2>
 <table>
   <thead>
       <tr>
-          <th>项目</th>
-          <th>原始</th>
-          <th>LFR 后</th>
+          <th>维度</th>
+          <th>自回归解码</th>
+          <th>非自回归解码</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>时间步数 T</td>
-          <td>100</td>
-          <td>25</td>
+          <td><strong>生成方式</strong></td>
+          <td>串行，逐token</td>
+          <td>并行，一次性输出</td>
       </tr>
       <tr>
-          <td>单帧维度 D</td>
-          <td>80</td>
-          <td>320</td>
+          <td><strong>推理速度</strong></td>
+          <td>慢</td>
+          <td>快</td>
       </tr>
       <tr>
-          <td>特征总数</td>
-          <td>8000</td>
-          <td>8000</td>
+          <td><strong>生成质量</strong></td>
+          <td>高</td>
+          <td>略低</td>
+      </tr>
+      <tr>
+          <td><strong>依赖关系</strong></td>
+          <td>建模token间依赖</td>
+          <td>假设条件独立</td>
+      </tr>
+      <tr>
+          <td><strong>典型模型</strong></td>
+          <td>RNN-T、Seq2Seq</td>
+          <td>CTC、FastConformer</td>
       </tr>
   </tbody>
 </table>
+<h1 id="方案选择">方案选择</h1>
+<p>OK，前面了解了这么多，都是为了后续实现最小原型产品，选择语音识别方案做准备，目标不是要训练一个SOTA模型，因此这里暂时只是粗浅的了解。</p>
+<p>根据需求分析：</p>
 <ul>
-<li><strong>特征总量近似不变</strong></li>
-<li><strong>时间步数减少 4 倍</strong></li>
+<li><strong>目标设备</strong>：iOS移动端（资源有限）</li>
+<li><strong>语言支持</strong>：多语言</li>
+<li><strong>实时性</strong>：实时输入音频，实时输出文字</li>
 </ul>
-<hr>
-<h3 id="2-对模型计算复杂度的影响">2. 对模型计算复杂度的影响</h3>
-<h4 id="transformer">Transformer</h4>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Self-Attention: O(T² · D)
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>T 减少 4 倍 → 计算量 ≈ 1/16</li>
-<li>D 增加 4 倍 → 抵消一部分</li>
-<li><strong>整体计算量仍显著下降</strong></li>
-</ul>
-<hr>
-<h4 id="rnn--lstm">RNN / LSTM</h4>
+<h2 id="选择优先级">选择优先级</h2>
+<ol>
+<li><strong>首先能跑</strong>：模型大小和计算量必须在移动端可承受范围内</li>
+<li><strong>然后多语言</strong>：需要支持多种语言识别</li>
+<li><strong>最后准确率</strong>：在功能可用后再优化性能</li>
+</ol>
+<h2 id="优先级一模型能在移动端跑起来">优先级一：模型能在移动端跑起来</h2>
+<h3 id="参数量选择">参数量选择</h3>
+<p>移动端资源有限，模型参数量直接决定了能否运行。这里暂时没有明确的数值界限，实际运行起来再看，后面也可以用量化技术缩小模型体积。</p>
+<p><strong>量化技术</strong>：INT8量化可将模型体积缩小约4倍，准确率损失通常&lt;5%；INT4可进一步缩小到1/8，但准确率下降更明显。</p>
+<h3 id="架构选择">架构选择</h3>
+<table>
+  <thead>
+      <tr>
+          <th>架构</th>
+          <th>计算量</th>
+          <th>内存占用</th>
+          <th>移动端适用性</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Transformer Encoder</strong></td>
+          <td>中</td>
+          <td>中</td>
+          <td>★★★★☆</td>
+      </tr>
+      <tr>
+          <td><strong>Conformer</strong></td>
+          <td>中高</td>
+          <td>中</td>
+          <td>★★★★☆</td>
+      </tr>
+      <tr>
+          <td><strong>RNN/LSTM</strong></td>
+          <td>低</td>
+          <td>低</td>
+          <td>★★★☆☆</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>建议</strong>：选择Encoder-only或轻量级的Conformer结构，参数量控制在50M以内。</p>
+<h2 id="优先级二支持多语言">优先级二：支持多语言</h2>
+<p>确认模型能在移动端运行后，需要考虑多语言支持能力。</p>
+<h3 id="不同模型架构的多语言能力">不同模型架构的多语言能力</h3>
+<table>
+  <thead>
+      <tr>
+          <th>模型架构</th>
+          <th>多语言支持</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>端到端Seq2Seq</strong></td>
+          <td>★★★★★</td>
+          <td>训练时使用多语言数据，自然支持多语言</td>
+      </tr>
+      <tr>
+          <td><strong>RNN-T</strong></td>
+          <td>★★★☆☆</td>
+          <td>可支持，但需要针对性训练多语言版本</td>
+      </tr>
+      <tr>
+          <td><strong>CTC</strong></td>
+          <td>★★☆☆☆</td>
+          <td>通常针对单一语言，多语言版本较少</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="结论">结论</h3>
+<p>需要支持多语言时，<strong>优先选择端到端Seq2Seq架构</strong>，这类模型的预训练版本通常已支持数十到上百种语言。</p>
+<h2 id="优先级三实时性要求">优先级三：实时性要求</h2>
+<p>实时字幕要求模型能够在接收音频的同时输出文字。</p>
+<h3 id="流式-vs-非流式">流式 vs 非流式</h3>
+<table>
+  <thead>
+      <tr>
+          <th>类型</th>
+          <th>延迟</th>
+          <th>实现难度</th>
+          <th>实时字幕适用性</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>流式模型</strong></td>
+          <td>&lt;500ms</td>
+          <td>高</td>
+          <td>★★★★★</td>
+      </tr>
+      <tr>
+          <td><strong>非流式模型</strong></td>
+          <td>&gt;1s</td>
+          <td>低</td>
+          <td>★★☆☆☆</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>折中方案</strong>：使用非流式模型时，可通过&quot;分块处理&quot;策略模拟流式效果：</p>
 <ul>
-<li>每个时间步一次矩阵运算</li>
-<li>时间步减少 → 直接加速</li>
+<li>将音频切分为固定长度的chunk（如1秒）</li>
+<li>逐块识别并拼接结果</li>
+<li>通过缓存历史上下文减少误差</li>
 </ul>
-<hr>
-<h4 id="ctc--rnn-t-解码">CTC / RNN-T 解码</h4>
-<ul>
-<li>forward-backward 按时间展开</li>
-<li>blank 插入点减少</li>
-<li>对齐更稳定，延迟更低</li>
-</ul>
-<hr>
-<h3 id="3-更少的决策点">3. 更少的“决策点”</h3>
-<p>LFR 后：</p>
-<ul>
-<li>模型不需要每 10 ms 决策一次</li>
-<li>每个输出时间点更有语义意义</li>
-<li>beam search 状态空间显著缩小</li>
-</ul>
-<hr>
-<h2 id="六lfr-的工程意义总结">六、LFR 的工程意义总结</h2>
-<p>从工程视角看，LFR的本质是：</p>
-<blockquote>
-<p><strong>用更高维的“时间块特征”，
-换取更短的时间序列，
-从而在保证信息量的前提下降低计算成本。</strong></p></blockquote>
-<p>它带来的收益包括：</p>
-<ul>
-<li>计算量下降</li>
-<li>内存访问减少</li>
-<li>解码稳定性提升</li>
-<li>流式系统更易控延迟</li>
-</ul>
-<hr>
-<h2 id="七一句话总结">七、一句话总结</h2>
-<blockquote>
-<p><strong>Low Frame Rate 并不是减少信息，
-而是重新组织时间维度，
-让语音识别模型用更合理的方式“看时间”。</strong></p></blockquote>
+<h3 id="解码方式">解码方式</h3>
+<table>
+  <thead>
+      <tr>
+          <th>解码方式</th>
+          <th>延迟</th>
+          <th>实现复杂度</th>
+          <th>实时性</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>非自回归（Greedy）</strong></td>
+          <td>低</td>
+          <td>简单</td>
+          <td>★★★★★</td>
+      </tr>
+      <tr>
+          <td><strong>非自回归（Beam Search）</strong></td>
+          <td>中</td>
+          <td>中</td>
+          <td>★★★★☆</td>
+      </tr>
+      <tr>
+          <td><strong>自回归</strong></td>
+          <td>高</td>
+          <td>复杂</td>
+          <td>★★☆☆☆</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>建议</strong>：实时场景优先选择<strong>非自回归解码</strong>（Greedy），延迟最低。</p>
+<h2 id="总结">总结</h2>
+<p><strong>核心理念</strong>：先完成端到端流程验证，再根据实际体验进行针对性优化。移动端ASR是一个迭代过程，不必追求一步到位。</p>
+<p>后续我会记录在iOS端的具体实现过程，各位道友记得点赞追番哦。</p>
+<p><img alt="各位道友记得一键三连" loading="lazy" src="/images/%E4%B8%80%E9%94%AE%E4%B8%89%E8%BF%9E.jpg"></p>
 ]]></content:encoded>
     </item>
   </channel>

@@ -12,34 +12,41 @@
     <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Sun, 01 Feb 2026 09:28:45 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 14 Feb 2026 17:59:07 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>‘AI Coding’</title>
-      <link>https://lyapple2008.github.io/tags/ai-coding/</link>
-      <pubDate>Sun, 01 Feb 2026 09:28:45 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/tags/ai-coding/</guid>
+      <title>ASR</title>
+      <link>https://lyapple2008.github.io/tags/asr/</link>
+      <pubDate>Sat, 14 Feb 2026 17:59:07 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/asr/</guid>
       <description></description>
     </item>
     <item>
       <title>IOS开发</title>
       <link>https://lyapple2008.github.io/tags/ios%E5%BC%80%E5%8F%91/</link>
-      <pubDate>Sun, 25 Jan 2026 07:52:25 +0800</pubDate>
+      <pubDate>Sat, 14 Feb 2026 17:59:07 +0800</pubDate>
       <guid>https://lyapple2008.github.io/tags/ios%E5%BC%80%E5%8F%91/</guid>
       <description></description>
     </item>
     <item>
       <title>开发日志</title>
       <link>https://lyapple2008.github.io/tags/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</link>
-      <pubDate>Sun, 25 Jan 2026 07:52:25 +0800</pubDate>
+      <pubDate>Sat, 14 Feb 2026 17:59:07 +0800</pubDate>
       <guid>https://lyapple2008.github.io/tags/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</guid>
       <description></description>
     </item>
     <item>
       <title>双语字幕</title>
       <link>https://lyapple2008.github.io/tags/%E5%8F%8C%E8%AF%AD%E5%AD%97%E5%B9%95/</link>
-      <pubDate>Sun, 25 Jan 2026 07:52:25 +0800</pubDate>
+      <pubDate>Sat, 14 Feb 2026 17:59:07 +0800</pubDate>
       <guid>https://lyapple2008.github.io/tags/%E5%8F%8C%E8%AF%AD%E5%AD%97%E5%B9%95/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>‘AI Coding’</title>
+      <link>https://lyapple2008.github.io/tags/ai-coding/</link>
+      <pubDate>Sun, 01 Feb 2026 09:28:45 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/ai-coding/</guid>
       <description></description>
     </item>
     <item>
@@ -75,13 +82,6 @@
       <link>https://lyapple2008.github.io/tags/%E6%8A%80%E6%9C%AF/</link>
       <pubDate>Mon, 07 Jul 2025 21:59:22 +0800</pubDate>
       <guid>https://lyapple2008.github.io/tags/%E6%8A%80%E6%9C%AF/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>DeepLearning</title>
-      <link>https://lyapple2008.github.io/tags/deeplearning/</link>
-      <pubDate>Mon, 10 Jun 2024 22:20:31 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/tags/deeplearning/</guid>
       <description></description>
     </item>
   </channel>
