@@ -9,11 +9,38 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.152.2</generator>
+    <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Sat, 14 Feb 2026 17:59:07 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 09 Mar 2026 18:24:47 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/tags/ios%E5%BC%80%E5%8F%91/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>基于iOS系统接口实现双语字幕App</title>
+      <link>https://lyapple2008.github.io/posts/202603/2026-03-09-%E5%9F%BA%E4%BA%8Eios%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E5%8F%8C%E8%AF%AD%E5%AD%97%E5%B9%95app/</link>
+      <pubDate>Mon, 09 Mar 2026 18:24:47 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202603/2026-03-09-%E5%9F%BA%E4%BA%8Eios%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E5%8F%8C%E8%AF%AD%E5%AD%97%E5%B9%95app/</guid>
+      <description>&lt;p&gt;之前预告的 iOS 系统双语字幕 App，终于完成了。废话不多说，直接展示效果。目前的实现是通过 iOS 系统接口进行的，作为一个 baseline，后面也可以接入第三方开源方案。文末有项目链接，各位道友自取。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>之前预告的 iOS 系统双语字幕 App，终于完成了。废话不多说，直接展示效果。目前的实现是通过 iOS 系统接口进行的，作为一个 baseline，后面也可以接入第三方开源方案。文末有项目链接，各位道友自取。</p>
+<h2 id="模块流程">模块流程</h2>
+
+<div class="mermaid">graph LR
+    A[捕获系统播放音频] --&gt; B[语音识别ASR]
+    B --&gt; C[语言翻译]
+    B --&gt; D[双语字幕]
+    C --&gt; D</div>
+<h2 id="效果展示">效果展示</h2>
+<iframe width="100%" max-width="400" height="600" src="//player.bilibili.com/player.html?bvid=BV1irXGBtEnU&autoplay=0" frameborder="0" allowfullscreen></iframe>
+<h2 id="一些感想">一些感想</h2>
+<p>这也是第一个完全 AI Coding 的项目，有了 AI Coding 后有了一种自己无所不能的错觉。作为一个大龄程序员，已经放弃抵抗了，打不过咱就加入。</p>
+<h3 id="ai-是放大器">AI 是放大器</h3>
+<p>在做这个 Project 的过程中，对我来说最大的困难是 UI 部分。<a href="/posts/202601/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/">关于 AICoding 的一些感想和后续的规划</a> 中提到的，AI 的能力约等于使用者自身的能力。最近听到&quot;AI 是放大器&quot;这个说法，这个比喻可真的是贴切形象了。假如 AI 可以放大 10 倍，如果应用在你熟悉的领域是 10 分，放大后就是 100 分；如果应用在你不熟悉的领域，比如 iOS 客户端开发，对我来说约等于 0 分，放大后也是约等于 0 分。那这个时候就看天吃饭了，AI 给什么就吃什么，就算有问题我也无法判断，更别说是纠正 AI 了。所以网上一堆零基础开发一个 App 上线并产生收入的，真的可能吗？难道我的使用姿势不对？</p>
+<h3 id="狠狠地用起来">狠狠地用起来</h3>
+<p>虽然对于自己不熟悉的领域，使用 AI 产生可用代码的偶然性挺大的，不过作为 AI 协作者，AI 在学习人类的代码，人类也可以学习 AI 的代码。在这个项目中，对于自己不熟悉的客户端 UI 部分的代码，我就会让 AI 给我讲解一遍，从语法到架构、为什么这么写。在提问 → 学习 → 再提问 → 再学习的不断迭代过程中，也在慢慢提高 AI 输出自己不熟悉代码的可控性和判断力。</p>
+<p>现在是将想法落地最好的时代。以前你可能会卡在某个问题因为找不到有效的解答而不了了之，或者因为某个技术不懂而不能落地，但是现在你随时可以通过 AI 大模型得到你想要的答案，协助你实现自己的 idea。要像大神 Karpathy 一样，因为 token 没用完而感到焦虑，不停去跟 AI 交流、提问、讨论，落地想法。去尝试将 AI 嵌入到自己的工程流程中，这个我也还没找到方向，但是我觉得这个方向是没错的。狠狠地、使劲用起来吧。</p>
+<h2 id="项目链接">项目链接</h2>
+<p><a href="https://github.com/lyapple2008/DoubleSubtitleUseSystemAPI">DoubleSubtitleUseSystemAPI</a></p>
+]]></content:encoded>
+    </item>
     <item>
       <title>ASR任务初体验</title>
       <link>https://lyapple2008.github.io/posts/202602/2026-02-14-asr%E4%BB%BB%E5%8A%A1%E5%88%9D%E4%BD%93%E9%AA%8C/</link>
@@ -22,8 +49,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<blockquote>
-<p>这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。</p>
-</blockquote>
+<p>这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。</p></blockquote>
 <h3 id="模块流程">模块流程</h3>
 
 <div class="mermaid">graph LR
@@ -471,8 +497,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;这篇是iOS双语字幕软件的开发日志，目标是在iOS端实现，在观看视频时，实时对播放的内容进行识别和翻译，显示双语字幕，用于打破外语视频内容观看门槛。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<blockquote>
-<p>这篇是iOS双语字幕软件的开发日志，目标是在iOS端实现，在观看视频时，实时对播放的内容进行识别和翻译，显示双语字幕，用于打破外语视频内容观看门槛。</p>
-</blockquote>
+<p>这篇是iOS双语字幕软件的开发日志，目标是在iOS端实现，在观看视频时，实时对播放的内容进行识别和翻译，显示双语字幕，用于打破外语视频内容观看门槛。</p></blockquote>
 <h3 id="模块流程">模块流程</h3>
 
 <div class="mermaid">graph LR

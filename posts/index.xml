@@ -9,10 +9,10 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.152.2</generator>
+    <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Sun, 22 Feb 2026 09:43:54 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 09 Mar 2026 18:24:47 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>【置顶】2026</title>
@@ -20,8 +20,7 @@
       <pubDate>Sun, 22 Feb 2026 09:43:54 +0800</pubDate>
       <guid>https://lyapple2008.github.io/posts/2026-todo/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;记录跟踪2026年要做的事情和正在做的事情。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;记录跟踪2026年要做的事情和正在做的事情。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h1 id=&#34;目标&#34;&gt;目标&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -44,8 +43,7 @@
 &lt;li&gt;
 &lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; iOS双语字幕App&lt;/p&gt;</description>
       <content:encoded><![CDATA[<blockquote>
-<p>记录跟踪2026年要做的事情和正在做的事情。</p>
-</blockquote>
+<p>记录跟踪2026年要做的事情和正在做的事情。</p></blockquote>
 <h1 id="目标">目标</h1>
 <ul>
 <li>
@@ -87,6 +85,33 @@
 ]]></content:encoded>
     </item>
     <item>
+      <title>基于iOS系统接口实现双语字幕App</title>
+      <link>https://lyapple2008.github.io/posts/202603/2026-03-09-%E5%9F%BA%E4%BA%8Eios%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E5%8F%8C%E8%AF%AD%E5%AD%97%E5%B9%95app/</link>
+      <pubDate>Mon, 09 Mar 2026 18:24:47 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202603/2026-03-09-%E5%9F%BA%E4%BA%8Eios%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E5%8F%8C%E8%AF%AD%E5%AD%97%E5%B9%95app/</guid>
+      <description>&lt;p&gt;之前预告的 iOS 系统双语字幕 App，终于完成了。废话不多说，直接展示效果。目前的实现是通过 iOS 系统接口进行的，作为一个 baseline，后面也可以接入第三方开源方案。文末有项目链接，各位道友自取。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>之前预告的 iOS 系统双语字幕 App，终于完成了。废话不多说，直接展示效果。目前的实现是通过 iOS 系统接口进行的，作为一个 baseline，后面也可以接入第三方开源方案。文末有项目链接，各位道友自取。</p>
+<h2 id="模块流程">模块流程</h2>
+
+<div class="mermaid">graph LR
+    A[捕获系统播放音频] --&gt; B[语音识别ASR]
+    B --&gt; C[语言翻译]
+    B --&gt; D[双语字幕]
+    C --&gt; D</div>
+<h2 id="效果展示">效果展示</h2>
+<iframe width="100%" max-width="400" height="600" src="//player.bilibili.com/player.html?bvid=BV1irXGBtEnU&autoplay=0" frameborder="0" allowfullscreen></iframe>
+<h2 id="一些感想">一些感想</h2>
+<p>这也是第一个完全 AI Coding 的项目，有了 AI Coding 后有了一种自己无所不能的错觉。作为一个大龄程序员，已经放弃抵抗了，打不过咱就加入。</p>
+<h3 id="ai-是放大器">AI 是放大器</h3>
+<p>在做这个 Project 的过程中，对我来说最大的困难是 UI 部分。<a href="/posts/202601/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/">关于 AICoding 的一些感想和后续的规划</a> 中提到的，AI 的能力约等于使用者自身的能力。最近听到&quot;AI 是放大器&quot;这个说法，这个比喻可真的是贴切形象了。假如 AI 可以放大 10 倍，如果应用在你熟悉的领域是 10 分，放大后就是 100 分；如果应用在你不熟悉的领域，比如 iOS 客户端开发，对我来说约等于 0 分，放大后也是约等于 0 分。那这个时候就看天吃饭了，AI 给什么就吃什么，就算有问题我也无法判断，更别说是纠正 AI 了。所以网上一堆零基础开发一个 App 上线并产生收入的，真的可能吗？难道我的使用姿势不对？</p>
+<h3 id="狠狠地用起来">狠狠地用起来</h3>
+<p>虽然对于自己不熟悉的领域，使用 AI 产生可用代码的偶然性挺大的，不过作为 AI 协作者，AI 在学习人类的代码，人类也可以学习 AI 的代码。在这个项目中，对于自己不熟悉的客户端 UI 部分的代码，我就会让 AI 给我讲解一遍，从语法到架构、为什么这么写。在提问 → 学习 → 再提问 → 再学习的不断迭代过程中，也在慢慢提高 AI 输出自己不熟悉代码的可控性和判断力。</p>
+<p>现在是将想法落地最好的时代。以前你可能会卡在某个问题因为找不到有效的解答而不了了之，或者因为某个技术不懂而不能落地，但是现在你随时可以通过 AI 大模型得到你想要的答案，协助你实现自己的 idea。要像大神 Karpathy 一样，因为 token 没用完而感到焦虑，不停去跟 AI 交流、提问、讨论，落地想法。去尝试将 AI 嵌入到自己的工程流程中，这个我也还没找到方向，但是我觉得这个方向是没错的。狠狠地、使劲用起来吧。</p>
+<h2 id="项目链接">项目链接</h2>
+<p><a href="https://github.com/lyapple2008/DoubleSubtitleUseSystemAPI">DoubleSubtitleUseSystemAPI</a></p>
+]]></content:encoded>
+    </item>
+    <item>
       <title>ASR任务初体验</title>
       <link>https://lyapple2008.github.io/posts/202602/2026-02-14-asr%E4%BB%BB%E5%8A%A1%E5%88%9D%E4%BD%93%E9%AA%8C/</link>
       <pubDate>Sat, 14 Feb 2026 17:59:07 +0800</pubDate>
@@ -94,8 +119,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<blockquote>
-<p>这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。</p>
-</blockquote>
+<p>这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。</p></blockquote>
 <h3 id="模块流程">模块流程</h3>
 
 <div class="mermaid">graph LR
@@ -543,8 +567,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;最近要说最热最火的话题，那一定是 AI，而其中 AI 应用场景 AI Coding 也是发展迅速，大有替代程序员的势头。最近几个月一直在使用 AI Coding，心态上经历了最初的「完了，失业要提前了」，到「稳了，还能苟几年」。下面就分享一些使用上的感受，以及面对 AI Coding 这股后浪，这个号后面的一些规划。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<blockquote>
-<p>最近要说最热最火的话题，那一定是 AI，而其中 AI 应用场景 AI Coding 也是发展迅速，大有替代程序员的势头。最近几个月一直在使用 AI Coding，心态上经历了最初的「完了，失业要提前了」，到「稳了，还能苟几年」。下面就分享一些使用上的感受，以及面对 AI Coding 这股后浪，这个号后面的一些规划。</p>
-</blockquote>
+<p>最近要说最热最火的话题，那一定是 AI，而其中 AI 应用场景 AI Coding 也是发展迅速，大有替代程序员的势头。最近几个月一直在使用 AI Coding，心态上经历了最初的「完了，失业要提前了」，到「稳了，还能苟几年」。下面就分享一些使用上的感受，以及面对 AI Coding 这股后浪，这个号后面的一些规划。</p></blockquote>
 <p><img alt="程序员使用 AI 编码提升效率" loading="lazy" src="/images/2026-02-01/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BD%BF%E7%94%A8AI%E7%BC%96%E7%A0%81%E6%8F%90%E5%8D%87%E6%95%88%E7%8E%87.jpg"></p>
 <h3 id="1-ai-coding-非常有帮助收费的优于免费的">1. AI Coding 非常有帮助，收费的优于免费的</h3>
 <p>这几年 AI 发展迅速，早已不是当年的「人工智障」了，确实是可以作为生产力工具帮忙提升效率的。对于 AI Coding 来说，到底能提升多少效率，取决于多方面因素：比如 Coding 在日常开发中占的比重、使用 AI 的熟练程度、AI Coding 工具本身的性能等等。但不管怎么说，AI Coding 对于程序员来说都是有正向作用的，是值得花时间去用起来的。</p>
@@ -583,8 +606,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;这篇是iOS双语字幕软件的开发日志，目标是在iOS端实现，在观看视频时，实时对播放的内容进行识别和翻译，显示双语字幕，用于打破外语视频内容观看门槛。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<blockquote>
-<p>这篇是iOS双语字幕软件的开发日志，目标是在iOS端实现，在观看视频时，实时对播放的内容进行识别和翻译，显示双语字幕，用于打破外语视频内容观看门槛。</p>
-</blockquote>
+<p>这篇是iOS双语字幕软件的开发日志，目标是在iOS端实现，在观看视频时，实时对播放的内容进行识别和翻译，显示双语字幕，用于打破外语视频内容观看门槛。</p></blockquote>
 <h3 id="模块流程">模块流程</h3>
 
 <div class="mermaid">graph LR
@@ -3064,8 +3086,7 @@
 </ul>
 <p>访问方式简单：在Hugging Face平台搜索并下载，或使用Python的datasets库加载。数据集设计覆盖不同噪声、混响和麦克风配置，确保评估的全面性。</p>
 <blockquote>
-<p>可以参考下面的代码将hugging face中的validataion数据集以wav形式保存在本地，方便后续不同算法进行处理后，对处理结果进行评估。</p>
-</blockquote>
+<p>可以参考下面的代码将hugging face中的validataion数据集以wav形式保存在本地，方便后续不同算法进行处理后，对处理结果进行评估。</p></blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -3176,8 +3197,7 @@
 <p>计算这些指标需要工具和脚本。URGENT挑战的GitHub仓库（https://github.com/urgent-challenge/urgent2024_challenge）提供了evaluation_metrics文件夹下的实用脚本，如calculate_intrusive_se_metrics.py（处理PESQ、ESTOI、SDR、MCD、LSD等侵入式指标，支持无限SDR值处理），calculate_nonintrusive_dnsmos.py和calculate_nonintrusive_nisqa.py分别计算DNSMOS和NISQA。</p>
 <p><strong>计算步骤示例</strong>：</p>
 <blockquote>
-<p>参考evaluation_metrics/README.md</p>
-</blockquote>
+<p>参考evaluation_metrics/README.md</p></blockquote>
 <ol>
 <li><strong>数据准备</strong>对validation数据集中的noisy数据进行处理，得到enhanced的数据，按下面的目录结构进行组织
 <div class="highlight"><div class="chroma">
@@ -3332,8 +3352,7 @@ $$</p>
 </div>
 </div>
 <blockquote>
-<p>spectrum_prev_process_[i] 为前一帧信号的幅度谱，filter_[i]为前帧的Wiener滤波器增益，两者相乘后就是估计的纯净语音信号，因此prev_tsa就是前一帧的TSA (time-smoothed a priori SNR)</p>
-</blockquote>
+<p>spectrum_prev_process_[i] 为前一帧信号的幅度谱，filter_[i]为前帧的Wiener滤波器增益，两者相乘后就是估计的纯净语音信号，因此prev_tsa就是前一帧的TSA (time-smoothed a priori SNR)</p></blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -3353,8 +3372,7 @@ $$</p>
 </div>
 </div>
 <blockquote>
-<p>只有当信号幅度大于噪声幅度时，才认为有语音信号存在，避免负增益</p>
-</blockquote>
+<p>只有当信号幅度大于噪声幅度时，才认为有语音信号存在，避免负增益</p></blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -3364,8 +3382,7 @@ $$</p>
 </div>
 </div>
 <blockquote>
-<p>0.98 是平滑因子，表示以历史先验估计为主，防止突变</p>
-</blockquote>
+<p>0.98 是平滑因子，表示以历史先验估计为主，防止突变</p></blockquote>
 <ol start="2">
 <li>基本增益计算</li>
 </ol>
@@ -3852,8 +3869,7 @@ $$</p>
 <li>语音信号：存在能量集中（共振峰），几何均值 ≪ 算数均值，Flatness 接近 0</li>
 </ol>
 <blockquote>
-<p>因此谱平坦度 = 能量分布的“均匀性量尺” → 能直接用来做语音/噪声分类特征！</p>
-</blockquote>
+<p>因此谱平坦度 = 能量分布的“均匀性量尺” → 能直接用来做语音/噪声分类特征！</p></blockquote>
 <ul>
 <li>代码实现</li>
 </ul>
@@ -3931,8 +3947,7 @@ $$</p>
 <h2 id="indicator2-spectral-difference-谱模板差异">indicator2: Spectral Difference 谱模板差异</h2>
 <p>Spectral Difference频谱差异是用于衡量当前帧的频谱与已学习噪声模板之间的差异程度。其基本思想是：</p>
 <blockquote>
-<p>如果当前帧的频谱结构与噪声模板相似，则可能是噪声；如果差异大，则可能是语音。</p>
-</blockquote>
+<p>如果当前帧的频谱结构与噪声模板相似，则可能是噪声；如果差异大，则可能是语音。</p></blockquote>
 <ol>
 <li>总体计算公式
 $$
@@ -4305,8 +4320,7 @@ $$</p>
 <p>考虑连续观察大量值 {x₁, x₂, &hellip;, xₙ}，估计值 Q 如果在一个固定位置附近波动，那它一定满足：
 平均上调量 ≈ 平均下调量，也就是说，在那个点：</p>
 <blockquote>
-<p>上调概率 × 上调步长 = 下调概率 × 下调步长</p>
-</blockquote>
+<p>上调概率 × 上调步长 = 下调概率 × 下调步长</p></blockquote>
 <p>其中：</p>
 <ul>
 <li>上调概率 p_up = P(x &gt; Q)</li>
@@ -4317,8 +4331,7 @@ $$</p>
 </ul>
 <p>✅ 说明这个估计最终会逼近 25% 分位数！</p>
 <blockquote>
-<p>这个分位数的实现真是妙了呀，避免了常规分位计算需要排序的问题，同时还可以实时更新。👍</p>
-</blockquote>
+<p>这个分位数的实现真是妙了呀，避免了常规分位计算需要排序的问题，同时还可以实时更新。👍</p></blockquote>
 <h3 id="多分位数估计分时更新">多分位数估计分时更新</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -4410,8 +4423,7 @@ $$</p>
 <h3 id="利用密度估计实现自适应步长">利用”密度“估计实现自适应步长</h3>
 <p>分位数估计器在更新的时候，其更新步长与这个density_变量直接相关，现在我们来看下webrtc的实现是如何做到自适应步长的。</p>
 <blockquote>
-<p>density_[j]表示: 当前分位数估计点附近的”局部密度估计“，近似表示这个log频谱点的概率密度函数值。</p>
-</blockquote>
+<p>density_[j]表示: 当前分位数估计点附近的”局部密度估计“，近似表示这个log频谱点的概率密度函数值。</p></blockquote>
 <p>现实场景中，噪声频点能量分布是变化的，当低噪声变化时，噪声频点能量分布密集；当语音变化时，噪声频点能量分布稀疏。因此需要估计分布密度，以调整步长动态性，防止在高密度或低密度区域过度抖动或者太慢反应</p>
 <ul>
 <li>density_是如何计算的</li>
@@ -4464,8 +4476,7 @@ $$</p>
   </tbody>
 </table>
 <blockquote>
-<p>density_[j] 趋近于“单位宽度窗口”内命中次数的平均值 —— 表示在分位点附近的信号频谱密集程度。</p>
-</blockquote>
+<p>density_[j] 趋近于“单位宽度窗口”内命中次数的平均值 —— 表示在分位点附近的信号频谱密集程度。</p></blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -4484,312 +4495,6 @@ $$</p>
 <p>总结就是，density_ 表示当前分位点附近的局部频谱密度，用于调节更新速率，帮助 WebRTC 实现稳定、鲁棒、快速收敛的底噪估计。</p>
 <p>Ok，这就是WebRTC中基于分位数噪声估计的全部了。总的来说，基于分位数的噪声估计算法原理简单，但WebRTC的实现有很多巧妙的地方，即保证了效果，也提高了效率，绝对是工程精华值得好好研究。</p>
 <p>接下来会继续分享WebRTC语音降噪部分代码，希望对有兴趣的朋友有帮助。</p>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>程序员的基本修养之代码编译</title>
-      <link>https://lyapple2008.github.io/posts/202503/2025-03-27-%E4%BB%A3%E7%A0%81%E7%BC%96%E8%AF%91/</link>
-      <pubDate>Thu, 27 Mar 2025 22:43:58 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/202503/2025-03-27-%E4%BB%A3%E7%A0%81%E7%BC%96%E8%AF%91/</guid>
-      <description>&lt;h1 id=&#34;程序员的基本修养之代码编译&#34;&gt;程序员的基本修养之代码编译&lt;/h1&gt;
-&lt;p&gt;| 代码编译过程介绍，避坑指南，一些常用代码查看工具使用介绍&lt;/p&gt;
-&lt;h2 id=&#34;预处理&#34;&gt;预处理&lt;/h2&gt;
-&lt;h3 id=&#34;1预处理的作用&#34;&gt;1.预处理的作用&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;宏替换&lt;/strong&gt;：&lt;br&gt;
-替换 #define 定义的宏。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#define PI 3.14159
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;circle_area&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;double&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;radius&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PI&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;radius&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;radius&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 替换后：3.14159 * radius * radius
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;头文件包含&lt;/strong&gt; &lt;br&gt;
-替换 #include 指令为头文件的内容。&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<h1 id="程序员的基本修养之代码编译">程序员的基本修养之代码编译</h1>
-<p>| 代码编译过程介绍，避坑指南，一些常用代码查看工具使用介绍</p>
-<h2 id="预处理">预处理</h2>
-<h3 id="1预处理的作用">1.预处理的作用</h3>
-<p><strong>宏替换</strong>：<br>
-替换 #define 定义的宏。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#define PI 3.14159
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">double</span> <span class="nf">circle_area</span><span class="p">(</span><span class="kt">double</span> <span class="n">radius</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">PI</span> <span class="o">*</span> <span class="n">radius</span> <span class="o">*</span> <span class="n">radius</span><span class="p">;</span> <span class="c1">// 替换后：3.14159 * radius * radius
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p><strong>头文件包含</strong> <br>
-替换 #include 指令为头文件的内容。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;// 替换为 &lt;iostream&gt; 文件的完整内容</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p><strong>条件编译</strong> <br>
-根据条件选择性地编译代码。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#ifdef DEBUG
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Debug mode is on&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="cp">#endif</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p><strong>宏展开</strong> <br>
-处理函数式宏。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#define SQUARE(x) ((x) * (x))
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="nf">SQUARE</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// 替换为 ((5) * (5))
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p><strong>注释删除</strong> <br>
-移除源代码中的注释内容。</p>
-<h3 id="2查看预处理结果">2.查看预处理结果</h3>
-<p>通过 编译器选项 可以仅执行预处理步骤。例如gcc/clang：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-Shell" data-lang="Shell"><span class="line"><span class="cl">g++ -E main.cpp -o main.i</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<ul>
-<li>-E 选项表示仅执行预处理。</li>
-<li>输出文件 main.i 包含预处理后的源代码。
-<img src="/images/2025-03-27/001.png"/>
-cmake可以通过添加配置保存中间产物</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-CMake" data-lang="CMake"><span class="line"><span class="cl"><span class="nb">set_target_properties</span><span class="p">(</span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span> <span class="s">PROPERTIES</span> <span class="s">COMPILE_FLAGS</span> <span class="s2">&#34;-save-temps=obj&#34;</span><span class="p">)</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>注：一些复杂的宏操作可以通过这种方式确定最终展开后的形式</p>
-<h3 id="3预处理注意事项">3.预处理注意事项</h3>
-<p><strong>宏展开陷阱</strong> <br>
-注意宏的嵌套展开可能引发意外行为，用括号保护表达式。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#define ADD(x, y) ((x) + (y))</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p><strong>头文件滥用</strong> <br>
-导出了所有头文件并加入了搜索路径，当存在多个同名头文件时，可能会引起一些诡异的编译问题，或者运行时崩溃</p>
-<ul>
-<li>头文件的搜索顺序
-1.搜索当前目录（一般是#include &ldquo;header.h&rdquo;，双引号方式引用头文件）
-2.通过-I指定的目录，多个目录按加入的顺序搜索
-3.标准系统目录</li>
-</ul>
-<h2 id="编译">编译</h2>
-<p>| 编译是从源文件（<em>.c/</em>.cpp）生成目标文件（*.o）的过程</p>
-<h3 id="q1目标文件里面包含了哪些信息">Q1：目标文件里面包含了哪些信息？</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-Shell" data-lang="Shell"><span class="line"><span class="cl">llvm-objdump -s /path/to/objfile <span class="c1"># 显示目标文件中所有Section的内容</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<img src="/images/2025-03-27/002.png"/>
-<h4 id="1目标文件类型目标架构">1.目标文件类型、目标架构</h4>
-<p>查看命令：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-Shell" data-lang="Shell"><span class="line"><span class="cl"><span class="c1"># 可以直接使用ndk里面的工具，目标文件/静态库/动态库/可执行文件都可以查看</span>
-</span></span><span class="line"><span class="cl">llvm-readelf -h 目标文件</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">File: /Users/marshall/Workspace/projects/test_compile/build/lib_src/CMakeFiles/lib_src.dir/conv1d.o
-</span></span><span class="line"><span class="cl">Format: Mach-O arm64
-</span></span><span class="line"><span class="cl">Arch: aarch64
-</span></span><span class="line"><span class="cl">AddressSize: 64bit
-</span></span><span class="line"><span class="cl">MachHeader {
-</span></span><span class="line"><span class="cl">  Magic: Magic64 (0xFEEDFACF)
-</span></span><span class="line"><span class="cl">  CpuType: Arm64 (0x100000C)
-</span></span><span class="line"><span class="cl">  CpuSubType: CPU_SUBTYPE_ARM64_ALL (0x0)
-</span></span><span class="line"><span class="cl">  FileType: Relocatable (0x1)
-</span></span><span class="line"><span class="cl">  NumOfLoadCommands: 4
-</span></span><span class="line"><span class="cl">  SizeOfLoadCommands: 520
-</span></span><span class="line"><span class="cl">  Flags [ (0x2000)
-</span></span><span class="line"><span class="cl">    MH_SUBSECTIONS_VIA_SYMBOLS (0x2000)
-</span></span><span class="line"><span class="cl">  ]
-</span></span><span class="line"><span class="cl">  Reserved: 0x0
-</span></span><span class="line"><span class="cl">}</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<h4 id="2只读内容存在__text段">2.只读内容存在__TEXT段</h4>
-<h5 id="a__text节保存了编译后的机器码">a.__text节保存了编译后的机器码:</h5>
-<p>内容：源代码编译后的二进制机器指令，对应程序的函数和逻辑
-查看命令：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-Shell" data-lang="Shell"><span class="line"><span class="cl">llvm-objdump -d 目标文件</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>注：通过查看中间产物汇编文件（*.s）可以初步分析是否值得做 <br>
-比如通过查看conv1d.s文件，发现已经做了循环展开，就不需要在c代码上手动做循环展开了（NEON类的SIMD在代码编译是否会进行编译优化待确定）</p>
-<h5 id="b__cstring节保存了字符串">b.__cstring节保存了字符串</h5>
-<h5 id="c__const节保存了学常量">c.__const节保存了学常量</h5>
-<h4 id="3全局变量和静态变量保存在__data段">3.全局变量和静态变量保存在__DATA段</h4>
-<p>nm命令介绍
-nm命令可以用来分析二进制分析的符号信息</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-Shell" data-lang="Shell"><span class="line"><span class="cl"><span class="c1"># -A 选项在符号名前附加文件名，适用于分析静态库（.a）：</span>
-</span></span><span class="line"><span class="cl">nm -A 静态库路径</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<img src="/images/2025-03-27/003.png"/>
-<img src="/images/2025-03-27/004.png"/>
-注：该命令可以用来辅助分析Undefined symbol一类的编译问题
-<h3 id="q2同一份代码保持编译参数不变的情况两次编译最终的目标文件是否是一样的">Q2：同一份代码，保持编译参数不变的情况，两次编译最终的目标文件是否是一样的？</h3>
-<ul>
-<li>通常一致的场景
-如果满足以下条件，两次编译的目标文件大概率相同：</li>
-</ul>
-<ol>
-<li>代码完全不变：未修改任何源码文件（包括头文件）</li>
-<li>编译参数严格一致：包括优化级别（如 -O2）、调试选项（如 -g）、路径参数（如 -I）等</li>
-<li>编译器版本一致：同一版本的编译器（如 GCC 12.3）和链接器</li>
-<li>环境无干扰：<br>
-a.无时间戳或随机化因素嵌入二进制文件（如代码中未使用 <strong>DATE</strong>、<strong>TIME</strong> 宏）<br>
-b.编译路径和文件系统结构相同</li>
-</ol>
-<ul>
-<li>可能导致不一致的例外情况</li>
-</ul>
-<ol>
-<li>时间戳或随机化因素 <br>
-若源码使用 <strong>DATE</strong>、<strong>TIME</strong> 等宏，编译后生成的二进制文件会包含编译时间戳，导致两次编译结果不同。</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Build Time: %s %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">__DATE__</span><span class="p">,</span> <span class="n">__TIME__</span><span class="p">);</span> <span class="c1">// 每次编译结果不同
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<ol start="2">
-<li>调试信息中的路径差异 <br>
-调试信息（.debug_line 段）默认包含源码绝对路径。若两次编译的源码目录不同，目标文件会不同。</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-Shell" data-lang="Shell"><span class="line"><span class="cl"><span class="c1"># 第一次编译路径：/home/user/project/</span>
-</span></span><span class="line"><span class="cl">gcc -g main.c -o main
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 第二次编译路径：/tmp/build/</span>
-</span></span><span class="line"><span class="cl">gcc -g main.c -o main  <span class="c1"># 调试信息中的路径不同，目标文件哈希值不同</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<h2 id="链接">链接</h2>
-<p>| 链接就是把所有目标文件合并到起，同时目标文件中在未知的地址（如在其它文件中实现的函数调用）替换成最终的地址</p>
-<img src="/images/2025-03-27/005.png"/>
-注：左侧是目标文件main.o，右侧是最终的可执行程序main
-``` Shell
-llvm-objdump -d 目标文件
-```
-<h3 id="动态库与静态库对比">动态库与静态库对比</h3>
-<img src="/images/2025-03-27/006.png"/>
-<p>macos环境下查看依赖</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">otool</span> <span class="o">-</span><span class="n">L</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">binary</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">main:
-</span></span><span class="line"><span class="cl">	@rpath/liblib_src.dylib (compatibility version 0.0.0, current version 0.0.0)
-</span></span><span class="line"><span class="cl">	/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1351.0.0)</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>注：@rpath 会根据不同应用的配置解析到对应的目录</p>
 ]]></content:encoded>
     </item>
   </channel>
