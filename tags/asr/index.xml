@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>ASR on BeYoung</title>
-    <link>http://localhost:1313/tags/asr/</link>
+    <link>https://lyapple2008.github.io/tags/asr/</link>
     <description>Recent content in ASR on BeYoung</description>
     <image>
       <title>BeYoung</title>
-      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Mon, 09 Mar 2026 18:24:47 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/asr/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://lyapple2008.github.io/tags/asr/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>基于iOS系统接口实现双语字幕App</title>
-      <link>http://localhost:1313/posts/202603/2026-03-09-%E5%9F%BA%E4%BA%8Eios%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E5%8F%8C%E8%AF%AD%E5%AD%97%E5%B9%95app/</link>
+      <link>https://lyapple2008.github.io/posts/202603/2026-03-09-%E5%9F%BA%E4%BA%8Eios%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E5%8F%8C%E8%AF%AD%E5%AD%97%E5%B9%95app/</link>
       <pubDate>Mon, 09 Mar 2026 18:24:47 +0800</pubDate>
-      <guid>http://localhost:1313/posts/202603/2026-03-09-%E5%9F%BA%E4%BA%8Eios%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E5%8F%8C%E8%AF%AD%E5%AD%97%E5%B9%95app/</guid>
+      <guid>https://lyapple2008.github.io/posts/202603/2026-03-09-%E5%9F%BA%E4%BA%8Eios%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E5%8F%8C%E8%AF%AD%E5%AD%97%E5%B9%95app/</guid>
       <description>&lt;p&gt;之前预告的 iOS 系统双语字幕 App，终于完成了。废话不多说，直接展示效果。目前的实现是通过 iOS 系统接口进行的，作为一个 baseline，后面也可以接入第三方开源方案。文末有项目链接，各位道友自取。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>之前预告的 iOS 系统双语字幕 App，终于完成了。废话不多说，直接展示效果。目前的实现是通过 iOS 系统接口进行的，作为一个 baseline，后面也可以接入第三方开源方案。文末有项目链接，各位道友自取。</p>
 <h2 id="模块流程">模块流程</h2>
@@ -43,9 +43,9 @@
     </item>
     <item>
       <title>ASR任务初体验</title>
-      <link>http://localhost:1313/posts/202602/2026-02-14-asr%E4%BB%BB%E5%8A%A1%E5%88%9D%E4%BD%93%E9%AA%8C/</link>
+      <link>https://lyapple2008.github.io/posts/202602/2026-02-14-asr%E4%BB%BB%E5%8A%A1%E5%88%9D%E4%BD%93%E9%AA%8C/</link>
       <pubDate>Sat, 14 Feb 2026 17:59:07 +0800</pubDate>
-      <guid>http://localhost:1313/posts/202602/2026-02-14-asr%E4%BB%BB%E5%8A%A1%E5%88%9D%E4%BD%93%E9%AA%8C/</guid>
+      <guid>https://lyapple2008.github.io/posts/202602/2026-02-14-asr%E4%BB%BB%E5%8A%A1%E5%88%9D%E4%BD%93%E9%AA%8C/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<blockquote>

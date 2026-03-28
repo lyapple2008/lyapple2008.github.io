@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>BeYoung</title>
-    <link>http://localhost:1313/</link>
+    <link>https://lyapple2008.github.io/</link>
     <description>Recent content on BeYoung</description>
     <image>
       <title>BeYoung</title>
-      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Mon, 09 Mar 2026 18:24:47 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://lyapple2008.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>【置顶】2026</title>
-      <link>http://localhost:1313/posts/2026-todo/</link>
+      <link>https://lyapple2008.github.io/posts/2026-todo/</link>
       <pubDate>Sun, 22 Feb 2026 09:43:54 +0800</pubDate>
-      <guid>http://localhost:1313/posts/2026-todo/</guid>
+      <guid>https://lyapple2008.github.io/posts/2026-todo/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;记录跟踪2026年要做的事情和正在做的事情。&lt;/p&gt;&lt;/blockquote&gt;
-&lt;h1 id=&#34;目标&#34;&gt;目标&lt;/h1&gt;
+&lt;h2 id=&#34;目标&#34;&gt;目标&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;健康生活&lt;/p&gt;
@@ -29,22 +29,30 @@
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 体重减到60kg&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;探索可能&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 英语能力，熟练3篇演讲短文&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 独立开发，目标完成4个独立项目&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 公众号输出，目标输出文章10篇&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;正在做的项目&#34;&gt;正在做的项目&lt;/h1&gt;
+&lt;div id=&#34;weight-chart&#34; style=&#34;width: 100%; height: 300px;&#34;&gt;&lt;/div&gt;
+&lt;script src=&#34;https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js&#34;&gt;&lt;/script&gt;
+&lt;script&gt;
+var chart = echarts.init(document.getElementById(&#39;weight-chart&#39;));
+chart.setOption({
+    tooltip: { trigger: &#39;axis&#39; },
+    xAxis: { type: &#39;category&#39;, data: [&#39;1月&#39;, &#39;2月&#39;, &#39;3月&#39;] },
+    yAxis: { type: &#39;value&#39;, min: 55, max: 70 },
+    series: [{
+        data: [65, 65.8, 65.6],
+        type: &#39;line&#39;,
+        smooth: true,
+        areaStyle: { opacity: 0.3 },
+        markLine: { data: [{ yAxis: 60, name: &#39;目标&#39; }], linestyle: { color: &#39;#52c41a&#39;, type: &#39;dashed&#39; } }
+    }]
+});
+&lt;/script&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; iOS双语字幕App&lt;/p&gt;</description>
+&lt;p&gt;探索可能&lt;/p&gt;</description>
       <content:encoded><![CDATA[<blockquote>
 <p>记录跟踪2026年要做的事情和正在做的事情。</p></blockquote>
-<h1 id="目标">目标</h1>
+<h2 id="目标">目标</h2>
 <ul>
 <li>
 <p>健康生活</p>
@@ -52,6 +60,25 @@
 <li><input disabled="" type="checkbox"> 体重减到60kg</li>
 </ul>
 </li>
+</ul>
+<div id="weight-chart" style="width: 100%; height: 300px;"></div>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<script>
+var chart = echarts.init(document.getElementById('weight-chart'));
+chart.setOption({
+    tooltip: { trigger: 'axis' },
+    xAxis: { type: 'category', data: ['1月', '2月', '3月'] },
+    yAxis: { type: 'value', min: 55, max: 70 },
+    series: [{
+        data: [65, 65.8, 65.6],
+        type: 'line',
+        smooth: true,
+        areaStyle: { opacity: 0.3 },
+        markLine: { data: [{ yAxis: 60, name: '目标' }], linestyle: { color: '#52c41a', type: 'dashed' } }
+    }]
+});
+</script>
+<ul>
 <li>
 <p>探索可能</p>
 <ul>
@@ -61,34 +88,25 @@
 </ul>
 </li>
 </ul>
-<h1 id="正在做的项目">正在做的项目</h1>
+<h2 id="正在做的项目">正在做的项目</h2>
 <ul>
 <li>
-<p><input disabled="" type="checkbox"> iOS双语字幕App</p>
+<p><input checked="" disabled="" type="checkbox"> iOS双语字幕App</p>
 </li>
 <li>
-<p><input disabled="" type="checkbox"> 30天每天一万步（2026.02.22~2026.03.22）</p>
+<p><input disabled="" type="checkbox"> 拼了还拼小游戏外挂</p>
 </li>
 <li>
-<p><input disabled="" type="checkbox"> 五万资产配置计划</p>
+<p><input disabled="" type="checkbox"> <a href="https://github.com/karpathy/autoresearch">autoresearch</a>应用在音频降噪模式训练上</p>
 </li>
 </ul>
-<h2 id="一些想做的事情">一些想做的事情</h2>
-<ol>
-<li>普通绘本变成点读书，或者可交互的书</li>
-<li>就某一个主题与GPT的多轮对话，经常会思路分叉，做一个工具汇总整理这些对话</li>
-<li>电子书阅读器支持TTS</li>
-<li>照片管理应用，如何方便的整理和管理大量照片</li>
-<li>拼了还拼小游戏外挂</li>
-<li><a href="https://github.com/karpathy/autoresearch">autoresearch</a>应用在音频降噪模式训练上</li>
-</ol>
 ]]></content:encoded>
     </item>
     <item>
       <title>基于iOS系统接口实现双语字幕App</title>
-      <link>http://localhost:1313/posts/202603/2026-03-09-%E5%9F%BA%E4%BA%8Eios%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E5%8F%8C%E8%AF%AD%E5%AD%97%E5%B9%95app/</link>
+      <link>https://lyapple2008.github.io/posts/202603/2026-03-09-%E5%9F%BA%E4%BA%8Eios%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E5%8F%8C%E8%AF%AD%E5%AD%97%E5%B9%95app/</link>
       <pubDate>Mon, 09 Mar 2026 18:24:47 +0800</pubDate>
-      <guid>http://localhost:1313/posts/202603/2026-03-09-%E5%9F%BA%E4%BA%8Eios%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E5%8F%8C%E8%AF%AD%E5%AD%97%E5%B9%95app/</guid>
+      <guid>https://lyapple2008.github.io/posts/202603/2026-03-09-%E5%9F%BA%E4%BA%8Eios%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0%E5%8F%8C%E8%AF%AD%E5%AD%97%E5%B9%95app/</guid>
       <description>&lt;p&gt;之前预告的 iOS 系统双语字幕 App，终于完成了。废话不多说，直接展示效果。目前的实现是通过 iOS 系统接口进行的，作为一个 baseline，后面也可以接入第三方开源方案。文末有项目链接，各位道友自取。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>之前预告的 iOS 系统双语字幕 App，终于完成了。废话不多说，直接展示效果。目前的实现是通过 iOS 系统接口进行的，作为一个 baseline，后面也可以接入第三方开源方案。文末有项目链接，各位道友自取。</p>
 <h2 id="模块流程">模块流程</h2>
@@ -113,9 +131,9 @@
     </item>
     <item>
       <title>ASR任务初体验</title>
-      <link>http://localhost:1313/posts/202602/2026-02-14-asr%E4%BB%BB%E5%8A%A1%E5%88%9D%E4%BD%93%E9%AA%8C/</link>
+      <link>https://lyapple2008.github.io/posts/202602/2026-02-14-asr%E4%BB%BB%E5%8A%A1%E5%88%9D%E4%BD%93%E9%AA%8C/</link>
       <pubDate>Sat, 14 Feb 2026 17:59:07 +0800</pubDate>
-      <guid>http://localhost:1313/posts/202602/2026-02-14-asr%E4%BB%BB%E5%8A%A1%E5%88%9D%E4%BD%93%E9%AA%8C/</guid>
+      <guid>https://lyapple2008.github.io/posts/202602/2026-02-14-asr%E4%BB%BB%E5%8A%A1%E5%88%9D%E4%BD%93%E9%AA%8C/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<blockquote>
@@ -561,9 +579,9 @@
     </item>
     <item>
       <title>关于AICoding的一些感想和后续的规划</title>
-      <link>http://localhost:1313/posts/202601/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/</link>
+      <link>https://lyapple2008.github.io/posts/202601/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/</link>
       <pubDate>Sun, 01 Feb 2026 09:28:45 +0800</pubDate>
-      <guid>http://localhost:1313/posts/202601/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/</guid>
+      <guid>https://lyapple2008.github.io/posts/202601/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;最近要说最热最火的话题，那一定是 AI，而其中 AI 应用场景 AI Coding 也是发展迅速，大有替代程序员的势头。最近几个月一直在使用 AI Coding，心态上经历了最初的「完了，失业要提前了」，到「稳了，还能苟几年」。下面就分享一些使用上的感受，以及面对 AI Coding 这股后浪，这个号后面的一些规划。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<blockquote>
@@ -600,9 +618,9 @@
     </item>
     <item>
       <title>iOS音频捕获</title>
-      <link>http://localhost:1313/posts/202601/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/</link>
+      <link>https://lyapple2008.github.io/posts/202601/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/</link>
       <pubDate>Sun, 25 Jan 2026 07:52:25 +0800</pubDate>
-      <guid>http://localhost:1313/posts/202601/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/</guid>
+      <guid>https://lyapple2008.github.io/posts/202601/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/</guid>
       <description>&lt;blockquote&gt;
 &lt;p&gt;这篇是iOS双语字幕软件的开发日志，目标是在iOS端实现，在观看视频时，实时对播放的内容进行识别和翻译，显示双语字幕，用于打破外语视频内容观看门槛。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<blockquote>
@@ -1290,9 +1308,9 @@
     </item>
     <item>
       <title>使用ORT进行语音降噪模型推理</title>
-      <link>http://localhost:1313/posts/202511/2025-11-03-%E4%BD%BF%E7%94%A8ort%E8%BF%9B%E8%A1%8C%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E6%8E%A8%E7%90%86/</link>
+      <link>https://lyapple2008.github.io/posts/202511/2025-11-03-%E4%BD%BF%E7%94%A8ort%E8%BF%9B%E8%A1%8C%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E6%8E%A8%E7%90%86/</link>
       <pubDate>Mon, 03 Nov 2025 19:39:53 +0800</pubDate>
-      <guid>http://localhost:1313/posts/202511/2025-11-03-%E4%BD%BF%E7%94%A8ort%E8%BF%9B%E8%A1%8C%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E6%8E%A8%E7%90%86/</guid>
+      <guid>https://lyapple2008.github.io/posts/202511/2025-11-03-%E4%BD%BF%E7%94%A8ort%E8%BF%9B%E8%A1%8C%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E6%8E%A8%E7%90%86/</guid>
       <description>&lt;p&gt;在深度学习语音降噪模型的部署过程中，选择合适的推理引擎至关重要。ONNX Runtime（ORT）作为微软开源的跨平台推理引擎，在性能、兼容性和易用性方面表现出色，已成为许多生产环境的首选。本文将介绍为什么选择ORT，ORT的核心概念和使用流程，以及在使用ORT进行语音降噪推理时需要注意的关键事项，特别是针对时序模型（如GRU/LSTM）的隐状态管理。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>在深度学习语音降噪模型的部署过程中，选择合适的推理引擎至关重要。ONNX Runtime（ORT）作为微软开源的跨平台推理引擎，在性能、兼容性和易用性方面表现出色，已成为许多生产环境的首选。本文将介绍为什么选择ORT，ORT的核心概念和使用流程，以及在使用ORT进行语音降噪推理时需要注意的关键事项，特别是针对时序模型（如GRU/LSTM）的隐状态管理。</p>
 <h2 id="一为什么选择ort">一、为什么选择ORT？</h2>
@@ -3032,9 +3050,9 @@
     </item>
     <item>
       <title>语音增强算法评估指南</title>
-      <link>http://localhost:1313/posts/202508/2025-08-11-%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95%E8%AF%84%E4%BC%B0/</link>
+      <link>https://lyapple2008.github.io/posts/202508/2025-08-11-%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95%E8%AF%84%E4%BC%B0/</link>
       <pubDate>Mon, 11 Aug 2025 22:27:28 +0800</pubDate>
-      <guid>http://localhost:1313/posts/202508/2025-08-11-%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95%E8%AF%84%E4%BC%B0/</guid>
+      <guid>https://lyapple2008.github.io/posts/202508/2025-08-11-%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95%E8%AF%84%E4%BC%B0/</guid>
       <description>&lt;h1 id=&#34;语音增强算法评估指南&#34;&gt;语音增强算法评估指南&lt;/h1&gt;
 &lt;p&gt;如今语音增强算法已成为智能设备、视频会议和助听器等应用的核心，它能从嘈杂环境中“拯救”清晰的语音信号，但如何判断一个算法的好坏？这就是评估的意义所在。今天，我们来聊聊语音增强算法的评估体系，通过一个国际挑战赛作为切入点，带你一步步了解关键指标和计算方法。无论你是初学者还是从业者，这篇文章都能帮你理清思路。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<h1 id="语音增强算法评估指南">语音增强算法评估指南</h1>
@@ -3298,9 +3316,9 @@
     </item>
     <item>
       <title>WebRTC语音降噪之Wiener滤波</title>
-      <link>http://localhost:1313/posts/202507/2025-07-13-webrtc%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E4%B9%8Bwiener%E6%BB%A4%E6%B3%A2/</link>
+      <link>https://lyapple2008.github.io/posts/202507/2025-07-13-webrtc%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E4%B9%8Bwiener%E6%BB%A4%E6%B3%A2/</link>
       <pubDate>Mon, 07 Jul 2025 21:59:22 +0800</pubDate>
-      <guid>http://localhost:1313/posts/202507/2025-07-13-webrtc%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E4%B9%8Bwiener%E6%BB%A4%E6%B3%A2/</guid>
+      <guid>https://lyapple2008.github.io/posts/202507/2025-07-13-webrtc%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E4%B9%8Bwiener%E6%BB%A4%E6%B3%A2/</guid>
       <description>&lt;h1 id=&#34;webrtc中的wiener滤波降噪算法&#34;&gt;WebRTC中的Wiener滤波降噪算法&lt;/h1&gt;
 &lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;
 &lt;p&gt;在实时语音通信系统中，背景噪声的抑制对于提升通话清晰度至关重要。Google 的 WebRTC 项目在其开源语音引擎中实现了高质量的语音降噪模块，其中 Wiener 滤波器作为核心组成部分，结合语音概率估计、多特征建模、噪声谱跟踪等模块构建了一个高度实用的增强框架。&lt;/p&gt;</description>
@@ -3642,9 +3660,9 @@ $$</p>
     </item>
     <item>
       <title>WebRTC语音降噪之语音概率估计</title>
-      <link>http://localhost:1313/posts/202506/2025-06-30-%E8%AF%AD%E9%9F%B3%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/</link>
+      <link>https://lyapple2008.github.io/posts/202506/2025-06-30-%E8%AF%AD%E9%9F%B3%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/</link>
       <pubDate>Mon, 30 Jun 2025 21:36:39 +0800</pubDate>
-      <guid>http://localhost:1313/posts/202506/2025-06-30-%E8%AF%AD%E9%9F%B3%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/</guid>
+      <guid>https://lyapple2008.github.io/posts/202506/2025-06-30-%E8%AF%AD%E9%9F%B3%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/</guid>
       <description>&lt;p&gt;WebRTC的语音降噪算法中实现了一个频点维度的语音概率估计器SpeechProbabilityEstimator，本质是一个多特征融合的线性分类器。统计计算以下三种特征，&lt;/p&gt;</description>
       <content:encoded><![CDATA[<p>WebRTC的语音降噪算法中实现了一个频点维度的语音概率估计器SpeechProbabilityEstimator，本质是一个多特征融合的线性分类器。统计计算以下三种特征，</p>
 <ul>
@@ -4239,9 +4257,9 @@ $$</p>
     </item>
     <item>
       <title>WebRTC语音降噪之基于分位数的噪声估计</title>
-      <link>http://localhost:1313/posts/202506/2025-06-28-%E5%9F%BA%E4%BA%8E%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E5%99%AA%E5%A3%B0%E4%BC%B0%E8%AE%A1/</link>
+      <link>https://lyapple2008.github.io/posts/202506/2025-06-28-%E5%9F%BA%E4%BA%8E%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E5%99%AA%E5%A3%B0%E4%BC%B0%E8%AE%A1/</link>
       <pubDate>Sat, 28 Jun 2025 15:38:44 +0800</pubDate>
-      <guid>http://localhost:1313/posts/202506/2025-06-28-%E5%9F%BA%E4%BA%8E%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E5%99%AA%E5%A3%B0%E4%BC%B0%E8%AE%A1/</guid>
+      <guid>https://lyapple2008.github.io/posts/202506/2025-06-28-%E5%9F%BA%E4%BA%8E%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E5%99%AA%E5%A3%B0%E4%BC%B0%E8%AE%A1/</guid>
       <description>&lt;h2 id=&#34;噪声估计的作用&#34;&gt;噪声估计的作用&lt;/h2&gt;
 &lt;p&gt;噪声估计算法在整个语音降噪系统中起到核心支撑作用，先验SNR和后验SNR的计算都依赖于当前帧的噪声功率谱估计。若噪声估计偏低，会导致保留太多噪声（过度保留）；若噪声估计偏高，会把语音当作噪声过滤掉（语音失真）； 更新不稳定，整体听感时好时坏，忽大忽小，出现”泵声“、”音乐噪声“现象。本文介绍WebRTC中目前使用的基于分位数的噪声估计算法，及其在工程实现中的巧妙之处。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<h2 id="噪声估计的作用">噪声估计的作用</h2>
