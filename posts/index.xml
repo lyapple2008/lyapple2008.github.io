@@ -12,7 +12,7 @@
     <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Mon, 09 Mar 2026 18:24:47 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 28 Mar 2026 14:17:17 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>【置顶】2026</title>
@@ -100,6 +100,110 @@ chart.setOption({
 <p><input disabled="" type="checkbox"> <a href="https://github.com/karpathy/autoresearch">autoresearch</a>应用在音频降噪模式训练上</p>
 </li>
 </ul>
+<h2 id="一些随想">一些随想</h2>
+<blockquote>
+<p>记录一些生活工作中一些小感受和小想法</p></blockquote>
+<ul>
+<li>2026.03.29</li>
+</ul>
+<blockquote>
+<p>每天记录和量化进度，本身就是一种负担，而且对于效率提高帮助不大，也不利于长期任务，与其每天盯着任务进度，
+不如现在开始试下，里程碑式的工作方法，给自己一段时间设定一些目标，到期后来检查完成情况，中间如何只记录
+据有里程碑意义的事件。</p></blockquote>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>一个程序员为了不看广告有多拼</title>
+      <link>https://lyapple2008.github.io/posts/202603/2026-03-28-%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%BA%E4%BA%86%E4%B8%8D%E7%9C%8B%E5%B9%BF%E5%91%8A%E6%9C%89%E5%A4%9A%E6%8B%BC/</link>
+      <pubDate>Sat, 28 Mar 2026 14:17:17 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202603/2026-03-28-%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%BA%E4%BA%86%E4%B8%8D%E7%9C%8B%E5%B9%BF%E5%91%8A%E6%9C%89%E5%A4%9A%E6%8B%BC/</guid>
+      <description>&lt;h2 id=&#34;一缘起&#34;&gt;一、缘起&lt;/h2&gt;
+&lt;p&gt;春节期间，为了打发时间，我迷上了一款拼图小游戏。游戏规则很简单——给你一张漂亮的图片，打乱成若干块，然后在时间限制内把它拼好。听起来很休闲对不对？&lt;strong&gt;too young too simple&lt;/strong&gt;。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<h2 id="一缘起">一、缘起</h2>
+<p>春节期间，为了打发时间，我迷上了一款拼图小游戏。游戏规则很简单——给你一张漂亮的图片，打乱成若干块，然后在时间限制内把它拼好。听起来很休闲对不对？<strong>too young too simple</strong>。</p>
+<img src="/images/2026-03/微信拼图小游戏.PNG" height="400">
+<p>问题在于：<strong>每次超时都要看30秒视频广告</strong>。人菜瘾又大的我，经常需要看广告才能过关。</p>
+<p>终于在某次看了第17遍&quot;是兄弟就来砍我&quot;之后，我一拍桌子——<strong>不行，我要搞点事情</strong>。</p>
+<blockquote>
+<p>📢 友情提示：本文不涉及游戏外挂或修改游戏本身，只是研究如何用程序自动操作已知的拼图图片。</p></blockquote>
+<h2 id="二动手干">二、动手干</h2>
+<h3 id="21-拼图还原问题">2.1 拼图还原问题</h3>
+<p><strong>拼图还原问题（Jigsaw Puzzle Reassembly Problem）</strong> 是计算机视觉和图像处理领域的一个重要研究课题。简单来说，就是给定一幅被打碎的图像，如何让计算机自动识别各个碎片之间的关系，并将它们重新拼合成完整的原始图像。</p>
+<h4 id="问题分类">问题分类</h4>
+<p>根据不同的碎片特征，拼图还原问题可以分为以下几类：</p>
+<table>
+  <thead>
+      <tr>
+          <th>类型</th>
+          <th>碎片特征</th>
+          <th>难度</th>
+          <th>典型场景</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Type 1</strong></td>
+          <td>矩形碎片，排列规则，<strong>无旋转</strong></td>
+          <td>⭐⭐</td>
+          <td>网格切割的图片</td>
+      </tr>
+      <tr>
+          <td><strong>Type 2</strong></td>
+          <td>矩形碎片，排列规则，<strong>有旋转</strong></td>
+          <td>⭐⭐⭐</td>
+          <td>可旋转的拼图游戏</td>
+      </tr>
+      <tr>
+          <td><strong>Type 3</strong></td>
+          <td>传统锯齿边缘，<strong>无旋转</strong></td>
+          <td>⭐⭐⭐⭐</td>
+          <td>传统拼图</td>
+      </tr>
+      <tr>
+          <td><strong>Type 4</strong></td>
+          <td>传统锯齿边缘，<strong>有旋转</strong></td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>复杂拼图、考古文物修复</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="本文面对的问题">本文面对的问题</h4>
+<p>回顾本文面对的拼图问题：</p>
+<ul>
+<li>✅ <strong>矩形分块</strong>：每块都是规整的矩形，没有传统拼图的锯齿边缘</li>
+<li>✅ <strong>网格排列</strong>：6×6、7×7、8×8 三种规格，整齐排列</li>
+<li>✅ <strong>无旋转</strong>：所有碎片都是正向朝上，不涉及旋转匹配</li>
+<li>❌ <strong>无参考图</strong>：原图被打碎后完全不可见，需要通过碎片自身特征推断位置</li>
+</ul>
+<p>这属于上表中的 <strong>Type 1</strong> 类型——矩形碎片、无旋转的规则拼图。虽然是相对简单的一类，但结合&quot;无参考图&quot;这一约束条件，仍然需要借助图像边缘匹配等计算机视觉技术来解决。</p>
+<h3 id="22-实施方案">2.2 实施方案</h3>
+<h4 id="221-提取拼图区域">2.2.1 提取拼图区域</h4>
+<p><strong>输入</strong>：含 UI 的原始截图
+<strong>输出</strong>：纯拼图区域图像 + bbox</p>
+<p><strong>方法</strong>：基于背景颜色分割</p>
+<p>从图像四周边缘采样获取背景色，对每个像素计算 RGB 欧氏距离。距离 &gt; 35 的像素标记为非背景，经形态学开闭运算去噪填洞后，查找最大连通域作为拼图区域。</p>
+<hr>
+<h4 id="222-检测拼图块边界">2.2.2 检测拼图块边界</h4>
+<p><strong>输入</strong>：纯拼图区域图像
+<strong>输出</strong>：M×N 个等大小 patch</p>
+<p><strong>方法</strong>：基于轴向纹理信号检测分割线</p>
+<p>灰度化后沿行/列方向计算标准差。拼图块内部纹理有变化→信号高，块间缝隙处纹理一致→信号低。通过搜索信号局部最小值定位每条分割线，最后归一化所有 patch 为统一尺寸。</p>
+<hr>
+<h4 id="223-遗传算法拼图">2.2.3 遗传算法拼图</h4>
+<p><strong>输入</strong>：打乱的 M×N 个 patch
+<strong>输出</strong>：还原后的 grid + 重建图像</p>
+<p><strong>方法</strong>：进化算法最小化相邻块边缘差异</p>
+<p>种群 200 个随机排列个体，以相邻块边缘像素差（MSE/Median/Percentile/Huber）的总和作为适应度。轮盘赌选择父代、交叉产生子代、精英保留 Top2，连续 10 代无提升则早停。</p>
+<p><img alt="拼图还原示例" loading="lazy" src="/images/2026-03/jigsaw-recontruct-example.png"></p>
+<h2 id="三最终效果展示">三、最终效果展示</h2>
+<iframe src="//player.bilibili.com/player.html?bvid=BV1E2XDBBEN1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="500"></iframe>
+<h2 id="四总结">四、总结</h2>
+<p>这个项目大概花了我<strong>四周的周末时间</strong>，从最初的&quot;看广告好烦&quot;到最后的&quot;这玩意儿居然还真能跑&quot;，过程颇为曲折。虽然全程vibe coding，但是大方向还是需要自己去研究清楚后，再给AI讲清楚后，才能有个好的结果。</p>
+<p>目前这个效果离我最初设想的效果，一键启动通关，还差很远，还存在不少问题，不过也算基本达到当时的目的，用了这个后，玩这个拼图游戏再也没有看过广告了。也许后面有时间，再看看没有其它能够实现一键通关的方法，比如RL之类的，现在就暂时到这里吧，毕竟只是一个副本任务。</p>
+<p>项目地址：<a href="https://github.com/lyapple2008/JigsawPuzzleReconstruction">JigsawPuzzleReconstruction</a></p>
+<hr>
+<p><strong>最后</strong>，如果你也被游戏广告折磨得不行，不妨试试这个思路——<strong>有时候最好的外挂，是用自己的技术绕过广告</strong>（而不是去黑游戏服务器）。</p>
+<p>祝大家拼图愉快，<strong>永不看广告</strong>！</p>
 ]]></content:encoded>
     </item>
     <item>
@@ -4253,266 +4357,6 @@ $$</p>
 </ul>
 <p>Ok! 到这里WebRTC就真正完成了噪声谱的估计，接下继续分享WebRTC语音降噪代码.</p>
 <h4 id="to-be-continue">To Be Continue!!!</h4>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>WebRTC语音降噪之基于分位数的噪声估计</title>
-      <link>https://lyapple2008.github.io/posts/202506/2025-06-28-%E5%9F%BA%E4%BA%8E%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E5%99%AA%E5%A3%B0%E4%BC%B0%E8%AE%A1/</link>
-      <pubDate>Sat, 28 Jun 2025 15:38:44 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/202506/2025-06-28-%E5%9F%BA%E4%BA%8E%E5%88%86%E4%BD%8D%E6%95%B0%E7%9A%84%E5%99%AA%E5%A3%B0%E4%BC%B0%E8%AE%A1/</guid>
-      <description>&lt;h2 id=&#34;噪声估计的作用&#34;&gt;噪声估计的作用&lt;/h2&gt;
-&lt;p&gt;噪声估计算法在整个语音降噪系统中起到核心支撑作用，先验SNR和后验SNR的计算都依赖于当前帧的噪声功率谱估计。若噪声估计偏低，会导致保留太多噪声（过度保留）；若噪声估计偏高，会把语音当作噪声过滤掉（语音失真）； 更新不稳定，整体听感时好时坏，忽大忽小，出现”泵声“、”音乐噪声“现象。本文介绍WebRTC中目前使用的基于分位数的噪声估计算法，及其在工程实现中的巧妙之处。&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<h2 id="噪声估计的作用">噪声估计的作用</h2>
-<p>噪声估计算法在整个语音降噪系统中起到核心支撑作用，先验SNR和后验SNR的计算都依赖于当前帧的噪声功率谱估计。若噪声估计偏低，会导致保留太多噪声（过度保留）；若噪声估计偏高，会把语音当作噪声过滤掉（语音失真）； 更新不稳定，整体听感时好时坏，忽大忽小，出现”泵声“、”音乐噪声“现象。本文介绍WebRTC中目前使用的基于分位数的噪声估计算法，及其在工程实现中的巧妙之处。</p>
-<h2 id="什么是基于分位数的噪声估计">什么是基于分位数的噪声估计</h2>
-<p>基于分位数的噪声估计算法是一种利用信号统计特性区分噪声和语音的自适应方法。其核心原理在于：噪声的能量分布通常集中在低分位区域，而语音信号的能量分布会抬高高分位数。</p>
-<h2 id="webrtc中的实现解读妙呀">WebRTC中的实现解读（妙呀）</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 代码位置
-</span></span><span class="line"><span class="cl">modules/audio_processing/ns/quantile_noise_estimator.h 
-</span></span><span class="line"><span class="cl">modules/audio_processing/ns/quantile_noise_estimator.cc</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<h3 id="分位数计算">分位数计算</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">log_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">log_quantile_</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">log_quantile_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.25f</span> <span class="o">*</span> <span class="n">multiplier</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">log_quantile_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="mf">0.75f</span> <span class="o">*</span> <span class="n">multiplier</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>以上是WebRTC中分位数计算的代码，它表示25%分位数估计，下面我们来逐步说明为什么这段代码可以计算25%分位数。</p>
-<h4 id="什么是分位数">什么是分位数？</h4>
-<p>以25%分位数为例，它表示：如果你观察一组数，有25%是小于它的，有75%是大于它的。
-比如：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">数据（已排序）：[1, 2, 3, 4, 5, 6, 7, 8, 9]
-</span></span><span class="line"><span class="cl">0.25分位数 ≈ 第3个数 = 3</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<h4 id="非对称更新的数学直觉">非对称更新的数学直觉</h4>
-<p>设：当前估计值为Q，当前观测值为X</p>
-<p>我们每帧更新规则如下：</p>
-<table>
-  <thead>
-      <tr>
-          <th>情况</th>
-          <th>更新量</th>
-          <th>含义</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>x &gt; Q</td>
-          <td>Q ← Q + 0.25 × step</td>
-          <td>当前值太大，稍微拉高估计值</td>
-      </tr>
-      <tr>
-          <td>x &lt; Q</td>
-          <td>Q ← Q - 0.75 × step</td>
-          <td>当前值太小，大幅拉低估计值</td>
-      </tr>
-  </tbody>
-</table>
-<h4 id="收敛分析平衡点--25分位数">收敛分析：平衡点 = 25%分位数</h4>
-<p>考虑连续观察大量值 {x₁, x₂, &hellip;, xₙ}，估计值 Q 如果在一个固定位置附近波动，那它一定满足：
-平均上调量 ≈ 平均下调量，也就是说，在那个点：</p>
-<blockquote>
-<p>上调概率 × 上调步长 = 下调概率 × 下调步长</p></blockquote>
-<p>其中：</p>
-<ul>
-<li>上调概率 p_up = P(x &gt; Q)</li>
-<li>下调概率 p_down = P(x &lt; Q) = 1 - p_up</li>
-<li>上调步长 = 0.25</li>
-<li>下调步长 = 0.75
-计算可以得到：p_down = 0.25</li>
-</ul>
-<p>✅ 说明这个估计最终会逼近 25% 分位数！</p>
-<blockquote>
-<p>这个分位数的实现真是妙了呀，避免了常规分位计算需要排序的问题，同时还可以实时更新。👍</p></blockquote>
-<h3 id="多分位数估计分时更新">多分位数估计分时更新</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">  <span class="o">//</span> <span class="n">Loop</span> <span class="n">over</span> <span class="n">simultaneous</span> <span class="n">estimates</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="ne">int</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="n">kSimult</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">       <span class="o">++</span><span class="n">s</span><span class="p">,</span> <span class="n">k</span> <span class="o">+=</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="ne">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">kFftSizeBy2Plus1</span><span class="p">))</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="ne">float</span> <span class="n">one_by_counter_plus_1</span> <span class="o">=</span> <span class="mf">1.</span><span class="n">f</span> <span class="o">/</span> <span class="p">(</span><span class="n">counter_</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1.</span><span class="n">f</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="ne">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">k</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="ne">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">kFftSizeBy2Plus1</span><span class="p">);</span> <span class="o">++</span><span class="n">i</span><span class="p">,</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="o">//</span> <span class="n">Update</span> <span class="nb">log</span> <span class="n">quantile</span> <span class="n">estimate</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl">      <span class="k">const</span> <span class="ne">float</span> <span class="n">delta</span> <span class="o">=</span> <span class="n">density_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">1.</span><span class="n">f</span> <span class="err">?</span> <span class="mf">40.</span><span class="n">f</span> <span class="o">/</span> <span class="n">density_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="p">:</span> <span class="mf">40.</span><span class="n">f</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      <span class="k">const</span> <span class="ne">float</span> <span class="n">multiplier</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">*</span> <span class="n">one_by_counter_plus_1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">log_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">log_quantile_</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">log_quantile_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.25</span><span class="n">f</span> <span class="o">*</span> <span class="n">multiplier</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">log_quantile_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-=</span> <span class="mf">0.75</span><span class="n">f</span> <span class="o">*</span> <span class="n">multiplier</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">      <span class="o">//</span> <span class="n">Update</span> <span class="n">density</span> <span class="n">estimate</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl">      <span class="n">constexpr</span> <span class="ne">float</span> <span class="n">kWidth</span> <span class="o">=</span> <span class="mf">0.01</span><span class="n">f</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      <span class="n">constexpr</span> <span class="ne">float</span> <span class="n">kOneByWidthPlus2</span> <span class="o">=</span> <span class="mf">1.</span><span class="n">f</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span><span class="n">f</span> <span class="o">*</span> <span class="n">kWidth</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">log_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">log_quantile_</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">kWidth</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">density_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">counter_</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">*</span> <span class="n">density_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">kOneByWidthPlus2</span><span class="p">)</span> <span class="o">*</span>
-</span></span><span class="line"><span class="cl">                      <span class="n">one_by_counter_plus_1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">counter_</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">kLongStartupPhaseBlocks</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">counter_</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">num_updates_</span> <span class="o">&gt;=</span> <span class="n">kLongStartupPhaseBlocks</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">quantile_index_to_return</span> <span class="o">=</span> <span class="n">k</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="o">++</span><span class="n">counter_</span><span class="p">[</span><span class="n">s</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>kLongStartupPhaseBlocks=200，意味着分位数估计在200帧后，即2秒，才会更新重置输出估计结果。webrtc为了减少响应延迟，设置了三个错位的独立分位数估计器，如下代码，可以看到每一个分位数估计器的更新计数是错开的，这样可以达到每67帧，即670ms，就会有一个分位数估计器进行重置更新输出估计结果，从而达到快速响应的效果。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">  <span class="n">constexpr</span> <span class="ne">float</span> <span class="n">kOneBySimult</span> <span class="o">=</span> <span class="mf">1.</span><span class="n">f</span> <span class="o">/</span> <span class="n">kSimult</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="n">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kSimult</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">counter_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">floor</span><span class="p">(</span><span class="n">kLongStartupPhaseBlocks</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mf">1.</span><span class="n">f</span><span class="p">)</span> <span class="o">*</span> <span class="n">kOneBySimult</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<h3 id="利用密度估计实现自适应步长">利用”密度“估计实现自适应步长</h3>
-<p>分位数估计器在更新的时候，其更新步长与这个density_变量直接相关，现在我们来看下webrtc的实现是如何做到自适应步长的。</p>
-<blockquote>
-<p>density_[j]表示: 当前分位数估计点附近的”局部密度估计“，近似表示这个log频谱点的概率密度函数值。</p></blockquote>
-<p>现实场景中，噪声频点能量分布是变化的，当低噪声变化时，噪声频点能量分布密集；当语音变化时，噪声频点能量分布稀疏。因此需要估计分布密度，以调整步长动态性，防止在高密度或低密度区域过度抖动或者太慢反应</p>
-<ul>
-<li>density_是如何计算的</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="n">Update</span> <span class="n">density</span> <span class="n">estimate</span><span class="o">.</span>
-</span></span><span class="line"><span class="cl"><span class="n">constexpr</span> <span class="ne">float</span> <span class="n">kWidth</span> <span class="o">=</span> <span class="mf">0.01</span><span class="n">f</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">constexpr</span> <span class="ne">float</span> <span class="n">kOneByWidthPlus2</span> <span class="o">=</span> <span class="mf">1.</span><span class="n">f</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span><span class="n">f</span> <span class="o">*</span> <span class="n">kWidth</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">log_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">log_quantile_</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">kWidth</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="n">density_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">counter_</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">*</span> <span class="n">density_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">kOneByWidthPlus2</span><span class="p">)</span> <span class="o">*</span>
-</span></span><span class="line"><span class="cl">                <span class="n">one_by_counter_plus_1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>这是一种滑动窗口统计估计法：</p>
-<table>
-  <thead>
-      <tr>
-          <th>步骤</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>fabs(&hellip;) &lt; kWidth</td>
-          <td>当前观测值是否落在估计值 ±0.01 范围内</td>
-      </tr>
-      <tr>
-          <td>kOneByWidthPlus2 = 1 / (2 × 0.01)</td>
-          <td>这是一个常数权重（经验值）</td>
-      </tr>
-      <tr>
-          <td>density_[j] = (&hellip;)</td>
-          <td>使用 指数滑动平均 来更新密度值</td>
-      </tr>
-      <tr>
-          <td>最终的效果是：</td>
-          <td></td>
-      </tr>
-  </tbody>
-</table>
-<blockquote>
-<p>density_[j] 趋近于“单位宽度窗口”内命中次数的平均值 —— 表示在分位点附近的信号频谱密集程度。</p></blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">const</span> <span class="ne">float</span> <span class="n">delta</span> <span class="o">=</span> <span class="n">density_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">1.</span><span class="n">f</span> <span class="err">?</span> <span class="mf">40.</span><span class="n">f</span> <span class="o">/</span> <span class="n">density_</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="p">:</span> <span class="mf">40.</span><span class="n">f</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="ne">float</span> <span class="n">multiplier</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">*</span> <span class="n">one_by_counter_plus_1</span><span class="p">;</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>density_变量直接影响了分位数估计的步长，也就是说</p>
-<ul>
-<li>如果 density_ 高：说明这个频率点的能量比较“稳定”，变化较小 → delta 会小 → 更新变慢</li>
-<li>如果 density_ 低：说明这个点的能量波动大 → delta 会大 → 更新更激进</li>
-</ul>
-<p>总结就是，density_ 表示当前分位点附近的局部频谱密度，用于调节更新速率，帮助 WebRTC 实现稳定、鲁棒、快速收敛的底噪估计。</p>
-<p>Ok，这就是WebRTC中基于分位数噪声估计的全部了。总的来说，基于分位数的噪声估计算法原理简单，但WebRTC的实现有很多巧妙的地方，即保证了效果，也提高了效率，绝对是工程精华值得好好研究。</p>
-<p>接下来会继续分享WebRTC语音降噪部分代码，希望对有兴趣的朋友有帮助。</p>
 ]]></content:encoded>
     </item>
   </channel>
