@@ -9,11 +9,39 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.147.9</generator>
+    <generator>Hugo -- 0.152.2</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Mon, 09 Mar 2026 18:24:47 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 20 Apr 2026 15:02:03 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>音频算法</title>
+      <link>https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Mon, 20 Apr 2026 15:02:03 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Agent</title>
+      <link>https://lyapple2008.github.io/tags/agent/</link>
+      <pubDate>Thu, 02 Apr 2026 09:58:19 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/agent/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AI</title>
+      <link>https://lyapple2008.github.io/tags/ai/</link>
+      <pubDate>Thu, 02 Apr 2026 09:58:19 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Claude Code</title>
+      <link>https://lyapple2008.github.io/tags/claude-code/</link>
+      <pubDate>Thu, 02 Apr 2026 09:58:19 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/claude-code/</guid>
+      <description></description>
+    </item>
     <item>
       <title>ASR</title>
       <link>https://lyapple2008.github.io/tags/asr/</link>
@@ -54,34 +82,6 @@
       <link>https://lyapple2008.github.io/tags/%E7%94%9F%E6%B4%BB/</link>
       <pubDate>Sun, 22 Feb 2026 09:43:54 +0800</pubDate>
       <guid>https://lyapple2008.github.io/tags/%E7%94%9F%E6%B4%BB/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>‘AI Coding’</title>
-      <link>https://lyapple2008.github.io/tags/ai-coding/</link>
-      <pubDate>Sun, 01 Feb 2026 09:28:45 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/tags/ai-coding/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Onnx Runtime</title>
-      <link>https://lyapple2008.github.io/tags/onnx-runtime/</link>
-      <pubDate>Mon, 03 Nov 2025 19:39:53 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/tags/onnx-runtime/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>音频算法</title>
-      <link>https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95/</link>
-      <pubDate>Mon, 03 Nov 2025 19:39:53 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>语音降噪</title>
-      <link>https://lyapple2008.github.io/tags/%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA/</link>
-      <pubDate>Mon, 03 Nov 2025 19:39:53 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/tags/%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA/</guid>
       <description></description>
     </item>
   </channel>

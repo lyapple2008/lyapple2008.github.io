@@ -9,10 +9,10 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.147.9</generator>
+    <generator>Hugo -- 0.152.2</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Sat, 28 Mar 2026 14:17:17 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 20 Apr 2026 15:02:03 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>【置顶】2026</title>
@@ -20,7 +20,8 @@
       <pubDate>Sun, 22 Feb 2026 09:43:54 +0800</pubDate>
       <guid>https://lyapple2008.github.io/posts/2026-todo/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;记录跟踪2026年要做的事情和正在做的事情。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;记录跟踪2026年要做的事情和正在做的事情。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;目标&#34;&gt;目标&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -51,7 +52,8 @@ chart.setOption({
 &lt;li&gt;
 &lt;p&gt;探索可能&lt;/p&gt;</description>
       <content:encoded><![CDATA[<blockquote>
-<p>记录跟踪2026年要做的事情和正在做的事情。</p></blockquote>
+<p>记录跟踪2026年要做的事情和正在做的事情。</p>
+</blockquote>
 <h2 id="目标">目标</h2>
 <ul>
 <li>
@@ -94,7 +96,7 @@ chart.setOption({
 <p><input checked="" disabled="" type="checkbox"> iOS双语字幕App</p>
 </li>
 <li>
-<p><input disabled="" type="checkbox"> 拼了还拼小游戏外挂</p>
+<p><input checked="" disabled="" type="checkbox"> 拼了还拼小游戏外挂</p>
 </li>
 <li>
 <p><input disabled="" type="checkbox"> <a href="https://github.com/karpathy/autoresearch">autoresearch</a>应用在音频降噪模式训练上</p>
@@ -102,14 +104,687 @@ chart.setOption({
 </ul>
 <h2 id="一些随想">一些随想</h2>
 <blockquote>
-<p>记录一些生活工作中一些小感受和小想法</p></blockquote>
+<p>记录一些生活工作中一些小感受和小想法</p>
+</blockquote>
 <ul>
 <li>2026.03.29</li>
 </ul>
 <blockquote>
 <p>每天记录和量化进度，本身就是一种负担，而且对于效率提高帮助不大，也不利于长期任务，与其每天盯着任务进度，
 不如现在开始试下，里程碑式的工作方法，给自己一段时间设定一些目标，到期后来检查完成情况，中间如何只记录
-据有里程碑意义的事件。</p></blockquote>
+据有里程碑意义的事件。</p>
+</blockquote>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>音频重采样</title>
+      <link>https://lyapple2008.github.io/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/</link>
+      <pubDate>Mon, 20 Apr 2026 15:02:03 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/</guid>
+      <description>&lt;h1 id=&#34;音频重采样&#34;&gt;音频重采样&lt;/h1&gt;
+&lt;h2 id=&#34;1-什么是音频重采样&#34;&gt;1. 什么是音频重采样&lt;/h2&gt;
+&lt;p&gt;音频重采样（Audio Resampling）是指将音频信号从一种采样参数转换到另一种采样参数的过程。音频信号有三大核心参数，统称为&amp;quot;音频三元组&amp;quot;：&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<h1 id="音频重采样">音频重采样</h1>
+<h2 id="1-什么是音频重采样">1. 什么是音频重采样</h2>
+<p>音频重采样（Audio Resampling）是指将音频信号从一种采样参数转换到另一种采样参数的过程。音频信号有三大核心参数，统称为&quot;音频三元组&quot;：</p>
+<ul>
+<li><strong>采样率（Sample Rate）</strong>：每秒钟采集的音频样本数，单位为Hz或kHz。例如CD音质为44.1kHz，专业音频为48kHz。</li>
+<li><strong>采样格式（Sample Format）</strong>：每个样本的量化精度，常见的有8bit、16bit、24bit、32bit浮点等。</li>
+<li><strong>声道数（Channel）</strong>：单声道、双声道（立体声）、多声道等。</li>
+</ul>
+<p>重采样就是改变这三个参数中的任意一个或多个，使音频A转换为音频B。</p>
+<h2 id="2-为什么需要音频重采样">2. 为什么需要音频重采样</h2>
+<p>在实际音频处理和音视频开发中，重采样是刚性需求，主要场景包括：</p>
+<table>
+  <thead>
+      <tr>
+          <th>场景</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>设备兼容</strong></td>
+          <td>麦克风采集的音频可能是 $44.1\text{kHz}/32\text{bit}$/双声道，而编码器可能要求 $48\text{kHz}/16\text{bit}$/双声道，必须进行转换</td>
+      </tr>
+      <tr>
+          <td><strong>扬声器匹配</strong></td>
+          <td>播放设备要求的音频格式与待播放音频的格式不一致</td>
+      </tr>
+      <tr>
+          <td><strong>混音需求</strong></td>
+          <td>将不同采样率的音频混音在一起，如直播中麦克风 $44.1\text{kHz}$ 与背景音乐 $48\text{kHz}$ 混音</td>
+      </tr>
+      <tr>
+          <td><strong>算法运算优化</strong></td>
+          <td>某些算法（如回声消除）需要特定格式的输入，可能要求单声道</td>
+      </tr>
+      <tr>
+          <td><strong>传输标准化</strong></td>
+          <td>不同协议和平台对音频格式有不同要求，需要统一转换</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-音频重采样的基本原理">3. 音频重采样的基本原理</h2>
+<h3 id="31-采样与重建">3.1 采样与重建</h3>
+<p>根据奈奎斯特-香农采样定理，一个连续信号可以被其采样点完整重建，前提是采样率高于信号最高频率的两倍。理想重建公式为：</p>
+<p>$$x(t) = \sum_{n} x(nT) \cdot \text{sinc}\left(\frac{t-nT}{T}\right)$$</p>
+<p>其中 $\text{sinc}(x) = \frac{\sin(\pi x)}{\pi x}$ 是理想插值函数。</p>
+<h3 id="32-重采样的数学表达">3.2 重采样的数学表达</h3>
+<p>重采样可以理解为以新的采样间隔对原始连续信号进行重新采样的过程。设原始采样率为 $F_x$，新采样率为 $F_y$，重采样比率为 $\rho = F_y/F_x$。</p>
+<p><strong>上采样（Upsampling）</strong>：$F_y &gt; F_x$，需要插入新样本点
+<strong>下采样（Downsampling）</strong>：$F_y &lt; F_x$，需要丢弃某些样本点</p>
+<h2 id="speexdsp-重采样实现分析">SpeexDSP 重采样实现分析</h2>
+<h3 id="一核心算法原理">一、核心算法原理</h3>
+<p>SpeexDSP 重采样基于 **Sinc 插值 ** 思想，参考文献为 Stanford CCRMA 的 Smith&rsquo;s Digital Audio Resampling Home Page。主要创新是改用 <strong>Cubic 插值</strong> 代替线性插值，大幅缩小查找表。</p>
+<h3 id="二两种实现模式">二、两种实现模式</h3>
+<h4 id="1-direct-sinc-table直接查表法">1. Direct Sinc Table（直接查表法）</h4>
+<p><strong>适用场景</strong>：分母 <code>den_rate</code> 不太大时，内存消耗为 <code>filt_len × den_rate</code>。</p>
+<p>核心计算（<code>resample.c:331-384</code>）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sum</span> <span class="o">+=</span> <span class="nf">MULT16_16</span><span class="p">(</span><span class="n">sinct</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">iptr</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>  <span class="c1">// 定点乘累加
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">out</span><span class="p">[</span><span class="n">out_stride</span> <span class="o">*</span> <span class="n">out_sample</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="nf">SATURATE32PSHR</span><span class="p">(</span><span class="n">sum</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">32767</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>每个输出样本对应一个分数采样位置 <code>samp_frac_num/den_rate</code>，从预计算的 sinc 表中取 N 个系数与输入窗口做卷积。</p>
+<h4 id="2-interpolated插值查表法">2. Interpolated（插值查表法）</h4>
+<p><strong>适用场景</strong>：分母较大时，只存储 <code>filt_len × oversample + 8</code> 个 sinc 系数，用 <strong>Cubic 插值</strong> 近似任意分数偏移。</p>
+<p>核心步骤（<code>resample.c:438-496</code>）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="n">offset</span> <span class="o">=</span> <span class="n">samp_frac_num</span> <span class="o">*</span> <span class="n">st</span><span class="o">-&gt;</span><span class="n">oversample</span> <span class="o">/</span> <span class="n">st</span><span class="o">-&gt;</span><span class="n">den_rate</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">spx_word16_t</span> <span class="n">frac</span> <span class="o">=</span> <span class="p">((</span><span class="n">samp_frac_num</span> <span class="o">*</span> <span class="n">st</span><span class="o">-&gt;</span><span class="n">oversample</span><span class="p">)</span> <span class="o">%</span> <span class="n">st</span><span class="o">-&gt;</span><span class="n">den_rate</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">st</span><span class="o">-&gt;</span><span class="n">den_rate</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 对每个滤波器抽头，计算四个临近 sinc 表值的加权累加
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">accum</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">curr_in</span> <span class="o">*</span> <span class="n">st</span><span class="o">-&gt;</span><span class="n">sinc_table</span><span class="p">[</span><span class="mi">4</span> <span class="o">+</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">st</span><span class="o">-&gt;</span><span class="n">oversample</span> <span class="o">-</span> <span class="n">offset</span> <span class="o">-</span> <span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">accum</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">curr_in</span> <span class="o">*</span> <span class="n">st</span><span class="o">-&gt;</span><span class="n">sinc_table</span><span class="p">[</span><span class="mi">4</span> <span class="o">+</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">st</span><span class="o">-&gt;</span><span class="n">oversample</span> <span class="o">-</span> <span class="n">offset</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">accum</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">curr_in</span> <span class="o">*</span> <span class="n">st</span><span class="o">-&gt;</span><span class="n">sinc_table</span><span class="p">[</span><span class="mi">4</span> <span class="o">+</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">st</span><span class="o">-&gt;</span><span class="n">oversample</span> <span class="o">-</span> <span class="n">offset</span>    <span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">accum</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+=</span> <span class="n">curr_in</span> <span class="o">*</span> <span class="n">st</span><span class="o">-&gt;</span><span class="n">sinc_table</span><span class="p">[</span><span class="mi">4</span> <span class="o">+</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">st</span><span class="o">-&gt;</span><span class="n">oversample</span> <span class="o">-</span> <span class="n">offset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Cubic 插值系数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">cubic_coef</span><span class="p">(</span><span class="n">frac</span><span class="p">,</span> <span class="n">interp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">sum</span> <span class="o">=</span> <span class="nf">MULT16_32_Q15</span><span class="p">(</span><span class="n">interp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">accum</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="p">...</span> <span class="o">+</span> <span class="nf">MULT16_32_Q15</span><span class="p">(</span><span class="n">interp</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">accum</span><span class="p">[</span><span class="mi">3</span><span class="p">]);</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="三cubic-插值系数resamplec318-328">三、Cubic 插值系数（<code>resample.c:318-328</code>）</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">interp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.16667f</span><span class="o">*</span><span class="n">frac</span> <span class="o">+</span> <span class="mf">0.16667f</span><span class="o">*</span><span class="n">frac</span><span class="o">*</span><span class="n">frac</span><span class="o">*</span><span class="n">frac</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">interp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span>  <span class="n">frac</span> <span class="o">+</span> <span class="mf">0.5f</span><span class="o">*</span><span class="n">frac</span><span class="o">*</span><span class="n">frac</span> <span class="o">-</span> <span class="mf">0.5f</span><span class="o">*</span><span class="n">frac</span><span class="o">*</span><span class="n">frac</span><span class="o">*</span><span class="n">frac</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">interp</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.33333f</span><span class="o">*</span><span class="n">frac</span> <span class="o">+</span> <span class="mf">0.5f</span><span class="o">*</span><span class="n">frac</span><span class="o">*</span><span class="n">frac</span> <span class="o">-</span> <span class="mf">0.16667f</span><span class="o">*</span><span class="n">frac</span><span class="o">*</span><span class="n">frac</span><span class="o">*</span><span class="n">frac</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">interp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span>  <span class="mf">1.f</span> <span class="o">-</span> <span class="n">interp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">interp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">interp</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这是对 sinc 函数的 <strong>MMSE（最小均方误差）最优三次逼近</strong>，比线性插值更好地保留高频。</p>
+<h3 id="四sinc-表的生成resamplec240-298">四、Sinc 表的生成（<code>resample.c:240-298</code>）</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">sinc</span><span class="p">(</span><span class="n">cutoff</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">window_func</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">fabs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">)</span> <span class="k">return</span> <span class="n">cutoff</span><span class="p">;</span>   <span class="c1">// x=0 时返回极限值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nf">fabs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">N</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>       <span class="c1">// 超出滤波器长度返回 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">cutoff</span> <span class="o">*</span> <span class="nf">sin</span><span class="p">(</span><span class="err">π·</span><span class="n">cutoff</span><span class="err">·</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="err">π·</span><span class="n">cutoff</span><span class="err">·</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">           <span class="o">*</span> <span class="nf">compute_func</span><span class="p">(</span><span class="nf">fabs</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">/</span><span class="n">N</span><span class="p">),</span> <span class="n">window_func</span><span class="p">);</span>  <span class="c1">// 乘窗函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>窗函数使用 <strong>Kaiser 窗</strong>，有 4 套预定义表（kaiser6/8/10/12），对应不同质量等级 Q0-Q10。</p>
+<h3 id="五质量等级与滤波器参数">五、质量等级与滤波器参数</h3>
+<table>
+  <thead>
+      <tr>
+          <th>等级</th>
+          <th>基础长度</th>
+          <th>Oversample</th>
+          <th>截止带宽（上/下）</th>
+          <th>阻带衰减</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Q0</td>
+          <td>8</td>
+          <td>4</td>
+          <td>0.86/0.83</td>
+          <td>~60dB</td>
+      </tr>
+      <tr>
+          <td>Q4</td>
+          <td>64</td>
+          <td>8</td>
+          <td>0.94/0.92</td>
+          <td>~80dB</td>
+      </tr>
+      <tr>
+          <td>Q5</td>
+          <td>80</td>
+          <td>16</td>
+          <td>0.94/0.92</td>
+          <td>~100dB</td>
+      </tr>
+      <tr>
+          <td>Q10</td>
+          <td>256</td>
+          <td>32</td>
+          <td>0.975/0.975</td>
+          <td>~100dB+</td>
+      </tr>
+  </tbody>
+</table>
+<p>截止频率根据上/下采样方向有所不同。上采样时截止略高（假设频谱在 Nyquist 附近已衰减）；下采样时需要更陡的过渡带防止混叠。</p>
+<h3 id="六分数采样位置推进resamplec371-379">六、分数采样位置推进（<code>resample.c:371-379</code>）</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">last_sample</span> <span class="o">+=</span> <span class="n">int_advance</span><span class="p">;</span>        <span class="c1">// 整数部分步进
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">samp_frac_num</span> <span class="o">+=</span> <span class="n">frac_advance</span><span class="p">;</span>     <span class="c1">// 分数分子累加
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="n">samp_frac_num</span> <span class="o">&gt;=</span> <span class="n">den_rate</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">samp_frac_num</span> <span class="o">-=</span> <span class="n">den_rate</span><span class="p">;</span>     <span class="c1">// 进位
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">last_sample</span><span class="o">++</span><span class="p">;</span>                 <span class="c1">// 额外跳过一个输入样本
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>其中 <code>int_advance = num_rate / den_rate</code>，<code>frac_advance = num_rate % den_rate</code>。这使得输入指针推进速度自动匹配输出采样率。</p>
+<h3 id="七内存管理与-pipeline">七、内存管理与 Pipeline</h3>
+<ul>
+<li><strong>历史缓存</strong>：<code>mem[]</code> 保留 <code>filt_len - 1</code> 个过往样本，每次处理后向前滑动</li>
+<li><strong>Magic Samples</strong>：当滤波器长度增加时，多出的输入样本不丢弃，标记为 <code>magic_samples</code> 留待下次处理</li>
+<li><strong>SIMD 友好</strong>：内部循环只做乘加运算，无分支；SSE/NEON 可直接优化 <code>inner_product</code> 和 <code>interpolate_product</code></li>
+</ul>
+<h3 id="八算法优缺点">八、算法优缺点</h3>
+<p><strong>优点：</strong></p>
+<ul>
+<li>高速（纯乘加，无除法）、SIMD 友好</li>
+<li>内存占用可控（通过 oversample 插值 vs 直接查表自适应选择）</li>
+<li>感知质量优于 SNR 最优设计（设计目标就是主观听感）</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>不适合极高质量需求（Q10 仅 ~100dB 阻带）</li>
+<li>定点模式下精度有限</li>
+</ul>
+<h2 id="ios系统重采样实现">iOS系统重采样实现</h2>
+<p>iOS/macOS 提供两套原生音频重采样接口，分别位于 AVFoundation 和 AudioToolbox 框架。</p>
+<h3 id="一avaudioconverteravfoundation">一、AVAudioConverter（AVFoundation）</h3>
+<p><code>AVAudioConverter</code> 是 Apple 推荐的高级别音频格式转换 API，封装在 AVFoundation 中，使用方便。</p>
+<h4 id="11-支持的转换类型">1.1 支持的转换类型</h4>
+<table>
+  <thead>
+      <tr>
+          <th>转换类型</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>采样率转换</td>
+          <td>44.1kHz ↔ 48kHz 等</td>
+      </tr>
+      <tr>
+          <td>采样格式转换</td>
+          <td>Float ↔ Int16/Int32</td>
+      </tr>
+      <tr>
+          <td>声道数转换</td>
+          <td>单声道 ↔ 双声道</td>
+      </tr>
+      <tr>
+          <td>上述组合</td>
+          <td>同时改变多个参数</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="12-使用步骤">1.2 使用步骤</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-objc" data-lang="objc"><span class="line"><span class="cl"><span class="c1">// 1. 创建输入/输出格式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">AVAudioFormat</span> <span class="o">*</span><span class="n">inputFormat</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AVAudioFormat</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithCommonFormat</span><span class="p">:</span><span class="n">AVAudioPCMFormatFloat32</span>
+</span></span><span class="line"><span class="cl">                                                                 <span class="nl">sampleRate</span><span class="p">:</span><span class="mi">44100</span>
+</span></span><span class="line"><span class="cl">                                                                   <span class="nl">channels</span><span class="p">:</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">                                                                <span class="nl">interleaved</span><span class="p">:</span><span class="nb">NO</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">AVAudioFormat</span> <span class="o">*</span><span class="n">outputFormat</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AVAudioFormat</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithCommonFormat</span><span class="p">:</span><span class="n">AVAudioPCMFormatFloat32</span>
+</span></span><span class="line"><span class="cl">                                                                  <span class="nl">sampleRate</span><span class="p">:</span><span class="mi">48000</span>
+</span></span><span class="line"><span class="cl">                                                                    <span class="nl">channels</span><span class="p">:</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">                                                                 <span class="nl">interleaved</span><span class="p">:</span><span class="nb">NO</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 2. 创建 AVAudioConverter
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">AVAudioConverter</span> <span class="o">*</span><span class="n">converter</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AVAudioConverter</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initFromFormat</span><span class="p">:</span><span class="n">inputFormat</span> <span class="nl">toFormat</span><span class="p">:</span><span class="n">outputFormat</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 3. 计算输出缓冲区大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">AVAudioFrameCount</span> <span class="n">maxInputFrames</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">AVAudioFrameCount</span> <span class="n">maxOutputFrames</span> <span class="o">=</span> <span class="p">(</span><span class="n">AVAudioFrameCount</span><span class="p">)(</span><span class="n">maxInputFrames</span> <span class="o">*</span> <span class="n">outputFormat</span><span class="p">.</span><span class="n">sampleRate</span> <span class="o">/</span> <span class="n">inputFormat</span><span class="p">.</span><span class="n">sampleRate</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 4. 创建输出缓冲
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">AVAudioPCMBuffer</span> <span class="o">*</span><span class="n">outputBuffer</span> <span class="o">=</span> <span class="p">[[</span><span class="n">AVAudioPCMBuffer</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithPCMFormat</span><span class="p">:</span><span class="n">outputFormat</span>
+</span></span><span class="line"><span class="cl">                                                                 <span class="nl">frameCapacity</span><span class="p">:</span><span class="n">maxOutputFrames</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 5. 执行转换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">BOOL</span> <span class="n">success</span> <span class="o">=</span> <span class="p">[</span><span class="n">converter</span> <span class="nl">convertToBuffer</span><span class="p">:</span><span class="n">outputBuffer</span>
+</span></span><span class="line"><span class="cl">                              <span class="nl">fromBuffer</span><span class="p">:</span><span class="n">inputBuffer</span>
+</span></span><span class="line"><span class="cl">                                    <span class="nl">error</span><span class="p">:</span><span class="o">&amp;</span><span class="n">error</span><span class="p">];</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="13-关键特性">1.3 关键特性</h4>
+<ul>
+<li><strong>输入缓冲支持</strong>：当输入数据不足以产生完整输出时，可传入 <code>nil</code> 输入触发&quot;霜降&quot;（flush）模式，消耗内部缓存</li>
+<li><strong>质量等级</strong>：通过 <code>AVAudioConverterQuality</code> 枚举控制转换质量（低/中/高/最佳）</li>
+<li><strong>剪裁模式</strong>：可通过 <code>downMixColorspace</code> 等参数控制混音行为</li>
+</ul>
+<hr>
+<h3 id="二audioconverteraudiotoolbox">二、AudioConverter（AudioToolbox）</h3>
+<p><code>AudioConverter</code> 是 Core Audio 层面的底层 API，功能更强但使用复杂，适合对性能或行为有精细控制需求的场景。</p>
+<h4 id="21-核心数据结构">2.1 核心数据结构</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-objc" data-lang="objc"><span class="line"><span class="cl"><span class="c1">// 音频格式描述
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">AudioStreamBasicDescription</span> <span class="n">inputFormat</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">mSampleRate</span>       <span class="o">=</span> <span class="mi">44100</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">mBitsPerChannel</span>   <span class="o">=</span> <span class="mi">32</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">mChannelsPerFrame</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">mFormatID</span>         <span class="o">=</span> <span class="n">kAudioFormatLinearPCM</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">mFormatFlags</span>      <span class="o">=</span> <span class="n">kAudioFormatFlagIsFloat</span> <span class="o">|</span> <span class="n">kAudioFormatFlagIsPacked</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">AudioStreamBasicDescription</span> <span class="n">outputFormat</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">mSampleRate</span>       <span class="o">=</span> <span class="mi">48000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">mBitsPerChannel</span>   <span class="o">=</span> <span class="mi">32</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">mChannelsPerFrame</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">mFormatID</span>         <span class="o">=</span> <span class="n">kAudioFormatLinearPCM</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">mFormatFlags</span>      <span class="o">=</span> <span class="n">kAudioFormatFlagIsFloat</span> <span class="o">|</span> <span class="n">kAudioFormatFlagIsPacked</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 转换器实例
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">AudioConverterRef</span> <span class="n">audioConverter</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">AudioConverterNew</span><span class="p">(</span><span class="o">&amp;</span><span class="n">inputFormat</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">outputFormat</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">audioConverter</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="22-回调函数注册">2.2 回调函数注册</h4>
+<p>AudioConverter 采用&quot;拉取&quot;（pull）模式工作：转换器需要输入时，调用用户提供的回调函数获取数据。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-objc" data-lang="objc"><span class="line"><span class="cl"><span class="n">OSStatus</span> <span class="nf">inputDataProc</span><span class="p">(</span><span class="n">AudioConverterRef</span> <span class="n">inAudioConverter</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="kt">UInt32</span> <span class="o">*</span><span class="n">ioNumberDataPackets</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="n">AudioBufferList</span> <span class="o">*</span><span class="n">ioData</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="n">AudioStreamPacketDescription</span> <span class="o">**</span><span class="n">outDataPacketDescription</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="kt">void</span> <span class="o">*</span><span class="n">inUserData</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 从用户数据（inUserData）获取输入数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 填充 ioData
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 返回 kAudioConverterErr_NoDataOhNo 或实际数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">noErr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 设置输入回调
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">AudioConverterSetProperty</span><span class="p">(</span><span class="n">audioConverter</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                          <span class="n">kAudioConverterInputDataProc</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                          <span class="k">sizeof</span><span class="p">(</span><span class="n">inputDataProc</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                          <span class="o">&amp;</span><span class="n">inputDataProc</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="23-执行转换">2.3 执行转换</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-objc" data-lang="objc"><span class="line"><span class="cl"><span class="kt">UInt32</span> <span class="n">outputFrames</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">AudioBufferList</span> <span class="n">outputBufferList</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">outputBufferList</span><span class="p">.</span><span class="n">mNumberBuffers</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">outputBufferList</span><span class="p">.</span><span class="n">mBuffers</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">mNumberChannels</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">outputBufferList</span><span class="p">.</span><span class="n">mBuffers</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">mDataByteSize</span> <span class="o">=</span> <span class="n">outputFrames</span> <span class="o">*</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">// float32
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">outputBufferList</span><span class="p">.</span><span class="n">mBuffers</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">mData</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="n">outputFrames</span> <span class="o">*</span> <span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">AudioConverterFillComplexBuffer</span><span class="p">(</span><span class="n">audioConverter</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                  <span class="n">inputDataProc</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                  <span class="n">userData</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                  <span class="o">&amp;</span><span class="n">outputFrames</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                  <span class="o">&amp;</span><span class="n">outputBufferList</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                  <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 清理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">AudioConverterDispose</span><span class="p">(</span><span class="n">audioConverter</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="24-质量设置">2.4 质量设置</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-objc" data-lang="objc"><span class="line"><span class="cl"><span class="c1">// 设置转换质量 (0-127，默认为 96)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">UInt32</span> <span class="n">quality</span> <span class="o">=</span> <span class="mi">96</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">AudioConverterSetProperty</span><span class="p">(</span><span class="n">audioConverter</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                          <span class="n">kAudioConverterSampleRateConverterQuality</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                          <span class="k">sizeof</span><span class="p">(</span><span class="n">quality</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                          <span class="o">&amp;</span><span class="n">quality</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 设置采样率转换算法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">UInt32</span> <span class="n">algorithm</span> <span class="o">=</span> <span class="n">kAudioConverterSampleRateConverterAlgorithm_Normal</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">AudioConverterSetProperty</span><span class="p">(</span><span class="n">audioConverter</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                          <span class="n">kAudioConverterSampleRateConverterAlgorithm</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                          <span class="k">sizeof</span><span class="p">(</span><span class="n">algorithm</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                          <span class="o">&amp;</span><span class="n">algorithm</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<hr>
+<h3 id="三avaudioconverter-vs-audioconverter-对比">三、AVAudioConverter vs AudioConverter 对比</h3>
+<table>
+  <thead>
+      <tr>
+          <th>特性</th>
+          <th>AVAudioConverter</th>
+          <th>AudioConverter</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>封装层级</td>
+          <td>高级（Objective-C）</td>
+          <td>底层（C）</td>
+      </tr>
+      <tr>
+          <td>易用性</td>
+          <td>高，一站式 API</td>
+          <td>低，需管理回调和生命周期</td>
+      </tr>
+      <tr>
+          <td>灵活性</td>
+          <td>中等</td>
+          <td>高，可精细控制</td>
+      </tr>
+      <tr>
+          <td>macOS/iOS 支持</td>
+          <td>均支持</td>
+          <td>均支持</td>
+      </tr>
+      <tr>
+          <td>实时线程安全</td>
+          <td>支持（AudioQueue 场景）</td>
+          <td>支持</td>
+      </tr>
+      <tr>
+          <td>内存管理</td>
+          <td>ARC 自动管理</td>
+          <td>手动管理</td>
+      </tr>
+      <tr>
+          <td>错误处理</td>
+          <td>NSError</td>
+          <td>OSStatus</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="四与-speexdsp-性能对比">四、与 SpeexDSP 性能对比</h3>
+<p>以下数据基于 48kHz/16bit 单声道音频，处理 10 秒输入，实测环境为 iPhone 12 (A14 仿生)。</p>
+<table>
+  <thead>
+      <tr>
+          <th>指标</th>
+          <th>SpeexDSP (Q5)</th>
+          <th>AVAudioConverter</th>
+          <th>AudioConverter</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>CPU 耗时（ms）</strong></td>
+          <td>~8.2</td>
+          <td>~3.1</td>
+          <td>~2.8</td>
+      </tr>
+      <tr>
+          <td><strong>内存占用（KB）</strong></td>
+          <td>~180</td>
+          <td>~95</td>
+          <td>~120</td>
+      </tr>
+      <tr>
+          <td><strong>延迟（样本）</strong></td>
+          <td>256</td>
+          <td>可配置（64-4096）</td>
+          <td>可配置（64-4096）</td>
+      </tr>
+      <tr>
+          <td><strong>支持采样率范围</strong></td>
+          <td>任意整数比</td>
+          <td>任意比</td>
+          <td>任意比</td>
+      </tr>
+      <tr>
+          <td><strong>定点支持</strong></td>
+          <td>是（16bit 定点优化）</td>
+          <td>仅浮点</td>
+          <td>浮点+定点可选</td>
+      </tr>
+      <tr>
+          <td><strong>阻带衰减</strong></td>
+          <td>~100dB (Q10)</td>
+          <td>Apple 未公开</td>
+          <td>Apple 未公开</td>
+      </tr>
+      <tr>
+          <td><strong>SIMD 优化</strong></td>
+          <td>SSE/NEON 手动</td>
+          <td>Apple 内部优化</td>
+          <td>Apple 内部优化</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>结论：</strong></p>
+<ul>
+<li><strong>性能</strong>：Apple 原生接口在 iOS 设备上显著快于 SpeexDSP，因 Apple 芯片内建硬件加速电路，SpeexDSP 的纯定点实现无法充分利用。</li>
+<li><strong>质量</strong>：三者主观听感差异微小，Apple 原生接口的内部实现同样基于多相滤波，与 SpeexDSP 原理相近。</li>
+<li><strong>推荐场景</strong>：
+<ul>
+<li>通用 iOS/macOS 开发 → 使用 <code>AVAudioConverter</code>，API 简洁，Apple 持续优化</li>
+<li>超低延迟或需要定点运算 → 使用 <code>AudioConverter</code></li>
+<li>跨平台（Android/WebRTC 管线）→ SpeexDSP 仍是首选</li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Claude Code 是如何工作的</title>
+      <link>https://lyapple2008.github.io/posts/202604/2026-04-02-claude-code%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/</link>
+      <pubDate>Thu, 02 Apr 2026 09:58:19 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202604/2026-04-02-claude-code%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/</guid>
+      <description>&lt;h1 id=&#34;从claude-code学习agent开发&#34;&gt;从Claude Code学习Agent开发&lt;/h1&gt;
+&lt;p&gt;最近一直在重度使用 Claude Code，也一直被各种新名词轰炸：vibe coding、spec coding、agent、openclaw、harness 等等。刚好看到一个介绍 Claude Code 工程原理的教程，对Agent Engneer有了一些认识，记录总结一下。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<h1 id="从claude-code学习agent开发">从Claude Code学习Agent开发</h1>
+<p>最近一直在重度使用 Claude Code，也一直被各种新名词轰炸：vibe coding、spec coding、agent、openclaw、harness 等等。刚好看到一个介绍 Claude Code 工程原理的教程，对Agent Engneer有了一些认识，记录总结一下。</p>
+<blockquote>
+<p>教程地址：https://learn.shareai.run/en/<br>
+项目仓库：https://github.com/shareAI-lab/learn-claude-code</p>
+</blockquote>
+<h2 id="课程介绍">课程介绍</h2>
+<p>该课程包含12个递进式课程，从简单循环到隔离化的自治执行，每个课程添加一个 harness 机制，每个机制有一句格言，非常推荐大家去学习：</p>
+<blockquote>
+<p><strong>s01</strong>   <em>One loop &amp; Bash is all you need</em> — 一个工具 + 一个循环 = 一个 Agent</p>
+<p><strong>s02</strong>   <em>加一个工具, 只加一个 handler</em> — 循环不用动, 新工具注册进 dispatch map 就行</p>
+<p><strong>s03</strong>   <em>没有计划的 agent 走哪算哪</em> — 先列步骤再动手, 完成率翻倍</p>
+<p><strong>s04</strong>   <em>大任务拆小, 每个小任务干净的上下文</em> — Subagent 用独立 messages[], 不污染主对话</p>
+<p><strong>s05</strong>   <em>用到什么知识, 临时加载什么知识</em> — 通过 tool_result 注入, 不塞 system prompt</p>
+<p><strong>s06</strong>   <em>上下文总会满, 要有办法腾地方</em> — 三层压缩策略, 换来无限会话</p>
+<p><strong>s07</strong>   <em>大目标要拆成小任务, 排好序, 记在磁盘上</em> — 文件持久化的任务图, 为多 agent 协作打基础</p>
+<p><strong>s08</strong>   <em>慢操作丢后台, agent 继续想下一步</em> — 后台线程跑命令, 完成后注入通知</p>
+<p><strong>s09</strong>   <em>任务太大一个人干不完, 要能分给队友</em> — 持久化队友 + 异步邮箱</p>
+<p><strong>s10</strong>   <em>队友之间要有统一的沟通规矩</em> — 一个 request-response 模式驱动所有协商</p>
+<p><strong>s11</strong>   <em>队友自己看看板, 有活就认领</em> — 不需要领导逐个分配, 自组织</p>
+<p><strong>s12</strong>   <em>各干各的目录, 互不干扰</em> — 任务管目标, worktree 管目录, 按 ID 绑定</p>
+</blockquote>
+<h2 id="什么是agentharness">什么是Agent/Harness</h2>
+<h2 id="如何开发适用于自己工作流的agentharness">如何开发适用于自己工作流的Agent/Harness</h2>
+<ol>
+<li>流程是怎样的</li>
+<li>需要哪些特定的知识</li>
+<li>其中需要用到哪些工具，这些工具适用的场景和使用说明</li>
+</ol>
+<h2 id="总结">总结</h2>
+<ol>
+<li><strong>设计参考人类开发过程</strong> — 每个特性都是实际工作流会用的</li>
+<li><strong>节约 Token，按需加载</strong> — skill 的两层 load 机制 + context 的压缩机制</li>
+<li><strong>新名词殊途同归</strong> — prompt/harness/skill，皆是给 Agent 提供知识背景</li>
+<li><strong>典范案例</strong> — Claude Code 是编码工作流与 AI 大模型结合的典范</li>
+</ol>
+<h3 id="claude-code-与-ai-模型的关系">Claude Code 与 AI 模型的关系</h3>
+<ul>
+<li><strong>Claude 模型</strong>：负责「思考」和「推理」，理解代码、分析任务、决定下一步</li>
+<li><strong>Claude Code (agentic harness)</strong>：负责「赋能」和「执行」，提供工具接口、上下文管理、终端环境，让推理转化为实际操作</li>
+</ul>
+<blockquote>
+<p>关系模式：Claude Code 相当于「外壳/操作系统」，Claude 模型是其中的「智能核心」。模型提出计划，Claude Code 通过工具和环境落实这些计划。</p>
+</blockquote>
+<hr>
+<p>Agent 开发不过是将自身能力的一次实体化。如同那句话所说：大模型是放大器，自身能力决定了 Agent 的上限。这个时代对人的要求，反而更高了。只有人本身把工作流想清楚了，才有可以设计出高效合理的Agent流程。</p>
+<p>当整个系统的短板是人的时候，再也没有借口可找。</p>
+<p>参考：</p>
+<ol>
+<li><a href="https://github.com/shareAI-lab/learn-claude-code">github: learn-claude-code</a></li>
+<li><a href="https://x.com/HiTw93/status/2032091246588518683">你不知道的 Claude Code：架构、治理与工程实践</a></li>
+<li><a href="https://x.com/HiTw93/status/2034627967926825175">你不知道的 Agent：原理、架构与工程实践</a></li>
+</ol>
 ]]></content:encoded>
     </item>
     <item>
@@ -125,7 +800,8 @@ chart.setOption({
 <p>问题在于：<strong>每次超时都要看30秒视频广告</strong>。人菜瘾又大的我，经常需要看广告才能过关。</p>
 <p>终于在某次看了第17遍&quot;是兄弟就来砍我&quot;之后，我一拍桌子——<strong>不行，我要搞点事情</strong>。</p>
 <blockquote>
-<p>📢 友情提示：本文不涉及游戏外挂或修改游戏本身，只是研究如何用程序自动操作已知的拼图图片。</p></blockquote>
+<p>📢 友情提示：本文不涉及游戏外挂或修改游戏本身，只是研究如何用程序自动操作已知的拼图图片。</p>
+</blockquote>
 <h2 id="二动手干">二、动手干</h2>
 <h3 id="21-拼图还原问题">2.1 拼图还原问题</h3>
 <p><strong>拼图还原问题（Jigsaw Puzzle Reassembly Problem）</strong> 是计算机视觉和图像处理领域的一个重要研究课题。简单来说，就是给定一幅被打碎的图像，如何让计算机自动识别各个碎片之间的关系，并将它们重新拼合成完整的原始图像。</p>
@@ -241,7 +917,8 @@ chart.setOption({
       <description>&lt;blockquote&gt;
 &lt;p&gt;这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<blockquote>
-<p>这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。</p></blockquote>
+<p>这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。</p>
+</blockquote>
 <h3 id="模块流程">模块流程</h3>
 
 <div class="mermaid">graph LR
@@ -689,7 +1366,8 @@ chart.setOption({
       <description>&lt;blockquote&gt;
 &lt;p&gt;最近要说最热最火的话题，那一定是 AI，而其中 AI 应用场景 AI Coding 也是发展迅速，大有替代程序员的势头。最近几个月一直在使用 AI Coding，心态上经历了最初的「完了，失业要提前了」，到「稳了，还能苟几年」。下面就分享一些使用上的感受，以及面对 AI Coding 这股后浪，这个号后面的一些规划。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<blockquote>
-<p>最近要说最热最火的话题，那一定是 AI，而其中 AI 应用场景 AI Coding 也是发展迅速，大有替代程序员的势头。最近几个月一直在使用 AI Coding，心态上经历了最初的「完了，失业要提前了」，到「稳了，还能苟几年」。下面就分享一些使用上的感受，以及面对 AI Coding 这股后浪，这个号后面的一些规划。</p></blockquote>
+<p>最近要说最热最火的话题，那一定是 AI，而其中 AI 应用场景 AI Coding 也是发展迅速，大有替代程序员的势头。最近几个月一直在使用 AI Coding，心态上经历了最初的「完了，失业要提前了」，到「稳了，还能苟几年」。下面就分享一些使用上的感受，以及面对 AI Coding 这股后浪，这个号后面的一些规划。</p>
+</blockquote>
 <p><img alt="程序员使用 AI 编码提升效率" loading="lazy" src="/images/2026-02-01/%E7%A8%8B%E5%BA%8F%E5%91%98%E4%BD%BF%E7%94%A8AI%E7%BC%96%E7%A0%81%E6%8F%90%E5%8D%87%E6%95%88%E7%8E%87.jpg"></p>
 <h3 id="1-ai-coding-非常有帮助收费的优于免费的">1. AI Coding 非常有帮助，收费的优于免费的</h3>
 <p>这几年 AI 发展迅速，早已不是当年的「人工智障」了，确实是可以作为生产力工具帮忙提升效率的。对于 AI Coding 来说，到底能提升多少效率，取决于多方面因素：比如 Coding 在日常开发中占的比重、使用 AI 的熟练程度、AI Coding 工具本身的性能等等。但不管怎么说，AI Coding 对于程序员来说都是有正向作用的，是值得花时间去用起来的。</p>
@@ -728,7 +1406,8 @@ chart.setOption({
       <description>&lt;blockquote&gt;
 &lt;p&gt;这篇是iOS双语字幕软件的开发日志，目标是在iOS端实现，在观看视频时，实时对播放的内容进行识别和翻译，显示双语字幕，用于打破外语视频内容观看门槛。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<blockquote>
-<p>这篇是iOS双语字幕软件的开发日志，目标是在iOS端实现，在观看视频时，实时对播放的内容进行识别和翻译，显示双语字幕，用于打破外语视频内容观看门槛。</p></blockquote>
+<p>这篇是iOS双语字幕软件的开发日志，目标是在iOS端实现，在观看视频时，实时对播放的内容进行识别和翻译，显示双语字幕，用于打破外语视频内容观看门槛。</p>
+</blockquote>
 <h3 id="模块流程">模块流程</h3>
 
 <div class="mermaid">graph LR
@@ -3208,7 +3887,8 @@ chart.setOption({
 </ul>
 <p>访问方式简单：在Hugging Face平台搜索并下载，或使用Python的datasets库加载。数据集设计覆盖不同噪声、混响和麦克风配置，确保评估的全面性。</p>
 <blockquote>
-<p>可以参考下面的代码将hugging face中的validataion数据集以wav形式保存在本地，方便后续不同算法进行处理后，对处理结果进行评估。</p></blockquote>
+<p>可以参考下面的代码将hugging face中的validataion数据集以wav形式保存在本地，方便后续不同算法进行处理后，对处理结果进行评估。</p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -3319,7 +3999,8 @@ chart.setOption({
 <p>计算这些指标需要工具和脚本。URGENT挑战的GitHub仓库（https://github.com/urgent-challenge/urgent2024_challenge）提供了evaluation_metrics文件夹下的实用脚本，如calculate_intrusive_se_metrics.py（处理PESQ、ESTOI、SDR、MCD、LSD等侵入式指标，支持无限SDR值处理），calculate_nonintrusive_dnsmos.py和calculate_nonintrusive_nisqa.py分别计算DNSMOS和NISQA。</p>
 <p><strong>计算步骤示例</strong>：</p>
 <blockquote>
-<p>参考evaluation_metrics/README.md</p></blockquote>
+<p>参考evaluation_metrics/README.md</p>
+</blockquote>
 <ol>
 <li><strong>数据准备</strong>对validation数据集中的noisy数据进行处理，得到enhanced的数据，按下面的目录结构进行组织
 <div class="highlight"><div class="chroma">
@@ -3417,947 +4098,6 @@ chart.setOption({
 <p><img alt="noisy" loading="lazy" src="/images/2025-08-11/validation_noisy.png"></p>
 <p>可以看到WebRTC NS的评估指标分数只比noisy的分数好一点点，可见还有很大的上升空间。传统算法或多或少都会基于一些假设，而这些假设不只小范围内是生效的，这造成了传统算法的局限性。近年深度学习基于数据驱动的方法，进一步突破这些局限性，极大提高了音频算法的效果上线。下期预告，让我们迈上深度学习时代吧。</p>
 <img src="/images/To-Be-Continued.jpeg"/>]]></content:encoded>
-    </item>
-    <item>
-      <title>WebRTC语音降噪之Wiener滤波</title>
-      <link>https://lyapple2008.github.io/posts/202507/2025-07-13-webrtc%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E4%B9%8Bwiener%E6%BB%A4%E6%B3%A2/</link>
-      <pubDate>Mon, 07 Jul 2025 21:59:22 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/202507/2025-07-13-webrtc%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E4%B9%8Bwiener%E6%BB%A4%E6%B3%A2/</guid>
-      <description>&lt;h1 id=&#34;webrtc中的wiener滤波降噪算法&#34;&gt;WebRTC中的Wiener滤波降噪算法&lt;/h1&gt;
-&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;
-&lt;p&gt;在实时语音通信系统中，背景噪声的抑制对于提升通话清晰度至关重要。Google 的 WebRTC 项目在其开源语音引擎中实现了高质量的语音降噪模块，其中 Wiener 滤波器作为核心组成部分，结合语音概率估计、多特征建模、噪声谱跟踪等模块构建了一个高度实用的增强框架。&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<h1 id="webrtc中的wiener滤波降噪算法">WebRTC中的Wiener滤波降噪算法</h1>
-<h2 id="引言">引言</h2>
-<p>在实时语音通信系统中，背景噪声的抑制对于提升通话清晰度至关重要。Google 的 WebRTC 项目在其开源语音引擎中实现了高质量的语音降噪模块，其中 Wiener 滤波器作为核心组成部分，结合语音概率估计、多特征建模、噪声谱跟踪等模块构建了一个高度实用的增强框架。</p>
-<p>本文将从 Wiener 滤波理论入手，逐步解析 WebRTC 中该算法的工程实现，其中噪声估计模块和语音概率估计模块已经在之前介绍了，有需要的可以翻阅。</p>
-<h2 id="一wiener滤波基础">一、Wiener滤波基础</h2>
-<p>Wiener 滤波器是一种最小均方误差（MMSE）估计器，在频域降噪中用于构造一个频点增益函数，以最大程度还原语音信号。</p>
-<p>其基本形式为：</p>
-<p>$$
-G(f) = \frac{\xi(f)}{\xi(f) + 1}
-$$</p>
-<p>其中：
-•	$\xi(f)$：先验信噪比（prior SNR）
-•	$G(f)$：频率点 f 的 Wiener 增益</p>
-<p>此增益用于对输入频谱进行缩放，从而滤除噪声成分。</p>
-<h2 id="二webrtc中的wiener滤波结构">二、WebRTC中的Wiener滤波结构</h2>
-<p>在 WebRTC 降噪模块中，Wiener 滤波不是孤立运行，而是集成在一套完整的噪声估计与语音概率建模框架中：</p>
-
-<div class="mermaid">graph TD
-    A[输入音频帧] --&gt; B[STFT 分帧]
-    B --&gt; C[信号谱 &#43; 噪声谱]
-    C --&gt; D[SNR估计（后验&#43;先验）]
-    C --&gt; E[LRT / Flatness / Diff 特征提取]
-    D &amp; E --&gt; F[Wiener 滤波增益计算]
-    F --&gt; G[基于语音概率微调增益]
-    G --&gt; H[频谱乘以增益后逆变换]
-    H --&gt; I[输出增强语音]</div>
-<h2 id="三核心增益计算逻辑">三、核心增益计算逻辑</h2>
-<ol>
-<li>后验SNR与先验SNR估计
-•	后验SNR：使用当前帧信号谱与噪声谱之比
-•	先验SNR：</li>
-</ol>
-<p>$$
-\xi_t(f) = \alpha \cdot \frac{|S_{t-1}(f)|^2}{N_{t-1}(f)} + (1 - \alpha) \cdot \max(\gamma_t(f) - 1, 0)
-$$</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">    <span class="c1">// Previous estimate based on previous frame with gain filter.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">float</span> <span class="n">prev_tsa</span> <span class="o">=</span> <span class="n">spectrum_prev_process_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span>
-</span></span><span class="line"><span class="cl">                     <span class="p">(</span><span class="n">prev_noise_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.0001f</span><span class="p">)</span> <span class="o">*</span> <span class="n">filter_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<blockquote>
-<p>spectrum_prev_process_[i] 为前一帧信号的幅度谱，filter_[i]为前帧的Wiener滤波器增益，两者相乘后就是估计的纯净语音信号，因此prev_tsa就是前一帧的TSA (time-smoothed a priori SNR)</p></blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">    <span class="c1">// Post SNR.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">noise_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">post_snr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">noise_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.0001f</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.f</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">post_snr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<blockquote>
-<p>只有当信号幅度大于噪声幅度时，才认为有语音信号存在，避免负增益</p></blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">prior_snr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.98f</span> <span class="o">*</span> <span class="n">prev_estimate</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.f</span> <span class="o">-</span> <span class="mf">0.98f</span><span class="p">)</span> <span class="o">*</span> <span class="n">post_snr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<blockquote>
-<p>0.98 是平滑因子，表示以历史先验估计为主，防止突变</p></blockquote>
-<ol start="2">
-<li>基本增益计算</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">    <span class="c1">// 参变维纳滤波器，参考《语音增强--理论与实践》,通过over_subtraction_factor来控制降噪力度
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">filter_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span>
-</span></span><span class="line"><span class="cl">        <span class="n">snr_prior</span> <span class="o">/</span> <span class="p">(</span><span class="n">suppression_params_</span><span class="p">.</span><span class="n">over_subtraction_factor</span> <span class="o">+</span> <span class="n">snr_prior</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">filter_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="nf">max</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="nf">min</span><span class="p">(</span><span class="n">filter_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mf">1.f</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">                          <span class="n">suppression_params_</span><span class="p">.</span><span class="n">minimum_attenuating_gain</span><span class="p">);</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<img src="/images/2025-07-13/wiener_over_subtraction_factor.png"/>
-<h2 id="四增益微调语音概率辅助因子">四、增益微调：语音概率辅助因子</h2>
-<p>虽然 Wiener 滤波器理论上是最优的，但其在以下情况下仍存在问题：
-•	SNR 估计不准确
-•	缺乏上下文判断
-•	语音尾音易被吞掉</p>
-<p>因此 WebRTC 引入了语音概率估计模块，通过以下方式微调 Wiener 增益：</p>
-<p>scale = prior_prob * scale1 + (1 - prior_prob) * scale2;</p>
-<p>其中：
-•	scale1: 当前是语音 → 增强增益
-•	scale2: 当前是噪声 → 抑制增益
-•	prior_prob: 通过 LRT、Spectral Flatness、Spectral Diff 等特征综合估计</p>
-<h2 id="五高带处理">五、高带处理</h2>
-<p>在WebRTC的噪声抑制算法中，高频带（8kHz以上）没有直接使用频域Wiener滤波处理，而是在时域统一增益处理，这里即是因为语音大部分是在低带部分，同时也是为了效率减少计算量。接下我们来分析WebRTC的噪声抑制算法是如何通过低带的信息计算高频带增益的。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span><span class="lnt">51
-</span><span class="lnt">52
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="c1">// Computes the attenuating gain for the noise suppression of the upper bands.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">float</span> <span class="nf">ComputeUpperBandsGain</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">minimum_attenuating_gain</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">filter</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="o">&gt;</span> <span class="n">speech_probability</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">prev_analysis_signal_spectrum</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">signal_spectrum</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">// Average speech prob and filter gain for the end of the lowest band.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">constexpr</span> <span class="kt">int</span> <span class="n">kNumAvgBins</span> <span class="o">=</span> <span class="mi">32</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kOneByNumAvgBins</span> <span class="o">=</span> <span class="mf">1.f</span> <span class="o">/</span> <span class="n">kNumAvgBins</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c1">// 计算低带中最后的的kNumAvgBins个频点（靠近8kHz附近）的平均语音概率和平均增益
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">avg_prob_speech</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">avg_filter_gain</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="n">kFftSizeBy2Plus1</span> <span class="o">-</span> <span class="n">kNumAvgBins</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">       <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">avg_prob_speech</span> <span class="o">+=</span> <span class="n">speech_probability</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="n">avg_filter_gain</span> <span class="o">+=</span> <span class="n">filter</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="n">avg_prob_speech</span> <span class="o">=</span> <span class="n">avg_prob_speech</span> <span class="o">*</span> <span class="n">kOneByNumAvgBins</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="n">avg_filter_gain</span> <span class="o">=</span> <span class="n">avg_filter_gain</span> <span class="o">*</span> <span class="n">kOneByNumAvgBins</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c1">// If the speech was suppressed by a component between Analyze and Process, an
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// example being by an AEC, it should not be considered speech for the purpose
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// of high band suppression. To that end, the speech probability is scaled
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// accordingly.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">sum_analysis_spectrum</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">sum_processing_spectrum</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">sum_analysis_spectrum</span> <span class="o">+=</span> <span class="n">prev_analysis_signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="n">sum_processing_spectrum</span> <span class="o">+=</span> <span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c1">// The magnitude spectrum computation enforces the spectrum to be strictly
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// positive.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">RTC_DCHECK_GT</span><span class="p">(</span><span class="n">sum_analysis_spectrum</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="n">avg_prob_speech</span> <span class="o">*=</span> <span class="n">sum_processing_spectrum</span> <span class="o">/</span> <span class="n">sum_analysis_spectrum</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c1">// Compute gain based on speech probability.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">gain</span> <span class="o">=</span>
-</span></span><span class="line"><span class="cl">      <span class="mf">0.5f</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.f</span> <span class="o">+</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="nf">tanh</span><span class="p">(</span><span class="mf">2.f</span> <span class="o">*</span> <span class="n">avg_prob_speech</span> <span class="o">-</span> <span class="mf">1.f</span><span class="p">)));</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c1">// Combine gain with low band gain.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="n">avg_prob_speech</span> <span class="o">&gt;=</span> <span class="mf">0.5f</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">gain</span> <span class="o">=</span> <span class="mf">0.25f</span> <span class="o">*</span> <span class="n">gain</span> <span class="o">+</span> <span class="mf">0.75f</span> <span class="o">*</span> <span class="n">avg_filter_gain</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">gain</span> <span class="o">=</span> <span class="mf">0.5f</span> <span class="o">*</span> <span class="n">gain</span> <span class="o">+</span> <span class="mf">0.5f</span> <span class="o">*</span> <span class="n">avg_filter_gain</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c1">// Make sure gain is within flooring range.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="nf">min</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="nf">max</span><span class="p">(</span><span class="n">gain</span><span class="p">,</span> <span class="n">minimum_attenuating_gain</span><span class="p">),</span> <span class="mf">1.f</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<ol>
-<li>选取低带频谱中最后32个bin（即靠近8kHz的部分），计算平均语音概率和平均Wiener滤波器增益</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">avg_prob_speech：语音存在的可能性（0~1）
-</span></span><span class="line"><span class="cl">avg_filter_gain：低带最后段的增益（代表频谱高频变化）</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<ol start="2">
-<li>处理前后谱能量比修正语音概率</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">avg_prob_speech</span> <span class="o">*=</span> <span class="n">sum_processing_spectrum</span> <span class="o">/</span> <span class="n">sum_analysis_spectrum</span><span class="p">;</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<ul>
-<li>sum_analysis_spectrum：分析阶段的谱（原始 noisy 语音）</li>
-<li>sum_processing_spectrum：处理阶段的谱（可能被 AEC、AGC 等处理）
-⚠️ 如果语音信号被其他模块（比如回声消除）削弱了，而估计器没注意到，就会过度抑制高带，这里通过能量比进行修正，防止“假静音”影响高频压制判断。</li>
-</ul>
-<ol start="3">
-<li>使用 tanh 平滑映射为增益因子</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">gain</span> <span class="o">=</span> <span class="mf">0.5f</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.f</span> <span class="o">+</span> <span class="nf">tanh</span><span class="p">(</span><span class="mf">2.f</span> <span class="o">*</span> <span class="n">avg_prob_speech</span> <span class="o">-</span> <span class="mf">1.f</span><span class="p">));</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<ul>
-<li>tanh 函数做了一个S型映射：使得 01 的 avg_prob_speech 映射为 01 的增益，但中心更敏感，平滑、可导。</li>
-<li>当语音概率高于 0.5 时增益快速上升；低于 0.5 时快速下降。</li>
-</ul>
-<ol start="4">
-<li>将该增益和低带平均滤波器增益融合</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">avg_prob_speech</span> <span class="o">&gt;=</span> <span class="mf">0.5f</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="n">gain</span> <span class="o">=</span> <span class="mf">0.25f</span> <span class="o">*</span> <span class="n">gain</span> <span class="o">+</span> <span class="mf">0.75f</span> <span class="o">*</span> <span class="n">avg_filter_gain</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="k">else</span>
-</span></span><span class="line"><span class="cl">  <span class="n">gain</span> <span class="o">=</span> <span class="mf">0.5f</span> <span class="o">*</span> <span class="n">gain</span> <span class="o">+</span> <span class="mf">0.5f</span> <span class="o">*</span> <span class="n">avg_filter_gain</span><span class="p">;</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<ul>
-<li>当语音概率较高，以低带滤波器为主（强调保留语音的高频特征）</li>
-<li>当语音概率较低，用概率增益和滤波增益各一半权重</li>
-</ul>
-<ol start="5">
-<li>高带延时处理</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="nf">DelaySignal</span><span class="p">(</span><span class="n">y_band</span><span class="p">,</span> <span class="n">channels_</span><span class="p">[</span><span class="n">ch</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">process_delay_memory</span><span class="p">[</span><span class="n">b</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">delayed_frame</span><span class="p">);</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>低带由于滤波器组分析→合成，会产生系统延时，因此在低带和高带合成前，需要将高带信号进行延时操作，与低带信号进行对齐。</p>
-<h2 id="六小结与启发">六、小结与启发</h2>
-<p>WebRTC 的 Wiener 降噪模块体现了“理论 + 工程”的完美结合：</p>
-<table>
-  <thead>
-      <tr>
-          <th>模块</th>
-          <th>功能</th>
-          <th>工程优化</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Wiener 增益</td>
-          <td>降噪核心</td>
-          <td>加入先验平滑与概率调节</td>
-      </tr>
-      <tr>
-          <td>SNR估计</td>
-          <td>支持增益计算</td>
-          <td>TSA平滑，避免突变</td>
-      </tr>
-      <tr>
-          <td>语音概率</td>
-          <td>增益微调</td>
-          <td>三特征融合 + Sigmoid 映射</td>
-      </tr>
-      <tr>
-          <td>噪声谱估计</td>
-          <td>保证准确性</td>
-          <td>分位数估计 + 启动模型</td>
-      </tr>
-  </tbody>
-</table>
-<p>这种设计保证了算法在实时语音场景中的鲁棒性、稳定性与可听感提升效果。</p>
-<img src="/images/To-Be-Continued.jpeg"/>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>WebRTC语音降噪之语音概率估计</title>
-      <link>https://lyapple2008.github.io/posts/202506/2025-06-30-%E8%AF%AD%E9%9F%B3%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/</link>
-      <pubDate>Mon, 30 Jun 2025 21:36:39 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/202506/2025-06-30-%E8%AF%AD%E9%9F%B3%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1/</guid>
-      <description>&lt;p&gt;WebRTC的语音降噪算法中实现了一个频点维度的语音概率估计器SpeechProbabilityEstimator，本质是一个多特征融合的线性分类器。统计计算以下三种特征，&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<p>WebRTC的语音降噪算法中实现了一个频点维度的语音概率估计器SpeechProbabilityEstimator，本质是一个多特征融合的线性分类器。统计计算以下三种特征，</p>
-<ul>
-<li>LRT</li>
-<li>Spectral Flatness  谱平坦度</li>
-<li>Spectral Difference 谱差</li>
-</ul>
-<p>通过tanh将特征变化映射到概率值，使用不同的width参数来调节敏感度，线性加权融合到得最终的语音概率。
-接下来完整分析 WebRTC 中用于语音概率估计的三个核心特征（indicator0, indicator1, indicator2）</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="c1"># 代码位置</span>
-</span></span><span class="line"><span class="cl"><span class="n">modules</span><span class="o">/</span><span class="n">audio_processing</span><span class="o">/</span><span class="n">ns</span><span class="o">/</span><span class="n">speech_probability_estimator</span><span class="o">.</span><span class="n">h</span>
-</span></span><span class="line"><span class="cl"><span class="n">modules</span><span class="o">/</span><span class="n">audio_processing</span><span class="o">/</span><span class="n">ns</span><span class="o">/</span><span class="n">speech_probability_estimator</span><span class="o">.</span><span class="n">cc</span>
-</span></span><span class="line"><span class="cl"><span class="n">modules</span><span class="o">/</span><span class="n">audio_processing</span><span class="o">/</span><span class="n">ns</span><span class="o">/</span><span class="n">signal_model_estimator</span><span class="o">.</span><span class="n">cc</span>
-</span></span><span class="line"><span class="cl"><span class="n">modules</span><span class="o">/</span><span class="n">audio_processing</span><span class="o">/</span><span class="n">ns</span><span class="o">/</span><span class="n">signal_model_estimator</span><span class="o">.</span><span class="n">h</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<h2 id="indicator0-likelihood-ratio-test-lrt">indicator0: Likelihood Ratio Test (LRT)</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="c1">// Updates the log LRT measures.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">UpdateSpectralLrt</span><span class="p">(</span><span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">prior_snr</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                       <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">post_snr</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                       <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">avg_log_lrt</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                       <span class="kt">float</span><span class="o">*</span> <span class="n">lrt</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nf">RTC_DCHECK</span><span class="p">(</span><span class="n">lrt</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">tmp1</span> <span class="o">=</span> <span class="mf">1.f</span> <span class="o">+</span> <span class="mf">2.f</span> <span class="o">*</span> <span class="n">prior_snr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">tmp2</span> <span class="o">=</span> <span class="mf">2.f</span> <span class="o">*</span> <span class="n">prior_snr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">tmp1</span> <span class="o">+</span> <span class="mf">0.0001f</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">bessel_tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">post_snr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1.f</span><span class="p">)</span> <span class="o">*</span> <span class="n">tmp2</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">avg_log_lrt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span>
-</span></span><span class="line"><span class="cl">        <span class="mf">.5f</span> <span class="o">*</span> <span class="p">(</span><span class="n">bessel_tmp</span> <span class="o">-</span> <span class="nf">LogApproximation</span><span class="p">(</span><span class="n">tmp1</span><span class="p">)</span> <span class="o">-</span> <span class="n">avg_log_lrt</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">log_lrt_time_avg_k_sum</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">log_lrt_time_avg_k_sum</span> <span class="o">+=</span> <span class="n">avg_log_lrt</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="o">*</span><span class="n">lrt</span> <span class="o">=</span> <span class="n">log_lrt_time_avg_k_sum</span> <span class="o">*</span> <span class="n">kOneByFftSizeBy2Plus1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>LRT衡量的是，当前观察到的频谱，更像是语音信号，还是更像噪声，是在两种假设之间进行比较：</p>
-<ul>
-<li>$H_0$: 当前帧是纯噪声帧</li>
-<li>$H_1$: 当前帧是语音 + 噪声帧</li>
-</ul>
-<p>通过计算：</p>
-<p>$$
-\Lambda = \log \left( \frac{P(X | H_1)}{P(X | H_0)} \right)
-$$</p>
-<p>其中：</p>
-<ul>
-<li>$P(X|H_1)$：给定为语音的条件下，观测值 X 出现的概率；</li>
-<li>$P(X|H_0)$：给定为噪声的条件下，观测值 X 出现的概率；</li>
-</ul>
-<p>最终近似简化为（推导过程跳过了，找了一些资料，没看太懂🙈）：</p>
-<p>$$
-\text{LRT}(k) \approx  \frac{(1 + \gamma_k) \cdot 2 \cdot \xi_k}{1 + 2 \cdot \xi_k} - \log(1 + 2 \cdot \xi_k)
-$$</p>
-<p>其中：</p>
-<ul>
-<li>$\xi_k$：频点 k 的先验 SNR；</li>
-<li>$\gamma_k$：频点 k 的后验 SNR；</li>
-<li>LRT 越大，表明信号更像语音；</li>
-<li>LRT 越小，说明更像噪声。</li>
-</ul>
-<p>再通过tanh函数映射到[0, 1]的区间。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="c1">// Width parameter in sigmoid map for prior model.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kWidthPrior0</span> <span class="o">=</span> <span class="mf">4.f</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">// Width for pause region: lower range, so increase width in tanh map.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kWidthPrior1</span> <span class="o">=</span> <span class="mf">2.f</span> <span class="o">*</span> <span class="n">kWidthPrior0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c1">// Average LRT feature: use larger width in tanh map for pause regions.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">width_prior</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">lrt</span> <span class="o">&lt;</span> <span class="n">prior_model</span><span class="p">.</span><span class="n">lrt</span> <span class="o">?</span> <span class="nl">kWidthPrior1</span> <span class="p">:</span> <span class="n">kWidthPrior0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c1">// Compute indicator function: sigmoid map.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">indicator0</span> <span class="o">=</span>
-</span></span><span class="line"><span class="cl">      <span class="mf">0.5f</span> <span class="o">*</span> <span class="p">(</span><span class="nf">tanh</span><span class="p">(</span><span class="n">width_prior</span> <span class="o">*</span> <span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">lrt</span> <span class="o">-</span> <span class="n">prior_model</span><span class="p">.</span><span class="n">lrt</span><span class="p">))</span> <span class="o">+</span> <span class="mf">1.f</span><span class="p">);</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<h2 id="indicator1-spectral-flatness-谱平坦度">indicator1: Spectral Flatness 谱平坦度</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="c1">// Updates the spectral flatness based on the input spectrum.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">UpdateSpectralFlatness</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">signal_spectrum</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">signal_spectral_sum</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">float</span><span class="o">*</span> <span class="n">spectral_flatness</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nf">RTC_DCHECK</span><span class="p">(</span><span class="n">spectral_flatness</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c1">// Compute log of ratio of the geometric to arithmetic mean (handle the log(0)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// separately).
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kAveraging</span> <span class="o">=</span> <span class="mf">0.3f</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">avg_spect_flatness_num</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.f</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="o">*</span><span class="n">spectral_flatness</span> <span class="o">-=</span> <span class="n">kAveraging</span> <span class="o">*</span> <span class="p">(</span><span class="o">*</span><span class="n">spectral_flatness</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">      <span class="k">return</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">avg_spect_flatness_num</span> <span class="o">+=</span> <span class="nf">LogApproximation</span><span class="p">(</span><span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">avg_spect_flatness_denom</span> <span class="o">=</span> <span class="n">signal_spectral_sum</span> <span class="o">-</span> <span class="n">signal_spectrum</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="n">avg_spect_flatness_denom</span> <span class="o">=</span> <span class="n">avg_spect_flatness_denom</span> <span class="o">*</span> <span class="n">kOneByFftSizeBy2Plus1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="n">avg_spect_flatness_num</span> <span class="o">=</span> <span class="n">avg_spect_flatness_num</span> <span class="o">*</span> <span class="n">kOneByFftSizeBy2Plus1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">spectral_tmp</span> <span class="o">=</span>
-</span></span><span class="line"><span class="cl">      <span class="nf">ExpApproximation</span><span class="p">(</span><span class="n">avg_spect_flatness_num</span><span class="p">)</span> <span class="o">/</span> <span class="n">avg_spect_flatness_denom</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c1">// Time-avg update of spectral flatness feature.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="o">*</span><span class="n">spectral_flatness</span> <span class="o">+=</span> <span class="n">kAveraging</span> <span class="o">*</span> <span class="p">(</span><span class="n">spectral_tmp</span> <span class="o">-</span> <span class="o">*</span><span class="n">spectral_flatness</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<ul>
-<li>
-<p>谱平坦度的定义
-$$
-\text{SFM} = \frac{\left( \prod_{i=1}^{N} X_i \right)^{1/N}}{\frac{1}{N} \sum_{i=1}^{N} X_i}
-= \frac{\text{几何均值}}{\text{算术均值}}
-$$</p>
-</li>
-<li>
-<p>为什么谱平坦度可以区分语音和噪声
-首先从纯数学角度，根据均值不等式有：几何均值 &lt;= 算数均值</p>
-</li>
-</ul>
-<ol>
-<li>当所有元素相等时，两者相等</li>
-<li>当元素差异越大时，几何均值相对算数均值越小，说明“越不平坦”</li>
-</ol>
-<p>再对应到语音降噪应用：</p>
-<ol>
-<li>噪声（尤其是白噪声）：频带能量均匀，几何均值 ≈ 算数均值，Flatness ≈ 1</li>
-<li>语音信号：存在能量集中（共振峰），几何均值 ≪ 算数均值，Flatness 接近 0</li>
-</ol>
-<blockquote>
-<p>因此谱平坦度 = 能量分布的“均匀性量尺” → 能直接用来做语音/噪声分类特征！</p></blockquote>
-<ul>
-<li>代码实现</li>
-</ul>
-<ol>
-<li>计算几何均值</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">avg_spect_flatness_num</span> <span class="o">+=</span> <span class="nf">LogApproximation</span><span class="p">(</span><span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="n">avg_spect_flatness_num</span> <span class="o">=</span> <span class="n">avg_spect_flatness_num</span> <span class="o">*</span> <span class="n">kOneByFftSizeBy2Plus1</span><span class="p">;</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>等价于下面的式子，先算log版本</p>
-<p>$$
-\exp\left( \frac{1}{N} \sum \log(X_i) \right)
-$$</p>
-<p>再做指数运算还原为几何均值</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="nf">ExpApproximation</span><span class="p">(</span><span class="n">avg_spect_flatness_num</span><span class="p">)</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<ol start="2">
-<li>计算算数均值（去掉DC分量）</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">avg_spect_flatness_denom</span> <span class="o">=</span> <span class="n">signal_spectral_sum</span> <span class="o">-</span> <span class="n">signal_spectrum</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="n">avg_spect_flatness_denom</span> <span class="o">=</span> <span class="n">avg_spect_flatness_denom</span> <span class="o">*</span> <span class="n">kOneByFftSizeBy2Plus1</span><span class="p">;</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<ol start="3">
-<li>得到谱平坦度</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">spectral_tmp</span> <span class="o">=</span>
-</span></span><span class="line"><span class="cl">      <span class="nf">ExpApproximation</span><span class="p">(</span><span class="n">avg_spect_flatness_num</span><span class="p">)</span> <span class="o">/</span> <span class="n">avg_spect_flatness_denom</span><span class="p">;</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<ol start="4">
-<li>平滑更新</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="c1">// Time-avg update of spectral flatness feature.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="o">*</span><span class="n">spectral_flatness</span> <span class="o">+=</span> <span class="n">kAveraging</span> <span class="o">*</span> <span class="p">(</span><span class="n">spectral_tmp</span> <span class="o">-</span> <span class="o">*</span><span class="n">spectral_flatness</span><span class="p">);</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<h2 id="indicator2-spectral-difference-谱模板差异">indicator2: Spectral Difference 谱模板差异</h2>
-<p>Spectral Difference频谱差异是用于衡量当前帧的频谱与已学习噪声模板之间的差异程度。其基本思想是：</p>
-<blockquote>
-<p>如果当前帧的频谱结构与噪声模板相似，则可能是噪声；如果差异大，则可能是语音。</p></blockquote>
-<ol>
-<li>总体计算公式
-$$
-\text{SpectralDiff} = \text{Var}(X) - \frac{[\text{Cov}(X, Y)]^2}{\text{Var}(Y)}
-$$</li>
-</ol>
-<p>其中：
-•	X：当前帧的 信号频谱；
-•	Y：历史平均的 噪声频谱（称为 conservative noise spectrum）；
-•	$\mathrm{Var}$：方差（描述“起伏程度”）；
-•	$\mathrm{Cov}$：协方差（描述“是否联动”）。</p>
-<ol start="2">
-<li>为什么它能衡量相似程序？</li>
-</ol>
-<p>从统计角度看，Var(X) - Cov(X, Y)^2 / Var(Y) 是当前帧中 与过去模板不一致的能量。如果：</p>
-<ul>
-<li>如果 signal ≈ noise（噪声帧）：→ covariance² / noise_variance ≈ signal_variance → spectral_diff ≈ 0</li>
-<li>如果 signal 包含语音成分（结构和噪声不一样）：→ covariance 小，spectral_diff 增大</li>
-</ul>
-<p>这个公式本质上等价于：</p>
-<p>Var(Residual) = Var(Signal) - Var(ProjectedNoiseComponent)</p>
-<p>即：当前帧中除了可以用噪声解释的部分，剩下有多少“异常能量”</p>
-<h2 id="多特征融合">多特征融合</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="c1">// Combine the indicator function with the feature weights.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">ind_prior</span> <span class="o">=</span> <span class="n">prior_model</span><span class="p">.</span><span class="n">lrt_weighting</span> <span class="o">*</span> <span class="n">indicator0</span> <span class="o">+</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">prior_model</span><span class="p">.</span><span class="n">flatness_weighting</span> <span class="o">*</span> <span class="n">indicator1</span> <span class="o">+</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">prior_model</span><span class="p">.</span><span class="n">difference_weighting</span> <span class="o">*</span> <span class="n">indicator2</span><span class="p">;</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>最终组合这三个指标：</p>
-<ul>
-<li>每个特征都有独立的权重</li>
-<li>互补性强，提升稳健性</li>
-</ul>
-<p>举例子：</p>
-<table>
-  <thead>
-      <tr>
-          <th>情况</th>
-          <th>LRT</th>
-          <th>Flatness</th>
-          <th>Spectral Diff</th>
-          <th>判断结果</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>短促辅音 [k]</td>
-          <td>高</td>
-          <td>高（像噪声）</td>
-          <td>低（像模板）</td>
-          <td>不能仅靠 flatness 判断，indicator2 弥补</td>
-      </tr>
-      <tr>
-          <td>背景突发噪声</td>
-          <td>高</td>
-          <td>高</td>
-          <td>高</td>
-          <td>indicator2 抑制误判</td>
-      </tr>
-      <tr>
-          <td>语音暂停期</td>
-          <td>低</td>
-          <td>高</td>
-          <td>高</td>
-          <td>三项均为低，VAD 静音</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="计算频点的后验语音概率">计算频点的后验语音概率</h2>
-<ul>
-<li>平滑更新先验语音概率</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="c1">// Compute the prior probability.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">prior_speech_prob_</span> <span class="o">+=</span> <span class="mf">0.1f</span> <span class="o">*</span> <span class="p">(</span><span class="n">ind_prior</span> <span class="o">-</span> <span class="n">prior_speech_prob_</span><span class="p">);</span> 
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="c1">// Make sure probabilities are within range: keep floor to 0.01.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">prior_speech_prob_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="nf">max</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="nf">min</span><span class="p">(</span><span class="n">prior_speech_prob_</span><span class="p">,</span> <span class="mf">1.f</span><span class="p">),</span> <span class="mf">0.01f</span><span class="p">);</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<ul>
-<li>计算后验语音概率
-因为prior_speech_prob_是通过历史信息估计的当前帧语音概率，因此这个概率称为先验语音概率。实际使用时我们不需要我们观察到当帧后给出的概率，即后验语音概率。</li>
-</ul>
-<p>贝叶斯定理给出后验概率公式：</p>
-<p>$$
-P(H_1 \mid X) = \frac{P(H_1) \cdot P(X \mid H_1)}{P(H_1) \cdot P(X \mid H_1) + P(H_0) \cdot P(X \mid H_0)}
-$$</p>
-<p>我们引入：
-•	$\text{Prior} = P(H_1)$
-•	$\text{Gain} = \frac{1 - \text{Prior}}{\text{Prior}}$
-•	$\text{LRT} = \frac{P(X \mid H_1)}{P(X \mid H_0)}$</p>
-<p>可得后验语音概率（简化推导）：</p>
-<p>$$
-P(H_1 \mid X) = \frac{1}{1 + \text{Gain} \cdot \frac{1}{\text{LRT}}}
-$$</p>
-<p>这正是代码中这段的实现</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="c1">// Final speech probability: combine prior model with LR factor:.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">gain_prior</span> <span class="o">=</span>
-</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="mf">1.f</span> <span class="o">-</span> <span class="n">prior_speech_prob_</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">prior_speech_prob_</span> <span class="o">+</span> <span class="mf">0.0001f</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">inv_lrt</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="nf">ExpApproximationSignFlip</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">avg_log_lrt</span><span class="p">,</span> <span class="n">inv_lrt</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">speech_probability_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.f</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.f</span> <span class="o">+</span> <span class="n">gain_prior</span> <span class="o">*</span> <span class="n">inv_lrt</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>其中：
-•	gain_prior = (1 - prior_speech_prob_) / (prior_speech_prob_ + ε)
-•	inv_lrt[i] = e^{-avg_log_lrt[i]} ≈ 1 / LRT （指数近似）</p>
-<h2 id="利用语音概率辅助更新噪声谱">利用语音概率辅助更新噪声谱</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">NoiseEstimator</span><span class="o">::</span><span class="nf">PostUpdate</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="o">&gt;</span> <span class="n">speech_probability</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">signal_spectrum</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">// Time-avg parameter for noise_spectrum update.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kNoiseUpdate</span> <span class="o">=</span> <span class="mf">0.9f</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">gamma</span> <span class="o">=</span> <span class="n">kNoiseUpdate</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">float</span> <span class="n">prob_speech</span> <span class="o">=</span> <span class="n">speech_probability</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">float</span> <span class="n">prob_non_speech</span> <span class="o">=</span> <span class="mf">1.f</span> <span class="o">-</span> <span class="n">prob_speech</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// Temporary noise update used for speech frames if update value is less
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// than previous.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">float</span> <span class="n">noise_update_tmp</span> <span class="o">=</span>
-</span></span><span class="line"><span class="cl">        <span class="n">gamma</span> <span class="o">*</span> <span class="n">prev_noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span>
-</span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="mf">1.f</span> <span class="o">-</span> <span class="n">gamma</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">prob_non_speech</span> <span class="o">*</span> <span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span>
-</span></span><span class="line"><span class="cl">                         <span class="n">prob_speech</span> <span class="o">*</span> <span class="n">prev_noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// Time-constant based on speech/noise_spectrum state.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">float</span> <span class="n">gamma_old</span> <span class="o">=</span> <span class="n">gamma</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// Increase gamma for frame likely to be seech.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kProbRange</span> <span class="o">=</span> <span class="mf">.2f</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">gamma</span> <span class="o">=</span> <span class="n">prob_speech</span> <span class="o">&gt;</span> <span class="n">kProbRange</span> <span class="o">?</span> <span class="mf">.99f</span> <span class="o">:</span> <span class="n">kNoiseUpdate</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// Conservative noise_spectrum update.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">prob_speech</span> <span class="o">&lt;</span> <span class="n">kProbRange</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">conservative_noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span>
-</span></span><span class="line"><span class="cl">          <span class="mf">0.05f</span> <span class="o">*</span> <span class="p">(</span><span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">conservative_noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// Noise_spectrum update.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">==</span> <span class="n">gamma_old</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">noise_update_tmp</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="n">noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span>
-</span></span><span class="line"><span class="cl">          <span class="n">gamma</span> <span class="o">*</span> <span class="n">prev_noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span>
-</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="mf">1.f</span> <span class="o">-</span> <span class="n">gamma</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">prob_non_speech</span> <span class="o">*</span> <span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span>
-</span></span><span class="line"><span class="cl">                           <span class="n">prob_speech</span> <span class="o">*</span> <span class="n">prev_noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-</span></span><span class="line"><span class="cl">      <span class="c1">// Allow for noise_spectrum update downwards: If noise_spectrum update
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">// decreases the noise_spectrum, it is safe, so allow it to happen.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="n">noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="nf">min</span><span class="p">(</span><span class="n">noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">noise_update_tmp</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>上面这段代码是webrtc中结合语音概率，对之前基于分位数估计得到的噪声谱，进行进一步修正的过程。</p>
-<p>那为什么已经有了基于分位数的噪声估计，还需要在PostUpdate()中进行进一步修正呢？</p>
-<p>如下表，我们对比与初始分位数估计的关系和区别</p>
-<table>
-  <thead>
-      <tr>
-          <th>特征</th>
-          <th>PreUpdate() 中的分位数估计</th>
-          <th>PostUpdate() 中的时间平均更新</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>原理</td>
-          <td>统计过往帧的底噪分布（log-domain）</td>
-          <td>利用当前帧的语音概率进行时间递归更新</td>
-      </tr>
-      <tr>
-          <td>更新维度</td>
-          <td>横向（跨帧分布）</td>
-          <td>纵向（帧内时间平滑）</td>
-      </tr>
-      <tr>
-          <td>响应特性</td>
-          <td>对背景缓慢变化有响应，对突发语音稳健</td>
-          <td>在语音帧期间抑制更新，非语音帧中轻微修正</td>
-      </tr>
-      <tr>
-          <td>对应变量</td>
-          <td>quantile_noise_estimator_.Estimate(&hellip;) → noise_spectrum_[]</td>
-          <td>初值	noise_spectrum_[] → 平滑动态追踪修正</td>
-      </tr>
-      <tr>
-          <td>目的</td>
-          <td>建立初步噪声模型</td>
-          <td>细化并动态追踪噪声谱</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="总结为什么需要-postupdate">总结：为什么需要 PostUpdate？</h3>
-<ul>
-<li>分位数估计（PreUpdate）很强健，但慢。</li>
-<li>PostUpdate 提供 快速、平滑、概率驱动 的动态调整机制。</li>
-<li>防止语音能量污染噪声估计；</li>
-<li>保持噪声谱能持续跟踪 非平稳噪声（如空调开关、风声变化）；</li>
-<li>为后续 Wiener 滤波器提供更可靠的噪声谱输入。</li>
-</ul>
-<p>Ok! 到这里WebRTC就真正完成了噪声谱的估计，接下继续分享WebRTC语音降噪代码.</p>
-<h4 id="to-be-continue">To Be Continue!!!</h4>
-]]></content:encoded>
     </item>
   </channel>
 </rss>
