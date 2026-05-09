@@ -745,7 +745,7 @@ chart.setOption({
 </div>
 <p><strong>第三步：对每个滤波器抽头，取 4 个相邻表值做 cubic 插值</strong></p>
 <p><strong>第四步：所有抽头加权求和</strong></p>
-<p>$$\text{output}[m] = \sum_{j=0}^{7} \text{sinc_value}[j] \times \text{input}[n_{\text{center}} + k_j]$$</p>
+<p>$$\mathrm{output}[m] = \sum_{j=0}^{7} \mathrm{sinc_value}[j] \times \mathrm{input}\big[n_{\mathrm{center}} + k_j\big]$$</p>
 <h4 id="cubic-插值系数">Cubic 插值系数</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
