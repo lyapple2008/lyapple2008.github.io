@@ -1,0 +1,103 @@
+categories/index.xml
+  h_82733dd61c3915 2,7,9
+images/2026-09/ai-coding-engineer-value-cover.svg
+  h_82733dd61c3915 1-179
+index.xml
+  h_82733dd61c3915 2,7,9-10,17,20-26,59,66,73,80
+posts/202607/speex-echo-cancellation/index.html
+  h_82733dd61c3915 1
+posts/index.xml
+  h_82733dd61c3915 2,7,9-10,17,20-26,59,66,73,80
+sitemap.xml
+  h_82733dd61c3915 8-9,11-12,14-15,18,21-35
+tags/aec/index.xml
+  h_82733dd61c3915 2,7,9
+tags/agent/index.xml
+  h_82733dd61c3915 2,7,9-10,13-19,24
+tags/ai-coding/index.xml
+  h_82733dd61c3915 2,7,9,17
+tags/ai/index.xml
+  h_82733dd61c3915 2,7,9,17
+tags/android/index.xml
+  h_82733dd61c3915 2,7,9,17,24,31,38,52
+tags/apple-silicon/index.xml
+  h_82733dd61c3915 2,7,9
+tags/asr/index.xml
+  h_82733dd61c3915 2,7,9,17,31
+tags/audio/index.xml
+  h_82733dd61c3915 2,7,9,17,24,31
+tags/audioprocessing/index.xml
+  h_82733dd61c3915 2,7,9,17
+tags/claude-code/index.xml
+  h_82733dd61c3915 2,7,9,17
+tags/deeplearning/index.xml
+  h_82733dd61c3915 2,7,9,17,24,31,38
+tags/ffmpeg/index.xml
+  h_82733dd61c3915 2,7,9
+tags/gitpage/index.xml
+  h_82733dd61c3915 2,7,9,17
+tags/index.xml
+  h_82733dd61c3915 2,7,9-10,13-40
+tags/inferenceengine/index.xml
+  h_82733dd61c3915 2,7,9,17
+tags/ios/index.xml
+  h_82733dd61c3915 2,7,9
+tags/ios开发/index.xml
+  h_82733dd61c3915 2,7,9,24,31
+tags/jni/index.xml
+  h_82733dd61c3915 2,7,9,17,24
+tags/llm/index.xml
+  h_82733dd61c3915 2,7,9,17
+tags/onnx-runtime/index.xml
+  h_82733dd61c3915 2,7,9
+tags/qwen3-coder-next/index.xml
+  h_82733dd61c3915 2,7,9,17
+tags/speexdsp/index.xml
+  h_82733dd61c3915 2,7,9
+tags/webrtc/index.xml
+  h_82733dd61c3915 2,7,9,17,31,38,45,52
+tags/双语字幕/index.xml
+  h_82733dd61c3915 2,7,9,24,31
+tags/开发日志/index.xml
+  h_82733dd61c3915 2,7,9,24,31
+tags/性能优化/index.xml
+  h_82733dd61c3915 2,7,9
+tags/房产/index.xml
+  h_82733dd61c3915 2,7,9
+tags/技术/index.xml
+  h_82733dd61c3915 2,7,9,17,24,38,45,52,59,66,73,80
+tags/数字信号处理/index.xml
+  h_82733dd61c3915 2,7,9
+tags/本地部署/index.xml
+  h_82733dd61c3915 2,7,9,17
+tags/生活/index.xml
+  h_82733dd61c3915 2,7,9,17,45,52
+tags/矩阵乘法/index.xml
+  h_82733dd61c3915 2,7,9
+tags/职业规划/index.xml
+  h_82733dd61c3915 1-20
+tags/语音降噪/index.xml
+  h_82733dd61c3915 2,7,9,24
+tags/读书/index.xml
+  h_82733dd61c3915 2,7,9
+tags/财务/index.xml
+  h_82733dd61c3915 2,7,9
+tags/软件工程/index.xml
+  h_82733dd61c3915 1-20
+tags/音视频/index.xml
+  h_82733dd61c3915 2,7,9
+tags/音频算法/index.xml
+  h_82733dd61c3915 2,7,9,17,24,38,45,59
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "764cc51476628f0654b2d0d90d08cebb26680f52",
+  "prompts": {},
+  "logical_commit_id": "764cc51476628f0654b2d0d90d08cebb26680f52",
+  "humans": {
+    "h_82733dd61c3915": {
+      "author": "liuyang.marshall <liuyang.marshall@bigo.sg>"
+    }
+  }
+}
