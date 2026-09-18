@@ -1,0 +1,397 @@
+404.html
+  h_82733dd61c3915 1
+about_me/index.html
+  h_82733dd61c3915 7,13,20
+archives/index.html
+  h_82733dd61c3915 1,5-6
+categories/index.html
+  h_82733dd61c3915 1
+categories/index.xml
+  h_82733dd61c3915 2,7-12,14
+index.html
+  h_82733dd61c3915 1,7
+index.json
+  h_82733dd61c3915 1
+index.xml
+  h_82733dd61c3915 2,7-12,14,22-139,147-610,618-1205,1213-1297,1305-1501,1515-2135,2142-2643,2650-3544,3551-3606
+page/1/index.html
+  h_82733dd61c3915 1
+page/2/index.html
+  h_82733dd61c3915 1,3,8
+page/3/index.html
+  h_82733dd61c3915 1,3-4,8
+page/4/index.html
+  h_82733dd61c3915 1,3-4,8
+page/5/index.html
+  h_82733dd61c3915 1,3-7,11
+page/6/index.html
+  h_82733dd61c3915 1,3-4,7
+page/7/index.html
+  h_82733dd61c3915 1,3-4,6,8
+page/8/index.html
+  h_82733dd61c3915 1,3-5,9-10
+page/9/index.html
+  h_82733dd61c3915 1,3-4
+posts/201802/2018-2-15-jni入门之helloworld篇/index.html
+  h_82733dd61c3915 2
+posts/201802/2018-2-19-2018小目标/index.html
+  h_82733dd61c3915 1
+posts/201803/2018-3-24-ffmpeg中avfilter模块实践指南/index.html
+  h_82733dd61c3915 1
+posts/201804/2018-04-29-android端实现手写数字识别/index.html
+  h_82733dd61c3915 1
+posts/201808/2018-08-18-windows下载编译ffmpeg动态库指北/index.html
+  h_82733dd61c3915 1
+posts/201810/2018-10-15-2018健身记录/index.html
+  h_82733dd61c3915 7
+posts/201810/2018-10-29-收集音频技术应用公司与实验室/index.html
+  h_82733dd61c3915 3
+posts/201901/2019-01-26-2019小目标/index.html
+  h_82733dd61c3915 4
+posts/201903/2019-03-03-javanativeinterface笔记/index.html
+  h_82733dd61c3915 6
+posts/201903/2019-03-10-音频开发资源/index.html
+  h_82733dd61c3915 8,12-13,21,26-27
+posts/201903/2019-03-31-音乐人声分离小结/index.html
+  h_82733dd61c3915 2
+posts/201904/2019-04-07-算法工程师到底是做什么的/index.html
+  h_82733dd61c3915 1
+posts/201908/2019-08-04-代码优化方法论/index.html
+  h_82733dd61c3915 7
+posts/202004/2020-04-25-github-io博客无法访问问题/index.html
+  h_82733dd61c3915 12
+posts/202009/2020-09-07-webrtc-android源码编译/index.html
+  h_82733dd61c3915 2
+posts/202112/2021-12-22-webrtc中的音频处理概览/index.html
+  h_82733dd61c3915 3
+posts/202202/2022-02-03-qmf分析综合滤波器/index.html
+  h_82733dd61c3915 4
+posts/202208/2022-08-24-android中几种sdkversion的区别/index.html
+  h_82733dd61c3915 6-7,9
+posts/202405/2024-05-17-算子融合/index.html
+  h_82733dd61c3915 8
+posts/202406/2024-06-10-macos-m2-tensorflow-gpu环境搭建/index.html
+  h_82733dd61c3915 3
+posts/202503/2025-03-27-代码编译/index.html
+  h_82733dd61c3915 22
+posts/202506/2025-06-28-基于分位数的噪声估计/index.html
+  h_82733dd61c3915 2
+posts/202506/2025-06-30-语音概率估计/index.html
+  h_82733dd61c3915 1
+posts/202507/2025-07-13-webrtc语音降噪之wiener滤波/index.html
+  h_82733dd61c3915 3
+posts/202508/2025-08-11-音频算法评估/index.html
+  h_82733dd61c3915 2
+posts/202511/2025-11-03-使用ort进行语音降噪推理/index.html
+  h_82733dd61c3915 1
+posts/2026-todo/index.html
+  h_82733dd61c3915 4,19,23,43
+posts/202601/2026-01-25-ios音频捕获/index.html
+  h_82733dd61c3915 2
+posts/202601/2026-02-01-关于aicoding的一些感想和后续的规划/index.html
+  h_82733dd61c3915 2
+posts/202602/2026-02-14-asr任务初体验/index.html
+  h_82733dd61c3915 2
+posts/202603/2026-03-09-基于ios系统接口实现双语字幕app/index.html
+  h_82733dd61c3915 1
+posts/202603/2026-03-28-一个程序员为了不看广告有多拼/index.html
+  h_82733dd61c3915 2
+posts/202604/2026-04-02-claude-code是如何工作的/index.html
+  h_82733dd61c3915 2
+posts/202604/2026-04-20-音频重采样/index.html
+  h_82733dd61c3915 16
+posts/202607/2026-07-15-本地ai大模型方案/index.html
+  h_82733dd61c3915 3
+posts/202607/mel_spectrogram/index.html
+  h_82733dd61c3915 2
+posts/202608/2026-08-30-40年房贷/index.html
+  h_82733dd61c3915 1
+posts/202609/2026-09-03-富爸爸穷爸爸读后感/index.html
+  h_82733dd61c3915 1
+posts/202609/2026-09-06-矩阵乘法优化/index.html
+  h_82733dd61c3915 1,79
+posts/202609/2026-09-17-chatgpt给软件工程师的建议/index.html
+  h_82733dd61c3915 1-115
+posts/index.html
+  h_82733dd61c3915 1,7
+posts/index.xml
+  h_82733dd61c3915 2,7-12,14,22-139,147-610,618-1205,1213-1297,1305-1501,1515-2135,2142-2643,2650-3544,3551-3606
+posts/page/1/index.html
+  h_82733dd61c3915 1
+posts/page/2/index.html
+  h_82733dd61c3915 1,4,9
+posts/page/3/index.html
+  h_82733dd61c3915 1,4-5,9
+posts/page/4/index.html
+  h_82733dd61c3915 1,4-5,9
+posts/page/5/index.html
+  h_82733dd61c3915 1,4-8,12
+posts/page/6/index.html
+  h_82733dd61c3915 1,4-5,8
+posts/page/7/index.html
+  h_82733dd61c3915 1,4-5,7,9
+posts/page/8/index.html
+  h_82733dd61c3915 1,4-6,10-11
+posts/page/9/index.html
+  h_82733dd61c3915 1,3-5
+robots.txt
+  h_82733dd61c3915 2-3
+search/index.html
+  h_82733dd61c3915 1
+tags/aec/index.html
+  h_82733dd61c3915 1
+tags/aec/index.xml
+  h_82733dd61c3915 2,7-12,14
+tags/aec/page/1/index.html
+  h_82733dd61c3915 1
+tags/agent/index.html
+  h_82733dd61c3915 1,4
+tags/agent/index.xml
+  h_82733dd61c3915 2,7-12,14,23-486,493-548
+tags/agent/page/1/index.html
+  h_82733dd61c3915 1
+tags/ai-coding/index.html
+  h_82733dd61c3915 1
+tags/ai-coding/index.xml
+  h_82733dd61c3915 2,7-12,14,22-55
+tags/ai-coding/page/1/index.html
+  h_82733dd61c3915 1
+tags/ai/index.html
+  h_82733dd61c3915 1
+tags/ai/index.xml
+  h_82733dd61c3915 2,7-12,14,22-77
+tags/ai/page/1/index.html
+  h_82733dd61c3915 1
+tags/android/index.html
+  h_82733dd61c3915 1,8
+tags/android/index.xml
+  h_82733dd61c3915 2,7-12,14,22-61,68-188,195-220,227-1278,1286-1547,1554-1704
+tags/android/page/1/index.html
+  h_82733dd61c3915 1
+tags/android/page/2/index.html
+  h_82733dd61c3915 1
+tags/apple-silicon/index.html
+  h_82733dd61c3915 1
+tags/apple-silicon/index.xml
+  h_82733dd61c3915 2,7-12,14,23-610
+tags/apple-silicon/page/1/index.html
+  h_82733dd61c3915 1
+tags/asr/index.html
+  h_82733dd61c3915 1
+tags/asr/index.xml
+  h_82733dd61c3915 2,7-12,14,22-523,531-550,557-999
+tags/asr/page/1/index.html
+  h_82733dd61c3915 1
+tags/audio/index.html
+  h_82733dd61c3915 1
+tags/audio/index.xml
+  h_82733dd61c3915 2,7-12,14,22-263,270-314,321-366
+tags/audio/page/1/index.html
+  h_82733dd61c3915 1
+tags/audioprocessing/index.html
+  h_82733dd61c3915 1,6
+tags/audioprocessing/index.xml
+  h_82733dd61c3915 2,7-12,14,22-47
+tags/audioprocessing/page/1/index.html
+  h_82733dd61c3915 1
+tags/claude-code/index.html
+  h_82733dd61c3915 1
+tags/claude-code/index.xml
+  h_82733dd61c3915 2,7-12,14,22-77
+tags/claude-code/page/1/index.html
+  h_82733dd61c3915 1
+tags/deeplearning/index.html
+  h_82733dd61c3915 1
+tags/deeplearning/index.xml
+  h_82733dd61c3915 2,7-12,14,22-93,100-145,152-427,434-614,622-883
+tags/deeplearning/page/1/index.html
+  h_82733dd61c3915 1
+tags/ffmpeg/index.html
+  h_82733dd61c3915 1
+tags/ffmpeg/index.xml
+  h_82733dd61c3915 2,7-12,14,23-97,105-768
+tags/ffmpeg/page/1/index.html
+  h_82733dd61c3915 1
+tags/gitpage/index.html
+  h_82733dd61c3915 1
+tags/gitpage/index.xml
+  h_82733dd61c3915 2,7-12,14,22-52
+tags/gitpage/page/1/index.html
+  h_82733dd61c3915 1
+tags/index.html
+  h_82733dd61c3915 1,3
+tags/index.xml
+  h_82733dd61c3915 2,7-12,14
+tags/inferenceengine/index.html
+  h_82733dd61c3915 1
+tags/inferenceengine/index.xml
+  h_82733dd61c3915 2,7-12,14,22-67
+tags/inferenceengine/page/1/index.html
+  h_82733dd61c3915 1
+tags/ios/index.html
+  h_82733dd61c3915 1
+tags/ios/index.xml
+  h_82733dd61c3915 2,7-12,14,23-610
+tags/ios/page/1/index.html
+  h_82733dd61c3915 1
+tags/ios开发/index.html
+  h_82733dd61c3915 1
+tags/ios开发/index.xml
+  h_82733dd61c3915 2,7-12,14,23-42,49-491,498-1182
+tags/ios开发/page/1/index.html
+  h_82733dd61c3915 1
+tags/jni/index.html
+  h_82733dd61c3915 1
+tags/jni/index.xml
+  h_82733dd61c3915 2,7-12,14,22-1073,1080-1230
+tags/jni/page/1/index.html
+  h_82733dd61c3915 1
+tags/llm/index.html
+  h_82733dd61c3915 1
+tags/llm/index.xml
+  h_82733dd61c3915 2,7-12,14,22-642
+tags/llm/page/1/index.html
+  h_82733dd61c3915 1
+tags/onnx-runtime/index.html
+  h_82733dd61c3915 1
+tags/onnx-runtime/index.xml
+  h_82733dd61c3915 2,7-12,14,23-1757
+tags/onnx-runtime/page/1/index.html
+  h_82733dd61c3915 1
+tags/qwen3-coder-next/index.html
+  h_82733dd61c3915 1
+tags/qwen3-coder-next/index.xml
+  h_82733dd61c3915 2,7-12,14,22-642
+tags/qwen3-coder-next/page/1/index.html
+  h_82733dd61c3915 1
+tags/speexdsp/index.html
+  h_82733dd61c3915 1
+tags/speexdsp/index.xml
+  h_82733dd61c3915 2,7-12,14
+tags/speexdsp/page/1/index.html
+  h_82733dd61c3915 1
+tags/webrtc/index.html
+  h_82733dd61c3915 1
+tags/webrtc/index.xml
+  h_82733dd61c3915 2,7-12,14,22-362,370-961,968-1225,1232-1473,1480-1524,1531-1651
+tags/webrtc/page/1/index.html
+  h_82733dd61c3915 1
+tags/webrtc/page/2/index.html
+  h_82733dd61c3915 1
+tags/双语字幕/index.html
+  h_82733dd61c3915 1
+tags/双语字幕/index.xml
+  h_82733dd61c3915 2,7-12,14,23-42,49-491,498-1182
+tags/双语字幕/page/1/index.html
+  h_82733dd61c3915 1
+tags/开发日志/index.html
+  h_82733dd61c3915 1
+tags/开发日志/index.xml
+  h_82733dd61c3915 2,7-12,14,23-42,49-491,498-1182
+tags/开发日志/page/1/index.html
+  h_82733dd61c3915 1
+tags/性能优化/index.html
+  h_82733dd61c3915 1
+tags/性能优化/index.xml
+  h_82733dd61c3915 2,7-12,14,23-610
+tags/性能优化/page/1/index.html
+  h_82733dd61c3915 1
+tags/房产/index.html
+  h_82733dd61c3915 1
+tags/房产/index.xml
+  h_82733dd61c3915 2,7-12,14,23-219
+tags/房产/page/1/index.html
+  h_82733dd61c3915 1
+tags/技术/index.html
+  h_82733dd61c3915 1
+tags/技术/index.xml
+  h_82733dd61c3915 2,7-12,14,22-139,146-486,494-1085,1092-1349,1356-1655,1662-1733,1740-1785,1792-1831,1838-2079,2086-2130
+tags/技术/page/1/index.html
+  h_82733dd61c3915 1
+tags/技术/page/2/index.html
+  h_82733dd61c3915 1
+tags/技术/page/3/index.html
+  h_82733dd61c3915 1
+tags/数字信号处理/index.html
+  h_82733dd61c3915 1
+tags/数字信号处理/index.xml
+  h_82733dd61c3915 2,7-12,14
+tags/数字信号处理/page/1/index.html
+  h_82733dd61c3915 1
+tags/本地部署/index.html
+  h_82733dd61c3915 1
+tags/本地部署/index.xml
+  h_82733dd61c3915 2,7-12,14,22-642
+tags/本地部署/page/1/index.html
+  h_82733dd61c3915 1
+tags/生活/index.html
+  h_82733dd61c3915 1
+tags/生活/index.xml
+  h_82733dd61c3915 2,7-12,14,22-139,147-231,239-435,443-491,498-580,587-1080,1088-1107
+tags/生活/page/1/index.html
+  h_82733dd61c3915 1
+tags/生活/page/2/index.html
+  h_82733dd61c3915 1
+tags/矩阵乘法/index.html
+  h_82733dd61c3915 1
+tags/矩阵乘法/index.xml
+  h_82733dd61c3915 2,7-12,14,23-610
+tags/矩阵乘法/page/1/index.html
+  h_82733dd61c3915 1
+tags/职业规划/index.html
+  h_82733dd61c3915 1-8
+tags/职业规划/index.xml
+  h_82733dd61c3915 2,7-12,14,23-486
+tags/职业规划/page/1/index.html
+  h_82733dd61c3915 1
+tags/语音降噪/index.html
+  h_82733dd61c3915 1
+tags/语音降噪/index.xml
+  h_82733dd61c3915 2,7-12,14,23-1757,1764-2025
+tags/语音降噪/page/1/index.html
+  h_82733dd61c3915 1
+tags/读书/index.html
+  h_82733dd61c3915 1
+tags/读书/index.xml
+  h_82733dd61c3915 2,7-12,14,23-107
+tags/读书/page/1/index.html
+  h_82733dd61c3915 1
+tags/财务/index.html
+  h_82733dd61c3915 1
+tags/财务/index.xml
+  h_82733dd61c3915 2,7-12,14,23-107,115-311
+tags/财务/page/1/index.html
+  h_82733dd61c3915 1
+tags/软件工程/index.html
+  h_82733dd61c3915 1-8
+tags/软件工程/index.xml
+  h_82733dd61c3915 2,7-12,14,23-486
+tags/软件工程/page/1/index.html
+  h_82733dd61c3915 1
+tags/音视频/index.html
+  h_82733dd61c3915 1
+tags/音视频/index.xml
+  h_82733dd61c3915 2,7-12,14
+tags/音视频/page/1/index.html
+  h_82733dd61c3915 1
+tags/音频算法/index.html
+  h_82733dd61c3915 1
+tags/音频算法/index.xml
+  h_82733dd61c3915 2,7-12,14,22-523,530-1424,1432-3166,3173-3434,3441-3781,3789-4380,4387-4644
+tags/音频算法/page/1/index.html
+  h_82733dd61c3915 1
+tags/音频算法/page/2/index.html
+  h_82733dd61c3915 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "68459c00cdc5d763ed170e8519a55d66c92e4581",
+  "prompts": {},
+  "logical_commit_id": "68459c00cdc5d763ed170e8519a55d66c92e4581",
+  "humans": {
+    "h_82733dd61c3915": {
+      "author": "liuyang.marshall <liuyang.marshall@bigo.sg>"
+    }
+  }
+}
