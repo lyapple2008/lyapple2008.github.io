@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>职业规划 on BeYoung</title>
     <link>https://lyapple2008.github.io/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/</link>
     <description>Recent content in 职业规划 on BeYoung</description>
-    <generator>Hugo</generator>
+    <image>
+      <title>BeYoung</title>
+      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.152.2</generator>
     <language>zh</language>
-    <copyright>See this site&#39;s source code [here](https://github.com/lyapple2008/lyapple2008.github.io), licensed under GPLv3 ·</copyright>
+    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Thu, 17 Sep 2026 16:55:34 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -15,6 +20,470 @@
       <pubDate>Thu, 17 Sep 2026 16:55:34 +0800</pubDate>
       <guid>https://lyapple2008.github.io/posts/202609/2026-09-17-chatgpt%E7%BB%99%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BB%BA%E8%AE%AE/</guid>
       <description>当代码生成越来越便宜，工程师真正稀缺的能力是什么？这篇文章整理了我和 ChatGPT 关于职业前景的一次长谈，以及一条从 AI Coding、Spec 到 Agent Engineering 的个人进阶路线。</description>
+      <content:encoded><![CDATA[<p>AI Coding 已经进入软件开发的完整流程：读代码、写代码、补测试、查问题、改文档，甚至可以自己运行命令，再根据结果继续迭代。它带来的不只是效率提升，也有一个越来越难回避的问题：</p>
+<blockquote>
+<p>当 AI 可以完成越来越多开发工作，以后还需要软件工程师吗？如果需要，工程师真正值钱的能力又是什么？</p>
+</blockquote>
+<p>最近我把这个问题抛给了 ChatGPT，又结合自己的情况继续追问：一个已经做了多年 C/C++、音视频和移动端开发的工程师，应该继续深挖原来的技术栈，还是转向 AI Agent？如果要转，具体该学什么？</p>
+<p>讨论很长，下面不是聊天记录的原样搬运，而是我重新整理后的结论和行动路线。</p>
+<p>先说答案：<strong>软件工程师仍然需要，但“会写代码”不再足以定义一个软件工程师。</strong></p>
+<p>AI 改变的不是软件是否还要有人负责，而是代码正在从稀缺的生产能力，变成越来越便宜的生产资料。未来更稀缺的，是能把模糊问题变成正确系统、能驾驭 AI 完成交付，并能判断结果是否可靠的人。</p>
+<h2 id="一消失的不是工程师而是代码生产的溢价">一、消失的不是工程师，而是代码生产的溢价</h2>
+<p>过去的软件开发流程大致是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">需求 → 设计 → 写代码 → Debug → 测试 → 发布 → 维护</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>其中大量时间花在查 API、写样板代码、补测试、重构和整理文档上。如今这些环节正在被 AI 快速压缩，新的流程更像：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">问题 → 需求澄清 → 系统设计 → 任务拆解 → Agent 实现
+</span></span><span class="line"><span class="cl">     → 自动验证 → 人工决策 → 上线 → 持续反馈</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这里有一个很重要的变化：<strong>代码生产的成本下降了，决策、验证和责任的成本却没有一起消失。</strong></p>
+<p>AI 可以在几分钟内生成上千行代码，但它并不知道业务到底想解决什么，不会天然理解系统里的隐性约束，也不会替团队承担线上事故的责任。生成得越快，人越需要回答三个问题：</p>
+<ol>
+<li>做的是不是正确的问题？</li>
+<li>采用的是不是合适的系统方案？</li>
+<li>结果凭什么值得相信？</li>
+</ol>
+<p>这意味着软件开发正在经历一次“抽象层上移”。过去工程师的主要产出是代码，接下来更重要的产出会逐渐变成：清晰的问题定义、可执行的规格、合理的系统边界，以及可验证的交付结果。</p>
+<h2 id="二未来更重要的五种能力">二、未来更重要的五种能力</h2>
+<p>把工程师的能力从底到顶排列，大致可以分成五层：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">问题与产品判断       最稀缺
+</span></span><span class="line"><span class="cl">系统设计与工程取舍
+</span></span><span class="line"><span class="cl">领域知识与工程经验
+</span></span><span class="line"><span class="cl">验证、测试与可观测性
+</span></span><span class="line"><span class="cl">编码与工具使用       逐渐普及</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这不是说 Coding 不再重要，而是 Coding 的角色变了：它正在从主要产出，变成理解系统、约束 AI 和处理疑难问题的基础能力。</p>
+<h3 id="1-定义问题而不是急着写代码">1. 定义问题，而不是急着写代码</h3>
+<p>假设需求只有一句话：“做一个 AI 实时字幕功能。”</p>
+<p>接到需求就开始选 Whisper、接音频、写界面，当然可以很快看到 Demo。但真正决定这个功能能不能落地的，是更前面的那些问题：</p>
+<ul>
+<li>音频来自麦克风、系统播放，还是直播链路？</li>
+<li>可接受延迟是 200 毫秒、1 秒还是 3 秒？</li>
+<li>音频是否允许上传云端？断网时怎么处理？</li>
+<li>支持哪些语言，翻译按流式输出还是按句提交？</li>
+<li>字幕“稳定”的定义是什么，已经展示的文字是否允许回改？</li>
+<li>目标设备、功耗和内存上限是多少？</li>
+<li>系统 API 是否真的允许采集目标音频？</li>
+</ul>
+<p>这些问题没有答案，再强的模型也只会更快地做出错误的东西。</p>
+<p>所以未来第一项核心能力不是 Prompt 技巧，而是 <strong>Problem Framing</strong>：识别真实目标，发现约束，把模糊需求拆成可以验证的问题。AI 擅长在边界内求解，人必须先画出正确的边界。</p>
+<h3 id="2-设计系统而不只是拼接模块">2. 设计系统，而不只是拼接模块</h3>
+<p>AI 很擅长生成函数、类、接口和局部测试，却不天然擅长为一个长期演进的系统负责。一个真实系统仍然需要工程师决定：</p>
+<ul>
+<li>数据从哪里来，由谁拥有；</li>
+<li>状态放在哪里，生命周期如何结束；</li>
+<li>哪些步骤同步，哪些步骤异步；</li>
+<li>线程如何协作，错误如何传播；</li>
+<li>性能瓶颈可能出现在哪里；</li>
+<li>如何升级、降级、回滚和观测。</li>
+</ul>
+<p>还是以实时字幕为例，链路可以画成：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Audio Capture → PCM → VAD → ASR → 稳定化 → 翻译 → 字幕展示</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>AI 可以分别实现每个模块，但“为什么这样拆”仍是人的工作。哪里需要 streaming，谁管理 buffer 的 ownership，ASR 的中间结果何时 commit，翻译失败是否阻塞原文字幕——这些选择共同决定了系统是否可用。</p>
+<h3 id="3-保留真正的领域深度">3. 保留真正的领域深度</h3>
+<p>当通用代码越来越容易生成，领域知识反而会更有价值。</p>
+<p>“会写 Python”很容易被模型复制；但理解 AEC、NS、AGC、VAD、重采样、SIMD、缓存、实时线程、延迟和功耗之间的关系，就不是生成一段代码那么简单。这里面包含长期积累的边界条件、失败经验和取舍能力。</p>
+<p>这也是我不打算丢掉音视频和 C/C++，完全转成“Agent 开发者”的原因。更合理的组合是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">音视频 / DSP 领域能力
+</span></span><span class="line"><span class="cl">        +
+</span></span><span class="line"><span class="cl">C/C++ 与移动端工程能力
+</span></span><span class="line"><span class="cl">        +
+</span></span><span class="line"><span class="cl">AI Coding / Agent 杠杆
+</span></span><span class="line"><span class="cl">        =
+</span></span><span class="line"><span class="cl">更高产出的系统工程师</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>AI 应该放大已有的专业能力，而不是把它替换成一套很快就会普及的工具操作。</p>
+<h3 id="4-建立验证-ai-的能力">4. 建立验证 AI 的能力</h3>
+<p>AI 生成的代码量越大，工程师越不能只靠“看起来没问题”来验收。未来很常见的工作流会是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Human → Spec → Agent → 大量代码 → 自动验证 → Human Review</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>真正困难的问题是：<strong>怎么证明 Agent 写对了？</strong></p>
+<p>因此下面这些传统工程能力不但不会过时，反而会成为 AI Coding 的基础设施：</p>
+<ul>
+<li>单元测试、集成测试、端到端测试和回归测试；</li>
+<li>延迟、吞吐、CPU、内存、功耗和准确率 Benchmark；</li>
+<li>日志、指标、Trace、Profiling 和 Crash 分析；</li>
+<li>静态分析、Sanitizer、Fuzzing、断言和类型系统。</li>
+</ul>
+<p>我最近研究的 gtest、ASAN、UBSAN、TSAN 和 simpleperf，看起来都不是最热门的“AI 技术”，却恰好是在给 AI 产出建立护栏。代码可以由 Agent 写，验收标准不能临时猜。</p>
+<h3 id="5-从使用-agent-到指挥-agent">5. 从使用 Agent 到指挥 Agent</h3>
+<p>AI Coding 不应该停留在“问 ChatGPT 一个问题，再复制一段代码”。更成熟的方式是把工作拆给不同角色：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">                  Human
+</span></span><span class="line"><span class="cl">                    │
+</span></span><span class="line"><span class="cl">              Specification
+</span></span><span class="line"><span class="cl">                    │
+</span></span><span class="line"><span class="cl">       ┌────────────┼────────────┐
+</span></span><span class="line"><span class="cl">       ↓            ↓            ↓
+</span></span><span class="line"><span class="cl">  Explore Agent  Coding Agent  Test Agent
+</span></span><span class="line"><span class="cl">       └────────────┼────────────┘
+</span></span><span class="line"><span class="cl">                    ↓
+</span></span><span class="line"><span class="cl">             Review / Benchmark
+</span></span><span class="line"><span class="cl">                    ↓
+</span></span><span class="line"><span class="cl">              Human Approval</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>人的工作会越来越接近 Architect、Reviewer 和 Agent Operator 的组合：给出上下文和约束，拆分任务，选择工具，处理冲突，并对最终结果负责。</p>
+<p>但这不意味着可以放弃 Coding。不会 C++ 的人，很难发现一个看似普通的 <code>std::vector&lt;float&gt;</code> 背后是否存在多余分配、拷贝、生命周期、对齐或缓存问题；不了解并发的人，也很难识别 AI 写出的偶发竞态。<strong>不一定要亲手写完每一行，但必须有能力判断这些代码是否可信。</strong></p>
+<h2 id="三哪些岗位会减少哪些工程师会更值钱">三、哪些岗位会减少，哪些工程师会更值钱</h2>
+<p>软件工程岗位总量是否一定减少，很难准确预测；但岗位结构发生变化几乎是确定的。</p>
+<p>简单 CRUD、普通页面、常规 API、一次性脚本和数据转换，这些边界清楚、容易验证的工作会最先被压缩。不是它们完全不再需要人，而是完成同样工作需要的人会更少。</p>
+<p>操作系统、编译器、数据库、音视频、网络、安全、机器人、嵌入式、高性能计算和大型分布式系统，则不会因为代码生成变快就突然变简单。它们面对的是现实世界的复杂约束，需要长期的工程取舍、跨模块理解和故障处理。</p>
+<p>未来的软件工程师可能形成三种分化：</p>
+<table>
+  <thead>
+      <tr>
+          <th>类型</th>
+          <th>能力结构</th>
+          <th>处境</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>纯代码生产者</td>
+          <td>按明确需求实现功能</td>
+          <td>工作最容易被压缩</td>
+      </tr>
+      <tr>
+          <td>AI 增强型开发者</td>
+          <td>Coding + AI 工具</td>
+          <td>产出明显提高</td>
+      </tr>
+      <tr>
+          <td>AI 增强型领域工程师</td>
+          <td>领域知识 + 系统设计 + Coding + Agent + 验证</td>
+          <td>能解决复杂问题，杠杆最高</td>
+      </tr>
+  </tbody>
+</table>
+<p>我想走的是第三条路。目标不是和 AI 比谁敲代码快，而是把自己的领域经验、工程判断和 AI 的执行能力组合起来，完成过去需要更多人协作才能完成的系统。</p>
+<p>这个结论也延续了我之前对 AI Coding 的看法。我曾在<a href="/posts/202601/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/">《关于 AI Coding 的一些感想和后续规划》</a>里写过，AI 的能力边界很大程度受使用者影响，生产代码的责任仍在人身上。现在再往前一步看，真正的变化不只是“用 AI 写得更快”，而是要围绕 AI 重新设计整套软件工程流程。</p>
+<h2 id="四我的进阶路线从-ai-coding-到-ai-native-engineering">四、我的进阶路线：从 AI Coding 到 AI-Native Engineering</h2>
+<p>结合我目前的基础，更合适的路线不是从零转行做大模型，也不是追逐所有 Agent 框架，而是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">传统工程能力补强
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">AI Coding 工作流
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">Specification / SDD
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">Agent 原理与实现
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">MCP / Tool / Agent Runtime
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">AI-Native Software Engineering</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这条路线可以用 6～9 个月建立基本体系，但各阶段不需要等前一阶段“学完”才开始。更有效的节奏始终是：学一点，马上放进真实项目；遇到问题，再回来补知识。</p>
+<h3 id="stage-0补强软件工程闭环">Stage 0：补强软件工程闭环</h3>
+<p>时间：2～4 周。</p>
+<p>这一阶段不是重新学习语法，而是把注意力从 Coding 拉回完整交付：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Requirement → Spec → Architecture → Implementation
+</span></span><span class="line"><span class="cl">            → Test → Benchmark → Release → Observability</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>重点补三块：</p>
+<ul>
+<li><strong>Architecture</strong>：模块、接口、依赖、ownership、生命周期、状态、并发和错误处理；</li>
+<li><strong>Testing</strong>：单测、集成测试、回归、Benchmark、Fuzzing 和静态分析；</li>
+<li><strong>Profiling</strong>：CPU、内存、I/O、Cache、SIMD、功耗、延迟和吞吐。</li>
+</ul>
+<p>核心不是背设计模式，而是能解释为什么系统应该这样拆、为什么这个实现会慢、为什么这个结果值得信任。</p>
+<h3 id="stage-1形成稳定的-ai-coding-工作流">Stage 1：形成稳定的 AI Coding 工作流</h3>
+<p>时间：3～6 周。</p>
+<p>先不急着开发 Agent Framework，而是把 Codex、Claude Code 或 Cursor 用到工程级。对中等以上的任务，固定练习五个步骤：</p>
+<ol>
+<li><strong>Explore</strong>：只读工程，定位相关代码、调用链和风险；</li>
+<li><strong>Plan</strong>：输出修改方案、影响范围、验证方式，先不动代码；</li>
+<li><strong>Implement</strong>：按照确认后的计划分步实现；</li>
+<li><strong>Verify</strong>：编译、测试、检查 Diff，并补充必要的性能验证；</li>
+<li><strong>Review</strong>：换一个上下文或 Agent，从正确性、并发、性能、兼容性和回归风险重新审查。</li>
+</ol>
+<p>这五步的价值不在于流程看起来完整，而在于把“写代码”放回一个可控制、可复核的闭环里。</p>
+<h3 id="stage-2学习-specification-与-sdd">Stage 2：学习 Specification 与 SDD</h3>
+<p>时间：3～6 周。</p>
+<p>AI 很会执行，但人必须先说清楚执行什么。这个阶段要能区分并使用：</p>
+<ul>
+<li>Requirement；</li>
+<li>Specification；</li>
+<li>Design；</li>
+<li>Task；</li>
+<li>Acceptance Criteria；</li>
+<li>Test Case；</li>
+<li>Architecture Decision。</li>
+</ul>
+<p>OpenSpec 一类工具值得学习，但重点不是记命令，而是理解从 Explore、Propose、Review、Apply 到 Archive 的变更过程：设计错了如何修订，什么时候应该更新 Spec，什么时候需要重新 Proposal。</p>
+<p>可以把 Specification 看成 AI Coding 的“上游源代码”。它未必像代码一样可以直接执行，却决定了 Agent 最终生成什么，以及人用什么标准验收。</p>
+<h3 id="stage-3亲手实现一个-mini-agent">Stage 3：亲手实现一个 Mini Agent</h3>
+<p>时间：1～2 个月。</p>
+<p>这一阶段才正式学习 Agent、LLM、Tool Calling、Context、Planning、Memory、Reflection 和 Sub-agent。最好的入口不是先读几十个框架，而是用 TypeScript 写一个最小 Agent：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">User → LLM → Tool Call → Tool Result → LLM → Answer</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>第一版只需要 filesystem、calculator、shell 三个 Tool；第二版加入多轮上下文和循环执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">llm</span><span class="p">(</span><span class="nx">messages</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">toolCall</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">execute</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">toolCall</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">messages</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">answer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>真正理解这个循环后，再读各种 Agent Framework，就能看见包装之下共同的骨架。</p>
+<p>TypeScript 不需要从头学遍，只要先掌握 <code>type</code>、<code>interface</code>、泛型、联合类型、<code>Promise</code>、<code>async/await</code>、模块和 npm，够用就往项目里走。</p>
+<h3 id="stage-4理解-mcp工具与安全边界">Stage 4：理解 MCP、工具与安全边界</h3>
+<p>时间：约 1 个月。</p>
+<p>Agent Loop 本身并不神秘，工程复杂度主要来自 Agent 与真实世界的连接：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Agent + Tools + Context + State + Permissions + Reliability + Security</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这个阶段要理解 Tool、Resource、Prompt 和 MCP Client 如何连接文件系统、GitHub、数据库和其他服务。除了“能调用”，还要继续追问：</p>
+<ul>
+<li>工具权限如何限制；</li>
+<li>高风险操作何时需要人工批准；</li>
+<li>第三方返回内容是否可信；</li>
+<li>执行失败如何重试或回滚；</li>
+<li>日志里如何避免泄露敏感信息。</li>
+</ul>
+<p>Agent 能操作的东西越多，安全边界就越重要。</p>
+<h3 id="stage-5阅读真实的-agent-runtime">Stage 5：阅读真实的 Agent Runtime</h3>
+<p>时间：1～2 个月。</p>
+<p>有了 Mini Agent 和 MCP 的基础，再研究 Codex、OpenClaw、Pi 或 Agent SDK 这类真实系统。不要从源码第一行顺序读，而是沿着运行链路追踪：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">CLI → Runtime → Session → Agent Loop → LLM
+</span></span><span class="line"><span class="cl">    → Tool → Context → Memory → Sub-agent</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>面对任何 Agent Runtime，都可以用八个问题拆解：</p>
+<ol>
+<li>Agent Loop 在哪里？</li>
+<li>Context 在什么时候组装、裁剪和压缩？</li>
+<li>Tool 如何注册、选择和执行？</li>
+<li>Session、状态和 Checkpoint 如何保存？</li>
+<li>长上下文怎样摘要，信息丢失如何处理？</li>
+<li>执行中断后怎样恢复？</li>
+<li>Sub-agent 如何隔离上下文、并行工作和汇总结果？</li>
+<li>权限、审批和审计边界在哪里？</li>
+</ol>
+<p>我之前整理过<a href="/posts/202604/2026-04-02-claude-code%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/">《从 Claude Code 学习 Agent 开发》</a>，当时得到的结论是“一个循环加工具就是 Agent”。这句话适合解释原理；真正到了工程里，难点则是如何让这个循环在长期运行、上下文变化和工具失败时仍然可靠。</p>
+<h3 id="stage-6建立-ai-native-开发方式">Stage 6：建立 AI-Native 开发方式</h3>
+<p>这是持续演进的阶段。最终目标不是“会用 Copilot”，而是让整个开发过程围绕人和 Agent 的分工重新组织：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Idea → Explore → Specification → Architecture
+</span></span><span class="line"><span class="cl">     → Implementation Agent → Test Agent → Review Agent
+</span></span><span class="line"><span class="cl">     → Benchmark → Human Approval → Release</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>人在关键决策点介入，Agent 承担可拆分、可验证的执行工作。任何一步都不能只因为“模型说完成了”就算完成，最终仍要回到构建结果、测试、指标和验收标准。</p>
+<h2 id="五用三个项目把路线串起来">五、用三个项目把路线串起来</h2>
+<p>学习 Agent 最容易掉进的坑，是看了很多框架，收藏了很多名词，却没有一条真实链路把它们连起来。与其做几十个 Demo，不如做三个逐步升级的项目。</p>
+<h3 id="project-1mini-agent">Project 1：Mini Agent</h3>
+<p>用 TypeScript 实现 LLM、Tool Calling 和 Agent Loop，控制在 1～2 周。目标不是做一个能用的产品，而是把 Agent 的最小原理亲手跑通。</p>
+<h3 id="project-2audio-coding-agent">Project 2：Audio Coding Agent</h3>
+<p>让 Agent 分析一个真实的 C++ Audio Pipeline，寻找 CPU Hotspot、内存拷贝、重采样开销、线程问题和潜在竞态。给它配置 filesystem、代码搜索、Git、编译、gtest 和 simpleperf 等工具，形成：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Analyze → Plan → Modify → Build → Test → Benchmark → Report</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这个项目能把我已有的 C++、音频、性能优化经验和 Agent Engineering 串在一起。与通用 Coding Agent 相比，领域知识会真正参与结果判断。</p>
+<h3 id="project-3ai-native-实时字幕应用">Project 3：AI-Native 实时字幕应用</h3>
+<p>最后选择一个完整项目，例如 iOS 双语实时字幕，从想法开始严格走一遍 Spec、架构、任务拆分、实现、测试、Benchmark 和发布流程。可以让不同 Agent 分别承担探索、编码、测试、性能和 Review，但每一步都必须有明确输入、输出和验收标准。</p>
+<p>这个项目不是为了证明“一人公司”或“无人开发”已经实现，而是建立一套自己真正用得起来的个人 AI 软件工程体系。</p>
+<h2 id="六时间如何分配">六、时间如何分配</h2>
+<p>如果每周可以投入 8～10 小时，我准备按下面的比例推进：</p>
+<table>
+  <thead>
+      <tr>
+          <th>阶段</th>
+          <th style="text-align: right">参考时间</th>
+          <th>主要产出</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>工程闭环补强</td>
+          <td style="text-align: right">2～4 周</td>
+          <td>测试、性能与架构检查清单</td>
+      </tr>
+      <tr>
+          <td>AI Coding 工作流</td>
+          <td style="text-align: right">3～6 周</td>
+          <td>Explore 到 Review 的稳定流程</td>
+      </tr>
+      <tr>
+          <td>Specification / SDD</td>
+          <td style="text-align: right">3～6 周</td>
+          <td>可执行、可验收的项目 Spec</td>
+      </tr>
+      <tr>
+          <td>Agent 原理</td>
+          <td style="text-align: right">4～6 周</td>
+          <td>Mini Agent</td>
+      </tr>
+      <tr>
+          <td>MCP / Tool</td>
+          <td style="text-align: right">3～4 周</td>
+          <td>带权限边界的工具集成</td>
+      </tr>
+      <tr>
+          <td>Runtime 研究</td>
+          <td style="text-align: right">4～8 周</td>
+          <td>对一个真实 Agent 的源码分析</td>
+      </tr>
+      <tr>
+          <td>AI-Native Engineering</td>
+          <td style="text-align: right">持续</td>
+          <td>完整项目与复盘</td>
+      </tr>
+  </tbody>
+</table>
+<p>时间不是硬指标。判断一个阶段是否完成的标准，不是“资料看完了”，而是能否拿出可以运行、可以验证、可以复盘的产物。</p>
+<h2 id="七参考资料">七、参考资料</h2>
+<p>资料不需要多，先沿着主线读官方文档：</p>
+<ul>
+<li><a href="https://openai.com/business/guides-and-resources/how-openai-uses-codex/">How OpenAI uses Codex</a>：观察 AI Coding 如何进入真实工程流程；</li>
+<li><a href="https://openai.com/index/running-codex-safely/">Running Codex safely</a>：理解权限、环境和人工审批；</li>
+<li><a href="https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/">A practical guide to building agents</a>：建立 Agent 的整体模型；</li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/">TypeScript Handbook</a> 与 <a href="https://www.typescriptlang.org/docs/handbook/2/modules.html">Modules</a>：补齐实现 Agent 所需的 TypeScript 子集；</li>
+<li><a href="https://openspec.dev/docs/quickstart">OpenSpec Quickstart</a>：把 Spec 驱动流程放进真实项目。</li>
+</ul>
+<p>读资料时不追求“系统学完”。每看懂一个概念，就在项目中找到它的位置；没有项目对应的知识，过一段时间大概率还会忘掉。</p>
+<h2 id="八最后不要成为工具收藏家">八、最后：不要成为工具收藏家</h2>
+<p>这次讨论最终给我的提醒，不是赶紧转行，也不是赶紧再学一个热门框架，而是重新确认自己的能力组合：</p>
+<blockquote>
+<p>未来优秀的软件工程师，应该能定义问题、设计系统、驾驭 Agent、验证结果，并对最终交付负责。</p>
+</blockquote>
+<p>因此，不应该按照“先学 TypeScript，再学 Agent，再学 MCP，再学某个框架”的课程目录前进。更有效的方式，是始终围绕一个真实项目：项目需要什么，就补什么；做出结果，再复盘哪些判断可以沉淀成 Spec、测试、工具或工作流。</p>
+<p>代码正在变便宜，但正确的软件并没有因此自动出现。会写代码仍然重要，只是它不再是终点。接下来真正值得投入的，是把领域经验、系统工程和 AI 组织成一套能持续交付的能力。</p>
+]]></content:encoded>
     </item>
   </channel>
 </rss>
