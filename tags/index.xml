@@ -1,19 +1,42 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on BeYoung</title>
     <link>https://lyapple2008.github.io/tags/</link>
     <description>Recent content in Tags on BeYoung</description>
-    <image>
-      <title>BeYoung</title>
-      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
-    </image>
-    <generator>Hugo -- 0.147.9</generator>
+    <generator>Hugo</generator>
     <language>zh</language>
-    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Sun, 06 Sep 2026 21:30:00 +0800</lastBuildDate>
+    <copyright>See this site&#39;s source code [here](https://github.com/lyapple2008/lyapple2008.github.io), licensed under GPLv3 ·</copyright>
+    <lastBuildDate>Thu, 17 Sep 2026 16:55:34 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Agent</title>
+      <link>https://lyapple2008.github.io/tags/agent/</link>
+      <pubDate>Thu, 17 Sep 2026 16:55:34 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/agent/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AI Coding</title>
+      <link>https://lyapple2008.github.io/tags/ai-coding/</link>
+      <pubDate>Thu, 17 Sep 2026 16:55:34 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/ai-coding/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>软件工程</title>
+      <link>https://lyapple2008.github.io/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/</link>
+      <pubDate>Thu, 17 Sep 2026 16:55:34 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>职业规划</title>
+      <link>https://lyapple2008.github.io/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/</link>
+      <pubDate>Thu, 17 Sep 2026 16:55:34 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Apple Silicon</title>
       <link>https://lyapple2008.github.io/tags/apple-silicon/</link>
@@ -54,34 +77,6 @@
       <link>https://lyapple2008.github.io/tags/%E8%AF%BB%E4%B9%A6/</link>
       <pubDate>Thu, 03 Sep 2026 22:30:00 +0800</pubDate>
       <guid>https://lyapple2008.github.io/tags/%E8%AF%BB%E4%B9%A6/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>生活</title>
-      <link>https://lyapple2008.github.io/tags/%E7%94%9F%E6%B4%BB/</link>
-      <pubDate>Thu, 03 Sep 2026 22:30:00 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/tags/%E7%94%9F%E6%B4%BB/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>房产</title>
-      <link>https://lyapple2008.github.io/tags/%E6%88%BF%E4%BA%A7/</link>
-      <pubDate>Sun, 30 Aug 2026 09:40:00 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/tags/%E6%88%BF%E4%BA%A7/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>AEC</title>
-      <link>https://lyapple2008.github.io/tags/aec/</link>
-      <pubDate>Fri, 31 Jul 2026 22:04:00 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/tags/aec/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>SpeexDSP</title>
-      <link>https://lyapple2008.github.io/tags/speexdsp/</link>
-      <pubDate>Fri, 31 Jul 2026 22:04:00 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/tags/speexdsp/</guid>
       <description></description>
     </item>
   </channel>

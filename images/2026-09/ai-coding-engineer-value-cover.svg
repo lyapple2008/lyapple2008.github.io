@@ -1,0 +1,179 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">代码很便宜，判断很贵</title>
+  <desc id="desc">幽默卡通风格的 AI Coding 软件工程师封面：机器人快速生成代码，人类工程师站在能力金字塔顶端，负责问题定义、系统设计与验证。</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff8df"/>
+      <stop offset="1" stop-color="#f5e7bd"/>
+    </linearGradient>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d9f1f0"/>
+      <stop offset="1" stop-color="#fef5dc"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffd86a"/>
+      <stop offset="1" stop-color="#e89e27"/>
+    </linearGradient>
+    <linearGradient id="coral" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff8b6b"/>
+      <stop offset="1" stop-color="#e65850"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#74cbd0"/>
+      <stop offset="1" stop-color="#238c9e"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b9a1ef"/>
+      <stop offset="1" stop-color="#7351b9"/>
+    </linearGradient>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="2" fill="#1d3440" opacity=".10"/>
+    </pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#17303a" flood-opacity=".18"/>
+    </filter>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="150%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <style>
+      .ink { stroke: #18343d; stroke-width: 8; stroke-linejoin: round; stroke-linecap: round; }
+      .thin { stroke: #18343d; stroke-width: 5; stroke-linejoin: round; stroke-linecap: round; }
+      .cn { font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
+      .mono { font-family: "SFMono-Regular", "Cascadia Code", "Menlo", monospace; }
+    </style>
+  </defs>
+
+  <!-- warm paper card -->
+  <rect x="22" y="22" width="1556" height="856" rx="54" fill="url(#paper)" class="ink"/>
+  <rect x="36" y="36" width="1528" height="828" rx="44" fill="url(#sky)" opacity=".74"/>
+  <rect x="36" y="36" width="1528" height="828" rx="44" fill="url(#dots)" opacity=".45"/>
+  <ellipse cx="1070" cy="754" rx="470" ry="74" fill="#21414a" opacity=".12" filter="url(#soft)"/>
+
+  <!-- title -->
+  <g transform="translate(88 88)">
+    <rect x="0" y="0" width="306" height="46" rx="23" fill="#18343d"/>
+    <text x="153" y="31" text-anchor="middle" fill="#fff8df" font-size="22" font-weight="800" class="cn">给软件工程师的建议</text>
+    <text x="0" y="116" fill="#18343d" font-size="72" font-weight="900" letter-spacing="-3" class="cn">代码很便宜</text>
+    <text x="4" y="190" fill="#e2584d" font-size="72" font-weight="900" letter-spacing="-3" class="cn">判断很贵</text>
+    <path d="M4 211 C130 228 254 224 374 204" fill="none" stroke="#e8a329" stroke-width="12" stroke-linecap="round"/>
+    <text x="7" y="258" fill="#47636a" font-size="25" font-weight="700" class="cn">AI 写得飞快，人要负责“做什么”和“凭什么对”</text>
+  </g>
+
+  <!-- floating code confetti -->
+  <g class="mono" font-size="18" font-weight="700" fill="#238c9e" opacity=".75">
+    <text x="470" y="98" transform="rotate(-8 470 98)">const idea = ???</text>
+    <text x="1260" y="121" transform="rotate(7 1260 121)">while (true) { ... }</text>
+    <text x="144" y="470" transform="rotate(-15 144 470)">BUG?</text>
+    <text x="1340" y="570" transform="rotate(11 1340 570)">ship_it();</text>
+    <text x="1155" y="730" transform="rotate(-8 1155 730)">1000 lines / min</text>
+  </g>
+  <g fill="#e8a329" opacity=".85">
+    <path d="M445 154 l18 25 -31 -4z"/>
+    <path d="M1380 203 l15 28 -29 -10z"/>
+    <path d="M128 579 l25 10 -18 18z"/>
+    <circle cx="1420" cy="465" r="10"/>
+    <circle cx="510" cy="710" r="8"/>
+  </g>
+
+  <!-- capability pyramid -->
+  <g transform="translate(500 322)" filter="url(#shadow)">
+    <!-- bottom tier -->
+    <path d="M0 356 L550 356 L478 256 L72 256 Z" fill="url(#blue)" class="ink"/>
+    <text x="275" y="326" text-anchor="middle" fill="#fff8df" font-size="27" font-weight="900" class="cn">编码 &amp; 工具使用</text>
+    <text x="275" y="351" text-anchor="middle" fill="#d9f1f0" font-size="17" font-weight="700" class="cn">越来越普及</text>
+    <!-- verification tier -->
+    <path d="M72 256 L478 256 L420 171 L130 171 Z" fill="url(#purple)" class="ink"/>
+    <text x="275" y="222" text-anchor="middle" fill="#fff8df" font-size="25" font-weight="900" class="cn">验证 &amp; 可观测性</text>
+    <!-- domain tier -->
+    <path d="M130 171 L420 171 L365 101 L185 101 Z" fill="url(#coral)" class="ink"/>
+    <text x="275" y="145" text-anchor="middle" fill="#fff8df" font-size="24" font-weight="900" class="cn">领域经验</text>
+    <!-- system tier -->
+    <path d="M185 101 L365 101 L329 48 L221 48 Z" fill="url(#gold)" class="ink"/>
+    <text x="275" y="83" text-anchor="middle" fill="#18343d" font-size="21" font-weight="900" class="cn">系统设计</text>
+    <!-- top -->
+    <path d="M221 48 L329 48 L275 -72 Z" fill="#ffdc70" class="ink"/>
+    <circle cx="275" cy="-42" r="18" fill="#fff8df" stroke="#e89e27" stroke-width="7"/>
+    <path d="M275 -64 L281 -49 L297 -48 L284 -38 L288 -22 L275 -31 L262 -22 L266 -38 L253 -48 L269 -49 Z" fill="#e89e27"/>
+    <rect x="-72" y="-125" width="250" height="47" rx="23" fill="#18343d"/>
+    <text x="53" y="-94" text-anchor="middle" fill="#fff8df" font-size="22" font-weight="900" class="cn">问题与产品判断</text>
+    <text x="53" y="-143" text-anchor="middle" fill="#e2584d" font-size="20" font-weight="900" class="cn">最稀缺 ★</text>
+  </g>
+
+  <!-- human engineer on top of the pyramid -->
+  <g transform="translate(715 191)" filter="url(#shadow)">
+    <!-- legs -->
+    <path d="M111 130 L95 215" fill="none" class="ink"/>
+    <path d="M145 130 L163 215" fill="none" class="ink"/>
+    <path d="M91 212 L58 216" fill="none" class="ink"/>
+    <path d="M160 212 L194 216" fill="none" class="ink"/>
+    <!-- body -->
+    <path d="M93 52 Q130 34 166 55 L177 137 Q130 160 84 137 Z" fill="#f1b347" class="ink"/>
+    <path d="M92 64 Q62 76 51 112" fill="none" class="ink"/>
+    <path d="M166 66 Q193 80 208 109" fill="none" class="ink"/>
+    <!-- head -->
+    <circle cx="130" cy="18" r="48" fill="#ffd4a7" class="ink"/>
+    <path d="M84 9 Q91 -35 135 -35 Q175 -31 180 10 Q155 -2 130 6 Q108 -2 84 9Z" fill="#263d45" class="ink"/>
+    <circle cx="111" cy="18" r="5" fill="#18343d"/>
+    <circle cx="151" cy="18" r="5" fill="#18343d"/>
+    <path d="M117 39 Q130 49 144 39" fill="none" class="thin"/>
+    <!-- magnifier -->
+    <circle cx="214" cy="58" r="31" fill="#d9f1f0" stroke="#18343d" stroke-width="8"/>
+    <path d="M236 81 L266 111" fill="none" class="ink"/>
+    <text x="214" y="66" text-anchor="middle" fill="#238c9e" font-size="18" font-weight="900" class="mono">WHY?</text>
+    <rect x="-16" y="-104" width="184" height="37" rx="18" fill="#e2584d" transform="rotate(-8 76 -85)"/>
+    <text x="76" y="-79" text-anchor="middle" fill="#fff8df" font-size="19" font-weight="900" class="cn" transform="rotate(-8 76 -79)">Human in the loop</text>
+  </g>
+
+  <!-- AI robot producing code on the right -->
+  <g transform="translate(1110 276)" filter="url(#shadow)">
+    <!-- antenna -->
+    <path d="M134 0 L134 -36" fill="none" class="ink"/>
+    <circle cx="134" cy="-45" r="12" fill="#e8a329" class="ink"/>
+    <!-- ears -->
+    <rect x="-22" y="105" width="35" height="82" rx="16" fill="#7351b9" class="ink"/>
+    <rect x="255" y="105" width="35" height="82" rx="16" fill="#7351b9" class="ink"/>
+    <!-- head -->
+    <rect x="0" y="27" width="268" height="196" rx="52" fill="#9bd9dd" class="ink"/>
+    <rect x="35" y="72" width="198" height="105" rx="30" fill="#18343d" class="thin"/>
+    <circle cx="94" cy="121" r="14" fill="#ffdc70"/>
+    <circle cx="176" cy="121" r="14" fill="#ffdc70"/>
+    <path d="M91 151 Q134 175 180 151" fill="none" stroke="#ff8b6b" stroke-width="9" stroke-linecap="round"/>
+    <!-- body and arms -->
+    <path d="M42 226 Q134 199 226 226 L246 430 L20 430 Z" fill="#7351b9" class="ink"/>
+    <rect x="77" y="267" width="114" height="83" rx="15" fill="#d9f1f0" class="thin"/>
+    <text x="134" y="296" text-anchor="middle" fill="#238c9e" font-size="17" font-weight="800" class="mono">CODE</text>
+    <text x="134" y="324" text-anchor="middle" fill="#e2584d" font-size="17" font-weight="800" class="mono">CODE</text>
+    <path d="M36 251 Q-18 275 -2 331" fill="none" class="ink"/>
+    <path d="M231 251 Q287 270 303 320" fill="none" class="ink"/>
+    <circle cx="-1" cy="334" r="18" fill="#9bd9dd" class="ink"/>
+    <circle cx="306" cy="323" r="18" fill="#9bd9dd" class="ink"/>
+    <!-- code stream -->
+    <path d="M305 323 C370 342 371 387 329 415" fill="none" stroke="#e8a329" stroke-width="9" stroke-dasharray="17 17"/>
+    <rect x="250" y="396" width="180" height="58" rx="16" fill="#fff8df" class="thin" transform="rotate(6 250 396)"/>
+    <text x="340" y="433" text-anchor="middle" fill="#18343d" font-size="19" font-weight="900" class="mono" transform="rotate(6 340 433)">1,000 lines!</text>
+    <rect x="-85" y="-73" width="183" height="46" rx="23" fill="#fff8df" class="thin" transform="rotate(-8 -85 -73)"/>
+    <text x="7" y="-43" text-anchor="middle" fill="#e2584d" font-size="22" font-weight="900" class="cn" transform="rotate(-8 7 -43)">我能写！</text>
+  </g>
+
+  <!-- human response speech bubble -->
+  <g transform="translate(918 116)">
+    <path d="M0 0 Q12 -43 66 -43 L240 -43 Q294 -43 306 8 L306 83 Q294 132 240 132 L112 132 L62 166 L69 132 L66 132 Q12 132 0 83Z" fill="#fff8df" class="ink" filter="url(#shadow)"/>
+    <text x="153" y="17" text-anchor="middle" fill="#18343d" font-size="24" font-weight="900" class="cn">那问题是什么？</text>
+    <text x="153" y="58" text-anchor="middle" fill="#238c9e" font-size="19" font-weight="700" class="cn">先定义，再交付</text>
+    <path d="M249 93 q21 17 37 5" fill="none" class="thin"/>
+  </g>
+
+  <!-- bottom takeaway ribbon -->
+  <g transform="translate(104 759)">
+    <rect x="0" y="0" width="1391" height="70" rx="35" fill="#18343d"/>
+    <circle cx="36" cy="35" r="15" fill="#ffdc70"/>
+    <text x="70" y="46" fill="#fff8df" font-size="27" font-weight="900" class="cn">AI Coding</text>
+    <text x="265" y="46" fill="#ffdc70" font-size="30" font-weight="900">×</text>
+    <text x="306" y="46" fill="#fff8df" font-size="27" font-weight="900" class="cn">领域经验</text>
+    <text x="550" y="46" fill="#ffdc70" font-size="30" font-weight="900">×</text>
+    <text x="591" y="46" fill="#fff8df" font-size="27" font-weight="900" class="cn">工程判断</text>
+    <text x="910" y="45" fill="#9bd9dd" font-size="21" font-weight="700" class="cn">更高产出的系统工程师</text>
+    <path d="M1273 35 h68" stroke="#e8a329" stroke-width="8" stroke-linecap="round"/>
+    <path d="M1328 19 l20 16 -20 16" fill="none" stroke="#e8a329" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

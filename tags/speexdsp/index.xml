@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>SpeexDSP on BeYoung</title>
     <link>https://lyapple2008.github.io/tags/speexdsp/</link>
     <description>Recent content in SpeexDSP on BeYoung</description>
-    <image>
-      <title>BeYoung</title>
-      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
-    </image>
-    <generator>Hugo -- 0.147.9</generator>
+    <generator>Hugo</generator>
     <language>zh</language>
-    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
+    <copyright>See this site&#39;s source code [here](https://github.com/lyapple2008/lyapple2008.github.io), licensed under GPLv3 ·</copyright>
     <lastBuildDate>Fri, 31 Jul 2026 22:04:00 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/tags/speexdsp/index.xml" rel="self" type="application/rss+xml" />
     <item>

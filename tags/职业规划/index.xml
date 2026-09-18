@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Agent on BeYoung</title>
-    <link>https://lyapple2008.github.io/tags/agent/</link>
-    <description>Recent content in Agent on BeYoung</description>
+    <title>职业规划 on BeYoung</title>
+    <link>https://lyapple2008.github.io/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/</link>
+    <description>Recent content in 职业规划 on BeYoung</description>
     <generator>Hugo</generator>
     <language>zh</language>
     <copyright>See this site&#39;s source code [here](https://github.com/lyapple2008/lyapple2008.github.io), licensed under GPLv3 ·</copyright>
     <lastBuildDate>Thu, 17 Sep 2026 16:55:34 +0800</lastBuildDate>
-    <atom:link href="https://lyapple2008.github.io/tags/agent/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://lyapple2008.github.io/tags/%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>当代码越来越便宜，软件工程师还值钱吗？</title>
       <link>https://lyapple2008.github.io/posts/202609/2026-09-17-chatgpt%E7%BB%99%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BB%BA%E8%AE%AE/</link>
       <pubDate>Thu, 17 Sep 2026 16:55:34 +0800</pubDate>
       <guid>https://lyapple2008.github.io/posts/202609/2026-09-17-chatgpt%E7%BB%99%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BB%BA%E8%AE%AE/</guid>
       <description>当代码生成越来越便宜，工程师真正稀缺的能力是什么？这篇文章整理了我和 ChatGPT 关于职业前景的一次长谈，以及一条从 AI Coding、Spec 到 Agent Engineering 的个人进阶路线。</description>
-    </item>
-    <item>
-      <title>Claude Code 是如何工作的</title>
-      <link>https://lyapple2008.github.io/posts/202604/2026-04-02-claude-code%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/</link>
-      <pubDate>Thu, 02 Apr 2026 09:58:19 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/202604/2026-04-02-claude-code%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/</guid>
-      <description>&lt;h1 id=&#34;从claude-code学习agent开发&#34;&gt;从Claude Code学习Agent开发&lt;/h1&gt;&#xA;&lt;p&gt;最近一直在重度使用 Claude Code，也一直被各种新名词轰炸：vibe coding、spec coding、agent、openclaw、harness 等等。刚好看到一个介绍 Claude Code 工程原理的教程，对Agent Engneer有了一些认识，记录总结一下。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
