@@ -12,20 +12,41 @@
     <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Thu, 17 Sep 2026 16:55:34 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 28 Sep 2026 07:22:02 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Agent</title>
       <link>https://lyapple2008.github.io/tags/agent/</link>
-      <pubDate>Thu, 17 Sep 2026 16:55:34 +0800</pubDate>
+      <pubDate>Mon, 28 Sep 2026 07:22:02 +0800</pubDate>
       <guid>https://lyapple2008.github.io/tags/agent/</guid>
       <description></description>
     </item>
     <item>
       <title>AI Coding</title>
       <link>https://lyapple2008.github.io/tags/ai-coding/</link>
-      <pubDate>Thu, 17 Sep 2026 16:55:34 +0800</pubDate>
+      <pubDate>Mon, 28 Sep 2026 07:22:02 +0800</pubDate>
       <guid>https://lyapple2008.github.io/tags/ai-coding/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>OpenSpec</title>
+      <link>https://lyapple2008.github.io/tags/openspec/</link>
+      <pubDate>Mon, 28 Sep 2026 07:22:02 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/openspec/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Specification</title>
+      <link>https://lyapple2008.github.io/tags/specification/</link>
+      <pubDate>Mon, 28 Sep 2026 07:22:02 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/specification/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>工作流</title>
+      <link>https://lyapple2008.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/</link>
+      <pubDate>Mon, 28 Sep 2026 07:22:02 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/</guid>
       <description></description>
     </item>
     <item>
@@ -61,27 +82,6 @@
       <link>https://lyapple2008.github.io/tags/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/</link>
       <pubDate>Sun, 06 Sep 2026 21:30:00 +0800</pubDate>
       <guid>https://lyapple2008.github.io/tags/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>性能优化</title>
-      <link>https://lyapple2008.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
-      <pubDate>Sun, 06 Sep 2026 21:30:00 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>财务</title>
-      <link>https://lyapple2008.github.io/tags/%E8%B4%A2%E5%8A%A1/</link>
-      <pubDate>Thu, 03 Sep 2026 22:30:00 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/tags/%E8%B4%A2%E5%8A%A1/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>读书</title>
-      <link>https://lyapple2008.github.io/tags/%E8%AF%BB%E4%B9%A6/</link>
-      <pubDate>Thu, 03 Sep 2026 22:30:00 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/tags/%E8%AF%BB%E4%B9%A6/</guid>
       <description></description>
     </item>
   </channel>
