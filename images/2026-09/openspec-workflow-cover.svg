@@ -1,0 +1,239 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">OpenSpec 工程流</title>
+  <desc id="desc">从模糊需求出发，经过 Explore、Propose、Review、Apply 和 Archive 五个阶段，将 AI 对话转化为可审查、可恢复、可追溯的工程记录。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101d2b"/>
+      <stop offset="0.52" stop-color="#163446"/>
+      <stop offset="1" stop-color="#102331"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#5de2d6" stop-opacity=".30"/>
+      <stop offset="1" stop-color="#5de2d6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rail" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#56d5cf"/>
+      <stop offset=".5" stop-color="#8ce1bd"/>
+      <stop offset="1" stop-color="#f7bd63"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fffaf0"/>
+      <stop offset="1" stop-color="#dceff0"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6fe1d7"/>
+      <stop offset="1" stop-color="#2b9faa"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffd47f"/>
+      <stop offset="1" stop-color="#ef9c45"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c0adf5"/>
+      <stop offset="1" stop-color="#7664ca"/>
+    </linearGradient>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+      <path d="M44 0H0V44" fill="none" stroke="#b7e4e3" stroke-opacity=".08" stroke-width="1"/>
+      <circle cx="0" cy="0" r="2.2" fill="#b7e4e3" fill-opacity=".18"/>
+    </pattern>
+    <pattern id="microdots" width="18" height="18" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.4" fill="#18313e" opacity=".10"/>
+    </pattern>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="16" stdDeviation="13" flood-color="#07121a" flood-opacity=".42"/>
+    </filter>
+    <filter id="smallShadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="7" stdDeviation="6" flood-color="#07121a" flood-opacity=".35"/>
+    </filter>
+    <filter id="lineGlow" x="-20%" y="-100%" width="140%" height="300%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .cn { font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
+      .mono { font-family: "SFMono-Regular", "Cascadia Code", Menlo, monospace; }
+      .ink { stroke: #18313e; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+      .thin { stroke: #18313e; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .label { fill: #effafa; font-size: 28px; font-weight: 800; letter-spacing: .5px; }
+      .caption { fill: #9bc6ca; font-size: 17px; font-weight: 600; }
+    </style>
+  </defs>
+
+  <!-- canvas -->
+  <rect width="1600" height="900" rx="48" fill="url(#bg)"/>
+  <rect x="18" y="18" width="1564" height="864" rx="38" fill="none" stroke="#8ce1d7" stroke-opacity=".22" stroke-width="3"/>
+  <rect x="26" y="26" width="1548" height="848" rx="34" fill="url(#grid)"/>
+  <ellipse cx="805" cy="470" rx="650" ry="350" fill="url(#glow)"/>
+
+  <!-- heading -->
+  <g transform="translate(82 65)">
+    <rect x="0" y="0" width="166" height="43" rx="21.5" fill="#59d5cc"/>
+    <text x="83" y="29" text-anchor="middle" fill="#102331" font-size="19" font-weight="900" class="mono">AI CODING</text>
+    <text x="0" y="113" fill="#effafa" font-size="74" font-weight="900" letter-spacing="-2" class="cn">OpenSpec</text>
+    <text x="374" y="111" fill="#f7bd63" font-size="68" font-weight="900" letter-spacing="-3" class="cn">工程流</text>
+    <text x="3" y="158" fill="#9bc6ca" font-size="25" font-weight="650" class="cn">把对话变成规格，把过程变成可恢复的工程记录</text>
+  </g>
+
+  <!-- right status chips -->
+  <g transform="translate(1112 80)" class="cn" font-size="18" font-weight="800">
+    <rect x="0" y="0" width="130" height="42" rx="21" fill="#203e4e" stroke="#59d5cc" stroke-opacity=".55" stroke-width="2"/>
+    <circle cx="24" cy="21" r="7" fill="#59d5cc"/>
+    <text x="42" y="28" fill="#dff9f5">可追溯</text>
+    <rect x="143" y="0" width="130" height="42" rx="21" fill="#203e4e" stroke="#a895ea" stroke-opacity=".65" stroke-width="2"/>
+    <circle cx="167" cy="21" r="7" fill="#a895ea"/>
+    <text x="185" y="28" fill="#eee9ff">可恢复</text>
+    <rect x="286" y="0" width="130" height="42" rx="21" fill="#203e4e" stroke="#f7bd63" stroke-opacity=".65" stroke-width="2"/>
+    <circle cx="310" cy="21" r="7" fill="#f7bd63"/>
+    <text x="328" y="28" fill="#fff2d9">可沉淀</text>
+  </g>
+
+  <!-- main luminous flow rail -->
+  <g>
+    <path d="M150 518 C250 518 274 518 350 518 S505 518 580 518 S740 518 815 518 S970 518 1045 518 S1210 518 1445 518" fill="none" stroke="#07151e" stroke-width="28" stroke-linecap="round" opacity=".68"/>
+    <path d="M150 518 C250 518 274 518 350 518 S505 518 580 518 S740 518 815 518 S970 518 1045 518 S1210 518 1445 518" fill="none" stroke="url(#rail)" stroke-width="10" stroke-linecap="round" filter="url(#lineGlow)"/>
+    <g fill="#f7bd63">
+      <path d="M317 500 l26 18 -26 18z"/>
+      <path d="M547 500 l26 18 -26 18z"/>
+      <path d="M782 500 l26 18 -26 18z"/>
+      <path d="M1012 500 l26 18 -26 18z"/>
+      <path d="M1252 500 l26 18 -26 18z"/>
+    </g>
+  </g>
+
+  <!-- input: fuzzy requirement -->
+  <g transform="translate(63 351)" filter="url(#smallShadow)">
+    <path d="M13 61 Q13 13 65 13 H205 Q253 13 253 61 V137 Q253 181 207 181 H97 L53 215 L61 181 Q13 178 13 137Z" fill="#fff1cf" class="ink"/>
+    <circle cx="77" cy="97" r="9" fill="#ee9c46"/>
+    <circle cx="127" cy="97" r="9" fill="#ee9c46"/>
+    <circle cx="177" cy="97" r="9" fill="#ee9c46"/>
+    <path d="M44 52 h176 M45 142 h121" fill="none" stroke="#c77e39" stroke-width="5" stroke-linecap="round" opacity=".50"/>
+    <rect x="36" y="-18" width="132" height="38" rx="19" fill="#ef9c45"/>
+    <text x="102" y="8" text-anchor="middle" fill="#172c38" font-size="19" font-weight="900" class="cn">模糊需求</text>
+  </g>
+
+  <!-- stage cards backgrounds -->
+  <g filter="url(#shadow)">
+    <rect x="302" y="300" width="226" height="286" rx="30" fill="#1c3c4c" stroke="#5bd9d0" stroke-width="4"/>
+    <rect x="542" y="300" width="226" height="286" rx="30" fill="#1c3c4c" stroke="#80d9bd" stroke-width="4"/>
+    <rect x="782" y="300" width="226" height="286" rx="30" fill="#1c3c4c" stroke="#a894e5" stroke-width="4"/>
+    <rect x="1022" y="300" width="226" height="286" rx="30" fill="#1c3c4c" stroke="#f1a552" stroke-width="4"/>
+    <rect x="1262" y="300" width="226" height="286" rx="30" fill="#1c3c4c" stroke="#f7c66f" stroke-width="4"/>
+  </g>
+
+  <!-- 1 Explore icon -->
+  <g transform="translate(322 318)">
+    <circle cx="93" cy="87" r="61" fill="#dff8f4" class="ink"/>
+    <circle cx="93" cy="87" r="35" fill="#76dcd4" opacity=".55" class="thin"/>
+    <path d="M137 132 l40 40" class="ink" fill="none"/>
+    <path d="M67 84 h18 l11 -21 17 44 11 -23 h20" fill="none" stroke="#1b7783" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="9" y="165" width="168" height="39" rx="19.5" fill="#59d5cc"/>
+    <text x="93" y="192" text-anchor="middle" fill="#102331" font-size="22" font-weight="900" class="mono">1 · EXPLORE</text>
+  </g>
+  <text x="415" y="558" text-anchor="middle" class="caption cn">读代码 · 澄清边界</text>
+
+  <!-- 2 Propose icon: layered artifacts -->
+  <g transform="translate(566 321)">
+    <rect x="37" y="25" width="126" height="142" rx="13" fill="#81d9bc" class="ink" transform="rotate(7 100 96)"/>
+    <rect x="18" y="35" width="130" height="147" rx="13" fill="#b7ece0" class="ink" transform="rotate(-7 83 108)"/>
+    <rect x="30" y="21" width="132" height="154" rx="13" fill="url(#paper)" class="ink"/>
+    <rect x="48" y="42" width="78" height="17" rx="8.5" fill="#3a9da5"/>
+    <path d="M49 81 h95 M49 102 h76 M49 123 h88" fill="none" stroke="#6ba6aa" stroke-width="7" stroke-linecap="round"/>
+    <rect x="47" y="141" width="22" height="20" rx="4" fill="#81d9bc" class="thin"/>
+    <path d="M52 151 l7 6 15 -18" fill="none" stroke="#17434b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="-3" y="162" width="187" height="42" rx="21" fill="#80d9bd"/>
+    <text x="90" y="190" text-anchor="middle" fill="#102331" font-size="22" font-weight="900" class="mono">2 · PROPOSE</text>
+  </g>
+  <text x="655" y="558" text-anchor="middle" class="caption cn">Spec · Design · Tasks</text>
+
+  <!-- 3 Review icon: human decision gate -->
+  <g transform="translate(806 318)">
+    <circle cx="89" cy="62" r="37" fill="#ffd7ad" class="ink"/>
+    <path d="M54 54 Q61 20 91 20 Q119 21 125 52 Q102 41 80 48 Q67 44 54 54Z" fill="#223a46" class="ink"/>
+    <path d="M43 147 Q44 100 89 99 Q135 101 136 147 V167 H43Z" fill="url(#purple)" class="ink"/>
+    <circle cx="143" cy="113" r="37" fill="#effafa" class="ink"/>
+    <path d="M124 112 l13 14 25 -31" fill="none" stroke="#36a99e" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="-3" y="165" width="187" height="40" rx="20" fill="#a894e5"/>
+    <text x="90" y="192" text-anchor="middle" fill="#172337" font-size="22" font-weight="900" class="mono">3 · REVIEW</text>
+  </g>
+  <text x="895" y="558" text-anchor="middle" class="caption cn">人工审查 · 修正方案</text>
+
+  <!-- 4 Apply icon: coding agent + checklist -->
+  <g transform="translate(1043 318)">
+    <path d="M90 17 v21" fill="none" class="ink"/>
+    <circle cx="90" cy="10" r="10" fill="#f7bd63" class="thin"/>
+    <rect x="31" y="34" width="118" height="94" rx="31" fill="url(#orange)" class="ink"/>
+    <rect x="49" y="58" width="82" height="48" rx="16" fill="#15313e" class="thin"/>
+    <circle cx="75" cy="82" r="7" fill="#f8d27f"/>
+    <circle cx="106" cy="82" r="7" fill="#f8d27f"/>
+    <path d="M73 103 Q90 115 108 103" fill="none" stroke="#71d9cf" stroke-width="5" stroke-linecap="round"/>
+    <rect x="18" y="126" width="144" height="47" rx="13" fill="#d9eff0" class="ink"/>
+    <text x="89" y="156" text-anchor="middle" fill="#1f6c76" font-size="18" font-weight="900" class="mono">&lt;/CODE&gt;</text>
+    <rect x="-3" y="165" width="187" height="40" rx="20" fill="#f1a552"/>
+    <text x="90" y="192" text-anchor="middle" fill="#172c38" font-size="22" font-weight="900" class="mono">4 · APPLY</text>
+  </g>
+  <text x="1135" y="558" text-anchor="middle" class="caption cn">逐项实现 · 测试验证</text>
+
+  <!-- 5 Archive icon: living specs and history -->
+  <g transform="translate(1284 319)">
+    <rect x="15" y="35" width="153" height="133" rx="12" fill="#e9c16b" class="ink"/>
+    <path d="M15 70 h153" fill="none" class="ink"/>
+    <rect x="34" y="80" width="25" height="70" rx="5" fill="#59cfc7" class="thin"/>
+    <rect x="64" y="87" width="25" height="63" rx="5" fill="#a894e5" class="thin"/>
+    <rect x="94" y="76" width="25" height="74" rx="5" fill="#f5a957" class="thin"/>
+    <rect x="124" y="91" width="25" height="59" rx="5" fill="#dff5ed" class="thin"/>
+    <rect x="44" y="17" width="95" height="38" rx="8" fill="#fff6db" class="ink"/>
+    <text x="91" y="43" text-anchor="middle" fill="#18313e" font-size="18" font-weight="900" class="mono">SPECS</text>
+    <rect x="-3" y="164" width="187" height="41" rx="20.5" fill="#f7c66f"/>
+    <text x="90" y="192" text-anchor="middle" fill="#172c38" font-size="22" font-weight="900" class="mono">5 · ARCHIVE</text>
+  </g>
+  <text x="1375" y="558" text-anchor="middle" class="caption cn">同步规格 · 沉淀历史</text>
+
+  <!-- review feedback loop -->
+  <g>
+    <path d="M910 292 C910 225 844 208 740 208 H655 C599 208 580 236 580 280" fill="none" stroke="#a894e5" stroke-width="6" stroke-dasharray="11 11" stroke-linecap="round"/>
+    <path d="M565 258 l15 24 15 -24" fill="#a894e5"/>
+    <rect x="678" y="186" width="162" height="42" rx="21" fill="#263e55" stroke="#a894e5" stroke-width="3"/>
+    <text x="759" y="214" text-anchor="middle" fill="#e9e3ff" font-size="18" font-weight="800" class="cn">方案不对，先改规格</text>
+  </g>
+
+  <!-- explicit state / resume strip -->
+  <g transform="translate(80 645)">
+    <rect x="0" y="0" width="1440" height="168" rx="34" fill="#0c1c27" stroke="#36586a" stroke-width="3"/>
+    <rect x="22" y="22" width="1396" height="124" rx="24" fill="url(#microdots)" opacity=".9"/>
+    <g transform="translate(42 35)">
+      <rect x="0" y="0" width="238" height="96" rx="21" fill="#173746" stroke="#59d5cc" stroke-width="3"/>
+      <text x="24" y="33" fill="#89e6df" font-size="17" font-weight="900" class="mono">tasks.md</text>
+      <rect x="25" y="49" width="17" height="17" rx="3" fill="#59d5cc"/>
+      <path d="M28 57 l5 5 10 -13" fill="none" stroke="#12313b" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M53 58 h127" stroke="#a4cdd0" stroke-width="5" stroke-linecap="round"/>
+      <rect x="25" y="74" width="17" height="17" rx="3" fill="none" stroke="#a4cdd0" stroke-width="3"/>
+      <path d="M53 83 h92" stroke="#a4cdd0" stroke-width="5" stroke-linecap="round" opacity=".7"/>
+    </g>
+    <path d="M315 83 h86" fill="none" stroke="#f7bd63" stroke-width="7" stroke-linecap="round"/>
+    <path d="M384 65 l26 18 -26 18" fill="none" stroke="#f7bd63" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(435 35)">
+      <rect x="0" y="0" width="275" height="96" rx="21" fill="#173746" stroke="#a894e5" stroke-width="3"/>
+      <path d="M39 70 a28 28 0 1 1 23 10" fill="none" stroke="#a894e5" stroke-width="7" stroke-linecap="round"/>
+      <path d="M34 52 l5 20 18 -10" fill="none" stroke="#a894e5" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="91" y="43" fill="#eee9ff" font-size="21" font-weight="900" class="cn">中断后换会话</text>
+      <text x="91" y="73" fill="#9bc6ca" font-size="17" font-weight="650" class="cn">从未勾选任务继续</text>
+    </g>
+    <path d="M745 83 h86" fill="none" stroke="#f7bd63" stroke-width="7" stroke-linecap="round"/>
+    <path d="M814 65 l26 18 -26 18" fill="none" stroke="#f7bd63" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <g transform="translate(865 35)">
+      <rect x="0" y="0" width="513" height="96" rx="21" fill="#173746" stroke="#f7bd63" stroke-width="3"/>
+      <circle cx="53" cy="48" r="28" fill="#f7bd63"/>
+      <path d="M39 48 l10 11 20 -25" fill="none" stroke="#17313c" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="101" y="42" fill="#fff2d5" font-size="23" font-weight="900" class="cn">会话可以丢，工作不应该一起丢</text>
+      <text x="101" y="73" fill="#9bc6ca" font-size="17" font-weight="650" class="cn">Spec + Decision + Task + Git = 可重建的项目上下文</text>
+    </g>
+  </g>
+
+  <!-- tiny version-control motif -->
+  <g transform="translate(1452 168)" opacity=".8">
+    <circle cx="0" cy="0" r="10" fill="#59d5cc"/>
+    <circle cx="0" cy="57" r="10" fill="#f7bd63"/>
+    <circle cx="-49" cy="29" r="10" fill="#a894e5"/>
+    <path d="M0 10 v37 M-40 29 h16 q24 0 24 22" fill="none" stroke="#b9dcdf" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>

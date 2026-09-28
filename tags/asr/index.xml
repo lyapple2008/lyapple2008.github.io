@@ -9,7 +9,7 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.152.2</generator>
+    <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Sat, 04 Jul 2026 10:23:20 +0800</lastBuildDate>
@@ -22,8 +22,7 @@
       <description>&lt;blockquote&gt;
 &lt;p&gt;Mel Spectrogram 是语音识别、音频分类、音乐信息检索里非常常见的输入特征。它做的事情可以简单理解为：把一段一维波形，变成一张“符合人耳听觉习惯”的时间-频率能量图。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<blockquote>
-<p>Mel Spectrogram 是语音识别、音频分类、音乐信息检索里非常常见的输入特征。它做的事情可以简单理解为：把一段一维波形，变成一张“符合人耳听觉习惯”的时间-频率能量图。</p>
-</blockquote>
+<p>Mel Spectrogram 是语音识别、音频分类、音乐信息检索里非常常见的输入特征。它做的事情可以简单理解为：把一段一维波形，变成一张“符合人耳听觉习惯”的时间-频率能量图。</p></blockquote>
 <hr>
 <h2 id="1-从一段声音开始">1. 从一段声音开始</h2>
 <p>计算机拿到的音频通常是一串采样点：</p>
@@ -557,8 +556,7 @@ $$</p>
       <description>&lt;blockquote&gt;
 &lt;p&gt;这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。&lt;/p&gt;</description>
       <content:encoded><![CDATA[<blockquote>
-<p>这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。</p>
-</blockquote>
+<p>这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。</p></blockquote>
 <h3 id="模块流程">模块流程</h3>
 
 <div class="mermaid">graph LR
