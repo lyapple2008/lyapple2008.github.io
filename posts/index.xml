@@ -12,7 +12,7 @@
     <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Mon, 28 Sep 2026 07:22:02 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 29 Sep 2026 09:05:00 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>【置顶】2026</title>
@@ -37,10 +37,10 @@
 var chart = echarts.init(document.getElementById(&#39;weight-chart&#39;));
 chart.setOption({
     tooltip: { trigger: &#39;axis&#39; },
-    xAxis: { type: &#39;category&#39;, data: [&#39;1月&#39;, &#39;2月&#39;, &#39;3月&#39;, &#39;4月&#39;, &#39;5月&#39;, &#39;六月&#39;, &#39;七月&#39;, &#39;八月&#39;] },
+    xAxis: { type: &#39;category&#39;, data: [&#39;1月&#39;, &#39;2月&#39;, &#39;3月&#39;, &#39;4月&#39;, &#39;5月&#39;, &#39;六月&#39;, &#39;七月&#39;, &#39;八月&#39;, &#39;九月&#39;] },
     yAxis: { type: &#39;value&#39;, min: 55, max: 70 },
     series: [{
-        data: [65, 65.8, 65.6, 64.4, 63.7, 63.9, 63.6, 63.1],
+        data: [65, 65.8, 65.6, 64.4, 63.7, 63.9, 63.6, 63.1, 62.8],
         type: &#39;line&#39;,
         smooth: true,
         areaStyle: { opacity: 0.3 },
@@ -69,10 +69,10 @@ chart.setOption({
 var chart = echarts.init(document.getElementById('weight-chart'));
 chart.setOption({
     tooltip: { trigger: 'axis' },
-    xAxis: { type: 'category', data: ['1月', '2月', '3月', '4月', '5月', '六月', '七月', '八月'] },
+    xAxis: { type: 'category', data: ['1月', '2月', '3月', '4月', '5月', '六月', '七月', '八月', '九月'] },
     yAxis: { type: 'value', min: 55, max: 70 },
     series: [{
-        data: [65, 65.8, 65.6, 64.4, 63.7, 63.9, 63.6, 63.1],
+        data: [65, 65.8, 65.6, 64.4, 63.7, 63.9, 63.6, 63.1, 62.8],
         type: 'line',
         smooth: true,
         areaStyle: { opacity: 0.3 },
@@ -130,6 +130,261 @@ chart.setOption({
 <p>每天记录和量化进度，本身就是一种负担，而且对于效率提高帮助不大，也不利于长期任务，与其每天盯着任务进度，
 不如现在开始试下，里程碑式的工作方法，给自己一段时间设定一些目标，到期后来检查完成情况，中间如何只记录
 据有里程碑意义的事件。</p></blockquote>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>一名音频程序员的科技自媒体创业调研</title>
+      <link>https://lyapple2008.github.io/posts/202609/2026-09-29-%E8%87%AA%E5%AA%92%E4%BD%93%E5%88%9B%E4%B8%9A%E8%B0%83%E7%A0%94/</link>
+      <pubDate>Tue, 29 Sep 2026 09:05:00 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202609/2026-09-29-%E8%87%AA%E5%AA%92%E4%BD%93%E5%88%9B%E4%B8%9A%E8%B0%83%E7%A0%94/</guid>
+      <description>我想尝试科技自媒体创业。这篇文章基于自己十多年音频算法和音视频开发经历，整理了账号定位、内容栏目、起步选题、制作流程和变现路径。</description>
+      <content:encoded><![CDATA[<p>最近开始认真考虑一件事：利用业余时间尝试科技自媒体，并观察它有没有发展成一门事业的可能。</p>
+<p>我做了十多年程序员，主要从事音频算法、音频应用和音视频直播相关开发。这段经历让我比较熟悉麦克风、耳机、降噪、回声消除、音频编解码、直播链路和 AI 语音等技术，也知道一项技术从演示到真正产品化之间，往往隔着很多工程问题。</p>
+<p>最初的想法是介绍最新、有意思的科技产品和技术，先通过模仿成熟博主学习选题、拍摄和表达。但继续往下想，“泛科技”并不是一个好的起点：它需要抢新闻、抢新品、拼设备和制作成本，而我最稀缺的优势反而容易被淹没。</p>
+<p>这篇文章是我对账号定位、内容方向、执行方式和变现路径的第一次系统整理。</p>
+<h2 id="一先从音频科技切入而不是直接做泛科技">一、先从音频科技切入，而不是直接做泛科技</h2>
+<p>结合自己的经历，目前比较合适的定位是：</p>
+<blockquote>
+<p>一个懂音频的程序员，用真实实验帮普通人看懂科技产品。</p></blockquote>
+<p>如果进一步把账号价值压缩成一句话，可以是：</p>
+<blockquote>
+<p>不背参数，不念发布会，用实验告诉你技术有没有用、产品值不值得买。</p></blockquote>
+<p>这个定位有几个好处：</p>
+<ul>
+<li>音频技术和我的从业经历高度匹配，不需要从零积累专业性；</li>
+<li>耳机、麦克风、音箱和直播设备都是大众消费品，不会只吸引少数从业者；</li>
+<li>降噪、蓝牙无损、空间音频和 AI 语音都有足够的话题性；</li>
+<li>先用音频建立辨识度，以后还可以自然扩展到 AI 硬件、智能设备和其他科技产品。</li>
+</ul>
+<p>也就是说，热门产品负责带来关注，工程师视角负责建立信任。</p>
+<h2 id="二受众以普通消费者为主科技爱好者为辅">二、受众以普通消费者为主，科技爱好者为辅</h2>
+<p>我不想只面向音频开发人员，因为这个群体相对小，内容也容易变成技术课程。更合适的受众关系是：</p>
+<blockquote>
+<p>普通消费者是主要服务对象，科技爱好者是内容传播者和专业度验证者。</p></blockquote>
+<p>这类观众不一定想学习一整套算法，但会关心三个问题：</p>
+<ol>
+<li>这个功能到底有什么用？</li>
+<li>厂商宣传的内容有多少是真的？</li>
+<li>我应该怎么选，又有没有必要为它花钱？</li>
+</ol>
+<p>因此，内容应当从生活问题出发，先给结论，再用实验和简单原理证明。专业不是把观众带进一堆术语，而是有能力把复杂的东西讲简单，同时不丢失准确性。</p>
+<h2 id="三内容方向和比例">三、内容方向和比例</h2>
+<p>起步阶段不宜在手机、汽车、相机和电脑之间反复跳跃。观众需要先能用一句话记住这个账号，之后才会接受内容边界的扩展。</p>
+<p>初期可以按以下比例规划：</p>
+<table>
+  <thead>
+      <tr>
+          <th>内容方向</th>
+          <th style="text-align: right">比例</th>
+          <th>主要作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>耳机、麦克风、音箱、直播设备</td>
+          <td style="text-align: right">50%</td>
+          <td>建立专业标签和账号辨识度</td>
+      </tr>
+      <tr>
+          <td>AI 语音、AI 硬件、智能设备</td>
+          <td style="text-align: right">25%</td>
+          <td>承接科技热点和新产品</td>
+      </tr>
+      <tr>
+          <td>手机、电脑等泛科技产品</td>
+          <td style="text-align: right">15%</td>
+          <td>逐步扩大受众范围</td>
+      </tr>
+      <tr>
+          <td>程序员视角和行业故事</td>
+          <td style="text-align: right">10%</td>
+          <td>建立真实的个人形象</td>
+      </tr>
+  </tbody>
+</table>
+<p>在表现形式上，可以先建立四个固定栏目。</p>
+<h3 id="1-这项技术到底有没有用">1. 这项技术到底有没有用</h3>
+<p>负责解释消费者经常看到，但并不真正理解的概念。</p>
+<ul>
+<li>主动降噪为什么消不掉人声？</li>
+<li>蓝牙“无损”是真无损吗？</li>
+<li>空间音频到底是不是智商税？</li>
+<li>手机厂商说的 AI 通话降噪是什么？</li>
+<li>耳机上有多个麦克风到底有什么用？</li>
+</ul>
+<h3 id="2-程序员实测">2. 程序员实测</h3>
+<p>这是最值得做成招牌的栏目。科技博主很多，但愿意认真控制实验条件的人并不多。</p>
+<ul>
+<li>200 元和 2000 元麦克风的盲听对比；</li>
+<li>地铁、刮风和人群环境下的耳机通话测试；</li>
+<li>AI 降噪能不能消除键盘、风扇和装修声；</li>
+<li>手机、无线耳机和专业录音笔的同场对比；</li>
+<li>在音量匹配后比较不同的音质模式。</li>
+</ul>
+<p>测试时应尽量做到音量匹配、环境一致、条件公开，并清楚区分主观感受和客观数据。长期下来，这套可重复的实验方法会成为账号的护城河。</p>
+<h3 id="3-一分钟购买建议">3. 一分钟购买建议</h3>
+<p>直接解决消费决策，这类内容容易获得收藏和搜索流量。</p>
+<ul>
+<li>通勤耳机应该优先看什么？</li>
+<li>开会用耳机，音质和麦克风哪个更重要？</li>
+<li>普通人有没有必要买独立麦克风？</li>
+<li>直播新手的第一套设备应该怎么搭？</li>
+<li>预算 500 元，应该先升级耳机还是麦克风？</li>
+</ul>
+<h3 id="4-工程师看新品">4. 工程师看新品</h3>
+<p>这个栏目用来跟进热点，但不复述发布会，而是固定回答五个问题：</p>
+<ol>
+<li>新产品增加了什么？</li>
+<li>它背后的技术是什么？</li>
+<li>用户在实际使用中能不能感知？</li>
+<li>哪些是技术进步，哪些是宣传包装？</li>
+<li>什么样的人值得购买？</li>
+</ol>
+<h2 id="四从模仿开始但不复制别人">四、从模仿开始，但不复制别人</h2>
+<p>模仿成熟博主是很好的入门方式，但应该模仿的是内容机制，而不是人设、文案和标志性表达。</p>
+<p>拆解一条优秀视频时，可以关注：</p>
+<ul>
+<li>博主为什么选这个题；</li>
+<li>标题制造了什么疑问或冲突；</li>
+<li>前 5 秒如何留住观众；</li>
+<li>什么时候给出结论；</li>
+<li>用实验、故事还是争议证明观点；</li>
+<li>一条视频中有多少次节奏变化；</li>
+<li>评论区的观众还在追问什么。</li>
+</ul>
+<p>可以同时选择三类学习对象：一位擅长选题和标题，一位擅长把技术讲清楚，一位擅长镜头表达和节奏。把三者的优点组合起来，比完整模仿某一个人更容易形成自己的风格。</p>
+<h2 id="五固定视频结构">五、固定视频结构</h2>
+<p>面向普通消费者，可以先使用一个简单、可重复的脚本结构：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">生活场景 → 直接结论 → 对比实验 → 简单原理 → 购买建议</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>例如讲降噪耳机，可以用一个普通用户经历过的问题开场：</p>
+<blockquote>
+<p>你的降噪耳机能消掉地铁声，却消不掉旁边的人说话，不一定是产品质量差。因为这两种声音对降噪算法来说，难度完全不同。</p></blockquote>
+<p>紧接着播放对比实验，等观众已经产生疑问后，再解释稳定噪声和突发人声的区别。不宜一开头就从“主动降噪的定义”讲起。</p>
+<p>表达风格可以定为“可信赖的工程师朋友”：</p>
+<ul>
+<li>敢于给出明确结论，但会说明结论适用的条件；</li>
+<li>能够讲原理，但不用术语炫技；</li>
+<li>敢于质疑营销，但不刻意制造争议；</li>
+<li>承认主观体验的存在，不把个人喜好包装成科学结论；</li>
+<li>适当分享开发经历，但严格遵守公司的保密要求。</li>
+</ul>
+<p>还可以尝试用一句固定结尾强化账号记忆：</p>
+<blockquote>
+<p>参数负责告诉我们它能做什么，实验负责告诉我们它做得怎么样。</p></blockquote>
+<h2 id="六第一批选题">六、第一批选题</h2>
+<p>第一批内容不应全部做新品评测，而应该同时测试实验、解释、购买建议和观点等不同内容模式。</p>
+<ol>
+<li>降噪耳机为什么消不掉小孩哭声？</li>
+<li>视频会议声音难听，真的是耳机太差吗？</li>
+<li>蓝牙无损音质，普通人到底能不能听出来？</li>
+<li>200 元和 2000 元麦克风，直播时差距有多大？</li>
+<li>主播声音好听，麦克风和后期各占多少？</li>
+<li>AI 降噪能否消除机械键盘、风扇和装修声？</li>
+<li>耳机麦克风数量越多，通话效果就越好吗？</li>
+<li>为什么语音消息听起来没有原声好听？</li>
+<li>空间音频是实用功能，还是营销概念？</li>
+<li>买耳机时最没必要纠结的三个参数。</li>
+</ol>
+<p>其中，第 1、3、4、6 个选题更适合做实验，第 2、5、8 个选题更适合用故事引入，第 9、10 个选题则用来测试观点型内容。</p>
+<p>如果只选一条作为起点，我会选《降噪耳机为什么消不掉人声？》。这个问题认知门槛低、受众广、实验效果明显，又能立即展示自己的专业背景。</p>
+<h2 id="七一次研究生产多种内容">七、一次研究，生产多种内容</h2>
+<p>在职状态下，时间是最稀缺的资源，不能为每个平台分别研究一个选题。更可行的方式是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">一个选题
+</span></span><span class="line"><span class="cl">├── 一条 5～10 分钟的完整视频
+</span></span><span class="line"><span class="cl">├── 两到三条结论型短视频
+</span></span><span class="line"><span class="cl">├── 一篇完整的博客文章
+</span></span><span class="line"><span class="cl">└── 若干图文卡片或问答</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>平台分工可以先简化为：</p>
+<ul>
+<li>B 站发布完整内容，建立专业度和长期搜索价值；</li>
+<li>抖音或视频号发布短内容，快速测试选题和开头；</li>
+<li>现有博客保存原始录音、实验数据、参考资料和完整原理。</li>
+</ul>
+<p>音频内容有一个特殊问题：视频平台会压缩声音，用户使用的播放设备也不同，所以视频中的音质对比未必可靠。可以在博客中补充：</p>
+<ul>
+<li>未经平台压缩的原始录音；</li>
+<li>测试设备、环境和完整流程；</li>
+<li>视频中省略的技术解释；</li>
+<li>错误修正和长期使用更新。</li>
+</ul>
+<p>视频负责吸引和解释，博客负责证据和沉淀，两者正好互补。</p>
+<h2 id="八用-30-天做一次低成本验证">八、用 30 天做一次低成本验证</h2>
+<p>第一个月的目标不是购买昂贵设备，也不是立即涨多少粉丝，而是验证一套内容生产闭环。</p>
+<h3 id="第一周完成准备">第一周：完成准备</h3>
+<ul>
+<li>确定一句账号定位；</li>
+<li>拆解 10 个相关账号、30 条表现较好的视频；</li>
+<li>建立一个至少包含 20 个题目的选题库；</li>
+<li>确定简单统一的封面和视频结构；</li>
+<li>使用已有设备录制 3 条样片。</li>
+</ul>
+<h3 id="后三周发布和复盘">后三周：发布和复盘</h3>
+<ul>
+<li>每周发布 2 条短内容；</li>
+<li>每两周发布 1 条完整内容；</li>
+<li>记录每条内容的研究、拍摄和剪辑耗时；</li>
+<li>从评论区收集用户追问，补充下一轮选题；</li>
+<li>对同一个主题尝试两种开头、标题或封面。</li>
+</ul>
+<p>需要重点观察的不只是播放量，还包括：</p>
+<ul>
+<li>观众在前几秒的流失情况；</li>
+<li>完播率或平均观看时长；</li>
+<li>收藏、有效评论和关注转化；</li>
+<li>每条内容的实际制作时间。</li>
+</ul>
+<p>30 天后需要回答的不是“我有没有成功”，而是四个更实际的问题：</p>
+<ol>
+<li>哪类题目最容易让人点开？</li>
+<li>哪种表达最容易让人看完？</li>
+<li>哪类观众愿意追问并关注？</li>
+<li>哪种内容可以保持长期、低成本生产？</li>
+</ol>
+<h2 id="九变现不应该只依赖播放量">九、变现不应该只依赖播放量</h2>
+<p>这件事如果最终要成为创业方向，就不能只把播放量和平台补贴当成收入模型。结合自己的背景，比较合适的变现顺序可能是：</p>
+<ol>
+<li>音频设备、直播设备的内容合作和销售佣金；</li>
+<li>直播间、播客、会议和录音环境的音频诊断；</li>
+<li>音视频产品或 AI 语音产品的技术咨询；</li>
+<li>企业培训、课程和知识产品；</li>
+<li>自己开发小工具、插件或测试服务；</li>
+<li>账号成熟后的品牌广告和长期栏目赞助。</li>
+</ol>
+<p>本质上，目标不是只做一个“靠流量吃饭的媒体”，而是：</p>
+<blockquote>
+<p>用大众内容建立影响力，再用专业能力完成高价值变现。</p></blockquote>
+<p>这种模式与现有职业经验衔接得更好，也比单纯依赖广告分成更稳定。</p>
+<h2 id="十信任和职业边界">十、信任和职业边界</h2>
+<p>科技消费内容一旦开始变现，最容易损伤的就是观众信任。因此，需要尽早建立几条原则：</p>
+<ul>
+<li>区分自购、借测、商业合作和佣金链接；</li>
+<li>商业合作不影响测试方法和结论表达；</li>
+<li>不为了流量轻易使用“吊打”“智商税”“彻底改变行业”等绝对化表达；</li>
+<li>测试方法、限制条件和判断依据尽可能公开。</li>
+</ul>
+<p>同时，在职创作还必须提前检查劳动合同、竞业和保密要求。不使用公司的代码、数据、客户信息和未公开的产品细节，测试设备、账号和制作时间也尽量与工作分开。</p>
+<h2 id="结语先完成一个最小闭环">结语：先完成一个最小闭环</h2>
+<p>现阶段比较清晰的方向，可以暂时概括为“声音科技实验室”：用真实实验拆解耳机、麦克风、直播和 AI 语音产品，面向普通消费者和科技爱好者讲清楚一项技术的价值、限制和购买建议。</p>
+<p>起步时不需要立即购买大量设备，也不需要同时经营所有平台。先用手机、现有耳机和电脑，以“真人讲解＋桌面实验＋少量动画”的方式，完成从选题、实验、拍摄、剪辑、发布到复盘的第一个闭环。</p>
+<p>第一个里程碑不是“成为大博主”，而是发出第一条能代表自己未来方向的内容，再根据真实反馈继续调整。</p>
 ]]></content:encoded>
     </item>
     <item>
@@ -2971,902 +3226,6 @@ $$</p>
 <li><a href="https://medium.com/@kunalkushwahatg/exploring-mel-spectrograms-a-powerful-feature-extraction-tool-for-audio-signals-3b68ff6fcf96">Exploring Mel Spectrograms: A Powerful Feature Extraction Tool for Audio Signals</a></li>
 <li><a href="https://medium.com/@kunalkushwahatg/zooming-in-understanding-the-short-time-fourier-transform-27c58f6a08ee">Zooming In: Understanding the Short-Time Fourier Transform</a></li>
 <li><a href="https://librosa.org/doc/main/generated/librosa.feature.melspectrogram.html">librosa.feature.melspectrogram</a></li>
-</ul>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>音频重采样：从原理到工程实现</title>
-      <link>https://lyapple2008.github.io/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/</link>
-      <pubDate>Mon, 20 Apr 2026 15:02:03 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/</guid>
-      <description>&lt;p&gt;深入理解 sinc 卷积如何完成信号重建，探索从朴素算法到 SpeexDSP 的优化之路&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;第一部分重采样的原理与处理过程&#34;&gt;第一部分：重采样的原理与处理过程&lt;/h2&gt;
-&lt;h3 id=&#34;目录&#34;&gt;目录&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;https://lyapple2008.github.io/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/#sampling-nature&#34;&gt;采样操作的本质：频谱复制&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://lyapple2008.github.io/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/#reconstruction-condition&#34;&gt;重建的条件：无混叠&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://lyapple2008.github.io/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/#ideal-lpf&#34;&gt;理想低通滤波器&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://lyapple2008.github.io/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/#convolution-reconstruction&#34;&gt;卷积重建&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://lyapple2008.github.io/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/#resampling-process&#34;&gt;重采样过程&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://lyapple2008.github.io/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/#why-sinc&#34;&gt;为什么是 sinc 而不是其他函数&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;11-采样操作的本质频谱复制&#34;&gt;1.1 采样操作的本质：频谱复制&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;核心结论 — Whittaker-Shannon 插值公式：&lt;/strong&gt;&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<p>深入理解 sinc 卷积如何完成信号重建，探索从朴素算法到 SpeexDSP 的优化之路</p>
-<hr>
-<h2 id="第一部分重采样的原理与处理过程">第一部分：重采样的原理与处理过程</h2>
-<h3 id="目录">目录</h3>
-<ol>
-<li><a href="/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/#sampling-nature">采样操作的本质：频谱复制</a></li>
-<li><a href="/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/#reconstruction-condition">重建的条件：无混叠</a></li>
-<li><a href="/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/#ideal-lpf">理想低通滤波器</a></li>
-<li><a href="/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/#convolution-reconstruction">卷积重建</a></li>
-<li><a href="/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/#resampling-process">重采样过程</a></li>
-<li><a href="/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/#why-sinc">为什么是 sinc 而不是其他函数</a></li>
-</ol>
-<hr>
-<h3 id="11-采样操作的本质频谱复制">1.1 采样操作的本质：频谱复制</h3>
-<blockquote>
-<p><strong>核心结论 — Whittaker-Shannon 插值公式：</strong></p>
-<p>$$x_c(t) = \sum_{n=-\infty}^{\infty} x[n] \cdot \text{sinc}\left(\frac{t - nT}{T}\right)$$</p>
-<p>其中 $\text{sinc}(u) = \frac{\sin(\pi u)}{\pi u}$。
-<strong>这意味着：任意时刻的连续值 = 离散样本与 sinc 函数的卷积。</strong></p></blockquote>
-<h4 id="第一步采样定理的数学表达">第一步：采样定理的数学表达</h4>
-<p>设连续信号 $x_c(t)$ 的傅里叶变换为 $X_c(j\Omega)$，带宽限制在 $|\Omega| \leq \Omega_0$（即 bandlimited）。</p>
-<p><strong>采样</strong>（采样周期 $T$）等价于将 $x_c(t)$ 乘以冲激串：</p>
-<p>$$x_s(t) = x_c(t) \cdot \sum_{n=-\infty}^{\infty} \delta(t - nT)$$</p>
-<p>频域上，乘积变成卷积。冲激串的傅里叶变换仍是冲激串（周期为 $\Omega_s = 2\pi/T$）：</p>
-<p>$$\sum_{n=-\infty}^{\infty} \delta(t - nT) \xrightarrow{\mathcal{F}} \frac{2\pi}{T}\sum_{k=-\infty}^{\infty} \delta(\Omega - k\Omega_s)$$</p>
-<p>卷积结果：<strong>采样信号的频谱是原始频谱的无限复制</strong>：</p>
-<p>$$X_s(j\Omega) = \frac{1}{T}\sum_{k=-\infty}^{\infty} X_c\left(j(\Omega - k\Omega_s)\right)$$</p>
-<h4 id="直观理解为什么采样--频谱复制">直观理解：为什么采样 = 频谱复制</h4>
-<p><strong>时域直觉：采样就是&quot;按快门&quot;</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">连续信号:  ∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿  (无限多点)
-</span></span><span class="line"><span class="cl">采样后:      ●     ●     ●     ●     (有限个点)
-</span></span><span class="line"><span class="cl">           t=0   t=T  t=2T  t=3T</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>数学上，这个操作是信号乘以冲激串：$x_s(t) = x_c(t) \cdot \sum_n \delta(t - nT)$。冲激串就像一把&quot;梳子&quot;，只在整数倍 T 的位置&quot;抓住&quot;信号值，其余全部归零。</p>
-<p><strong>频域发生了什么？</strong></p>
-<p>时域相乘 → 频域卷积（傅里叶变换的基本性质）。而冲激串的傅里叶变换<strong>仍然是冲激串</strong>：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">时域:  ↑     ↑     ↑     ↑     (冲激串，周期 T)
-</span></span><span class="line"><span class="cl">       ↓ 傅里叶变换 ↓
-</span></span><span class="line"><span class="cl">频域:  ↑     ↑     ↑     ↑     (冲激串，周期 Ωs = 2π/T)</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p><strong>卷积一个冲激串 = 把函数复制粘贴到每个冲激的位置。</strong> 好比一张照片（原始频谱）被复印无数份，每份放在一个相框里。</p>
-<h4 id="复制品重叠与否决定混叠的关键">复制品重叠与否：决定混叠的关键</h4>
-<p><strong>采样率足够高</strong>（Ωs &gt; 2Ω₀）—— 复制品之间有间隔，可以用低通滤波器完美提取原始频谱：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">     ╱╲       ╱╲       ╱╲       ╱╲
-</span></span><span class="line"><span class="cl">    ╱  ╲     ╱  ╲     ╱  ╲     ╱  ╲
-</span></span><span class="line"><span class="cl">   ╱    ╲   ╱    ╲   ╱    ╲   ╱    ╲
-</span></span><span class="line"><span class="cl">──╱──────╲─╱──────╲─╱──────╲─╱──────╲──→ Ω
-</span></span><span class="line"><span class="cl">              ↑
-</span></span><span class="line"><span class="cl">         间隔存在，可完美重建</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p><strong>采样率不够</strong>（Ωs &lt; 2Ω₀）—— 复制品重叠，原始频谱被破坏，这就是混叠：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">     ╱╲     ╱╲
-</span></span><span class="line"><span class="cl">    ╱  ╲╱╲╱  ╲
-</span></span><span class="line"><span class="cl">   ╱   ╳╳╳╳   ╲       ← 重叠！原始频谱被破坏
-</span></span><span class="line"><span class="cl">──╱──╱──────╲──╲──→ Ω
-</span></span><span class="line"><span class="cl">         ↑
-</span></span><span class="line"><span class="cl">    高低频信息混在一起无法分离</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<h4 id="数字例子30hz-信号在-40hz-采样率下">数字例子：30Hz 信号在 40Hz 采样率下</h4>
-<p>信号最高频率 30Hz，采样率 40Hz，Ωs = 40Hz：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">原始频谱: 0~30Hz 有能量
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">采样后频谱复制 (每 40Hz 一份):
-</span></span><span class="line"><span class="cl">  复制品0:  [0 ~ 30Hz]       ← 原始
-</span></span><span class="line"><span class="cl">  复制品1:  [40 ~ 70Hz]      ← 40+0 ~ 40+30
-</span></span><span class="line"><span class="cl">  复制品-1: [-40 ~ -10Hz]    ← 折叠到正频率变成 10~40Hz</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>复制品-1 的负频率部分（-30~-10Hz）折叠到正频率变成 10<del>30Hz，与原始频谱的 10</del>30Hz <strong>重叠</strong>——30Hz 被&quot;误认&quot;为 10Hz，这就是混叠。</p>
-<hr>
-<h3 id="12-重建的条件无混叠">1.2 重建的条件：无混叠</h3>
-<p>若 $\Omega_s \geq 2\Omega_0$（即采样频率高于奈奎斯特频率），则复制频谱<strong>互不重叠</strong>，可以通过一个理想低通滤波器提取出原始频谱。</p>
-<p><strong>重建条件（采样定理）：</strong></p>
-<p>$$\Omega_s = \frac{2\pi}{T} &gt; 2\Omega_0 \implies T &lt; \frac{\pi}{\Omega_0}$$</p>
-<hr>
-<h3 id="13-理想低通滤波器">1.3 理想低通滤波器</h3>
-<p>要完美重建 $x_c(t)$，需要让 $x_s(t)$ 通过一个<strong>理想砖墙低通滤波器</strong> $H(j\Omega)$：</p>
-<p>$$H(j\Omega) = \begin{cases} T, &amp; |\Omega| \leq \Omega_c \ 0, &amp; |\Omega| &gt; \Omega_c \end{cases}$$</p>
-<p>其中 $\Omega_c$ 满足 $\Omega_0 \leq \Omega_c \leq \Omega_s - \Omega_0$（通常取 $\Omega_c = \Omega_s/2 = \pi/T$）。</p>
-<p>该滤波器的<strong>单位冲激响应</strong>（即逆傅里叶变换）为：</p>
-<p>$$h(t) = \mathcal{F}^{-1}{H(j\Omega)} = T \cdot \frac{\sin(\Omega_c t)}{\Omega_c t}$$</p>
-<p>令 $\Omega_c = \pi/T$，则：</p>
-<p>$$h(t) = T \cdot \frac{\sin(\pi t/T)}{\pi t/T} = \text{sinc}\left(\frac{t}{T}\right)$$</p>
-<blockquote>
-<p><strong>这就是 sinc 函数！</strong></p></blockquote>
-<h4 id="sinc-同时完成重建与低通">sinc 同时完成重建与低通</h4>
-<p>sinc 卷积在频域做了一件事：<strong>只保留目标频段，切除其余复制品</strong>。从不同角度看，它有两个名字：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">频域视角：
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">采样信号频谱:    |原始|  复制品  |  复制品  |  复制品
-</span></span><span class="line"><span class="cl">                      ↑
-</span></span><span class="line"><span class="cl">                 只提取这一块
-</span></span><span class="line"><span class="cl">                 = 重建 = 低通滤波 = 去除复制品</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<table>
-  <thead>
-      <tr>
-          <th>视角</th>
-          <th>sinc 做了什么</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>重建</strong></td>
-          <td>从离散样本恢复出连续信号</td>
-      </tr>
-      <tr>
-          <td><strong>低通 / 防混叠</strong></td>
-          <td>去除采样产生的频谱复制品</td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>它们是同一个滤波操作的两种叫法。</strong> 重建 = 低通滤波 = sinc 卷积。</p>
-<h4 id="sinc-如何确定截止频率">sinc 如何确定截止频率？</h4>
-<p>sinc 函数不是&quot;带参数的滤波器&quot;，它<strong>就是</strong>理想低通滤波器的时域形态。截止频率由 sinc 的&quot;胖瘦&quot;决定：</p>
-<p>**缩放规则：**sinc 在时域越&quot;窄&quot;，频域的矩形窗越&quot;宽&quot;（时频互逆）。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sinc(t/T)          →  截止频率 = π/T = Ωs/2
-</span></span><span class="line"><span class="cl">sinc(2Wt)          →  截止频率 = W    (角频率)
-</span></span><span class="line"><span class="cl">sinc(2πf_c · t)    →  截止频率 = f_c  (Hz)</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<h4 id="重采样中截止频率的选择">重采样中截止频率的选择</h4>
-<p>截止频率不是随便选的，它由<strong>目标采样率</strong>决定：<strong>sinc 的截止频率 = 目标采样率的 Nyquist 频率（$F_{\text{target}}/2$）。</strong></p>
-<p>**上采样（插值）：**从 $F_s$ 上采样到 $M \cdot F_s$</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">原始 Nyquist = Fs/2
-</span></span><span class="line"><span class="cl">新 Nyquist   = M·Fs/2
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">插零后频谱:   |原始|  镜像  |  镜像  |  镜像
-</span></span><span class="line"><span class="cl">                     ↑
-</span></span><span class="line"><span class="cl">              sinc 滤波器只保留这里
-</span></span><span class="line"><span class="cl">              截止 = 新采样率的 Nyquist = M·Fs/2</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>**下采样（抽取）：**从 $F_s$ 下采样到 $F_s/M$</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">原始 Nyquist = Fs/2
-</span></span><span class="line"><span class="cl">新 Nyquist   = Fs/(2M)
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">原始频谱:     |████████████████|
-</span></span><span class="line"><span class="cl">                      ↑
-</span></span><span class="line"><span class="cl">              只保留这部分，截止 = 新采样率的 Nyquist = Fs/(2M)
-</span></span><span class="line"><span class="cl">              然后再抽取</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<hr>
-<h3 id="14-卷积重建">1.4 卷积重建</h3>
-<p>滤波器输出为输入与冲激响应的卷积：</p>
-<p>$$x_c(t) = x_s(t) * h(t) = \left[x_c(t) \cdot \sum_{n}\delta(t-nT)\right] * \text{sinc}\left(\frac{t}{T}\right)$$</p>
-<p>乘以冲激串后得到一系列移位冲激：</p>
-<p>$$x_s(t) = \sum_{n=-\infty}^{\infty} x_c(nT) \cdot \delta(t - nT)$$</p>
-<p>与 sinc 卷积：</p>
-<p>$$x_c(t) = \sum_{n=-\infty}^{\infty} x_c(nT) \cdot \text{sinc}\left(\frac{t - nT}{T}\right)$$</p>
-<blockquote>
-<p><strong>核心公式的意义：</strong></p>
-<ul>
-<li>连续信号可以<strong>唯一地</strong>由其样本 ${x_c(nT)}$ 决定</li>
-<li>每个样本乘以一个 sinc 函数，所有这些 sinc 函数叠加即重建连续信号</li>
-<li>sinc 函数的峰值在 $t = nT$，在其他采样点为零（正交性）</li>
-</ul></blockquote>
-<hr>
-<h3 id="15-重采样过程">1.5 重采样过程</h3>
-<p>现在要将信号从采样率 $T_1$<strong>重采样</strong>到 $T_2$。</p>
-<p><strong>整数倍上采样</strong>（$T_2 = T_1/N$，增加 $N$ 倍）：</p>
-<ol>
-<li>在样本间插入 $N-1$ 个零 → 频谱压缩 $N$ 倍</li>
-<li>通过低通滤波器（增益 $N$）去除镜像频谱</li>
-<li>该滤波器就是 sinc 函数</li>
-</ol>
-<p><strong>有理数比上/下采样</strong>（$T_2 = \frac{P}{Q}T_1$）：</p>
-<ul>
-<li>先上采样 $P$ 倍（插值）</li>
-<li>再下采样 $Q$ 倍（抽取）</li>
-<li>每一步都用 sinc 滤波</li>
-</ul>
-<p><strong>任意比值重采样：</strong></p>
-<p>在目标时刻 $t = mT_2$ 直接计算：</p>
-<p>$$x[m] = \sum_{n=-\infty}^{\infty} x_1[n] \cdot \text{sinc}\left(\frac{mT_2 - nT_1}{T_1}\right)$$</p>
-<hr>
-<h3 id="16-为什么是-sinc-而不是其他函数">1.6 为什么是 sinc 而不是其他函数？</h3>
-<table>
-  <thead>
-      <tr>
-          <th>函数</th>
-          <th>来源</th>
-          <th>性质</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>sinc</strong></td>
-          <td>理想低通滤波器的逆 FT</td>
-          <td>唯一满足完美重建（奈奎斯特条件）</td>
-      </tr>
-      <tr>
-          <td>其他插值核（线性、立方等）</td>
-          <td>窗化的 sinc 近似</td>
-          <td>是 sinc 的截断/平滑版本，有误差</td>
-      </tr>
-  </tbody>
-</table>
-<blockquote>
-<p><strong>sinc 是唯一的：<strong>在采样定理框架下，只有 sinc 能实现</strong>理论上完美</strong>的连续信号重建。任何其他核都是对 sinc 的近似，代价是高频失真（Gibbs 现象 / 振铃效应）。</p></blockquote>
-<hr>
-<h3 id="17-物理直觉">1.7 物理直觉</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">原始连续信号:  ~~~波形~~~
-</span></span><span class="line"><span class="cl">采样点:          ●    ●    ●    ●
-</span></span><span class="line"><span class="cl">                  ↖   ↗   ↖   ↗
-</span></span><span class="line"><span class="cl">              每个点&#34;抓住&#34;一个sinc,叠加重建波形</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>sinc 函数是<strong>理想低通滤波器的时域响应</strong>。卷积即滤波，滤波即重建。</p>
-<hr>
-<h2 id="第二部分工程实现从朴素到优化">第二部分：工程实现：从朴素到优化</h2>
-<p>以 SpeexDSP 重采样器为例，从最原始的 sinc 插值出发，逐步引入优化手段，理解每个优化解决什么问题。</p>
-<h3 id="目录-1">目录</h3>
-<ol>
-<li><a href="/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/#naive-implementation">最原始的实现：直接算 sinc</a></li>
-<li><a href="/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/#lookup-table">第一步优化：查表代替实时计算</a></li>
-<li><a href="/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/#polyphase">第二步优化：多相滤波</a></li>
-<li><a href="/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/#speex-hybrid">第三步优化：Speex 的混合策略</a></li>
-<li><a href="/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/#accumulator">第四步优化：分数位置推进</a></li>
-<li><a href="/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/#fixed-point">第五步优化：定点运算</a></li>
-<li><a href="/posts/202604/2026-04-20-%E9%9F%B3%E9%A2%91%E9%87%8D%E9%87%87%E6%A0%B7/#summary">全景总结</a></li>
-</ol>
-<hr>
-<h3 id="21-最原始的实现直接算-sinc">2.1 最原始的实现：直接算 sinc</h3>
-<p>根据 Whittaker-Shannon 公式，要计算任意时刻 $t$ 的信号值：</p>
-<p>$$x(t) = \sum_{n} x[n] \cdot \text{sinc}\left(\frac{t - nT}{T}\right)$$</p>
-<p>最直觉的实现：<strong>对每个输出样本，遍历所有相关输入样本，实时计算 sinc 值。</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">naive_resample</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fs_in</span><span class="p">,</span> <span class="n">fs_out</span><span class="p">,</span> <span class="n">num_samples_out</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;最原始的重采样：直接算 sinc&#34;&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">num_samples_out</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samples_out</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">        <span class="n">t</span> <span class="o">=</span> <span class="n">m</span> <span class="o">/</span> <span class="n">fs_out</span>
-</span></span><span class="line"><span class="cl">        <span class="n">pos</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="n">fs_in</span>  <span class="c1"># 在输入序列中的&#34;虚拟位置&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">n_center</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">pos</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="n">half_len</span> <span class="o">=</span> <span class="mi">16</span>  <span class="c1"># 只取 ±16 个点（截断 sinc）</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">s</span> <span class="o">=</span> <span class="mf">0.0</span>
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_center</span> <span class="o">-</span> <span class="n">half_len</span><span class="p">,</span> <span class="n">n_center</span> <span class="o">+</span> <span class="n">half_len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">                <span class="n">sinc_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sinc</span><span class="p">(</span><span class="n">pos</span> <span class="o">-</span> <span class="n">n</span><span class="p">)</span>  <span class="c1"># sin(πx)/(πx)</span>
-</span></span><span class="line"><span class="cl">                <span class="n">s</span> <span class="o">+=</span> <span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">*</span> <span class="n">sinc_val</span>
-</span></span><span class="line"><span class="cl">        <span class="n">output</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">output</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<h4 id="问题计算量太大">问题：计算量太大</h4>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">对每个输出样本:
-</span></span><span class="line"><span class="cl">  → 遍历 2 × half_len 个输入样本
-</span></span><span class="line"><span class="cl">  → 每个都要调用 np.sinc()（内部算 sin + 除法）
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">总计算量: num_out × 2 × half_len × (sin + 除法)
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">示例: 10 秒 48kHz 音频，half_len=32
-</span></span><span class="line"><span class="cl">  480000 × 64 = 3072 万次 sin() 调用</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<blockquote>
-<p><strong>核心瓶颈：</strong> sin() 是很贵的运算，每次都要算。</p></blockquote>
-<hr>
-<h3 id="22-第一步优化查表代替实时计算">2.2 第一步优化：查表代替实时计算</h3>
-<p>sinc 函数是固定的，可以<strong>预先计算好一张表</strong>，运行时直接查表。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">优化前:  每次算 sin(πx)/(πx)     → 贵（三角函数 + 除法）
-</span></span><span class="line"><span class="cl">优化后:  直接查表 sinc_table[i]   → 快（一次内存访问）</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p><strong>新问题：精度不足。</strong> 输出位置通常是分数（比如 <code>pos = 3.7</code>），而 sinc 表只有固定间隔的值。需要用<strong>插值</strong>逼近任意分数位置的 sinc 值。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">目标: sinc(3.7)
-</span></span><span class="line"><span class="cl">表里有: sinc(3.50), sinc(3.75)   ← 间隔 1/4
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">选项A: 线性插值   → sinc(3.7) ≈ 0.4×sinc(3.50) + 0.6×sinc(3.75)
-</span></span><span class="line"><span class="cl">选项B: 三次插值   → 用相邻 4 个点做 cubic 插值（更准）
-</span></span><span class="line"><span class="cl">选项C: 存更大的表  → oversample=16 或 32，直接取最近的（但费内存）</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>Speex 的 <strong>Interpolated 模式</strong>采用选项 B：存一张较稀疏的 sinc 表，用 Cubic 插值逼近任意位置。</p>
-<hr>
-<h3 id="23-第二步优化多相滤波--避免重复计算">2.3 第二步优化：多相滤波 — 避免重复计算</h3>
-<p>上面的方法对每个输出样本独立做一次卷积。但如果输入输出采样率是<strong>整数比</strong>关系，可以利用<strong>周期性</strong>复用计算。</p>
-<h4 id="关键观察">关键观察</h4>
-<p>上采样 4 倍时，sinc 系数只有 4 种不同的偏移：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">输出样本 0: sinc 偏移 0/4 → 系数 [a0, a1, a2, a3]
-</span></span><span class="line"><span class="cl">输出样本 1: sinc 偏移 1/4 → 系数 [b0, b1, b2, b3]
-</span></span><span class="line"><span class="cl">输出样本 2: sinc 偏移 2/4 → 系数 [c0, c1, c2, c3]
-</span></span><span class="line"><span class="cl">输出样本 3: sinc 偏移 3/4 → 系数 [d0, d1, d2, d3]
-</span></span><span class="line"><span class="cl">输出样本 4: sinc 偏移 4/4 = 0/4 → 系数 [a0, a1, a2, a3]  ← 重复！</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p><strong>只有 4 组不同的系数</strong>，不需要为每个输出样本重新查表。</p>
-<h4 id="多相滤波器结构">多相滤波器结构</h4>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">输入 x[n] ───┬──→ [滤波器组 a] ──→ 输出 t=0/4
-</span></span><span class="line"><span class="cl">             ├──→ [滤波器组 b] ──→ 输出 t=1/4
-</span></span><span class="line"><span class="cl">             ├──→ [滤波器组 c] ──→ 输出 t=2/4
-</span></span><span class="line"><span class="cl">             └──→ [滤波器组 d] ──→ 输出 t=3/4
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">4 组滤波器，每组只对同一个输入段计算一次</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p><strong>计算量从 N×M 降到 N×M/P</strong>（P = 上采样倍数）。</p>
-<hr>
-<h3 id="24-第三步优化speex-的混合策略">2.4 第三步优化：Speex 的混合策略</h3>
-<p>SpeexDSP 面对的是<strong>任意比例</strong>重采样（不是整数比），不能直接用纯多相。它的策略是根据参数自动选择查表方式。</p>
-<h4 id="策略一direct-sinc-tableden_rate-较小时">策略一：Direct Sinc Table（den_rate 较小时）</h4>
-<p>当分母 <code>den_rate</code> 不太大时，直接存 <code>filt_len × den_rate</code> 大小的 sinc 表，精确查找。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">den_rate = 160 (分母)
-</span></span><span class="line"><span class="cl">filt_len = 64  (滤波器长度)
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">sinc 表大小 = 64 × 160 = 10240 个系数
-</span></span><span class="line"><span class="cl">内存 ≈ 10240 × 2 bytes = 20KB
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">查找: sinc_table[j * den_rate + samp_frac_num]
-</span></span><span class="line"><span class="cl">      ↑                ↑
-</span></span><span class="line"><span class="cl">      第 j 个抽头      当前分数位置</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>**优点：**直接查表，零插值误差
-**缺点：**内存随 den_rate 线性增长</p>
-<h4 id="策略二interpolated-sinc-tableden_rate-较大时">策略二：Interpolated Sinc Table（den_rate 较大时）</h4>
-<p>**核心矛盾：**Direct 模式要存 <code>filt_len × den_rate</code> 个系数。当 <code>den_rate = 48000</code> 时：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">filt_len=64, den_rate=48000 → 64 × 48000 = 307 万个系数 → 6MB 内存</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>太大了。能不能存一个小表，用插值来&quot;猜&quot;中间的值？</p>
-<h4 id="sinc-表存的到底是什么">sinc 表存的到底是什么？</h4>
-<p>每个输出样本需要的 sinc 系数，就是 sinc 函数在<strong>不同偏移位置</strong>的采样值。</p>
-<p><strong>Direct 模式：为每个可能的分数位置都存一份</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">输出位置 0.000:  用 sinc 在 ..., -2.000, -1.000, 0.000, 1.000, ... 处的值
-</span></span><span class="line"><span class="cl">输出位置 0.001:  用 sinc 在 ..., -1.999, -0.999, 0.001, 1.001, ... 处的值
-</span></span><span class="line"><span class="cl">输出位置 0.002:  用 sinc 在 ..., -1.998, -0.998, 0.002, 1.002, ... 处的值
-</span></span><span class="line"><span class="cl">...
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">den_rate=1000 时，需要为 1000 种不同的偏移各存 filt_len 个系数
-</span></span><span class="line"><span class="cl">表大小 = filt_len × 1000</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p><strong>Interpolated 模式：只存 oversample 份，用插值补中间</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">oversample=16 时，只存 16 种偏移的系数：
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">偏移 0/16:  sinc 在 0.000, 1.000, 2.000, ... 处的值
-</span></span><span class="line"><span class="cl">偏移 1/16:  sinc 在 0.0625, 1.0625, 2.0625, ... 处的值
-</span></span><span class="line"><span class="cl">偏移 2/16:  sinc 在 0.125, 1.125, 2.125, ... 处的值
-</span></span><span class="line"><span class="cl">...
-</span></span><span class="line"><span class="cl">偏移 15/16: sinc 在 0.9375, 1.9375, 2.9375, ... 处的值
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">表大小 = filt_len × 16</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<h4 id="完整的查找过程数字示例">完整的查找过程（数字示例）</h4>
-<p>设定：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">信号: 48kHz → 44.1kHz 重采样
-</span></span><span class="line"><span class="cl">filt_len = 8  (滤波器长度，取 8 个输入样本)
-</span></span><span class="line"><span class="cl">oversample = 16
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">sinc 表大小 = 8 × 16 + 8 = 136 个系数</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p><strong>第一步：确定在输入序列中的位置</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">输入位置 pos = m × (fs_in / fs_out) = 100 × (48000/44100) = 108.8480...
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">整数部分: n_center = 108
-</span></span><span class="line"><span class="cl">小数部分: frac_input = 0.8480...</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p><strong>第二步：将小数部分映射到 oversample 网格</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">oversample_index = frac_input × oversample = 0.8480 × 16 = 13.568
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">整数偏移: offset = 13        ← 在 sinc 表中的基准位置
-</span></span><span class="line"><span class="cl">小数偏移: frac = 0.568       ← cubic 插值的输入</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p><strong>第三步：对每个滤波器抽头，取 4 个相邻表值做 cubic 插值</strong></p>
-<p><strong>第四步：所有抽头加权求和</strong></p>
-<p>$$\mathrm{output}[m] = \sum_{j=0}^{7} \mathrm{sinc_value}[j] \times \mathrm{input}\big[n_{\mathrm{center}} + k_j\big]$$</p>
-<h4 id="cubic-插值系数">Cubic 插值系数</h4>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">interp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.16667</span><span class="o">*</span><span class="n">frac</span> <span class="o">+</span> <span class="mf">0.16667</span><span class="o">*</span><span class="n">frac</span><span class="o">*</span><span class="n">frac</span><span class="o">*</span><span class="n">frac</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">interp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span>  <span class="n">frac</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">frac</span><span class="o">*</span><span class="n">frac</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">frac</span><span class="o">*</span><span class="n">frac</span><span class="o">*</span><span class="n">frac</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">interp</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.33333</span><span class="o">*</span><span class="n">frac</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">frac</span><span class="o">*</span><span class="n">frac</span> <span class="o">-</span> <span class="mf">0.16667</span><span class="o">*</span><span class="n">frac</span><span class="o">*</span><span class="n">frac</span><span class="o">*</span><span class="n">frac</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">interp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span>  <span class="mf">1.f</span> <span class="o">-</span> <span class="n">interp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">interp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">interp</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>这是对 sinc 函数的 <strong>MMSE（最小均方误差）最优三次逼近</strong>。</p>
-<p><strong>为什么用 Cubic 而不是线性？</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">线性插值:  在两个点之间拉直线 → 对 sinc 这种振荡形状误差大
-</span></span><span class="line"><span class="cl">Cubic 插值: 用三次曲线拟合 → 高频失真更小，接近直接查表精度</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<h4 id="对比省了多少内存">对比：省了多少内存？</h4>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">场景: 48kHz → 44.1kHz, filt_len=64
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Direct (den_rate=48000):
-</span></span><span class="line"><span class="cl">  表大小 = 64 × 48000 = 3,072,000 个系数
-</span></span><span class="line"><span class="cl">  内存 = 3,072,000 × 2 bytes = 6 MB
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Interpolated (oversample=16):
-</span></span><span class="line"><span class="cl">  表大小 = 64 × 16 + 8 = 1,032 个系数
-</span></span><span class="line"><span class="cl">  内存 = 1,032 × 2 bytes = 2 KB
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">节省: 6MB → 2KB，缩小 3000 倍
-</span></span><span class="line"><span class="cl">代价: cubic 插值引入微小误差（~0.01dB，人耳不可感知）</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<hr>
-<h3 id="25-第四步优化分数位置推进--避免除法">2.5 第四步优化：分数位置推进 — 避免除法</h3>
-<p>每个输出样本的分数位置怎么算？朴素做法：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 朴素：每个样本都做一次除法
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">frac_pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="n">fs_in</span><span class="p">)</span> <span class="o">%</span> <span class="n">fs_out</span> <span class="o">/</span> <span class="n">fs_out</span><span class="p">;</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p><strong>除法很贵。</strong> Speex 用<strong>累加器</strong>避免除法：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 预计算一次（整数除法，只在初始化时执行）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">int_advance</span>  <span class="o">=</span> <span class="n">num_rate</span> <span class="o">/</span> <span class="n">den_rate</span><span class="p">;</span>     <span class="c1">// 整数部分
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">frac_advance</span> <span class="o">=</span> <span class="n">num_rate</span> <span class="o">%</span> <span class="n">den_rate</span><span class="p">;</span>     <span class="c1">// 分数累加步长
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="c1">// 每个输出样本（只有整数加法和比较）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">last_sample</span>  <span class="o">+=</span> <span class="n">int_advance</span><span class="p">;</span>            <span class="c1">// 整数步进
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">samp_frac_num</span> <span class="o">+=</span> <span class="n">frac_advance</span><span class="p">;</span>          <span class="c1">// 分数累加
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="n">samp_frac_num</span> <span class="o">&gt;=</span> <span class="n">den_rate</span><span class="p">)</span> <span class="p">{</span>        <span class="c1">// 进位
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">samp_frac_num</span> <span class="o">-=</span> <span class="n">den_rate</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">last_sample</span><span class="o">++</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p><strong>整个过程只有整数加法和比较，零除法，零浮点运算。</strong></p>
-<hr>
-<h3 id="26-第五步优化定点运算">2.6 第五步优化：定点运算</h3>
-<p>浮点运算在某些平台（嵌入式 DSP 芯片）很慢。Speex 支持 16-bit 定点模式：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 浮点版
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">sum</span> <span class="o">+=</span> <span class="n">sinc_val</span> <span class="o">*</span> <span class="n">input_val</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 定点版 (Q15 格式: 1 位符号 + 15 位小数)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">sum</span> <span class="o">+=</span> <span class="nf">MULT16_16</span><span class="p">(</span><span class="n">sinc_val_q15</span><span class="p">,</span> <span class="n">input_val_q15</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="c1">// 其中 MULT16_16 = (int32_t)a * (int32_t)b &gt;&gt; 15
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p><strong>精度换速度：</strong> 16-bit 定点的阻带衰减约 90dB，对语音应用足够。</p>
-<hr>
-<h3 id="27-全景总结">2.7 全景总结</h3>
-<h4 id="优化路径">优化路径</h4>
-<table>
-  <thead>
-      <tr>
-          <th>步骤</th>
-          <th>优化内容</th>
-          <th>解决的问题</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>0</td>
-          <td>直接算 sinc</td>
-          <td>瓶颈：sin() 太慢</td>
-      </tr>
-      <tr>
-          <td>1</td>
-          <td>sinc 查表 + 插值</td>
-          <td>瓶颈：每个样本独立查表，重复计算</td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td>多相滤波（整数比时复用系数）</td>
-          <td>瓶颈：任意比怎么办</td>
-      </tr>
-      <tr>
-          <td>3</td>
-          <td>Speex 混合策略</td>
-          <td>瓶颈：每个样本做除法求分数位置</td>
-      </tr>
-      <tr>
-          <td>4</td>
-          <td>累加器推进（整数加法代替除法）</td>
-          <td>瓶颈：浮点运算慢</td>
-      </tr>
-      <tr>
-          <td>5</td>
-          <td>定点运算（16-bit 定点乘加）</td>
-          <td>最终：纯乘加，无除法，无 sin()，SIMD 友好</td>
-      </tr>
-  </tbody>
-</table>
-<h4 id="各步骤对比">各步骤对比</h4>
-<table>
-  <thead>
-      <tr>
-          <th>优化步骤</th>
-          <th>解决的问题</th>
-          <th>核心手段</th>
-          <th>代价</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>查表</td>
-          <td>sin() 太贵</td>
-          <td>预计算 + 内存访问</td>
-          <td>需要插值弥补精度</td>
-      </tr>
-      <tr>
-          <td>Cubic 插值</td>
-          <td>sinc 表太大</td>
-          <td>小表 + 三次插值逼近</td>
-          <td>微小的高频误差</td>
-      </tr>
-      <tr>
-          <td>多相/累加器</td>
-          <td>重复计算 + 除法</td>
-          <td>周期性复用 + 整数累加</td>
-          <td>仅适用于整数比</td>
-      </tr>
-      <tr>
-          <td>混合策略</td>
-          <td>任意比 + 内存/精度权衡</td>
-          <td>自适应选择 Direct/Interpolated</td>
-          <td>代码复杂度</td>
-      </tr>
-      <tr>
-          <td>定点</td>
-          <td>浮点太慢</td>
-          <td>Q15 定点乘加</td>
-          <td>精度有限（~90dB）</td>
-      </tr>
-  </tbody>
-</table>
-<h4 id="speex-质量等级与滤波器参数">Speex 质量等级与滤波器参数</h4>
-<table>
-  <thead>
-      <tr>
-          <th>等级</th>
-          <th>filt_len</th>
-          <th>Oversample</th>
-          <th>阻带衰减</th>
-          <th>适用场景</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Q0</td>
-          <td>8</td>
-          <td>4</td>
-          <td>~60dB</td>
-          <td>低功耗实时</td>
-      </tr>
-      <tr>
-          <td>Q4</td>
-          <td>64</td>
-          <td>8</td>
-          <td>~80dB</td>
-          <td>一般语音</td>
-      </tr>
-      <tr>
-          <td>Q5</td>
-          <td>80</td>
-          <td>16</td>
-          <td>~100dB</td>
-          <td>高质量语音</td>
-      </tr>
-      <tr>
-          <td>Q10</td>
-          <td>256</td>
-          <td>32</td>
-          <td>~100dB+</td>
-          <td>音乐 / 离线处理</td>
-      </tr>
-  </tbody>
-</table>
-<p>filt_len 越长 → sinc 截断越接近理想 → 阻带衰减越好 → 计算量越大。</p>
-<hr>
-<h2 id="参考">参考</h2>
-<ul>
-<li><a href="https://ccrma.stanford.edu/~jos/resample/">Stanford CCRMA - Digital Audio Resampling</a></li>
-<li>SpeexDSP 源码：<code>speex/libspeexdsp/resample.c</code></li>
 </ul>
 ]]></content:encoded>
     </item>

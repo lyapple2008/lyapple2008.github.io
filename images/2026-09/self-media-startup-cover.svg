@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">程序员做科技自媒体</title>
+  <desc id="desc">一名音频程序员在声音科技实验台前测试耳机、麦克风和音频波形，象征以真实实验面向普通消费者创作科技内容。</desc>
+  <defs>
+    <linearGradient id="night" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#102f3a"/>
+      <stop offset="0.58" stop-color="#174957"/>
+      <stop offset="1" stop-color="#0d2834"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff5d8"/>
+      <stop offset="1" stop-color="#f4dfad"/>
+    </linearGradient>
+    <linearGradient id="coral" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff8b6c"/>
+      <stop offset="1" stop-color="#e6514f"/>
+    </linearGradient>
+    <linearGradient id="aqua" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#74d8d0"/>
+      <stop offset="1" stop-color="#22a8aa"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffd66e"/>
+      <stop offset="1" stop-color="#ed9f32"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#8ff4e8" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#8ff4e8" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M42 0H0V42" fill="none" stroke="#b7ede8" stroke-width="1.5" opacity=".10"/>
+    </pattern>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#071a22" flood-opacity=".38"/>
+    </filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+    <style>
+      .ink { stroke: #0d2c36; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; }
+      .thin { stroke: #0d2c36; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .light { stroke: #eaf9ef; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+      .cn { font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
+      .mono { font-family: "SFMono-Regular", "Cascadia Code", "Menlo", monospace; }
+    </style>
+  </defs>
+
+  <!-- deep-tech canvas -->
+  <rect x="22" y="22" width="1556" height="856" rx="56" fill="url(#night)" stroke="#0a2029" stroke-width="10"/>
+  <rect x="38" y="38" width="1524" height="824" rx="43" fill="url(#grid)"/>
+  <ellipse cx="1190" cy="438" rx="420" ry="370" fill="url(#glow)"/>
+  <ellipse cx="1120" cy="785" rx="420" ry="54" fill="#061921" opacity=".46" filter="url(#soft)"/>
+
+  <!-- decorative signal path -->
+  <g fill="none" stroke="#70d8d0" stroke-width="4" opacity=".42">
+    <path d="M92 726 C230 665 300 745 410 686 S610 655 721 707"/>
+    <path d="M84 752 C216 700 298 780 420 724 S622 695 742 743" opacity=".45"/>
+  </g>
+  <g fill="#ffd36c">
+    <circle cx="104" cy="723" r="7"/>
+    <circle cx="409" cy="686" r="7"/>
+    <circle cx="721" cy="707" r="7"/>
+  </g>
+
+  <!-- title block -->
+  <g transform="translate(92 92)">
+    <rect x="0" y="0" width="338" height="48" rx="24" fill="#7adbd2"/>
+    <circle cx="26" cy="24" r="8" fill="#0d2c36"/>
+    <text x="51" y="32" fill="#0d2c36" font-size="22" font-weight="850" letter-spacing="1" class="cn">音频程序员 × 创业调研</text>
+
+    <text x="0" y="144" fill="#fff5d8" font-size="76" font-weight="900" letter-spacing="-3" class="cn">程序员做</text>
+    <text x="0" y="232" fill="#ff7d65" font-size="88" font-weight="900" letter-spacing="-4" class="cn">科技自媒体</text>
+    <path d="M3 259 C150 282 344 278 520 248" fill="none" stroke="#ffd269" stroke-width="13" stroke-linecap="round"/>
+
+    <text x="2" y="326" fill="#d7eeea" font-size="29" font-weight="650" class="cn">从声音科技出发，用真实实验建立信任</text>
+
+    <g transform="translate(0 380)">
+      <rect width="590" height="142" rx="26" fill="#fff5d8" opacity=".97" filter="url(#shadow)"/>
+      <text x="29" y="42" fill="#24444d" font-size="20" font-weight="800" class="cn">内容定位</text>
+      <text x="29" y="82" fill="#0d2c36" font-size="28" font-weight="900" class="cn">不背参数，不念发布会</text>
+      <text x="29" y="116" fill="#d94f4b" font-size="24" font-weight="800" class="cn">用实验回答“有没有用、值不值得买”</text>
+      <g transform="translate(505 30)">
+        <circle cx="31" cy="31" r="31" fill="url(#gold)" class="thin"/>
+        <path d="M18 31 l9 9 18 -22" fill="none" class="ink"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- floating creator workflow cards -->
+  <g transform="translate(715 104) rotate(-4)" filter="url(#shadow)">
+    <rect width="222" height="102" rx="22" fill="#fff5d8" class="thin"/>
+    <circle cx="38" cy="37" r="18" fill="#ff7d65" class="thin"/>
+    <path d="M31 37 h14 M38 30 v14" class="thin"/>
+    <text x="70" y="43" fill="#0d2c36" font-size="24" font-weight="900" class="cn">选题</text>
+    <text x="24" y="79" fill="#49656b" font-size="17" font-weight="700" class="cn">消费者真正关心什么？</text>
+  </g>
+  <g transform="translate(1260 105) rotate(5)" filter="url(#shadow)">
+    <rect width="230" height="102" rx="22" fill="#fff5d8" class="thin"/>
+    <path d="M25 51 h14 l10 -22 17 47 15 -34 12 19 h17" fill="none" stroke="#e45450" stroke-width="6" stroke-linejoin="round"/>
+    <text x="123" y="44" text-anchor="middle" fill="#0d2c36" font-size="23" font-weight="900" class="cn">实验</text>
+    <text x="123" y="77" text-anchor="middle" fill="#49656b" font-size="17" font-weight="700" class="cn">结论要经得起验证</text>
+  </g>
+
+  <!-- sound-lab screen -->
+  <g transform="translate(872 245)" filter="url(#shadow)">
+    <rect x="0" y="0" width="548" height="310" rx="32" fill="#fdf1d4" class="ink"/>
+    <rect x="26" y="27" width="496" height="222" rx="20" fill="#163e49" class="thin"/>
+    <g transform="translate(49 58)">
+      <text x="0" y="0" fill="#8cebe0" font-size="16" font-weight="700" class="mono">LIVE AUDIO TEST</text>
+      <circle cx="414" cy="-6" r="7" fill="#ff7663"/>
+      <text x="430" y="0" fill="#eaf9ef" font-size="13" font-weight="700" class="mono">REC</text>
+      <path d="M0 91 h20 l13 -16 17 31 17 -58 18 94 18 -118 21 132 20 -96 18 62 19 -34 18 20 19 -70 20 120 20 -91 19 35 19 -53 20 104 18 -130 20 149 19 -87 20 46 18 -25 21 5 h24" fill="none" stroke="#6fe2d7" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="0" y1="170" x2="449" y2="170" stroke="#8bb8bb" stroke-width="2" stroke-dasharray="8 10" opacity=".45"/>
+      <g fill="#ffd269">
+        <rect x="0" y="187" width="92" height="10" rx="5"/>
+        <rect x="102" y="187" width="150" height="10" rx="5" opacity=".7"/>
+        <rect x="262" y="187" width="74" height="10" rx="5" opacity=".45"/>
+      </g>
+    </g>
+    <rect x="204" y="265" width="140" height="65" rx="16" fill="#f3b848" class="ink"/>
+    <path d="M274 330 v58 M214 389 h120" fill="none" class="ink"/>
+  </g>
+
+  <!-- headphones -->
+  <g transform="translate(759 386) rotate(-8)" filter="url(#shadow)">
+    <path d="M28 117 C17 23 71 -19 130 2 C173 17 194 57 188 117" fill="none" stroke="#0d2c36" stroke-width="24" stroke-linecap="round"/>
+    <path d="M32 113 C26 45 63 14 108 14 C154 14 187 48 184 112" fill="none" stroke="#70d8d0" stroke-width="11" stroke-linecap="round"/>
+    <rect x="0" y="98" width="66" height="126" rx="31" fill="url(#coral)" class="ink"/>
+    <rect x="157" y="98" width="66" height="126" rx="31" fill="url(#coral)" class="ink"/>
+    <path d="M51 122 v79 M172 122 v79" fill="none" stroke="#ffbd93" stroke-width="8" stroke-linecap="round" opacity=".6"/>
+  </g>
+
+  <!-- desk -->
+  <g transform="translate(733 657)" filter="url(#shadow)">
+    <path d="M0 0 H774 C791 0 804 13 804 30 V55 H0 Z" fill="url(#paper)" class="ink"/>
+    <path d="M55 55 V170 M738 55 V170" fill="none" class="ink"/>
+  </g>
+
+  <!-- laptop / article pipeline -->
+  <g transform="translate(1010 521)" filter="url(#shadow)">
+    <path d="M31 0 h278 c17 0 31 14 31 31 v141 H0 V31 C0 14 14 0 31 0z" fill="#e7f1e7" class="ink"/>
+    <rect x="24" y="24" width="292" height="122" rx="12" fill="#143b46"/>
+    <path d="M60 60 h104 M60 87 h194 M60 114 h148" fill="none" stroke="#6fded5" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="278" cy="61" r="17" fill="#ffd269"/>
+    <path d="M0 172 h340 l34 37 H-34 Z" fill="#f4dfad" class="ink"/>
+  </g>
+
+  <!-- studio microphone -->
+  <g transform="translate(1370 420)" filter="url(#shadow)">
+    <rect x="0" y="0" width="89" height="174" rx="44" fill="url(#aqua)" class="ink"/>
+    <g stroke="#0d2c36" stroke-width="5" opacity=".65">
+      <line x1="20" y1="38" x2="69" y2="38"/>
+      <line x1="17" y1="62" x2="72" y2="62"/>
+      <line x1="17" y1="86" x2="72" y2="86"/>
+      <line x1="20" y1="110" x2="69" y2="110"/>
+    </g>
+    <path d="M-25 91 v34 c0 42 30 73 69 73 s70 -31 70 -73 V91" fill="none" class="ink"/>
+    <path d="M44 198 v67 M5 266 h78" fill="none" class="ink"/>
+  </g>
+
+  <!-- phone / short video -->
+  <g transform="translate(824 558) rotate(-7)" filter="url(#shadow)">
+    <rect width="132" height="236" rx="25" fill="#fff5d8" class="ink"/>
+    <rect x="16" y="29" width="100" height="157" rx="14" fill="#e96759"/>
+    <circle cx="66" cy="108" r="34" fill="#fff5d8" opacity=".94"/>
+    <path d="M57 89 l29 19 -29 19z" fill="#0d2c36"/>
+    <rect x="42" y="12" width="48" height="7" rx="4" fill="#0d2c36"/>
+    <circle cx="66" cy="209" r="9" fill="#0d2c36"/>
+  </g>
+
+  <!-- cross-platform arrows and audience dots -->
+  <g fill="none" stroke="#ffd269" stroke-width="5" stroke-linecap="round" opacity=".9">
+    <path d="M1197 768 C1250 817 1340 810 1386 756"/>
+    <path d="M1371 755 l18 1 -5 17"/>
+  </g>
+  <g transform="translate(1400 718)">
+    <circle cx="0" cy="0" r="19" fill="#ff7d65" class="thin"/>
+    <circle cx="48" cy="-10" r="19" fill="#73d8cf" class="thin"/>
+    <circle cx="93" cy="5" r="19" fill="#ffd269" class="thin"/>
+    <path d="M-25 50 C-15 20 17 20 27 50 M22 50 C33 16 67 16 77 50 M67 50 C78 23 108 23 117 50" fill="url(#paper)" class="thin"/>
+  </g>
+
+  <!-- small idea sparks -->
+  <g fill="#ffd269">
+    <path d="M749 260 l12 22 24 3 -18 16 5 24 -23 -12 -21 12 4 -24 -18 -16 24 -3z"/>
+    <path d="M1490 310 l8 15 17 2 -13 11 4 17 -16 -8 -15 8 3 -17 -12 -11 17 -2z" opacity=".8"/>
+  </g>
+  <g class="mono" font-size="18" font-weight="700" fill="#9ee7df" opacity=".72">
+    <text x="120" y="827">QUESTION → TEST → EXPLAIN → TRUST</text>
+    <text x="1135" y="842">01 / START SMALL</text>
+  </g>
+</svg>
