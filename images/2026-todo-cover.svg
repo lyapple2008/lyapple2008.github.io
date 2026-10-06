@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">2026 · 向上生长，寻找变化</title>
+  <desc id="desc">巨大的2026字样映衬着温暖的朝阳，绿色山丘间的道路蜿蜒向上、通往开阔的远方，象征健康生活、探索可能与积极改变。</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fffaf0"/>
+      <stop offset=".62" stop-color="#fff3dc"/>
+      <stop offset="1" stop-color="#f9dfba"/>
+    </linearGradient>
+    <radialGradient id="sunlight">
+      <stop stop-color="#ffd283" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#ffd283" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#ffdb88"/>
+      <stop offset="1" stop-color="#f49a58"/>
+    </linearGradient>
+    <linearGradient id="year" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#ee7852"/>
+      <stop offset="1" stop-color="#d95839"/>
+    </linearGradient>
+    <linearGradient id="nearHill" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#326b57"/>
+      <stop offset="1" stop-color="#1e4d41"/>
+    </linearGradient>
+    <linearGradient id="road" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#fff2ce"/>
+      <stop offset="1" stop-color="#edc798"/>
+    </linearGradient>
+    <style>
+      text { font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
+      .year { font-family: "Helvetica Neue", Arial, sans-serif; font-weight: 900; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <circle cx="1284" cy="290" r="360" fill="url(#sunlight)"/>
+  <circle cx="1284" cy="290" r="126" fill="url(#sun)"/>
+  <circle cx="1284" cy="290" r="153" fill="none" stroke="#e8b775" stroke-width="1.5" opacity=".5"/>
+
+  <!-- Open sky and a rising horizon. -->
+  <g fill="none" stroke="#f5c792" stroke-width="2" opacity=".6">
+    <path d="M1060 157h93 M1080 172h48"/>
+    <path d="M1430 437h105 M1459 452h56"/>
+  </g>
+  <g fill="none" stroke="#627967" stroke-width="3.5" stroke-linecap="round">
+    <path d="M1417 182q14-12 27 0q14-12 27 0"/>
+    <path d="M1467 212q10-9 20 0q10-9 20 0" opacity=".6"/>
+  </g>
+
+  <!-- Landscape stays behind the title and leaves generous reading space. -->
+  <path d="M0 910C360 910 608 739 835 636C961 579 1012 562 1100 576C1200 592 1258 465 1374 480C1475 493 1524 447 1600 464V900H0Z" fill="#d3dbb4"/>
+  <path d="M0 950C360 965 572 818 747 710C909 610 1043 673 1166 597C1281 526 1370 562 1465 533C1521 516 1564 527 1600 551V900H0Z" fill="#a7bf96"/>
+  <path d="M0 960C230 970 425 939 604 824C771 659 930 779 1070 680C1235 563 1331 669 1453 622C1521 595 1561 606 1600 621V900H0Z" fill="#76a184"/>
+  <path d="M0 798C170 753 304 737 455 781C597 823 679 847 835 801C1001 752 1142 715 1268 762C1407 813 1511 704 1600 694V900H0Z" fill="url(#nearHill)"/>
+
+  <!-- A winding road narrows toward a new horizon. -->
+  <path d="M704 900C788 826 846 774 970 751C1090 729 1214 738 1237 691C1267 631 1132 630 1126 585C1123 556 1204 537 1238 514C1255 503 1265 491 1267 477L1275 477C1273 496 1268 508 1254 521C1223 551 1157 565 1163 584C1170 609 1317 611 1311 683C1305 755 1189 781 1088 804C1016 820 966 858 925 900Z" fill="url(#road)"/>
+  <path d="M813 900C877 833 944 799 1026 779C1140 752 1254 755 1272 688C1286 636 1152 620 1145 585C1141 560 1223 540 1247 517C1264 502 1270 489 1271 478" fill="none" stroke="#fff8e5" stroke-width="3" stroke-dasharray="13 20" opacity=".65"/>
+
+  <!-- Main typography, readable even as a blog-list thumbnail. -->
+  <g transform="translate(110 115)">
+    <path d="M0 23L18 5M4 5H18V19" fill="none" stroke="#376650" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="37" y="25" fill="#4b6856" font-size="24" font-weight="600" letter-spacing="4">健康生活 · 探索可能</text>
+  </g>
+  <text x="96" y="470" fill="url(#year)" font-size="340" letter-spacing="-15" class="year">2026</text>
+  <path d="M114 510H185" stroke="#dd6848" stroke-width="5" stroke-linecap="round"/>
+  <text x="108" y="595" fill="#244e40" font-size="59" font-weight="650" letter-spacing="3">向上生长，寻找变化</text>
+  <text x="112" y="658" fill="#63765f" font-size="25" letter-spacing="2">把新的可能，走成自己的路。</text>
+
+  <!-- Small new leaves repeat the idea of growth. -->
+  <g transform="translate(1420 765)" fill="none" stroke="#d6e1ad" stroke-width="3" stroke-linecap="round">
+    <path d="M0 61V6"/>
+    <path d="M0 38C-26 38-39 20-35 8C-14 6 0 17 0 38Z" fill="#b3ca91" stroke="none"/>
+    <path d="M1 22C1 0 18-10 36-8C37 12 24 24 1 22Z" fill="#d6e1ad" stroke="none"/>
+  </g>
+  <g fill="#e4dfc2" opacity=".8">
+    <circle cx="1310" cy="834" r="3"/>
+    <circle cx="1325" cy="827" r="2"/>
+    <circle cx="1495" cy="799" r="3"/>
+  </g>
+  <text x="112" y="842" fill="#dce6cd" font-size="21" letter-spacing="3">保持好奇，继续向前</text>
+</svg>
