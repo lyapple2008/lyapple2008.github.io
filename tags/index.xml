@@ -12,8 +12,36 @@
     <generator>Hugo -- 0.147.9</generator>
     <language>zh</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Tue, 29 Sep 2026 09:05:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2026 15:28:43 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WebRTC</title>
+      <link>https://lyapple2008.github.io/tags/webrtc/</link>
+      <pubDate>Sun, 25 Oct 2026 15:28:43 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/webrtc/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>跨平台</title>
+      <link>https://lyapple2008.github.io/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/</link>
+      <pubDate>Sun, 25 Oct 2026 15:28:43 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>音频设备</title>
+      <link>https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87/</link>
+      <pubDate>Sun, 25 Oct 2026 15:28:43 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>源码分析</title>
+      <link>https://lyapple2008.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 25 Oct 2026 15:28:43 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</guid>
+      <description></description>
+    </item>
     <item>
       <title>创业</title>
       <link>https://lyapple2008.github.io/tags/%E5%88%9B%E4%B8%9A/</link>
@@ -54,34 +82,6 @@
       <link>https://lyapple2008.github.io/tags/agent/</link>
       <pubDate>Mon, 28 Sep 2026 07:22:02 +0800</pubDate>
       <guid>https://lyapple2008.github.io/tags/agent/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>AI Coding</title>
-      <link>https://lyapple2008.github.io/tags/ai-coding/</link>
-      <pubDate>Mon, 28 Sep 2026 07:22:02 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/tags/ai-coding/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>OpenSpec</title>
-      <link>https://lyapple2008.github.io/tags/openspec/</link>
-      <pubDate>Mon, 28 Sep 2026 07:22:02 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/tags/openspec/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Specification</title>
-      <link>https://lyapple2008.github.io/tags/specification/</link>
-      <pubDate>Mon, 28 Sep 2026 07:22:02 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/tags/specification/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>工作流</title>
-      <link>https://lyapple2008.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/</link>
-      <pubDate>Mon, 28 Sep 2026 07:22:02 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/tags/%E5%B7%A5%E4%BD%9C%E6%B5%81/</guid>
       <description></description>
     </item>
   </channel>
