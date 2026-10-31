@@ -1,26 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>音频 on BeYoung</title>
-    <link>https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91/</link>
-    <description>Recent content in 音频 on BeYoung</description>
-    <image>
-      <title>BeYoung</title>
-      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
-    </image>
-    <generator>Hugo -- 0.147.9</generator>
-    <language>zh</language>
-    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Tue, 29 Sep 2026 09:05:00 +0800</lastBuildDate>
-    <atom:link href="https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>一名音频程序员的科技自媒体创业调研</title>
-      <link>https://lyapple2008.github.io/posts/202609/2026-09-29-%E8%87%AA%E5%AA%92%E4%BD%93%E5%88%9B%E4%B8%9A%E8%B0%83%E7%A0%94/</link>
-      <pubDate>Tue, 29 Sep 2026 09:05:00 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/202609/2026-09-29-%E8%87%AA%E5%AA%92%E4%BD%93%E5%88%9B%E4%B8%9A%E8%B0%83%E7%A0%94/</guid>
-      <description>我想尝试科技自媒体创业。这篇文章基于自己十多年音频算法和音视频开发经历，整理了账号定位、内容栏目、起步选题、制作流程和变现路径。</description>
-      <content:encoded><![CDATA[<p>最近开始认真考虑一件事：利用业余时间尝试科技自媒体，并观察它有没有发展成一门事业的可能。</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>音频 - 标签 - BeYoung</title><link>https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91/</link><description>音频 - 标签 - BeYoung</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>See this site's source code [here](https://github.com/lyapple2008/lyapple2008.github.io), licensed under GPLv3 ·</copyright><lastBuildDate>Tue, 29 Sep 2026 09:05:00 +0800</lastBuildDate><atom:link href="https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91/" rel="self" type="application/rss+xml"/><item><title>一名音频程序员的科技自媒体创业调研</title><link>https://lyapple2008.github.io/posts/202609/2026-09-29-%E8%87%AA%E5%AA%92%E4%BD%93%E5%88%9B%E4%B8%9A%E8%B0%83%E7%A0%94/</link><pubDate>Tue, 29 Sep 2026 09:05:00 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-29-%E8%87%AA%E5%AA%92%E4%BD%93%E5%88%9B%E4%B8%9A%E8%B0%83%E7%A0%94/</guid><description><![CDATA[<p>最近开始认真考虑一件事：利用业余时间尝试科技自媒体，并观察它有没有发展成一门事业的可能。</p>
 <p>我做了十多年程序员，主要从事音频算法、音频应用和音视频直播相关开发。这段经历让我比较熟悉麦克风、耳机、降噪、回声消除、音频编解码、直播链路和 AI 语音等技术，也知道一项技术从演示到真正产品化之间，往往隔着很多工程问题。</p>
 <p>最初的想法是介绍最新、有意思的科技产品和技术，先通过模仿成熟博主学习选题、拍摄和表达。但继续往下想，“泛科技”并不是一个好的起点：它需要抢新闻、抢新品、拼设备和制作成本，而我最稀缺的优势反而容易被淹没。</p>
 <p>这篇文章是我对账号定位、内容方向、执行方式和变现路径的第一次系统整理。</p>
@@ -137,14 +115,12 @@
 <p>可以同时选择三类学习对象：一位擅长选题和标题，一位擅长把技术讲清楚，一位擅长镜头表达和节奏。把三者的优点组合起来，比完整模仿某一个人更容易形成自己的风格。</p>
 <h2 id="五固定视频结构">五、固定视频结构</h2>
 <p>面向普通消费者，可以先使用一个简单、可重复的脚本结构：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">生活场景 → 直接结论 → 对比实验 → 简单原理 → 购买建议</span></span></code></pre></td></tr></table>
-</div>
-</div>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-text">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">生活场景 → 直接结论 → 对比实验 → 简单原理 → 购买建议</span></span></code></pre></div></div>
 <p>例如讲降噪耳机，可以用一个普通用户经历过的问题开场：</p>
 <blockquote>
 <p>你的降噪耳机能消掉地铁声，却消不掉旁边的人说话，不一定是产品质量差。因为这两种声音对降噪算法来说，难度完全不同。</p></blockquote>
@@ -178,22 +154,16 @@
 <p>如果只选一条作为起点，我会选《降噪耳机为什么消不掉人声？》。这个问题认知门槛低、受众广、实验效果明显，又能立即展示自己的专业背景。</p>
 <h2 id="七一次研究生产多种内容">七、一次研究，生产多种内容</h2>
 <p>在职状态下，时间是最稀缺的资源，不能为每个平台分别研究一个选题。更可行的方式是：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">一个选题
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-text">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">一个选题
 </span></span><span class="line"><span class="cl">├── 一条 5～10 分钟的完整视频
 </span></span><span class="line"><span class="cl">├── 两到三条结论型短视频
 </span></span><span class="line"><span class="cl">├── 一篇完整的博客文章
-</span></span><span class="line"><span class="cl">└── 若干图文卡片或问答</span></span></code></pre></td></tr></table>
-</div>
-</div>
+</span></span><span class="line"><span class="cl">└── 若干图文卡片或问答</span></span></code></pre></div></div>
 <p>平台分工可以先简化为：</p>
 <ul>
 <li>B 站发布完整内容，建立专业度和长期搜索价值；</li>
@@ -267,7 +237,4 @@
 <p>现阶段比较清晰的方向，可以暂时概括为“声音科技实验室”：用真实实验拆解耳机、麦克风、直播和 AI 语音产品，面向普通消费者和科技爱好者讲清楚一项技术的价值、限制和购买建议。</p>
 <p>起步时不需要立即购买大量设备，也不需要同时经营所有平台。先用手机、现有耳机和电脑，以“真人讲解＋桌面实验＋少量动画”的方式，完成从选题、实验、拍摄、剪辑、发布到复盘的第一个闭环。</p>
 <p>第一个里程碑不是“成为大博主”，而是发出第一条能代表自己未来方向的内容，再根据真实反馈继续调整。</p>
-]]></content:encoded>
-    </item>
-  </channel>
-</rss>
+]]></description></item></channel></rss>

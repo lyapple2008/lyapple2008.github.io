@@ -1,28 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>本地部署 on BeYoung</title>
-    <link>https://lyapple2008.github.io/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/</link>
-    <description>Recent content in 本地部署 on BeYoung</description>
-    <image>
-      <title>BeYoung</title>
-      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
-    </image>
-    <generator>Hugo -- 0.147.9</generator>
-    <language>zh</language>
-    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Wed, 15 Jul 2026 22:52:35 +0800</lastBuildDate>
-    <atom:link href="https://lyapple2008.github.io/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Token在燃烧？尝试本地部署？</title>
-      <link>https://lyapple2008.github.io/posts/202607/2026-07-15-%E6%9C%AC%E5%9C%B0ai%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%96%B9%E6%A1%88/</link>
-      <pubDate>Wed, 15 Jul 2026 22:52:35 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/202607/2026-07-15-%E6%9C%AC%E5%9C%B0ai%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%96%B9%E6%A1%88/</guid>
-      <description>&lt;p&gt;&lt;img alt=&#34;尝试本地部署？&#34; loading=&#34;lazy&#34; src=&#34;https://lyapple2008.github.io/images/2026-07/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2.jpg&#34;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;如果把个人可以买到的设备限制在最多 128GB 统一内存，什么开源模型最适合 AI Coding？买 Mac Studio、AMD 大内存小主机、DGX Spark 或多显卡工作站，和直接调用在线 API 相比，哪一种更快、更便宜？&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<p><img alt="尝试本地部署？" loading="lazy" src="/images/2026-07/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2.jpg"></p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>本地部署 - 标签 - BeYoung</title><link>https://lyapple2008.github.io/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/</link><description>本地部署 - 标签 - BeYoung</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>See this site's source code [here](https://github.com/lyapple2008/lyapple2008.github.io), licensed under GPLv3 ·</copyright><lastBuildDate>Wed, 15 Jul 2026 22:52:35 +0800</lastBuildDate><atom:link href="https://lyapple2008.github.io/tags/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2/" rel="self" type="application/rss+xml"/><item><title>Token在燃烧？尝试本地部署？</title><link>https://lyapple2008.github.io/posts/202607/2026-07-15-%E6%9C%AC%E5%9C%B0ai%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%96%B9%E6%A1%88/</link><pubDate>Wed, 15 Jul 2026 22:52:35 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202607/2026-07-15-%E6%9C%AC%E5%9C%B0ai%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%96%B9%E6%A1%88/</guid><description><![CDATA[<p></p>
 <blockquote>
 <p>如果把个人可以买到的设备限制在最多 128GB 统一内存，什么开源模型最适合 AI Coding？买 Mac Studio、AMD 大内存小主机、DGX Spark 或多显卡工作站，和直接调用在线 API 相比，哪一种更快、更便宜？</p></blockquote>
 <p>这篇文章只讨论 <strong>AI Coding Agent</strong>：模型需要读取代码仓库、调用终端、修改多个文件、执行测试，并根据报错继续迭代。普通聊天、知识问答和只补全下一行代码的 FIM 模型不在本文范围内。</p>
@@ -43,7 +19,7 @@
 <li><strong>个人最合理的模式仍然是混合使用。</strong> 敏感代码、离线任务和高频小修改走本地；长上下文、紧急任务和复杂重构走 API。</li>
 </ol>
 <h2 id="二为什么选择-qwen3-coder-next">二、为什么选择 Qwen3-Coder-Next</h2>
-<p><a href="https://huggingface.co/Qwen/Qwen3-Coder-Next">Qwen3-Coder-Next</a> 是专门面向 Coding Agent 和本地开发的 MoE 模型，采用 Apache-2.0 许可证。官方模型卡给出的核心参数如下：</p>
+<p><a href="https://huggingface.co/Qwen/Qwen3-Coder-Next" target="_blank" rel="noopener noreffer ">Qwen3-Coder-Next</a> 是专门面向 Coding Agent 和本地开发的 MoE 模型，采用 Apache-2.0 许可证。官方模型卡给出的核心参数如下：</p>
 <ul>
 <li>总参数量 80B，每个 Token 激活约 3B；</li>
 <li>原生上下文 262,144 Token；</li>
@@ -82,7 +58,7 @@
 <p>这些成绩会受到 Agent 框架、提示词、工具集和推理参数影响，不能理解为在任何 IDE 中都有固定成功率。不过它们至少说明，这个模型的目标不是生成几个函数，而是完成仓库级软件工程任务。</p>
 <h3 id="为什么不选择更大的模型">为什么不选择更大的模型</h3>
 <p>总参数更大的模型不一定适合本次硬件约束。例如 GLM-5.2 的最低实用量化也需要约 223GB～245GB 总内存，128GB 设备只能依赖大量 SSD 或远程卸载。它虽然能“启动”，但权重会频繁跨层级搬运，无法获得正常的 AI Coding 交互体验。</p>
-<p>Qwen3-Coder-Next 的优势正好相反：总参数 80B，但每 Token 只激活约 3B。根据 <a href="https://unsloth.ai/docs/models/qwen3-coder-next">Unsloth 的本地运行说明</a>：</p>
+<p>Qwen3-Coder-Next 的优势正好相反：总参数 80B，但每 Token 只激活约 3B。根据 <a href="https://unsloth.ai/docs/models/qwen3-coder-next" target="_blank" rel="noopener noreffer ">Unsloth 的本地运行说明</a>：</p>
 <table>
   <thead>
       <tr>
@@ -117,16 +93,13 @@
 <p>本文默认选择 <strong>4bit</strong>。它能在 64GB 设备上运行，又比 3bit 更稳；8bit 虽然更接近原始模型，但在 96GB 设备上只剩很少空间给 KV Cache，综合体验未必更好。</p>
 <h2 id="三ai-coding-性能不能只看-tokens">三、AI Coding 性能不能只看 Token/s</h2>
 <p>Coding Agent 的完整链路通常是：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">理解需求 -&gt; 搜索仓库 -&gt; 阅读文件 -&gt; 规划修改 -&gt; 编辑代码
-</span></span><span class="line"><span class="cl">        -&gt; 执行命令 -&gt; 分析报错 -&gt; 再次修改 -&gt; 运行测试</span></span></code></pre></td></tr></table>
-</div>
-</div>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-text">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">理解需求 -&gt; 搜索仓库 -&gt; 阅读文件 -&gt; 规划修改 -&gt; 编辑代码
+</span></span><span class="line"><span class="cl">        -&gt; 执行命令 -&gt; 分析报错 -&gt; 再次修改 -&gt; 运行测试</span></span></code></pre></div></div>
 <p>因此需要同时比较四种性能：</p>
 <ul>
 <li><strong>任务成功率</strong>：能否最终通过测试，而不是只输出看起来正确的代码；</li>
@@ -220,7 +193,7 @@
 </ul>
 <p>因此 64GB 更适合 4bit + 16K～32K 上下文，不适合追求 256K 满上下文。</p>
 <h3 id="2-96gb-mac-studio-m3-ultramac-路线的性能型选择">2. 96GB Mac Studio M3 Ultra：Mac 路线的性能型选择</h3>
-<p><a href="https://www.apple.com/mac-studio/specs/">Apple 的技术规格</a>显示，M3 Ultra 的统一内存带宽为 819GB/s。96GB 配置运行 46GB 的 4bit 模型时，可以给 KV Cache 和其他应用留下较大空间，比 64GB 配置更适合作为长期运行的本地 Coding 服务。</p>
+<p><a href="https://www.apple.com/mac-studio/specs/" target="_blank" rel="noopener noreffer ">Apple 的技术规格</a>显示，M3 Ultra 的统一内存带宽为 819GB/s。96GB 配置运行 46GB 的 4bit 模型时，可以给 KV Cache 和其他应用留下较大空间，比 64GB 配置更适合作为长期运行的本地 Coding 服务。</p>
 <p>8bit 约需 85GB，看起来也能加载，但只剩约 11GB，容易被系统和长上下文吃完。实际使用更建议继续选择高质量 4bit，把容量留给上下文。</p>
 <p>主要瓶颈是：</p>
 <ul>
@@ -230,7 +203,7 @@
 <li>设备价格远高于调用同名 API 的费用。</li>
 </ul>
 <h3 id="3-ryzen-ai-max-395-128gb容量优先的-pc-小主机">3. Ryzen AI Max+ 395 128GB：容量优先的 PC 小主机</h3>
-<p><a href="https://frame.work/desktop">Framework Desktop</a> 等设备可配置 128GB LPDDR5x-8000 统一内存，官方称最多可提供 96GB 图形可寻址内存，采用 256-bit 内存总线。Qwen3-Coder-Next 4bit 可以宽裕运行，8bit 也有机会完整装入。</p>
+<p><a href="https://frame.work/desktop" target="_blank" rel="noopener noreffer ">Framework Desktop</a> 等设备可配置 128GB LPDDR5x-8000 统一内存，官方称最多可提供 96GB 图形可寻址内存，采用 256-bit 内存总线。Qwen3-Coder-Next 4bit 可以宽裕运行，8bit 也有机会完整装入。</p>
 <p>这条路线的优点是容量大、体积小、功耗低，并且保留 Linux/Windows 环境。主要瓶颈是：</p>
 <ul>
 <li>统一内存带宽明显低于 M3 Ultra 和高端独立显卡；</li>
@@ -240,7 +213,7 @@
 </ul>
 <p>它适合把“运行更大模型和更长上下文”放在第一位的人，不适合单纯追求最快 Token/s。</p>
 <h3 id="4-dgx-spark128gb--cuda但不是大显存显卡的速度">4. DGX Spark：128GB + CUDA，但不是大显存显卡的速度</h3>
-<p><a href="https://www.nvidia.com/en-us/products/workstations/dgx-spark/">NVIDIA DGX Spark</a> 使用 GB10 Grace Blackwell Superchip，提供 128GB 一致性内存和 NVIDIA AI 软件栈。它的价值是小体积、CUDA 环境和大容量可以同时获得，部署容器、NIM、PyTorch、SGLang 和 vLLM 类工具更接近 NVIDIA 服务器工作流。</p>
+<p><a href="https://www.nvidia.com/en-us/products/workstations/dgx-spark/" target="_blank" rel="noopener noreffer ">NVIDIA DGX Spark</a> 使用 GB10 Grace Blackwell Superchip，提供 128GB 一致性内存和 NVIDIA AI 软件栈。它的价值是小体积、CUDA 环境和大容量可以同时获得，部署容器、NIM、PyTorch、SGLang 和 vLLM 类工具更接近 NVIDIA 服务器工作流。</p>
 <p>它的核心瓶颈是约 <strong>273GB/s 内存带宽</strong>。这远低于 RTX 5090 和 RTX PRO 6000，因此不能因为名字中有“DGX”就预期获得数据中心 GPU 的生成速度。其他限制还包括 ARM64 环境的软件兼容、部分 Python Wheel 和第三方工具需要重新验证。</p>
 <p>DGX Spark 更适合学习和验证 CUDA 部署栈，未必是单用户桌面 AI Coding 的最高性价比方案。</p>
 <h3 id="5-双-rtx-3090最便宜的-48gb-cuda-路线">5. 双 RTX 3090：最便宜的 48GB CUDA 路线</h3>
@@ -301,7 +274,7 @@
 <p>个人桌面部署建议先使用 llama.cpp 或封装它的 Ollama/LM Studio。它们对 GGUF 量化和 CPU/GPU 混合卸载支持最好。团队共享、需要并发时，再考虑 SGLang 或 vLLM。</p>
 <p>无论使用哪一个后端，都应向 Coding 客户端暴露 OpenAI 兼容接口。这样可以把模型接入 OpenCode、Cline、Continue、Aider、Codex 或其他 Agent，而不必把工作流锁定在单一推理程序中。</p>
 <h2 id="六同名模型在线-api-方案">六、同名模型在线 API 方案</h2>
-<p><a href="https://www.qwencloud.com/models/qwen3-coder-next">Qwen Cloud 的 Qwen3-Coder-Next 页面</a>提供 OpenAI 兼容 API、函数调用、结构化输出和上下文缓存。官方公布的上下文上限约 262K，最大输入约 204.8K，最大输出约 65.5K。</p>
+<p><a href="https://www.qwencloud.com/models/qwen3-coder-next" target="_blank" rel="noopener noreffer ">Qwen Cloud 的 Qwen3-Coder-Next 页面</a>提供 OpenAI 兼容 API、函数调用、结构化输出和上下文缓存。官方公布的上下文上限约 262K，最大输入约 204.8K，最大输出约 65.5K。</p>
 <p>API 按单次请求的输入长度分档计价：</p>
 <table>
   <thead>
@@ -624,20 +597,17 @@
 <p><strong>没有现成硬件就先用 API；已有 64GB 以上设备就部署本地 4bit；有隐私或离线刚需再购买 96GB～128GB 设备。不要为了“本地免费”忽略折旧、速度和任务成功率。</strong></p></blockquote>
 <h2 id="参考资料">参考资料</h2>
 <ul>
-<li><a href="https://huggingface.co/Qwen/Qwen3-Coder-Next">Qwen3-Coder-Next 官方模型卡</a></li>
-<li><a href="https://unsloth.ai/docs/models/qwen3-coder-next">Qwen3-Coder-Next 本地运行、量化与内存要求</a></li>
-<li><a href="https://www.qwencloud.com/models/qwen3-coder-next">Qwen3-Coder-Next 官方 API 能力与价格</a></li>
-<li><a href="https://github.com/QwenLM/Qwen3-Coder">Qwen3-Coder GitHub</a></li>
-<li><a href="https://github.com/ggml-org/llama.cpp">llama.cpp</a></li>
-<li><a href="https://github.com/vllm-project/vllm">vLLM</a></li>
-<li><a href="https://github.com/sgl-project/sglang">SGLang</a></li>
-<li><a href="https://www.apple.com/mac-studio/specs/">Apple Mac Studio 技术规格</a></li>
-<li><a href="https://frame.work/desktop">Framework Desktop Ryzen AI Max</a></li>
-<li><a href="https://www.nvidia.com/en-us/products/workstations/dgx-spark/">NVIDIA DGX Spark</a></li>
-<li><a href="https://www.nvidia.com/en-us/products/workstations/professional-desktop-gpus/rtx-pro-6000/">NVIDIA RTX PRO 6000 Blackwell</a></li>
-<li><a href="https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/">NVIDIA GeForce RTX 5090</a></li>
+<li><a href="https://huggingface.co/Qwen/Qwen3-Coder-Next" target="_blank" rel="noopener noreffer ">Qwen3-Coder-Next 官方模型卡</a></li>
+<li><a href="https://unsloth.ai/docs/models/qwen3-coder-next" target="_blank" rel="noopener noreffer ">Qwen3-Coder-Next 本地运行、量化与内存要求</a></li>
+<li><a href="https://www.qwencloud.com/models/qwen3-coder-next" target="_blank" rel="noopener noreffer ">Qwen3-Coder-Next 官方 API 能力与价格</a></li>
+<li><a href="https://github.com/QwenLM/Qwen3-Coder" target="_blank" rel="noopener noreffer ">Qwen3-Coder GitHub</a></li>
+<li><a href="https://github.com/ggml-org/llama.cpp" target="_blank" rel="noopener noreffer ">llama.cpp</a></li>
+<li><a href="https://github.com/vllm-project/vllm" target="_blank" rel="noopener noreffer ">vLLM</a></li>
+<li><a href="https://github.com/sgl-project/sglang" target="_blank" rel="noopener noreffer ">SGLang</a></li>
+<li><a href="https://www.apple.com/mac-studio/specs/" target="_blank" rel="noopener noreffer ">Apple Mac Studio 技术规格</a></li>
+<li><a href="https://frame.work/desktop" target="_blank" rel="noopener noreffer ">Framework Desktop Ryzen AI Max</a></li>
+<li><a href="https://www.nvidia.com/en-us/products/workstations/dgx-spark/" target="_blank" rel="noopener noreffer ">NVIDIA DGX Spark</a></li>
+<li><a href="https://www.nvidia.com/en-us/products/workstations/professional-desktop-gpus/rtx-pro-6000/" target="_blank" rel="noopener noreffer ">NVIDIA RTX PRO 6000 Blackwell</a></li>
+<li><a href="https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/" target="_blank" rel="noopener noreffer ">NVIDIA GeForce RTX 5090</a></li>
 </ul>
-]]></content:encoded>
-    </item>
-  </channel>
-</rss>
+]]></description></item></channel></rss>

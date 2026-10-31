@@ -1,26 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>财务 on BeYoung</title>
-    <link>https://lyapple2008.github.io/tags/%E8%B4%A2%E5%8A%A1/</link>
-    <description>Recent content in 财务 on BeYoung</description>
-    <image>
-      <title>BeYoung</title>
-      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
-    </image>
-    <generator>Hugo -- 0.147.9</generator>
-    <language>zh</language>
-    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Thu, 03 Sep 2026 22:30:00 +0800</lastBuildDate>
-    <atom:link href="https://lyapple2008.github.io/tags/%E8%B4%A2%E5%8A%A1/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>读《富爸爸穷爸爸》：房子是资产吗，写代码是事业吗</title>
-      <link>https://lyapple2008.github.io/posts/202609/2026-09-03-%E5%AF%8C%E7%88%B8%E7%88%B8%E7%A9%B7%E7%88%B8%E7%88%B8%E8%AF%BB%E5%90%8E%E6%84%9F/</link>
-      <pubDate>Thu, 03 Sep 2026 22:30:00 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/202609/2026-09-03-%E5%AF%8C%E7%88%B8%E7%88%B8%E7%A9%B7%E7%88%B8%E7%88%B8%E8%AF%BB%E5%90%8E%E6%84%9F/</guid>
-      <description>硬上车的房子，现在开始按月供过日子；「会写代码」也正在被 AI 变便宜。富人买资产、穷人买负债——这句话常被读歪。真正好用的不是口号，是先把账记对。</description>
-      <content:encoded><![CDATA[<p>前阵子写<a href="/posts/202608/2026-08-30-40%E5%B9%B4%E6%88%BF%E8%B4%B7/">40 年房贷</a>的时候，已经把《富爸爸穷爸爸》里最刺耳的那句拿出来用过一次：很多人把负债当成了资产。书看完之后，觉得那句话只是入口。清崎翻来覆去讲的，其实就两对很容易混的概念——<strong>资产与负债</strong>，<strong>职业与事业</strong>。</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>财务 - 标签 - BeYoung</title><link>https://lyapple2008.github.io/tags/%E8%B4%A2%E5%8A%A1/</link><description>财务 - 标签 - BeYoung</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>See this site's source code [here](https://github.com/lyapple2008/lyapple2008.github.io), licensed under GPLv3 ·</copyright><lastBuildDate>Thu, 03 Sep 2026 22:30:00 +0800</lastBuildDate><atom:link href="https://lyapple2008.github.io/tags/%E8%B4%A2%E5%8A%A1/" rel="self" type="application/rss+xml"/><item><title>读《富爸爸穷爸爸》：房子是资产吗，写代码是事业吗</title><link>https://lyapple2008.github.io/posts/202609/2026-09-03-%E5%AF%8C%E7%88%B8%E7%88%B8%E7%A9%B7%E7%88%B8%E7%88%B8%E8%AF%BB%E5%90%8E%E6%84%9F/</link><pubDate>Thu, 03 Sep 2026 22:30:00 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-03-%E5%AF%8C%E7%88%B8%E7%88%B8%E7%A9%B7%E7%88%B8%E7%88%B8%E8%AF%BB%E5%90%8E%E6%84%9F/</guid><description><![CDATA[<p>前阵子写<a href="/posts/202608/2026-08-30-40%e5%b9%b4%e6%88%bf%e8%b4%b7/" rel="">40 年房贷</a>的时候，已经把《富爸爸穷爸爸》里最刺耳的那句拿出来用过一次：很多人把负债当成了资产。书看完之后，觉得那句话只是入口。清崎翻来覆去讲的，其实就两对很容易混的概念——<strong>资产与负债</strong>，<strong>职业与事业</strong>。</p>
 <p>这两对概念都不新，新的是对照物变了。一套近几年硬上车、现在开始按月供过日子的房子，一份正在被 AI 改写的程序员工作，比书里那些美国出租屋和快餐店例子更近。下面就用这两件事把书读一遍。</p>
 <h2 id="一先把作者的尺子拿出来">一、先把作者的尺子拿出来</h2>
 <p>穷爸爸受过良好教育，稳定上班，讲究稳妥，觉得房子是最大的资产，债务是危险的。富爸爸学历一般，却反复强调一件事：先看钱往哪边流。</p>
@@ -70,7 +48,7 @@
 <p>清崎说穷人和中产为工作赚钱，富人让钱为自己工作。落到程序员身上，职业路径很熟悉：学一门技术，进一家公司，靠职级和年限把时薪抬上去。代码写得越好，越容易被委以更重的模块；模块越重，越离不开你。看起来是成长，底层仍是同一件事——<strong>收入和你的在岗时间绑在一起</strong>。</p>
 <p>这没有原罪。职业是体面的，也是绝大多数人安身的方式。书里真正提醒的是：不要把职业误认成事业。职业给你发工资，事业给你一台可以离开你还能转一会儿的机器。很多程序员把「技术越来越精」当成事业，其实只是把职业做得更专业。专业很值钱，但它仍然是在为别人的体系工作。</p>
 <h3 id="ai-压缩的首先是职业本身">AI 压缩的，首先是职业本身</h3>
-<p>2023 年以来，这件事从抽象讨论变成了日常体验。AI Coding 已经能写模块、改测试、查日志、补文档；一个熟练的人带着它，产出可以是从前的数倍。我自己也写过<a href="/posts/202601/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/">使用上的感受</a>：从「完了，失业要提前了」，到「稳了，还能苟几年」。苟得住的前提，其实已经变了——不是代码还只能人手写，而是使用者还要为质量兜底，还要会拆任务、会判断、会把系统拼起来。</p>
+<p>2023 年以来，这件事从抽象讨论变成了日常体验。AI Coding 已经能写模块、改测试、查日志、补文档；一个熟练的人带着它，产出可以是从前的数倍。我自己也写过<a href="/posts/202601/2026-02-01-%e5%85%b3%e4%ba%8eAICoding%e7%9a%84%e4%b8%80%e4%ba%9b%e6%84%9f%e6%83%b3%e5%92%8c%e5%90%8e%e7%bb%ad%e7%9a%84%e8%a7%84%e5%88%92/" rel="">使用上的感受</a>：从「完了，失业要提前了」，到「稳了，还能苟几年」。苟得住的前提，其实已经变了——不是代码还只能人手写，而是使用者还要为质量兜底，还要会拆任务、会判断、会把系统拼起来。</p>
 <p>对职业的冲击是不均匀的。</p>
 <ul>
 <li><strong>被压得最明显的</strong>，是把「会写代码」本身当成稀缺能力的岗位。CRUD、模板页面、标准接入、重复劳动，正在迅速便宜。公司会发现：同样的功能，更少的人加上更好的工具就能交出来。</li>
@@ -103,15 +81,7 @@
 <li>AI 和房贷这类新变量出现时，我是在加固原来的错账，还是借机把账改对？</li>
 </ol>
 <p>房子可以是家，代码可以是手艺。在把它们写进资产栏、写进事业栏之前，先看清楚钱和时间到底在为谁工作。</p>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>房贷年限放宽到40年，父贷子还？</title>
-      <link>https://lyapple2008.github.io/posts/202608/2026-08-30-40%E5%B9%B4%E6%88%BF%E8%B4%B7/</link>
-      <pubDate>Sun, 30 Aug 2026 09:40:00 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/202608/2026-08-30-40%E5%B9%B4%E6%88%BF%E8%B4%B7/</guid>
-      <description>月供少六百，总利息多二十万。40年不是把房子变便宜了，是把压力挪到后面十年。人走了既不是父债子还，也不是人死债消——门槛已经这么低，有需求的人现在该上车吗？</description>
-      <content:encoded><![CDATA[<p>8 月 28 日，央行和金融监管总局把个人住房贷款最长期限从 30 年延长到 40 年。同一套文件里，还把月房贷支出占收入的上限划在 50%，全部债务支出占收入的上限划在 60%。再加上这几年已经落地的降首付、降利率，购房门槛确实被压到了近年来最低的位置。</p>
+]]></description></item><item><title>房贷年限放宽到40年，父贷子还？</title><link>https://lyapple2008.github.io/posts/202608/2026-08-30-40%E5%B9%B4%E6%88%BF%E8%B4%B7/</link><pubDate>Sun, 30 Aug 2026 09:40:00 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202608/2026-08-30-40%E5%B9%B4%E6%88%BF%E8%B4%B7/</guid><description><![CDATA[<p>8 月 28 日，央行和金融监管总局把个人住房贷款最长期限从 30 年延长到 40 年。同一套文件里，还把月房贷支出占收入的上限划在 50%，全部债务支出占收入的上限划在 60%。再加上这几年已经落地的降首付、降利率，购房门槛确实被压到了近年来最低的位置。</p>
 <p>门槛低，不等于账变得更便宜。最近在看《富爸爸穷爸爸》，里面最刺耳的一句就是：很多人把负债当成了资产。40 年房贷正好是拿这句话对照现实的好时机。下面分四块说：别国怎么做、人走了债怎么办、现在该不该买、以及从「资产 vs 负债」怎么看这件事。</p>
 <h2 id="一政策本身在做什么">一、政策本身在做什么</h2>
 <p>这次不是单独改一个年限，而是一套信贷规则一起出：</p>
@@ -306,7 +276,4 @@
 <p>别国经验说的是同一件事：年限可以放，但必须配上收入比、年龄上限、摊还规则和保险。中国这次把年限放开了，收入比和放贷时点也补上了；「人走了债怎么办」则仍然主要靠《民法典》的限定继承，以及你自己愿不愿意买一份还贷保障。</p>
 <p>有居住需求、算得过现金流、愿意把自住房当成要供很多年的消费品，现在可以买。只是因为门槛低了、怕错过，或者指望 40 年月供把一套本来买不起的房子变成资产，那这笔账大概率会算错。</p>
 <p>房子可以是家。在把钥匙拿回来之前，它首先是一笔很长的负债。</p>
-]]></content:encoded>
-    </item>
-  </channel>
-</rss>
+]]></description></item></channel></rss>

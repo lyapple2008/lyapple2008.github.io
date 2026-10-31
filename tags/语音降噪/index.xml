@@ -1,26 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>语音降噪 on BeYoung</title>
-    <link>https://lyapple2008.github.io/tags/%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA/</link>
-    <description>Recent content in 语音降噪 on BeYoung</description>
-    <image>
-      <title>BeYoung</title>
-      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
-    </image>
-    <generator>Hugo -- 0.147.9</generator>
-    <language>zh</language>
-    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Mon, 03 Nov 2025 19:39:53 +0800</lastBuildDate>
-    <atom:link href="https://lyapple2008.github.io/tags/%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>使用ORT进行语音降噪模型推理</title>
-      <link>https://lyapple2008.github.io/posts/202511/2025-11-03-%E4%BD%BF%E7%94%A8ort%E8%BF%9B%E8%A1%8C%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E6%8E%A8%E7%90%86/</link>
-      <pubDate>Mon, 03 Nov 2025 19:39:53 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/202511/2025-11-03-%E4%BD%BF%E7%94%A8ort%E8%BF%9B%E8%A1%8C%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E6%8E%A8%E7%90%86/</guid>
-      <description>&lt;p&gt;在深度学习语音降噪模型的部署过程中，选择合适的推理引擎至关重要。ONNX Runtime（ORT）作为微软开源的跨平台推理引擎，在性能、兼容性和易用性方面表现出色，已成为许多生产环境的首选。本文将介绍为什么选择ORT，ORT的核心概念和使用流程，以及在使用ORT进行语音降噪推理时需要注意的关键事项，特别是针对时序模型（如GRU/LSTM）的隐状态管理。&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<p>在深度学习语音降噪模型的部署过程中，选择合适的推理引擎至关重要。ONNX Runtime（ORT）作为微软开源的跨平台推理引擎，在性能、兼容性和易用性方面表现出色，已成为许多生产环境的首选。本文将介绍为什么选择ORT，ORT的核心概念和使用流程，以及在使用ORT进行语音降噪推理时需要注意的关键事项，特别是针对时序模型（如GRU/LSTM）的隐状态管理。</p>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>语音降噪 - 标签 - BeYoung</title><link>https://lyapple2008.github.io/tags/%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA/</link><description>语音降噪 - 标签 - BeYoung</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>See this site's source code [here](https://github.com/lyapple2008/lyapple2008.github.io), licensed under GPLv3 ·</copyright><lastBuildDate>Mon, 03 Nov 2025 19:39:53 +0800</lastBuildDate><atom:link href="https://lyapple2008.github.io/tags/%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA/" rel="self" type="application/rss+xml"/><item><title>使用ORT进行语音降噪模型推理</title><link>https://lyapple2008.github.io/posts/202511/2025-11-03-%E4%BD%BF%E7%94%A8ort%E8%BF%9B%E8%A1%8C%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E6%8E%A8%E7%90%86/</link><pubDate>Mon, 03 Nov 2025 19:39:53 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202511/2025-11-03-%E4%BD%BF%E7%94%A8ort%E8%BF%9B%E8%A1%8C%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA%E6%8E%A8%E7%90%86/</guid><description><![CDATA[<p>在深度学习语音降噪模型的部署过程中，选择合适的推理引擎至关重要。ONNX Runtime（ORT）作为微软开源的跨平台推理引擎，在性能、兼容性和易用性方面表现出色，已成为许多生产环境的首选。本文将介绍为什么选择ORT，ORT的核心概念和使用流程，以及在使用ORT进行语音降噪推理时需要注意的关键事项，特别是针对时序模型（如GRU/LSTM）的隐状态管理。</p>
 <h2 id="一为什么选择ort">一、为什么选择ORT？</h2>
 <h3 id="11-跨平台支持">1.1 跨平台支持</h3>
 <p>ORT提供了广泛的平台支持，包括：</p>
@@ -55,27 +33,12 @@
 <p>作为微软开源项目，ORT拥有活跃的社区和持续的更新，bug修复和新功能迭代速度快。</p>
 <h2 id="二ort基本概念与推理流程">二、ORT基本概念与推理流程</h2>
 <h3 id="21-核心概念">2.1 核心概念</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">   ┌───────────────────────────────┐
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">   ┌───────────────────────────────┐
 </span></span><span class="line"><span class="cl">   │ OrtEnv （运行时环境）         │
 </span></span><span class="line"><span class="cl">   │ └─ 管理全局资源、线程池等     │
 </span></span><span class="line"><span class="cl">   └──────────────┬────────────────┘
@@ -90,26 +53,15 @@
 </span></span><span class="line"><span class="cl">   │ ├─ 输入 OrtValue (Tensor 等)           │
 </span></span><span class="line"><span class="cl">   │ ├─ 输出 OrtValue                      │
 </span></span><span class="line"><span class="cl">   │ └─ 在 Env/Session 的线程池中执行      │
-</span></span><span class="line"><span class="cl">   └────────────────────────────────────────┘</span></span></code></pre></td></tr></table>
-</div>
-</div>
+</span></span><span class="line"><span class="cl">   └────────────────────────────────────────┘</span></span></code></pre></div></div>
 <h4 id="ortenv运行时环境">OrtEnv（运行时环境）</h4>
 <p><code>OrtEnv</code>是ORT的全局运行时环境，负责管理线程池、日志等全局资源。通常一个进程只需要创建一个<code>OrtEnv</code>实例：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;onnxruntime_c_api.h&gt;</span><span class="cp">
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-c">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;onnxruntime_c_api.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 创建运行时环境
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">OrtEnv</span><span class="o">*</span> <span class="n">env</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
@@ -118,36 +70,15 @@
 </span></span><span class="line"><span class="cl">    <span class="c1">// 错误处理
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">msg</span> <span class="o">=</span> <span class="nf">OrtGetErrorMessage</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">OrtReleaseStatus</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
 <h4 id="ortsession推理会话">OrtSession（推理会话）</h4>
 <p><code>OrtSession</code>负责加载ONNX模型并执行推理。创建会话需要先创建会话选项：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;onnxruntime_c_api.h&gt;</span><span class="cp">
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-c">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;onnxruntime_c_api.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 1. 创建会话选项
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">OrtSessionOptions</span><span class="o">*</span> <span class="n">session_options</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
@@ -166,31 +97,15 @@
 </span></span><span class="line"><span class="cl"><span class="c1">// 3. 释放资源（使用完毕后）
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtReleaseSessionOptions</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseSession</span><span class="p">(</span><span class="n">session</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseEnv</span><span class="p">(</span><span class="n">env</span><span class="p">);</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
+</span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseEnv</span><span class="p">(</span><span class="n">env</span><span class="p">);</span></span></span></code></pre></div></div>
 <h4 id="execution-provider-ep">Execution Provider (EP)</h4>
 <p>执行提供者决定了模型在哪个硬件上运行。在C API中，通过<code>OrtSessionOptionsAppendExecutionProvider</code>添加EP：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// CPU执行（默认，无需显式添加）
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-c">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// CPU执行（默认，无需显式添加）
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 直接创建会话即可使用CPU
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>
 </span></span><span class="line"><span class="cl"><span class="c1">// CUDA执行（需要NVIDIA GPU）
@@ -204,59 +119,15 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtSessionOptionsAppendExecutionProvider_CoreML</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 创建会话（会按顺序尝试EP，失败则回退到下一个）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtCreateSession</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">session</span><span class="p">);</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtCreateSession</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">session</span><span class="p">);</span></span></span></code></pre></div></div>
 <h4 id="inputoutput">Input/Output</h4>
 <p>模型的输入输出通过<code>OrtValue</code>传递，需要手动创建和管理：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 1. 获取输入输出信息
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-c">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 1. 获取输入输出信息
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">size_t</span> <span class="n">num_input_nodes</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">OrtStatus</span><span class="o">*</span> <span class="n">status</span> <span class="o">=</span> <span class="nf">OrtSessionGetInputCount</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">num_input_nodes</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
@@ -298,43 +169,15 @@
 </span></span><span class="line"><span class="cl"><span class="c1">// 5. 释放资源
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtReleaseValue</span><span class="p">(</span><span class="n">output_tensor</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseValue</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseMemoryInfo</span><span class="p">(</span><span class="n">memory_info</span><span class="p">);</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
+</span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseMemoryInfo</span><span class="p">(</span><span class="n">memory_info</span><span class="p">);</span></span></span></code></pre></div></div>
 <h3 id="22-性能优化选项">2.2 性能优化选项</h3>
 <p>ORT提供了多种性能优化选项，在C API中通过<code>OrtSessionOptions</code>进行配置：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">OrtSessionOptions</span><span class="o">*</span> <span class="n">session_options</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-c">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">OrtSessionOptions</span><span class="o">*</span> <span class="n">session_options</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nf">OrtCreateSessionOptions</span><span class="p">(</span><span class="o">&amp;</span><span class="n">session_options</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 图优化级别
@@ -360,9 +203,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtCreateSession</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">session</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 使用完毕后释放
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtReleaseSessionOptions</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtReleaseSessionOptions</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span></span></span></code></pre></div></div>
 <h2 id="三语音降噪推理的特殊注意事项">三、语音降噪推理的特殊注意事项</h2>
 <p>语音降噪模型通常使用时序建模网络（如GRU、LSTM），这些网络具有隐状态（hidden state），在实时推理时需要特别注意状态管理。</p>
 <h3 id="31-为什么ort不保存隐状态">3.1 为什么ORT不保存隐状态？</h3>
@@ -383,32 +224,24 @@
 </ul>
 <h4 id="313-与训练框架的差异">3.1.3 与训练框架的差异</h4>
 <p>在训练框架（如PyTorch、TensorFlow）中，RNN/LSTM层通常会维护隐状态：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># PyTorch训练时的行为</span>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-python">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># PyTorch训练时的行为</span>
 </span></span><span class="line"><span class="cl"><span class="n">lstm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">output</span><span class="p">,</span> <span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span> <span class="o">=</span> <span class="n">lstm</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="n">cell</span><span class="p">))</span>  <span class="c1"># 状态在层内部管理</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
+</span></span><span class="line"><span class="cl"><span class="n">output</span><span class="p">,</span> <span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span> <span class="o">=</span> <span class="n">lstm</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="n">cell</span><span class="p">))</span>  <span class="c1"># 状态在层内部管理</span></span></span></code></pre></div></div>
 <p>但在ONNX导出和ORT推理时，隐状态被<strong>显式化</strong>为模型的输入和输出：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// ONNX模型结构
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-c">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// ONNX模型结构
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 输入: [audio_features, hidden_state, cell_state]  // 显式输入
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 输出: [denoised_features, new_hidden_state, new_cell_state]  // 显式输出
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
+</span></span></span></code></pre></div></div>
 <p>这种显式化的设计使得：</p>
 <ul>
 <li>状态在模型外部可见和可控</li>
@@ -434,260 +267,14 @@
 <li><strong>定义输入输出</strong>：新模型有4个输入（features + 3个GRU状态）和5个输出（denoise_output + vad_output + 3个GRU状态）</li>
 </ol>
 <p>下图中，左侧为没有导出隐状态的onnx模型可视化图，可以看到gru的隐状态每次都是被重置的；右侧为导出了隐状态的onnx模型可视化图，可以看到gru节点对应了一个gru state输入端口和一个gru state的输出端口。</p>
-<p><img alt="rnnoise-onnx-导出隐状态" loading="lazy" src="/images/2025-11-03/rnnoise-onnx-%E5%AF%BC%E5%87%BA%E9%9A%90%E7%8A%B6%E6%80%81.jpg"></p>
+<p></p>
 <p>以下是完整的转换代码：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">  1
-</span><span class="lnt">  2
-</span><span class="lnt">  3
-</span><span class="lnt">  4
-</span><span class="lnt">  5
-</span><span class="lnt">  6
-</span><span class="lnt">  7
-</span><span class="lnt">  8
-</span><span class="lnt">  9
-</span><span class="lnt"> 10
-</span><span class="lnt"> 11
-</span><span class="lnt"> 12
-</span><span class="lnt"> 13
-</span><span class="lnt"> 14
-</span><span class="lnt"> 15
-</span><span class="lnt"> 16
-</span><span class="lnt"> 17
-</span><span class="lnt"> 18
-</span><span class="lnt"> 19
-</span><span class="lnt"> 20
-</span><span class="lnt"> 21
-</span><span class="lnt"> 22
-</span><span class="lnt"> 23
-</span><span class="lnt"> 24
-</span><span class="lnt"> 25
-</span><span class="lnt"> 26
-</span><span class="lnt"> 27
-</span><span class="lnt"> 28
-</span><span class="lnt"> 29
-</span><span class="lnt"> 30
-</span><span class="lnt"> 31
-</span><span class="lnt"> 32
-</span><span class="lnt"> 33
-</span><span class="lnt"> 34
-</span><span class="lnt"> 35
-</span><span class="lnt"> 36
-</span><span class="lnt"> 37
-</span><span class="lnt"> 38
-</span><span class="lnt"> 39
-</span><span class="lnt"> 40
-</span><span class="lnt"> 41
-</span><span class="lnt"> 42
-</span><span class="lnt"> 43
-</span><span class="lnt"> 44
-</span><span class="lnt"> 45
-</span><span class="lnt"> 46
-</span><span class="lnt"> 47
-</span><span class="lnt"> 48
-</span><span class="lnt"> 49
-</span><span class="lnt"> 50
-</span><span class="lnt"> 51
-</span><span class="lnt"> 52
-</span><span class="lnt"> 53
-</span><span class="lnt"> 54
-</span><span class="lnt"> 55
-</span><span class="lnt"> 56
-</span><span class="lnt"> 57
-</span><span class="lnt"> 58
-</span><span class="lnt"> 59
-</span><span class="lnt"> 60
-</span><span class="lnt"> 61
-</span><span class="lnt"> 62
-</span><span class="lnt"> 63
-</span><span class="lnt"> 64
-</span><span class="lnt"> 65
-</span><span class="lnt"> 66
-</span><span class="lnt"> 67
-</span><span class="lnt"> 68
-</span><span class="lnt"> 69
-</span><span class="lnt"> 70
-</span><span class="lnt"> 71
-</span><span class="lnt"> 72
-</span><span class="lnt"> 73
-</span><span class="lnt"> 74
-</span><span class="lnt"> 75
-</span><span class="lnt"> 76
-</span><span class="lnt"> 77
-</span><span class="lnt"> 78
-</span><span class="lnt"> 79
-</span><span class="lnt"> 80
-</span><span class="lnt"> 81
-</span><span class="lnt"> 82
-</span><span class="lnt"> 83
-</span><span class="lnt"> 84
-</span><span class="lnt"> 85
-</span><span class="lnt"> 86
-</span><span class="lnt"> 87
-</span><span class="lnt"> 88
-</span><span class="lnt"> 89
-</span><span class="lnt"> 90
-</span><span class="lnt"> 91
-</span><span class="lnt"> 92
-</span><span class="lnt"> 93
-</span><span class="lnt"> 94
-</span><span class="lnt"> 95
-</span><span class="lnt"> 96
-</span><span class="lnt"> 97
-</span><span class="lnt"> 98
-</span><span class="lnt"> 99
-</span><span class="lnt">100
-</span><span class="lnt">101
-</span><span class="lnt">102
-</span><span class="lnt">103
-</span><span class="lnt">104
-</span><span class="lnt">105
-</span><span class="lnt">106
-</span><span class="lnt">107
-</span><span class="lnt">108
-</span><span class="lnt">109
-</span><span class="lnt">110
-</span><span class="lnt">111
-</span><span class="lnt">112
-</span><span class="lnt">113
-</span><span class="lnt">114
-</span><span class="lnt">115
-</span><span class="lnt">116
-</span><span class="lnt">117
-</span><span class="lnt">118
-</span><span class="lnt">119
-</span><span class="lnt">120
-</span><span class="lnt">121
-</span><span class="lnt">122
-</span><span class="lnt">123
-</span><span class="lnt">124
-</span><span class="lnt">125
-</span><span class="lnt">126
-</span><span class="lnt">127
-</span><span class="lnt">128
-</span><span class="lnt">129
-</span><span class="lnt">130
-</span><span class="lnt">131
-</span><span class="lnt">132
-</span><span class="lnt">133
-</span><span class="lnt">134
-</span><span class="lnt">135
-</span><span class="lnt">136
-</span><span class="lnt">137
-</span><span class="lnt">138
-</span><span class="lnt">139
-</span><span class="lnt">140
-</span><span class="lnt">141
-</span><span class="lnt">142
-</span><span class="lnt">143
-</span><span class="lnt">144
-</span><span class="lnt">145
-</span><span class="lnt">146
-</span><span class="lnt">147
-</span><span class="lnt">148
-</span><span class="lnt">149
-</span><span class="lnt">150
-</span><span class="lnt">151
-</span><span class="lnt">152
-</span><span class="lnt">153
-</span><span class="lnt">154
-</span><span class="lnt">155
-</span><span class="lnt">156
-</span><span class="lnt">157
-</span><span class="lnt">158
-</span><span class="lnt">159
-</span><span class="lnt">160
-</span><span class="lnt">161
-</span><span class="lnt">162
-</span><span class="lnt">163
-</span><span class="lnt">164
-</span><span class="lnt">165
-</span><span class="lnt">166
-</span><span class="lnt">167
-</span><span class="lnt">168
-</span><span class="lnt">169
-</span><span class="lnt">170
-</span><span class="lnt">171
-</span><span class="lnt">172
-</span><span class="lnt">173
-</span><span class="lnt">174
-</span><span class="lnt">175
-</span><span class="lnt">176
-</span><span class="lnt">177
-</span><span class="lnt">178
-</span><span class="lnt">179
-</span><span class="lnt">180
-</span><span class="lnt">181
-</span><span class="lnt">182
-</span><span class="lnt">183
-</span><span class="lnt">184
-</span><span class="lnt">185
-</span><span class="lnt">186
-</span><span class="lnt">187
-</span><span class="lnt">188
-</span><span class="lnt">189
-</span><span class="lnt">190
-</span><span class="lnt">191
-</span><span class="lnt">192
-</span><span class="lnt">193
-</span><span class="lnt">194
-</span><span class="lnt">195
-</span><span class="lnt">196
-</span><span class="lnt">197
-</span><span class="lnt">198
-</span><span class="lnt">199
-</span><span class="lnt">200
-</span><span class="lnt">201
-</span><span class="lnt">202
-</span><span class="lnt">203
-</span><span class="lnt">204
-</span><span class="lnt">205
-</span><span class="lnt">206
-</span><span class="lnt">207
-</span><span class="lnt">208
-</span><span class="lnt">209
-</span><span class="lnt">210
-</span><span class="lnt">211
-</span><span class="lnt">212
-</span><span class="lnt">213
-</span><span class="lnt">214
-</span><span class="lnt">215
-</span><span class="lnt">216
-</span><span class="lnt">217
-</span><span class="lnt">218
-</span><span class="lnt">219
-</span><span class="lnt">220
-</span><span class="lnt">221
-</span><span class="lnt">222
-</span><span class="lnt">223
-</span><span class="lnt">224
-</span><span class="lnt">225
-</span><span class="lnt">226
-</span><span class="lnt">227
-</span><span class="lnt">228
-</span><span class="lnt">229
-</span><span class="lnt">230
-</span><span class="lnt">231
-</span><span class="lnt">232
-</span><span class="lnt">233
-</span><span class="lnt">234
-</span><span class="lnt">235
-</span><span class="lnt">236
-</span><span class="lnt">237
-</span><span class="lnt">238
-</span><span class="lnt">239
-</span><span class="lnt">240
-</span><span class="lnt">241
-</span><span class="lnt">242
-</span><span class="lnt">243
-</span><span class="lnt">244
-</span><span class="lnt">245
-</span><span class="lnt">246
-</span><span class="lnt">247
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">keras.backend</span> <span class="k">as</span> <span class="nn">K</span>
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-python">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">keras.backend</span> <span class="k">as</span> <span class="nn">K</span>
 </span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">keras.constraints</span> <span class="kn">import</span> <span class="n">Constraint</span>
 </span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">GRU</span><span class="p">,</span> <span class="n">concatenate</span>
 </span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
@@ -933,396 +520,16 @@
 </span></span><span class="line"><span class="cl">    <span class="n">convert</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">opset</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">opset</span><span class="p">,</span> <span class="n">auto_rebuild</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">auto_rebuild</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
+</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span></span></span></code></pre></div></div>
 <h4 id="322-推理时对隐状态进行管理">3.2.2 推理时对隐状态进行管理</h4>
 <p>前面导出onnx模型时，已经为每个GRU节点导出了隐状态的输入和输出端口，因此在每一次帧的时候，只需要将上一次推理保存的隐状态信息输入到对应的隐状态输入端口，同时在推理后对GRU节点的隐状态输出端口进行保存，就可以实现流式推理GRU保留历史信息了。</p>
 <p>以下是部分核心函数实现，只需要将其嵌入到原rnnoise降噪代码中就可以实现ort推理了。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">  1
-</span><span class="lnt">  2
-</span><span class="lnt">  3
-</span><span class="lnt">  4
-</span><span class="lnt">  5
-</span><span class="lnt">  6
-</span><span class="lnt">  7
-</span><span class="lnt">  8
-</span><span class="lnt">  9
-</span><span class="lnt"> 10
-</span><span class="lnt"> 11
-</span><span class="lnt"> 12
-</span><span class="lnt"> 13
-</span><span class="lnt"> 14
-</span><span class="lnt"> 15
-</span><span class="lnt"> 16
-</span><span class="lnt"> 17
-</span><span class="lnt"> 18
-</span><span class="lnt"> 19
-</span><span class="lnt"> 20
-</span><span class="lnt"> 21
-</span><span class="lnt"> 22
-</span><span class="lnt"> 23
-</span><span class="lnt"> 24
-</span><span class="lnt"> 25
-</span><span class="lnt"> 26
-</span><span class="lnt"> 27
-</span><span class="lnt"> 28
-</span><span class="lnt"> 29
-</span><span class="lnt"> 30
-</span><span class="lnt"> 31
-</span><span class="lnt"> 32
-</span><span class="lnt"> 33
-</span><span class="lnt"> 34
-</span><span class="lnt"> 35
-</span><span class="lnt"> 36
-</span><span class="lnt"> 37
-</span><span class="lnt"> 38
-</span><span class="lnt"> 39
-</span><span class="lnt"> 40
-</span><span class="lnt"> 41
-</span><span class="lnt"> 42
-</span><span class="lnt"> 43
-</span><span class="lnt"> 44
-</span><span class="lnt"> 45
-</span><span class="lnt"> 46
-</span><span class="lnt"> 47
-</span><span class="lnt"> 48
-</span><span class="lnt"> 49
-</span><span class="lnt"> 50
-</span><span class="lnt"> 51
-</span><span class="lnt"> 52
-</span><span class="lnt"> 53
-</span><span class="lnt"> 54
-</span><span class="lnt"> 55
-</span><span class="lnt"> 56
-</span><span class="lnt"> 57
-</span><span class="lnt"> 58
-</span><span class="lnt"> 59
-</span><span class="lnt"> 60
-</span><span class="lnt"> 61
-</span><span class="lnt"> 62
-</span><span class="lnt"> 63
-</span><span class="lnt"> 64
-</span><span class="lnt"> 65
-</span><span class="lnt"> 66
-</span><span class="lnt"> 67
-</span><span class="lnt"> 68
-</span><span class="lnt"> 69
-</span><span class="lnt"> 70
-</span><span class="lnt"> 71
-</span><span class="lnt"> 72
-</span><span class="lnt"> 73
-</span><span class="lnt"> 74
-</span><span class="lnt"> 75
-</span><span class="lnt"> 76
-</span><span class="lnt"> 77
-</span><span class="lnt"> 78
-</span><span class="lnt"> 79
-</span><span class="lnt"> 80
-</span><span class="lnt"> 81
-</span><span class="lnt"> 82
-</span><span class="lnt"> 83
-</span><span class="lnt"> 84
-</span><span class="lnt"> 85
-</span><span class="lnt"> 86
-</span><span class="lnt"> 87
-</span><span class="lnt"> 88
-</span><span class="lnt"> 89
-</span><span class="lnt"> 90
-</span><span class="lnt"> 91
-</span><span class="lnt"> 92
-</span><span class="lnt"> 93
-</span><span class="lnt"> 94
-</span><span class="lnt"> 95
-</span><span class="lnt"> 96
-</span><span class="lnt"> 97
-</span><span class="lnt"> 98
-</span><span class="lnt"> 99
-</span><span class="lnt">100
-</span><span class="lnt">101
-</span><span class="lnt">102
-</span><span class="lnt">103
-</span><span class="lnt">104
-</span><span class="lnt">105
-</span><span class="lnt">106
-</span><span class="lnt">107
-</span><span class="lnt">108
-</span><span class="lnt">109
-</span><span class="lnt">110
-</span><span class="lnt">111
-</span><span class="lnt">112
-</span><span class="lnt">113
-</span><span class="lnt">114
-</span><span class="lnt">115
-</span><span class="lnt">116
-</span><span class="lnt">117
-</span><span class="lnt">118
-</span><span class="lnt">119
-</span><span class="lnt">120
-</span><span class="lnt">121
-</span><span class="lnt">122
-</span><span class="lnt">123
-</span><span class="lnt">124
-</span><span class="lnt">125
-</span><span class="lnt">126
-</span><span class="lnt">127
-</span><span class="lnt">128
-</span><span class="lnt">129
-</span><span class="lnt">130
-</span><span class="lnt">131
-</span><span class="lnt">132
-</span><span class="lnt">133
-</span><span class="lnt">134
-</span><span class="lnt">135
-</span><span class="lnt">136
-</span><span class="lnt">137
-</span><span class="lnt">138
-</span><span class="lnt">139
-</span><span class="lnt">140
-</span><span class="lnt">141
-</span><span class="lnt">142
-</span><span class="lnt">143
-</span><span class="lnt">144
-</span><span class="lnt">145
-</span><span class="lnt">146
-</span><span class="lnt">147
-</span><span class="lnt">148
-</span><span class="lnt">149
-</span><span class="lnt">150
-</span><span class="lnt">151
-</span><span class="lnt">152
-</span><span class="lnt">153
-</span><span class="lnt">154
-</span><span class="lnt">155
-</span><span class="lnt">156
-</span><span class="lnt">157
-</span><span class="lnt">158
-</span><span class="lnt">159
-</span><span class="lnt">160
-</span><span class="lnt">161
-</span><span class="lnt">162
-</span><span class="lnt">163
-</span><span class="lnt">164
-</span><span class="lnt">165
-</span><span class="lnt">166
-</span><span class="lnt">167
-</span><span class="lnt">168
-</span><span class="lnt">169
-</span><span class="lnt">170
-</span><span class="lnt">171
-</span><span class="lnt">172
-</span><span class="lnt">173
-</span><span class="lnt">174
-</span><span class="lnt">175
-</span><span class="lnt">176
-</span><span class="lnt">177
-</span><span class="lnt">178
-</span><span class="lnt">179
-</span><span class="lnt">180
-</span><span class="lnt">181
-</span><span class="lnt">182
-</span><span class="lnt">183
-</span><span class="lnt">184
-</span><span class="lnt">185
-</span><span class="lnt">186
-</span><span class="lnt">187
-</span><span class="lnt">188
-</span><span class="lnt">189
-</span><span class="lnt">190
-</span><span class="lnt">191
-</span><span class="lnt">192
-</span><span class="lnt">193
-</span><span class="lnt">194
-</span><span class="lnt">195
-</span><span class="lnt">196
-</span><span class="lnt">197
-</span><span class="lnt">198
-</span><span class="lnt">199
-</span><span class="lnt">200
-</span><span class="lnt">201
-</span><span class="lnt">202
-</span><span class="lnt">203
-</span><span class="lnt">204
-</span><span class="lnt">205
-</span><span class="lnt">206
-</span><span class="lnt">207
-</span><span class="lnt">208
-</span><span class="lnt">209
-</span><span class="lnt">210
-</span><span class="lnt">211
-</span><span class="lnt">212
-</span><span class="lnt">213
-</span><span class="lnt">214
-</span><span class="lnt">215
-</span><span class="lnt">216
-</span><span class="lnt">217
-</span><span class="lnt">218
-</span><span class="lnt">219
-</span><span class="lnt">220
-</span><span class="lnt">221
-</span><span class="lnt">222
-</span><span class="lnt">223
-</span><span class="lnt">224
-</span><span class="lnt">225
-</span><span class="lnt">226
-</span><span class="lnt">227
-</span><span class="lnt">228
-</span><span class="lnt">229
-</span><span class="lnt">230
-</span><span class="lnt">231
-</span><span class="lnt">232
-</span><span class="lnt">233
-</span><span class="lnt">234
-</span><span class="lnt">235
-</span><span class="lnt">236
-</span><span class="lnt">237
-</span><span class="lnt">238
-</span><span class="lnt">239
-</span><span class="lnt">240
-</span><span class="lnt">241
-</span><span class="lnt">242
-</span><span class="lnt">243
-</span><span class="lnt">244
-</span><span class="lnt">245
-</span><span class="lnt">246
-</span><span class="lnt">247
-</span><span class="lnt">248
-</span><span class="lnt">249
-</span><span class="lnt">250
-</span><span class="lnt">251
-</span><span class="lnt">252
-</span><span class="lnt">253
-</span><span class="lnt">254
-</span><span class="lnt">255
-</span><span class="lnt">256
-</span><span class="lnt">257
-</span><span class="lnt">258
-</span><span class="lnt">259
-</span><span class="lnt">260
-</span><span class="lnt">261
-</span><span class="lnt">262
-</span><span class="lnt">263
-</span><span class="lnt">264
-</span><span class="lnt">265
-</span><span class="lnt">266
-</span><span class="lnt">267
-</span><span class="lnt">268
-</span><span class="lnt">269
-</span><span class="lnt">270
-</span><span class="lnt">271
-</span><span class="lnt">272
-</span><span class="lnt">273
-</span><span class="lnt">274
-</span><span class="lnt">275
-</span><span class="lnt">276
-</span><span class="lnt">277
-</span><span class="lnt">278
-</span><span class="lnt">279
-</span><span class="lnt">280
-</span><span class="lnt">281
-</span><span class="lnt">282
-</span><span class="lnt">283
-</span><span class="lnt">284
-</span><span class="lnt">285
-</span><span class="lnt">286
-</span><span class="lnt">287
-</span><span class="lnt">288
-</span><span class="lnt">289
-</span><span class="lnt">290
-</span><span class="lnt">291
-</span><span class="lnt">292
-</span><span class="lnt">293
-</span><span class="lnt">294
-</span><span class="lnt">295
-</span><span class="lnt">296
-</span><span class="lnt">297
-</span><span class="lnt">298
-</span><span class="lnt">299
-</span><span class="lnt">300
-</span><span class="lnt">301
-</span><span class="lnt">302
-</span><span class="lnt">303
-</span><span class="lnt">304
-</span><span class="lnt">305
-</span><span class="lnt">306
-</span><span class="lnt">307
-</span><span class="lnt">308
-</span><span class="lnt">309
-</span><span class="lnt">310
-</span><span class="lnt">311
-</span><span class="lnt">312
-</span><span class="lnt">313
-</span><span class="lnt">314
-</span><span class="lnt">315
-</span><span class="lnt">316
-</span><span class="lnt">317
-</span><span class="lnt">318
-</span><span class="lnt">319
-</span><span class="lnt">320
-</span><span class="lnt">321
-</span><span class="lnt">322
-</span><span class="lnt">323
-</span><span class="lnt">324
-</span><span class="lnt">325
-</span><span class="lnt">326
-</span><span class="lnt">327
-</span><span class="lnt">328
-</span><span class="lnt">329
-</span><span class="lnt">330
-</span><span class="lnt">331
-</span><span class="lnt">332
-</span><span class="lnt">333
-</span><span class="lnt">334
-</span><span class="lnt">335
-</span><span class="lnt">336
-</span><span class="lnt">337
-</span><span class="lnt">338
-</span><span class="lnt">339
-</span><span class="lnt">340
-</span><span class="lnt">341
-</span><span class="lnt">342
-</span><span class="lnt">343
-</span><span class="lnt">344
-</span><span class="lnt">345
-</span><span class="lnt">346
-</span><span class="lnt">347
-</span><span class="lnt">348
-</span><span class="lnt">349
-</span><span class="lnt">350
-</span><span class="lnt">351
-</span><span class="lnt">352
-</span><span class="lnt">353
-</span><span class="lnt">354
-</span><span class="lnt">355
-</span><span class="lnt">356
-</span><span class="lnt">357
-</span><span class="lnt">358
-</span><span class="lnt">359
-</span><span class="lnt">360
-</span><span class="lnt">361
-</span><span class="lnt">362
-</span><span class="lnt">363
-</span><span class="lnt">364
-</span><span class="lnt">365
-</span><span class="lnt">366
-</span><span class="lnt">367
-</span><span class="lnt">368
-</span><span class="lnt">369
-</span><span class="lnt">370
-</span><span class="lnt">371
-</span><span class="lnt">372
-</span><span class="lnt">373
-</span><span class="lnt">374
-</span><span class="lnt">375
-</span><span class="lnt">376
-</span><span class="lnt">377
-</span><span class="lnt">378
-</span><span class="lnt">379
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Initialize ONNX model
+<div class="code-block code-line-numbers" style="counter-reset: code-block 0">
+    <div class="code-header language-c">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Initialize ONNX model
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">initialize_onnx_model</span><span class="p">(</span><span class="n">RNNoiseContext</span><span class="o">*</span> <span class="n">ctx</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">model_path</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// Get ONNX Runtime API
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">const</span> <span class="n">OrtApiBase</span><span class="o">*</span> <span class="n">api_base</span> <span class="o">=</span> <span class="nf">OrtGetApiBase</span><span class="p">();</span>
@@ -1700,32 +907,15 @@
 </span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">ReleaseMemoryInfo</span><span class="p">(</span><span class="n">memory_info</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
 <h3 id="33-推理性能对比">3.3 推理性能对比</h3>
 <p>可以看到在不需要自己手搓各个算子的C实现，借助ORT就可以实现接近5倍的性能提升，这投入回报比可是不要太高了。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">=== Overall Inference Time Statistics ===
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">=== Overall Inference Time Statistics ===
 </span></span><span class="line"><span class="cl">Total frames processed: 2048
 </span></span><span class="line"><span class="cl">Frames with inference: 2047
 </span></span><span class="line"><span class="cl">
@@ -1740,9 +930,7 @@
 </span></span><span class="line"><span class="cl">Comparison:
 </span></span><span class="line"><span class="cl">  ONNX / C ratio: 0.21x
 </span></span><span class="line"><span class="cl">  Speedup: 4.76x (ONNX faster)
-</span></span><span class="line"><span class="cl">==========================================</span></span></code></pre></td></tr></table>
-</div>
-</div>
+</span></span><span class="line"><span class="cl">==========================================</span></span></code></pre></div></div>
 <h2 id="四总结">四、总结</h2>
 <p>ORT作为跨平台的推理引擎，在语音降噪模型部署中具有显著优势。正确使用ORT需要：</p>
 <ol>
@@ -1754,16 +942,7 @@
 <p>对于实时语音降噪场景，隐状态管理是关键，需要仔细设计状态传递逻辑，确保模型能够正确利用历史信息。</p>
 <p>通过合理使用ORT，可以充分发挥深度学习语音降噪模型的性能，实现高效、稳定的实时推理。</p>
 <p>另外，ORT还有很多高级特性，大家可以自己摸索尝试下。</p>
-<img src="/images/To-Be-Continued.jpeg"/>]]></content:encoded>
-    </item>
-    <item>
-      <title>语音增强算法评估指南</title>
-      <link>https://lyapple2008.github.io/posts/202508/2025-08-11-%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95%E8%AF%84%E4%BC%B0/</link>
-      <pubDate>Mon, 11 Aug 2025 22:27:28 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/202508/2025-08-11-%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95%E8%AF%84%E4%BC%B0/</guid>
-      <description>&lt;h1 id=&#34;语音增强算法评估指南&#34;&gt;语音增强算法评估指南&lt;/h1&gt;
-&lt;p&gt;如今语音增强算法已成为智能设备、视频会议和助听器等应用的核心，它能从嘈杂环境中“拯救”清晰的语音信号，但如何判断一个算法的好坏？这就是评估的意义所在。今天，我们来聊聊语音增强算法的评估体系，通过一个国际挑战赛作为切入点，带你一步步了解关键指标和计算方法。无论你是初学者还是从业者，这篇文章都能帮你理清思路。&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<h1 id="语音增强算法评估指南">语音增强算法评估指南</h1>
+]]></description></item><item><title>语音增强算法评估指南</title><link>https://lyapple2008.github.io/posts/202508/2025-08-11-%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95%E8%AF%84%E4%BC%B0/</link><pubDate>Mon, 11 Aug 2025 22:27:28 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202508/2025-08-11-%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95%E8%AF%84%E4%BC%B0/</guid><description><![CDATA[<h1 id="语音增强算法评估指南">语音增强算法评估指南</h1>
 <p>如今语音增强算法已成为智能设备、视频会议和助听器等应用的核心，它能从嘈杂环境中“拯救”清晰的语音信号，但如何判断一个算法的好坏？这就是评估的意义所在。今天，我们来聊聊语音增强算法的评估体系，通过一个国际挑战赛作为切入点，带你一步步了解关键指标和计算方法。无论你是初学者还是从业者，这篇文章都能帮你理清思路。</p>
 <h2 id="前言为什么需要评估语音增强算法">前言：为什么需要评估语音增强算法？</h2>
 <p>想象一下，你开发了一个语音增强模型，自认为它能完美去除背景噪音。但在实际应用中，用户反馈“声音听起来怪怪的”或“某些噪音下完全失效”。这就是为什么评估至关重要：它提供了一个客观、量化的标准，帮助开发者识别算法的优缺点、优化性能，并与其他方法进行公平比较。</p>
@@ -1775,7 +954,7 @@
 </ul>
 <p>没有评估，算法开发就像盲人摸象；有了评估，它就成了科学工程。接下来，我们以NeurIPS 2024竞赛轨道下的URGENT 2024挑战为例，深入探讨评估体系。这个挑战聚焦于构建通用语音增强模型，强调在不同噪声、采样率和麦克风配置下的表现。</p>
 <h2 id="urgent-2024挑战评估体系的典范">URGENT 2024挑战：评估体系的典范</h2>
-<p><a href="https://urgent-challenge.github.io/urgent2024/">URGENT 2024（Universality, Robustness, and Generalizability for EnhancemeNT）</a>挑战旨在解决传统语音增强研究的痛点：许多算法只针对特定条件优化，缺乏跨场景泛化能力。挑战要求参赛者使用统一的公共数据集训练单一模型，处理各种失真（如噪声、混响），并支持不同输入格式（如单/多通道、不同采样率）。</p>
+<p><a href="https://urgent-challenge.github.io/urgent2024/" target="_blank" rel="noopener noreffer ">URGENT 2024（Universality, Robustness, and Generalizability for EnhancemeNT）</a>挑战旨在解决传统语音增强研究的痛点：许多算法只针对特定条件优化，缺乏跨场景泛化能力。挑战要求参赛者使用统一的公共数据集训练单一模型，处理各种失真（如噪声、混响），并支持不同输入格式（如单/多通道、不同采样率）。</p>
 <p>这个挑战的亮点在于其全面评估框架，包括非侵入式（无参考信号）和侵入式（需参考信号）指标，以及下游任务相关指标（如词错误率WER）。它还引入主观MOS（Mean Opinion Score）评分作为最终盲测环节的补充。挑战提供ESPnet工具包的基线模型，鼓励数据增强，但严格限制训练数据来源，确保公平性。</p>
 <p>通过这个挑战，我们可以看到评估不仅是“打分”，而是推动行业向真实场景迈进的基准。接下来，重点介绍挑战中使用的核心客观指标：PESQ、ESTOI、SDR、MCD、LSD、DNSMOS和NISQA。</p>
 <h2 id="评估指标详解每个指标都在测什么">评估指标详解：每个指标都在测什么？</h2>
@@ -1813,61 +992,12 @@
 <p>访问方式简单：在Hugging Face平台搜索并下载，或使用Python的datasets库加载。数据集设计覆盖不同噪声、混响和麦克风配置，确保评估的全面性。</p>
 <blockquote>
 <p>可以参考下面的代码将hugging face中的validataion数据集以wav形式保存在本地，方便后续不同算法进行处理后，对处理结果进行评估。</p></blockquote>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span><span class="lnt">48
-</span><span class="lnt">49
-</span><span class="lnt">50
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-python">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">load_dataset</span>
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">soundfile</span> <span class="k">as</span> <span class="nn">sf</span>
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
 </span></span><span class="line"><span class="cl">
@@ -1916,9 +1046,7 @@
 </span></span><span class="line"><span class="cl">    <span class="n">save_audio</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="n">num_proc</span><span class="o">=</span><span class="n">NUM_PROC</span><span class="p">,</span>      <span class="c1"># 开启多进程</span>
 </span></span><span class="line"><span class="cl">    <span class="n">desc</span><span class="o">=</span><span class="s2">&#34;Exporting audio&#34;</span><span class="p">,</span> <span class="c1"># tqdm 进度条描述</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
+</span></span><span class="line"><span class="cl"><span class="p">)</span></span></span></code></pre></div></div>
 <h2 id="指标计算实践一步步上手">指标计算实践：一步步上手</h2>
 <p>计算这些指标需要工具和脚本。URGENT挑战的GitHub仓库（https://github.com/urgent-challenge/urgent2024_challenge）提供了evaluation_metrics文件夹下的实用脚本，如calculate_intrusive_se_metrics.py（处理PESQ、ESTOI、SDR、MCD、LSD等侵入式指标，支持无限SDR值处理），calculate_nonintrusive_dnsmos.py和calculate_nonintrusive_nisqa.py分别计算DNSMOS和NISQA。</p>
 <p><strong>计算步骤示例</strong>：</p>
@@ -1926,20 +1054,12 @@
 <p>参考evaluation_metrics/README.md</p></blockquote>
 <ol>
 <li><strong>数据准备</strong>对validation数据集中的noisy数据进行处理，得到enhanced的数据，按下面的目录结构进行组织
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">📁 /path/to/your/data/
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">📁 /path/to/your/data/
 </span></span><span class="line"><span class="cl">├── 📁 enhanced/
 </span></span><span class="line"><span class="cl">│   ├── 🔈 fileid_1.wav
 </span></span><span class="line"><span class="cl">│   ├── 🔈 fileid_2.wav
@@ -1947,25 +1067,15 @@
 </span></span><span class="line"><span class="cl">└── 📁 clean/
 </span></span><span class="line"><span class="cl">    ├── 🔈 fileid_1.wav
 </span></span><span class="line"><span class="cl">    ├── 🔈 fileid_2.wav
-</span></span><span class="line"><span class="cl">    └── ...</span></span></code></pre></td></tr></table>
-</div>
-</div>
+</span></span><span class="line"><span class="cl">    └── ...</span></span></code></pre></div></div>
 </li>
 <li><strong>生成scp文件</strong> 为clean数据和enhance数据生成对应的scp文件，在scp文件中包含两列信息，一列是一个唯一的文件id，一列是文件路径，如下
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># enhanced.scp
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># enhanced.scp
 </span></span><span class="line"><span class="cl">fileid_1 /path/to/your/data/enhanced/fileid_1.flac
 </span></span><span class="line"><span class="cl">fileid_2 /path/to/your/data/enhanced/fileid_2.flac
 </span></span><span class="line"><span class="cl">...
@@ -1973,30 +1083,16 @@
 </span></span><span class="line"><span class="cl"># reference.scp
 </span></span><span class="line"><span class="cl">fileid_1 /path/to/your/data/clean/fileid_1.flac
 </span></span><span class="line"><span class="cl">fileid_2 /path/to/your/data/clean/fileid_2.flac
-</span></span><span class="line"><span class="cl">...</span></span></code></pre></td></tr></table>
-</div>
-</div>
+</span></span><span class="line"><span class="cl">...</span></span></code></pre></div></div>
 </li>
 <li><strong>运行脚本</strong>：例如，对于侵入式指标，运行<code>calculate_intrusive_se_metrics.py</code>输入增强文件和参考文件，输出PESQ等分数。非侵入式如DNSMOS可直接输入增强语音。</li>
 <li><strong>示例代码片段</strong>：
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
+    <div class="code-header language-">
+        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
+        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+        
+    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nv">nj</span><span class="o">=</span><span class="m">8</span>  <span class="c1"># Number of parallel CPU jobs for speedup</span>
 </span></span><span class="line"><span class="cl"><span class="nv">python</span><span class="o">=</span>python3
 </span></span><span class="line"><span class="cl">
@@ -2008,19 +1104,14 @@
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>   --inf_scp enhanced_webrtc.scp <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>   --output_dir <span class="s2">&#34;</span><span class="si">${</span><span class="nv">output_prefix</span><span class="si">}</span><span class="s2">&#34;</span>/scoring_webrtc <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>   --nj <span class="si">${</span><span class="nv">nj</span><span class="si">}</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>   --chunksize <span class="m">60</span></span></span></code></pre></td></tr></table>
-</div>
-</div>
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>   --chunksize <span class="m">60</span></span></span></code></pre></div></div>
 对于批量计算，仓库脚本支持文件夹输入。</li>
 </ol>
 <p>在实践中，建议结合主观听测（如MOS）验证客观指标，避免“高分低体验”的情况。</p>
 <h2 id="结语评估驱动创新">结语：评估驱动创新</h2>
 <p>语音增强算法评估不是终点，而是起点。通过URGENT 2024这样的挑战，我们看到评估体系在推动算法向通用、鲁棒方向演进。未来，随着更多非侵入式指标和多模态数据的融入，评估将更贴近真实世界。</p>
 <p>最后我们来看下之前介绍的WebRTC NS是什么水平吧，最终的指标如下所示。</p>
-<p><img alt="webrtc ns算法评估指标" loading="lazy" src="/images/2025-08-11/validation_webrtc_ns.png"></p>
-<p><img alt="noisy" loading="lazy" src="/images/2025-08-11/validation_noisy.png"></p>
+<p></p>
+<p></p>
 <p>可以看到WebRTC NS的评估指标分数只比noisy的分数好一点点，可见还有很大的上升空间。传统算法或多或少都会基于一些假设，而这些假设不只小范围内是生效的，这造成了传统算法的局限性。近年深度学习基于数据驱动的方法，进一步突破这些局限性，极大提高了音频算法的效果上线。下期预告，让我们迈上深度学习时代吧。</p>
-<img src="/images/To-Be-Continued.jpeg"/>]]></content:encoded>
-    </item>
-  </channel>
-</rss>
+]]></description></item></channel></rss>

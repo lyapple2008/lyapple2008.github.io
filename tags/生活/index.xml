@@ -1,57 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>生活 on BeYoung</title>
-    <link>https://lyapple2008.github.io/tags/%E7%94%9F%E6%B4%BB/</link>
-    <description>Recent content in 生活 on BeYoung</description>
-    <image>
-      <title>BeYoung</title>
-      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
-    </image>
-    <generator>Hugo -- 0.147.9</generator>
-    <language>zh</language>
-    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Thu, 03 Sep 2026 22:30:00 +0800</lastBuildDate>
-    <atom:link href="https://lyapple2008.github.io/tags/%E7%94%9F%E6%B4%BB/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>【置顶】2026</title>
-      <link>https://lyapple2008.github.io/posts/2026-todo/</link>
-      <pubDate>Sun, 22 Feb 2026 09:43:54 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/2026-todo/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;记录跟踪2026年要做的事情和正在做的事情。&lt;/p&gt;&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;目标&#34;&gt;目标&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;健康生活&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 体重减到60kg&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div id=&#34;weight-chart&#34; style=&#34;width: 100%; height: 300px;&#34;&gt;&lt;/div&gt;
-&lt;script src=&#34;https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js&#34;&gt;&lt;/script&gt;
-&lt;script&gt;
-var chart = echarts.init(document.getElementById(&#39;weight-chart&#39;));
-chart.setOption({
-    tooltip: { trigger: &#39;axis&#39; },
-    xAxis: { type: &#39;category&#39;, data: [&#39;1月&#39;, &#39;2月&#39;, &#39;3月&#39;, &#39;4月&#39;, &#39;5月&#39;, &#39;六月&#39;, &#39;七月&#39;, &#39;八月&#39;, &#39;九月&#39;] },
-    yAxis: { type: &#39;value&#39;, min: 55, max: 70 },
-    series: [{
-        data: [65, 65.8, 65.6, 64.4, 63.7, 63.9, 63.6, 63.1, 62.8],
-        type: &#39;line&#39;,
-        smooth: true,
-        areaStyle: { opacity: 0.3 },
-        markLine: { data: [{ yAxis: 60, name: &#39;目标&#39; }], linestyle: { color: &#39;#52c41a&#39;, type: &#39;dashed&#39; } }
-    }]
-});
-&lt;/script&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;探索可能&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<blockquote>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>生活 - 标签 - BeYoung</title><link>https://lyapple2008.github.io/tags/%E7%94%9F%E6%B4%BB/</link><description>生活 - 标签 - BeYoung</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>See this site's source code [here](https://github.com/lyapple2008/lyapple2008.github.io), licensed under GPLv3 ·</copyright><lastBuildDate>Thu, 03 Sep 2026 22:30:00 +0800</lastBuildDate><atom:link href="https://lyapple2008.github.io/tags/%E7%94%9F%E6%B4%BB/" rel="self" type="application/rss+xml"/><item><title>【置顶】2026</title><link>https://lyapple2008.github.io/posts/2026-todo/</link><pubDate>Sun, 22 Feb 2026 09:43:54 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/2026-todo/</guid><description><![CDATA[<blockquote>
 <p>记录跟踪2026年要做的事情和正在做的事情。</p></blockquote>
 <hr>
 <h2 id="目标">目标</h2>
@@ -59,7 +6,7 @@ chart.setOption({
 <li>
 <p>健康生活</p>
 <ul>
-<li><input disabled="" type="checkbox"> 体重减到60kg</li>
+<li><i class="far fa-square" aria-hidden="true"></i> 体重减到60kg</li>
 </ul>
 </li>
 </ul>
@@ -84,28 +31,28 @@ chart.setOption({
 <li>
 <p>探索可能</p>
 <ul>
-<li><input disabled="" type="checkbox"> 英语能力，熟练3篇演讲短文</li>
-<li><input disabled="" type="checkbox"> 独立开发，目标完成4个独立项目 &ndash;&gt; 进度2/4</li>
-<li><input disabled="" type="checkbox"> 公众号输出，目标输出文章10篇  &ndash;&gt; 进度12/10</li>
+<li><i class="far fa-square" aria-hidden="true"></i> 英语能力，熟练3篇演讲短文</li>
+<li><i class="far fa-square" aria-hidden="true"></i> 独立开发，目标完成4个独立项目 &ndash;&gt; 进度2/4</li>
+<li><i class="far fa-square" aria-hidden="true"></i> 公众号输出，目标输出文章10篇  &ndash;&gt; 进度12/10</li>
 </ul>
 </li>
 </ul>
 <h2 id="正在做的项目">正在做的项目</h2>
 <ul>
 <li>
-<p><input checked="" disabled="" type="checkbox"> iOS双语字幕App</p>
+<p><i class="far fa-check-square" aria-hidden="true"></i> iOS双语字幕App</p>
 </li>
 <li>
-<p><input checked="" disabled="" type="checkbox"> 拼了还拼小游戏外挂</p>
+<p><i class="far fa-check-square" aria-hidden="true"></i> 拼了还拼小游戏外挂</p>
 </li>
 <li>
-<p><input disabled="" type="checkbox"> 个人资产管理app上架 app store</p>
+<p><i class="far fa-square" aria-hidden="true"></i> 个人资产管理app上架 app store</p>
 </li>
 <li>
-<p><input disabled="" type="checkbox"> asr from scratch</p>
+<p><i class="far fa-square" aria-hidden="true"></i> asr from scratch</p>
 </li>
 <li>
-<p><input disabled="" type="checkbox"> 虚拟主播</p>
+<p><i class="far fa-square" aria-hidden="true"></i> 虚拟主播</p>
 </li>
 </ul>
 <h2 id="一些随想">一些随想</h2>
@@ -135,15 +82,7 @@ chart.setOption({
 <p>每天记录和量化进度，本身就是一种负担，而且对于效率提高帮助不大，也不利于长期任务，与其每天盯着任务进度，
 不如现在开始试下，里程碑式的工作方法，给自己一段时间设定一些目标，到期后来检查完成情况，中间如何只记录
 据有里程碑意义的事件。</p></blockquote>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>读《富爸爸穷爸爸》：房子是资产吗，写代码是事业吗</title>
-      <link>https://lyapple2008.github.io/posts/202609/2026-09-03-%E5%AF%8C%E7%88%B8%E7%88%B8%E7%A9%B7%E7%88%B8%E7%88%B8%E8%AF%BB%E5%90%8E%E6%84%9F/</link>
-      <pubDate>Thu, 03 Sep 2026 22:30:00 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/202609/2026-09-03-%E5%AF%8C%E7%88%B8%E7%88%B8%E7%A9%B7%E7%88%B8%E7%88%B8%E8%AF%BB%E5%90%8E%E6%84%9F/</guid>
-      <description>硬上车的房子，现在开始按月供过日子；「会写代码」也正在被 AI 变便宜。富人买资产、穷人买负债——这句话常被读歪。真正好用的不是口号，是先把账记对。</description>
-      <content:encoded><![CDATA[<p>前阵子写<a href="/posts/202608/2026-08-30-40%E5%B9%B4%E6%88%BF%E8%B4%B7/">40 年房贷</a>的时候，已经把《富爸爸穷爸爸》里最刺耳的那句拿出来用过一次：很多人把负债当成了资产。书看完之后，觉得那句话只是入口。清崎翻来覆去讲的，其实就两对很容易混的概念——<strong>资产与负债</strong>，<strong>职业与事业</strong>。</p>
+]]></description></item><item><title>读《富爸爸穷爸爸》：房子是资产吗，写代码是事业吗</title><link>https://lyapple2008.github.io/posts/202609/2026-09-03-%E5%AF%8C%E7%88%B8%E7%88%B8%E7%A9%B7%E7%88%B8%E7%88%B8%E8%AF%BB%E5%90%8E%E6%84%9F/</link><pubDate>Thu, 03 Sep 2026 22:30:00 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-03-%E5%AF%8C%E7%88%B8%E7%88%B8%E7%A9%B7%E7%88%B8%E7%88%B8%E8%AF%BB%E5%90%8E%E6%84%9F/</guid><description><![CDATA[<p>前阵子写<a href="/posts/202608/2026-08-30-40%e5%b9%b4%e6%88%bf%e8%b4%b7/" rel="">40 年房贷</a>的时候，已经把《富爸爸穷爸爸》里最刺耳的那句拿出来用过一次：很多人把负债当成了资产。书看完之后，觉得那句话只是入口。清崎翻来覆去讲的，其实就两对很容易混的概念——<strong>资产与负债</strong>，<strong>职业与事业</strong>。</p>
 <p>这两对概念都不新，新的是对照物变了。一套近几年硬上车、现在开始按月供过日子的房子，一份正在被 AI 改写的程序员工作，比书里那些美国出租屋和快餐店例子更近。下面就用这两件事把书读一遍。</p>
 <h2 id="一先把作者的尺子拿出来">一、先把作者的尺子拿出来</h2>
 <p>穷爸爸受过良好教育，稳定上班，讲究稳妥，觉得房子是最大的资产，债务是危险的。富爸爸学历一般，却反复强调一件事：先看钱往哪边流。</p>
@@ -193,7 +132,7 @@ chart.setOption({
 <p>清崎说穷人和中产为工作赚钱，富人让钱为自己工作。落到程序员身上，职业路径很熟悉：学一门技术，进一家公司，靠职级和年限把时薪抬上去。代码写得越好，越容易被委以更重的模块；模块越重，越离不开你。看起来是成长，底层仍是同一件事——<strong>收入和你的在岗时间绑在一起</strong>。</p>
 <p>这没有原罪。职业是体面的，也是绝大多数人安身的方式。书里真正提醒的是：不要把职业误认成事业。职业给你发工资，事业给你一台可以离开你还能转一会儿的机器。很多程序员把「技术越来越精」当成事业，其实只是把职业做得更专业。专业很值钱，但它仍然是在为别人的体系工作。</p>
 <h3 id="ai-压缩的首先是职业本身">AI 压缩的，首先是职业本身</h3>
-<p>2023 年以来，这件事从抽象讨论变成了日常体验。AI Coding 已经能写模块、改测试、查日志、补文档；一个熟练的人带着它，产出可以是从前的数倍。我自己也写过<a href="/posts/202601/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/">使用上的感受</a>：从「完了，失业要提前了」，到「稳了，还能苟几年」。苟得住的前提，其实已经变了——不是代码还只能人手写，而是使用者还要为质量兜底，还要会拆任务、会判断、会把系统拼起来。</p>
+<p>2023 年以来，这件事从抽象讨论变成了日常体验。AI Coding 已经能写模块、改测试、查日志、补文档；一个熟练的人带着它，产出可以是从前的数倍。我自己也写过<a href="/posts/202601/2026-02-01-%e5%85%b3%e4%ba%8eAICoding%e7%9a%84%e4%b8%80%e4%ba%9b%e6%84%9f%e6%83%b3%e5%92%8c%e5%90%8e%e7%bb%ad%e7%9a%84%e8%a7%84%e5%88%92/" rel="">使用上的感受</a>：从「完了，失业要提前了」，到「稳了，还能苟几年」。苟得住的前提，其实已经变了——不是代码还只能人手写，而是使用者还要为质量兜底，还要会拆任务、会判断、会把系统拼起来。</p>
 <p>对职业的冲击是不均匀的。</p>
 <ul>
 <li><strong>被压得最明显的</strong>，是把「会写代码」本身当成稀缺能力的岗位。CRUD、模板页面、标准接入、重复劳动，正在迅速便宜。公司会发现：同样的功能，更少的人加上更好的工具就能交出来。</li>
@@ -226,15 +165,7 @@ chart.setOption({
 <li>AI 和房贷这类新变量出现时，我是在加固原来的错账，还是借机把账改对？</li>
 </ol>
 <p>房子可以是家，代码可以是手艺。在把它们写进资产栏、写进事业栏之前，先看清楚钱和时间到底在为谁工作。</p>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>房贷年限放宽到40年，父贷子还？</title>
-      <link>https://lyapple2008.github.io/posts/202608/2026-08-30-40%E5%B9%B4%E6%88%BF%E8%B4%B7/</link>
-      <pubDate>Sun, 30 Aug 2026 09:40:00 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/202608/2026-08-30-40%E5%B9%B4%E6%88%BF%E8%B4%B7/</guid>
-      <description>月供少六百，总利息多二十万。40年不是把房子变便宜了，是把压力挪到后面十年。人走了既不是父债子还，也不是人死债消——门槛已经这么低，有需求的人现在该上车吗？</description>
-      <content:encoded><![CDATA[<p>8 月 28 日，央行和金融监管总局把个人住房贷款最长期限从 30 年延长到 40 年。同一套文件里，还把月房贷支出占收入的上限划在 50%，全部债务支出占收入的上限划在 60%。再加上这几年已经落地的降首付、降利率，购房门槛确实被压到了近年来最低的位置。</p>
+]]></description></item><item><title>房贷年限放宽到40年，父贷子还？</title><link>https://lyapple2008.github.io/posts/202608/2026-08-30-40%E5%B9%B4%E6%88%BF%E8%B4%B7/</link><pubDate>Sun, 30 Aug 2026 09:40:00 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202608/2026-08-30-40%E5%B9%B4%E6%88%BF%E8%B4%B7/</guid><description><![CDATA[<p>8 月 28 日，央行和金融监管总局把个人住房贷款最长期限从 30 年延长到 40 年。同一套文件里，还把月房贷支出占收入的上限划在 50%，全部债务支出占收入的上限划在 60%。再加上这几年已经落地的降首付、降利率，购房门槛确实被压到了近年来最低的位置。</p>
 <p>门槛低，不等于账变得更便宜。最近在看《富爸爸穷爸爸》，里面最刺耳的一句就是：很多人把负债当成了资产。40 年房贷正好是拿这句话对照现实的好时机。下面分四块说：别国怎么做、人走了债怎么办、现在该不该买、以及从「资产 vs 负债」怎么看这件事。</p>
 <h2 id="一政策本身在做什么">一、政策本身在做什么</h2>
 <p>这次不是单独改一个年限，而是一套信贷规则一起出：</p>
@@ -429,15 +360,7 @@ chart.setOption({
 <p>别国经验说的是同一件事：年限可以放，但必须配上收入比、年龄上限、摊还规则和保险。中国这次把年限放开了，收入比和放贷时点也补上了；「人走了债怎么办」则仍然主要靠《民法典》的限定继承，以及你自己愿不愿意买一份还贷保障。</p>
 <p>有居住需求、算得过现金流、愿意把自住房当成要供很多年的消费品，现在可以买。只是因为门槛低了、怕错过，或者指望 40 年月供把一套本来买不起的房子变成资产，那这笔账大概率会算错。</p>
 <p>房子可以是家。在把钥匙拿回来之前，它首先是一笔很长的负债。</p>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>算法工程师到底是做什么的</title>
-      <link>https://lyapple2008.github.io/posts/201904/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/</link>
-      <pubDate>Sun, 07 Apr 2019 20:20:38 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/posts/201904/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/</guid>
-      <description>&lt;p&gt;还记得刚毕业那会找工作，那是一定要找法工程师这个岗位，当时就只是觉得这个岗位牛逼是公司的核心岗位，但是可能对于算法工程师与一般的软件工程有什么区别其实心理也说不清楚。作为一个到今年6月份就工作满5年了的老菜鸟，这期间工作的title也是算法工程师（虽然有些并不是真的在做算法），反正在以算法工程师的title在企业工作的感受与毕业那会想像中上的算法工程师的工作完全不一样。&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<p>还记得刚毕业那会找工作，那是一定要找法工程师这个岗位，当时就只是觉得这个岗位牛逼是公司的核心岗位，但是可能对于算法工程师与一般的软件工程有什么区别其实心理也说不清楚。作为一个到今年6月份就工作满5年了的老菜鸟，这期间工作的title也是算法工程师（虽然有些并不是真的在做算法），反正在以算法工程师的title在企业工作的感受与毕业那会想像中上的算法工程师的工作完全不一样。</p>
+]]></description></item><item><title>算法工程师到底是做什么的</title><link>https://lyapple2008.github.io/posts/201904/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/</link><pubDate>Sun, 07 Apr 2019 20:20:38 +0000</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/201904/2019-04-07-%E7%AE%97%E6%B3%95%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84/</guid><description><![CDATA[<p>还记得刚毕业那会找工作，那是一定要找法工程师这个岗位，当时就只是觉得这个岗位牛逼是公司的核心岗位，但是可能对于算法工程师与一般的软件工程有什么区别其实心理也说不清楚。作为一个到今年6月份就工作满5年了的老菜鸟，这期间工作的title也是算法工程师（虽然有些并不是真的在做算法），反正在以算法工程师的title在企业工作的感受与毕业那会想像中上的算法工程师的工作完全不一样。</p>
 <p>我觉得所谓的算法工程师应该叫算法应用工程师会更合适一些。因为算法工程师的工作流程大概是这样的（以我自身的经历为例，可能不同公司有不同的工作方式），接到一个功能需求，然后开始调研实现这个功能需要的算法，研究过程中挑选两三种可能的方案，对这些挑选的方案进行实现（也可能是github clone），分析对比这几种方案。最后从中选出一种方案，作为最后的方案。接下来就是对最终的算法方案针对自己的功能需求和业务场景进行做优化，这期间你会对这个算法方案进行原理研究，参数调整，性能优化等等，最终的目标就是尽可能满足业务需求方的要求。</p>
 <p>知乎上@Jackpop的回答应该是符合大多数算法工程师的实际工作状态，而我们毕业那会想象中的算法工程师，天天手推工式那种，应该叫科学家或者研究员更合适些。<strong>总结一下，我觉得一个优秀的算法工程师应该是能够针对不同的业务场景选择最优的算法方案，并能对现有的算法针对业务场景做一些微调和优化，以更进一步适合业务场景。因为对于企业来说不能落地的算法，是丝毫没有价值的。</strong></p>
 <blockquote>
@@ -484,23 +407,12 @@ chart.setOption({
 <ul>
 <li>算法验证能力</li>
 </ul>
-<p>就像前面提到的那样，**算法验证在算法工程师日常工作中占据很大的比重，**我们拿到一些成熟、优秀的算法后，它的效果如何？能否起作用是未知的，我们需要对它进行验证，包括效率、精度等方面。这就要求算法工程师拥有算法验证能力，能够在众多算法中挑选出一种合适的算法来解决相应问题。</p>]]></content:encoded>
-    </item>
-    <item>
-      <title>2019小目标--重新开始打脸之路</title>
-      <link>https://lyapple2008.github.io/posts/201901/2019-01-26-2019%E5%B0%8F%E7%9B%AE%E6%A0%87/</link>
-      <pubDate>Sat, 26 Jan 2019 19:58:18 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/posts/201901/2019-01-26-2019%E5%B0%8F%E7%9B%AE%E6%A0%87/</guid>
-      <description>&lt;h1 id=&#34;2018回顾&#34;&gt;2018回顾&lt;/h1&gt;
-&lt;p&gt;先看下2018初始的时候自己立下的flag吧，看看脸被打得有多痛&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;image&#34; loading=&#34;lazy&#34; src=&#34;https://user-images.githubusercontent.com/3350865/61180087-427cb700-a643-11e9-8bfd-354561f9d0e2.jpg&#34;&gt;
-&lt;img src=&#34;https://lyapple2008.github.io/images/2019-01-26-001.jpg&#34; /&gt;&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<h1 id="2018回顾">2018回顾</h1>
+<p>就像前面提到的那样，**算法验证在算法工程师日常工作中占据很大的比重，**我们拿到一些成熟、优秀的算法后，它的效果如何？能否起作用是未知的，我们需要对它进行验证，包括效率、精度等方面。这就要求算法工程师拥有算法验证能力，能够在众多算法中挑选出一种合适的算法来解决相应问题。</p>]]></description></item><item><title>2019小目标--重新开始打脸之路</title><link>https://lyapple2008.github.io/posts/201901/2019-01-26-2019%E5%B0%8F%E7%9B%AE%E6%A0%87/</link><pubDate>Sat, 26 Jan 2019 19:58:18 +0000</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/201901/2019-01-26-2019%E5%B0%8F%E7%9B%AE%E6%A0%87/</guid><description><![CDATA[<h1 id="2018回顾">2018回顾</h1>
 <p>先看下2018初始的时候自己立下的flag吧，看看脸被打得有多痛</p>
-<p><img alt="image" loading="lazy" src="https://user-images.githubusercontent.com/3350865/61180087-427cb700-a643-11e9-8bfd-354561f9d0e2.jpg">
-<img src="/images/2019-01-26-001.jpg" /></p>
+<p>
+</p>
 <!-- ![image](https://user-images.githubusercontent.com/3350865/61180088-4577a780-a643-11e9-80b5-dcece931421b.jpg) -->
-<img src="/images/2019-01-26-002.jpg" />
+
 <p>咱们一个脸一个脸地来打，轻拍：</p>
 <ol>
 <li>健身</li>
@@ -545,43 +457,29 @@ chart.setOption({
 <li>健身</li>
 </ol>
 <ul>
-<li><input disabled="" type="checkbox"> 体重降到58Kg</li>
+<li><i class="far fa-square" aria-hidden="true"></i> 体重降到58Kg</li>
 </ul>
 <ol start="2">
 <li>小爱好</li>
 </ol>
 <ul>
-<li><input disabled="" type="checkbox"> 录制《纸短情长ukelele》的小视频</li>
-<li><input disabled="" type="checkbox"> 非技术读书笔记2篇</li>
-<li><input disabled="" type="checkbox"> 海贼王系列视频特效准备</li>
+<li><i class="far fa-square" aria-hidden="true"></i> 录制《纸短情长ukelele》的小视频</li>
+<li><i class="far fa-square" aria-hidden="true"></i> 非技术读书笔记2篇</li>
+<li><i class="far fa-square" aria-hidden="true"></i> 海贼王系列视频特效准备</li>
 </ul>
 <ol start="3">
 <li>技术</li>
 </ol>
 <ul>
-<li><input disabled="" type="checkbox"> WebRTC音视频通讯开发</li>
-<li><input disabled="" type="checkbox"> 输出一篇移动端布署深度学习应用的文章</li>
+<li><i class="far fa-square" aria-hidden="true"></i> WebRTC音视频通讯开发</li>
+<li><i class="far fa-square" aria-hidden="true"></i> 输出一篇移动端布署深度学习应用的文章</li>
 </ul>
 <ol start="4">
 <li>写博客</li>
 </ol>
 <ul>
-<li><input disabled="" type="checkbox"> 每月一篇博客，不限主题</li>
-</ul>]]></content:encoded>
-    </item>
-    <item>
-      <title>2018健身记录</title>
-      <link>https://lyapple2008.github.io/posts/201810/2018-10-15-2018%E5%81%A5%E8%BA%AB%E8%AE%B0%E5%BD%95/</link>
-      <pubDate>Mon, 15 Oct 2018 22:11:34 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/posts/201810/2018-10-15-2018%E5%81%A5%E8%BA%AB%E8%AE%B0%E5%BD%95/</guid>
-      <description>&lt;p&gt;  今天又一次重新开始健身计划，这次到这里来做个记录，看看能坚持多久！为了更好的身体，为了腹肌，加油，少年，你是要成为海贼王的男人！！！&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;器械：瑜伽垫一张&lt;/li&gt;
-&lt;li&gt;课程：Fit健身&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;今天买了课程，花了大价钱，达不成目标就要打水漂了！！！&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<p>  今天又一次重新开始健身计划，这次到这里来做个记录，看看能坚持多久！为了更好的身体，为了腹肌，加油，少年，你是要成为海贼王的男人！！！</p>
+<li><i class="far fa-square" aria-hidden="true"></i> 每月一篇博客，不限主题</li>
+</ul>]]></description></item><item><title>2018健身记录</title><link>https://lyapple2008.github.io/posts/201810/2018-10-15-2018%E5%81%A5%E8%BA%AB%E8%AE%B0%E5%BD%95/</link><pubDate>Mon, 15 Oct 2018 22:11:34 +0000</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/201810/2018-10-15-2018%E5%81%A5%E8%BA%AB%E8%AE%B0%E5%BD%95/</guid><description><![CDATA[<p>  今天又一次重新开始健身计划，这次到这里来做个记录，看看能坚持多久！为了更好的身体，为了腹肌，加油，少年，你是要成为海贼王的男人！！！</p>
 <ul>
 <li>器械：瑜伽垫一张</li>
 <li>课程：Fit健身</li>
@@ -589,8 +487,8 @@ chart.setOption({
 <blockquote>
 <p>今天买了课程，花了大价钱，达不成目标就要打水漂了！！！</p></blockquote>
 <center>
-<!-- <img src="https://user-images.githubusercontent.com/3350865/61180053-a357bf80-a642-11e9-914e-529f460e4445.jpg" width="50%" height="50%"/> -->
-<img src="/images/2018-10-15-001.jpg" width="50%" height="50%"/>
+<!--  -->
+
 </center>
 <!---more--->
 <ul>
@@ -851,7 +749,7 @@ chart.setOption({
       <tr>
           <td>2018-11-18</td>
           <td style="text-align: center">64.6</td>
-          <td style="text-align: center"><a href="https://www.youtube.com/watch?v=bTHnzGSgkqk">十分鐘家中腹肌訓練</a></td>
+          <td style="text-align: center"><a href="https://www.youtube.com/watch?v=bTHnzGSgkqk" target="_blank" rel="noopener noreffer ">十分鐘家中腹肌訓練</a></td>
           <td style="text-align: center">10</td>
       </tr>
       <tr>
@@ -1013,7 +911,7 @@ chart.setOption({
       <tr>
           <td>2018-12-10</td>
           <td style="text-align: center">63.6</td>
-          <td style="text-align: center"><a href="https://www.youtube.com/watch?v=bTHnzGSgkqk">十分鐘家中腹肌訓練</a></td>
+          <td style="text-align: center"><a href="https://www.youtube.com/watch?v=bTHnzGSgkqk" target="_blank" rel="noopener noreffer ">十分鐘家中腹肌訓練</a></td>
           <td style="text-align: center">10</td>
       </tr>
       <tr>
@@ -1064,17 +962,9 @@ chart.setOption({
 <li>爆开始前的照片</li>
 </ul>
 <center>
-<!-- <img src="https://user-images.githubusercontent.com/3350865/61180060-b8345300-a642-11e9-9859-536be6249df6.jpg" width="50%" height="50%"/> -->
-<img src="/images/2018-10-15-002.jpg" width="50%" height="50%"/>
-</center>]]></content:encoded>
-    </item>
-    <item>
-      <title>2018小目标</title>
-      <link>https://lyapple2008.github.io/posts/201802/2018-2-19-2018%E5%B0%8F%E7%9B%AE%E6%A0%87/</link>
-      <pubDate>Mon, 19 Feb 2018 22:46:21 +0000</pubDate>
-      <guid>https://lyapple2008.github.io/posts/201802/2018-2-19-2018%E5%B0%8F%E7%9B%AE%E6%A0%87/</guid>
-      <description>&lt;p&gt;大年初四立个flag，明年来看看能完成多少，看看脸会不会被打肿。&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<p>大年初四立个flag，明年来看看能完成多少，看看脸会不会被打肿。</p>
+<!--  -->
+
+</center>]]></description></item><item><title>2018小目标</title><link>https://lyapple2008.github.io/posts/201802/2018-2-19-2018%E5%B0%8F%E7%9B%AE%E6%A0%87/</link><pubDate>Mon, 19 Feb 2018 22:46:21 +0000</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/201802/2018-2-19-2018%E5%B0%8F%E7%9B%AE%E6%A0%87/</guid><description><![CDATA[<p>大年初四立个flag，明年来看看能完成多少，看看脸会不会被打肿。</p>
 <h2 id="1-健身">1. 健身</h2>
 <blockquote>
 <p>体重：55Kg
@@ -1089,7 +979,4 @@ chart.setOption({
 深度学习</p></blockquote>
 <h2 id="4-写博客">4. 写博客</h2>
 <blockquote>
-<p>至少每月一篇博客</p></blockquote>]]></content:encoded>
-    </item>
-  </channel>
-</rss>
+<p>至少每月一篇博客</p></blockquote>]]></description></item></channel></rss>
