@@ -1,6 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>所有文章 - BeYoung</title><link>https://lyapple2008.github.io/posts/</link><description>所有文章 | BeYoung</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>See this site's source code [here](https://github.com/lyapple2008/lyapple2008.github.io), licensed under GPLv3 ·</copyright><lastBuildDate>Sun, 25 Oct 2026 15:28:43 +0800</lastBuildDate><atom:link href="https://lyapple2008.github.io/posts/" rel="self" type="application/rss+xml"/><item><title>【置顶】2026</title><link>https://lyapple2008.github.io/posts/2026-todo/</link><pubDate>Sun, 22 Feb 2026 09:43:54 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/2026-todo/</guid><description><![CDATA[<div class="featured-image">
-                <img src="/images/2026-todo-cover.png" referrerpolicy="no-referrer">
-            </div><blockquote>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>所有文章 - BeYoung</title><link>https://lyapple2008.github.io/posts/</link><description>所有文章 | BeYoung</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>See this site's source code [here](https://github.com/lyapple2008/lyapple2008.github.io), licensed under GPLv3 ·</copyright><lastBuildDate>Sun, 25 Oct 2026 15:28:43 +0800</lastBuildDate><atom:link href="https://lyapple2008.github.io/posts/" rel="self" type="application/rss+xml"/><item><title>【置顶】2026</title><link>https://lyapple2008.github.io/posts/2026-todo/</link><pubDate>Sun, 22 Feb 2026 09:43:54 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/2026-todo/</guid><description><![CDATA[<blockquote>
 <p>记录跟踪2026年要做的事情和正在做的事情。</p></blockquote>
 <hr>
 <h2 id="目标">目标</h2>
@@ -84,9 +82,7 @@ chart.setOption({
 <p>每天记录和量化进度，本身就是一种负担，而且对于效率提高帮助不大，也不利于长期任务，与其每天盯着任务进度，
 不如现在开始试下，里程碑式的工作方法，给自己一段时间设定一些目标，到期后来检查完成情况，中间如何只记录
 据有里程碑意义的事件。</p></blockquote>
-]]></description></item><item><title>WebRTC 音频设备管理：从双向数据流到跨平台实现</title><link>https://lyapple2008.github.io/posts/202610/2026-10-25-webrtc%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/</link><pubDate>Sun, 25 Oct 2026 15:28:43 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202610/2026-10-25-webrtc%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/</guid><description><![CDATA[<div class="featured-image">
-                <img src="/images/2026-10/webrtc-adm-cover.png" referrerpolicy="no-referrer">
-            </div><p>麦克风把声音变成 PCM，扬声器把 PCM 变回声音。对一个实时通话系统来说，这两句话之间还有很多事情：选择设备、协商格式、启动音频流、适应设备回调的节奏，以及在耳机拔出、来电中断后恢复工作。</p>
+]]></description></item><item><title>WebRTC 音频设备管理：从双向数据流到跨平台实现</title><link>https://lyapple2008.github.io/posts/202610/2026-10-25-webrtc%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/</link><pubDate>Sun, 25 Oct 2026 15:28:43 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202610/2026-10-25-webrtc%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/</guid><description><![CDATA[<p>麦克风把声音变成 PCM，扬声器把 PCM 变回声音。对一个实时通话系统来说，这两句话之间还有很多事情：选择设备、协商格式、启动音频流、适应设备回调的节奏，以及在耳机拔出、来电中断后恢复工作。</p>
 <p>WebRTC 把这些工作集中在 <strong>Audio Device Module，简称 ADM</strong>。理解它，最好先建立整体位置，再沿着音频数据走一遍，最后进入代码和平台实现。否则很容易把“设备缓冲”“网络抖动缓冲”和“回声消除”混成一件事。</p>
 <blockquote>
 <p>本文以本地 <code>webrtc_src</code> 的提交 <code>3dec7d05377fb690e84f503db865edde982ab2a5</code> 为源码基线，提交日期为 2026-10-23。正文主要讨论使用内置设备模块的 native 音频路径；浏览器或业务方可以注入自己的 ADM，复用这里的接口而采用不同的数据通路。文中的源码链接固定到该提交，代码片段会标明是否经过简化。</p></blockquote>
@@ -826,9 +822,7 @@ sequenceDiagram
 <li><strong>切换耳机后失声或变速</strong>：检查实际路由、采样率、声道和设备块长是否变化，ADB 参数及块长适配器是否随流重建而更新。</li>
 <li><strong>声音正常但回声明显</strong>：检查播放参考是否进入对应的 APM、设备延迟是否合理，以及系统语音处理与软件 APM 的启用配置是否匹配。</li>
 </ul>
-<p>这些检查贯穿全文的四个层次：先确认 ADM 是否接入并运行，再确认数据流是否连续，然后定位到具体的方法与线程交接，最后分析平台设备与路由行为。这样读代码，平台细节才有清晰的落点。</p>]]></description></item><item><title>一名音频程序员的科技自媒体创业调研</title><link>https://lyapple2008.github.io/posts/202609/2026-09-29-%E8%87%AA%E5%AA%92%E4%BD%93%E5%88%9B%E4%B8%9A%E8%B0%83%E7%A0%94/</link><pubDate>Tue, 29 Sep 2026 09:05:00 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-29-%E8%87%AA%E5%AA%92%E4%BD%93%E5%88%9B%E4%B8%9A%E8%B0%83%E7%A0%94/</guid><description><![CDATA[<div class="featured-image">
-                <img src="/images/2026-09/self-media-startup-cover.svg" referrerpolicy="no-referrer">
-            </div><p>最近开始认真考虑一件事：利用业余时间尝试科技自媒体，并观察它有没有发展成一门事业的可能。</p>
+<p>这些检查贯穿全文的四个层次：先确认 ADM 是否接入并运行，再确认数据流是否连续，然后定位到具体的方法与线程交接，最后分析平台设备与路由行为。这样读代码，平台细节才有清晰的落点。</p>]]></description></item><item><title>一名音频程序员的科技自媒体创业调研</title><link>https://lyapple2008.github.io/posts/202609/2026-09-29-%E8%87%AA%E5%AA%92%E4%BD%93%E5%88%9B%E4%B8%9A%E8%B0%83%E7%A0%94/</link><pubDate>Tue, 29 Sep 2026 09:05:00 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-29-%E8%87%AA%E5%AA%92%E4%BD%93%E5%88%9B%E4%B8%9A%E8%B0%83%E7%A0%94/</guid><description><![CDATA[<p>最近开始认真考虑一件事：利用业余时间尝试科技自媒体，并观察它有没有发展成一门事业的可能。</p>
 <p>我做了十多年程序员，主要从事音频算法、音频应用和音视频直播相关开发。这段经历让我比较熟悉麦克风、耳机、降噪、回声消除、音频编解码、直播链路和 AI 语音等技术，也知道一项技术从演示到真正产品化之间，往往隔着很多工程问题。</p>
 <p>最初的想法是介绍最新、有意思的科技产品和技术，先通过模仿成熟博主学习选题、拍摄和表达。但继续往下想，“泛科技”并不是一个好的起点：它需要抢新闻、抢新品、拼设备和制作成本，而我最稀缺的优势反而容易被淹没。</p>
 <p>这篇文章是我对账号定位、内容方向、执行方式和变现路径的第一次系统整理。</p>
@@ -1067,9 +1061,7 @@ sequenceDiagram
 <p>现阶段比较清晰的方向，可以暂时概括为“声音科技实验室”：用真实实验拆解耳机、麦克风、直播和 AI 语音产品，面向普通消费者和科技爱好者讲清楚一项技术的价值、限制和购买建议。</p>
 <p>起步时不需要立即购买大量设备，也不需要同时经营所有平台。先用手机、现有耳机和电脑，以“真人讲解＋桌面实验＋少量动画”的方式，完成从选题、实验、拍摄、剪辑、发布到复盘的第一个闭环。</p>
 <p>第一个里程碑不是“成为大博主”，而是发出第一条能代表自己未来方向的内容，再根据真实反馈继续调整。</p>
-]]></description></item><item><title>用 OpenSpec 重构 AI Coding 工作流：让每次开发都可追溯、可恢复、可沉淀</title><link>https://lyapple2008.github.io/posts/202609/2026-09-28-ai-coding%E5%B7%A5%E4%BD%9C%E6%B5%81openspec/</link><pubDate>Mon, 28 Sep 2026 07:22:02 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-28-ai-coding%E5%B7%A5%E4%BD%9C%E6%B5%81openspec/</guid><description><![CDATA[<div class="featured-image">
-                <img src="/images/2026-09/openspec-workflow-cover.svg" referrerpolicy="no-referrer">
-            </div><p>AI Coding 用得越多，我越能感觉到两个问题。</p>
+]]></description></item><item><title>用 OpenSpec 重构 AI Coding 工作流：让每次开发都可追溯、可恢复、可沉淀</title><link>https://lyapple2008.github.io/posts/202609/2026-09-28-ai-coding%E5%B7%A5%E4%BD%9C%E6%B5%81openspec/</link><pubDate>Mon, 28 Sep 2026 07:22:02 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-28-ai-coding%E5%B7%A5%E4%BD%9C%E6%B5%81openspec/</guid><description><![CDATA[<p>AI Coding 用得越多，我越能感觉到两个问题。</p>
 <p>第一个问题是：<strong>开发过程没有留下足够的中间记录。</strong></p>
 <p>Agent 可以很快生成大量代码，但方案不对时，常常只能整段推倒重来；某个架构决策是在对话里做的，过两天就不记得当时为什么这样选；一次任务被打断，换一个会话后，Agent 又要从头理解需求和已经做过的工作。真正丢失的不只是上下文，还有上下文中包含的判断。</p>
 <p>第二个问题是：<strong>AI Coding Agent 没有跟着我和项目一起成长。</strong></p>
@@ -1345,9 +1337,7 @@ sequenceDiagram
 <li><a href="https://openspec.dev/docs/project-config" target="_blank" rel="noopener noreffer ">OpenSpec Project configuration</a></li>
 <li><a href="https://github.com/Fission-AI/OpenSpec" target="_blank" rel="noopener noreffer ">OpenSpec GitHub</a></li>
 </ul>
-]]></description></item><item><title>当代码越来越便宜，软件工程师还值钱吗？</title><link>https://lyapple2008.github.io/posts/202609/2026-09-17-chatgpt%E7%BB%99%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BB%BA%E8%AE%AE/</link><pubDate>Thu, 17 Sep 2026 16:55:34 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-17-chatgpt%E7%BB%99%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BB%BA%E8%AE%AE/</guid><description><![CDATA[<div class="featured-image">
-                <img src="/images/2026-09/ai-coding-engineer-value-cover.svg" referrerpolicy="no-referrer">
-            </div><p>AI Coding 已经进入软件开发的完整流程：读代码、写代码、补测试、查问题、改文档，甚至可以自己运行命令，再根据结果继续迭代。它带来的不只是效率提升，也有一个越来越难回避的问题：</p>
+]]></description></item><item><title>当代码越来越便宜，软件工程师还值钱吗？</title><link>https://lyapple2008.github.io/posts/202609/2026-09-17-chatgpt%E7%BB%99%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BB%BA%E8%AE%AE/</link><pubDate>Thu, 17 Sep 2026 16:55:34 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-17-chatgpt%E7%BB%99%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BB%BA%E8%AE%AE/</guid><description><![CDATA[<p>AI Coding 已经进入软件开发的完整流程：读代码、写代码、补测试、查问题、改文档，甚至可以自己运行命令，再根据结果继续迭代。它带来的不只是效率提升，也有一个越来越难回避的问题：</p>
 <blockquote>
 <p>当 AI 可以完成越来越多开发工作，以后还需要软件工程师吗？如果需要，工程师真正值钱的能力又是什么？</p></blockquote>
 <p>最近我把这个问题抛给了 ChatGPT，又结合自己的情况继续追问：一个已经做了多年 C/C++、音视频和移动端开发的工程师，应该继续深挖原来的技术栈，还是转向 AI Agent？如果要转，具体该学什么？</p>
@@ -1732,9 +1722,7 @@ sequenceDiagram
 <p>未来优秀的软件工程师，应该能定义问题、设计系统、驾驭 Agent、验证结果，并对最终交付负责。</p></blockquote>
 <p>因此，不应该按照“先学 TypeScript，再学 Agent，再学 MCP，再学某个框架”的课程目录前进。更有效的方式，是始终围绕一个真实项目：项目需要什么，就补什么；做出结果，再复盘哪些判断可以沉淀成 Spec、测试、工具或工作流。</p>
 <p>代码正在变便宜，但正确的软件并没有因此自动出现。会写代码仍然重要，只是它不再是终点。接下来真正值得投入的，是把领域经验、系统工程和 AI 组织成一套能持续交付的能力。</p>
-]]></description></item><item><title>矩阵乘法优化：从三层循环到 Apple Silicon</title><link>https://lyapple2008.github.io/posts/202609/2026-09-06-%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95%E4%BC%98%E5%8C%96/</link><pubDate>Sun, 06 Sep 2026 21:30:00 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-06-%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95%E4%BC%98%E5%8C%96/</guid><description><![CDATA[<div class="featured-image">
-                <img src="/images/2026-09/gemm-cover.png" referrerpolicy="no-referrer">
-            </div><p>深度学习里最贵的那几下，多半是矩阵乘法。注意力的 $QK^{\top}$ 和 $PV$、全连接、卷积展开之后，都是</p>
+]]></description></item><item><title>矩阵乘法优化：从三层循环到 Apple Silicon</title><link>https://lyapple2008.github.io/posts/202609/2026-09-06-%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95%E4%BC%98%E5%8C%96/</link><pubDate>Sun, 06 Sep 2026 21:30:00 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-06-%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95%E4%BC%98%E5%8C%96/</guid><description><![CDATA[<p>深度学习里最贵的那几下，多半是矩阵乘法。注意力的 $QK^{\top}$ 和 $PV$、全连接、卷积展开之后，都是</p>
 <p>$$C = AB,\qquad C_{ij}=\sum_k A_{ik},B_{kj}$$</p>
 <p>算力是 $O(n^3)$，访存是 $O(n^2)$。算术强度大约是 $n/6$（三个矩阵各扫一遍、FP32）。$n$ 小的时候吃带宽，$n$ 大的时候吃算力。优化不是把循环写得更花，而是让每个被请上芯片的数，多干几次活。</p>
 <p>这篇文章按「图示原理 → 硬件瓶颈 → 最短代码 → 本机数字」往下走。平台是眼前这台 <strong>Mac mini M2 Pro</strong>（6 个性能核 + 4 个能效核，16GB 统一内存）。编译器 Apple clang 21，<code>-O3 -ffast-math</code>，方阵 FP32，暖机后取中位数。iOS 和 macOS 共用同一套 Accelerate，后面会单独讲两堵不同的墙。</p>
@@ -2279,9 +2267,7 @@ sequenceDiagram
 <p>公式只需要三个：$C_{ij}=\sum_k A_{ik}B_{kj}$，算术强度大约 $n/6$，以及 $\mathrm{GFLOPS}=2N^3/t$。其余的，都是让数据停在更靠近计算的那一层。</p>
 <h2 id="项目链接">项目链接</h2>
 <p>文中各阶梯的 C 实现和 CMake bench 在 <a href="https://github.com/lyapple2008/gmm_opt" target="_blank" rel="noopener noreffer ">gmm_opt</a>。</p>
-]]></description></item><item><title>读《富爸爸穷爸爸》：房子是资产吗，写代码是事业吗</title><link>https://lyapple2008.github.io/posts/202609/2026-09-03-%E5%AF%8C%E7%88%B8%E7%88%B8%E7%A9%B7%E7%88%B8%E7%88%B8%E8%AF%BB%E5%90%8E%E6%84%9F/</link><pubDate>Thu, 03 Sep 2026 22:30:00 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-03-%E5%AF%8C%E7%88%B8%E7%88%B8%E7%A9%B7%E7%88%B8%E7%88%B8%E8%AF%BB%E5%90%8E%E6%84%9F/</guid><description><![CDATA[<div class="featured-image">
-                <img src="/images/2026-09/rich-dad-poor-dad-cover.jpg" referrerpolicy="no-referrer">
-            </div><p>前阵子写<a href="/posts/202608/2026-08-30-40%e5%b9%b4%e6%88%bf%e8%b4%b7/" rel="">40 年房贷</a>的时候，已经把《富爸爸穷爸爸》里最刺耳的那句拿出来用过一次：很多人把负债当成了资产。书看完之后，觉得那句话只是入口。清崎翻来覆去讲的，其实就两对很容易混的概念——<strong>资产与负债</strong>，<strong>职业与事业</strong>。</p>
+]]></description></item><item><title>读《富爸爸穷爸爸》：房子是资产吗，写代码是事业吗</title><link>https://lyapple2008.github.io/posts/202609/2026-09-03-%E5%AF%8C%E7%88%B8%E7%88%B8%E7%A9%B7%E7%88%B8%E7%88%B8%E8%AF%BB%E5%90%8E%E6%84%9F/</link><pubDate>Thu, 03 Sep 2026 22:30:00 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-03-%E5%AF%8C%E7%88%B8%E7%88%B8%E7%A9%B7%E7%88%B8%E7%88%B8%E8%AF%BB%E5%90%8E%E6%84%9F/</guid><description><![CDATA[<p>前阵子写<a href="/posts/202608/2026-08-30-40%e5%b9%b4%e6%88%bf%e8%b4%b7/" rel="">40 年房贷</a>的时候，已经把《富爸爸穷爸爸》里最刺耳的那句拿出来用过一次：很多人把负债当成了资产。书看完之后，觉得那句话只是入口。清崎翻来覆去讲的，其实就两对很容易混的概念——<strong>资产与负债</strong>，<strong>职业与事业</strong>。</p>
 <p>这两对概念都不新，新的是对照物变了。一套近几年硬上车、现在开始按月供过日子的房子，一份正在被 AI 改写的程序员工作，比书里那些美国出租屋和快餐店例子更近。下面就用这两件事把书读一遍。</p>
 <h2 id="一先把作者的尺子拿出来">一、先把作者的尺子拿出来</h2>
 <p>穷爸爸受过良好教育，稳定上班，讲究稳妥，觉得房子是最大的资产，债务是危险的。富爸爸学历一般，却反复强调一件事：先看钱往哪边流。</p>
@@ -2364,9 +2350,7 @@ sequenceDiagram
 <li>AI 和房贷这类新变量出现时，我是在加固原来的错账，还是借机把账改对？</li>
 </ol>
 <p>房子可以是家，代码可以是手艺。在把它们写进资产栏、写进事业栏之前，先看清楚钱和时间到底在为谁工作。</p>
-]]></description></item><item><title>房贷年限放宽到40年，父贷子还？</title><link>https://lyapple2008.github.io/posts/202608/2026-08-30-40%E5%B9%B4%E6%88%BF%E8%B4%B7/</link><pubDate>Sun, 30 Aug 2026 09:40:00 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202608/2026-08-30-40%E5%B9%B4%E6%88%BF%E8%B4%B7/</guid><description><![CDATA[<div class="featured-image">
-                <img src="/images/2026-08/40-year-mortgage-cover.jpg" referrerpolicy="no-referrer">
-            </div><p>8 月 28 日，央行和金融监管总局把个人住房贷款最长期限从 30 年延长到 40 年。同一套文件里，还把月房贷支出占收入的上限划在 50%，全部债务支出占收入的上限划在 60%。再加上这几年已经落地的降首付、降利率，购房门槛确实被压到了近年来最低的位置。</p>
+]]></description></item><item><title>房贷年限放宽到40年，父贷子还？</title><link>https://lyapple2008.github.io/posts/202608/2026-08-30-40%E5%B9%B4%E6%88%BF%E8%B4%B7/</link><pubDate>Sun, 30 Aug 2026 09:40:00 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202608/2026-08-30-40%E5%B9%B4%E6%88%BF%E8%B4%B7/</guid><description><![CDATA[<p>8 月 28 日，央行和金融监管总局把个人住房贷款最长期限从 30 年延长到 40 年。同一套文件里，还把月房贷支出占收入的上限划在 50%，全部债务支出占收入的上限划在 60%。再加上这几年已经落地的降首付、降利率，购房门槛确实被压到了近年来最低的位置。</p>
 <p>门槛低，不等于账变得更便宜。最近在看《富爸爸穷爸爸》，里面最刺耳的一句就是：很多人把负债当成了资产。40 年房贷正好是拿这句话对照现实的好时机。下面分四块说：别国怎么做、人走了债怎么办、现在该不该买、以及从「资产 vs 负债」怎么看这件事。</p>
 <h2 id="一政策本身在做什么">一、政策本身在做什么</h2>
 <p>这次不是单独改一个年限，而是一套信贷规则一起出：</p>
