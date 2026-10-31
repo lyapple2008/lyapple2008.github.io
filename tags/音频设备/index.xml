@@ -1,11 +1,37 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>音频设备 - 标签 - BeYoung</title><link>https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87/</link><description>音频设备 - 标签 - BeYoung</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>See this site's source code [here](https://github.com/lyapple2008/lyapple2008.github.io), licensed under GPLv3 ·</copyright><lastBuildDate>Sun, 25 Oct 2026 15:28:43 +0800</lastBuildDate><atom:link href="https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87/" rel="self" type="application/rss+xml"/><item><title>WebRTC 音频设备管理：从双向数据流到跨平台实现</title><link>https://lyapple2008.github.io/posts/202610/2026-10-25-webrtc%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/</link><pubDate>Sun, 25 Oct 2026 15:28:43 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202610/2026-10-25-webrtc%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/</guid><description><![CDATA[<p>麦克风把声音变成 PCM，扬声器把 PCM 变回声音。对一个实时通话系统来说，这两句话之间还有很多事情：选择设备、协商格式、启动音频流、适应设备回调的节奏，以及在耳机拔出、来电中断后恢复工作。</p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>音频设备 on BeYoung</title>
+    <link>https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87/</link>
+    <description>Recent content in 音频设备 on BeYoung</description>
+    <image>
+      <title>BeYoung</title>
+      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.147.9</generator>
+    <language>zh</language>
+    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
+    <lastBuildDate>Sun, 25 Oct 2026 15:28:43 +0800</lastBuildDate>
+    <atom:link href="https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WebRTC 音频设备管理：从双向数据流到跨平台实现</title>
+      <link>https://lyapple2008.github.io/posts/202610/2026-10-25-webrtc%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Sun, 25 Oct 2026 15:28:43 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202610/2026-10-25-webrtc%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/</guid>
+      <description>&lt;p&gt;麦克风把声音变成 PCM，扬声器把 PCM 变回声音。对一个实时通话系统来说，这两句话之间还有很多事情：选择设备、协商格式、启动音频流、适应设备回调的节奏，以及在耳机拔出、来电中断后恢复工作。&lt;/p&gt;
+&lt;p&gt;WebRTC 把这些工作集中在 &lt;strong&gt;Audio Device Module，简称 ADM&lt;/strong&gt;。理解它，最好先建立整体位置，再沿着音频数据走一遍，最后进入代码和平台实现。否则很容易把“设备缓冲”“网络抖动缓冲”和“回声消除”混成一件事。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文以本地 &lt;code&gt;webrtc_src&lt;/code&gt; 的提交 &lt;code&gt;3dec7d05377fb690e84f503db865edde982ab2a5&lt;/code&gt; 为源码基线，提交日期为 2026-10-23。正文主要讨论使用内置设备模块的 native 音频路径；浏览器或业务方可以注入自己的 ADM，复用这里的接口而采用不同的数据通路。文中的源码链接固定到该提交，代码片段会标明是否经过简化。&lt;/p&gt;&lt;/blockquote&gt;</description>
+      <content:encoded><![CDATA[<p>麦克风把声音变成 PCM，扬声器把 PCM 变回声音。对一个实时通话系统来说，这两句话之间还有很多事情：选择设备、协商格式、启动音频流、适应设备回调的节奏，以及在耳机拔出、来电中断后恢复工作。</p>
 <p>WebRTC 把这些工作集中在 <strong>Audio Device Module，简称 ADM</strong>。理解它，最好先建立整体位置，再沿着音频数据走一遍，最后进入代码和平台实现。否则很容易把“设备缓冲”“网络抖动缓冲”和“回声消除”混成一件事。</p>
 <blockquote>
 <p>本文以本地 <code>webrtc_src</code> 的提交 <code>3dec7d05377fb690e84f503db865edde982ab2a5</code> 为源码基线，提交日期为 2026-10-23。正文主要讨论使用内置设备模块的 native 音频路径；浏览器或业务方可以注入自己的 ADM，复用这里的接口而采用不同的数据通路。文中的源码链接固定到该提交，代码片段会标明是否经过简化。</p></blockquote>
 <h2 id="一整体视角adm-是-webrtc-与操作系统音频-io-的边界">一、整体视角：ADM 是 WebRTC 与操作系统音频 I/O 的边界</h2>
 <h3 id="11-它在整个系统的什么位置">1.1 它在整个系统的什么位置</h3>
 <p>可以把 WebRTC 的音频部分分成三个层次：最下面连接操作系统和设备，中间处理 PCM，上面处理编码后的数据和网络传输。</p>
-<div class="mermaid" id="id-d7d259f51860">flowchart TB
+
+<div class="mermaid">flowchart TB
     APP[&#34;应用与 PeerConnection：通话、轨道和配置&#34;]
     NET[&#34;网络传输：RTP / RTCP / 安全传输&#34;]
     CODEC[&#34;编解码与接收缓冲：编码器、解码器、NetEq&#34;]
@@ -19,7 +45,8 @@
     CODEC &lt;--&gt;|&#34;PCM&#34;| PCM
     PCM &lt;--&gt;|&#34;PCM 与设备侧时序信息&#34;| ADM
     ADM &lt;--&gt; OS
-    OS &lt;--&gt; HW</div><p>这张图表达的是职责边界，不代表所有对象都按这个顺序相互持有。</p>
+    OS &lt;--&gt; HW</div>
+<p>这张图表达的是职责边界，不代表所有对象都按这个顺序相互持有。</p>
 <p>从上向下看，ADM 提供“准备并启停输入输出、获取和交付 PCM”的能力；从下向上看，它把不同系统的音频 API 适配成 WebRTC 能使用的接口。上层不必分别理解 WASAPI、CoreAudio、AudioRecord 或 AudioUnit。</p>
 <h3 id="12-adm-管理哪些事情">1.2 ADM 管理哪些事情</h3>
 <table>
@@ -59,7 +86,8 @@
 <p>这一节暂时忽略平台差异，只看各平台共同需要完成的事情。</p>
 <h3 id="21-采集数据由麦克风驱动向发送链路推送">2.1 采集数据：由麦克风驱动，向发送链路推送</h3>
 <p>用户说话时，操作系统不断提供新采集的音频。设备模块整理这些数据，向上层报告“这一段录音已经可用”，上层再进行处理和发送。</p>
-<div class="mermaid" id="id-5fedcca44340">flowchart TB
+
+<div class="mermaid">flowchart TB
     MIC[&#34;麦克风 / 系统输入缓冲&#34;]
     CAP[&#34;ADM：读取、格式适配、整理音频块&#34;]
     TRANS[&#34;音频运输桥接：接收采集 PCM&#34;]
@@ -69,12 +97,14 @@
     RTP[&#34;RTP 发送链路&#34;]
     MIC --&gt;|&#34;新采集的数据&#34;| CAP
     CAP --&gt;|&#34;PCM、格式、延迟、可选时间戳&#34;| TRANS
-    TRANS --&gt; APM --&gt; DIST --&gt; ENC --&gt; RTP</div><p>这是一种 <strong>push 模型</strong>：采集端产生数据，主动交付给上层。设备不会等编码器询问“你有没有新录音”。</p>
+    TRANS --&gt; APM --&gt; DIST --&gt; ENC --&gt; RTP</div>
+<p>这是一种 <strong>push 模型</strong>：采集端产生数据，主动交付给上层。设备不会等编码器询问“你有没有新录音”。</p>
 <p>在本文的默认路径中，同一份采集数据先经过公共 APM 处理，再向已注册的发送流分发；各发送流拥有自己的编码与发送过程。因此，“有多个发送流”不意味着每个流都重新打开一个麦克风。</p>
 <h3 id="22-播放数据由设备需求驱动向接收链路拉取">2.2 播放数据：由设备需求驱动，向接收链路拉取</h3>
 <p>播放的起点容易理解反了：网络包到达时，并不直接写进扬声器。网络到包是有抖动的，而扬声器需要按设备时钟持续消费音频。</p>
 <p>接收链路先把到来的压缩音频放入 NetEq；当设备需要下一段播放数据时，再由播放调用链拉取音频、完成接收处理并混音。</p>
-<div class="mermaid" id="id-35bfc8910a33">flowchart TB
+
+<div class="mermaid">flowchart TB
     PKT[&#34;远端 RTP 到包&#34;]
     NQ[&#34;各接收流的 NetEq：缓冲、按需解码与丢包补偿&#34;]
     SRC[&#34;各接收流提供 PCM&#34;]
@@ -88,7 +118,8 @@
     DEV -.-&gt;|&#34;设备需要音频，向上请求&#34;| OUT
     OUT -.-&gt;|&#34;调用混音&#34;| MIX
     MIX -.-&gt;|&#34;逐个请求接收流&#34;| SRC
-    SRC -.-&gt;|&#34;请求下一段音频&#34;| NQ</div><p>实线表示数据的交付方向，虚线表示播放需求的传播方向。<strong>播放数据向设备流动，播放请求向接收链路传播。</strong></p>
+    SRC -.-&gt;|&#34;请求下一段音频&#34;| NQ</div>
+<p>实线表示数据的交付方向，虚线表示播放需求的传播方向。<strong>播放数据向设备流动，播放请求向接收链路传播。</strong></p>
 <p>这里的 <strong>pull 模型</strong> 是逻辑关系：有的平台由系统回调直接触发拉取，有的平台由后端工作线程提前填充本地缓冲。共同点是播放节奏最终受设备消费速度约束，而不是受网络到包时刻支配。</p>
 <h3 id="23-为什么采集与播放还会在-apm-相遇">2.3 为什么采集与播放还会在 APM 相遇</h3>
 <p>假设扬声器播放远端声音，麦克风又把它录了进去。若原样发送，远端就会听到自己的回声。AEC（Acoustic Echo Cancellation，声学回声消除）需要同时观察两类信号：</p>
@@ -96,7 +127,8 @@
 <li><strong>采集信号</strong>：麦克风录下的近端语音、噪声和回声。</li>
 <li><strong>播放参考信号</strong>：本机准备播放的远端音频。</li>
 </ul>
-<div class="mermaid" id="id-917f49f1f3d7">flowchart TB
+
+<div class="mermaid">flowchart TB
     MIX[&#34;远端音频混音结果&#34;]
     REF[&#34;APM 播放参考：reverse stream&#34;]
     SPK[&#34;设备输出 → 扬声器&#34;]
@@ -107,7 +139,8 @@
     MIX --&gt; SPK --&gt; ROOM --&gt; MIC --&gt; PROC --&gt; SEND
     MIX --&gt; REF
     REF -.-&gt;|&#34;AEC 参考&#34;| PROC
-    DELAY[&#34;ADM 提供设备侧延迟估计&#34;] -.-&gt; PROC</div><p>因此，播放链路除了把音频送到设备，还会把混音结果送给 APM 的 reverse stream。采集侧再把设备侧延迟传给 APM，辅助对齐参考与录音。</p>
+    DELAY[&#34;ADM 提供设备侧延迟估计&#34;] -.-&gt; PROC</div>
+<p>因此，播放链路除了把音频送到设备，还会把混音结果送给 APM 的 reverse stream。采集侧再把设备侧延迟传给 APM，辅助对齐参考与录音。</p>
 <p>这里的参考是<strong>设备输出之前的数字音频</strong>，并非从扬声器重新录回来的声音；ADM 提供的延迟也只是播放和采集的设备侧估计，不包含全部网络、NetEq 和编解码延迟。</p>
 <h3 id="24-共同的数据契约16-bit-pcm-与-10-ms">2.4 共同的数据契约：16-bit PCM 与 10 ms</h3>
 <p>在本文所讨论的 <code>AudioDeviceBuffer</code> → <code>AudioTransportImpl</code> 路径中，上下层主要交换 <strong>16-bit、交错存储的 PCM</strong>，每次处理 <strong>10 ms</strong>。交错双声道的排列是 <code>L0, R0, L1, R1, ...</code>。</p>
@@ -141,14 +174,16 @@
 <p>这里一个 <strong>PCM frame</strong> 包含同一时刻所有声道的样本；它与源码中表示一整段音频的 <code>AudioFrame</code> 对象是两个概念。换成 16 kHz，10 ms 就是每声道 160 个样本，因此 10 ms 也不等于固定的 480 个样本。</p>
 <p><strong>10 ms 是逻辑处理粒度，设备回调周期和编码包时长可以不同。</strong> 设备可能每次给 128、192 或其他数量的 PCM frame；编码器也可能积累两个 10 ms 输入，才产出一个 20 ms 的编码包。</p>
 <p>以“48 kHz、单声道、每次设备回调 192 frame”为例，采集适配的过程可以是：</p>
-<div class="mermaid" id="id-5e70bac41400">flowchart TB
+
+<div class="mermaid">flowchart TB
     C1[&#34;回调 1：192 frame&#34;] --&gt; B1[&#34;累计 192：暂不交付&#34;]
     B1 --&gt; C2[&#34;回调 2：再来 192&#34;]
     C2 --&gt; B2[&#34;累计 384：暂不交付&#34;]
     B2 --&gt; C3[&#34;回调 3：再来 192&#34;]
     C3 --&gt; B3[&#34;累计 576&#34;]
     B3 --&gt; U[&#34;向上交付 480 frame = 10 ms&#34;]
-    B3 --&gt; R[&#34;保留 96 frame，供下一轮拼接&#34;]</div><p>播放侧执行相反操作：先按 10 ms 向上层取数，再按设备本次需要的大小切出，保留余量。<code>FineAudioBuffer</code> 就是完成这种块长适配的工具之一；另一些后端自己实现累计、拆分或环形缓冲。</p>
+    B3 --&gt; R[&#34;保留 96 frame，供下一轮拼接&#34;]</div>
+<p>播放侧执行相反操作：先按 10 ms 向上层取数，再按设备本次需要的大小切出，保留余量。<code>FineAudioBuffer</code> 就是完成这种块长适配的工具之一；另一些后端自己实现累计、拆分或环形缓冲。</p>
 <h2 id="三源码视角对象如何连接方法如何调用">三、源码视角：对象如何连接，方法如何调用</h2>
 <h3 id="31-先分清六个核心角色">3.1 先分清六个核心角色</h3>
 <table>
@@ -193,7 +228,8 @@
   </tbody>
 </table>
 <p>以通用 <code>AudioDeviceModuleImpl</code> 路径为例，对象关系如下。节点中合并标出接口与实现，箭头表示持有或调用关系，不表示单向音频流。</p>
-<div class="mermaid" id="id-f32cd10e7596">flowchart TB
+
+<div class="mermaid">flowchart TB
     VE[&#34;WebRtcVoiceEngine&#34;]
     STATE[&#34;AudioState&#34;]
     IMPL[&#34;AudioDeviceModule 接口&lt;br/&gt;实现示例：AudioDeviceModuleImpl&#34;]
@@ -215,28 +251,34 @@
     ADB --&gt;|&#34;注册的回调指针&#34;| TRANS
     TRANS --&gt;|&#34;调用&#34;| APM
     TRANS --&gt;|&#34;拉取&#34;| MIX
-    TRANS --&gt;|&#34;分发&#34;| SEND</div><p>这张图只展开一种 ADM 的内部组织。Android 的组合式 ADM、iOS SDK 的 <code>AudioDeviceModuleIOS</code>、Windows 的另一套 Core Audio ADM，都可以直接实现同一个公共接口，不需要继承 <code>AudioDeviceModuleImpl</code>。</p>
-<p>对应源码：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/api/audio/audio_device.h" target="_blank" rel="noopener noreffer ">ADM 公共接口</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/audio_device_impl.cc" target="_blank" rel="noopener noreffer ">通用 ADM 实现</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/audio_state.cc" target="_blank" rel="noopener noreffer ">AudioState</a>。</p>
+    TRANS --&gt;|&#34;分发&#34;| SEND</div>
+<p>这张图只展开一种 ADM 的内部组织。Android 的组合式 ADM、iOS SDK 的 <code>AudioDeviceModuleIOS</code>、Windows 的另一套 Core Audio ADM，都可以直接实现同一个公共接口，不需要继承 <code>AudioDeviceModuleImpl</code>。</p>
+<p>对应源码：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/api/audio/audio_device.h">ADM 公共接口</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/audio_device_impl.cc">通用 ADM 实现</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/audio_state.cc">AudioState</a>。</p>
 <h3 id="32-建立连接后端接入-adb再注册运输回调">3.2 建立连接：后端接入 ADB，再注册运输回调</h3>
 <p>第一处连接发生在设备模块内部。通用工厂创建后端后，调用：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-cpp">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// AudioDeviceModuleImpl::AttachAudioBuffer()，保留核心语句。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">audio_device_</span><span class="o">-&gt;</span><span class="n">AttachAudioBuffer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">audio_device_buffer_</span><span class="p">);</span></span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// AudioDeviceModuleImpl::AttachAudioBuffer()，保留核心语句。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">audio_device_</span><span class="o">-&gt;</span><span class="n">AttachAudioBuffer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">audio_device_buffer_</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>这让平台后端知道应该向哪个 ADB 交付录音、从哪个 ADB 获取播放数据。</p>
 <p>第二处连接发生在设备模块与音频引擎之间。<code>WebRtcVoiceEngine::Init()</code> 完成设备初始化和选项配置后，执行：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-cpp">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">adm</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">RegisterAudioCallback</span><span class="p">(</span><span class="n">audio_state</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">audio_transport</span><span class="p">());</span></span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">adm</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">RegisterAudioCallback</span><span class="p">(</span><span class="n">audio_state</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">audio_transport</span><span class="p">());</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p><code>audio_transport()</code> 返回内部 <code>AudioTransportImpl</code> 的接口指针；通用 ADM 再把这个指针交给 <code>AudioDeviceBuffer::RegisterAudioCallback()</code>。至此，<strong>后端 ↔ ADB ↔ AudioTransportImpl</strong> 才连通。</p>
 <p><code>AudioTransport</code> 是上层实现、下层调用的接口。尤其要注意：<code>NeedMorePlayData()</code> 虽然是“回调”，行为却是同步请求，上层要在返回前填好输出 PCM。</p>
-<p>初始化路径见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/media/engine/webrtc_voice_engine.cc" target="_blank" rel="noopener noreffer ">WebRtcVoiceEngine::Init</a> 和 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/media/engine/adm_helpers.cc" target="_blank" rel="noopener noreffer ">adm_helpers::Init</a>。允许内部设备的构建中，未注入 ADM 时会尝试创建平台默认实现；调用方也可以提供自己的 ADM。</p>
+<p>初始化路径见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/media/engine/webrtc_voice_engine.cc">WebRtcVoiceEngine::Init</a> 和 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/media/engine/adm_helpers.cc">adm_helpers::Init</a>。允许内部设备的构建中，未注入 ADM 时会尝试创建平台默认实现；调用方也可以提供自己的 ADM。</p>
 <h3 id="33-控制调用链初始化与真正运行分开">3.3 控制调用链：初始化与真正运行分开</h3>
 <p><code>Init()</code>、<code>InitMicrophone()</code> 和 <code>StartRecording()</code> 不是同一件事。公共接口把模块初始化、设备控制能力准备、I/O 流准备与运行分开；各平台实际创建资源的时机可能有所不同。</p>
 <table>
@@ -271,7 +313,8 @@
   </tbody>
 </table>
 <p>在 <code>AudioState</code> 中，运行还与收发流是否存在、录音/播放开关是否启用有关：</p>
-<div class="mermaid" id="id-060a8d40cd6f">flowchart TB
+
+<div class="mermaid">flowchart TB
     INIT[&#34;引擎 Init&lt;br/&gt;ADM 初始化、设备与能力配置、注册回调&#34;]
     INIT --&gt; SEND[&#34;加入发送流 / 启用录音&#34;]
     INIT --&gt; RECV[&#34;加入接收流 / 启用播放&#34;]
@@ -280,27 +323,43 @@
     SC --&gt;|&#34;是，且尚未录音&#34;| SI[&#34;InitRecording → StartRecording&#34;]
     RC --&gt;|&#34;是，且尚未播放&#34;| RI[&#34;InitPlayout → StartPlayout&#34;]
     SI --&gt; SS[&#34;最后一个发送流移除 / 关闭录音&lt;br/&gt;StopRecording&#34;]
-    RI --&gt; RS[&#34;最后一个接收流移除 / 关闭播放&lt;br/&gt;StopPlayout&#34;]</div><p>发送流注册时，<code>AudioState::UpdateAudioTransportWithSendingStreams()</code> 还会更新 <code>AudioTransportImpl</code> 中的发送者列表及所需采样率、声道数；接收流注册时，则通过 <code>AudioMixer::AddSource(stream-&gt;source())</code> 加入混音器。生命周期控制和 PCM 流动由此衔接起来。</p>
+    RI --&gt; RS[&#34;最后一个接收流移除 / 关闭播放&lt;br/&gt;StopPlayout&#34;]</div>
+<p>发送流注册时，<code>AudioState::UpdateAudioTransportWithSendingStreams()</code> 还会更新 <code>AudioTransportImpl</code> 中的发送者列表及所需采样率、声道数；接收流注册时，则通过 <code>AudioMixer::AddSource(stream-&gt;source())</code> 加入混音器。生命周期控制和 PCM 流动由此衔接起来。</p>
 <p>另一个细节是：当接收流仍存在、只是 <code>AudioState</code> 的 playout 开关被关闭时，<code>UpdateNullAudioPollerState()</code> 会启用 10 ms 定时拉取，让接收音频继续被消费。这和把接收流自身停止是不同的操作，不能把所有“静音”都理解成同一种状态。</p>
 <h3 id="34-采集调用链上半段后端--adb--apm">3.4 采集调用链上半段：后端 → ADB → APM</h3>
 <p>无论系统通过回调、事件还是读线程提供录音，后端最终需要把合适大小的 PCM 交给 ADB。以下为调用顺序示意，块长适配已由后端或 <code>FineAudioBuffer</code> 完成：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-cpp">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 伪代码：每次交付 10 ms，每声道样本数为 sample_rate / 100。
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 伪代码：每次交付 10 ms，每声道样本数为 sample_rate / 100。
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">adb</span><span class="o">-&gt;</span><span class="n">SetRecordedBuffer</span><span class="p">(</span><span class="n">pcm</span><span class="p">,</span> <span class="n">samples_per_channel</span><span class="p">,</span> <span class="n">capture_timestamp_ns</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">adb</span><span class="o">-&gt;</span><span class="n">SetVQEData</span><span class="p">(</span><span class="n">playout_delay_ms</span><span class="p">,</span> <span class="n">recording_delay_ms</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">adb</span><span class="o">-&gt;</span><span class="n">DeliverRecordedData</span><span class="p">();</span></span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl"><span class="n">adb</span><span class="o">-&gt;</span><span class="n">DeliverRecordedData</span><span class="p">();</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>这三步的作用分别是：复制 PCM 到 <code>rec_buffer_</code>；保存播放与采集延迟；通过已注册的 <code>AudioTransport</code> 把 PCM 和元数据交给上层。<code>SetRecordedBuffer()</code> 本身只保存本次给它的数据，不负责累计不足 10 ms 的输入。</p>
 <p><code>DeliverRecordedData()</code> 的关键调用可概括为：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-cpp">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 简化自 AudioDeviceBuffer::DeliverRecordedData()，省略错误处理。
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 简化自 AudioDeviceBuffer::DeliverRecordedData()，省略错误处理。
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">const</span> <span class="n">size_t</span> <span class="n">frames</span> <span class="o">=</span> <span class="n">rec_buffer_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="n">rec_channels_</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">size_t</span> <span class="n">bytes_per_frame</span> <span class="o">=</span> <span class="n">rec_channels_</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int16_t</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="kt">uint32_t</span> <span class="n">ignored_new_mic_level</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -310,7 +369,9 @@
 </span></span><span class="line"><span class="cl">    <span class="n">rec_channels_</span><span class="p">,</span> <span class="n">rec_sample_rate_</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="n">play_delay_ms_</span> <span class="o">+</span> <span class="n">rec_delay_ms_</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">typing_status_</span><span class="p">,</span> <span class="n">ignored_new_mic_level</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="n">capture_timestamp_ns_</span><span class="p">);</span></span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">    <span class="n">capture_timestamp_ns_</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>接口中的参数名 <code>nBytesPerSample</code> 容易误导：在这条 ADB 调用路径里，传入的是<strong>每个 PCM frame 的字节数</strong>，即 <code>声道数 × sizeof(int16_t)</code>。双声道为 4，不能直接按“一个标量样本 2 字节”去填。<code>AudioTransportImpl</code> 中也有相应的检查。</p>
 <p>进入 <code>AudioTransportImpl::RecordedDataIsAvailable()</code> 后，主要顺序是：</p>
 <ol>
@@ -321,10 +382,11 @@
 <li>设置可选的绝对采集时间，之后直接或经可选异步处理器进入 <code>SendProcessedData()</code>。</li>
 </ol>
 <p>如果后端提供采集时间戳，ADB 会利用 <code>TimestampAligner</code> 将它映射到 WebRTC 使用的时钟域；没有时间戳时，接口允许传入 <code>std::nullopt</code>。不要因为参数中还有 <code>clockDrift</code>、<code>currentMicLevel</code> 等历史字段，就假定当前 ADB 会提供有效数值：上面的实现对它们传入的是 0。</p>
-<p>实现见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/audio_device_buffer.cc" target="_blank" rel="noopener noreffer ">AudioDeviceBuffer</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/audio_transport_impl.cc" target="_blank" rel="noopener noreffer ">AudioTransportImpl</a> 和 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_processing/include/audio_frame_proxies.cc" target="_blank" rel="noopener noreffer ">APM 的 AudioFrame 适配函数</a>。</p>
+<p>实现见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/audio_device_buffer.cc">AudioDeviceBuffer</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/audio_transport_impl.cc">AudioTransportImpl</a> 和 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_processing/include/audio_frame_proxies.cc">APM 的 AudioFrame 适配函数</a>。</p>
 <h3 id="35-采集调用链下半段发送流--编码队列--rtp">3.5 采集调用链下半段：发送流 → 编码队列 → RTP</h3>
 <p><code>AudioTransportImpl::SendProcessedData()</code> 遍历已注册的 <code>AudioSender</code>，调用各发送流的 <code>SendAudioData()</code>。多个发送流需要数据时，为其中的流复制 <code>AudioFrame</code>，最后把原始对象移动给一个流。</p>
-<div class="mermaid" id="id-3199513e8f79">%%{init: {&#34;sequence&#34;: {&#34;wrap&#34;: true, &#34;width&#34;: 90, &#34;actorMargin&#34;: 12, &#34;diagramMarginX&#34;: 8, &#34;mirrorActors&#34;: false}}}%%
+
+<div class="mermaid">%%{init: {&#34;sequence&#34;: {&#34;wrap&#34;: true, &#34;width&#34;: 90, &#34;actorMargin&#34;: 12, &#34;diagramMarginX&#34;: 8, &#34;mirrorActors&#34;: false}}}%%
 sequenceDiagram
     participant D as 后端
     participant B as ADB
@@ -346,13 +408,24 @@ sequenceDiagram
     opt 编码器已积累足够数据
         Q-&gt;&gt;S: AudioPacketizationCallback::SendData
         S-&gt;&gt;S: RTPSenderAudio::SendAudio&lt;br/&gt;→ RTP 发送链路
-    end</div><p>图中 Transport 指 <code>AudioTransportImpl</code>，“发送链路”合并表示 <code>AudioSendStream</code> 和 <code>ChannelSend</code>。源码中的主链可按下面的顺序阅读：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">AudioTransportImpl::SendProcessedData
+    end</div>
+<p>图中 Transport 指 <code>AudioTransportImpl</code>，“发送链路”合并表示 <code>AudioSendStream</code> 和 <code>ChannelSend</code>。源码中的主链可按下面的顺序阅读：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">AudioTransportImpl::SendProcessedData
 </span></span><span class="line"><span class="cl">  → AudioSendStream::SendAudioData
 </span></span><span class="line"><span class="cl">  → ChannelSend::ProcessAndEncodeAudio
 </span></span><span class="line"><span class="cl">      → encoder_queue_-&gt;PostTask(...)
@@ -362,24 +435,31 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">          → AudioPacketizationCallback::SendData
 </span></span><span class="line"><span class="cl">              → ChannelSend::SendData
 </span></span><span class="line"><span class="cl">              → RTPSenderAudio::SendAudio
-</span></span><span class="line"><span class="cl">              → 后续 RTP 发送链路</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">              → 后续 RTP 发送链路</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p><strong>明确的线程交接发生在 <code>ChannelSend</code> 投递编码任务时。</strong> 默认同步路径中的格式调整、APM 以及发送流分发，会先在调用采集交付函数的线程上执行；启用额外异步处理时，中间还会增加交接点。</p>
 <p>另外，<code>Add10MsData()</code> 每次接受 10 ms，并不保证每次都回调 <code>SendData()</code>。编码器是否已经攒够一个包、是否启用 DTX 等都会影响输出。把设备帧、APM 处理帧和 RTP 包时长分开看，才能正确分析延迟。</p>
-<p>对应源码：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/audio_send_stream.cc" target="_blank" rel="noopener noreffer ">AudioSendStream</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/channel_send.cc" target="_blank" rel="noopener noreffer ">ChannelSend</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_coding/acm2/audio_coding_module.cc" target="_blank" rel="noopener noreffer ">AudioCodingModuleImpl</a>。</p>
+<p>对应源码：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/audio_send_stream.cc">AudioSendStream</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/channel_send.cc">ChannelSend</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_coding/acm2/audio_coding_module.cc">AudioCodingModuleImpl</a>。</p>
 <h3 id="36-播放调用链设备请求--混音器--接收流--neteq">3.6 播放调用链：设备请求 → 混音器 → 接收流 → NetEq</h3>
 <p>先看网络到包这一侧。<code>ChannelReceive::OnRtpPacket()</code> 解析和处理 RTP，在接收流处于播放状态时，经过 <code>OnReceivedPayloadData()</code> 把载荷插入 <code>NetEq::InsertPacket()</code>。这一步提供的是压缩音频，不会直接触发设备播放。</p>
 <p>真正消费音频的入口在设备侧。后端执行：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-cpp">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 伪代码：后端已经确定采样率、声道与 10 ms 块长。
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 伪代码：后端已经确定采样率、声道与 10 ms 块长。
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">adb</span><span class="o">-&gt;</span><span class="n">RequestPlayoutData</span><span class="p">(</span><span class="n">samples_per_channel</span><span class="p">);</span>  <span class="c1">// 向上层请求并保存 PCM。
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">adb</span><span class="o">-&gt;</span><span class="n">GetPlayoutData</span><span class="p">(</span><span class="n">device_buffer</span><span class="p">);</span>           <span class="c1">// 复制到后端提供的缓冲。
-</span></span></span></code></pre></div></div>
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p><code>RequestPlayoutData()</code> 同步调用 <code>AudioTransport::NeedMorePlayData()</code>。进入 <code>AudioTransportImpl</code> 后，它先调用混音器；混音器逐个向接收流请求音频；各流最终向自己的 NetEq 取出下一段 10 ms PCM。</p>
-<div class="mermaid" id="id-7784c4620244">%%{init: {&#34;sequence&#34;: {&#34;wrap&#34;: true, &#34;width&#34;: 80, &#34;actorMargin&#34;: 10, &#34;diagramMarginX&#34;: 8, &#34;mirrorActors&#34;: false}}}%%
+
+<div class="mermaid">%%{init: {&#34;sequence&#34;: {&#34;wrap&#34;: true, &#34;width&#34;: 80, &#34;actorMargin&#34;: 10, &#34;diagramMarginX&#34;: 8, &#34;mirrorActors&#34;: false}}}%%
 sequenceDiagram
     participant D as 后端
     participant B as ADB
@@ -404,13 +484,29 @@ sequenceDiagram
     T--&gt;&gt;B: 填好播放 PCM 与输出长度
     B--&gt;&gt;D: RequestPlayoutData 返回
     D-&gt;&gt;B: GetPlayoutData
-    B--&gt;&gt;D: 复制 PCM 到设备侧缓冲</div><p>图中 Transport 指 <code>AudioTransportImpl</code>，Mixer 指 <code>AudioMixer</code>，“接收链路”合并表示接收流和 <code>ChannelReceive</code>。展开方法名之后，主链是：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">平台输出回调 / 后端播放工作线程
+    B--&gt;&gt;D: 复制 PCM 到设备侧缓冲</div>
+<p>图中 Transport 指 <code>AudioTransportImpl</code>，Mixer 指 <code>AudioMixer</code>，“接收链路”合并表示接收流和 <code>ChannelReceive</code>。展开方法名之后，主链是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">平台输出回调 / 后端播放工作线程
 </span></span><span class="line"><span class="cl">  → [可选 FineAudioBuffer::GetPlayoutData]
 </span></span><span class="line"><span class="cl">  → AudioDeviceBuffer::RequestPlayoutData
 </span></span><span class="line"><span class="cl">  → AudioTransportImpl::NeedMorePlayData
@@ -425,14 +521,16 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">      → Resample
 </span></span><span class="line"><span class="cl">  ← PCM 写入 ADB 的 play_buffer_
 </span></span><span class="line"><span class="cl">  → AudioDeviceBuffer::GetPlayoutData
-</span></span><span class="line"><span class="cl">  → 后端缓冲 / 格式适配 → OS 输出</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">  → 后端缓冲 / 格式适配 → OS 输出</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>这里有三个关键点：</p>
 <ul>
 <li><strong>NetEq 是由播放需求拉动的。</strong> 它结合已有包和当前状态生成音频，可能解码新包、使用已解码的缓存，也可能执行丢包补偿；不是每次 <code>GetAudio()</code> 都恰好解码一个网络包。</li>
 <li><strong>混音之后才进入 APM 播放参考路径。</strong> AEC 需要观察本机准备输出的合成声音，而不只是某一条远端流。</li>
 <li><strong>重采样可能不止一次。</strong> 接收流先适配混音器要求的格式，混音结果再适配设备要求的采样率；设备侧仍可能存在原生格式转换。</li>
 </ul>
-<p>对应源码：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_mixer/audio_mixer_impl.cc" target="_blank" rel="noopener noreffer ">混音器</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/audio_receive_stream.cc" target="_blank" rel="noopener noreffer ">AudioReceiveStreamImpl</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/channel_receive.cc" target="_blank" rel="noopener noreffer ">ChannelReceive</a>。</p>
+<p>对应源码：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_mixer/audio_mixer_impl.cc">混音器</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/audio_receive_stream.cc">AudioReceiveStreamImpl</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/channel_receive.cc">ChannelReceive</a>。</p>
 <p><code>AudioTransport</code> 还定义了 <code>PullRenderData()</code>。本基线中的注释说明，Chromium 使用这个入口并拥有自己的 APM，因此该方法没有在内部调用 <code>ProcessReverseStream()</code>；采集侧 <code>RecordedDataIsAvailable()</code> 的默认处理路径也注明不用于 Chromium。分析 Chrome 时，应继续追踪浏览器自己的采集与处理装配，不能把上面的 native 调用链直接套过去。</p>
 <h3 id="37-adbfineaudiobuffer-与-neteq三种缓冲分别解决什么">3.7 ADB、FineAudioBuffer 与 NetEq：三种缓冲分别解决什么</h3>
 <table>
@@ -466,11 +564,12 @@ sequenceDiagram
   </tbody>
 </table>
 <p><code>FineAudioBuffer::DeliverRecordedData()</code> 中的循环体现了这个区别：追加本次设备数据，只要缓存达到一个 10 ms 块，就调用 ADB 的 <code>SetRecordedBuffer()</code>、<code>SetVQEData()</code>、<code>DeliverRecordedData()</code>，剩余数据保留到下次。</p>
-<p>反向的 <code>GetPlayoutData()</code> 则不断请求 10 ms，直到足够满足设备这次的需求，然后复制所需部分并保留余量。它会缓存后端传入的播放延迟，供后续采集交付时一起上报。完整实现见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/fine_audio_buffer.cc" target="_blank" rel="noopener noreffer ">fine_audio_buffer.cc</a>。</p>
+<p>反向的 <code>GetPlayoutData()</code> 则不断请求 10 ms，直到足够满足设备这次的需求，然后复制所需部分并保留余量。它会缓存后端传入的播放延迟，供后续采集交付时一起上报。完整实现见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/fine_audio_buffer.cc">fine_audio_buffer.cc</a>。</p>
 <h2 id="四平台视角共用-pcm-边界底层采用不同的节奏">四、平台视角：共用 PCM 边界，底层采用不同的节奏</h2>
 <h3 id="41-差异集中在哪几层">4.1 差异集中在哪几层</h3>
 <p>上层的 <code>AudioTransport</code> 契约可以复用，但设备 API、后端组织、回调线程、设备路由和系统音效能力都存在差异。</p>
-<div class="mermaid" id="id-fae46282c0e4">flowchart LR
+
+<div class="mermaid">flowchart LR
     T[&#34;共同上层&lt;br/&gt;AudioTransport / APM&lt;br/&gt;混音 / 收发流&#34;]
     B[&#34;AudioDeviceBuffer&lt;br/&gt;共同的 PCM 交接点&#34;]
     T &lt;--&gt; B
@@ -478,7 +577,8 @@ sequenceDiagram
     B &lt;--&gt; M[&#34;macOS&lt;br/&gt;HAL、IOProc、环形缓冲与 worker&#34;]
     B &lt;--&gt; L[&#34;Linux&lt;br/&gt;PulseAudio 或 ALSA&#34;]
     B &lt;--&gt; A[&#34;Android&lt;br/&gt;Java / OpenSL ES / AAudio&#34;]
-    B &lt;--&gt; I[&#34;iOS&lt;br/&gt;AVAudioSession 与 VoiceProcessingIO&#34;]</div><table>
+    B &lt;--&gt; I[&#34;iOS&lt;br/&gt;AVAudioSession 与 VoiceProcessingIO&#34;]</div>
+<table>
   <thead>
       <tr>
           <th>平台 / 路径</th>
@@ -544,10 +644,11 @@ sequenceDiagram
 <p>播放线程的主过程是等待事件，通过 <code>GetCurrentPadding()</code> 确定输出缓冲还能容纳多少 frame，再按 10 ms 向 ADB 请求 PCM，最后提交到 WASAPI。采集线程从 <code>GetBuffer()</code> 取得数据，放入同步缓冲，凑足 10 ms 后交给 ADB。</p>
 <p>因此，即使一次系统事件对应的可读写数据不是 10 ms 的整倍数，上层仍可按 10 ms 工作。格式也由设备探测与协商确定，不能假定任何端点都接受同一个采样率和声道组合。</p>
 <p>本基线还保留另一套 <code>kWindowsCoreAudio2</code> 路径，通过 <code>CoreAudioInput</code> / <code>CoreAudioOutput</code> 组合成 ADM。它需要调用专用工厂 <code>CreateWindowsCoreAudioAudioDeviceModule()</code>；直接把这个枚举值传给通用 ADM 工厂会被拒绝。专用入口要求正确初始化 COM MTA，并提供 <code>automatic_restart</code> 参数控制断连后的自动重启。</p>
-<p>源码入口：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/win/audio_device_core_win.cc" target="_blank" rel="noopener noreffer ">audio_device_core_win.cc</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/include/audio_device_factory.h" target="_blank" rel="noopener noreffer ">专用工厂与约束</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/win/audio_device_module_win.cc" target="_blank" rel="noopener noreffer ">组合式 Windows ADM</a>。</p>
+<p>源码入口：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/win/audio_device_core_win.cc">audio_device_core_win.cc</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/include/audio_device_factory.h">专用工厂与约束</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/win/audio_device_module_win.cc">组合式 Windows ADM</a>。</p>
 <h3 id="43-macosioproc-与-webrtc-处理之间隔着环形缓冲">4.3 macOS：IOProc 与 WebRTC 处理之间隔着环形缓冲</h3>
 <p><code>AudioDeviceMac</code> 直接使用 CoreAudio HAL。系统在 IOProc 中提供输入、请求输出，而 WebRTC 上层的调用主要发生在后端工作线程中。环形缓冲把两边连接起来。</p>
-<div class="mermaid" id="id-55010c6ad7fb">flowchart TB
+
+<div class="mermaid">flowchart TB
     subgraph CAP[&#34;采集方向&#34;]
         CI[&#34;CoreAudio 输入 IOProc&#34;] --&gt; CR[&#34;输入环形缓冲&#34;]
         CR --&gt; CW[&#34;CaptureWorkerThread / AudioConverter&#34;]
@@ -557,15 +658,16 @@ sequenceDiagram
         PB[&#34;ADB：请求 10 ms&#34;] --&gt; PW[&#34;RenderWorkerThread&#34;]
         PW --&gt; PR[&#34;输出环形缓冲&#34;]
         PR --&gt; PO[&#34;CoreAudio 输出 IOProc / 格式转换&#34;]
-    end</div><p>这样做可以把上层处理与 IOProc 的实时节奏隔开。播放 worker 观察环形缓冲的可写空间，持续补充音频；采集 worker 从输入缓冲取数并做格式转换，再交付 ADB。它增加了本地缓冲，也需要在延迟估计中考虑这些缓冲。</p>
+    end</div>
+<p>这样做可以把上层处理与 IOProc 的实时节奏隔开。播放 worker 观察环形缓冲的可写空间，持续补充音频；采集 worker 从输入缓冲取数并做格式转换，再交付 ADB。它增加了本地缓冲，也需要在延迟估计中考虑这些缓冲。</p>
 <p>当前后端把 ADB 的默认格式设为采集 48 kHz 单声道、播放 48 kHz 双声道，并结合设备能力和配置调整声道；设备原生格式与内部格式之间由 <code>AudioConverter</code> 等逻辑适配。后端还监听设备、格式等属性变化。</p>
-<p>macOS 和 iOS 都属于 Apple 平台，但这份 macOS 实现采用 HAL、IOProc 与 worker 的组织方式，不能照搬下一节 iOS 的 AudioUnit 模型。源码见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/mac/audio_device_mac.cc" target="_blank" rel="noopener noreffer ">AudioDeviceMac</a>。</p>
+<p>macOS 和 iOS 都属于 Apple 平台，但这份 macOS 实现采用 HAL、IOProc 与 worker 的组织方式，不能照搬下一节 iOS 的 AudioUnit 模型。源码见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/mac/audio_device_mac.cc">AudioDeviceMac</a>。</p>
 <h3 id="44-linuxpulseaudio-服务端路径与-alsa-pcm-路径">4.4 Linux：PulseAudio 服务端路径与 ALSA PCM 路径</h3>
 <p><strong>PulseAudio 路径。</strong> 当构建启用 <code>WEBRTC_ENABLE_LINUX_PULSE</code> 时，通用 ADM 的 <code>kPlatformDefaultAudio</code> 选择 <code>AudioDeviceLinuxPulse</code>。后端加载 <code>libpulse</code>，创建 <code>pa_threaded_mainloop</code>、<code>pa_context</code>，连接服务端，再建立采集与播放的 <code>pa_stream</code>。读写回调与后端音频线程协作，完成本地 10 ms PCM 和服务端缓冲之间的交换。</p>
 <p>设备列表与默认 source / sink 来自服务端，因此系统混音和路由也是时序与设备行为的一部分。</p>
 <p><strong>ALSA 路径。</strong> 未启用 PulseAudio 时，平台默认走 ALSA；启用 PulseAudio 的构建也可显式选择 <code>kLinuxAlsaAudio</code>。<code>AudioDeviceLinuxALSA</code> 通过 <code>snd_pcm_readi()</code>、<code>snd_pcm_writei()</code> 读写 PCM，配合 <code>snd_pcm_wait()</code> 等待，以及 <code>snd_pcm_delay()</code> 获取延迟信息。</p>
 <p>两条路径都要处理“暂时没有足够数据”和异常恢复。ALSA 的 <code>ErrorRecovery()</code> 会针对 underrun 等错误恢复 PCM 状态；PulseAudio 后端通过服务端流状态和缓冲回调协调。它们共同向 ADB 提供 10 ms 音频，但缓冲层次、设备命名和路由来源不同。</p>
-<p>源码见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/linux/audio_device_pulse_linux.cc" target="_blank" rel="noopener noreffer ">PulseAudio 后端</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/linux/audio_device_alsa_linux.cc" target="_blank" rel="noopener noreffer ">ALSA 后端</a>。这里列的是 WebRTC 后端使用的 API，不能仅凭桌面系统采用了什么音频服务，就推断源码中存在同名的直接后端。</p>
+<p>源码见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/linux/audio_device_pulse_linux.cc">PulseAudio 后端</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/linux/audio_device_alsa_linux.cc">ALSA 后端</a>。这里列的是 WebRTC 后端使用的 API，不能仅凭桌面系统采用了什么音频服务，就推断源码中存在同名的直接后端。</p>
 <h3 id="45-android输入与输出可以采用不同-api">4.5 Android：输入与输出可以采用不同 API</h3>
 <p>Android 需要先问清楚“通过哪个工厂、选择哪种 AudioLayer 创建 ADM”。native API 的 <code>CreateAndroidAudioDeviceModule()</code> 支持这些组合：</p>
 <table>
@@ -612,12 +714,21 @@ sequenceDiagram
 </table>
 <p>在这个工厂中，请求 <code>kPlatformDefaultAudio</code> 时，若定义了 <code>WEBRTC_AUDIO_DEVICE_INCLUDE_ANDROID_AAUDIO</code>，选择 AAudio 双向路径；否则根据系统报告的低延迟输入/输出能力，在 OpenSL ES、混合路径和 Java 路径之间选择。这是该工厂的选择逻辑，不代表所有 Android SDK 接入都采用同样的默认值。</p>
 <p><strong>Java 路径的数据交接</strong>很适合作为一个具体例子：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">采集：WebRtcAudioRecord 的录音线程
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">采集：WebRtcAudioRecord 的录音线程
 </span></span><span class="line"><span class="cl">  → AudioRecord.read 写入 direct ByteBuffer
 </span></span><span class="line"><span class="cl">  → JNI → AudioRecordJni::DataIsRecorded
 </span></span><span class="line"><span class="cl">  → ADB::SetRecordedBuffer / SetVQEData / DeliverRecordedData
@@ -626,15 +737,18 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">  → JNI → AudioTrackJni::GetPlayoutData
 </span></span><span class="line"><span class="cl">  → ADB::RequestPlayoutData / GetPlayoutData
 </span></span><span class="line"><span class="cl">  → PCM 写入 direct ByteBuffer
-</span></span><span class="line"><span class="cl">  → AudioTrack.write</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">  → AudioTrack.write</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>direct <code>ByteBuffer</code> 让 JNI 可以访问已缓存的内存地址，减少 Java 与 C++ 交接的额外复制；不过 ADB 自身的保存和取数仍有复制，不能把整条链路理解为零拷贝。</p>
 <p>OpenSL ES 使用缓冲队列回调，AAudio 使用带 <code>num_frames</code> 的 data callback。它们通过 <code>FineAudioBuffer</code> 衔接设备块长与 10 ms。AAudio 播放端还会观察 xrun：欠载次数增加时，扩大一个 burst 的输出缓冲，以延迟换稳定性；断连时把重启工作投递到另一线程，而不是在错误回调中直接关闭、重开流。</p>
 <p>另一项差异是设备管理：这份组合式 Android ADM 的枚举接口返回一个逻辑输入和一个逻辑输出，不能据此得到全部手机麦克风、蓝牙和扬声器列表。路由需要结合 Android 系统音频管理与应用配置处理。Java 输入还可能使用系统 AEC/NS/AGC，启用时应与 APM 选项协调。</p>
-<p>源码入口：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/android/native_api/audio_device_module/audio_device_android.cc" target="_blank" rel="noopener noreffer ">Android 工厂与选择逻辑</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/android/src/jni/audio_device/audio_device_module.cc" target="_blank" rel="noopener noreffer ">AndroidAudioDeviceModule</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/android/src/jni/audio_device/audio_record_jni.cc" target="_blank" rel="noopener noreffer ">AudioRecordJni</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/android/src/jni/audio_device/audio_track_jni.cc" target="_blank" rel="noopener noreffer ">AudioTrackJni</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/android/src/jni/audio_device/aaudio_player.cc" target="_blank" rel="noopener noreffer ">AAudioPlayer</a>。</p>
+<p>源码入口：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/android/native_api/audio_device_module/audio_device_android.cc">Android 工厂与选择逻辑</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/android/src/jni/audio_device/audio_device_module.cc">AndroidAudioDeviceModule</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/android/src/jni/audio_device/audio_record_jni.cc">AudioRecordJni</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/android/src/jni/audio_device/audio_track_jni.cc">AudioTrackJni</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/android/src/jni/audio_device/aaudio_player.cc">AAudioPlayer</a>。</p>
 <h3 id="46-ios音频会话决定环境一个-audiounit-承担双向-io">4.6 iOS：音频会话决定环境，一个 AudioUnit 承担双向 I/O</h3>
 <p>iOS 的核心设备实现是 <code>AudioDeviceIOS</code>，SDK 可以通过 <code>AudioDeviceModuleIOS</code> 包装它。控制环境主要来自 <code>AVAudioSession</code>，实际 I/O 使用 Voice-Processing I/O AudioUnit。</p>
 <p>它与前面的独立输入/输出线程模型有一个明显区别：同一个全双工 AudioUnit 组织录音与播放，系统语音处理可以同时观察两侧信号。默认创建路径不旁路 voice processing；SDK 也提供 <code>bypass_voice_processing</code> 配置，因此应以实际创建选项判断系统处理是否启用。</p>
-<div class="mermaid" id="id-1a3824701901">flowchart TB
+
+<div class="mermaid">flowchart TB
     SESSION[&#34;AVAudioSession：路由、激活、中断、实际格式&#34;]
     UNIT[&#34;VoiceProcessingIO AudioUnit：双向 I/O&#34;]
     IN[&#34;输入回调：AudioUnitRender 获取 PCM&#34;]
@@ -644,10 +758,11 @@ sequenceDiagram
     SESSION -.-&gt;|&#34;配置与状态变化&#34;| UNIT
     UNIT --&gt; IN --&gt; FINE
     FINE --&gt; OUT --&gt; UNIT
-    FINE &lt;--&gt; ADB</div><p>初始化时要区分<strong>偏好参数</strong>与<strong>真实参数</strong>：<code>Init()</code> 先保存偏好采样率和声道；真正准备 I/O、激活 session 后，<code>SetupAudioBuffersForActiveAudioSession()</code> 再读取实际 <code>sampleRate</code> 和 <code>IOBufferDuration</code>，更新 ADB，并重建 <code>FineAudioBuffer</code>。</p>
+    FINE &lt;--&gt; ADB</div>
+<p>初始化时要区分<strong>偏好参数</strong>与<strong>真实参数</strong>：<code>Init()</code> 先保存偏好采样率和声道；真正准备 I/O、激活 session 后，<code>SetupAudioBuffersForActiveAudioSession()</code> 再读取实际 <code>sampleRate</code> 和 <code>IOBufferDuration</code>，更新 ADB，并重建 <code>FineAudioBuffer</code>。</p>
 <p>具体的采集入口是 <code>AudioDeviceIOS::OnDeliverRecordedData()</code>：它调用 AudioUnit 的 render 取得输入，再通过 <code>FineAudioBuffer::DeliverRecordedData()</code> 累积交付。播放入口是 <code>OnGetPlayoutData()</code>：它通过 <code>FineAudioBuffer::GetPlayoutData()</code> 取得当前回调需要的 PCM，不播放时填零。</p>
 <p>耳机路由变化、电话中断和采样率变化，都可能要求重新配置。后端把相关事件转交到拥有对象的线程，在需要时停止 AudioUnit、反初始化、读取新的 session 参数、重建缓冲并恢复运行。这里的设备选择主要属于 session 路由管理，不能套用桌面 ADM 的 index/GUID 操作方式。</p>
-<p>源码入口：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/objc/native/api/audio_device_module.mm" target="_blank" rel="noopener noreffer ">iOS SDK 工厂</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/objc/native/src/audio/audio_device_ios.mm" target="_blank" rel="noopener noreffer ">AudioDeviceIOS</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/objc/native/src/audio/voice_processing_audio_unit.mm" target="_blank" rel="noopener noreffer ">VoiceProcessingAudioUnit</a>。</p>
+<p>源码入口：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/objc/native/api/audio_device_module.mm">iOS SDK 工厂</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/objc/native/src/audio/audio_device_ios.mm">AudioDeviceIOS</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/objc/native/src/audio/voice_processing_audio_unit.mm">VoiceProcessingAudioUnit</a>。</p>
 <h3 id="47-哪些能力不能假定跨平台一致">4.7 哪些能力不能假定跨平台一致</h3>
 <table>
   <thead>
@@ -738,4 +853,7 @@ sequenceDiagram
 <li><strong>切换耳机后失声或变速</strong>：检查实际路由、采样率、声道和设备块长是否变化，ADB 参数及块长适配器是否随流重建而更新。</li>
 <li><strong>声音正常但回声明显</strong>：检查播放参考是否进入对应的 APM、设备延迟是否合理，以及系统语音处理与软件 APM 的启用配置是否匹配。</li>
 </ul>
-<p>这些检查贯穿全文的四个层次：先确认 ADM 是否接入并运行，再确认数据流是否连续，然后定位到具体的方法与线程交接，最后分析平台设备与路由行为。这样读代码，平台细节才有清晰的落点。</p>]]></description></item></channel></rss>
+<p>这些检查贯穿全文的四个层次：先确认 ADM 是否接入并运行，再确认数据流是否连续，然后定位到具体的方法与线程交接，最后分析平台设备与路由行为。这样读代码，平台细节才有清晰的落点。</p>]]></content:encoded>
+    </item>
+  </channel>
+</rss>

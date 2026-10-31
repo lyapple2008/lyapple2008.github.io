@@ -1,1 +1,88 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tags on BeYoung</title><link>https://lyapple2008.github.io/tags/</link><description>Recent content in Tags on BeYoung</description><generator>Hugo</generator><language>zh-CN</language><copyright>See this site's source code [here](https://github.com/lyapple2008/lyapple2008.github.io), licensed under GPLv3 ·</copyright><lastBuildDate>Sun, 25 Oct 2026 15:28:43 +0800</lastBuildDate><atom:link href="https://lyapple2008.github.io/tags/index.xml" rel="self" type="application/rss+xml"/><item><title>WebRTC</title><link>https://lyapple2008.github.io/tags/webrtc/</link><pubDate>Sun, 25 Oct 2026 15:28:43 +0800</pubDate><guid>https://lyapple2008.github.io/tags/webrtc/</guid><description/></item><item><title>跨平台</title><link>https://lyapple2008.github.io/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/</link><pubDate>Sun, 25 Oct 2026 15:28:43 +0800</pubDate><guid>https://lyapple2008.github.io/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/</guid><description/></item><item><title>音频设备</title><link>https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87/</link><pubDate>Sun, 25 Oct 2026 15:28:43 +0800</pubDate><guid>https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87/</guid><description/></item><item><title>源码分析</title><link>https://lyapple2008.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</link><pubDate>Sun, 25 Oct 2026 15:28:43 +0800</pubDate><guid>https://lyapple2008.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</guid><description/></item><item><title>创业</title><link>https://lyapple2008.github.io/tags/%E5%88%9B%E4%B8%9A/</link><pubDate>Tue, 29 Sep 2026 09:05:00 +0800</pubDate><guid>https://lyapple2008.github.io/tags/%E5%88%9B%E4%B8%9A/</guid><description/></item><item><title>科技</title><link>https://lyapple2008.github.io/tags/%E7%A7%91%E6%8A%80/</link><pubDate>Tue, 29 Sep 2026 09:05:00 +0800</pubDate><guid>https://lyapple2008.github.io/tags/%E7%A7%91%E6%8A%80/</guid><description/></item><item><title>内容创作</title><link>https://lyapple2008.github.io/tags/%E5%86%85%E5%AE%B9%E5%88%9B%E4%BD%9C/</link><pubDate>Tue, 29 Sep 2026 09:05:00 +0800</pubDate><guid>https://lyapple2008.github.io/tags/%E5%86%85%E5%AE%B9%E5%88%9B%E4%BD%9C/</guid><description/></item><item><title>音频</title><link>https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91/</link><pubDate>Tue, 29 Sep 2026 09:05:00 +0800</pubDate><guid>https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91/</guid><description/></item><item><title>自媒体</title><link>https://lyapple2008.github.io/tags/%E8%87%AA%E5%AA%92%E4%BD%93/</link><pubDate>Tue, 29 Sep 2026 09:05:00 +0800</pubDate><guid>https://lyapple2008.github.io/tags/%E8%87%AA%E5%AA%92%E4%BD%93/</guid><description/></item><item><title>Agent</title><link>https://lyapple2008.github.io/tags/agent/</link><pubDate>Mon, 28 Sep 2026 07:22:02 +0800</pubDate><guid>https://lyapple2008.github.io/tags/agent/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Tags on BeYoung</title>
+    <link>https://lyapple2008.github.io/tags/</link>
+    <description>Recent content in Tags on BeYoung</description>
+    <image>
+      <title>BeYoung</title>
+      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.147.9</generator>
+    <language>zh</language>
+    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
+    <lastBuildDate>Sun, 25 Oct 2026 15:28:43 +0800</lastBuildDate>
+    <atom:link href="https://lyapple2008.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WebRTC</title>
+      <link>https://lyapple2008.github.io/tags/webrtc/</link>
+      <pubDate>Sun, 25 Oct 2026 15:28:43 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/webrtc/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>跨平台</title>
+      <link>https://lyapple2008.github.io/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/</link>
+      <pubDate>Sun, 25 Oct 2026 15:28:43 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/%E8%B7%A8%E5%B9%B3%E5%8F%B0/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>音频设备</title>
+      <link>https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87/</link>
+      <pubDate>Sun, 25 Oct 2026 15:28:43 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>源码分析</title>
+      <link>https://lyapple2008.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</link>
+      <pubDate>Sun, 25 Oct 2026 15:28:43 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>创业</title>
+      <link>https://lyapple2008.github.io/tags/%E5%88%9B%E4%B8%9A/</link>
+      <pubDate>Tue, 29 Sep 2026 09:05:00 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/%E5%88%9B%E4%B8%9A/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>科技</title>
+      <link>https://lyapple2008.github.io/tags/%E7%A7%91%E6%8A%80/</link>
+      <pubDate>Tue, 29 Sep 2026 09:05:00 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/%E7%A7%91%E6%8A%80/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>内容创作</title>
+      <link>https://lyapple2008.github.io/tags/%E5%86%85%E5%AE%B9%E5%88%9B%E4%BD%9C/</link>
+      <pubDate>Tue, 29 Sep 2026 09:05:00 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/%E5%86%85%E5%AE%B9%E5%88%9B%E4%BD%9C/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>音频</title>
+      <link>https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91/</link>
+      <pubDate>Tue, 29 Sep 2026 09:05:00 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>自媒体</title>
+      <link>https://lyapple2008.github.io/tags/%E8%87%AA%E5%AA%92%E4%BD%93/</link>
+      <pubDate>Tue, 29 Sep 2026 09:05:00 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/%E8%87%AA%E5%AA%92%E4%BD%93/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Agent</title>
+      <link>https://lyapple2008.github.io/tags/agent/</link>
+      <pubDate>Mon, 28 Sep 2026 07:22:02 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/tags/agent/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

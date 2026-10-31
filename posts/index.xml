@@ -1,4 +1,57 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>所有文章 - BeYoung</title><link>https://lyapple2008.github.io/posts/</link><description>所有文章 | BeYoung</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>See this site's source code [here](https://github.com/lyapple2008/lyapple2008.github.io), licensed under GPLv3 ·</copyright><lastBuildDate>Sun, 25 Oct 2026 15:28:43 +0800</lastBuildDate><atom:link href="https://lyapple2008.github.io/posts/" rel="self" type="application/rss+xml"/><item><title>【置顶】2026</title><link>https://lyapple2008.github.io/posts/2026-todo/</link><pubDate>Sun, 22 Feb 2026 09:43:54 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/2026-todo/</guid><description><![CDATA[<blockquote>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on BeYoung</title>
+    <link>https://lyapple2008.github.io/posts/</link>
+    <description>Recent content in Posts on BeYoung</description>
+    <image>
+      <title>BeYoung</title>
+      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.147.9</generator>
+    <language>zh</language>
+    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
+    <lastBuildDate>Sun, 25 Oct 2026 15:28:43 +0800</lastBuildDate>
+    <atom:link href="https://lyapple2008.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>【置顶】2026</title>
+      <link>https://lyapple2008.github.io/posts/2026-todo/</link>
+      <pubDate>Sun, 22 Feb 2026 09:43:54 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/2026-todo/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;记录跟踪2026年要做的事情和正在做的事情。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;目标&#34;&gt;目标&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;健康生活&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 体重减到60kg&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;weight-chart&#34; style=&#34;width: 100%; height: 300px;&#34;&gt;&lt;/div&gt;
+&lt;script src=&#34;https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js&#34;&gt;&lt;/script&gt;
+&lt;script&gt;
+var chart = echarts.init(document.getElementById(&#39;weight-chart&#39;));
+chart.setOption({
+    tooltip: { trigger: &#39;axis&#39; },
+    xAxis: { type: &#39;category&#39;, data: [&#39;1月&#39;, &#39;2月&#39;, &#39;3月&#39;, &#39;4月&#39;, &#39;5月&#39;, &#39;六月&#39;, &#39;七月&#39;, &#39;八月&#39;, &#39;九月&#39;] },
+    yAxis: { type: &#39;value&#39;, min: 55, max: 70 },
+    series: [{
+        data: [65, 65.8, 65.6, 64.4, 63.7, 63.9, 63.6, 63.1, 62.8],
+        type: &#39;line&#39;,
+        smooth: true,
+        areaStyle: { opacity: 0.3 },
+        markLine: { data: [{ yAxis: 60, name: &#39;目标&#39; }], linestyle: { color: &#39;#52c41a&#39;, type: &#39;dashed&#39; } }
+    }]
+});
+&lt;/script&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;探索可能&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<blockquote>
 <p>记录跟踪2026年要做的事情和正在做的事情。</p></blockquote>
 <hr>
 <h2 id="目标">目标</h2>
@@ -6,7 +59,7 @@
 <li>
 <p>健康生活</p>
 <ul>
-<li><i class="far fa-square" aria-hidden="true"></i> 体重减到60kg</li>
+<li><input disabled="" type="checkbox"> 体重减到60kg</li>
 </ul>
 </li>
 </ul>
@@ -31,28 +84,28 @@ chart.setOption({
 <li>
 <p>探索可能</p>
 <ul>
-<li><i class="far fa-square" aria-hidden="true"></i> 英语能力，熟练3篇演讲短文</li>
-<li><i class="far fa-square" aria-hidden="true"></i> 独立开发，目标完成4个独立项目 &ndash;&gt; 进度2/4</li>
-<li><i class="far fa-square" aria-hidden="true"></i> 公众号输出，目标输出文章10篇  &ndash;&gt; 进度12/10</li>
+<li><input disabled="" type="checkbox"> 英语能力，熟练3篇演讲短文</li>
+<li><input disabled="" type="checkbox"> 独立开发，目标完成4个独立项目 &ndash;&gt; 进度2/4</li>
+<li><input disabled="" type="checkbox"> 公众号输出，目标输出文章10篇  &ndash;&gt; 进度12/10</li>
 </ul>
 </li>
 </ul>
 <h2 id="正在做的项目">正在做的项目</h2>
 <ul>
 <li>
-<p><i class="far fa-check-square" aria-hidden="true"></i> iOS双语字幕App</p>
+<p><input checked="" disabled="" type="checkbox"> iOS双语字幕App</p>
 </li>
 <li>
-<p><i class="far fa-check-square" aria-hidden="true"></i> 拼了还拼小游戏外挂</p>
+<p><input checked="" disabled="" type="checkbox"> 拼了还拼小游戏外挂</p>
 </li>
 <li>
-<p><i class="far fa-square" aria-hidden="true"></i> 个人资产管理app上架 app store</p>
+<p><input disabled="" type="checkbox"> 个人资产管理app上架 app store</p>
 </li>
 <li>
-<p><i class="far fa-square" aria-hidden="true"></i> asr from scratch</p>
+<p><input disabled="" type="checkbox"> asr from scratch</p>
 </li>
 <li>
-<p><i class="far fa-square" aria-hidden="true"></i> 虚拟主播</p>
+<p><input disabled="" type="checkbox"> 虚拟主播</p>
 </li>
 </ul>
 <h2 id="一些随想">一些随想</h2>
@@ -82,14 +135,26 @@ chart.setOption({
 <p>每天记录和量化进度，本身就是一种负担，而且对于效率提高帮助不大，也不利于长期任务，与其每天盯着任务进度，
 不如现在开始试下，里程碑式的工作方法，给自己一段时间设定一些目标，到期后来检查完成情况，中间如何只记录
 据有里程碑意义的事件。</p></blockquote>
-]]></description></item><item><title>WebRTC 音频设备管理：从双向数据流到跨平台实现</title><link>https://lyapple2008.github.io/posts/202610/2026-10-25-webrtc%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/</link><pubDate>Sun, 25 Oct 2026 15:28:43 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202610/2026-10-25-webrtc%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/</guid><description><![CDATA[<p>麦克风把声音变成 PCM，扬声器把 PCM 变回声音。对一个实时通话系统来说，这两句话之间还有很多事情：选择设备、协商格式、启动音频流、适应设备回调的节奏，以及在耳机拔出、来电中断后恢复工作。</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>WebRTC 音频设备管理：从双向数据流到跨平台实现</title>
+      <link>https://lyapple2008.github.io/posts/202610/2026-10-25-webrtc%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Sun, 25 Oct 2026 15:28:43 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202610/2026-10-25-webrtc%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/</guid>
+      <description>&lt;p&gt;麦克风把声音变成 PCM，扬声器把 PCM 变回声音。对一个实时通话系统来说，这两句话之间还有很多事情：选择设备、协商格式、启动音频流、适应设备回调的节奏，以及在耳机拔出、来电中断后恢复工作。&lt;/p&gt;
+&lt;p&gt;WebRTC 把这些工作集中在 &lt;strong&gt;Audio Device Module，简称 ADM&lt;/strong&gt;。理解它，最好先建立整体位置，再沿着音频数据走一遍，最后进入代码和平台实现。否则很容易把“设备缓冲”“网络抖动缓冲”和“回声消除”混成一件事。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文以本地 &lt;code&gt;webrtc_src&lt;/code&gt; 的提交 &lt;code&gt;3dec7d05377fb690e84f503db865edde982ab2a5&lt;/code&gt; 为源码基线，提交日期为 2026-10-23。正文主要讨论使用内置设备模块的 native 音频路径；浏览器或业务方可以注入自己的 ADM，复用这里的接口而采用不同的数据通路。文中的源码链接固定到该提交，代码片段会标明是否经过简化。&lt;/p&gt;&lt;/blockquote&gt;</description>
+      <content:encoded><![CDATA[<p>麦克风把声音变成 PCM，扬声器把 PCM 变回声音。对一个实时通话系统来说，这两句话之间还有很多事情：选择设备、协商格式、启动音频流、适应设备回调的节奏，以及在耳机拔出、来电中断后恢复工作。</p>
 <p>WebRTC 把这些工作集中在 <strong>Audio Device Module，简称 ADM</strong>。理解它，最好先建立整体位置，再沿着音频数据走一遍，最后进入代码和平台实现。否则很容易把“设备缓冲”“网络抖动缓冲”和“回声消除”混成一件事。</p>
 <blockquote>
 <p>本文以本地 <code>webrtc_src</code> 的提交 <code>3dec7d05377fb690e84f503db865edde982ab2a5</code> 为源码基线，提交日期为 2026-10-23。正文主要讨论使用内置设备模块的 native 音频路径；浏览器或业务方可以注入自己的 ADM，复用这里的接口而采用不同的数据通路。文中的源码链接固定到该提交，代码片段会标明是否经过简化。</p></blockquote>
 <h2 id="一整体视角adm-是-webrtc-与操作系统音频-io-的边界">一、整体视角：ADM 是 WebRTC 与操作系统音频 I/O 的边界</h2>
 <h3 id="11-它在整个系统的什么位置">1.1 它在整个系统的什么位置</h3>
 <p>可以把 WebRTC 的音频部分分成三个层次：最下面连接操作系统和设备，中间处理 PCM，上面处理编码后的数据和网络传输。</p>
-<div class="mermaid" id="id-d7d259f51860">flowchart TB
+
+<div class="mermaid">flowchart TB
     APP[&#34;应用与 PeerConnection：通话、轨道和配置&#34;]
     NET[&#34;网络传输：RTP / RTCP / 安全传输&#34;]
     CODEC[&#34;编解码与接收缓冲：编码器、解码器、NetEq&#34;]
@@ -103,7 +168,8 @@ chart.setOption({
     CODEC &lt;--&gt;|&#34;PCM&#34;| PCM
     PCM &lt;--&gt;|&#34;PCM 与设备侧时序信息&#34;| ADM
     ADM &lt;--&gt; OS
-    OS &lt;--&gt; HW</div><p>这张图表达的是职责边界，不代表所有对象都按这个顺序相互持有。</p>
+    OS &lt;--&gt; HW</div>
+<p>这张图表达的是职责边界，不代表所有对象都按这个顺序相互持有。</p>
 <p>从上向下看，ADM 提供“准备并启停输入输出、获取和交付 PCM”的能力；从下向上看，它把不同系统的音频 API 适配成 WebRTC 能使用的接口。上层不必分别理解 WASAPI、CoreAudio、AudioRecord 或 AudioUnit。</p>
 <h3 id="12-adm-管理哪些事情">1.2 ADM 管理哪些事情</h3>
 <table>
@@ -143,7 +209,8 @@ chart.setOption({
 <p>这一节暂时忽略平台差异，只看各平台共同需要完成的事情。</p>
 <h3 id="21-采集数据由麦克风驱动向发送链路推送">2.1 采集数据：由麦克风驱动，向发送链路推送</h3>
 <p>用户说话时，操作系统不断提供新采集的音频。设备模块整理这些数据，向上层报告“这一段录音已经可用”，上层再进行处理和发送。</p>
-<div class="mermaid" id="id-5fedcca44340">flowchart TB
+
+<div class="mermaid">flowchart TB
     MIC[&#34;麦克风 / 系统输入缓冲&#34;]
     CAP[&#34;ADM：读取、格式适配、整理音频块&#34;]
     TRANS[&#34;音频运输桥接：接收采集 PCM&#34;]
@@ -153,12 +220,14 @@ chart.setOption({
     RTP[&#34;RTP 发送链路&#34;]
     MIC --&gt;|&#34;新采集的数据&#34;| CAP
     CAP --&gt;|&#34;PCM、格式、延迟、可选时间戳&#34;| TRANS
-    TRANS --&gt; APM --&gt; DIST --&gt; ENC --&gt; RTP</div><p>这是一种 <strong>push 模型</strong>：采集端产生数据，主动交付给上层。设备不会等编码器询问“你有没有新录音”。</p>
+    TRANS --&gt; APM --&gt; DIST --&gt; ENC --&gt; RTP</div>
+<p>这是一种 <strong>push 模型</strong>：采集端产生数据，主动交付给上层。设备不会等编码器询问“你有没有新录音”。</p>
 <p>在本文的默认路径中，同一份采集数据先经过公共 APM 处理，再向已注册的发送流分发；各发送流拥有自己的编码与发送过程。因此，“有多个发送流”不意味着每个流都重新打开一个麦克风。</p>
 <h3 id="22-播放数据由设备需求驱动向接收链路拉取">2.2 播放数据：由设备需求驱动，向接收链路拉取</h3>
 <p>播放的起点容易理解反了：网络包到达时，并不直接写进扬声器。网络到包是有抖动的，而扬声器需要按设备时钟持续消费音频。</p>
 <p>接收链路先把到来的压缩音频放入 NetEq；当设备需要下一段播放数据时，再由播放调用链拉取音频、完成接收处理并混音。</p>
-<div class="mermaid" id="id-35bfc8910a33">flowchart TB
+
+<div class="mermaid">flowchart TB
     PKT[&#34;远端 RTP 到包&#34;]
     NQ[&#34;各接收流的 NetEq：缓冲、按需解码与丢包补偿&#34;]
     SRC[&#34;各接收流提供 PCM&#34;]
@@ -172,7 +241,8 @@ chart.setOption({
     DEV -.-&gt;|&#34;设备需要音频，向上请求&#34;| OUT
     OUT -.-&gt;|&#34;调用混音&#34;| MIX
     MIX -.-&gt;|&#34;逐个请求接收流&#34;| SRC
-    SRC -.-&gt;|&#34;请求下一段音频&#34;| NQ</div><p>实线表示数据的交付方向，虚线表示播放需求的传播方向。<strong>播放数据向设备流动，播放请求向接收链路传播。</strong></p>
+    SRC -.-&gt;|&#34;请求下一段音频&#34;| NQ</div>
+<p>实线表示数据的交付方向，虚线表示播放需求的传播方向。<strong>播放数据向设备流动，播放请求向接收链路传播。</strong></p>
 <p>这里的 <strong>pull 模型</strong> 是逻辑关系：有的平台由系统回调直接触发拉取，有的平台由后端工作线程提前填充本地缓冲。共同点是播放节奏最终受设备消费速度约束，而不是受网络到包时刻支配。</p>
 <h3 id="23-为什么采集与播放还会在-apm-相遇">2.3 为什么采集与播放还会在 APM 相遇</h3>
 <p>假设扬声器播放远端声音，麦克风又把它录了进去。若原样发送，远端就会听到自己的回声。AEC（Acoustic Echo Cancellation，声学回声消除）需要同时观察两类信号：</p>
@@ -180,7 +250,8 @@ chart.setOption({
 <li><strong>采集信号</strong>：麦克风录下的近端语音、噪声和回声。</li>
 <li><strong>播放参考信号</strong>：本机准备播放的远端音频。</li>
 </ul>
-<div class="mermaid" id="id-917f49f1f3d7">flowchart TB
+
+<div class="mermaid">flowchart TB
     MIX[&#34;远端音频混音结果&#34;]
     REF[&#34;APM 播放参考：reverse stream&#34;]
     SPK[&#34;设备输出 → 扬声器&#34;]
@@ -191,7 +262,8 @@ chart.setOption({
     MIX --&gt; SPK --&gt; ROOM --&gt; MIC --&gt; PROC --&gt; SEND
     MIX --&gt; REF
     REF -.-&gt;|&#34;AEC 参考&#34;| PROC
-    DELAY[&#34;ADM 提供设备侧延迟估计&#34;] -.-&gt; PROC</div><p>因此，播放链路除了把音频送到设备，还会把混音结果送给 APM 的 reverse stream。采集侧再把设备侧延迟传给 APM，辅助对齐参考与录音。</p>
+    DELAY[&#34;ADM 提供设备侧延迟估计&#34;] -.-&gt; PROC</div>
+<p>因此，播放链路除了把音频送到设备，还会把混音结果送给 APM 的 reverse stream。采集侧再把设备侧延迟传给 APM，辅助对齐参考与录音。</p>
 <p>这里的参考是<strong>设备输出之前的数字音频</strong>，并非从扬声器重新录回来的声音；ADM 提供的延迟也只是播放和采集的设备侧估计，不包含全部网络、NetEq 和编解码延迟。</p>
 <h3 id="24-共同的数据契约16-bit-pcm-与-10-ms">2.4 共同的数据契约：16-bit PCM 与 10 ms</h3>
 <p>在本文所讨论的 <code>AudioDeviceBuffer</code> → <code>AudioTransportImpl</code> 路径中，上下层主要交换 <strong>16-bit、交错存储的 PCM</strong>，每次处理 <strong>10 ms</strong>。交错双声道的排列是 <code>L0, R0, L1, R1, ...</code>。</p>
@@ -225,14 +297,16 @@ chart.setOption({
 <p>这里一个 <strong>PCM frame</strong> 包含同一时刻所有声道的样本；它与源码中表示一整段音频的 <code>AudioFrame</code> 对象是两个概念。换成 16 kHz，10 ms 就是每声道 160 个样本，因此 10 ms 也不等于固定的 480 个样本。</p>
 <p><strong>10 ms 是逻辑处理粒度，设备回调周期和编码包时长可以不同。</strong> 设备可能每次给 128、192 或其他数量的 PCM frame；编码器也可能积累两个 10 ms 输入，才产出一个 20 ms 的编码包。</p>
 <p>以“48 kHz、单声道、每次设备回调 192 frame”为例，采集适配的过程可以是：</p>
-<div class="mermaid" id="id-5e70bac41400">flowchart TB
+
+<div class="mermaid">flowchart TB
     C1[&#34;回调 1：192 frame&#34;] --&gt; B1[&#34;累计 192：暂不交付&#34;]
     B1 --&gt; C2[&#34;回调 2：再来 192&#34;]
     C2 --&gt; B2[&#34;累计 384：暂不交付&#34;]
     B2 --&gt; C3[&#34;回调 3：再来 192&#34;]
     C3 --&gt; B3[&#34;累计 576&#34;]
     B3 --&gt; U[&#34;向上交付 480 frame = 10 ms&#34;]
-    B3 --&gt; R[&#34;保留 96 frame，供下一轮拼接&#34;]</div><p>播放侧执行相反操作：先按 10 ms 向上层取数，再按设备本次需要的大小切出，保留余量。<code>FineAudioBuffer</code> 就是完成这种块长适配的工具之一；另一些后端自己实现累计、拆分或环形缓冲。</p>
+    B3 --&gt; R[&#34;保留 96 frame，供下一轮拼接&#34;]</div>
+<p>播放侧执行相反操作：先按 10 ms 向上层取数，再按设备本次需要的大小切出，保留余量。<code>FineAudioBuffer</code> 就是完成这种块长适配的工具之一；另一些后端自己实现累计、拆分或环形缓冲。</p>
 <h2 id="三源码视角对象如何连接方法如何调用">三、源码视角：对象如何连接，方法如何调用</h2>
 <h3 id="31-先分清六个核心角色">3.1 先分清六个核心角色</h3>
 <table>
@@ -277,7 +351,8 @@ chart.setOption({
   </tbody>
 </table>
 <p>以通用 <code>AudioDeviceModuleImpl</code> 路径为例，对象关系如下。节点中合并标出接口与实现，箭头表示持有或调用关系，不表示单向音频流。</p>
-<div class="mermaid" id="id-f32cd10e7596">flowchart TB
+
+<div class="mermaid">flowchart TB
     VE[&#34;WebRtcVoiceEngine&#34;]
     STATE[&#34;AudioState&#34;]
     IMPL[&#34;AudioDeviceModule 接口&lt;br/&gt;实现示例：AudioDeviceModuleImpl&#34;]
@@ -299,28 +374,34 @@ chart.setOption({
     ADB --&gt;|&#34;注册的回调指针&#34;| TRANS
     TRANS --&gt;|&#34;调用&#34;| APM
     TRANS --&gt;|&#34;拉取&#34;| MIX
-    TRANS --&gt;|&#34;分发&#34;| SEND</div><p>这张图只展开一种 ADM 的内部组织。Android 的组合式 ADM、iOS SDK 的 <code>AudioDeviceModuleIOS</code>、Windows 的另一套 Core Audio ADM，都可以直接实现同一个公共接口，不需要继承 <code>AudioDeviceModuleImpl</code>。</p>
-<p>对应源码：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/api/audio/audio_device.h" target="_blank" rel="noopener noreffer ">ADM 公共接口</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/audio_device_impl.cc" target="_blank" rel="noopener noreffer ">通用 ADM 实现</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/audio_state.cc" target="_blank" rel="noopener noreffer ">AudioState</a>。</p>
+    TRANS --&gt;|&#34;分发&#34;| SEND</div>
+<p>这张图只展开一种 ADM 的内部组织。Android 的组合式 ADM、iOS SDK 的 <code>AudioDeviceModuleIOS</code>、Windows 的另一套 Core Audio ADM，都可以直接实现同一个公共接口，不需要继承 <code>AudioDeviceModuleImpl</code>。</p>
+<p>对应源码：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/api/audio/audio_device.h">ADM 公共接口</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/audio_device_impl.cc">通用 ADM 实现</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/audio_state.cc">AudioState</a>。</p>
 <h3 id="32-建立连接后端接入-adb再注册运输回调">3.2 建立连接：后端接入 ADB，再注册运输回调</h3>
 <p>第一处连接发生在设备模块内部。通用工厂创建后端后，调用：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-cpp">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// AudioDeviceModuleImpl::AttachAudioBuffer()，保留核心语句。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">audio_device_</span><span class="o">-&gt;</span><span class="n">AttachAudioBuffer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">audio_device_buffer_</span><span class="p">);</span></span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// AudioDeviceModuleImpl::AttachAudioBuffer()，保留核心语句。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">audio_device_</span><span class="o">-&gt;</span><span class="n">AttachAudioBuffer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">audio_device_buffer_</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>这让平台后端知道应该向哪个 ADB 交付录音、从哪个 ADB 获取播放数据。</p>
 <p>第二处连接发生在设备模块与音频引擎之间。<code>WebRtcVoiceEngine::Init()</code> 完成设备初始化和选项配置后，执行：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-cpp">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">adm</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">RegisterAudioCallback</span><span class="p">(</span><span class="n">audio_state</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">audio_transport</span><span class="p">());</span></span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">adm</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">RegisterAudioCallback</span><span class="p">(</span><span class="n">audio_state</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">audio_transport</span><span class="p">());</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p><code>audio_transport()</code> 返回内部 <code>AudioTransportImpl</code> 的接口指针；通用 ADM 再把这个指针交给 <code>AudioDeviceBuffer::RegisterAudioCallback()</code>。至此，<strong>后端 ↔ ADB ↔ AudioTransportImpl</strong> 才连通。</p>
 <p><code>AudioTransport</code> 是上层实现、下层调用的接口。尤其要注意：<code>NeedMorePlayData()</code> 虽然是“回调”，行为却是同步请求，上层要在返回前填好输出 PCM。</p>
-<p>初始化路径见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/media/engine/webrtc_voice_engine.cc" target="_blank" rel="noopener noreffer ">WebRtcVoiceEngine::Init</a> 和 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/media/engine/adm_helpers.cc" target="_blank" rel="noopener noreffer ">adm_helpers::Init</a>。允许内部设备的构建中，未注入 ADM 时会尝试创建平台默认实现；调用方也可以提供自己的 ADM。</p>
+<p>初始化路径见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/media/engine/webrtc_voice_engine.cc">WebRtcVoiceEngine::Init</a> 和 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/media/engine/adm_helpers.cc">adm_helpers::Init</a>。允许内部设备的构建中，未注入 ADM 时会尝试创建平台默认实现；调用方也可以提供自己的 ADM。</p>
 <h3 id="33-控制调用链初始化与真正运行分开">3.3 控制调用链：初始化与真正运行分开</h3>
 <p><code>Init()</code>、<code>InitMicrophone()</code> 和 <code>StartRecording()</code> 不是同一件事。公共接口把模块初始化、设备控制能力准备、I/O 流准备与运行分开；各平台实际创建资源的时机可能有所不同。</p>
 <table>
@@ -355,7 +436,8 @@ chart.setOption({
   </tbody>
 </table>
 <p>在 <code>AudioState</code> 中，运行还与收发流是否存在、录音/播放开关是否启用有关：</p>
-<div class="mermaid" id="id-060a8d40cd6f">flowchart TB
+
+<div class="mermaid">flowchart TB
     INIT[&#34;引擎 Init&lt;br/&gt;ADM 初始化、设备与能力配置、注册回调&#34;]
     INIT --&gt; SEND[&#34;加入发送流 / 启用录音&#34;]
     INIT --&gt; RECV[&#34;加入接收流 / 启用播放&#34;]
@@ -364,27 +446,43 @@ chart.setOption({
     SC --&gt;|&#34;是，且尚未录音&#34;| SI[&#34;InitRecording → StartRecording&#34;]
     RC --&gt;|&#34;是，且尚未播放&#34;| RI[&#34;InitPlayout → StartPlayout&#34;]
     SI --&gt; SS[&#34;最后一个发送流移除 / 关闭录音&lt;br/&gt;StopRecording&#34;]
-    RI --&gt; RS[&#34;最后一个接收流移除 / 关闭播放&lt;br/&gt;StopPlayout&#34;]</div><p>发送流注册时，<code>AudioState::UpdateAudioTransportWithSendingStreams()</code> 还会更新 <code>AudioTransportImpl</code> 中的发送者列表及所需采样率、声道数；接收流注册时，则通过 <code>AudioMixer::AddSource(stream-&gt;source())</code> 加入混音器。生命周期控制和 PCM 流动由此衔接起来。</p>
+    RI --&gt; RS[&#34;最后一个接收流移除 / 关闭播放&lt;br/&gt;StopPlayout&#34;]</div>
+<p>发送流注册时，<code>AudioState::UpdateAudioTransportWithSendingStreams()</code> 还会更新 <code>AudioTransportImpl</code> 中的发送者列表及所需采样率、声道数；接收流注册时，则通过 <code>AudioMixer::AddSource(stream-&gt;source())</code> 加入混音器。生命周期控制和 PCM 流动由此衔接起来。</p>
 <p>另一个细节是：当接收流仍存在、只是 <code>AudioState</code> 的 playout 开关被关闭时，<code>UpdateNullAudioPollerState()</code> 会启用 10 ms 定时拉取，让接收音频继续被消费。这和把接收流自身停止是不同的操作，不能把所有“静音”都理解成同一种状态。</p>
 <h3 id="34-采集调用链上半段后端--adb--apm">3.4 采集调用链上半段：后端 → ADB → APM</h3>
 <p>无论系统通过回调、事件还是读线程提供录音，后端最终需要把合适大小的 PCM 交给 ADB。以下为调用顺序示意，块长适配已由后端或 <code>FineAudioBuffer</code> 完成：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-cpp">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 伪代码：每次交付 10 ms，每声道样本数为 sample_rate / 100。
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 伪代码：每次交付 10 ms，每声道样本数为 sample_rate / 100。
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">adb</span><span class="o">-&gt;</span><span class="n">SetRecordedBuffer</span><span class="p">(</span><span class="n">pcm</span><span class="p">,</span> <span class="n">samples_per_channel</span><span class="p">,</span> <span class="n">capture_timestamp_ns</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">adb</span><span class="o">-&gt;</span><span class="n">SetVQEData</span><span class="p">(</span><span class="n">playout_delay_ms</span><span class="p">,</span> <span class="n">recording_delay_ms</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">adb</span><span class="o">-&gt;</span><span class="n">DeliverRecordedData</span><span class="p">();</span></span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl"><span class="n">adb</span><span class="o">-&gt;</span><span class="n">DeliverRecordedData</span><span class="p">();</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>这三步的作用分别是：复制 PCM 到 <code>rec_buffer_</code>；保存播放与采集延迟；通过已注册的 <code>AudioTransport</code> 把 PCM 和元数据交给上层。<code>SetRecordedBuffer()</code> 本身只保存本次给它的数据，不负责累计不足 10 ms 的输入。</p>
 <p><code>DeliverRecordedData()</code> 的关键调用可概括为：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-cpp">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 简化自 AudioDeviceBuffer::DeliverRecordedData()，省略错误处理。
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 简化自 AudioDeviceBuffer::DeliverRecordedData()，省略错误处理。
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">const</span> <span class="n">size_t</span> <span class="n">frames</span> <span class="o">=</span> <span class="n">rec_buffer_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="n">rec_channels_</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">size_t</span> <span class="n">bytes_per_frame</span> <span class="o">=</span> <span class="n">rec_channels_</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int16_t</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="kt">uint32_t</span> <span class="n">ignored_new_mic_level</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -394,7 +492,9 @@ chart.setOption({
 </span></span><span class="line"><span class="cl">    <span class="n">rec_channels_</span><span class="p">,</span> <span class="n">rec_sample_rate_</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="n">play_delay_ms_</span> <span class="o">+</span> <span class="n">rec_delay_ms_</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">typing_status_</span><span class="p">,</span> <span class="n">ignored_new_mic_level</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="n">capture_timestamp_ns_</span><span class="p">);</span></span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">    <span class="n">capture_timestamp_ns_</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>接口中的参数名 <code>nBytesPerSample</code> 容易误导：在这条 ADB 调用路径里，传入的是<strong>每个 PCM frame 的字节数</strong>，即 <code>声道数 × sizeof(int16_t)</code>。双声道为 4，不能直接按“一个标量样本 2 字节”去填。<code>AudioTransportImpl</code> 中也有相应的检查。</p>
 <p>进入 <code>AudioTransportImpl::RecordedDataIsAvailable()</code> 后，主要顺序是：</p>
 <ol>
@@ -405,10 +505,11 @@ chart.setOption({
 <li>设置可选的绝对采集时间，之后直接或经可选异步处理器进入 <code>SendProcessedData()</code>。</li>
 </ol>
 <p>如果后端提供采集时间戳，ADB 会利用 <code>TimestampAligner</code> 将它映射到 WebRTC 使用的时钟域；没有时间戳时，接口允许传入 <code>std::nullopt</code>。不要因为参数中还有 <code>clockDrift</code>、<code>currentMicLevel</code> 等历史字段，就假定当前 ADB 会提供有效数值：上面的实现对它们传入的是 0。</p>
-<p>实现见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/audio_device_buffer.cc" target="_blank" rel="noopener noreffer ">AudioDeviceBuffer</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/audio_transport_impl.cc" target="_blank" rel="noopener noreffer ">AudioTransportImpl</a> 和 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_processing/include/audio_frame_proxies.cc" target="_blank" rel="noopener noreffer ">APM 的 AudioFrame 适配函数</a>。</p>
+<p>实现见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/audio_device_buffer.cc">AudioDeviceBuffer</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/audio_transport_impl.cc">AudioTransportImpl</a> 和 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_processing/include/audio_frame_proxies.cc">APM 的 AudioFrame 适配函数</a>。</p>
 <h3 id="35-采集调用链下半段发送流--编码队列--rtp">3.5 采集调用链下半段：发送流 → 编码队列 → RTP</h3>
 <p><code>AudioTransportImpl::SendProcessedData()</code> 遍历已注册的 <code>AudioSender</code>，调用各发送流的 <code>SendAudioData()</code>。多个发送流需要数据时，为其中的流复制 <code>AudioFrame</code>，最后把原始对象移动给一个流。</p>
-<div class="mermaid" id="id-3199513e8f79">%%{init: {&#34;sequence&#34;: {&#34;wrap&#34;: true, &#34;width&#34;: 90, &#34;actorMargin&#34;: 12, &#34;diagramMarginX&#34;: 8, &#34;mirrorActors&#34;: false}}}%%
+
+<div class="mermaid">%%{init: {&#34;sequence&#34;: {&#34;wrap&#34;: true, &#34;width&#34;: 90, &#34;actorMargin&#34;: 12, &#34;diagramMarginX&#34;: 8, &#34;mirrorActors&#34;: false}}}%%
 sequenceDiagram
     participant D as 后端
     participant B as ADB
@@ -430,13 +531,24 @@ sequenceDiagram
     opt 编码器已积累足够数据
         Q-&gt;&gt;S: AudioPacketizationCallback::SendData
         S-&gt;&gt;S: RTPSenderAudio::SendAudio&lt;br/&gt;→ RTP 发送链路
-    end</div><p>图中 Transport 指 <code>AudioTransportImpl</code>，“发送链路”合并表示 <code>AudioSendStream</code> 和 <code>ChannelSend</code>。源码中的主链可按下面的顺序阅读：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">AudioTransportImpl::SendProcessedData
+    end</div>
+<p>图中 Transport 指 <code>AudioTransportImpl</code>，“发送链路”合并表示 <code>AudioSendStream</code> 和 <code>ChannelSend</code>。源码中的主链可按下面的顺序阅读：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">AudioTransportImpl::SendProcessedData
 </span></span><span class="line"><span class="cl">  → AudioSendStream::SendAudioData
 </span></span><span class="line"><span class="cl">  → ChannelSend::ProcessAndEncodeAudio
 </span></span><span class="line"><span class="cl">      → encoder_queue_-&gt;PostTask(...)
@@ -446,24 +558,31 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">          → AudioPacketizationCallback::SendData
 </span></span><span class="line"><span class="cl">              → ChannelSend::SendData
 </span></span><span class="line"><span class="cl">              → RTPSenderAudio::SendAudio
-</span></span><span class="line"><span class="cl">              → 后续 RTP 发送链路</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">              → 后续 RTP 发送链路</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p><strong>明确的线程交接发生在 <code>ChannelSend</code> 投递编码任务时。</strong> 默认同步路径中的格式调整、APM 以及发送流分发，会先在调用采集交付函数的线程上执行；启用额外异步处理时，中间还会增加交接点。</p>
 <p>另外，<code>Add10MsData()</code> 每次接受 10 ms，并不保证每次都回调 <code>SendData()</code>。编码器是否已经攒够一个包、是否启用 DTX 等都会影响输出。把设备帧、APM 处理帧和 RTP 包时长分开看，才能正确分析延迟。</p>
-<p>对应源码：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/audio_send_stream.cc" target="_blank" rel="noopener noreffer ">AudioSendStream</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/channel_send.cc" target="_blank" rel="noopener noreffer ">ChannelSend</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_coding/acm2/audio_coding_module.cc" target="_blank" rel="noopener noreffer ">AudioCodingModuleImpl</a>。</p>
+<p>对应源码：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/audio_send_stream.cc">AudioSendStream</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/channel_send.cc">ChannelSend</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_coding/acm2/audio_coding_module.cc">AudioCodingModuleImpl</a>。</p>
 <h3 id="36-播放调用链设备请求--混音器--接收流--neteq">3.6 播放调用链：设备请求 → 混音器 → 接收流 → NetEq</h3>
 <p>先看网络到包这一侧。<code>ChannelReceive::OnRtpPacket()</code> 解析和处理 RTP，在接收流处于播放状态时，经过 <code>OnReceivedPayloadData()</code> 把载荷插入 <code>NetEq::InsertPacket()</code>。这一步提供的是压缩音频，不会直接触发设备播放。</p>
 <p>真正消费音频的入口在设备侧。后端执行：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-cpp">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 伪代码：后端已经确定采样率、声道与 10 ms 块长。
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 伪代码：后端已经确定采样率、声道与 10 ms 块长。
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">adb</span><span class="o">-&gt;</span><span class="n">RequestPlayoutData</span><span class="p">(</span><span class="n">samples_per_channel</span><span class="p">);</span>  <span class="c1">// 向上层请求并保存 PCM。
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">adb</span><span class="o">-&gt;</span><span class="n">GetPlayoutData</span><span class="p">(</span><span class="n">device_buffer</span><span class="p">);</span>           <span class="c1">// 复制到后端提供的缓冲。
-</span></span></span></code></pre></div></div>
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p><code>RequestPlayoutData()</code> 同步调用 <code>AudioTransport::NeedMorePlayData()</code>。进入 <code>AudioTransportImpl</code> 后，它先调用混音器；混音器逐个向接收流请求音频；各流最终向自己的 NetEq 取出下一段 10 ms PCM。</p>
-<div class="mermaid" id="id-7784c4620244">%%{init: {&#34;sequence&#34;: {&#34;wrap&#34;: true, &#34;width&#34;: 80, &#34;actorMargin&#34;: 10, &#34;diagramMarginX&#34;: 8, &#34;mirrorActors&#34;: false}}}%%
+
+<div class="mermaid">%%{init: {&#34;sequence&#34;: {&#34;wrap&#34;: true, &#34;width&#34;: 80, &#34;actorMargin&#34;: 10, &#34;diagramMarginX&#34;: 8, &#34;mirrorActors&#34;: false}}}%%
 sequenceDiagram
     participant D as 后端
     participant B as ADB
@@ -488,13 +607,29 @@ sequenceDiagram
     T--&gt;&gt;B: 填好播放 PCM 与输出长度
     B--&gt;&gt;D: RequestPlayoutData 返回
     D-&gt;&gt;B: GetPlayoutData
-    B--&gt;&gt;D: 复制 PCM 到设备侧缓冲</div><p>图中 Transport 指 <code>AudioTransportImpl</code>，Mixer 指 <code>AudioMixer</code>，“接收链路”合并表示接收流和 <code>ChannelReceive</code>。展开方法名之后，主链是：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">平台输出回调 / 后端播放工作线程
+    B--&gt;&gt;D: 复制 PCM 到设备侧缓冲</div>
+<p>图中 Transport 指 <code>AudioTransportImpl</code>，Mixer 指 <code>AudioMixer</code>，“接收链路”合并表示接收流和 <code>ChannelReceive</code>。展开方法名之后，主链是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">平台输出回调 / 后端播放工作线程
 </span></span><span class="line"><span class="cl">  → [可选 FineAudioBuffer::GetPlayoutData]
 </span></span><span class="line"><span class="cl">  → AudioDeviceBuffer::RequestPlayoutData
 </span></span><span class="line"><span class="cl">  → AudioTransportImpl::NeedMorePlayData
@@ -509,14 +644,16 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">      → Resample
 </span></span><span class="line"><span class="cl">  ← PCM 写入 ADB 的 play_buffer_
 </span></span><span class="line"><span class="cl">  → AudioDeviceBuffer::GetPlayoutData
-</span></span><span class="line"><span class="cl">  → 后端缓冲 / 格式适配 → OS 输出</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">  → 后端缓冲 / 格式适配 → OS 输出</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>这里有三个关键点：</p>
 <ul>
 <li><strong>NetEq 是由播放需求拉动的。</strong> 它结合已有包和当前状态生成音频，可能解码新包、使用已解码的缓存，也可能执行丢包补偿；不是每次 <code>GetAudio()</code> 都恰好解码一个网络包。</li>
 <li><strong>混音之后才进入 APM 播放参考路径。</strong> AEC 需要观察本机准备输出的合成声音，而不只是某一条远端流。</li>
 <li><strong>重采样可能不止一次。</strong> 接收流先适配混音器要求的格式，混音结果再适配设备要求的采样率；设备侧仍可能存在原生格式转换。</li>
 </ul>
-<p>对应源码：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_mixer/audio_mixer_impl.cc" target="_blank" rel="noopener noreffer ">混音器</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/audio_receive_stream.cc" target="_blank" rel="noopener noreffer ">AudioReceiveStreamImpl</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/channel_receive.cc" target="_blank" rel="noopener noreffer ">ChannelReceive</a>。</p>
+<p>对应源码：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_mixer/audio_mixer_impl.cc">混音器</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/audio_receive_stream.cc">AudioReceiveStreamImpl</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/audio/channel_receive.cc">ChannelReceive</a>。</p>
 <p><code>AudioTransport</code> 还定义了 <code>PullRenderData()</code>。本基线中的注释说明，Chromium 使用这个入口并拥有自己的 APM，因此该方法没有在内部调用 <code>ProcessReverseStream()</code>；采集侧 <code>RecordedDataIsAvailable()</code> 的默认处理路径也注明不用于 Chromium。分析 Chrome 时，应继续追踪浏览器自己的采集与处理装配，不能把上面的 native 调用链直接套过去。</p>
 <h3 id="37-adbfineaudiobuffer-与-neteq三种缓冲分别解决什么">3.7 ADB、FineAudioBuffer 与 NetEq：三种缓冲分别解决什么</h3>
 <table>
@@ -550,11 +687,12 @@ sequenceDiagram
   </tbody>
 </table>
 <p><code>FineAudioBuffer::DeliverRecordedData()</code> 中的循环体现了这个区别：追加本次设备数据，只要缓存达到一个 10 ms 块，就调用 ADB 的 <code>SetRecordedBuffer()</code>、<code>SetVQEData()</code>、<code>DeliverRecordedData()</code>，剩余数据保留到下次。</p>
-<p>反向的 <code>GetPlayoutData()</code> 则不断请求 10 ms，直到足够满足设备这次的需求，然后复制所需部分并保留余量。它会缓存后端传入的播放延迟，供后续采集交付时一起上报。完整实现见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/fine_audio_buffer.cc" target="_blank" rel="noopener noreffer ">fine_audio_buffer.cc</a>。</p>
+<p>反向的 <code>GetPlayoutData()</code> 则不断请求 10 ms，直到足够满足设备这次的需求，然后复制所需部分并保留余量。它会缓存后端传入的播放延迟，供后续采集交付时一起上报。完整实现见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/fine_audio_buffer.cc">fine_audio_buffer.cc</a>。</p>
 <h2 id="四平台视角共用-pcm-边界底层采用不同的节奏">四、平台视角：共用 PCM 边界，底层采用不同的节奏</h2>
 <h3 id="41-差异集中在哪几层">4.1 差异集中在哪几层</h3>
 <p>上层的 <code>AudioTransport</code> 契约可以复用，但设备 API、后端组织、回调线程、设备路由和系统音效能力都存在差异。</p>
-<div class="mermaid" id="id-fae46282c0e4">flowchart LR
+
+<div class="mermaid">flowchart LR
     T[&#34;共同上层&lt;br/&gt;AudioTransport / APM&lt;br/&gt;混音 / 收发流&#34;]
     B[&#34;AudioDeviceBuffer&lt;br/&gt;共同的 PCM 交接点&#34;]
     T &lt;--&gt; B
@@ -562,7 +700,8 @@ sequenceDiagram
     B &lt;--&gt; M[&#34;macOS&lt;br/&gt;HAL、IOProc、环形缓冲与 worker&#34;]
     B &lt;--&gt; L[&#34;Linux&lt;br/&gt;PulseAudio 或 ALSA&#34;]
     B &lt;--&gt; A[&#34;Android&lt;br/&gt;Java / OpenSL ES / AAudio&#34;]
-    B &lt;--&gt; I[&#34;iOS&lt;br/&gt;AVAudioSession 与 VoiceProcessingIO&#34;]</div><table>
+    B &lt;--&gt; I[&#34;iOS&lt;br/&gt;AVAudioSession 与 VoiceProcessingIO&#34;]</div>
+<table>
   <thead>
       <tr>
           <th>平台 / 路径</th>
@@ -628,10 +767,11 @@ sequenceDiagram
 <p>播放线程的主过程是等待事件，通过 <code>GetCurrentPadding()</code> 确定输出缓冲还能容纳多少 frame，再按 10 ms 向 ADB 请求 PCM，最后提交到 WASAPI。采集线程从 <code>GetBuffer()</code> 取得数据，放入同步缓冲，凑足 10 ms 后交给 ADB。</p>
 <p>因此，即使一次系统事件对应的可读写数据不是 10 ms 的整倍数，上层仍可按 10 ms 工作。格式也由设备探测与协商确定，不能假定任何端点都接受同一个采样率和声道组合。</p>
 <p>本基线还保留另一套 <code>kWindowsCoreAudio2</code> 路径，通过 <code>CoreAudioInput</code> / <code>CoreAudioOutput</code> 组合成 ADM。它需要调用专用工厂 <code>CreateWindowsCoreAudioAudioDeviceModule()</code>；直接把这个枚举值传给通用 ADM 工厂会被拒绝。专用入口要求正确初始化 COM MTA，并提供 <code>automatic_restart</code> 参数控制断连后的自动重启。</p>
-<p>源码入口：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/win/audio_device_core_win.cc" target="_blank" rel="noopener noreffer ">audio_device_core_win.cc</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/include/audio_device_factory.h" target="_blank" rel="noopener noreffer ">专用工厂与约束</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/win/audio_device_module_win.cc" target="_blank" rel="noopener noreffer ">组合式 Windows ADM</a>。</p>
+<p>源码入口：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/win/audio_device_core_win.cc">audio_device_core_win.cc</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/include/audio_device_factory.h">专用工厂与约束</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/win/audio_device_module_win.cc">组合式 Windows ADM</a>。</p>
 <h3 id="43-macosioproc-与-webrtc-处理之间隔着环形缓冲">4.3 macOS：IOProc 与 WebRTC 处理之间隔着环形缓冲</h3>
 <p><code>AudioDeviceMac</code> 直接使用 CoreAudio HAL。系统在 IOProc 中提供输入、请求输出，而 WebRTC 上层的调用主要发生在后端工作线程中。环形缓冲把两边连接起来。</p>
-<div class="mermaid" id="id-55010c6ad7fb">flowchart TB
+
+<div class="mermaid">flowchart TB
     subgraph CAP[&#34;采集方向&#34;]
         CI[&#34;CoreAudio 输入 IOProc&#34;] --&gt; CR[&#34;输入环形缓冲&#34;]
         CR --&gt; CW[&#34;CaptureWorkerThread / AudioConverter&#34;]
@@ -641,15 +781,16 @@ sequenceDiagram
         PB[&#34;ADB：请求 10 ms&#34;] --&gt; PW[&#34;RenderWorkerThread&#34;]
         PW --&gt; PR[&#34;输出环形缓冲&#34;]
         PR --&gt; PO[&#34;CoreAudio 输出 IOProc / 格式转换&#34;]
-    end</div><p>这样做可以把上层处理与 IOProc 的实时节奏隔开。播放 worker 观察环形缓冲的可写空间，持续补充音频；采集 worker 从输入缓冲取数并做格式转换，再交付 ADB。它增加了本地缓冲，也需要在延迟估计中考虑这些缓冲。</p>
+    end</div>
+<p>这样做可以把上层处理与 IOProc 的实时节奏隔开。播放 worker 观察环形缓冲的可写空间，持续补充音频；采集 worker 从输入缓冲取数并做格式转换，再交付 ADB。它增加了本地缓冲，也需要在延迟估计中考虑这些缓冲。</p>
 <p>当前后端把 ADB 的默认格式设为采集 48 kHz 单声道、播放 48 kHz 双声道，并结合设备能力和配置调整声道；设备原生格式与内部格式之间由 <code>AudioConverter</code> 等逻辑适配。后端还监听设备、格式等属性变化。</p>
-<p>macOS 和 iOS 都属于 Apple 平台，但这份 macOS 实现采用 HAL、IOProc 与 worker 的组织方式，不能照搬下一节 iOS 的 AudioUnit 模型。源码见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/mac/audio_device_mac.cc" target="_blank" rel="noopener noreffer ">AudioDeviceMac</a>。</p>
+<p>macOS 和 iOS 都属于 Apple 平台，但这份 macOS 实现采用 HAL、IOProc 与 worker 的组织方式，不能照搬下一节 iOS 的 AudioUnit 模型。源码见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/mac/audio_device_mac.cc">AudioDeviceMac</a>。</p>
 <h3 id="44-linuxpulseaudio-服务端路径与-alsa-pcm-路径">4.4 Linux：PulseAudio 服务端路径与 ALSA PCM 路径</h3>
 <p><strong>PulseAudio 路径。</strong> 当构建启用 <code>WEBRTC_ENABLE_LINUX_PULSE</code> 时，通用 ADM 的 <code>kPlatformDefaultAudio</code> 选择 <code>AudioDeviceLinuxPulse</code>。后端加载 <code>libpulse</code>，创建 <code>pa_threaded_mainloop</code>、<code>pa_context</code>，连接服务端，再建立采集与播放的 <code>pa_stream</code>。读写回调与后端音频线程协作，完成本地 10 ms PCM 和服务端缓冲之间的交换。</p>
 <p>设备列表与默认 source / sink 来自服务端，因此系统混音和路由也是时序与设备行为的一部分。</p>
 <p><strong>ALSA 路径。</strong> 未启用 PulseAudio 时，平台默认走 ALSA；启用 PulseAudio 的构建也可显式选择 <code>kLinuxAlsaAudio</code>。<code>AudioDeviceLinuxALSA</code> 通过 <code>snd_pcm_readi()</code>、<code>snd_pcm_writei()</code> 读写 PCM，配合 <code>snd_pcm_wait()</code> 等待，以及 <code>snd_pcm_delay()</code> 获取延迟信息。</p>
 <p>两条路径都要处理“暂时没有足够数据”和异常恢复。ALSA 的 <code>ErrorRecovery()</code> 会针对 underrun 等错误恢复 PCM 状态；PulseAudio 后端通过服务端流状态和缓冲回调协调。它们共同向 ADB 提供 10 ms 音频，但缓冲层次、设备命名和路由来源不同。</p>
-<p>源码见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/linux/audio_device_pulse_linux.cc" target="_blank" rel="noopener noreffer ">PulseAudio 后端</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/linux/audio_device_alsa_linux.cc" target="_blank" rel="noopener noreffer ">ALSA 后端</a>。这里列的是 WebRTC 后端使用的 API，不能仅凭桌面系统采用了什么音频服务，就推断源码中存在同名的直接后端。</p>
+<p>源码见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/linux/audio_device_pulse_linux.cc">PulseAudio 后端</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/linux/audio_device_alsa_linux.cc">ALSA 后端</a>。这里列的是 WebRTC 后端使用的 API，不能仅凭桌面系统采用了什么音频服务，就推断源码中存在同名的直接后端。</p>
 <h3 id="45-android输入与输出可以采用不同-api">4.5 Android：输入与输出可以采用不同 API</h3>
 <p>Android 需要先问清楚“通过哪个工厂、选择哪种 AudioLayer 创建 ADM”。native API 的 <code>CreateAndroidAudioDeviceModule()</code> 支持这些组合：</p>
 <table>
@@ -696,12 +837,21 @@ sequenceDiagram
 </table>
 <p>在这个工厂中，请求 <code>kPlatformDefaultAudio</code> 时，若定义了 <code>WEBRTC_AUDIO_DEVICE_INCLUDE_ANDROID_AAUDIO</code>，选择 AAudio 双向路径；否则根据系统报告的低延迟输入/输出能力，在 OpenSL ES、混合路径和 Java 路径之间选择。这是该工厂的选择逻辑，不代表所有 Android SDK 接入都采用同样的默认值。</p>
 <p><strong>Java 路径的数据交接</strong>很适合作为一个具体例子：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">采集：WebRtcAudioRecord 的录音线程
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">采集：WebRtcAudioRecord 的录音线程
 </span></span><span class="line"><span class="cl">  → AudioRecord.read 写入 direct ByteBuffer
 </span></span><span class="line"><span class="cl">  → JNI → AudioRecordJni::DataIsRecorded
 </span></span><span class="line"><span class="cl">  → ADB::SetRecordedBuffer / SetVQEData / DeliverRecordedData
@@ -710,15 +860,18 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">  → JNI → AudioTrackJni::GetPlayoutData
 </span></span><span class="line"><span class="cl">  → ADB::RequestPlayoutData / GetPlayoutData
 </span></span><span class="line"><span class="cl">  → PCM 写入 direct ByteBuffer
-</span></span><span class="line"><span class="cl">  → AudioTrack.write</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">  → AudioTrack.write</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>direct <code>ByteBuffer</code> 让 JNI 可以访问已缓存的内存地址，减少 Java 与 C++ 交接的额外复制；不过 ADB 自身的保存和取数仍有复制，不能把整条链路理解为零拷贝。</p>
 <p>OpenSL ES 使用缓冲队列回调，AAudio 使用带 <code>num_frames</code> 的 data callback。它们通过 <code>FineAudioBuffer</code> 衔接设备块长与 10 ms。AAudio 播放端还会观察 xrun：欠载次数增加时，扩大一个 burst 的输出缓冲，以延迟换稳定性；断连时把重启工作投递到另一线程，而不是在错误回调中直接关闭、重开流。</p>
 <p>另一项差异是设备管理：这份组合式 Android ADM 的枚举接口返回一个逻辑输入和一个逻辑输出，不能据此得到全部手机麦克风、蓝牙和扬声器列表。路由需要结合 Android 系统音频管理与应用配置处理。Java 输入还可能使用系统 AEC/NS/AGC，启用时应与 APM 选项协调。</p>
-<p>源码入口：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/android/native_api/audio_device_module/audio_device_android.cc" target="_blank" rel="noopener noreffer ">Android 工厂与选择逻辑</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/android/src/jni/audio_device/audio_device_module.cc" target="_blank" rel="noopener noreffer ">AndroidAudioDeviceModule</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/android/src/jni/audio_device/audio_record_jni.cc" target="_blank" rel="noopener noreffer ">AudioRecordJni</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/android/src/jni/audio_device/audio_track_jni.cc" target="_blank" rel="noopener noreffer ">AudioTrackJni</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/android/src/jni/audio_device/aaudio_player.cc" target="_blank" rel="noopener noreffer ">AAudioPlayer</a>。</p>
+<p>源码入口：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/android/native_api/audio_device_module/audio_device_android.cc">Android 工厂与选择逻辑</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/android/src/jni/audio_device/audio_device_module.cc">AndroidAudioDeviceModule</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/android/src/jni/audio_device/audio_record_jni.cc">AudioRecordJni</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/android/src/jni/audio_device/audio_track_jni.cc">AudioTrackJni</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/android/src/jni/audio_device/aaudio_player.cc">AAudioPlayer</a>。</p>
 <h3 id="46-ios音频会话决定环境一个-audiounit-承担双向-io">4.6 iOS：音频会话决定环境，一个 AudioUnit 承担双向 I/O</h3>
 <p>iOS 的核心设备实现是 <code>AudioDeviceIOS</code>，SDK 可以通过 <code>AudioDeviceModuleIOS</code> 包装它。控制环境主要来自 <code>AVAudioSession</code>，实际 I/O 使用 Voice-Processing I/O AudioUnit。</p>
 <p>它与前面的独立输入/输出线程模型有一个明显区别：同一个全双工 AudioUnit 组织录音与播放，系统语音处理可以同时观察两侧信号。默认创建路径不旁路 voice processing；SDK 也提供 <code>bypass_voice_processing</code> 配置，因此应以实际创建选项判断系统处理是否启用。</p>
-<div class="mermaid" id="id-1a3824701901">flowchart TB
+
+<div class="mermaid">flowchart TB
     SESSION[&#34;AVAudioSession：路由、激活、中断、实际格式&#34;]
     UNIT[&#34;VoiceProcessingIO AudioUnit：双向 I/O&#34;]
     IN[&#34;输入回调：AudioUnitRender 获取 PCM&#34;]
@@ -728,10 +881,11 @@ sequenceDiagram
     SESSION -.-&gt;|&#34;配置与状态变化&#34;| UNIT
     UNIT --&gt; IN --&gt; FINE
     FINE --&gt; OUT --&gt; UNIT
-    FINE &lt;--&gt; ADB</div><p>初始化时要区分<strong>偏好参数</strong>与<strong>真实参数</strong>：<code>Init()</code> 先保存偏好采样率和声道；真正准备 I/O、激活 session 后，<code>SetupAudioBuffersForActiveAudioSession()</code> 再读取实际 <code>sampleRate</code> 和 <code>IOBufferDuration</code>，更新 ADB，并重建 <code>FineAudioBuffer</code>。</p>
+    FINE &lt;--&gt; ADB</div>
+<p>初始化时要区分<strong>偏好参数</strong>与<strong>真实参数</strong>：<code>Init()</code> 先保存偏好采样率和声道；真正准备 I/O、激活 session 后，<code>SetupAudioBuffersForActiveAudioSession()</code> 再读取实际 <code>sampleRate</code> 和 <code>IOBufferDuration</code>，更新 ADB，并重建 <code>FineAudioBuffer</code>。</p>
 <p>具体的采集入口是 <code>AudioDeviceIOS::OnDeliverRecordedData()</code>：它调用 AudioUnit 的 render 取得输入，再通过 <code>FineAudioBuffer::DeliverRecordedData()</code> 累积交付。播放入口是 <code>OnGetPlayoutData()</code>：它通过 <code>FineAudioBuffer::GetPlayoutData()</code> 取得当前回调需要的 PCM，不播放时填零。</p>
 <p>耳机路由变化、电话中断和采样率变化，都可能要求重新配置。后端把相关事件转交到拥有对象的线程，在需要时停止 AudioUnit、反初始化、读取新的 session 参数、重建缓冲并恢复运行。这里的设备选择主要属于 session 路由管理，不能套用桌面 ADM 的 index/GUID 操作方式。</p>
-<p>源码入口：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/objc/native/api/audio_device_module.mm" target="_blank" rel="noopener noreffer ">iOS SDK 工厂</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/objc/native/src/audio/audio_device_ios.mm" target="_blank" rel="noopener noreffer ">AudioDeviceIOS</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/objc/native/src/audio/voice_processing_audio_unit.mm" target="_blank" rel="noopener noreffer ">VoiceProcessingAudioUnit</a>。</p>
+<p>源码入口：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/objc/native/api/audio_device_module.mm">iOS SDK 工厂</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/objc/native/src/audio/audio_device_ios.mm">AudioDeviceIOS</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/objc/native/src/audio/voice_processing_audio_unit.mm">VoiceProcessingAudioUnit</a>。</p>
 <h3 id="47-哪些能力不能假定跨平台一致">4.7 哪些能力不能假定跨平台一致</h3>
 <table>
   <thead>
@@ -822,7 +976,15 @@ sequenceDiagram
 <li><strong>切换耳机后失声或变速</strong>：检查实际路由、采样率、声道和设备块长是否变化，ADB 参数及块长适配器是否随流重建而更新。</li>
 <li><strong>声音正常但回声明显</strong>：检查播放参考是否进入对应的 APM、设备延迟是否合理，以及系统语音处理与软件 APM 的启用配置是否匹配。</li>
 </ul>
-<p>这些检查贯穿全文的四个层次：先确认 ADM 是否接入并运行，再确认数据流是否连续，然后定位到具体的方法与线程交接，最后分析平台设备与路由行为。这样读代码，平台细节才有清晰的落点。</p>]]></description></item><item><title>一名音频程序员的科技自媒体创业调研</title><link>https://lyapple2008.github.io/posts/202609/2026-09-29-%E8%87%AA%E5%AA%92%E4%BD%93%E5%88%9B%E4%B8%9A%E8%B0%83%E7%A0%94/</link><pubDate>Tue, 29 Sep 2026 09:05:00 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-29-%E8%87%AA%E5%AA%92%E4%BD%93%E5%88%9B%E4%B8%9A%E8%B0%83%E7%A0%94/</guid><description><![CDATA[<p>最近开始认真考虑一件事：利用业余时间尝试科技自媒体，并观察它有没有发展成一门事业的可能。</p>
+<p>这些检查贯穿全文的四个层次：先确认 ADM 是否接入并运行，再确认数据流是否连续，然后定位到具体的方法与线程交接，最后分析平台设备与路由行为。这样读代码，平台细节才有清晰的落点。</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>一名音频程序员的科技自媒体创业调研</title>
+      <link>https://lyapple2008.github.io/posts/202609/2026-09-29-%E8%87%AA%E5%AA%92%E4%BD%93%E5%88%9B%E4%B8%9A%E8%B0%83%E7%A0%94/</link>
+      <pubDate>Tue, 29 Sep 2026 09:05:00 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202609/2026-09-29-%E8%87%AA%E5%AA%92%E4%BD%93%E5%88%9B%E4%B8%9A%E8%B0%83%E7%A0%94/</guid>
+      <description>我想尝试科技自媒体创业。这篇文章基于自己十多年音频算法和音视频开发经历，整理了账号定位、内容栏目、起步选题、制作流程和变现路径。</description>
+      <content:encoded><![CDATA[<p>最近开始认真考虑一件事：利用业余时间尝试科技自媒体，并观察它有没有发展成一门事业的可能。</p>
 <p>我做了十多年程序员，主要从事音频算法、音频应用和音视频直播相关开发。这段经历让我比较熟悉麦克风、耳机、降噪、回声消除、音频编解码、直播链路和 AI 语音等技术，也知道一项技术从演示到真正产品化之间，往往隔着很多工程问题。</p>
 <p>最初的想法是介绍最新、有意思的科技产品和技术，先通过模仿成熟博主学习选题、拍摄和表达。但继续往下想，“泛科技”并不是一个好的起点：它需要抢新闻、抢新品、拼设备和制作成本，而我最稀缺的优势反而容易被淹没。</p>
 <p>这篇文章是我对账号定位、内容方向、执行方式和变现路径的第一次系统整理。</p>
@@ -939,12 +1101,14 @@ sequenceDiagram
 <p>可以同时选择三类学习对象：一位擅长选题和标题，一位擅长把技术讲清楚，一位擅长镜头表达和节奏。把三者的优点组合起来，比完整模仿某一个人更容易形成自己的风格。</p>
 <h2 id="五固定视频结构">五、固定视频结构</h2>
 <p>面向普通消费者，可以先使用一个简单、可重复的脚本结构：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">生活场景 → 直接结论 → 对比实验 → 简单原理 → 购买建议</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">生活场景 → 直接结论 → 对比实验 → 简单原理 → 购买建议</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>例如讲降噪耳机，可以用一个普通用户经历过的问题开场：</p>
 <blockquote>
 <p>你的降噪耳机能消掉地铁声，却消不掉旁边的人说话，不一定是产品质量差。因为这两种声音对降噪算法来说，难度完全不同。</p></blockquote>
@@ -978,16 +1142,22 @@ sequenceDiagram
 <p>如果只选一条作为起点，我会选《降噪耳机为什么消不掉人声？》。这个问题认知门槛低、受众广、实验效果明显，又能立即展示自己的专业背景。</p>
 <h2 id="七一次研究生产多种内容">七、一次研究，生产多种内容</h2>
 <p>在职状态下，时间是最稀缺的资源，不能为每个平台分别研究一个选题。更可行的方式是：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">一个选题
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">一个选题
 </span></span><span class="line"><span class="cl">├── 一条 5～10 分钟的完整视频
 </span></span><span class="line"><span class="cl">├── 两到三条结论型短视频
 </span></span><span class="line"><span class="cl">├── 一篇完整的博客文章
-</span></span><span class="line"><span class="cl">└── 若干图文卡片或问答</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">└── 若干图文卡片或问答</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>平台分工可以先简化为：</p>
 <ul>
 <li>B 站发布完整内容，建立专业度和长期搜索价值；</li>
@@ -1061,7 +1231,15 @@ sequenceDiagram
 <p>现阶段比较清晰的方向，可以暂时概括为“声音科技实验室”：用真实实验拆解耳机、麦克风、直播和 AI 语音产品，面向普通消费者和科技爱好者讲清楚一项技术的价值、限制和购买建议。</p>
 <p>起步时不需要立即购买大量设备，也不需要同时经营所有平台。先用手机、现有耳机和电脑，以“真人讲解＋桌面实验＋少量动画”的方式，完成从选题、实验、拍摄、剪辑、发布到复盘的第一个闭环。</p>
 <p>第一个里程碑不是“成为大博主”，而是发出第一条能代表自己未来方向的内容，再根据真实反馈继续调整。</p>
-]]></description></item><item><title>用 OpenSpec 重构 AI Coding 工作流：让每次开发都可追溯、可恢复、可沉淀</title><link>https://lyapple2008.github.io/posts/202609/2026-09-28-ai-coding%E5%B7%A5%E4%BD%9C%E6%B5%81openspec/</link><pubDate>Mon, 28 Sep 2026 07:22:02 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-28-ai-coding%E5%B7%A5%E4%BD%9C%E6%B5%81openspec/</guid><description><![CDATA[<p>AI Coding 用得越多，我越能感觉到两个问题。</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>用 OpenSpec 重构 AI Coding 工作流：让每次开发都可追溯、可恢复、可沉淀</title>
+      <link>https://lyapple2008.github.io/posts/202609/2026-09-28-ai-coding%E5%B7%A5%E4%BD%9C%E6%B5%81openspec/</link>
+      <pubDate>Mon, 28 Sep 2026 07:22:02 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202609/2026-09-28-ai-coding%E5%B7%A5%E4%BD%9C%E6%B5%81openspec/</guid>
+      <description>AI Coding 快了，但方案反复、决策丢失和上下文中断也变得更常见。这篇文章介绍如何用 OpenSpec 把 Explore、Propose、Review、Apply 和 Archive 串成一条可复用的规格驱动开发流程。</description>
+      <content:encoded><![CDATA[<p>AI Coding 用得越多，我越能感觉到两个问题。</p>
 <p>第一个问题是：<strong>开发过程没有留下足够的中间记录。</strong></p>
 <p>Agent 可以很快生成大量代码，但方案不对时，常常只能整段推倒重来；某个架构决策是在对话里做的，过两天就不记得当时为什么这样选；一次任务被打断，换一个会话后，Agent 又要从头理解需求和已经做过的工作。真正丢失的不只是上下文，还有上下文中包含的判断。</p>
 <p>第二个问题是：<strong>AI Coding Agent 没有跟着我和项目一起成长。</strong></p>
@@ -1078,46 +1256,71 @@ sequenceDiagram
 <p>前者是变更日志，后者是随代码演进的活文档。当一次变更被 Archive，其中的需求会进入主 Spec，变更目录则被移入 <code>openspec/changes/archive/</code>。</p>
 <h2 id="安装和初始化">安装和初始化</h2>
 <p>OpenSpec 需要 Node.js 20.19.0 或更高版本。可以使用 npm 安装：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-bash">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">npm install -g @fission-ai/openspec@latest
-</span></span><span class="line"><span class="cl">openspec --version</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">npm install -g @fission-ai/openspec@latest
+</span></span><span class="line"><span class="cl">openspec --version</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>macOS 也可以直接使用 Homebrew：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-bash">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install openspec</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install openspec</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>然后在项目根目录执行：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-bash">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">openspec init</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">openspec init</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p><code>init</code> 会询问正在使用哪些 AI 工具，为 Claude Code、Codex、Cursor 等工具安装对应的 Skill 或命令，并在项目中生成：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">openspec/
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">openspec/
 </span></span><span class="line"><span class="cl">├── config.yaml       # 项目上下文和工作流规则
 </span></span><span class="line"><span class="cl">├── specs/            # 已经上线的系统规格
 </span></span><span class="line"><span class="cl">└── changes/          # 正在开发的变更
-</span></span><span class="line"><span class="cl">    └── archive/      # 已完成的变更记录</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">    └── archive/      # 已完成的变更记录</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>这些都是普通文本文件，应该和代码一起提交到 Git，而不是仅保存在某一次会话中。初始化或 OpenSpec 升级后，可以用 <code>openspec update</code> 刷新项目中的 Skills 和命令。</p>
 <p><code>config.yaml</code> 值得单独提一下。它的 <code>context</code> 会进入每个 OpenSpec 工作流，适合放置会影响所有变更的少量事实；<code>rules</code> 可以约束某类产物；<code>operations</code> 则能约束 Apply 和 Archive 如何执行。例如：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-yaml">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
 </span></span></span><span class="line"><span class="cl"><span class="sd">  Tech stack: TypeScript, Node.js, PostgreSQL
 </span></span></span><span class="line"><span class="cl"><span class="sd">  所有 API 变更都必须兼容现有客户端
 </span></span></span><span class="line"><span class="cl"><span class="sd">  所有 OpenSpec 产物使用中文</span><span class="w">
@@ -1129,11 +1332,14 @@ sequenceDiagram
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">operations</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">apply</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">guidance</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">在标记任务完成前运行测试和 Lint</span></span></span></code></pre></div></div>
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">在标记任务完成前运行测试和 Lint</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>配置要尽量短。能从代码读出来的信息没必要重复塞进去，否则只会占用 Agent 的上下文。</p>
 <h2 id="一条完整的-openspec-工作流">一条完整的 OpenSpec 工作流</h2>
 <p>OpenSpec 官方的核心流程是 Explore → Propose → Review → Apply → Archive。如果把“发现问题后如何回退”也画进去，完整的开发过程更像下面这样：</p>
-<div class="mermaid" id="id-64008caa5c28">flowchart LR
+
+<div class="mermaid">flowchart LR
     idea[&#34;需求 / 问题&#34;] --&gt; explore[&#34;1. Explore&lt;br/&gt;读代码、澄清边界、比较方案&#34;]
     explore --&gt; propose[&#34;2. Propose&lt;br/&gt;生成 Proposal、Spec、Design、Tasks&#34;]
     propose --&gt; review{&#34;3. Review&lt;br/&gt;人工确认问题、验收条件和任务&#34;}
@@ -1143,7 +1349,8 @@ sequenceDiagram
     apply -- &#34;中断 / 换会话&#34; --&gt; resume[&#34;读取变更文件&lt;br/&gt;从第一个未完成任务继续&#34;]
     resume --&gt; apply
     apply -- &#34;代码、测试、验收全部通过&#34; --&gt; archive[&#34;5. Archive&lt;br/&gt;同步主 Spec，归档变更&#34;]
-    archive -. &#34;下一个变更&#34; .-&gt; idea</div><p>这条流程最重要的是：**代码不是一开始就出现，而是在规格经过确认后才出现。**修改几段 Markdown 的成本，远低于让 Agent 重写几千行代码。</p>
+    archive -. &#34;下一个变更&#34; .-&gt; idea</div>
+<p>这条流程最重要的是：**代码不是一开始就出现，而是在规格经过确认后才出现。**修改几段 Markdown 的成本，远低于让 Agent 重写几千行代码。</p>
 <h2 id="放进一个真实需求中怎么用">放进一个真实需求中怎么用</h2>
 <p>以“接入 RNNoise 降噪模型”为例。最初的需求往往只有一句话：</p>
 <blockquote>
@@ -1151,13 +1358,16 @@ sequenceDiagram
 <p>这句话还不能直接变成代码。按 OpenSpec 流程，可以这样做。</p>
 <h3 id="1-explore先把问题想清楚">1. Explore：先把问题想清楚</h3>
 <p>在 AI 对话中说：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请用 OpenSpec Explore 模式调查接入 RNNoise 降噪模型的需求。
-</span></span><span class="line"><span class="cl">先读取现有音频采集、重采样、编码和线程调度代码，画出当前音频链路，列出需要确认的边界和备选方案，暂时不写代码。</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请用 OpenSpec Explore 模式调查接入 RNNoise 降噪模型的需求。
+</span></span><span class="line"><span class="cl">先读取现有音频采集、重采样、编码和线程调度代码，画出当前音频链路，列出需要确认的边界和备选方案，暂时不写代码。</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>Explore 阶段应该回答这些问题：</p>
 <ul>
 <li>当前输入音频的采样率、通道数、数据类型和每次回调帧长是什么？</li>
@@ -1170,32 +1380,52 @@ sequenceDiagram
 <p>如果这些结论没有想清楚，Agent 越快，只会越快地实现一个错误方案。</p>
 <h3 id="2-propose把讨论变成可审查的文件">2. Propose：把讨论变成可审查的文件</h3>
 <p>方向确认后，继续说：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请就刚才确认的 RNNoise 接入方案创建 OpenSpec change，变更名称为 integrate-rnnoise-denoiser。</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请就刚才确认的 RNNoise 接入方案创建 OpenSpec change，变更名称为 integrate-rnnoise-denoiser。</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>Agent 会创建类似这样的目录：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">openspec/changes/integrate-rnnoise-denoiser/
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">openspec/changes/integrate-rnnoise-denoiser/
 </span></span><span class="line"><span class="cl">├── proposal.md       # 为什么做，改动范围是什么
 </span></span><span class="line"><span class="cl">├── specs/
 </span></span><span class="line"><span class="cl">│   └── rnnoise-denoising/
 </span></span><span class="line"><span class="cl">│       └── spec.md  # 可验收的行为要求
 </span></span><span class="line"><span class="cl">├── design.md         # 关键技术决策，需要时才创建
-</span></span><span class="line"><span class="cl">└── tasks.md          # 实现清单和进度</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">└── tasks.md          # 实现清单和进度</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p><code>spec.md</code> 不应该只写“接入 RNNoise”，而应该写成可验收的系统行为。例如：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-markdown">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="gu">### Requirement: 实时 RNNoise 降噪
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="gu">### Requirement: 实时 RNNoise 降噪
 </span></span></span><span class="line"><span class="cl"><span class="gu"></span>
 </span></span><span class="line"><span class="cl">系统必须在实时音频链路中按 RNNoise 帧规格连续处理音频，并保持输出的时序和时长与输入一致。
 </span></span><span class="line"><span class="cl">
@@ -1205,7 +1435,9 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl"><span class="k">-</span> **THEN** 系统必须先缓冲并组成 480 个采样点的完整帧
 </span></span><span class="line"><span class="cl"><span class="k">-</span> **AND** 每个完整帧必须严格按时间顺序调用一次 RNNoise 推理
 </span></span><span class="line"><span class="cl"><span class="k">-</span> **AND** 同一条音频流必须在相邻帧之间复用同一个模型状态
-</span></span><span class="line"><span class="cl">- <span class="gs">**AND**</span> 新建音频流或发生不连续跳转时必须重置状态</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">- <span class="gs">**AND**</span> 新建音频流或发生不连续跳转时必须重置状态</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p><code>design.md</code> 则应该记录“为什么”：为什么选原生 RNNoise 或 ONNX Runtime，为什么在重采样之后、编码之前执行降噪，如何管理每条流的隐状态，多声道是独立降噪还是先混音，曾经考虑过哪些方案又为什么放弃。这些内容比最后那几行推理调用更值得保留。</p>
 <h3 id="3-review把最贵的错误留在纸面上">3. Review：把最贵的错误留在纸面上</h3>
 <p>Propose 完成后不要立即点头让 Agent 写代码。建议按下面的顺序审查：</p>
@@ -1218,13 +1450,16 @@ sequenceDiagram
 <p>发现“现有采集输出其实是 44.1 kHz 立体声”或“多路音频不能共用同一个 RNNoise 状态”，可以直接编辑 Markdown，也可以让 Agent 更新变更文件。审查完成前，不产生业务代码。</p>
 <h3 id="4-apply换一个干净上下文开始实现">4. Apply：换一个干净上下文开始实现</h3>
 <p>OpenSpec 官方建议在新的会话中执行 Apply，把上一阶段的讨论噪声留在规格外面。可以直接说：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请 Apply integrate-rnnoise-denoiser 这个 OpenSpec change。
-</span></span><span class="line"><span class="cl">按 tasks.md 逐项实现，每项完成后运行对应验证，只在通过后勾选任务。</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请 Apply integrate-rnnoise-denoiser 这个 OpenSpec change。
+</span></span><span class="line"><span class="cl">按 tasks.md 逐项实现，每项完成后运行对应验证，只在通过后勾选任务。</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>Agent 会先读取这次变更的文件，再按 <code>tasks.md</code> 逐项实现。如果中途被打断，在新会话中再次要求 Apply 即可，新 Agent 会从第一个未勾选的任务继续。</p>
 <p>如果实现过程发现原方案有问题，不要只在代码中偷偷改口径。先修正 Spec、Design 或 Tasks，再继续 Apply。否则文档与代码会从这里开始分叉。</p>
 <h3 id="5-verify-和-archive用事实关闭变更">5. Verify 和 Archive：用事实关闭变更</h3>
@@ -1239,12 +1474,14 @@ sequenceDiagram
 </ul>
 <p>OpenSpec 还提供可选的 Verify 工作流，可用来检查实现是否与变更产物一致。默认配置不一定安装它，没有 Verify 时，也可以让另一个新会话根据 Spec 做独立 Review。</p>
 <p>所有任务、测试和人工验收全部通过后，再说：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请 Archive integrate-rnnoise-denoiser 这个 OpenSpec change。</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请 Archive integrate-rnnoise-denoiser 这个 OpenSpec change。</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>Archive 会把这次变更的行为要求合并到 <code>openspec/specs/</code>，并把变更目录移入 <code>openspec/changes/archive/</code>。Git 仍然是独立的事：规格、代码和测试应该在同一条变更链上提交和审查。</p>
 <h2 id="openspec-如何解决没有中间记录">OpenSpec 如何解决“没有中间记录”</h2>
 <p>回到开头的第一个问题，OpenSpec 的作用非常直接。</p>
@@ -1299,7 +1536,8 @@ sequenceDiagram
 <li><strong>个人记忆</strong>：使用者偏好的实现方式、可接受的风险、审查习惯和解释粒度。</li>
 </ol>
 <p>这些记忆不能只管写入，还要有一个可审查的学习闭环：</p>
-<div class="mermaid" id="id-12179c7f8002">flowchart LR
+
+<div class="mermaid">flowchart LR
     work[&#34;需求开发 / Bug / 线上故障&#34;] --&gt; reflect[&#34;复盘：提取候选经验&#34;]
     reflect --&gt; approve{&#34;人工确认&lt;br/&gt;是否正确、可复用&#34;}
     approve -- &#34;否&#34; --&gt; discard[&#34;丢弃或仅保留原始记录&#34;]
@@ -1308,7 +1546,8 @@ sequenceDiagram
     retrieve --&gt; plan[&#34;影响 Explore、Spec 和 Review&#34;]
     plan --&gt; measure[&#34;用测试、Review 和结果验证&#34;]
     measure --&gt; update[&#34;加强、修正、降权或过期&#34;]
-    update --&gt; memory</div><p>这样的 Agent 才不是把历史聊天全部塞进 Prompt，而是能够做四件事：</p>
+    update --&gt; memory</div>
+<p>这样的 Agent 才不是把历史聊天全部塞进 Prompt，而是能够做四件事：</p>
 <ul>
 <li>知道什么值得记住，什么只是当时的噪声；</li>
 <li>在正确的任务中取回正确的经验，而不是无差别加载所有过去；</li>
@@ -1331,13 +1570,21 @@ sequenceDiagram
 <p>它还没有让 Agent 真正学会长期成长，但已经先为成长准备了可信的原料：规格、决策、任务、验证和变更历史。我期待下一步，AI Coding Agent 能在这些原料上形成可审查、可纠正、可遗忘的长期记忆。到那时，它才不只是一个每次都很聪明的临时工，而是一个真正会随着使用者和项目共同进化的协作者。</p>
 <h2 id="参考资料">参考资料</h2>
 <ul>
-<li><a href="https://openspec.dev/docs/installation" target="_blank" rel="noopener noreffer ">OpenSpec Installation</a></li>
-<li><a href="https://openspec.dev/docs/setup" target="_blank" rel="noopener noreffer ">OpenSpec Set up your project</a></li>
-<li><a href="https://openspec.dev/docs/quickstart" target="_blank" rel="noopener noreffer ">OpenSpec Quickstart</a></li>
-<li><a href="https://openspec.dev/docs/project-config" target="_blank" rel="noopener noreffer ">OpenSpec Project configuration</a></li>
-<li><a href="https://github.com/Fission-AI/OpenSpec" target="_blank" rel="noopener noreffer ">OpenSpec GitHub</a></li>
+<li><a href="https://openspec.dev/docs/installation">OpenSpec Installation</a></li>
+<li><a href="https://openspec.dev/docs/setup">OpenSpec Set up your project</a></li>
+<li><a href="https://openspec.dev/docs/quickstart">OpenSpec Quickstart</a></li>
+<li><a href="https://openspec.dev/docs/project-config">OpenSpec Project configuration</a></li>
+<li><a href="https://github.com/Fission-AI/OpenSpec">OpenSpec GitHub</a></li>
 </ul>
-]]></description></item><item><title>当代码越来越便宜，软件工程师还值钱吗？</title><link>https://lyapple2008.github.io/posts/202609/2026-09-17-chatgpt%E7%BB%99%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BB%BA%E8%AE%AE/</link><pubDate>Thu, 17 Sep 2026 16:55:34 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-17-chatgpt%E7%BB%99%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BB%BA%E8%AE%AE/</guid><description><![CDATA[<p>AI Coding 已经进入软件开发的完整流程：读代码、写代码、补测试、查问题、改文档，甚至可以自己运行命令，再根据结果继续迭代。它带来的不只是效率提升，也有一个越来越难回避的问题：</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>当代码越来越便宜，软件工程师还值钱吗？</title>
+      <link>https://lyapple2008.github.io/posts/202609/2026-09-17-chatgpt%E7%BB%99%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BB%BA%E8%AE%AE/</link>
+      <pubDate>Thu, 17 Sep 2026 16:55:34 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202609/2026-09-17-chatgpt%E7%BB%99%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BB%BA%E8%AE%AE/</guid>
+      <description>当代码生成越来越便宜，工程师真正稀缺的能力是什么？这篇文章整理了我和 ChatGPT 关于职业前景的一次长谈，以及一条从 AI Coding、Spec 到 Agent Engineering 的个人进阶路线。</description>
+      <content:encoded><![CDATA[<p>AI Coding 已经进入软件开发的完整流程：读代码、写代码、补测试、查问题、改文档，甚至可以自己运行命令，再根据结果继续迭代。它带来的不只是效率提升，也有一个越来越难回避的问题：</p>
 <blockquote>
 <p>当 AI 可以完成越来越多开发工作，以后还需要软件工程师吗？如果需要，工程师真正值钱的能力又是什么？</p></blockquote>
 <p>最近我把这个问题抛给了 ChatGPT，又结合自己的情况继续追问：一个已经做了多年 C/C++、音视频和移动端开发的工程师，应该继续深挖原来的技术栈，还是转向 AI Agent？如果要转，具体该学什么？</p>
@@ -1346,20 +1593,25 @@ sequenceDiagram
 <p>AI 改变的不是软件是否还要有人负责，而是代码正在从稀缺的生产能力，变成越来越便宜的生产资料。未来更稀缺的，是能把模糊问题变成正确系统、能驾驭 AI 完成交付，并能判断结果是否可靠的人。</p>
 <h2 id="一消失的不是工程师而是代码生产的溢价">一、消失的不是工程师，而是代码生产的溢价</h2>
 <p>过去的软件开发流程大致是：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">需求 → 设计 → 写代码 → Debug → 测试 → 发布 → 维护</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">需求 → 设计 → 写代码 → Debug → 测试 → 发布 → 维护</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>其中大量时间花在查 API、写样板代码、补测试、重构和整理文档上。如今这些环节正在被 AI 快速压缩，新的流程更像：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">问题 → 需求澄清 → 系统设计 → 任务拆解 → Agent 实现
-</span></span><span class="line"><span class="cl">     → 自动验证 → 人工决策 → 上线 → 持续反馈</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">问题 → 需求澄清 → 系统设计 → 任务拆解 → Agent 实现
+</span></span><span class="line"><span class="cl">     → 自动验证 → 人工决策 → 上线 → 持续反馈</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>这里有一个很重要的变化：<strong>代码生产的成本下降了，决策、验证和责任的成本却没有一起消失。</strong></p>
 <p>AI 可以在几分钟内生成上千行代码，但它并不知道业务到底想解决什么，不会天然理解系统里的隐性约束，也不会替团队承担线上事故的责任。生成得越快，人越需要回答三个问题：</p>
 <ol>
@@ -1370,16 +1622,22 @@ sequenceDiagram
 <p>这意味着软件开发正在经历一次“抽象层上移”。过去工程师的主要产出是代码，接下来更重要的产出会逐渐变成：清晰的问题定义、可执行的规格、合理的系统边界，以及可验证的交付结果。</p>
 <h2 id="二未来更重要的五种能力">二、未来更重要的五种能力</h2>
 <p>把工程师的能力从底到顶排列，大致可以分成五层：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">问题与产品判断       最稀缺
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">问题与产品判断       最稀缺
 </span></span><span class="line"><span class="cl">系统设计与工程取舍
 </span></span><span class="line"><span class="cl">领域知识与工程经验
 </span></span><span class="line"><span class="cl">验证、测试与可观测性
-</span></span><span class="line"><span class="cl">编码与工具使用       逐渐普及</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">编码与工具使用       逐渐普及</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>这不是说 Coding 不再重要，而是 Coding 的角色变了：它正在从主要产出，变成理解系统、约束 AI 和处理疑难问题的基础能力。</p>
 <h3 id="1-定义问题而不是急着写代码">1. 定义问题，而不是急着写代码</h3>
 <p>假设需求只有一句话：“做一个 AI 实时字幕功能。”</p>
@@ -1406,38 +1664,50 @@ sequenceDiagram
 <li>如何升级、降级、回滚和观测。</li>
 </ul>
 <p>还是以实时字幕为例，链路可以画成：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Audio Capture → PCM → VAD → ASR → 稳定化 → 翻译 → 字幕展示</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Audio Capture → PCM → VAD → ASR → 稳定化 → 翻译 → 字幕展示</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>AI 可以分别实现每个模块，但“为什么这样拆”仍是人的工作。哪里需要 streaming，谁管理 buffer 的 ownership，ASR 的中间结果何时 commit，翻译失败是否阻塞原文字幕——这些选择共同决定了系统是否可用。</p>
 <h3 id="3-保留真正的领域深度">3. 保留真正的领域深度</h3>
 <p>当通用代码越来越容易生成，领域知识反而会更有价值。</p>
 <p>“会写 Python”很容易被模型复制；但理解 AEC、NS、AGC、VAD、重采样、SIMD、缓存、实时线程、延迟和功耗之间的关系，就不是生成一段代码那么简单。这里面包含长期积累的边界条件、失败经验和取舍能力。</p>
 <p>这也是我不打算丢掉音视频和 C/C++，完全转成“Agent 开发者”的原因。更合理的组合是：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">音视频 / DSP 领域能力
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">音视频 / DSP 领域能力
 </span></span><span class="line"><span class="cl">        +
 </span></span><span class="line"><span class="cl">C/C++ 与移动端工程能力
 </span></span><span class="line"><span class="cl">        +
 </span></span><span class="line"><span class="cl">AI Coding / Agent 杠杆
 </span></span><span class="line"><span class="cl">        =
-</span></span><span class="line"><span class="cl">更高产出的系统工程师</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">更高产出的系统工程师</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>AI 应该放大已有的专业能力，而不是把它替换成一套很快就会普及的工具操作。</p>
 <h3 id="4-建立验证-ai-的能力">4. 建立验证 AI 的能力</h3>
 <p>AI 生成的代码量越大，工程师越不能只靠“看起来没问题”来验收。未来很常见的工作流会是：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Human → Spec → Agent → 大量代码 → 自动验证 → Human Review</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Human → Spec → Agent → 大量代码 → 自动验证 → Human Review</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>真正困难的问题是：<strong>怎么证明 Agent 写对了？</strong></p>
 <p>因此下面这些传统工程能力不但不会过时，反而会成为 AI Coding 的基础设施：</p>
 <ul>
@@ -1449,12 +1719,23 @@ sequenceDiagram
 <p>我最近研究的 gtest、ASAN、UBSAN、TSAN 和 simpleperf，看起来都不是最热门的“AI 技术”，却恰好是在给 AI 产出建立护栏。代码可以由 Agent 写，验收标准不能临时猜。</p>
 <h3 id="5-从使用-agent-到指挥-agent">5. 从使用 Agent 到指挥 Agent</h3>
 <p>AI Coding 不应该停留在“问 ChatGPT 一个问题，再复制一段代码”。更成熟的方式是把工作拆给不同角色：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">                  Human
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">                  Human
 </span></span><span class="line"><span class="cl">                    │
 </span></span><span class="line"><span class="cl">              Specification
 </span></span><span class="line"><span class="cl">                    │
@@ -1465,7 +1746,9 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">                    ↓
 </span></span><span class="line"><span class="cl">             Review / Benchmark
 </span></span><span class="line"><span class="cl">                    ↓
-</span></span><span class="line"><span class="cl">              Human Approval</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">              Human Approval</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>人的工作会越来越接近 Architect、Reviewer 和 Agent Operator 的组合：给出上下文和约束，拆分任务，选择工具，处理冲突，并对最终结果负责。</p>
 <p>但这不意味着可以放弃 Coding。不会 C++ 的人，很难发现一个看似普通的 <code>std::vector&lt;float&gt;</code> 背后是否存在多余分配、拷贝、生命周期、对齐或缓存问题；不了解并发的人，也很难识别 AI 写出的偶发竞态。<strong>不一定要亲手写完每一行，但必须有能力判断这些代码是否可信。</strong></p>
 <h2 id="三哪些岗位会减少哪些工程师会更值钱">三、哪些岗位会减少，哪些工程师会更值钱</h2>
@@ -1500,15 +1783,25 @@ sequenceDiagram
   </tbody>
 </table>
 <p>我想走的是第三条路。目标不是和 AI 比谁敲代码快，而是把自己的领域经验、工程判断和 AI 的执行能力组合起来，完成过去需要更多人协作才能完成的系统。</p>
-<p>这个结论也延续了我之前对 AI Coding 的看法。我曾在<a href="/posts/202601/2026-02-01-%e5%85%b3%e4%ba%8eaicoding%e7%9a%84%e4%b8%80%e4%ba%9b%e6%84%9f%e6%83%b3%e5%92%8c%e5%90%8e%e7%bb%ad%e7%9a%84%e8%a7%84%e5%88%92/" rel="">《关于 AI Coding 的一些感想和后续规划》</a>里写过，AI 的能力边界很大程度受使用者影响，生产代码的责任仍在人身上。现在再往前一步看，真正的变化不只是“用 AI 写得更快”，而是要围绕 AI 重新设计整套软件工程流程。</p>
+<p>这个结论也延续了我之前对 AI Coding 的看法。我曾在<a href="/posts/202601/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/">《关于 AI Coding 的一些感想和后续规划》</a>里写过，AI 的能力边界很大程度受使用者影响，生产代码的责任仍在人身上。现在再往前一步看，真正的变化不只是“用 AI 写得更快”，而是要围绕 AI 重新设计整套软件工程流程。</p>
 <h2 id="四我的进阶路线从-ai-coding-到-ai-native-engineering">四、我的进阶路线：从 AI Coding 到 AI-Native Engineering</h2>
 <p>结合我目前的基础，更合适的路线不是从零转行做大模型，也不是追逐所有 Agent 框架，而是：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">传统工程能力补强
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">传统工程能力补强
 </span></span><span class="line"><span class="cl">        ↓
 </span></span><span class="line"><span class="cl">AI Coding 工作流
 </span></span><span class="line"><span class="cl">        ↓
@@ -1518,18 +1811,23 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">        ↓
 </span></span><span class="line"><span class="cl">MCP / Tool / Agent Runtime
 </span></span><span class="line"><span class="cl">        ↓
-</span></span><span class="line"><span class="cl">AI-Native Software Engineering</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">AI-Native Software Engineering</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>这条路线可以用 6～9 个月建立基本体系，但各阶段不需要等前一阶段“学完”才开始。更有效的节奏始终是：学一点，马上放进真实项目；遇到问题，再回来补知识。</p>
 <h3 id="stage-0补强软件工程闭环">Stage 0：补强软件工程闭环</h3>
 <p>时间：2～4 周。</p>
 <p>这一阶段不是重新学习语法，而是把注意力从 Coding 拉回完整交付：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Requirement → Spec → Architecture → Implementation
-</span></span><span class="line"><span class="cl">            → Test → Benchmark → Release → Observability</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Requirement → Spec → Architecture → Implementation
+</span></span><span class="line"><span class="cl">            → Test → Benchmark → Release → Observability</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>重点补三块：</p>
 <ul>
 <li><strong>Architecture</strong>：模块、接口、依赖、ownership、生命周期、状态、并发和错误处理；</li>
@@ -1565,19 +1863,31 @@ sequenceDiagram
 <h3 id="stage-3亲手实现一个-mini-agent">Stage 3：亲手实现一个 Mini Agent</h3>
 <p>时间：1～2 个月。</p>
 <p>这一阶段才正式学习 Agent、LLM、Tool Calling、Context、Planning、Memory、Reflection 和 Sub-agent。最好的入口不是先读几十个框架，而是用 TypeScript 写一个最小 Agent：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">User → LLM → Tool Call → Tool Result → LLM → Answer</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">User → LLM → Tool Call → Tool Result → LLM → Answer</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>第一版只需要 filesystem、calculator、shell 三个 Tool；第二版加入多轮上下文和循环执行：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-ts">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">llm</span><span class="p">(</span><span class="nx">messages</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">toolCall</span><span class="p">)</span> <span class="p">{</span>
@@ -1587,18 +1897,22 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">answer</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>真正理解这个循环后，再读各种 Agent Framework，就能看见包装之下共同的骨架。</p>
 <p>TypeScript 不需要从头学遍，只要先掌握 <code>type</code>、<code>interface</code>、泛型、联合类型、<code>Promise</code>、<code>async/await</code>、模块和 npm，够用就往项目里走。</p>
 <h3 id="stage-4理解-mcp工具与安全边界">Stage 4：理解 MCP、工具与安全边界</h3>
 <p>时间：约 1 个月。</p>
 <p>Agent Loop 本身并不神秘，工程复杂度主要来自 Agent 与真实世界的连接：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Agent + Tools + Context + State + Permissions + Reliability + Security</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Agent + Tools + Context + State + Permissions + Reliability + Security</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>这个阶段要理解 Tool、Resource、Prompt 和 MCP Client 如何连接文件系统、GitHub、数据库和其他服务。除了“能调用”，还要继续追问：</p>
 <ul>
 <li>工具权限如何限制；</li>
@@ -1611,13 +1925,16 @@ sequenceDiagram
 <h3 id="stage-5阅读真实的-agent-runtime">Stage 5：阅读真实的 Agent Runtime</h3>
 <p>时间：1～2 个月。</p>
 <p>有了 Mini Agent 和 MCP 的基础，再研究 Codex、OpenClaw、Pi 或 Agent SDK 这类真实系统。不要从源码第一行顺序读，而是沿着运行链路追踪：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">CLI → Runtime → Session → Agent Loop → LLM
-</span></span><span class="line"><span class="cl">    → Tool → Context → Memory → Sub-agent</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">CLI → Runtime → Session → Agent Loop → LLM
+</span></span><span class="line"><span class="cl">    → Tool → Context → Memory → Sub-agent</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>面对任何 Agent Runtime，都可以用八个问题拆解：</p>
 <ol>
 <li>Agent Loop 在哪里？</li>
@@ -1629,17 +1946,21 @@ sequenceDiagram
 <li>Sub-agent 如何隔离上下文、并行工作和汇总结果？</li>
 <li>权限、审批和审计边界在哪里？</li>
 </ol>
-<p>我之前整理过<a href="/posts/202604/2026-04-02-claude-code%e6%98%af%e5%a6%82%e4%bd%95%e5%b7%a5%e4%bd%9c%e7%9a%84/" rel="">《从 Claude Code 学习 Agent 开发》</a>，当时得到的结论是“一个循环加工具就是 Agent”。这句话适合解释原理；真正到了工程里，难点则是如何让这个循环在长期运行、上下文变化和工具失败时仍然可靠。</p>
+<p>我之前整理过<a href="/posts/202604/2026-04-02-claude-code%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/">《从 Claude Code 学习 Agent 开发》</a>，当时得到的结论是“一个循环加工具就是 Agent”。这句话适合解释原理；真正到了工程里，难点则是如何让这个循环在长期运行、上下文变化和工具失败时仍然可靠。</p>
 <h3 id="stage-6建立-ai-native-开发方式">Stage 6：建立 AI-Native 开发方式</h3>
 <p>这是持续演进的阶段。最终目标不是“会用 Copilot”，而是让整个开发过程围绕人和 Agent 的分工重新组织：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Idea → Explore → Specification → Architecture
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Idea → Explore → Specification → Architecture
 </span></span><span class="line"><span class="cl">     → Implementation Agent → Test Agent → Review Agent
-</span></span><span class="line"><span class="cl">     → Benchmark → Human Approval → Release</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">     → Benchmark → Human Approval → Release</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>人在关键决策点介入，Agent 承担可拆分、可验证的执行工作。任何一步都不能只因为“模型说完成了”就算完成，最终仍要回到构建结果、测试、指标和验收标准。</p>
 <h2 id="五用三个项目把路线串起来">五、用三个项目把路线串起来</h2>
 <p>学习 Agent 最容易掉进的坑，是看了很多框架，收藏了很多名词，却没有一条真实链路把它们连起来。与其做几十个 Demo，不如做三个逐步升级的项目。</p>
@@ -1647,12 +1968,14 @@ sequenceDiagram
 <p>用 TypeScript 实现 LLM、Tool Calling 和 Agent Loop，控制在 1～2 周。目标不是做一个能用的产品，而是把 Agent 的最小原理亲手跑通。</p>
 <h3 id="project-2audio-coding-agent">Project 2：Audio Coding Agent</h3>
 <p>让 Agent 分析一个真实的 C++ Audio Pipeline，寻找 CPU Hotspot、内存拷贝、重采样开销、线程问题和潜在竞态。给它配置 filesystem、代码搜索、Git、编译、gtest 和 simpleperf 等工具，形成：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Analyze → Plan → Modify → Build → Test → Benchmark → Report</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Analyze → Plan → Modify → Build → Test → Benchmark → Report</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>这个项目能把我已有的 C++、音频、性能优化经验和 Agent Engineering 串在一起。与通用 Coding Agent 相比，领域知识会真正参与结果判断。</p>
 <h3 id="project-3ai-native-实时字幕应用">Project 3：AI-Native 实时字幕应用</h3>
 <p>最后选择一个完整项目，例如 iOS 双语实时字幕，从想法开始严格走一遍 Spec、架构、任务拆分、实现、测试、Benchmark 和发布流程。可以让不同 Agent 分别承担探索、编码、测试、性能和 Review，但每一步都必须有明确输入、输出和验收标准。</p>
@@ -1709,11 +2032,11 @@ sequenceDiagram
 <h2 id="七参考资料">七、参考资料</h2>
 <p>资料不需要多，先沿着主线读官方文档：</p>
 <ul>
-<li><a href="https://openai.com/business/guides-and-resources/how-openai-uses-codex/" target="_blank" rel="noopener noreffer ">How OpenAI uses Codex</a>：观察 AI Coding 如何进入真实工程流程；</li>
-<li><a href="https://openai.com/index/running-codex-safely/" target="_blank" rel="noopener noreffer ">Running Codex safely</a>：理解权限、环境和人工审批；</li>
-<li><a href="https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/" target="_blank" rel="noopener noreffer ">A practical guide to building agents</a>：建立 Agent 的整体模型；</li>
-<li><a href="https://www.typescriptlang.org/docs/handbook/" target="_blank" rel="noopener noreffer ">TypeScript Handbook</a> 与 <a href="https://www.typescriptlang.org/docs/handbook/2/modules.html" target="_blank" rel="noopener noreffer ">Modules</a>：补齐实现 Agent 所需的 TypeScript 子集；</li>
-<li><a href="https://openspec.dev/docs/quickstart" target="_blank" rel="noopener noreffer ">OpenSpec Quickstart</a>：把 Spec 驱动流程放进真实项目。</li>
+<li><a href="https://openai.com/business/guides-and-resources/how-openai-uses-codex/">How OpenAI uses Codex</a>：观察 AI Coding 如何进入真实工程流程；</li>
+<li><a href="https://openai.com/index/running-codex-safely/">Running Codex safely</a>：理解权限、环境和人工审批；</li>
+<li><a href="https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/">A practical guide to building agents</a>：建立 Agent 的整体模型；</li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/">TypeScript Handbook</a> 与 <a href="https://www.typescriptlang.org/docs/handbook/2/modules.html">Modules</a>：补齐实现 Agent 所需的 TypeScript 子集；</li>
+<li><a href="https://openspec.dev/docs/quickstart">OpenSpec Quickstart</a>：把 Spec 驱动流程放进真实项目。</li>
 </ul>
 <p>读资料时不追求“系统学完”。每看懂一个概念，就在项目中找到它的位置；没有项目对应的知识，过一段时间大概率还会忘掉。</p>
 <h2 id="八最后不要成为工具收藏家">八、最后：不要成为工具收藏家</h2>
@@ -1722,14 +2045,22 @@ sequenceDiagram
 <p>未来优秀的软件工程师，应该能定义问题、设计系统、驾驭 Agent、验证结果，并对最终交付负责。</p></blockquote>
 <p>因此，不应该按照“先学 TypeScript，再学 Agent，再学 MCP，再学某个框架”的课程目录前进。更有效的方式，是始终围绕一个真实项目：项目需要什么，就补什么；做出结果，再复盘哪些判断可以沉淀成 Spec、测试、工具或工作流。</p>
 <p>代码正在变便宜，但正确的软件并没有因此自动出现。会写代码仍然重要，只是它不再是终点。接下来真正值得投入的，是把领域经验、系统工程和 AI 组织成一套能持续交付的能力。</p>
-]]></description></item><item><title>矩阵乘法优化：从三层循环到 Apple Silicon</title><link>https://lyapple2008.github.io/posts/202609/2026-09-06-%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95%E4%BC%98%E5%8C%96/</link><pubDate>Sun, 06 Sep 2026 21:30:00 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-06-%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95%E4%BC%98%E5%8C%96/</guid><description><![CDATA[<p>深度学习里最贵的那几下，多半是矩阵乘法。注意力的 $QK^{\top}$ 和 $PV$、全连接、卷积展开之后，都是</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>矩阵乘法优化：从三层循环到 Apple Silicon</title>
+      <link>https://lyapple2008.github.io/posts/202609/2026-09-06-%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Sun, 06 Sep 2026 21:30:00 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202609/2026-09-06-%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95%E4%BC%98%E5%8C%96/</guid>
+      <description>在 Mac mini M2 Pro 上把朴素 GEMM 从 2.5 GFLOPS 推到 Accelerate 的 2.7 TFLOPS。每一步先看数据怎么走，再改代码，最后对照这颗芯片的存储层次和 AMX。</description>
+      <content:encoded><![CDATA[<p>深度学习里最贵的那几下，多半是矩阵乘法。注意力的 $QK^{\top}$ 和 $PV$、全连接、卷积展开之后，都是</p>
 <p>$$C = AB,\qquad C_{ij}=\sum_k A_{ik},B_{kj}$$</p>
 <p>算力是 $O(n^3)$，访存是 $O(n^2)$。算术强度大约是 $n/6$（三个矩阵各扫一遍、FP32）。$n$ 小的时候吃带宽，$n$ 大的时候吃算力。优化不是把循环写得更花，而是让每个被请上芯片的数，多干几次活。</p>
 <p>这篇文章按「图示原理 → 硬件瓶颈 → 最短代码 → 本机数字」往下走。平台是眼前这台 <strong>Mac mini M2 Pro</strong>（6 个性能核 + 4 个能效核，16GB 统一内存）。编译器 Apple clang 21，<code>-O3 -ffast-math</code>，方阵 FP32，暖机后取中位数。iOS 和 macOS 共用同一套 Accelerate，后面会单独讲两堵不同的墙。</p>
-<p></p>
+<p><img alt="一行乘一列，得到 C 的一个数" loading="lazy" src="/images/2026-09/gemm-overview.svg"></p>
 <h2 id="先看这颗芯片">先看这颗芯片</h2>
 <p>后面每一步都回扣这里。M2 Pro 上其实有两张地图：数据住在哪一层，以及谁来算。</p>
-<p></p>
+<p><img alt="M2 Pro 存储层次与计算单元" loading="lazy" src="/images/2026-09/gemm-m2pro-hierarchy.svg"></p>
 <p>几个后面会反复用到的数：</p>
 <ul>
 <li>cache line <strong>128B</strong>，一行刚好 32 个 FP32</li>
@@ -1740,33 +2071,43 @@ sequenceDiagram
 </ul>
 <p>macOS 和 iOS 的指令集是同源的。差的不是「会不会写 kernel」，是频率墙、热和 QoS。</p>
 <p>用 Roofline 把终点立住：naive 贴在带宽墙上，Accelerate 已经顶到 AMX 的算力墙。中间那些优化，就是把点往右上挪。</p>
-<p></p>
+<p><img alt="本机 Roofline：naive 贴带宽墙，Accelerate 顶 AMX" loading="lazy" src="/images/2026-09/gemm-roofline.svg"></p>
 <p>阶梯是这样的：</p>
-<div class="mermaid" id="id-11300ce04093">flowchart LR
+
+<div class="mermaid">flowchart LR
     naive[naive ijk] --&gt; ikj[循环交换 ikj]
     ikj --&gt; tile[Cache 分块]
     tile --&gt; pack[Packing]
     pack --&gt; reg[寄存器分块]
     reg --&gt; neon[NEON 微核]
     neon --&gt; gcd[GCD 多线程]
-    gcd --&gt; amx[Accelerate / AMX]</div><p>不是每一步都会更快。有的步是在给下一步铺路，单独拿出来测会变慢。这本身就是软硬件合在一起时该有的诚实。</p>
+    gcd --&gt; amx[Accelerate / AMX]</div>
+<p>不是每一步都会更快。有的步是在给下一步铺路，单独拿出来测会变慢。这本身就是软硬件合在一起时该有的诚实。</p>
 <h2 id="1-naive-ijk按教科书写按列去跳">1. Naive ijk：按教科书写，按列去跳</h2>
 <p>图先看。内层循环沿 B 的列往下走：</p>
-<p></p>
+<p><img alt="naive ijk 的访问轨迹：B 跨行走" loading="lazy" src="/images/2026-09/gemm-naive-ijk.svg"></p>
 <p>行主序里，<code>B[k, j]</code> 的下一拍是 <code>B[k+1, j]</code>，中间隔了整行。cache line 请来 32 个数，用完 1 个就丢掉。L1 帮不上忙，预取器也跟不住这种步长。</p>
 <p>卡在哪：不是乘法慢，是 <strong>B 的跨步访问把带宽浪费了</strong>。</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-c">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kt">float</span> <span class="n">s</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="n">s</span> <span class="o">+=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">B</span><span class="p">[</span><span class="n">k</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="n">j</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">        <span class="n">C</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span></span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>本机数字：</p>
 <table>
   <thead>
@@ -1802,22 +2143,30 @@ sequenceDiagram
 <p>$N$ 一大，立刻掉到 2～3 GFLOPS。这就是后面所有加速比的分母。</p>
 <h2 id="2-循环交换-ikj同一套乘法换一条路">2. 循环交换 ikj：同一套乘法，换一条路</h2>
 <p>把 $j$ 收到最里面。固定一个 $A_{ik}$，沿 B 的第 $k$ 行走过去，C 的第 $i$ 行就地累加。</p>
-<p></p>
+<p><img alt="ikj：B 和 C 都变成顺序扫" loading="lazy" src="/images/2026-09/gemm-order-ikj.svg"></p>
 <p>对照更清楚。上面跨行跳，下面顺序扫，算的是同一件事：</p>
-<p></p>
+<p><img alt="ijk 与 ikj 访问轨迹对照" loading="lazy" src="/images/2026-09/gemm-order-compare.svg"></p>
 <p>卡在哪：还是标量乘法，但 <strong>空间局部性回来了</strong>。128B 的 cache line 里 32 个 FP32 终于被用上。</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-c">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">memset</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">memset</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="kt">float</span> <span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="n">k</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="n">C</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">B</span><span class="p">[</span><span class="n">k</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="n">j</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span></span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>本机数字（相对 naive）：</p>
 <table>
   <thead>
@@ -1858,18 +2207,23 @@ sequenceDiagram
 <p>只换循环顺序，大矩阵直接快一个数量级。这是整篇文章里，<strong>代码改动最小、收益最稳</strong> 的一步。后面所有花活，都建立在「先别跟 cache line 作对」之上。</p>
 <h2 id="3-cache-分块一次只请得起三块">3. Cache 分块：一次只请得起三块</h2>
 <p>$N=1024$ 时，三个矩阵各 4MB，已经超出单核 L1，也挤得 L2 很满。ikj 靠预取还能维持 29 GFLOPS，但微核如果想把一块 A 反复乘很多块 B，这三块必须先住进缓存。</p>
-<p></p>
+<p><img alt="一次只装进能住进 L1/L2 的 A、B、C 三块" loading="lazy" src="/images/2026-09/gemm-tiling.svg"></p>
 <p>块大小怎么反推：P 核 L1D 大约 128KB。一块 $128\times 256$ 的 FP32 panel 刚好 128KB，可以钉在 L1；对应的 B panel 放到 L2。A 留下，扫完所有 N 方向的块，再换下一段 K。这就是 Goto / BLIS 那套「外层大块 + 内层微核」的骨架。</p>
 <p>卡在哪：工作集超过缓存时，<strong>复用半径必须由块大小显式管住</strong>。预取器救得了顺序流，救不了「同时想记住三块还在长的矩阵」。</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-c">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i0</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i0</span> <span class="o">+=</span> <span class="n">MC</span><span class="p">)</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i0</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i0</span> <span class="o">+=</span> <span class="n">MC</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k0</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">k0</span> <span class="o">+=</span> <span class="n">KC</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j0</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j0</span> <span class="o">+=</span> <span class="n">NC</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="cm">/* 对 A[i0:i0+MC, k0:k0+KC] · B[k0:k0+KC, j0:j0+NC] 做 ikj */</span></span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">            <span class="cm">/* 对 A[i0:i0+MC, k0:k0+KC] · B[k0:k0+KC, j0:j0+NC] 做 ikj */</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>本机上，单独给 ikj 套一层 64×64 分块，并没有更快：</p>
 <table>
   <thead>
@@ -1905,12 +2259,12 @@ sequenceDiagram
 <p>这不是分块错了。是 <strong>ikj 已经被预取器喂饱，多出来的三重分块循环在收税</strong>。分块的价值要等微核出现：只有当你真的会把同一块 A 连乘很多块 B，把它钉在 L1 才划算。下面两步会把这件事做实。</p>
 <h2 id="4-packing给微核铺一条直道">4. Packing：给微核铺一条直道</h2>
 <p>微核希望每次 load 都是连续的、宽度刚好是 NR。原矩阵里，一个 $K_c\times N_r$ 的 panel 每行只要 8 个数，行与行之间却隔着整行步长。</p>
-<p></p>
+<p><img alt="panel 从原矩阵散落位置，打成连续条带" loading="lazy" src="/images/2026-09/gemm-packing.svg"></p>
 <p>卡在哪：即便块已经在缓存里，<strong>跨步 load 仍会打断微核的流水线，TLB 也更容易 miss</strong>。</p>
 <p>打包本身是一次 gather。只打包、微核仍是标量，拷贝成本会把收益吃光——本机 packed 标量核只有 <strong>7.5 GFLOPS</strong>，比 ikj 慢三倍。Packing 不是优化，是 <strong>给下一步快微核付的入场费</strong>。</p>
 <h2 id="5-寄存器分块c-的一小窗不要来回写">5. 寄存器分块：C 的一小窗不要来回写</h2>
 <p>微核窗口盖在 C 上。4×8 一共 32 个累加器，K 维走完再写回内存。</p>
-<p></p>
+<p><img alt="4×8 微核窗口和寄存器累加器" loading="lazy" src="/images/2026-09/gemm-regblock.svg"></p>
 <p>卡在哪：没有这一层，每次 <code>c[j] += a * b[j]</code> 都要读 C、写 C。C 的流量从 $O(n^2)$ 变成跟着 $K$ 放大。寄存器分块把 C 的写回从「每个 k 一次」收成「每个微核一次」。</p>
 <p>本机 4×4 标量寄存器分块：</p>
 <table>
@@ -1947,14 +2301,22 @@ sequenceDiagram
 <p>小矩阵整表住在缓存里，寄存器分块几乎白捡一倍。$N=2048$ 时没有外层 cache 分块护着，窗口外的 A、B 重新开始流，数字掉下去。再一次：微核和分块是一对，拆开都不完整。</p>
 <h2 id="6-neon一次-fma-吃-4-个-fp32">6. NEON：一次 FMA 吃 4 个 FP32</h2>
 <p>Apple Silicon 的 P 核每个周期能发多条 128-bit FMA。标量循环喂不饱它们。一条 NEON 寄存器装 4 个 FP32，<code>vfmaq_f32</code> 做的是「广播一个 $A_{ik}$，乘 B 的一行向量，累加进 C」。</p>
-<p></p>
+<p><img alt="128-bit 车道：广播 A × 向量 B → 累加 C" loading="lazy" src="/images/2026-09/gemm-neon.svg"></p>
 <p>卡在哪：算力墙从「标量 ALU」换成了 <strong>向量流水线</strong>。要喂饱它，pack 好的 A、B 和寄存器里的 C 必须同时在岗。</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-c">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">float32x4_t</span> <span class="n">c0</span> <span class="o">=</span> <span class="nf">vdupq_n_f32</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">c1</span> <span class="o">=</span> <span class="nf">vdupq_n_f32</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">float32x4_t</span> <span class="n">c0</span> <span class="o">=</span> <span class="nf">vdupq_n_f32</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">c1</span> <span class="o">=</span> <span class="nf">vdupq_n_f32</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">kc</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">float32x4_t</span> <span class="n">a</span> <span class="o">=</span> <span class="nf">vld1q_f32</span><span class="p">(</span><span class="n">Ap</span> <span class="o">+</span> <span class="n">k</span> <span class="o">*</span> <span class="mi">4</span><span class="p">);</span>     <span class="cm">/* 4 行 A */</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">float32x4_t</span> <span class="n">b0</span> <span class="o">=</span> <span class="nf">vld1q_f32</span><span class="p">(</span><span class="n">Bp</span> <span class="o">+</span> <span class="n">k</span> <span class="o">*</span> <span class="mi">8</span><span class="p">);</span>
@@ -1962,7 +2324,9 @@ sequenceDiagram
 </span></span><span class="line"><span class="cl">    <span class="n">c0</span> <span class="o">=</span> <span class="nf">vfmaq_laneq_f32</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">c1</span> <span class="o">=</span> <span class="nf">vfmaq_laneq_f32</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="cm">/* 其余 3 行同理 */</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>加上前面的分块和 packing，单线程微核在本机非常稳：</p>
 <table>
   <thead>
@@ -2008,18 +2372,24 @@ sequenceDiagram
 <p>大约 50 GFLOPS，几乎不随 $N$ 抖。说明微核已经把单核 NEON 的数据通路走顺了。6 个 P 核的 NEON 理论峰值大约在 600+ GFLOPS 这个量级，单核 50 离「喂饱一条核」还有距离，但已经不是访存在主导。</p>
 <h2 id="7-多线程先喂-p-核并看-qos">7. 多线程：先喂 P 核，并看 QoS</h2>
 <p>C 按行块切开，每块独立写自己的行，GCD concurrent 往外派。M2 Pro 是 6 个 P 核 + 4 个 E 核。默认队列不一定把活都堆在 P 核上；<code>QOS_CLASS_USER_INTERACTIVE</code> 会明确告诉调度器：这是前台要的算力。</p>
-<p></p>
+<p><img alt="按行块切开，6 条 P 核 + 4 条 E 核" loading="lazy" src="/images/2026-09/gemm-threads.svg"></p>
 <p>卡在哪：单核 NEON 已经不算访存了，但 <strong>6 个 P 核还在闲着</strong>。另一侧，线程太细或矩阵太小，派发成本会高过计算。</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-c">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">dispatch_queue_attr_t</span> <span class="n">attr</span> <span class="o">=</span> <span class="nf">dispatch_queue_attr_make_with_qos_class</span><span class="p">(</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">dispatch_queue_attr_t</span> <span class="n">attr</span> <span class="o">=</span> <span class="nf">dispatch_queue_attr_make_with_qos_class</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="n">DISPATCH_QUEUE_CONCURRENT</span><span class="p">,</span> <span class="n">QOS_CLASS_USER_INTERACTIVE</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="nf">dispatch_apply</span><span class="p">((</span><span class="n">n</span> <span class="o">+</span> <span class="n">MC</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">MC</span><span class="p">,</span> <span class="nf">dispatch_queue_create</span><span class="p">(</span><span class="s">&#34;gemm&#34;</span><span class="p">,</span> <span class="n">attr</span><span class="p">),</span> <span class="o">^</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">bi</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="cm">/* 对第 bi 个 MC 行块跑 NEON 微核 */</span>
-</span></span><span class="line"><span class="cl"><span class="p">});</span></span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl"><span class="p">});</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>本机：</p>
 <table>
   <thead>
@@ -2079,14 +2449,17 @@ sequenceDiagram
 <p>$N=1024$，手写多线程 NEON 是 280 GFLOPS。同一份数据交给 <code>cblas_sgemm</code>：</p>
 <p><strong>2708 GFLOPS，相对 naive 是 1072 倍。</strong></p>
 <p>差从哪来？Apple 在性能核旁边放了矩阵协处理器 AMX。它做的不是「一次 4 个数」，而是一列 × 一行，outer product 一次更新整块 C。</p>
-<p></p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-c">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">cblas_sgemm</span><span class="p">(</span><span class="n">CblasRowMajor</span><span class="p">,</span> <span class="n">CblasNoTrans</span><span class="p">,</span> <span class="n">CblasNoTrans</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">            <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mf">1.0f</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mf">0.0f</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span></span></span></code></pre></div></div>
+<p><img alt="AMX：outer product 一次写满一块 C" loading="lazy" src="/images/2026-09/gemm-amx-tile.svg"></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">cblas_sgemm</span><span class="p">(</span><span class="n">CblasRowMajor</span><span class="p">,</span> <span class="n">CblasNoTrans</span><span class="p">,</span> <span class="n">CblasNoTrans</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mf">1.0f</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mf">0.0f</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>本机 Accelerate：</p>
 <table>
   <thead>
@@ -2147,16 +2520,16 @@ sequenceDiagram
 <p>手写 NEON 很难追上，不是微核不够认真，是 <strong>单元就不一样</strong>。产品代码到这一步，默认答案就是调用系统库。</p>
 <h2 id="apple-silicon-上怎么选">Apple Silicon 上怎么选</h2>
 <p>通用 GEMM、网络里的一层、要不要上 GPU，不是同一条路。</p>
-<p></p>
+<p><img alt="Mac / iOS 选型" loading="lazy" src="/images/2026-09/gemm-dispatch.svg"></p>
 <h3 id="统一内存不是免费午餐">统一内存不是免费午餐</h3>
 <p>独立显卡机器上，小 GEMM 先被 PCIe 拷贝淹死。Apple Silicon 省掉了这次拷贝，CPU、GPU、ANE 看见的是同一块统一内存。省的是搬，不是缓存颠簸。Metal 的 <code>MPSMatrixMultiplication</code> 有启动开销，小矩阵往往不如 Accelerate；大矩阵、批量、已经在 GPU 上的图，再值得过去。</p>
-<p></p>
+<p><img alt="统一内存：没有 PCIe 拷贝，但仍有归属" loading="lazy" src="/images/2026-09/gemm-unified-memory.svg"></p>
 <h3 id="ane-不是通用-gemm">ANE 不是通用 GEMM</h3>
 <p>BNNS 吃 CPU 上的卷积和固定形状的网络层。Core ML 能把部分图卸到 ANE。ANE 喜欢静态形状、量化好的推理，不喜欢你随时改 $M,N,K$ 的通用乘法。动态 GEMM 留在 Accelerate 或 GPU。</p>
 <h3 id="sme-是公开的下一站">SME 是公开的下一站</h3>
 <p>M4 / A18 上 ARM 的 SME / SME2 把矩阵 tile（ZA）做成了公开指令。思路和 AMX 类似：向量外积填一块累加器。以后手写矩阵核有望不再依赖未文档化的协处理器，但今天这台 M2 Pro 上，公开可用、又真正快的，仍然是 Accelerate。</p>
 <h3 id="ios-和-mac-是同一套-api两堵不同的墙">iOS 和 Mac 是同一套 API，两堵不同的墙</h3>
-<p></p>
+<p><img alt="桌面峰值 vs 手机墙" loading="lazy" src="/images/2026-09/gemm-ios-wall.svg"></p>
 <p>A14 起的 A 系同样有 AMX，调用方式也是 <code>cblas_sgemm</code> / BNNS。不要把桌面 2.7 TFLOPS 写进手机 SLA：几秒热节流、进后台被降 QoS、App 被挂起，都会让数字塌掉。前台、用户正在等的计算，显式用 <code>QOS_CLASS_USER_INTERACTIVE</code>；能接受慢的，别去抢 P 核。</p>
 <h2 id="本机总表">本机总表</h2>
 <p>平台：Mac mini M2 Pro，FP32，$C=AB$，行主序。单位 GFLOPS。空格是这一档太慢、没跑。</p>
@@ -2266,8 +2639,16 @@ sequenceDiagram
 </ol>
 <p>公式只需要三个：$C_{ij}=\sum_k A_{ik}B_{kj}$，算术强度大约 $n/6$，以及 $\mathrm{GFLOPS}=2N^3/t$。其余的，都是让数据停在更靠近计算的那一层。</p>
 <h2 id="项目链接">项目链接</h2>
-<p>文中各阶梯的 C 实现和 CMake bench 在 <a href="https://github.com/lyapple2008/gmm_opt" target="_blank" rel="noopener noreffer ">gmm_opt</a>。</p>
-]]></description></item><item><title>读《富爸爸穷爸爸》：房子是资产吗，写代码是事业吗</title><link>https://lyapple2008.github.io/posts/202609/2026-09-03-%E5%AF%8C%E7%88%B8%E7%88%B8%E7%A9%B7%E7%88%B8%E7%88%B8%E8%AF%BB%E5%90%8E%E6%84%9F/</link><pubDate>Thu, 03 Sep 2026 22:30:00 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-03-%E5%AF%8C%E7%88%B8%E7%88%B8%E7%A9%B7%E7%88%B8%E7%88%B8%E8%AF%BB%E5%90%8E%E6%84%9F/</guid><description><![CDATA[<p>前阵子写<a href="/posts/202608/2026-08-30-40%e5%b9%b4%e6%88%bf%e8%b4%b7/" rel="">40 年房贷</a>的时候，已经把《富爸爸穷爸爸》里最刺耳的那句拿出来用过一次：很多人把负债当成了资产。书看完之后，觉得那句话只是入口。清崎翻来覆去讲的，其实就两对很容易混的概念——<strong>资产与负债</strong>，<strong>职业与事业</strong>。</p>
+<p>文中各阶梯的 C 实现和 CMake bench 在 <a href="https://github.com/lyapple2008/gmm_opt">gmm_opt</a>。</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>读《富爸爸穷爸爸》：房子是资产吗，写代码是事业吗</title>
+      <link>https://lyapple2008.github.io/posts/202609/2026-09-03-%E5%AF%8C%E7%88%B8%E7%88%B8%E7%A9%B7%E7%88%B8%E7%88%B8%E8%AF%BB%E5%90%8E%E6%84%9F/</link>
+      <pubDate>Thu, 03 Sep 2026 22:30:00 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202609/2026-09-03-%E5%AF%8C%E7%88%B8%E7%88%B8%E7%A9%B7%E7%88%B8%E7%88%B8%E8%AF%BB%E5%90%8E%E6%84%9F/</guid>
+      <description>硬上车的房子，现在开始按月供过日子；「会写代码」也正在被 AI 变便宜。富人买资产、穷人买负债——这句话常被读歪。真正好用的不是口号，是先把账记对。</description>
+      <content:encoded><![CDATA[<p>前阵子写<a href="/posts/202608/2026-08-30-40%E5%B9%B4%E6%88%BF%E8%B4%B7/">40 年房贷</a>的时候，已经把《富爸爸穷爸爸》里最刺耳的那句拿出来用过一次：很多人把负债当成了资产。书看完之后，觉得那句话只是入口。清崎翻来覆去讲的，其实就两对很容易混的概念——<strong>资产与负债</strong>，<strong>职业与事业</strong>。</p>
 <p>这两对概念都不新，新的是对照物变了。一套近几年硬上车、现在开始按月供过日子的房子，一份正在被 AI 改写的程序员工作，比书里那些美国出租屋和快餐店例子更近。下面就用这两件事把书读一遍。</p>
 <h2 id="一先把作者的尺子拿出来">一、先把作者的尺子拿出来</h2>
 <p>穷爸爸受过良好教育，稳定上班，讲究稳妥，觉得房子是最大的资产，债务是危险的。富爸爸学历一般，却反复强调一件事：先看钱往哪边流。</p>
@@ -2317,7 +2698,7 @@ sequenceDiagram
 <p>清崎说穷人和中产为工作赚钱，富人让钱为自己工作。落到程序员身上，职业路径很熟悉：学一门技术，进一家公司，靠职级和年限把时薪抬上去。代码写得越好，越容易被委以更重的模块；模块越重，越离不开你。看起来是成长，底层仍是同一件事——<strong>收入和你的在岗时间绑在一起</strong>。</p>
 <p>这没有原罪。职业是体面的，也是绝大多数人安身的方式。书里真正提醒的是：不要把职业误认成事业。职业给你发工资，事业给你一台可以离开你还能转一会儿的机器。很多程序员把「技术越来越精」当成事业，其实只是把职业做得更专业。专业很值钱，但它仍然是在为别人的体系工作。</p>
 <h3 id="ai-压缩的首先是职业本身">AI 压缩的，首先是职业本身</h3>
-<p>2023 年以来，这件事从抽象讨论变成了日常体验。AI Coding 已经能写模块、改测试、查日志、补文档；一个熟练的人带着它，产出可以是从前的数倍。我自己也写过<a href="/posts/202601/2026-02-01-%e5%85%b3%e4%ba%8eAICoding%e7%9a%84%e4%b8%80%e4%ba%9b%e6%84%9f%e6%83%b3%e5%92%8c%e5%90%8e%e7%bb%ad%e7%9a%84%e8%a7%84%e5%88%92/" rel="">使用上的感受</a>：从「完了，失业要提前了」，到「稳了，还能苟几年」。苟得住的前提，其实已经变了——不是代码还只能人手写，而是使用者还要为质量兜底，还要会拆任务、会判断、会把系统拼起来。</p>
+<p>2023 年以来，这件事从抽象讨论变成了日常体验。AI Coding 已经能写模块、改测试、查日志、补文档；一个熟练的人带着它，产出可以是从前的数倍。我自己也写过<a href="/posts/202601/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/">使用上的感受</a>：从「完了，失业要提前了」，到「稳了，还能苟几年」。苟得住的前提，其实已经变了——不是代码还只能人手写，而是使用者还要为质量兜底，还要会拆任务、会判断、会把系统拼起来。</p>
 <p>对职业的冲击是不均匀的。</p>
 <ul>
 <li><strong>被压得最明显的</strong>，是把「会写代码」本身当成稀缺能力的岗位。CRUD、模板页面、标准接入、重复劳动，正在迅速便宜。公司会发现：同样的功能，更少的人加上更好的工具就能交出来。</li>
@@ -2350,7 +2731,15 @@ sequenceDiagram
 <li>AI 和房贷这类新变量出现时，我是在加固原来的错账，还是借机把账改对？</li>
 </ol>
 <p>房子可以是家，代码可以是手艺。在把它们写进资产栏、写进事业栏之前，先看清楚钱和时间到底在为谁工作。</p>
-]]></description></item><item><title>房贷年限放宽到40年，父贷子还？</title><link>https://lyapple2008.github.io/posts/202608/2026-08-30-40%E5%B9%B4%E6%88%BF%E8%B4%B7/</link><pubDate>Sun, 30 Aug 2026 09:40:00 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202608/2026-08-30-40%E5%B9%B4%E6%88%BF%E8%B4%B7/</guid><description><![CDATA[<p>8 月 28 日，央行和金融监管总局把个人住房贷款最长期限从 30 年延长到 40 年。同一套文件里，还把月房贷支出占收入的上限划在 50%，全部债务支出占收入的上限划在 60%。再加上这几年已经落地的降首付、降利率，购房门槛确实被压到了近年来最低的位置。</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>房贷年限放宽到40年，父贷子还？</title>
+      <link>https://lyapple2008.github.io/posts/202608/2026-08-30-40%E5%B9%B4%E6%88%BF%E8%B4%B7/</link>
+      <pubDate>Sun, 30 Aug 2026 09:40:00 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202608/2026-08-30-40%E5%B9%B4%E6%88%BF%E8%B4%B7/</guid>
+      <description>月供少六百，总利息多二十万。40年不是把房子变便宜了，是把压力挪到后面十年。人走了既不是父债子还，也不是人死债消——门槛已经这么低，有需求的人现在该上车吗？</description>
+      <content:encoded><![CDATA[<p>8 月 28 日，央行和金融监管总局把个人住房贷款最长期限从 30 年延长到 40 年。同一套文件里，还把月房贷支出占收入的上限划在 50%，全部债务支出占收入的上限划在 60%。再加上这几年已经落地的降首付、降利率，购房门槛确实被压到了近年来最低的位置。</p>
 <p>门槛低，不等于账变得更便宜。最近在看《富爸爸穷爸爸》，里面最刺耳的一句就是：很多人把负债当成了资产。40 年房贷正好是拿这句话对照现实的好时机。下面分四块说：别国怎么做、人走了债怎么办、现在该不该买、以及从「资产 vs 负债」怎么看这件事。</p>
 <h2 id="一政策本身在做什么">一、政策本身在做什么</h2>
 <p>这次不是单独改一个年限，而是一套信贷规则一起出：</p>
@@ -2545,7 +2934,24 @@ sequenceDiagram
 <p>别国经验说的是同一件事：年限可以放，但必须配上收入比、年龄上限、摊还规则和保险。中国这次把年限放开了，收入比和放贷时点也补上了；「人走了债怎么办」则仍然主要靠《民法典》的限定继承，以及你自己愿不愿意买一份还贷保障。</p>
 <p>有居住需求、算得过现金流、愿意把自住房当成要供很多年的消费品，现在可以买。只是因为门槛低了、怕错过，或者指望 40 年月供把一套本来买不起的房子变成资产，那这笔账大概率会算错。</p>
 <p>房子可以是家。在把钥匙拿回来之前，它首先是一笔很长的负债。</p>
-]]></description></item><item><title>Speex 回声消除：从回声路径到 MDF/AUMDF</title><link>https://lyapple2008.github.io/posts/202607/speex-echo-cancellation/</link><pubDate>Fri, 31 Jul 2026 22:04:00 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202607/speex-echo-cancellation/</guid><description></description></item><item><title>Token在燃烧？尝试本地部署？</title><link>https://lyapple2008.github.io/posts/202607/2026-07-15-%E6%9C%AC%E5%9C%B0ai%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%96%B9%E6%A1%88/</link><pubDate>Wed, 15 Jul 2026 22:52:35 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202607/2026-07-15-%E6%9C%AC%E5%9C%B0ai%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%96%B9%E6%A1%88/</guid><description><![CDATA[<p></p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Speex 回声消除：从回声路径到 MDF/AUMDF</title>
+      <link>https://lyapple2008.github.io/posts/202607/speex-echo-cancellation/</link>
+      <pubDate>Fri, 31 Jul 2026 22:04:00 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202607/speex-echo-cancellation/</guid>
+      <description>从声学回声模型、自适应滤波与 MDF/AUMDF 原理，深入到 SpeexDSP 1.2.1 mdf.c 工程实现的交互式中文导读。</description>
+    </item>
+    <item>
+      <title>Token在燃烧？尝试本地部署？</title>
+      <link>https://lyapple2008.github.io/posts/202607/2026-07-15-%E6%9C%AC%E5%9C%B0ai%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Wed, 15 Jul 2026 22:52:35 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202607/2026-07-15-%E6%9C%AC%E5%9C%B0ai%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%96%B9%E6%A1%88/</guid>
+      <description>&lt;p&gt;&lt;img alt=&#34;尝试本地部署？&#34; loading=&#34;lazy&#34; src=&#34;https://lyapple2008.github.io/images/2026-07/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2.jpg&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果把个人可以买到的设备限制在最多 128GB 统一内存，什么开源模型最适合 AI Coding？买 Mac Studio、AMD 大内存小主机、DGX Spark 或多显卡工作站，和直接调用在线 API 相比，哪一种更快、更便宜？&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p><img alt="尝试本地部署？" loading="lazy" src="/images/2026-07/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2.jpg"></p>
 <blockquote>
 <p>如果把个人可以买到的设备限制在最多 128GB 统一内存，什么开源模型最适合 AI Coding？买 Mac Studio、AMD 大内存小主机、DGX Spark 或多显卡工作站，和直接调用在线 API 相比，哪一种更快、更便宜？</p></blockquote>
 <p>这篇文章只讨论 <strong>AI Coding Agent</strong>：模型需要读取代码仓库、调用终端、修改多个文件、执行测试，并根据报错继续迭代。普通聊天、知识问答和只补全下一行代码的 FIM 模型不在本文范围内。</p>
@@ -2566,7 +2972,7 @@ sequenceDiagram
 <li><strong>个人最合理的模式仍然是混合使用。</strong> 敏感代码、离线任务和高频小修改走本地；长上下文、紧急任务和复杂重构走 API。</li>
 </ol>
 <h2 id="二为什么选择-qwen3-coder-next">二、为什么选择 Qwen3-Coder-Next</h2>
-<p><a href="https://huggingface.co/Qwen/Qwen3-Coder-Next" target="_blank" rel="noopener noreffer ">Qwen3-Coder-Next</a> 是专门面向 Coding Agent 和本地开发的 MoE 模型，采用 Apache-2.0 许可证。官方模型卡给出的核心参数如下：</p>
+<p><a href="https://huggingface.co/Qwen/Qwen3-Coder-Next">Qwen3-Coder-Next</a> 是专门面向 Coding Agent 和本地开发的 MoE 模型，采用 Apache-2.0 许可证。官方模型卡给出的核心参数如下：</p>
 <ul>
 <li>总参数量 80B，每个 Token 激活约 3B；</li>
 <li>原生上下文 262,144 Token；</li>
@@ -2605,7 +3011,7 @@ sequenceDiagram
 <p>这些成绩会受到 Agent 框架、提示词、工具集和推理参数影响，不能理解为在任何 IDE 中都有固定成功率。不过它们至少说明，这个模型的目标不是生成几个函数，而是完成仓库级软件工程任务。</p>
 <h3 id="为什么不选择更大的模型">为什么不选择更大的模型</h3>
 <p>总参数更大的模型不一定适合本次硬件约束。例如 GLM-5.2 的最低实用量化也需要约 223GB～245GB 总内存，128GB 设备只能依赖大量 SSD 或远程卸载。它虽然能“启动”，但权重会频繁跨层级搬运，无法获得正常的 AI Coding 交互体验。</p>
-<p>Qwen3-Coder-Next 的优势正好相反：总参数 80B，但每 Token 只激活约 3B。根据 <a href="https://unsloth.ai/docs/models/qwen3-coder-next" target="_blank" rel="noopener noreffer ">Unsloth 的本地运行说明</a>：</p>
+<p>Qwen3-Coder-Next 的优势正好相反：总参数 80B，但每 Token 只激活约 3B。根据 <a href="https://unsloth.ai/docs/models/qwen3-coder-next">Unsloth 的本地运行说明</a>：</p>
 <table>
   <thead>
       <tr>
@@ -2640,13 +3046,16 @@ sequenceDiagram
 <p>本文默认选择 <strong>4bit</strong>。它能在 64GB 设备上运行，又比 3bit 更稳；8bit 虽然更接近原始模型，但在 96GB 设备上只剩很少空间给 KV Cache，综合体验未必更好。</p>
 <h2 id="三ai-coding-性能不能只看-tokens">三、AI Coding 性能不能只看 Token/s</h2>
 <p>Coding Agent 的完整链路通常是：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">理解需求 -&gt; 搜索仓库 -&gt; 阅读文件 -&gt; 规划修改 -&gt; 编辑代码
-</span></span><span class="line"><span class="cl">        -&gt; 执行命令 -&gt; 分析报错 -&gt; 再次修改 -&gt; 运行测试</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">理解需求 -&gt; 搜索仓库 -&gt; 阅读文件 -&gt; 规划修改 -&gt; 编辑代码
+</span></span><span class="line"><span class="cl">        -&gt; 执行命令 -&gt; 分析报错 -&gt; 再次修改 -&gt; 运行测试</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>因此需要同时比较四种性能：</p>
 <ul>
 <li><strong>任务成功率</strong>：能否最终通过测试，而不是只输出看起来正确的代码；</li>
@@ -2740,7 +3149,7 @@ sequenceDiagram
 </ul>
 <p>因此 64GB 更适合 4bit + 16K～32K 上下文，不适合追求 256K 满上下文。</p>
 <h3 id="2-96gb-mac-studio-m3-ultramac-路线的性能型选择">2. 96GB Mac Studio M3 Ultra：Mac 路线的性能型选择</h3>
-<p><a href="https://www.apple.com/mac-studio/specs/" target="_blank" rel="noopener noreffer ">Apple 的技术规格</a>显示，M3 Ultra 的统一内存带宽为 819GB/s。96GB 配置运行 46GB 的 4bit 模型时，可以给 KV Cache 和其他应用留下较大空间，比 64GB 配置更适合作为长期运行的本地 Coding 服务。</p>
+<p><a href="https://www.apple.com/mac-studio/specs/">Apple 的技术规格</a>显示，M3 Ultra 的统一内存带宽为 819GB/s。96GB 配置运行 46GB 的 4bit 模型时，可以给 KV Cache 和其他应用留下较大空间，比 64GB 配置更适合作为长期运行的本地 Coding 服务。</p>
 <p>8bit 约需 85GB，看起来也能加载，但只剩约 11GB，容易被系统和长上下文吃完。实际使用更建议继续选择高质量 4bit，把容量留给上下文。</p>
 <p>主要瓶颈是：</p>
 <ul>
@@ -2750,7 +3159,7 @@ sequenceDiagram
 <li>设备价格远高于调用同名 API 的费用。</li>
 </ul>
 <h3 id="3-ryzen-ai-max-395-128gb容量优先的-pc-小主机">3. Ryzen AI Max+ 395 128GB：容量优先的 PC 小主机</h3>
-<p><a href="https://frame.work/desktop" target="_blank" rel="noopener noreffer ">Framework Desktop</a> 等设备可配置 128GB LPDDR5x-8000 统一内存，官方称最多可提供 96GB 图形可寻址内存，采用 256-bit 内存总线。Qwen3-Coder-Next 4bit 可以宽裕运行，8bit 也有机会完整装入。</p>
+<p><a href="https://frame.work/desktop">Framework Desktop</a> 等设备可配置 128GB LPDDR5x-8000 统一内存，官方称最多可提供 96GB 图形可寻址内存，采用 256-bit 内存总线。Qwen3-Coder-Next 4bit 可以宽裕运行，8bit 也有机会完整装入。</p>
 <p>这条路线的优点是容量大、体积小、功耗低，并且保留 Linux/Windows 环境。主要瓶颈是：</p>
 <ul>
 <li>统一内存带宽明显低于 M3 Ultra 和高端独立显卡；</li>
@@ -2760,7 +3169,7 @@ sequenceDiagram
 </ul>
 <p>它适合把“运行更大模型和更长上下文”放在第一位的人，不适合单纯追求最快 Token/s。</p>
 <h3 id="4-dgx-spark128gb--cuda但不是大显存显卡的速度">4. DGX Spark：128GB + CUDA，但不是大显存显卡的速度</h3>
-<p><a href="https://www.nvidia.com/en-us/products/workstations/dgx-spark/" target="_blank" rel="noopener noreffer ">NVIDIA DGX Spark</a> 使用 GB10 Grace Blackwell Superchip，提供 128GB 一致性内存和 NVIDIA AI 软件栈。它的价值是小体积、CUDA 环境和大容量可以同时获得，部署容器、NIM、PyTorch、SGLang 和 vLLM 类工具更接近 NVIDIA 服务器工作流。</p>
+<p><a href="https://www.nvidia.com/en-us/products/workstations/dgx-spark/">NVIDIA DGX Spark</a> 使用 GB10 Grace Blackwell Superchip，提供 128GB 一致性内存和 NVIDIA AI 软件栈。它的价值是小体积、CUDA 环境和大容量可以同时获得，部署容器、NIM、PyTorch、SGLang 和 vLLM 类工具更接近 NVIDIA 服务器工作流。</p>
 <p>它的核心瓶颈是约 <strong>273GB/s 内存带宽</strong>。这远低于 RTX 5090 和 RTX PRO 6000，因此不能因为名字中有“DGX”就预期获得数据中心 GPU 的生成速度。其他限制还包括 ARM64 环境的软件兼容、部分 Python Wheel 和第三方工具需要重新验证。</p>
 <p>DGX Spark 更适合学习和验证 CUDA 部署栈，未必是单用户桌面 AI Coding 的最高性价比方案。</p>
 <h3 id="5-双-rtx-3090最便宜的-48gb-cuda-路线">5. 双 RTX 3090：最便宜的 48GB CUDA 路线</h3>
@@ -2821,7 +3230,7 @@ sequenceDiagram
 <p>个人桌面部署建议先使用 llama.cpp 或封装它的 Ollama/LM Studio。它们对 GGUF 量化和 CPU/GPU 混合卸载支持最好。团队共享、需要并发时，再考虑 SGLang 或 vLLM。</p>
 <p>无论使用哪一个后端，都应向 Coding 客户端暴露 OpenAI 兼容接口。这样可以把模型接入 OpenCode、Cline、Continue、Aider、Codex 或其他 Agent，而不必把工作流锁定在单一推理程序中。</p>
 <h2 id="六同名模型在线-api-方案">六、同名模型在线 API 方案</h2>
-<p><a href="https://www.qwencloud.com/models/qwen3-coder-next" target="_blank" rel="noopener noreffer ">Qwen Cloud 的 Qwen3-Coder-Next 页面</a>提供 OpenAI 兼容 API、函数调用、结构化输出和上下文缓存。官方公布的上下文上限约 262K，最大输入约 204.8K，最大输出约 65.5K。</p>
+<p><a href="https://www.qwencloud.com/models/qwen3-coder-next">Qwen Cloud 的 Qwen3-Coder-Next 页面</a>提供 OpenAI 兼容 API、函数调用、结构化输出和上下文缓存。官方公布的上下文上限约 262K，最大输入约 204.8K，最大输出约 65.5K。</p>
 <p>API 按单次请求的输入长度分档计价：</p>
 <table>
   <thead>
@@ -3144,17 +3553,20 @@ sequenceDiagram
 <p><strong>没有现成硬件就先用 API；已有 64GB 以上设备就部署本地 4bit；有隐私或离线刚需再购买 96GB～128GB 设备。不要为了“本地免费”忽略折旧、速度和任务成功率。</strong></p></blockquote>
 <h2 id="参考资料">参考资料</h2>
 <ul>
-<li><a href="https://huggingface.co/Qwen/Qwen3-Coder-Next" target="_blank" rel="noopener noreffer ">Qwen3-Coder-Next 官方模型卡</a></li>
-<li><a href="https://unsloth.ai/docs/models/qwen3-coder-next" target="_blank" rel="noopener noreffer ">Qwen3-Coder-Next 本地运行、量化与内存要求</a></li>
-<li><a href="https://www.qwencloud.com/models/qwen3-coder-next" target="_blank" rel="noopener noreffer ">Qwen3-Coder-Next 官方 API 能力与价格</a></li>
-<li><a href="https://github.com/QwenLM/Qwen3-Coder" target="_blank" rel="noopener noreffer ">Qwen3-Coder GitHub</a></li>
-<li><a href="https://github.com/ggml-org/llama.cpp" target="_blank" rel="noopener noreffer ">llama.cpp</a></li>
-<li><a href="https://github.com/vllm-project/vllm" target="_blank" rel="noopener noreffer ">vLLM</a></li>
-<li><a href="https://github.com/sgl-project/sglang" target="_blank" rel="noopener noreffer ">SGLang</a></li>
-<li><a href="https://www.apple.com/mac-studio/specs/" target="_blank" rel="noopener noreffer ">Apple Mac Studio 技术规格</a></li>
-<li><a href="https://frame.work/desktop" target="_blank" rel="noopener noreffer ">Framework Desktop Ryzen AI Max</a></li>
-<li><a href="https://www.nvidia.com/en-us/products/workstations/dgx-spark/" target="_blank" rel="noopener noreffer ">NVIDIA DGX Spark</a></li>
-<li><a href="https://www.nvidia.com/en-us/products/workstations/professional-desktop-gpus/rtx-pro-6000/" target="_blank" rel="noopener noreffer ">NVIDIA RTX PRO 6000 Blackwell</a></li>
-<li><a href="https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/" target="_blank" rel="noopener noreffer ">NVIDIA GeForce RTX 5090</a></li>
+<li><a href="https://huggingface.co/Qwen/Qwen3-Coder-Next">Qwen3-Coder-Next 官方模型卡</a></li>
+<li><a href="https://unsloth.ai/docs/models/qwen3-coder-next">Qwen3-Coder-Next 本地运行、量化与内存要求</a></li>
+<li><a href="https://www.qwencloud.com/models/qwen3-coder-next">Qwen3-Coder-Next 官方 API 能力与价格</a></li>
+<li><a href="https://github.com/QwenLM/Qwen3-Coder">Qwen3-Coder GitHub</a></li>
+<li><a href="https://github.com/ggml-org/llama.cpp">llama.cpp</a></li>
+<li><a href="https://github.com/vllm-project/vllm">vLLM</a></li>
+<li><a href="https://github.com/sgl-project/sglang">SGLang</a></li>
+<li><a href="https://www.apple.com/mac-studio/specs/">Apple Mac Studio 技术规格</a></li>
+<li><a href="https://frame.work/desktop">Framework Desktop Ryzen AI Max</a></li>
+<li><a href="https://www.nvidia.com/en-us/products/workstations/dgx-spark/">NVIDIA DGX Spark</a></li>
+<li><a href="https://www.nvidia.com/en-us/products/workstations/professional-desktop-gpus/rtx-pro-6000/">NVIDIA RTX PRO 6000 Blackwell</a></li>
+<li><a href="https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/">NVIDIA GeForce RTX 5090</a></li>
 </ul>
-]]></description></item></channel></rss>
+]]></content:encoded>
+    </item>
+  </channel>
+</rss>

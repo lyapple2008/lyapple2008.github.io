@@ -1,4 +1,26 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Agent - 标签 - BeYoung</title><link>https://lyapple2008.github.io/tags/agent/</link><description>Agent - 标签 - BeYoung</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>See this site's source code [here](https://github.com/lyapple2008/lyapple2008.github.io), licensed under GPLv3 ·</copyright><lastBuildDate>Mon, 28 Sep 2026 07:22:02 +0800</lastBuildDate><atom:link href="https://lyapple2008.github.io/tags/agent/" rel="self" type="application/rss+xml"/><item><title>用 OpenSpec 重构 AI Coding 工作流：让每次开发都可追溯、可恢复、可沉淀</title><link>https://lyapple2008.github.io/posts/202609/2026-09-28-ai-coding%E5%B7%A5%E4%BD%9C%E6%B5%81openspec/</link><pubDate>Mon, 28 Sep 2026 07:22:02 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-28-ai-coding%E5%B7%A5%E4%BD%9C%E6%B5%81openspec/</guid><description><![CDATA[<p>AI Coding 用得越多，我越能感觉到两个问题。</p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Agent on BeYoung</title>
+    <link>https://lyapple2008.github.io/tags/agent/</link>
+    <description>Recent content in Agent on BeYoung</description>
+    <image>
+      <title>BeYoung</title>
+      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.147.9</generator>
+    <language>zh</language>
+    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
+    <lastBuildDate>Mon, 28 Sep 2026 07:22:02 +0800</lastBuildDate>
+    <atom:link href="https://lyapple2008.github.io/tags/agent/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>用 OpenSpec 重构 AI Coding 工作流：让每次开发都可追溯、可恢复、可沉淀</title>
+      <link>https://lyapple2008.github.io/posts/202609/2026-09-28-ai-coding%E5%B7%A5%E4%BD%9C%E6%B5%81openspec/</link>
+      <pubDate>Mon, 28 Sep 2026 07:22:02 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202609/2026-09-28-ai-coding%E5%B7%A5%E4%BD%9C%E6%B5%81openspec/</guid>
+      <description>AI Coding 快了，但方案反复、决策丢失和上下文中断也变得更常见。这篇文章介绍如何用 OpenSpec 把 Explore、Propose、Review、Apply 和 Archive 串成一条可复用的规格驱动开发流程。</description>
+      <content:encoded><![CDATA[<p>AI Coding 用得越多，我越能感觉到两个问题。</p>
 <p>第一个问题是：<strong>开发过程没有留下足够的中间记录。</strong></p>
 <p>Agent 可以很快生成大量代码，但方案不对时，常常只能整段推倒重来；某个架构决策是在对话里做的，过两天就不记得当时为什么这样选；一次任务被打断，换一个会话后，Agent 又要从头理解需求和已经做过的工作。真正丢失的不只是上下文，还有上下文中包含的判断。</p>
 <p>第二个问题是：<strong>AI Coding Agent 没有跟着我和项目一起成长。</strong></p>
@@ -15,46 +37,71 @@
 <p>前者是变更日志，后者是随代码演进的活文档。当一次变更被 Archive，其中的需求会进入主 Spec，变更目录则被移入 <code>openspec/changes/archive/</code>。</p>
 <h2 id="安装和初始化">安装和初始化</h2>
 <p>OpenSpec 需要 Node.js 20.19.0 或更高版本。可以使用 npm 安装：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-bash">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">npm install -g @fission-ai/openspec@latest
-</span></span><span class="line"><span class="cl">openspec --version</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">npm install -g @fission-ai/openspec@latest
+</span></span><span class="line"><span class="cl">openspec --version</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>macOS 也可以直接使用 Homebrew：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-bash">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install openspec</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install openspec</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>然后在项目根目录执行：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-bash">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">openspec init</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">openspec init</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p><code>init</code> 会询问正在使用哪些 AI 工具，为 Claude Code、Codex、Cursor 等工具安装对应的 Skill 或命令，并在项目中生成：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">openspec/
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">openspec/
 </span></span><span class="line"><span class="cl">├── config.yaml       # 项目上下文和工作流规则
 </span></span><span class="line"><span class="cl">├── specs/            # 已经上线的系统规格
 </span></span><span class="line"><span class="cl">└── changes/          # 正在开发的变更
-</span></span><span class="line"><span class="cl">    └── archive/      # 已完成的变更记录</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">    └── archive/      # 已完成的变更记录</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>这些都是普通文本文件，应该和代码一起提交到 Git，而不是仅保存在某一次会话中。初始化或 OpenSpec 升级后，可以用 <code>openspec update</code> 刷新项目中的 Skills 和命令。</p>
 <p><code>config.yaml</code> 值得单独提一下。它的 <code>context</code> 会进入每个 OpenSpec 工作流，适合放置会影响所有变更的少量事实；<code>rules</code> 可以约束某类产物；<code>operations</code> 则能约束 Apply 和 Archive 如何执行。例如：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-yaml">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
 </span></span></span><span class="line"><span class="cl"><span class="sd">  Tech stack: TypeScript, Node.js, PostgreSQL
 </span></span></span><span class="line"><span class="cl"><span class="sd">  所有 API 变更都必须兼容现有客户端
 </span></span></span><span class="line"><span class="cl"><span class="sd">  所有 OpenSpec 产物使用中文</span><span class="w">
@@ -66,11 +113,14 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">operations</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">apply</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">guidance</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">在标记任务完成前运行测试和 Lint</span></span></span></code></pre></div></div>
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">在标记任务完成前运行测试和 Lint</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>配置要尽量短。能从代码读出来的信息没必要重复塞进去，否则只会占用 Agent 的上下文。</p>
 <h2 id="一条完整的-openspec-工作流">一条完整的 OpenSpec 工作流</h2>
 <p>OpenSpec 官方的核心流程是 Explore → Propose → Review → Apply → Archive。如果把“发现问题后如何回退”也画进去，完整的开发过程更像下面这样：</p>
-<div class="mermaid" id="id-64008caa5c28">flowchart LR
+
+<div class="mermaid">flowchart LR
     idea[&#34;需求 / 问题&#34;] --&gt; explore[&#34;1. Explore&lt;br/&gt;读代码、澄清边界、比较方案&#34;]
     explore --&gt; propose[&#34;2. Propose&lt;br/&gt;生成 Proposal、Spec、Design、Tasks&#34;]
     propose --&gt; review{&#34;3. Review&lt;br/&gt;人工确认问题、验收条件和任务&#34;}
@@ -80,7 +130,8 @@
     apply -- &#34;中断 / 换会话&#34; --&gt; resume[&#34;读取变更文件&lt;br/&gt;从第一个未完成任务继续&#34;]
     resume --&gt; apply
     apply -- &#34;代码、测试、验收全部通过&#34; --&gt; archive[&#34;5. Archive&lt;br/&gt;同步主 Spec，归档变更&#34;]
-    archive -. &#34;下一个变更&#34; .-&gt; idea</div><p>这条流程最重要的是：**代码不是一开始就出现，而是在规格经过确认后才出现。**修改几段 Markdown 的成本，远低于让 Agent 重写几千行代码。</p>
+    archive -. &#34;下一个变更&#34; .-&gt; idea</div>
+<p>这条流程最重要的是：**代码不是一开始就出现，而是在规格经过确认后才出现。**修改几段 Markdown 的成本，远低于让 Agent 重写几千行代码。</p>
 <h2 id="放进一个真实需求中怎么用">放进一个真实需求中怎么用</h2>
 <p>以“接入 RNNoise 降噪模型”为例。最初的需求往往只有一句话：</p>
 <blockquote>
@@ -88,13 +139,16 @@
 <p>这句话还不能直接变成代码。按 OpenSpec 流程，可以这样做。</p>
 <h3 id="1-explore先把问题想清楚">1. Explore：先把问题想清楚</h3>
 <p>在 AI 对话中说：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请用 OpenSpec Explore 模式调查接入 RNNoise 降噪模型的需求。
-</span></span><span class="line"><span class="cl">先读取现有音频采集、重采样、编码和线程调度代码，画出当前音频链路，列出需要确认的边界和备选方案，暂时不写代码。</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请用 OpenSpec Explore 模式调查接入 RNNoise 降噪模型的需求。
+</span></span><span class="line"><span class="cl">先读取现有音频采集、重采样、编码和线程调度代码，画出当前音频链路，列出需要确认的边界和备选方案，暂时不写代码。</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>Explore 阶段应该回答这些问题：</p>
 <ul>
 <li>当前输入音频的采样率、通道数、数据类型和每次回调帧长是什么？</li>
@@ -107,32 +161,52 @@
 <p>如果这些结论没有想清楚，Agent 越快，只会越快地实现一个错误方案。</p>
 <h3 id="2-propose把讨论变成可审查的文件">2. Propose：把讨论变成可审查的文件</h3>
 <p>方向确认后，继续说：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请就刚才确认的 RNNoise 接入方案创建 OpenSpec change，变更名称为 integrate-rnnoise-denoiser。</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请就刚才确认的 RNNoise 接入方案创建 OpenSpec change，变更名称为 integrate-rnnoise-denoiser。</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>Agent 会创建类似这样的目录：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">openspec/changes/integrate-rnnoise-denoiser/
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">openspec/changes/integrate-rnnoise-denoiser/
 </span></span><span class="line"><span class="cl">├── proposal.md       # 为什么做，改动范围是什么
 </span></span><span class="line"><span class="cl">├── specs/
 </span></span><span class="line"><span class="cl">│   └── rnnoise-denoising/
 </span></span><span class="line"><span class="cl">│       └── spec.md  # 可验收的行为要求
 </span></span><span class="line"><span class="cl">├── design.md         # 关键技术决策，需要时才创建
-</span></span><span class="line"><span class="cl">└── tasks.md          # 实现清单和进度</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">└── tasks.md          # 实现清单和进度</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p><code>spec.md</code> 不应该只写“接入 RNNoise”，而应该写成可验收的系统行为。例如：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-markdown">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="gu">### Requirement: 实时 RNNoise 降噪
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="gu">### Requirement: 实时 RNNoise 降噪
 </span></span></span><span class="line"><span class="cl"><span class="gu"></span>
 </span></span><span class="line"><span class="cl">系统必须在实时音频链路中按 RNNoise 帧规格连续处理音频，并保持输出的时序和时长与输入一致。
 </span></span><span class="line"><span class="cl">
@@ -142,7 +216,9 @@
 </span></span><span class="line"><span class="cl"><span class="k">-</span> **THEN** 系统必须先缓冲并组成 480 个采样点的完整帧
 </span></span><span class="line"><span class="cl"><span class="k">-</span> **AND** 每个完整帧必须严格按时间顺序调用一次 RNNoise 推理
 </span></span><span class="line"><span class="cl"><span class="k">-</span> **AND** 同一条音频流必须在相邻帧之间复用同一个模型状态
-</span></span><span class="line"><span class="cl">- <span class="gs">**AND**</span> 新建音频流或发生不连续跳转时必须重置状态</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">- <span class="gs">**AND**</span> 新建音频流或发生不连续跳转时必须重置状态</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p><code>design.md</code> 则应该记录“为什么”：为什么选原生 RNNoise 或 ONNX Runtime，为什么在重采样之后、编码之前执行降噪，如何管理每条流的隐状态，多声道是独立降噪还是先混音，曾经考虑过哪些方案又为什么放弃。这些内容比最后那几行推理调用更值得保留。</p>
 <h3 id="3-review把最贵的错误留在纸面上">3. Review：把最贵的错误留在纸面上</h3>
 <p>Propose 完成后不要立即点头让 Agent 写代码。建议按下面的顺序审查：</p>
@@ -155,13 +231,16 @@
 <p>发现“现有采集输出其实是 44.1 kHz 立体声”或“多路音频不能共用同一个 RNNoise 状态”，可以直接编辑 Markdown，也可以让 Agent 更新变更文件。审查完成前，不产生业务代码。</p>
 <h3 id="4-apply换一个干净上下文开始实现">4. Apply：换一个干净上下文开始实现</h3>
 <p>OpenSpec 官方建议在新的会话中执行 Apply，把上一阶段的讨论噪声留在规格外面。可以直接说：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请 Apply integrate-rnnoise-denoiser 这个 OpenSpec change。
-</span></span><span class="line"><span class="cl">按 tasks.md 逐项实现，每项完成后运行对应验证，只在通过后勾选任务。</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请 Apply integrate-rnnoise-denoiser 这个 OpenSpec change。
+</span></span><span class="line"><span class="cl">按 tasks.md 逐项实现，每项完成后运行对应验证，只在通过后勾选任务。</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>Agent 会先读取这次变更的文件，再按 <code>tasks.md</code> 逐项实现。如果中途被打断，在新会话中再次要求 Apply 即可，新 Agent 会从第一个未勾选的任务继续。</p>
 <p>如果实现过程发现原方案有问题，不要只在代码中偷偷改口径。先修正 Spec、Design 或 Tasks，再继续 Apply。否则文档与代码会从这里开始分叉。</p>
 <h3 id="5-verify-和-archive用事实关闭变更">5. Verify 和 Archive：用事实关闭变更</h3>
@@ -176,12 +255,14 @@
 </ul>
 <p>OpenSpec 还提供可选的 Verify 工作流，可用来检查实现是否与变更产物一致。默认配置不一定安装它，没有 Verify 时，也可以让另一个新会话根据 Spec 做独立 Review。</p>
 <p>所有任务、测试和人工验收全部通过后，再说：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请 Archive integrate-rnnoise-denoiser 这个 OpenSpec change。</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请 Archive integrate-rnnoise-denoiser 这个 OpenSpec change。</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>Archive 会把这次变更的行为要求合并到 <code>openspec/specs/</code>，并把变更目录移入 <code>openspec/changes/archive/</code>。Git 仍然是独立的事：规格、代码和测试应该在同一条变更链上提交和审查。</p>
 <h2 id="openspec-如何解决没有中间记录">OpenSpec 如何解决“没有中间记录”</h2>
 <p>回到开头的第一个问题，OpenSpec 的作用非常直接。</p>
@@ -236,7 +317,8 @@
 <li><strong>个人记忆</strong>：使用者偏好的实现方式、可接受的风险、审查习惯和解释粒度。</li>
 </ol>
 <p>这些记忆不能只管写入，还要有一个可审查的学习闭环：</p>
-<div class="mermaid" id="id-12179c7f8002">flowchart LR
+
+<div class="mermaid">flowchart LR
     work[&#34;需求开发 / Bug / 线上故障&#34;] --&gt; reflect[&#34;复盘：提取候选经验&#34;]
     reflect --&gt; approve{&#34;人工确认&lt;br/&gt;是否正确、可复用&#34;}
     approve -- &#34;否&#34; --&gt; discard[&#34;丢弃或仅保留原始记录&#34;]
@@ -245,7 +327,8 @@
     retrieve --&gt; plan[&#34;影响 Explore、Spec 和 Review&#34;]
     plan --&gt; measure[&#34;用测试、Review 和结果验证&#34;]
     measure --&gt; update[&#34;加强、修正、降权或过期&#34;]
-    update --&gt; memory</div><p>这样的 Agent 才不是把历史聊天全部塞进 Prompt，而是能够做四件事：</p>
+    update --&gt; memory</div>
+<p>这样的 Agent 才不是把历史聊天全部塞进 Prompt，而是能够做四件事：</p>
 <ul>
 <li>知道什么值得记住，什么只是当时的噪声；</li>
 <li>在正确的任务中取回正确的经验，而不是无差别加载所有过去；</li>
@@ -268,13 +351,21 @@
 <p>它还没有让 Agent 真正学会长期成长，但已经先为成长准备了可信的原料：规格、决策、任务、验证和变更历史。我期待下一步，AI Coding Agent 能在这些原料上形成可审查、可纠正、可遗忘的长期记忆。到那时，它才不只是一个每次都很聪明的临时工，而是一个真正会随着使用者和项目共同进化的协作者。</p>
 <h2 id="参考资料">参考资料</h2>
 <ul>
-<li><a href="https://openspec.dev/docs/installation" target="_blank" rel="noopener noreffer ">OpenSpec Installation</a></li>
-<li><a href="https://openspec.dev/docs/setup" target="_blank" rel="noopener noreffer ">OpenSpec Set up your project</a></li>
-<li><a href="https://openspec.dev/docs/quickstart" target="_blank" rel="noopener noreffer ">OpenSpec Quickstart</a></li>
-<li><a href="https://openspec.dev/docs/project-config" target="_blank" rel="noopener noreffer ">OpenSpec Project configuration</a></li>
-<li><a href="https://github.com/Fission-AI/OpenSpec" target="_blank" rel="noopener noreffer ">OpenSpec GitHub</a></li>
+<li><a href="https://openspec.dev/docs/installation">OpenSpec Installation</a></li>
+<li><a href="https://openspec.dev/docs/setup">OpenSpec Set up your project</a></li>
+<li><a href="https://openspec.dev/docs/quickstart">OpenSpec Quickstart</a></li>
+<li><a href="https://openspec.dev/docs/project-config">OpenSpec Project configuration</a></li>
+<li><a href="https://github.com/Fission-AI/OpenSpec">OpenSpec GitHub</a></li>
 </ul>
-]]></description></item><item><title>当代码越来越便宜，软件工程师还值钱吗？</title><link>https://lyapple2008.github.io/posts/202609/2026-09-17-chatgpt%E7%BB%99%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BB%BA%E8%AE%AE/</link><pubDate>Thu, 17 Sep 2026 16:55:34 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-17-chatgpt%E7%BB%99%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BB%BA%E8%AE%AE/</guid><description><![CDATA[<p>AI Coding 已经进入软件开发的完整流程：读代码、写代码、补测试、查问题、改文档，甚至可以自己运行命令，再根据结果继续迭代。它带来的不只是效率提升，也有一个越来越难回避的问题：</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>当代码越来越便宜，软件工程师还值钱吗？</title>
+      <link>https://lyapple2008.github.io/posts/202609/2026-09-17-chatgpt%E7%BB%99%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BB%BA%E8%AE%AE/</link>
+      <pubDate>Thu, 17 Sep 2026 16:55:34 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202609/2026-09-17-chatgpt%E7%BB%99%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E5%BB%BA%E8%AE%AE/</guid>
+      <description>当代码生成越来越便宜，工程师真正稀缺的能力是什么？这篇文章整理了我和 ChatGPT 关于职业前景的一次长谈，以及一条从 AI Coding、Spec 到 Agent Engineering 的个人进阶路线。</description>
+      <content:encoded><![CDATA[<p>AI Coding 已经进入软件开发的完整流程：读代码、写代码、补测试、查问题、改文档，甚至可以自己运行命令，再根据结果继续迭代。它带来的不只是效率提升，也有一个越来越难回避的问题：</p>
 <blockquote>
 <p>当 AI 可以完成越来越多开发工作，以后还需要软件工程师吗？如果需要，工程师真正值钱的能力又是什么？</p></blockquote>
 <p>最近我把这个问题抛给了 ChatGPT，又结合自己的情况继续追问：一个已经做了多年 C/C++、音视频和移动端开发的工程师，应该继续深挖原来的技术栈，还是转向 AI Agent？如果要转，具体该学什么？</p>
@@ -283,20 +374,25 @@
 <p>AI 改变的不是软件是否还要有人负责，而是代码正在从稀缺的生产能力，变成越来越便宜的生产资料。未来更稀缺的，是能把模糊问题变成正确系统、能驾驭 AI 完成交付，并能判断结果是否可靠的人。</p>
 <h2 id="一消失的不是工程师而是代码生产的溢价">一、消失的不是工程师，而是代码生产的溢价</h2>
 <p>过去的软件开发流程大致是：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">需求 → 设计 → 写代码 → Debug → 测试 → 发布 → 维护</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">需求 → 设计 → 写代码 → Debug → 测试 → 发布 → 维护</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>其中大量时间花在查 API、写样板代码、补测试、重构和整理文档上。如今这些环节正在被 AI 快速压缩，新的流程更像：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">问题 → 需求澄清 → 系统设计 → 任务拆解 → Agent 实现
-</span></span><span class="line"><span class="cl">     → 自动验证 → 人工决策 → 上线 → 持续反馈</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">问题 → 需求澄清 → 系统设计 → 任务拆解 → Agent 实现
+</span></span><span class="line"><span class="cl">     → 自动验证 → 人工决策 → 上线 → 持续反馈</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>这里有一个很重要的变化：<strong>代码生产的成本下降了，决策、验证和责任的成本却没有一起消失。</strong></p>
 <p>AI 可以在几分钟内生成上千行代码，但它并不知道业务到底想解决什么，不会天然理解系统里的隐性约束，也不会替团队承担线上事故的责任。生成得越快，人越需要回答三个问题：</p>
 <ol>
@@ -307,16 +403,22 @@
 <p>这意味着软件开发正在经历一次“抽象层上移”。过去工程师的主要产出是代码，接下来更重要的产出会逐渐变成：清晰的问题定义、可执行的规格、合理的系统边界，以及可验证的交付结果。</p>
 <h2 id="二未来更重要的五种能力">二、未来更重要的五种能力</h2>
 <p>把工程师的能力从底到顶排列，大致可以分成五层：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">问题与产品判断       最稀缺
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">问题与产品判断       最稀缺
 </span></span><span class="line"><span class="cl">系统设计与工程取舍
 </span></span><span class="line"><span class="cl">领域知识与工程经验
 </span></span><span class="line"><span class="cl">验证、测试与可观测性
-</span></span><span class="line"><span class="cl">编码与工具使用       逐渐普及</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">编码与工具使用       逐渐普及</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>这不是说 Coding 不再重要，而是 Coding 的角色变了：它正在从主要产出，变成理解系统、约束 AI 和处理疑难问题的基础能力。</p>
 <h3 id="1-定义问题而不是急着写代码">1. 定义问题，而不是急着写代码</h3>
 <p>假设需求只有一句话：“做一个 AI 实时字幕功能。”</p>
@@ -343,38 +445,50 @@
 <li>如何升级、降级、回滚和观测。</li>
 </ul>
 <p>还是以实时字幕为例，链路可以画成：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Audio Capture → PCM → VAD → ASR → 稳定化 → 翻译 → 字幕展示</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Audio Capture → PCM → VAD → ASR → 稳定化 → 翻译 → 字幕展示</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>AI 可以分别实现每个模块，但“为什么这样拆”仍是人的工作。哪里需要 streaming，谁管理 buffer 的 ownership，ASR 的中间结果何时 commit，翻译失败是否阻塞原文字幕——这些选择共同决定了系统是否可用。</p>
 <h3 id="3-保留真正的领域深度">3. 保留真正的领域深度</h3>
 <p>当通用代码越来越容易生成，领域知识反而会更有价值。</p>
 <p>“会写 Python”很容易被模型复制；但理解 AEC、NS、AGC、VAD、重采样、SIMD、缓存、实时线程、延迟和功耗之间的关系，就不是生成一段代码那么简单。这里面包含长期积累的边界条件、失败经验和取舍能力。</p>
 <p>这也是我不打算丢掉音视频和 C/C++，完全转成“Agent 开发者”的原因。更合理的组合是：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">音视频 / DSP 领域能力
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">音视频 / DSP 领域能力
 </span></span><span class="line"><span class="cl">        +
 </span></span><span class="line"><span class="cl">C/C++ 与移动端工程能力
 </span></span><span class="line"><span class="cl">        +
 </span></span><span class="line"><span class="cl">AI Coding / Agent 杠杆
 </span></span><span class="line"><span class="cl">        =
-</span></span><span class="line"><span class="cl">更高产出的系统工程师</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">更高产出的系统工程师</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>AI 应该放大已有的专业能力，而不是把它替换成一套很快就会普及的工具操作。</p>
 <h3 id="4-建立验证-ai-的能力">4. 建立验证 AI 的能力</h3>
 <p>AI 生成的代码量越大，工程师越不能只靠“看起来没问题”来验收。未来很常见的工作流会是：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Human → Spec → Agent → 大量代码 → 自动验证 → Human Review</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Human → Spec → Agent → 大量代码 → 自动验证 → Human Review</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>真正困难的问题是：<strong>怎么证明 Agent 写对了？</strong></p>
 <p>因此下面这些传统工程能力不但不会过时，反而会成为 AI Coding 的基础设施：</p>
 <ul>
@@ -386,12 +500,23 @@
 <p>我最近研究的 gtest、ASAN、UBSAN、TSAN 和 simpleperf，看起来都不是最热门的“AI 技术”，却恰好是在给 AI 产出建立护栏。代码可以由 Agent 写，验收标准不能临时猜。</p>
 <h3 id="5-从使用-agent-到指挥-agent">5. 从使用 Agent 到指挥 Agent</h3>
 <p>AI Coding 不应该停留在“问 ChatGPT 一个问题，再复制一段代码”。更成熟的方式是把工作拆给不同角色：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">                  Human
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">                  Human
 </span></span><span class="line"><span class="cl">                    │
 </span></span><span class="line"><span class="cl">              Specification
 </span></span><span class="line"><span class="cl">                    │
@@ -402,7 +527,9 @@
 </span></span><span class="line"><span class="cl">                    ↓
 </span></span><span class="line"><span class="cl">             Review / Benchmark
 </span></span><span class="line"><span class="cl">                    ↓
-</span></span><span class="line"><span class="cl">              Human Approval</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">              Human Approval</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>人的工作会越来越接近 Architect、Reviewer 和 Agent Operator 的组合：给出上下文和约束，拆分任务，选择工具，处理冲突，并对最终结果负责。</p>
 <p>但这不意味着可以放弃 Coding。不会 C++ 的人，很难发现一个看似普通的 <code>std::vector&lt;float&gt;</code> 背后是否存在多余分配、拷贝、生命周期、对齐或缓存问题；不了解并发的人，也很难识别 AI 写出的偶发竞态。<strong>不一定要亲手写完每一行，但必须有能力判断这些代码是否可信。</strong></p>
 <h2 id="三哪些岗位会减少哪些工程师会更值钱">三、哪些岗位会减少，哪些工程师会更值钱</h2>
@@ -437,15 +564,25 @@
   </tbody>
 </table>
 <p>我想走的是第三条路。目标不是和 AI 比谁敲代码快，而是把自己的领域经验、工程判断和 AI 的执行能力组合起来，完成过去需要更多人协作才能完成的系统。</p>
-<p>这个结论也延续了我之前对 AI Coding 的看法。我曾在<a href="/posts/202601/2026-02-01-%e5%85%b3%e4%ba%8eaicoding%e7%9a%84%e4%b8%80%e4%ba%9b%e6%84%9f%e6%83%b3%e5%92%8c%e5%90%8e%e7%bb%ad%e7%9a%84%e8%a7%84%e5%88%92/" rel="">《关于 AI Coding 的一些感想和后续规划》</a>里写过，AI 的能力边界很大程度受使用者影响，生产代码的责任仍在人身上。现在再往前一步看，真正的变化不只是“用 AI 写得更快”，而是要围绕 AI 重新设计整套软件工程流程。</p>
+<p>这个结论也延续了我之前对 AI Coding 的看法。我曾在<a href="/posts/202601/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/">《关于 AI Coding 的一些感想和后续规划》</a>里写过，AI 的能力边界很大程度受使用者影响，生产代码的责任仍在人身上。现在再往前一步看，真正的变化不只是“用 AI 写得更快”，而是要围绕 AI 重新设计整套软件工程流程。</p>
 <h2 id="四我的进阶路线从-ai-coding-到-ai-native-engineering">四、我的进阶路线：从 AI Coding 到 AI-Native Engineering</h2>
 <p>结合我目前的基础，更合适的路线不是从零转行做大模型，也不是追逐所有 Agent 框架，而是：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">传统工程能力补强
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">传统工程能力补强
 </span></span><span class="line"><span class="cl">        ↓
 </span></span><span class="line"><span class="cl">AI Coding 工作流
 </span></span><span class="line"><span class="cl">        ↓
@@ -455,18 +592,23 @@
 </span></span><span class="line"><span class="cl">        ↓
 </span></span><span class="line"><span class="cl">MCP / Tool / Agent Runtime
 </span></span><span class="line"><span class="cl">        ↓
-</span></span><span class="line"><span class="cl">AI-Native Software Engineering</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">AI-Native Software Engineering</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>这条路线可以用 6～9 个月建立基本体系，但各阶段不需要等前一阶段“学完”才开始。更有效的节奏始终是：学一点，马上放进真实项目；遇到问题，再回来补知识。</p>
 <h3 id="stage-0补强软件工程闭环">Stage 0：补强软件工程闭环</h3>
 <p>时间：2～4 周。</p>
 <p>这一阶段不是重新学习语法，而是把注意力从 Coding 拉回完整交付：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Requirement → Spec → Architecture → Implementation
-</span></span><span class="line"><span class="cl">            → Test → Benchmark → Release → Observability</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Requirement → Spec → Architecture → Implementation
+</span></span><span class="line"><span class="cl">            → Test → Benchmark → Release → Observability</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>重点补三块：</p>
 <ul>
 <li><strong>Architecture</strong>：模块、接口、依赖、ownership、生命周期、状态、并发和错误处理；</li>
@@ -502,19 +644,31 @@
 <h3 id="stage-3亲手实现一个-mini-agent">Stage 3：亲手实现一个 Mini Agent</h3>
 <p>时间：1～2 个月。</p>
 <p>这一阶段才正式学习 Agent、LLM、Tool Calling、Context、Planning、Memory、Reflection 和 Sub-agent。最好的入口不是先读几十个框架，而是用 TypeScript 写一个最小 Agent：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">User → LLM → Tool Call → Tool Result → LLM → Answer</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">User → LLM → Tool Call → Tool Result → LLM → Answer</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>第一版只需要 filesystem、calculator、shell 三个 Tool；第二版加入多轮上下文和循环执行：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-ts">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">llm</span><span class="p">(</span><span class="nx">messages</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">toolCall</span><span class="p">)</span> <span class="p">{</span>
@@ -524,18 +678,22 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">answer</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>真正理解这个循环后，再读各种 Agent Framework，就能看见包装之下共同的骨架。</p>
 <p>TypeScript 不需要从头学遍，只要先掌握 <code>type</code>、<code>interface</code>、泛型、联合类型、<code>Promise</code>、<code>async/await</code>、模块和 npm，够用就往项目里走。</p>
 <h3 id="stage-4理解-mcp工具与安全边界">Stage 4：理解 MCP、工具与安全边界</h3>
 <p>时间：约 1 个月。</p>
 <p>Agent Loop 本身并不神秘，工程复杂度主要来自 Agent 与真实世界的连接：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Agent + Tools + Context + State + Permissions + Reliability + Security</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Agent + Tools + Context + State + Permissions + Reliability + Security</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>这个阶段要理解 Tool、Resource、Prompt 和 MCP Client 如何连接文件系统、GitHub、数据库和其他服务。除了“能调用”，还要继续追问：</p>
 <ul>
 <li>工具权限如何限制；</li>
@@ -548,13 +706,16 @@
 <h3 id="stage-5阅读真实的-agent-runtime">Stage 5：阅读真实的 Agent Runtime</h3>
 <p>时间：1～2 个月。</p>
 <p>有了 Mini Agent 和 MCP 的基础，再研究 Codex、OpenClaw、Pi 或 Agent SDK 这类真实系统。不要从源码第一行顺序读，而是沿着运行链路追踪：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">CLI → Runtime → Session → Agent Loop → LLM
-</span></span><span class="line"><span class="cl">    → Tool → Context → Memory → Sub-agent</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">CLI → Runtime → Session → Agent Loop → LLM
+</span></span><span class="line"><span class="cl">    → Tool → Context → Memory → Sub-agent</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>面对任何 Agent Runtime，都可以用八个问题拆解：</p>
 <ol>
 <li>Agent Loop 在哪里？</li>
@@ -566,17 +727,21 @@
 <li>Sub-agent 如何隔离上下文、并行工作和汇总结果？</li>
 <li>权限、审批和审计边界在哪里？</li>
 </ol>
-<p>我之前整理过<a href="/posts/202604/2026-04-02-claude-code%e6%98%af%e5%a6%82%e4%bd%95%e5%b7%a5%e4%bd%9c%e7%9a%84/" rel="">《从 Claude Code 学习 Agent 开发》</a>，当时得到的结论是“一个循环加工具就是 Agent”。这句话适合解释原理；真正到了工程里，难点则是如何让这个循环在长期运行、上下文变化和工具失败时仍然可靠。</p>
+<p>我之前整理过<a href="/posts/202604/2026-04-02-claude-code%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/">《从 Claude Code 学习 Agent 开发》</a>，当时得到的结论是“一个循环加工具就是 Agent”。这句话适合解释原理；真正到了工程里，难点则是如何让这个循环在长期运行、上下文变化和工具失败时仍然可靠。</p>
 <h3 id="stage-6建立-ai-native-开发方式">Stage 6：建立 AI-Native 开发方式</h3>
 <p>这是持续演进的阶段。最终目标不是“会用 Copilot”，而是让整个开发过程围绕人和 Agent 的分工重新组织：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Idea → Explore → Specification → Architecture
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Idea → Explore → Specification → Architecture
 </span></span><span class="line"><span class="cl">     → Implementation Agent → Test Agent → Review Agent
-</span></span><span class="line"><span class="cl">     → Benchmark → Human Approval → Release</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">     → Benchmark → Human Approval → Release</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>人在关键决策点介入，Agent 承担可拆分、可验证的执行工作。任何一步都不能只因为“模型说完成了”就算完成，最终仍要回到构建结果、测试、指标和验收标准。</p>
 <h2 id="五用三个项目把路线串起来">五、用三个项目把路线串起来</h2>
 <p>学习 Agent 最容易掉进的坑，是看了很多框架，收藏了很多名词，却没有一条真实链路把它们连起来。与其做几十个 Demo，不如做三个逐步升级的项目。</p>
@@ -584,12 +749,14 @@
 <p>用 TypeScript 实现 LLM、Tool Calling 和 Agent Loop，控制在 1～2 周。目标不是做一个能用的产品，而是把 Agent 的最小原理亲手跑通。</p>
 <h3 id="project-2audio-coding-agent">Project 2：Audio Coding Agent</h3>
 <p>让 Agent 分析一个真实的 C++ Audio Pipeline，寻找 CPU Hotspot、内存拷贝、重采样开销、线程问题和潜在竞态。给它配置 filesystem、代码搜索、Git、编译、gtest 和 simpleperf 等工具，形成：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Analyze → Plan → Modify → Build → Test → Benchmark → Report</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Analyze → Plan → Modify → Build → Test → Benchmark → Report</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>这个项目能把我已有的 C++、音频、性能优化经验和 Agent Engineering 串在一起。与通用 Coding Agent 相比，领域知识会真正参与结果判断。</p>
 <h3 id="project-3ai-native-实时字幕应用">Project 3：AI-Native 实时字幕应用</h3>
 <p>最后选择一个完整项目，例如 iOS 双语实时字幕，从想法开始严格走一遍 Spec、架构、任务拆分、实现、测试、Benchmark 和发布流程。可以让不同 Agent 分别承担探索、编码、测试、性能和 Review，但每一步都必须有明确输入、输出和验收标准。</p>
@@ -646,11 +813,11 @@
 <h2 id="七参考资料">七、参考资料</h2>
 <p>资料不需要多，先沿着主线读官方文档：</p>
 <ul>
-<li><a href="https://openai.com/business/guides-and-resources/how-openai-uses-codex/" target="_blank" rel="noopener noreffer ">How OpenAI uses Codex</a>：观察 AI Coding 如何进入真实工程流程；</li>
-<li><a href="https://openai.com/index/running-codex-safely/" target="_blank" rel="noopener noreffer ">Running Codex safely</a>：理解权限、环境和人工审批；</li>
-<li><a href="https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/" target="_blank" rel="noopener noreffer ">A practical guide to building agents</a>：建立 Agent 的整体模型；</li>
-<li><a href="https://www.typescriptlang.org/docs/handbook/" target="_blank" rel="noopener noreffer ">TypeScript Handbook</a> 与 <a href="https://www.typescriptlang.org/docs/handbook/2/modules.html" target="_blank" rel="noopener noreffer ">Modules</a>：补齐实现 Agent 所需的 TypeScript 子集；</li>
-<li><a href="https://openspec.dev/docs/quickstart" target="_blank" rel="noopener noreffer ">OpenSpec Quickstart</a>：把 Spec 驱动流程放进真实项目。</li>
+<li><a href="https://openai.com/business/guides-and-resources/how-openai-uses-codex/">How OpenAI uses Codex</a>：观察 AI Coding 如何进入真实工程流程；</li>
+<li><a href="https://openai.com/index/running-codex-safely/">Running Codex safely</a>：理解权限、环境和人工审批；</li>
+<li><a href="https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/">A practical guide to building agents</a>：建立 Agent 的整体模型；</li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/">TypeScript Handbook</a> 与 <a href="https://www.typescriptlang.org/docs/handbook/2/modules.html">Modules</a>：补齐实现 Agent 所需的 TypeScript 子集；</li>
+<li><a href="https://openspec.dev/docs/quickstart">OpenSpec Quickstart</a>：把 Spec 驱动流程放进真实项目。</li>
 </ul>
 <p>读资料时不追求“系统学完”。每看懂一个概念，就在项目中找到它的位置；没有项目对应的知识，过一段时间大概率还会忘掉。</p>
 <h2 id="八最后不要成为工具收藏家">八、最后：不要成为工具收藏家</h2>
@@ -659,7 +826,16 @@
 <p>未来优秀的软件工程师，应该能定义问题、设计系统、驾驭 Agent、验证结果，并对最终交付负责。</p></blockquote>
 <p>因此，不应该按照“先学 TypeScript，再学 Agent，再学 MCP，再学某个框架”的课程目录前进。更有效的方式，是始终围绕一个真实项目：项目需要什么，就补什么；做出结果，再复盘哪些判断可以沉淀成 Spec、测试、工具或工作流。</p>
 <p>代码正在变便宜，但正确的软件并没有因此自动出现。会写代码仍然重要，只是它不再是终点。接下来真正值得投入的，是把领域经验、系统工程和 AI 组织成一套能持续交付的能力。</p>
-]]></description></item><item><title>Claude Code 是如何工作的</title><link>https://lyapple2008.github.io/posts/202604/2026-04-02-claude-code%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/</link><pubDate>Thu, 02 Apr 2026 09:58:19 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202604/2026-04-02-claude-code%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/</guid><description><![CDATA[<h1 id="从claude-code学习agent开发">从Claude Code学习Agent开发</h1>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Claude Code 是如何工作的</title>
+      <link>https://lyapple2008.github.io/posts/202604/2026-04-02-claude-code%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/</link>
+      <pubDate>Thu, 02 Apr 2026 09:58:19 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202604/2026-04-02-claude-code%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/</guid>
+      <description>&lt;h1 id=&#34;从claude-code学习agent开发&#34;&gt;从Claude Code学习Agent开发&lt;/h1&gt;
+&lt;p&gt;最近一直在重度使用 Claude Code，也一直被各种新名词轰炸：vibe coding、spec coding、agent、openclaw、harness 等等。刚好看到一个介绍 Claude Code 工程原理的教程，对Agent Engneer有了一些认识，记录总结一下。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<h1 id="从claude-code学习agent开发">从Claude Code学习Agent开发</h1>
 <p>最近一直在重度使用 Claude Code，也一直被各种新名词轰炸：vibe coding、spec coding、agent、openclaw、harness 等等。刚好看到一个介绍 Claude Code 工程原理的教程，对Agent Engneer有了一些认识，记录总结一下。</p>
 <blockquote>
 <p>教程地址：https://learn.shareai.run/en/<br>
@@ -705,8 +881,11 @@
 <p>当整个系统的短板是人的时候，再也没有借口可找。</p>
 <p>参考：</p>
 <ol>
-<li><a href="https://github.com/shareAI-lab/learn-claude-code" target="_blank" rel="noopener noreffer ">github: learn-claude-code</a></li>
-<li><a href="https://x.com/HiTw93/status/2032091246588518683" target="_blank" rel="noopener noreffer ">你不知道的 Claude Code：架构、治理与工程实践</a></li>
-<li><a href="https://x.com/HiTw93/status/2034627967926825175" target="_blank" rel="noopener noreffer ">你不知道的 Agent：原理、架构与工程实践</a></li>
+<li><a href="https://github.com/shareAI-lab/learn-claude-code">github: learn-claude-code</a></li>
+<li><a href="https://x.com/HiTw93/status/2032091246588518683">你不知道的 Claude Code：架构、治理与工程实践</a></li>
+<li><a href="https://x.com/HiTw93/status/2034627967926825175">你不知道的 Agent：原理、架构与工程实践</a></li>
 </ol>
-]]></description></item></channel></rss>
+]]></content:encoded>
+    </item>
+  </channel>
+</rss>

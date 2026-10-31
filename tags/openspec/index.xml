@@ -1,4 +1,26 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>OpenSpec - 标签 - BeYoung</title><link>https://lyapple2008.github.io/tags/openspec/</link><description>OpenSpec - 标签 - BeYoung</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>See this site's source code [here](https://github.com/lyapple2008/lyapple2008.github.io), licensed under GPLv3 ·</copyright><lastBuildDate>Mon, 28 Sep 2026 07:22:02 +0800</lastBuildDate><atom:link href="https://lyapple2008.github.io/tags/openspec/" rel="self" type="application/rss+xml"/><item><title>用 OpenSpec 重构 AI Coding 工作流：让每次开发都可追溯、可恢复、可沉淀</title><link>https://lyapple2008.github.io/posts/202609/2026-09-28-ai-coding%E5%B7%A5%E4%BD%9C%E6%B5%81openspec/</link><pubDate>Mon, 28 Sep 2026 07:22:02 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202609/2026-09-28-ai-coding%E5%B7%A5%E4%BD%9C%E6%B5%81openspec/</guid><description><![CDATA[<p>AI Coding 用得越多，我越能感觉到两个问题。</p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>OpenSpec on BeYoung</title>
+    <link>https://lyapple2008.github.io/tags/openspec/</link>
+    <description>Recent content in OpenSpec on BeYoung</description>
+    <image>
+      <title>BeYoung</title>
+      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.147.9</generator>
+    <language>zh</language>
+    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
+    <lastBuildDate>Mon, 28 Sep 2026 07:22:02 +0800</lastBuildDate>
+    <atom:link href="https://lyapple2008.github.io/tags/openspec/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>用 OpenSpec 重构 AI Coding 工作流：让每次开发都可追溯、可恢复、可沉淀</title>
+      <link>https://lyapple2008.github.io/posts/202609/2026-09-28-ai-coding%E5%B7%A5%E4%BD%9C%E6%B5%81openspec/</link>
+      <pubDate>Mon, 28 Sep 2026 07:22:02 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202609/2026-09-28-ai-coding%E5%B7%A5%E4%BD%9C%E6%B5%81openspec/</guid>
+      <description>AI Coding 快了，但方案反复、决策丢失和上下文中断也变得更常见。这篇文章介绍如何用 OpenSpec 把 Explore、Propose、Review、Apply 和 Archive 串成一条可复用的规格驱动开发流程。</description>
+      <content:encoded><![CDATA[<p>AI Coding 用得越多，我越能感觉到两个问题。</p>
 <p>第一个问题是：<strong>开发过程没有留下足够的中间记录。</strong></p>
 <p>Agent 可以很快生成大量代码，但方案不对时，常常只能整段推倒重来；某个架构决策是在对话里做的，过两天就不记得当时为什么这样选；一次任务被打断，换一个会话后，Agent 又要从头理解需求和已经做过的工作。真正丢失的不只是上下文，还有上下文中包含的判断。</p>
 <p>第二个问题是：<strong>AI Coding Agent 没有跟着我和项目一起成长。</strong></p>
@@ -15,46 +37,71 @@
 <p>前者是变更日志，后者是随代码演进的活文档。当一次变更被 Archive，其中的需求会进入主 Spec，变更目录则被移入 <code>openspec/changes/archive/</code>。</p>
 <h2 id="安装和初始化">安装和初始化</h2>
 <p>OpenSpec 需要 Node.js 20.19.0 或更高版本。可以使用 npm 安装：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-bash">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">npm install -g @fission-ai/openspec@latest
-</span></span><span class="line"><span class="cl">openspec --version</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">npm install -g @fission-ai/openspec@latest
+</span></span><span class="line"><span class="cl">openspec --version</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>macOS 也可以直接使用 Homebrew：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-bash">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install openspec</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install openspec</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>然后在项目根目录执行：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-bash">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">openspec init</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">openspec init</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p><code>init</code> 会询问正在使用哪些 AI 工具，为 Claude Code、Codex、Cursor 等工具安装对应的 Skill 或命令，并在项目中生成：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">openspec/
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">openspec/
 </span></span><span class="line"><span class="cl">├── config.yaml       # 项目上下文和工作流规则
 </span></span><span class="line"><span class="cl">├── specs/            # 已经上线的系统规格
 </span></span><span class="line"><span class="cl">└── changes/          # 正在开发的变更
-</span></span><span class="line"><span class="cl">    └── archive/      # 已完成的变更记录</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">    └── archive/      # 已完成的变更记录</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>这些都是普通文本文件，应该和代码一起提交到 Git，而不是仅保存在某一次会话中。初始化或 OpenSpec 升级后，可以用 <code>openspec update</code> 刷新项目中的 Skills 和命令。</p>
 <p><code>config.yaml</code> 值得单独提一下。它的 <code>context</code> 会进入每个 OpenSpec 工作流，适合放置会影响所有变更的少量事实；<code>rules</code> 可以约束某类产物；<code>operations</code> 则能约束 Apply 和 Archive 如何执行。例如：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-yaml">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
 </span></span></span><span class="line"><span class="cl"><span class="sd">  Tech stack: TypeScript, Node.js, PostgreSQL
 </span></span></span><span class="line"><span class="cl"><span class="sd">  所有 API 变更都必须兼容现有客户端
 </span></span></span><span class="line"><span class="cl"><span class="sd">  所有 OpenSpec 产物使用中文</span><span class="w">
@@ -66,11 +113,14 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">operations</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">apply</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">guidance</span><span class="p">:</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">在标记任务完成前运行测试和 Lint</span></span></span></code></pre></div></div>
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">在标记任务完成前运行测试和 Lint</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>配置要尽量短。能从代码读出来的信息没必要重复塞进去，否则只会占用 Agent 的上下文。</p>
 <h2 id="一条完整的-openspec-工作流">一条完整的 OpenSpec 工作流</h2>
 <p>OpenSpec 官方的核心流程是 Explore → Propose → Review → Apply → Archive。如果把“发现问题后如何回退”也画进去，完整的开发过程更像下面这样：</p>
-<div class="mermaid" id="id-64008caa5c28">flowchart LR
+
+<div class="mermaid">flowchart LR
     idea[&#34;需求 / 问题&#34;] --&gt; explore[&#34;1. Explore&lt;br/&gt;读代码、澄清边界、比较方案&#34;]
     explore --&gt; propose[&#34;2. Propose&lt;br/&gt;生成 Proposal、Spec、Design、Tasks&#34;]
     propose --&gt; review{&#34;3. Review&lt;br/&gt;人工确认问题、验收条件和任务&#34;}
@@ -80,7 +130,8 @@
     apply -- &#34;中断 / 换会话&#34; --&gt; resume[&#34;读取变更文件&lt;br/&gt;从第一个未完成任务继续&#34;]
     resume --&gt; apply
     apply -- &#34;代码、测试、验收全部通过&#34; --&gt; archive[&#34;5. Archive&lt;br/&gt;同步主 Spec，归档变更&#34;]
-    archive -. &#34;下一个变更&#34; .-&gt; idea</div><p>这条流程最重要的是：**代码不是一开始就出现，而是在规格经过确认后才出现。**修改几段 Markdown 的成本，远低于让 Agent 重写几千行代码。</p>
+    archive -. &#34;下一个变更&#34; .-&gt; idea</div>
+<p>这条流程最重要的是：**代码不是一开始就出现，而是在规格经过确认后才出现。**修改几段 Markdown 的成本，远低于让 Agent 重写几千行代码。</p>
 <h2 id="放进一个真实需求中怎么用">放进一个真实需求中怎么用</h2>
 <p>以“接入 RNNoise 降噪模型”为例。最初的需求往往只有一句话：</p>
 <blockquote>
@@ -88,13 +139,16 @@
 <p>这句话还不能直接变成代码。按 OpenSpec 流程，可以这样做。</p>
 <h3 id="1-explore先把问题想清楚">1. Explore：先把问题想清楚</h3>
 <p>在 AI 对话中说：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请用 OpenSpec Explore 模式调查接入 RNNoise 降噪模型的需求。
-</span></span><span class="line"><span class="cl">先读取现有音频采集、重采样、编码和线程调度代码，画出当前音频链路，列出需要确认的边界和备选方案，暂时不写代码。</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请用 OpenSpec Explore 模式调查接入 RNNoise 降噪模型的需求。
+</span></span><span class="line"><span class="cl">先读取现有音频采集、重采样、编码和线程调度代码，画出当前音频链路，列出需要确认的边界和备选方案，暂时不写代码。</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>Explore 阶段应该回答这些问题：</p>
 <ul>
 <li>当前输入音频的采样率、通道数、数据类型和每次回调帧长是什么？</li>
@@ -107,32 +161,52 @@
 <p>如果这些结论没有想清楚，Agent 越快，只会越快地实现一个错误方案。</p>
 <h3 id="2-propose把讨论变成可审查的文件">2. Propose：把讨论变成可审查的文件</h3>
 <p>方向确认后，继续说：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请就刚才确认的 RNNoise 接入方案创建 OpenSpec change，变更名称为 integrate-rnnoise-denoiser。</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请就刚才确认的 RNNoise 接入方案创建 OpenSpec change，变更名称为 integrate-rnnoise-denoiser。</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>Agent 会创建类似这样的目录：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">openspec/changes/integrate-rnnoise-denoiser/
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">openspec/changes/integrate-rnnoise-denoiser/
 </span></span><span class="line"><span class="cl">├── proposal.md       # 为什么做，改动范围是什么
 </span></span><span class="line"><span class="cl">├── specs/
 </span></span><span class="line"><span class="cl">│   └── rnnoise-denoising/
 </span></span><span class="line"><span class="cl">│       └── spec.md  # 可验收的行为要求
 </span></span><span class="line"><span class="cl">├── design.md         # 关键技术决策，需要时才创建
-</span></span><span class="line"><span class="cl">└── tasks.md          # 实现清单和进度</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">└── tasks.md          # 实现清单和进度</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p><code>spec.md</code> 不应该只写“接入 RNNoise”，而应该写成可验收的系统行为。例如：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-markdown">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="gu">### Requirement: 实时 RNNoise 降噪
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="gu">### Requirement: 实时 RNNoise 降噪
 </span></span></span><span class="line"><span class="cl"><span class="gu"></span>
 </span></span><span class="line"><span class="cl">系统必须在实时音频链路中按 RNNoise 帧规格连续处理音频，并保持输出的时序和时长与输入一致。
 </span></span><span class="line"><span class="cl">
@@ -142,7 +216,9 @@
 </span></span><span class="line"><span class="cl"><span class="k">-</span> **THEN** 系统必须先缓冲并组成 480 个采样点的完整帧
 </span></span><span class="line"><span class="cl"><span class="k">-</span> **AND** 每个完整帧必须严格按时间顺序调用一次 RNNoise 推理
 </span></span><span class="line"><span class="cl"><span class="k">-</span> **AND** 同一条音频流必须在相邻帧之间复用同一个模型状态
-</span></span><span class="line"><span class="cl">- <span class="gs">**AND**</span> 新建音频流或发生不连续跳转时必须重置状态</span></span></code></pre></div></div>
+</span></span><span class="line"><span class="cl">- <span class="gs">**AND**</span> 新建音频流或发生不连续跳转时必须重置状态</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p><code>design.md</code> 则应该记录“为什么”：为什么选原生 RNNoise 或 ONNX Runtime，为什么在重采样之后、编码之前执行降噪，如何管理每条流的隐状态，多声道是独立降噪还是先混音，曾经考虑过哪些方案又为什么放弃。这些内容比最后那几行推理调用更值得保留。</p>
 <h3 id="3-review把最贵的错误留在纸面上">3. Review：把最贵的错误留在纸面上</h3>
 <p>Propose 完成后不要立即点头让 Agent 写代码。建议按下面的顺序审查：</p>
@@ -155,13 +231,16 @@
 <p>发现“现有采集输出其实是 44.1 kHz 立体声”或“多路音频不能共用同一个 RNNoise 状态”，可以直接编辑 Markdown，也可以让 Agent 更新变更文件。审查完成前，不产生业务代码。</p>
 <h3 id="4-apply换一个干净上下文开始实现">4. Apply：换一个干净上下文开始实现</h3>
 <p>OpenSpec 官方建议在新的会话中执行 Apply，把上一阶段的讨论噪声留在规格外面。可以直接说：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请 Apply integrate-rnnoise-denoiser 这个 OpenSpec change。
-</span></span><span class="line"><span class="cl">按 tasks.md 逐项实现，每项完成后运行对应验证，只在通过后勾选任务。</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请 Apply integrate-rnnoise-denoiser 这个 OpenSpec change。
+</span></span><span class="line"><span class="cl">按 tasks.md 逐项实现，每项完成后运行对应验证，只在通过后勾选任务。</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>Agent 会先读取这次变更的文件，再按 <code>tasks.md</code> 逐项实现。如果中途被打断，在新会话中再次要求 Apply 即可，新 Agent 会从第一个未勾选的任务继续。</p>
 <p>如果实现过程发现原方案有问题，不要只在代码中偷偷改口径。先修正 Spec、Design 或 Tasks，再继续 Apply。否则文档与代码会从这里开始分叉。</p>
 <h3 id="5-verify-和-archive用事实关闭变更">5. Verify 和 Archive：用事实关闭变更</h3>
@@ -176,12 +255,14 @@
 </ul>
 <p>OpenSpec 还提供可选的 Verify 工作流，可用来检查实现是否与变更产物一致。默认配置不一定安装它，没有 Verify 时，也可以让另一个新会话根据 Spec 做独立 Review。</p>
 <p>所有任务、测试和人工验收全部通过后，再说：</p>
-<div class="code-block code-line-numbers open" style="counter-reset: code-block 0">
-    <div class="code-header language-text">
-        <span class="code-title"><i class="arrow fas fa-angle-right" aria-hidden="true"></i></span>
-        <span class="ellipses"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-        
-    </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请 Archive integrate-rnnoise-denoiser 这个 OpenSpec change。</span></span></code></pre></div></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">请 Archive integrate-rnnoise-denoiser 这个 OpenSpec change。</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <p>Archive 会把这次变更的行为要求合并到 <code>openspec/specs/</code>，并把变更目录移入 <code>openspec/changes/archive/</code>。Git 仍然是独立的事：规格、代码和测试应该在同一条变更链上提交和审查。</p>
 <h2 id="openspec-如何解决没有中间记录">OpenSpec 如何解决“没有中间记录”</h2>
 <p>回到开头的第一个问题，OpenSpec 的作用非常直接。</p>
@@ -236,7 +317,8 @@
 <li><strong>个人记忆</strong>：使用者偏好的实现方式、可接受的风险、审查习惯和解释粒度。</li>
 </ol>
 <p>这些记忆不能只管写入，还要有一个可审查的学习闭环：</p>
-<div class="mermaid" id="id-12179c7f8002">flowchart LR
+
+<div class="mermaid">flowchart LR
     work[&#34;需求开发 / Bug / 线上故障&#34;] --&gt; reflect[&#34;复盘：提取候选经验&#34;]
     reflect --&gt; approve{&#34;人工确认&lt;br/&gt;是否正确、可复用&#34;}
     approve -- &#34;否&#34; --&gt; discard[&#34;丢弃或仅保留原始记录&#34;]
@@ -245,7 +327,8 @@
     retrieve --&gt; plan[&#34;影响 Explore、Spec 和 Review&#34;]
     plan --&gt; measure[&#34;用测试、Review 和结果验证&#34;]
     measure --&gt; update[&#34;加强、修正、降权或过期&#34;]
-    update --&gt; memory</div><p>这样的 Agent 才不是把历史聊天全部塞进 Prompt，而是能够做四件事：</p>
+    update --&gt; memory</div>
+<p>这样的 Agent 才不是把历史聊天全部塞进 Prompt，而是能够做四件事：</p>
 <ul>
 <li>知道什么值得记住，什么只是当时的噪声；</li>
 <li>在正确的任务中取回正确的经验，而不是无差别加载所有过去；</li>
@@ -268,10 +351,13 @@
 <p>它还没有让 Agent 真正学会长期成长，但已经先为成长准备了可信的原料：规格、决策、任务、验证和变更历史。我期待下一步，AI Coding Agent 能在这些原料上形成可审查、可纠正、可遗忘的长期记忆。到那时，它才不只是一个每次都很聪明的临时工，而是一个真正会随着使用者和项目共同进化的协作者。</p>
 <h2 id="参考资料">参考资料</h2>
 <ul>
-<li><a href="https://openspec.dev/docs/installation" target="_blank" rel="noopener noreffer ">OpenSpec Installation</a></li>
-<li><a href="https://openspec.dev/docs/setup" target="_blank" rel="noopener noreffer ">OpenSpec Set up your project</a></li>
-<li><a href="https://openspec.dev/docs/quickstart" target="_blank" rel="noopener noreffer ">OpenSpec Quickstart</a></li>
-<li><a href="https://openspec.dev/docs/project-config" target="_blank" rel="noopener noreffer ">OpenSpec Project configuration</a></li>
-<li><a href="https://github.com/Fission-AI/OpenSpec" target="_blank" rel="noopener noreffer ">OpenSpec GitHub</a></li>
+<li><a href="https://openspec.dev/docs/installation">OpenSpec Installation</a></li>
+<li><a href="https://openspec.dev/docs/setup">OpenSpec Set up your project</a></li>
+<li><a href="https://openspec.dev/docs/quickstart">OpenSpec Quickstart</a></li>
+<li><a href="https://openspec.dev/docs/project-config">OpenSpec Project configuration</a></li>
+<li><a href="https://github.com/Fission-AI/OpenSpec">OpenSpec GitHub</a></li>
 </ul>
-]]></description></item></channel></rss>
+]]></content:encoded>
+    </item>
+  </channel>
+</rss>

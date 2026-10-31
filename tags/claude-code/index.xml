@@ -1,4 +1,27 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Claude Code - 标签 - BeYoung</title><link>https://lyapple2008.github.io/tags/claude-code/</link><description>Claude Code - 标签 - BeYoung</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>See this site's source code [here](https://github.com/lyapple2008/lyapple2008.github.io), licensed under GPLv3 ·</copyright><lastBuildDate>Thu, 02 Apr 2026 09:58:19 +0800</lastBuildDate><atom:link href="https://lyapple2008.github.io/tags/claude-code/" rel="self" type="application/rss+xml"/><item><title>Claude Code 是如何工作的</title><link>https://lyapple2008.github.io/posts/202604/2026-04-02-claude-code%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/</link><pubDate>Thu, 02 Apr 2026 09:58:19 +0800</pubDate><author>Marshall Liu</author><guid>https://lyapple2008.github.io/posts/202604/2026-04-02-claude-code%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/</guid><description><![CDATA[<h1 id="从claude-code学习agent开发">从Claude Code学习Agent开发</h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Claude Code on BeYoung</title>
+    <link>https://lyapple2008.github.io/tags/claude-code/</link>
+    <description>Recent content in Claude Code on BeYoung</description>
+    <image>
+      <title>BeYoung</title>
+      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- 0.147.9</generator>
+    <language>zh</language>
+    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
+    <lastBuildDate>Thu, 02 Apr 2026 09:58:19 +0800</lastBuildDate>
+    <atom:link href="https://lyapple2008.github.io/tags/claude-code/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Claude Code 是如何工作的</title>
+      <link>https://lyapple2008.github.io/posts/202604/2026-04-02-claude-code%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/</link>
+      <pubDate>Thu, 02 Apr 2026 09:58:19 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202604/2026-04-02-claude-code%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84/</guid>
+      <description>&lt;h1 id=&#34;从claude-code学习agent开发&#34;&gt;从Claude Code学习Agent开发&lt;/h1&gt;
+&lt;p&gt;最近一直在重度使用 Claude Code，也一直被各种新名词轰炸：vibe coding、spec coding、agent、openclaw、harness 等等。刚好看到一个介绍 Claude Code 工程原理的教程，对Agent Engneer有了一些认识，记录总结一下。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<h1 id="从claude-code学习agent开发">从Claude Code学习Agent开发</h1>
 <p>最近一直在重度使用 Claude Code，也一直被各种新名词轰炸：vibe coding、spec coding、agent、openclaw、harness 等等。刚好看到一个介绍 Claude Code 工程原理的教程，对Agent Engneer有了一些认识，记录总结一下。</p>
 <blockquote>
 <p>教程地址：https://learn.shareai.run/en/<br>
@@ -44,8 +67,11 @@
 <p>当整个系统的短板是人的时候，再也没有借口可找。</p>
 <p>参考：</p>
 <ol>
-<li><a href="https://github.com/shareAI-lab/learn-claude-code" target="_blank" rel="noopener noreffer ">github: learn-claude-code</a></li>
-<li><a href="https://x.com/HiTw93/status/2032091246588518683" target="_blank" rel="noopener noreffer ">你不知道的 Claude Code：架构、治理与工程实践</a></li>
-<li><a href="https://x.com/HiTw93/status/2034627967926825175" target="_blank" rel="noopener noreffer ">你不知道的 Agent：原理、架构与工程实践</a></li>
+<li><a href="https://github.com/shareAI-lab/learn-claude-code">github: learn-claude-code</a></li>
+<li><a href="https://x.com/HiTw93/status/2032091246588518683">你不知道的 Claude Code：架构、治理与工程实践</a></li>
+<li><a href="https://x.com/HiTw93/status/2034627967926825175">你不知道的 Agent：原理、架构与工程实践</a></li>
 </ol>
-]]></description></item></channel></rss>
+]]></content:encoded>
+    </item>
+  </channel>
+</rss>
