@@ -9,8 +9,8 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.147.9</generator>
-    <language>zh</language>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Mon, 09 Mar 2026 18:24:47 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/tags/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/index.xml" rel="self" type="application/rss+xml" />
@@ -47,9 +47,11 @@
       <pubDate>Sat, 14 Feb 2026 17:59:07 +0800</pubDate>
       <guid>https://lyapple2008.github.io/posts/202602/2026-02-14-asr%E4%BB%BB%E5%8A%A1%E5%88%9D%E4%BD%93%E9%AA%8C/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。&lt;/p&gt;</description>
+&lt;p&gt;这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
       <content:encoded><![CDATA[<blockquote>
-<p>这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。</p></blockquote>
+<p>这篇继续是开发日志，正在开发一款iOS端的实时双语字幕APP，由于需要用到语音识别，了解了下语音识别任务的现状和主流方案，为后面方案选择做准备。</p>
+</blockquote>
 <h3 id="模块流程">模块流程</h3>
 
 <div class="mermaid">graph LR
@@ -77,40 +79,40 @@
 <h1 id="与降噪任务的区别">与降噪任务的区别</h1>
 <p>在开发iOS双语字幕的过程中，我之前可能接触过降噪任务，这两者有本质区别：</p>
 <table>
-  <thead>
-      <tr>
-          <th>维度</th>
-          <th>降噪任务</th>
-          <th>ASR任务</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>输入输出</strong></td>
-          <td>音频 → 音频</td>
-          <td>音频 → 文本</td>
-      </tr>
-      <tr>
-          <td><strong>任务类型</strong></td>
-          <td>信号回归</td>
-          <td>序列到序列</td>
-      </tr>
-      <tr>
-          <td><strong>评估指标</strong></td>
-          <td>SNR、PESQ</td>
-          <td>WER、CER</td>
-      </tr>
-      <tr>
-          <td><strong>难点</strong></td>
-          <td>保留语音质量</td>
-          <td>识别准确性</td>
-      </tr>
-      <tr>
-          <td><strong>模型结构</strong></td>
-          <td>Encoder</td>
-          <td>Encoder-Decoder</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>维度</th>
+					<th>降噪任务</th>
+					<th>ASR任务</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>输入输出</strong></td>
+					<td>音频 → 音频</td>
+					<td>音频 → 文本</td>
+			</tr>
+			<tr>
+					<td><strong>任务类型</strong></td>
+					<td>信号回归</td>
+					<td>序列到序列</td>
+			</tr>
+			<tr>
+					<td><strong>评估指标</strong></td>
+					<td>SNR、PESQ</td>
+					<td>WER、CER</td>
+			</tr>
+			<tr>
+					<td><strong>难点</strong></td>
+					<td>保留语音质量</td>
+					<td>识别准确性</td>
+			</tr>
+			<tr>
+					<td><strong>模型结构</strong></td>
+					<td>Encoder</td>
+					<td>Encoder-Decoder</td>
+			</tr>
+	</tbody>
 </table>
 <p>简单来说：</p>
 <ul>
@@ -131,22 +133,22 @@
 <p><a href="https://distill.pub/2017/ctc/">Sequence Modeling With CTC</a> 详细原理可参考这篇文章。</p>
 <p>训练阶段就是使目标token序列路径的概率最大，而推理阶段就是搜索概率最大的token路径并输出，这里通常有两种方法：</p>
 <table>
-  <thead>
-      <tr>
-          <th>方法</th>
-          <th>描述</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Greedy Search</strong></td>
-          <td>每一步都选择概率最大的token输出</td>
-      </tr>
-      <tr>
-          <td><strong>Beam Search</strong></td>
-          <td>每一步保留top-N概率的token结果，输出token序列路径概率最大的结果</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th>描述</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Greedy Search</strong></td>
+					<td>每一步都选择概率最大的token输出</td>
+			</tr>
+			<tr>
+					<td><strong>Beam Search</strong></td>
+					<td>每一步保留top-N概率的token结果，输出token序列路径概率最大的结果</td>
+			</tr>
+	</tbody>
 </table>
 <h2 id="rnn-t-recurrent-neural-network-transducer">RNN-T (Recurrent Neural Network Transducer)</h2>
 <p>RNN-T是CTC的扩展，引入了一个额外的预测网络（Prediction Network）来建模输出token之间的依赖关系。</p>
@@ -210,40 +212,40 @@
 </ul>
 <h2 id="技术实现差异">技术实现差异</h2>
 <table>
-  <thead>
-      <tr>
-          <th>维度</th>
-          <th>流式模型</th>
-          <th>非流式模型</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>上下文</strong></td>
-          <td>有限上下文（lookahead）</td>
-          <td>完整上下文</td>
-      </tr>
-      <tr>
-          <td><strong>延迟</strong></td>
-          <td>低（&lt;500ms）</td>
-          <td>高</td>
-      </tr>
-      <tr>
-          <td><strong>准确率</strong></td>
-          <td>略低</td>
-          <td>较高</td>
-      </tr>
-      <tr>
-          <td><strong>模型复杂度</strong></td>
-          <td>较高（需处理分段）</td>
-          <td>较低</td>
-      </tr>
-      <tr>
-          <td><strong>内存占用</strong></td>
-          <td>较小</td>
-          <td>较大</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>维度</th>
+					<th>流式模型</th>
+					<th>非流式模型</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>上下文</strong></td>
+					<td>有限上下文（lookahead）</td>
+					<td>完整上下文</td>
+			</tr>
+			<tr>
+					<td><strong>延迟</strong></td>
+					<td>低（&lt;500ms）</td>
+					<td>高</td>
+			</tr>
+			<tr>
+					<td><strong>准确率</strong></td>
+					<td>略低</td>
+					<td>较高</td>
+			</tr>
+			<tr>
+					<td><strong>模型复杂度</strong></td>
+					<td>较高（需处理分段）</td>
+					<td>较低</td>
+			</tr>
+			<tr>
+					<td><strong>内存占用</strong></td>
+					<td>较小</td>
+					<td>较大</td>
+			</tr>
+	</tbody>
 </table>
 <p>流式模型通常需要特殊设计，如：</p>
 <ul>
@@ -302,40 +304,40 @@
 </ul>
 <h2 id="对比">对比</h2>
 <table>
-  <thead>
-      <tr>
-          <th>维度</th>
-          <th>自回归解码</th>
-          <th>非自回归解码</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>生成方式</strong></td>
-          <td>串行，逐token</td>
-          <td>并行，一次性输出</td>
-      </tr>
-      <tr>
-          <td><strong>推理速度</strong></td>
-          <td>慢</td>
-          <td>快</td>
-      </tr>
-      <tr>
-          <td><strong>生成质量</strong></td>
-          <td>高</td>
-          <td>略低</td>
-      </tr>
-      <tr>
-          <td><strong>依赖关系</strong></td>
-          <td>建模token间依赖</td>
-          <td>假设条件独立</td>
-      </tr>
-      <tr>
-          <td><strong>典型模型</strong></td>
-          <td>RNN-T、Seq2Seq</td>
-          <td>CTC、FastConformer</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>维度</th>
+					<th>自回归解码</th>
+					<th>非自回归解码</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>生成方式</strong></td>
+					<td>串行，逐token</td>
+					<td>并行，一次性输出</td>
+			</tr>
+			<tr>
+					<td><strong>推理速度</strong></td>
+					<td>慢</td>
+					<td>快</td>
+			</tr>
+			<tr>
+					<td><strong>生成质量</strong></td>
+					<td>高</td>
+					<td>略低</td>
+			</tr>
+			<tr>
+					<td><strong>依赖关系</strong></td>
+					<td>建模token间依赖</td>
+					<td>假设条件独立</td>
+			</tr>
+			<tr>
+					<td><strong>典型模型</strong></td>
+					<td>RNN-T、Seq2Seq</td>
+					<td>CTC、FastConformer</td>
+			</tr>
+	</tbody>
 </table>
 <h1 id="方案选择">方案选择</h1>
 <p>OK，前面了解了这么多，都是为了后续实现最小原型产品，选择语音识别方案做准备，目标不是要训练一个SOTA模型，因此这里暂时只是粗浅的了解。</p>
@@ -357,64 +359,64 @@
 <p><strong>量化技术</strong>：INT8量化可将模型体积缩小约4倍，准确率损失通常&lt;5%；INT4可进一步缩小到1/8，但准确率下降更明显。</p>
 <h3 id="架构选择">架构选择</h3>
 <table>
-  <thead>
-      <tr>
-          <th>架构</th>
-          <th>计算量</th>
-          <th>内存占用</th>
-          <th>移动端适用性</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Transformer Encoder</strong></td>
-          <td>中</td>
-          <td>中</td>
-          <td>★★★★☆</td>
-      </tr>
-      <tr>
-          <td><strong>Conformer</strong></td>
-          <td>中高</td>
-          <td>中</td>
-          <td>★★★★☆</td>
-      </tr>
-      <tr>
-          <td><strong>RNN/LSTM</strong></td>
-          <td>低</td>
-          <td>低</td>
-          <td>★★★☆☆</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>架构</th>
+					<th>计算量</th>
+					<th>内存占用</th>
+					<th>移动端适用性</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Transformer Encoder</strong></td>
+					<td>中</td>
+					<td>中</td>
+					<td>★★★★☆</td>
+			</tr>
+			<tr>
+					<td><strong>Conformer</strong></td>
+					<td>中高</td>
+					<td>中</td>
+					<td>★★★★☆</td>
+			</tr>
+			<tr>
+					<td><strong>RNN/LSTM</strong></td>
+					<td>低</td>
+					<td>低</td>
+					<td>★★★☆☆</td>
+			</tr>
+	</tbody>
 </table>
 <p><strong>建议</strong>：选择Encoder-only或轻量级的Conformer结构，参数量控制在50M以内。</p>
 <h2 id="优先级二支持多语言">优先级二：支持多语言</h2>
 <p>确认模型能在移动端运行后，需要考虑多语言支持能力。</p>
 <h3 id="不同模型架构的多语言能力">不同模型架构的多语言能力</h3>
 <table>
-  <thead>
-      <tr>
-          <th>模型架构</th>
-          <th>多语言支持</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>端到端Seq2Seq</strong></td>
-          <td>★★★★★</td>
-          <td>训练时使用多语言数据，自然支持多语言</td>
-      </tr>
-      <tr>
-          <td><strong>RNN-T</strong></td>
-          <td>★★★☆☆</td>
-          <td>可支持，但需要针对性训练多语言版本</td>
-      </tr>
-      <tr>
-          <td><strong>CTC</strong></td>
-          <td>★★☆☆☆</td>
-          <td>通常针对单一语言，多语言版本较少</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>模型架构</th>
+					<th>多语言支持</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>端到端Seq2Seq</strong></td>
+					<td>★★★★★</td>
+					<td>训练时使用多语言数据，自然支持多语言</td>
+			</tr>
+			<tr>
+					<td><strong>RNN-T</strong></td>
+					<td>★★★☆☆</td>
+					<td>可支持，但需要针对性训练多语言版本</td>
+			</tr>
+			<tr>
+					<td><strong>CTC</strong></td>
+					<td>★★☆☆☆</td>
+					<td>通常针对单一语言，多语言版本较少</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="结论">结论</h3>
 <p>需要支持多语言时，<strong>优先选择端到端Seq2Seq架构</strong>，这类模型的预训练版本通常已支持数十到上百种语言。</p>
@@ -422,28 +424,28 @@
 <p>实时字幕要求模型能够在接收音频的同时输出文字。</p>
 <h3 id="流式-vs-非流式">流式 vs 非流式</h3>
 <table>
-  <thead>
-      <tr>
-          <th>类型</th>
-          <th>延迟</th>
-          <th>实现难度</th>
-          <th>实时字幕适用性</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>流式模型</strong></td>
-          <td>&lt;500ms</td>
-          <td>高</td>
-          <td>★★★★★</td>
-      </tr>
-      <tr>
-          <td><strong>非流式模型</strong></td>
-          <td>&gt;1s</td>
-          <td>低</td>
-          <td>★★☆☆☆</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>类型</th>
+					<th>延迟</th>
+					<th>实现难度</th>
+					<th>实时字幕适用性</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>流式模型</strong></td>
+					<td>&lt;500ms</td>
+					<td>高</td>
+					<td>★★★★★</td>
+			</tr>
+			<tr>
+					<td><strong>非流式模型</strong></td>
+					<td>&gt;1s</td>
+					<td>低</td>
+					<td>★★☆☆☆</td>
+			</tr>
+	</tbody>
 </table>
 <p><strong>折中方案</strong>：使用非流式模型时，可通过&quot;分块处理&quot;策略模拟流式效果：</p>
 <ul>
@@ -453,34 +455,34 @@
 </ul>
 <h3 id="解码方式">解码方式</h3>
 <table>
-  <thead>
-      <tr>
-          <th>解码方式</th>
-          <th>延迟</th>
-          <th>实现复杂度</th>
-          <th>实时性</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>非自回归（Greedy）</strong></td>
-          <td>低</td>
-          <td>简单</td>
-          <td>★★★★★</td>
-      </tr>
-      <tr>
-          <td><strong>非自回归（Beam Search）</strong></td>
-          <td>中</td>
-          <td>中</td>
-          <td>★★★★☆</td>
-      </tr>
-      <tr>
-          <td><strong>自回归</strong></td>
-          <td>高</td>
-          <td>复杂</td>
-          <td>★★☆☆☆</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>解码方式</th>
+					<th>延迟</th>
+					<th>实现复杂度</th>
+					<th>实时性</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>非自回归（Greedy）</strong></td>
+					<td>低</td>
+					<td>简单</td>
+					<td>★★★★★</td>
+			</tr>
+			<tr>
+					<td><strong>非自回归（Beam Search）</strong></td>
+					<td>中</td>
+					<td>中</td>
+					<td>★★★★☆</td>
+			</tr>
+			<tr>
+					<td><strong>自回归</strong></td>
+					<td>高</td>
+					<td>复杂</td>
+					<td>★★☆☆☆</td>
+			</tr>
+	</tbody>
 </table>
 <p><strong>建议</strong>：实时场景优先选择<strong>非自回归解码</strong>（Greedy），延迟最低。</p>
 <h2 id="总结">总结</h2>
@@ -495,9 +497,11 @@
       <pubDate>Sun, 25 Jan 2026 07:52:25 +0800</pubDate>
       <guid>https://lyapple2008.github.io/posts/202601/2026-01-25-ios%E9%9F%B3%E9%A2%91%E6%8D%95%E8%8E%B7/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;这篇是iOS双语字幕软件的开发日志，目标是在iOS端实现，在观看视频时，实时对播放的内容进行识别和翻译，显示双语字幕，用于打破外语视频内容观看门槛。&lt;/p&gt;</description>
+&lt;p&gt;这篇是iOS双语字幕软件的开发日志，目标是在iOS端实现，在观看视频时，实时对播放的内容进行识别和翻译，显示双语字幕，用于打破外语视频内容观看门槛。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
       <content:encoded><![CDATA[<blockquote>
-<p>这篇是iOS双语字幕软件的开发日志，目标是在iOS端实现，在观看视频时，实时对播放的内容进行识别和翻译，显示双语字幕，用于打破外语视频内容观看门槛。</p></blockquote>
+<p>这篇是iOS双语字幕软件的开发日志，目标是在iOS端实现，在观看视频时，实时对播放的内容进行识别和翻译，显示双语字幕，用于打破外语视频内容观看门槛。</p>
+</blockquote>
 <h3 id="模块流程">模块流程</h3>
 
 <div class="mermaid">graph LR

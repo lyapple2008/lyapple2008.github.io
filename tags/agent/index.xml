@@ -9,8 +9,8 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.147.9</generator>
-    <language>zh</language>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Mon, 28 Sep 2026 07:22:02 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/tags/agent/index.xml" rel="self" type="application/rss+xml" />
@@ -106,11 +106,11 @@
 </span></span></span><span class="line"><span class="cl"><span class="sd">  所有 API 变更都必须兼容现有客户端
 </span></span></span><span class="line"><span class="cl"><span class="sd">  所有 OpenSpec 产物使用中文</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">rules</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">每个 API 任务都要包含自动化测试</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">operations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">operations</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">apply</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">guidance</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">在标记任务完成前运行测试和 Lint</span></span></span></code></pre></td></tr></table>
@@ -135,7 +135,8 @@
 <h2 id="放进一个真实需求中怎么用">放进一个真实需求中怎么用</h2>
 <p>以“接入 RNNoise 降噪模型”为例。最初的需求往往只有一句话：</p>
 <blockquote>
-<p>在现有实时音频处理链路中接入 RNNoise，降低环境噪声。</p></blockquote>
+<p>在现有实时音频处理链路中接入 RNNoise，降低环境噪声。</p>
+</blockquote>
 <p>这句话还不能直接变成代码。按 OpenSpec 流程，可以这样做。</p>
 <h3 id="1-explore先把问题想清楚">1. Explore：先把问题想清楚</h3>
 <p>在 AI 对话中说：</p>
@@ -207,11 +208,11 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="gu">### Requirement: 实时 RNNoise 降噪
-</span></span></span><span class="line"><span class="cl"><span class="gu"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">系统必须在实时音频链路中按 RNNoise 帧规格连续处理音频，并保持输出的时序和时长与输入一致。
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="gu">#### Scenario: 处理任意长度的音频回调
-</span></span></span><span class="line"><span class="cl"><span class="gu"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">-</span> **WHEN** 上游输入 48 kHz 单声道 PCM，且每次回调的采样点数不固定
 </span></span><span class="line"><span class="cl"><span class="k">-</span> **THEN** 系统必须先缓冲并组成 480 个采样点的完整帧
 </span></span><span class="line"><span class="cl"><span class="k">-</span> **AND** 每个完整帧必须严格按时间顺序调用一次 RNNoise 推理
@@ -267,34 +268,34 @@
 <h2 id="openspec-如何解决没有中间记录">OpenSpec 如何解决“没有中间记录”</h2>
 <p>回到开头的第一个问题，OpenSpec 的作用非常直接。</p>
 <table>
-  <thead>
-      <tr>
-          <th>AI Coding 中的问题</th>
-          <th>OpenSpec 的对应机制</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Agent 方案不符合预期，代码需要重写</td>
-          <td>在 Propose 和 Review 阶段先修正文本，延迟代码生成</td>
-      </tr>
-      <tr>
-          <td>不记得某个决策为什么做</td>
-          <td><code>proposal.md</code> 和 <code>design.md</code> 保存背景、备选方案与取舍</td>
-      </tr>
-      <tr>
-          <td>中途打断或上下文用完</td>
-          <td>变更文件提供上下文，<code>tasks.md</code> 勾选项提供显式进度</td>
-      </tr>
-      <tr>
-          <td>不知道代码是否真的完成</td>
-          <td>Spec 把“完成”改写为可验收的场景</td>
-      </tr>
-      <tr>
-          <td>对话结束后信息消失</td>
-          <td>文件进入 Git，Archive 保留变更历史并更新主 Spec</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>AI Coding 中的问题</th>
+					<th>OpenSpec 的对应机制</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Agent 方案不符合预期，代码需要重写</td>
+					<td>在 Propose 和 Review 阶段先修正文本，延迟代码生成</td>
+			</tr>
+			<tr>
+					<td>不记得某个决策为什么做</td>
+					<td><code>proposal.md</code> 和 <code>design.md</code> 保存背景、备选方案与取舍</td>
+			</tr>
+			<tr>
+					<td>中途打断或上下文用完</td>
+					<td>变更文件提供上下文，<code>tasks.md</code> 勾选项提供显式进度</td>
+			</tr>
+			<tr>
+					<td>不知道代码是否真的完成</td>
+					<td>Spec 把“完成”改写为可验收的场景</td>
+			</tr>
+			<tr>
+					<td>对话结束后信息消失</td>
+					<td>文件进入 Git，Archive 保留变更历史并更新主 Spec</td>
+			</tr>
+	</tbody>
 </table>
 <p>其中我认为最重要的一点是：**进度不再是 Agent 脑中的隐藏状态。**只要仓库还在，任何 Agent 都能通过读取文件重建任务状态。会话可以丢，工作不应该一起丢。</p>
 <h2 id="openspec-能否让-agent-跟着项目成长">OpenSpec 能否让 Agent 跟着项目成长</h2>
@@ -367,7 +368,8 @@
       <description>当代码生成越来越便宜，工程师真正稀缺的能力是什么？这篇文章整理了我和 ChatGPT 关于职业前景的一次长谈，以及一条从 AI Coding、Spec 到 Agent Engineering 的个人进阶路线。</description>
       <content:encoded><![CDATA[<p>AI Coding 已经进入软件开发的完整流程：读代码、写代码、补测试、查问题、改文档，甚至可以自己运行命令，再根据结果继续迭代。它带来的不只是效率提升，也有一个越来越难回避的问题：</p>
 <blockquote>
-<p>当 AI 可以完成越来越多开发工作，以后还需要软件工程师吗？如果需要，工程师真正值钱的能力又是什么？</p></blockquote>
+<p>当 AI 可以完成越来越多开发工作，以后还需要软件工程师吗？如果需要，工程师真正值钱的能力又是什么？</p>
+</blockquote>
 <p>最近我把这个问题抛给了 ChatGPT，又结合自己的情况继续追问：一个已经做了多年 C/C++、音视频和移动端开发的工程师，应该继续深挖原来的技术栈，还是转向 AI Agent？如果要转，具体该学什么？</p>
 <p>讨论很长，下面不是聊天记录的原样搬运，而是我重新整理后的结论和行动路线。</p>
 <p>先说答案：<strong>软件工程师仍然需要，但“会写代码”不再足以定义一个软件工程师。</strong></p>
@@ -538,30 +540,30 @@
 <p>操作系统、编译器、数据库、音视频、网络、安全、机器人、嵌入式、高性能计算和大型分布式系统，则不会因为代码生成变快就突然变简单。它们面对的是现实世界的复杂约束，需要长期的工程取舍、跨模块理解和故障处理。</p>
 <p>未来的软件工程师可能形成三种分化：</p>
 <table>
-  <thead>
-      <tr>
-          <th>类型</th>
-          <th>能力结构</th>
-          <th>处境</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>纯代码生产者</td>
-          <td>按明确需求实现功能</td>
-          <td>工作最容易被压缩</td>
-      </tr>
-      <tr>
-          <td>AI 增强型开发者</td>
-          <td>Coding + AI 工具</td>
-          <td>产出明显提高</td>
-      </tr>
-      <tr>
-          <td>AI 增强型领域工程师</td>
-          <td>领域知识 + 系统设计 + Coding + Agent + 验证</td>
-          <td>能解决复杂问题，杠杆最高</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>类型</th>
+					<th>能力结构</th>
+					<th>处境</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>纯代码生产者</td>
+					<td>按明确需求实现功能</td>
+					<td>工作最容易被压缩</td>
+			</tr>
+			<tr>
+					<td>AI 增强型开发者</td>
+					<td>Coding + AI 工具</td>
+					<td>产出明显提高</td>
+			</tr>
+			<tr>
+					<td>AI 增强型领域工程师</td>
+					<td>领域知识 + 系统设计 + Coding + Agent + 验证</td>
+					<td>能解决复杂问题，杠杆最高</td>
+			</tr>
+	</tbody>
 </table>
 <p>我想走的是第三条路。目标不是和 AI 比谁敲代码快，而是把自己的领域经验、工程判断和 AI 的执行能力组合起来，完成过去需要更多人协作才能完成的系统。</p>
 <p>这个结论也延续了我之前对 AI Coding 的看法。我曾在<a href="/posts/202601/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/">《关于 AI Coding 的一些感想和后续规划》</a>里写过，AI 的能力边界很大程度受使用者影响，生产代码的责任仍在人身上。现在再往前一步看，真正的变化不只是“用 AI 写得更快”，而是要围绕 AI 重新设计整套软件工程流程。</p>
@@ -764,50 +766,50 @@
 <h2 id="六时间如何分配">六、时间如何分配</h2>
 <p>如果每周可以投入 8～10 小时，我准备按下面的比例推进：</p>
 <table>
-  <thead>
-      <tr>
-          <th>阶段</th>
-          <th style="text-align: right">参考时间</th>
-          <th>主要产出</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>工程闭环补强</td>
-          <td style="text-align: right">2～4 周</td>
-          <td>测试、性能与架构检查清单</td>
-      </tr>
-      <tr>
-          <td>AI Coding 工作流</td>
-          <td style="text-align: right">3～6 周</td>
-          <td>Explore 到 Review 的稳定流程</td>
-      </tr>
-      <tr>
-          <td>Specification / SDD</td>
-          <td style="text-align: right">3～6 周</td>
-          <td>可执行、可验收的项目 Spec</td>
-      </tr>
-      <tr>
-          <td>Agent 原理</td>
-          <td style="text-align: right">4～6 周</td>
-          <td>Mini Agent</td>
-      </tr>
-      <tr>
-          <td>MCP / Tool</td>
-          <td style="text-align: right">3～4 周</td>
-          <td>带权限边界的工具集成</td>
-      </tr>
-      <tr>
-          <td>Runtime 研究</td>
-          <td style="text-align: right">4～8 周</td>
-          <td>对一个真实 Agent 的源码分析</td>
-      </tr>
-      <tr>
-          <td>AI-Native Engineering</td>
-          <td style="text-align: right">持续</td>
-          <td>完整项目与复盘</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>阶段</th>
+					<th style="text-align: right">参考时间</th>
+					<th>主要产出</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>工程闭环补强</td>
+					<td style="text-align: right">2～4 周</td>
+					<td>测试、性能与架构检查清单</td>
+			</tr>
+			<tr>
+					<td>AI Coding 工作流</td>
+					<td style="text-align: right">3～6 周</td>
+					<td>Explore 到 Review 的稳定流程</td>
+			</tr>
+			<tr>
+					<td>Specification / SDD</td>
+					<td style="text-align: right">3～6 周</td>
+					<td>可执行、可验收的项目 Spec</td>
+			</tr>
+			<tr>
+					<td>Agent 原理</td>
+					<td style="text-align: right">4～6 周</td>
+					<td>Mini Agent</td>
+			</tr>
+			<tr>
+					<td>MCP / Tool</td>
+					<td style="text-align: right">3～4 周</td>
+					<td>带权限边界的工具集成</td>
+			</tr>
+			<tr>
+					<td>Runtime 研究</td>
+					<td style="text-align: right">4～8 周</td>
+					<td>对一个真实 Agent 的源码分析</td>
+			</tr>
+			<tr>
+					<td>AI-Native Engineering</td>
+					<td style="text-align: right">持续</td>
+					<td>完整项目与复盘</td>
+			</tr>
+	</tbody>
 </table>
 <p>时间不是硬指标。判断一个阶段是否完成的标准，不是“资料看完了”，而是能否拿出可以运行、可以验证、可以复盘的产物。</p>
 <h2 id="七参考资料">七、参考资料</h2>
@@ -823,7 +825,8 @@
 <h2 id="八最后不要成为工具收藏家">八、最后：不要成为工具收藏家</h2>
 <p>这次讨论最终给我的提醒，不是赶紧转行，也不是赶紧再学一个热门框架，而是重新确认自己的能力组合：</p>
 <blockquote>
-<p>未来优秀的软件工程师，应该能定义问题、设计系统、驾驭 Agent、验证结果，并对最终交付负责。</p></blockquote>
+<p>未来优秀的软件工程师，应该能定义问题、设计系统、驾驭 Agent、验证结果，并对最终交付负责。</p>
+</blockquote>
 <p>因此，不应该按照“先学 TypeScript，再学 Agent，再学 MCP，再学某个框架”的课程目录前进。更有效的方式，是始终围绕一个真实项目：项目需要什么，就补什么；做出结果，再复盘哪些判断可以沉淀成 Spec、测试、工具或工作流。</p>
 <p>代码正在变便宜，但正确的软件并没有因此自动出现。会写代码仍然重要，只是它不再是终点。接下来真正值得投入的，是把领域经验、系统工程和 AI 组织成一套能持续交付的能力。</p>
 ]]></content:encoded>
@@ -839,7 +842,8 @@
 <p>最近一直在重度使用 Claude Code，也一直被各种新名词轰炸：vibe coding、spec coding、agent、openclaw、harness 等等。刚好看到一个介绍 Claude Code 工程原理的教程，对Agent Engneer有了一些认识，记录总结一下。</p>
 <blockquote>
 <p>教程地址：https://learn.shareai.run/en/<br>
-项目仓库：https://github.com/shareAI-lab/learn-claude-code</p></blockquote>
+项目仓库：https://github.com/shareAI-lab/learn-claude-code</p>
+</blockquote>
 <h2 id="课程介绍">课程介绍</h2>
 <p>该课程包含12个递进式课程，从简单循环到隔离化的自治执行，每个课程添加一个 harness 机制，每个机制有一句格言，非常推荐大家去学习：</p>
 <blockquote>
@@ -854,7 +858,8 @@
 <p><strong>s09</strong>   <em>任务太大一个人干不完, 要能分给队友</em> — 持久化队友 + 异步邮箱</p>
 <p><strong>s10</strong>   <em>队友之间要有统一的沟通规矩</em> — 一个 request-response 模式驱动所有协商</p>
 <p><strong>s11</strong>   <em>队友自己看看板, 有活就认领</em> — 不需要领导逐个分配, 自组织</p>
-<p><strong>s12</strong>   <em>各干各的目录, 互不干扰</em> — 任务管目标, worktree 管目录, 按 ID 绑定</p></blockquote>
+<p><strong>s12</strong>   <em>各干各的目录, 互不干扰</em> — 任务管目标, worktree 管目录, 按 ID 绑定</p>
+</blockquote>
 <h2 id="什么是agentharness">什么是Agent/Harness</h2>
 <h2 id="如何开发适用于自己工作流的agentharness">如何开发适用于自己工作流的Agent/Harness</h2>
 <ol>
@@ -875,7 +880,8 @@
 <li><strong>Claude Code (agentic harness)</strong>：负责「赋能」和「执行」，提供工具接口、上下文管理、终端环境，让推理转化为实际操作</li>
 </ul>
 <blockquote>
-<p>关系模式：Claude Code 相当于「外壳/操作系统」，Claude 模型是其中的「智能核心」。模型提出计划，Claude Code 通过工具和环境落实这些计划。</p></blockquote>
+<p>关系模式：Claude Code 相当于「外壳/操作系统」，Claude 模型是其中的「智能核心」。模型提出计划，Claude Code 通过工具和环境落实这些计划。</p>
+</blockquote>
 <hr>
 <p>Agent 开发不过是将自身能力的一次实体化。如同那句话所说：大模型是放大器，自身能力决定了 Agent 的上限。这个时代对人的要求，反而更高了。只有人本身把工作流想清楚了，才有可以设计出高效合理的Agent流程。</p>
 <p>当整个系统的短板是人的时候，再也没有借口可找。</p>

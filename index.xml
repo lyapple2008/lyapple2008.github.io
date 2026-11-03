@@ -9,8 +9,8 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.147.9</generator>
-    <language>zh</language>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Sun, 25 Oct 2026 15:28:43 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/index.xml" rel="self" type="application/rss+xml" />
@@ -20,7 +20,8 @@
       <pubDate>Sun, 22 Feb 2026 09:43:54 +0800</pubDate>
       <guid>https://lyapple2008.github.io/posts/2026-todo/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;记录跟踪2026年要做的事情和正在做的事情。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;记录跟踪2026年要做的事情和正在做的事情。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;目标&#34;&gt;目标&lt;/h2&gt;
 &lt;ul&gt;
@@ -50,9 +51,17 @@ chart.setOption({
 &lt;/script&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;探索可能&lt;/p&gt;</description>
+&lt;p&gt;探索可能&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 英语能力，熟练3篇演讲短文&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 独立开发，目标完成4个独立项目 &amp;ndash;&amp;gt; 进度2/4&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 公众号输出，目标输出文章10篇  &amp;ndash;&amp;gt; 进度12/10&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
       <content:encoded><![CDATA[<blockquote>
-<p>记录跟踪2026年要做的事情和正在做的事情。</p></blockquote>
+<p>记录跟踪2026年要做的事情和正在做的事情。</p>
+</blockquote>
 <hr>
 <h2 id="目标">目标</h2>
 <ul>
@@ -110,31 +119,36 @@ chart.setOption({
 </ul>
 <h2 id="一些随想">一些随想</h2>
 <blockquote>
-<p>记录一些生活工作中一些小感受和小想法</p></blockquote>
+<p>记录一些生活工作中一些小感受和小想法</p>
+</blockquote>
 <ul>
 <li>2026.10.18</li>
 </ul>
 <blockquote>
-<p>AI流行的这段时间，每天都在想如何利用AI提高工作效率，提高AI含量，最近越来越发现瓶颈在个人，也许本质还是没有变化，决定产物质量的高量还是个人，所以慢下来提高个人能力还是一如既往的重要。</p></blockquote>
+<p>AI流行的这段时间，每天都在想如何利用AI提高工作效率，提高AI含量，最近越来越发现瓶颈在个人，也许本质还是没有变化，决定产物质量的高量还是个人，所以慢下来提高个人能力还是一如既往的重要。</p>
+</blockquote>
 <ul>
 <li>2026.07.04</li>
 </ul>
 <blockquote>
-<p>慢下来才能更快。</p></blockquote>
+<p>慢下来才能更快。</p>
+</blockquote>
 <ul>
 <li>2026.05.24</li>
 </ul>
 <blockquote>
 <p>You can outsource your thinking, but you can&rsquo;t outsource your understanding.<br>
 思考可以外包，但理解不能外包<br>
-虽然现在AI进展神速，但是工作/学习的底层逻辑没有变化，AI只是加速了知识的获取和帮忙个人思考，对事情的理解过程还是存在于个人的大脑，这个是AI没法替你完成的。</p></blockquote>
+虽然现在AI进展神速，但是工作/学习的底层逻辑没有变化，AI只是加速了知识的获取和帮忙个人思考，对事情的理解过程还是存在于个人的大脑，这个是AI没法替你完成的。</p>
+</blockquote>
 <ul>
 <li>2026.03.29</li>
 </ul>
 <blockquote>
 <p>每天记录和量化进度，本身就是一种负担，而且对于效率提高帮助不大，也不利于长期任务，与其每天盯着任务进度，
 不如现在开始试下，里程碑式的工作方法，给自己一段时间设定一些目标，到期后来检查完成情况，中间如何只记录
-据有里程碑意义的事件。</p></blockquote>
+据有里程碑意义的事件。</p>
+</blockquote>
 ]]></content:encoded>
     </item>
     <item>
@@ -145,11 +159,13 @@ chart.setOption({
       <description>&lt;p&gt;麦克风把声音变成 PCM，扬声器把 PCM 变回声音。对一个实时通话系统来说，这两句话之间还有很多事情：选择设备、协商格式、启动音频流、适应设备回调的节奏，以及在耳机拔出、来电中断后恢复工作。&lt;/p&gt;
 &lt;p&gt;WebRTC 把这些工作集中在 &lt;strong&gt;Audio Device Module，简称 ADM&lt;/strong&gt;。理解它，最好先建立整体位置，再沿着音频数据走一遍，最后进入代码和平台实现。否则很容易把“设备缓冲”“网络抖动缓冲”和“回声消除”混成一件事。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;本文以本地 &lt;code&gt;webrtc_src&lt;/code&gt; 的提交 &lt;code&gt;3dec7d05377fb690e84f503db865edde982ab2a5&lt;/code&gt; 为源码基线，提交日期为 2026-10-23。正文主要讨论使用内置设备模块的 native 音频路径；浏览器或业务方可以注入自己的 ADM，复用这里的接口而采用不同的数据通路。文中的源码链接固定到该提交，代码片段会标明是否经过简化。&lt;/p&gt;&lt;/blockquote&gt;</description>
+&lt;p&gt;本文以本地 &lt;code&gt;webrtc_src&lt;/code&gt; 的提交 &lt;code&gt;3dec7d05377fb690e84f503db865edde982ab2a5&lt;/code&gt; 为源码基线，提交日期为 2026-10-23。正文主要讨论使用内置设备模块的 native 音频路径；浏览器或业务方可以注入自己的 ADM，复用这里的接口而采用不同的数据通路。文中的源码链接固定到该提交，代码片段会标明是否经过简化。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
       <content:encoded><![CDATA[<p>麦克风把声音变成 PCM，扬声器把 PCM 变回声音。对一个实时通话系统来说，这两句话之间还有很多事情：选择设备、协商格式、启动音频流、适应设备回调的节奏，以及在耳机拔出、来电中断后恢复工作。</p>
 <p>WebRTC 把这些工作集中在 <strong>Audio Device Module，简称 ADM</strong>。理解它，最好先建立整体位置，再沿着音频数据走一遍，最后进入代码和平台实现。否则很容易把“设备缓冲”“网络抖动缓冲”和“回声消除”混成一件事。</p>
 <blockquote>
-<p>本文以本地 <code>webrtc_src</code> 的提交 <code>3dec7d05377fb690e84f503db865edde982ab2a5</code> 为源码基线，提交日期为 2026-10-23。正文主要讨论使用内置设备模块的 native 音频路径；浏览器或业务方可以注入自己的 ADM，复用这里的接口而采用不同的数据通路。文中的源码链接固定到该提交，代码片段会标明是否经过简化。</p></blockquote>
+<p>本文以本地 <code>webrtc_src</code> 的提交 <code>3dec7d05377fb690e84f503db865edde982ab2a5</code> 为源码基线，提交日期为 2026-10-23。正文主要讨论使用内置设备模块的 native 音频路径；浏览器或业务方可以注入自己的 ADM，复用这里的接口而采用不同的数据通路。文中的源码链接固定到该提交，代码片段会标明是否经过简化。</p>
+</blockquote>
 <h2 id="一整体视角adm-是-webrtc-与操作系统音频-io-的边界">一、整体视角：ADM 是 WebRTC 与操作系统音频 I/O 的边界</h2>
 <h3 id="11-它在整个系统的什么位置">1.1 它在整个系统的什么位置</h3>
 <p>可以把 WebRTC 的音频部分分成三个层次：最下面连接操作系统和设备，中间处理 PCM，上面处理编码后的数据和网络传输。</p>
@@ -173,35 +189,35 @@ chart.setOption({
 <p>从上向下看，ADM 提供“准备并启停输入输出、获取和交付 PCM”的能力；从下向上看，它把不同系统的音频 API 适配成 WebRTC 能使用的接口。上层不必分别理解 WASAPI、CoreAudio、AudioRecord 或 AudioUnit。</p>
 <h3 id="12-adm-管理哪些事情">1.2 ADM 管理哪些事情</h3>
 <table>
-  <thead>
-      <tr>
-          <th>职责</th>
-          <th>解决的问题</th>
-          <th>典型例子</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>设备与能力管理</td>
-          <td>用哪个输入输出，支持什么能力</td>
-          <td>枚举设备、选择默认设备、查询立体声和音量能力</td>
-      </tr>
-      <tr>
-          <td>生命周期管理</td>
-          <td>什么时候准备、开始、停止 I/O</td>
-          <td>初始化模块，准备录音流，启动采集，停止播放</td>
-      </tr>
-      <tr>
-          <td>PCM 交接与适配</td>
-          <td>如何把系统缓冲交给 WebRTC</td>
-          <td>格式转换、缓冲拼接、交付采集 PCM、请求播放 PCM</td>
-      </tr>
-      <tr>
-          <td>设备侧时序与状态</td>
-          <td>音频在设备侧停留多久，流是否正常</td>
-          <td>播放/采集延迟、可选采集时间戳、欠载或中断处理</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>职责</th>
+					<th>解决的问题</th>
+					<th>典型例子</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>设备与能力管理</td>
+					<td>用哪个输入输出，支持什么能力</td>
+					<td>枚举设备、选择默认设备、查询立体声和音量能力</td>
+			</tr>
+			<tr>
+					<td>生命周期管理</td>
+					<td>什么时候准备、开始、停止 I/O</td>
+					<td>初始化模块，准备录音流，启动采集，停止播放</td>
+			</tr>
+			<tr>
+					<td>PCM 交接与适配</td>
+					<td>如何把系统缓冲交给 WebRTC</td>
+					<td>格式转换、缓冲拼接、交付采集 PCM、请求播放 PCM</td>
+			</tr>
+			<tr>
+					<td>设备侧时序与状态</td>
+					<td>音频在设备侧停留多久，流是否正常</td>
+					<td>播放/采集延迟、可选采集时间戳、欠载或中断处理</td>
+			</tr>
+	</tbody>
 </table>
 <p>这里的“ADM”有两种常见含义：狭义上指公共的 <code>AudioDeviceModule</code> 接口；广义上指接口实现、平台后端和缓冲适配组成的整个设备模块。后面说“ADM 适配设备回调”时，通常采用广义含义。</p>
 <p>ADM 交付的是 PCM。降噪、回声消除等算法主要属于 <strong>APM（Audio Processing Module）</strong>；网络包的乱序、抖动与丢包补偿属于接收侧 <strong>NetEq</strong>；编码器负责把 PCM 压缩成待发送的音频。某些平台后端可以启用系统语音处理，但这不改变这些职责边界。</p>
@@ -269,30 +285,30 @@ chart.setOption({
 <p>在本文所讨论的 <code>AudioDeviceBuffer</code> → <code>AudioTransportImpl</code> 路径中，上下层主要交换 <strong>16-bit、交错存储的 PCM</strong>，每次处理 <strong>10 ms</strong>。交错双声道的排列是 <code>L0, R0, L1, R1, ...</code>。</p>
 <p>以 48 kHz 为例：</p>
 <table>
-  <thead>
-      <tr>
-          <th>概念</th>
-          <th>单声道的 10 ms</th>
-          <th>双声道的 10 ms</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>每声道样本数 / PCM frame 数</td>
-          <td>480</td>
-          <td>480</td>
-      </tr>
-      <tr>
-          <td>所有声道合计的标量样本数</td>
-          <td>480</td>
-          <td>960</td>
-      </tr>
-      <tr>
-          <td>数据字节数，S16</td>
-          <td>960</td>
-          <td>1920</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>概念</th>
+					<th>单声道的 10 ms</th>
+					<th>双声道的 10 ms</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>每声道样本数 / PCM frame 数</td>
+					<td>480</td>
+					<td>480</td>
+			</tr>
+			<tr>
+					<td>所有声道合计的标量样本数</td>
+					<td>480</td>
+					<td>960</td>
+			</tr>
+			<tr>
+					<td>数据字节数，S16</td>
+					<td>960</td>
+					<td>1920</td>
+			</tr>
+	</tbody>
 </table>
 <p>这里一个 <strong>PCM frame</strong> 包含同一时刻所有声道的样本；它与源码中表示一整段音频的 <code>AudioFrame</code> 对象是两个概念。换成 16 kHz，10 ms 就是每声道 160 个样本，因此 10 ms 也不等于固定的 480 个样本。</p>
 <p><strong>10 ms 是逻辑处理粒度，设备回调周期和编码包时长可以不同。</strong> 设备可能每次给 128、192 或其他数量的 PCM frame；编码器也可能积累两个 10 ms 输入，才产出一个 20 ms 的编码包。</p>
@@ -310,45 +326,45 @@ chart.setOption({
 <h2 id="三源码视角对象如何连接方法如何调用">三、源码视角：对象如何连接，方法如何调用</h2>
 <h3 id="31-先分清六个核心角色">3.1 先分清六个核心角色</h3>
 <table>
-  <thead>
-      <tr>
-          <th>对象 / 接口</th>
-          <th>主要责任</th>
-          <th>需要避免的误解</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>AudioDeviceModule</code></td>
-          <td>面向上层的设备公共接口</td>
-          <td>它不等于某一个平台实现类</td>
-      </tr>
-      <tr>
-          <td>平台后端</td>
-          <td>调用 OS API、操作设备流、完成本地缓冲适配</td>
-          <td>各平台的线程和缓冲结构可以不同</td>
-      </tr>
-      <tr>
-          <td><code>AudioDeviceBuffer</code>，ADB</td>
-          <td>保存 PCM、采样率、声道、延迟等，调用运输回调</td>
-          <td>它不会自动把任意输入拼成 10 ms</td>
-      </tr>
-      <tr>
-          <td><code>FineAudioBuffer</code></td>
-          <td>在任意设备块长与 10 ms 之间拆分、拼接</td>
-          <td>它既不做网络抖动控制，也不负责重采样</td>
-      </tr>
-      <tr>
-          <td><code>AudioTransport</code> / <code>AudioTransportImpl</code></td>
-          <td>前者定义双向 PCM 回调，后者连接 APM、发送流和混音器</td>
-          <td>这里的 Transport 不是网络传输</td>
-      </tr>
-      <tr>
-          <td><code>AudioState</code></td>
-          <td>协调 ADM、APM、混音器和收发流的公共状态</td>
-          <td>音频 PCM 回调实际由其内部的 <code>AudioTransportImpl</code> 承接</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>对象 / 接口</th>
+					<th>主要责任</th>
+					<th>需要避免的误解</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>AudioDeviceModule</code></td>
+					<td>面向上层的设备公共接口</td>
+					<td>它不等于某一个平台实现类</td>
+			</tr>
+			<tr>
+					<td>平台后端</td>
+					<td>调用 OS API、操作设备流、完成本地缓冲适配</td>
+					<td>各平台的线程和缓冲结构可以不同</td>
+			</tr>
+			<tr>
+					<td><code>AudioDeviceBuffer</code>，ADB</td>
+					<td>保存 PCM、采样率、声道、延迟等，调用运输回调</td>
+					<td>它不会自动把任意输入拼成 10 ms</td>
+			</tr>
+			<tr>
+					<td><code>FineAudioBuffer</code></td>
+					<td>在任意设备块长与 10 ms 之间拆分、拼接</td>
+					<td>它既不做网络抖动控制，也不负责重采样</td>
+			</tr>
+			<tr>
+					<td><code>AudioTransport</code> / <code>AudioTransportImpl</code></td>
+					<td>前者定义双向 PCM 回调，后者连接 APM、发送流和混音器</td>
+					<td>这里的 Transport 不是网络传输</td>
+			</tr>
+			<tr>
+					<td><code>AudioState</code></td>
+					<td>协调 ADM、APM、混音器和收发流的公共状态</td>
+					<td>音频 PCM 回调实际由其内部的 <code>AudioTransportImpl</code> 承接</td>
+			</tr>
+	</tbody>
 </table>
 <p>以通用 <code>AudioDeviceModuleImpl</code> 路径为例，对象关系如下。节点中合并标出接口与实现，箭头表示持有或调用关系，不表示单向音频流。</p>
 
@@ -386,7 +402,7 @@ chart.setOption({
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// AudioDeviceModuleImpl::AttachAudioBuffer()，保留核心语句。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">audio_device_</span><span class="o">-&gt;</span><span class="n">AttachAudioBuffer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">audio_device_buffer_</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="n">audio_device_</span><span class="o">-&gt;</span><span class="n">AttachAudioBuffer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">audio_device_buffer_</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 <p>这让平台后端知道应该向哪个 ADB 交付录音、从哪个 ADB 获取播放数据。</p>
@@ -405,35 +421,35 @@ chart.setOption({
 <h3 id="33-控制调用链初始化与真正运行分开">3.3 控制调用链：初始化与真正运行分开</h3>
 <p><code>Init()</code>、<code>InitMicrophone()</code> 和 <code>StartRecording()</code> 不是同一件事。公共接口把模块初始化、设备控制能力准备、I/O 流准备与运行分开；各平台实际创建资源的时机可能有所不同。</p>
 <table>
-  <thead>
-      <tr>
-          <th>阶段</th>
-          <th>录音侧的代表方法</th>
-          <th>播放侧的代表方法</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>模块初始化</td>
-          <td><code>Init()</code></td>
-          <td>同一个 <code>Init()</code></td>
-      </tr>
-      <tr>
-          <td>选择设备、准备控制能力</td>
-          <td><code>SetRecordingDevice()</code>、<code>InitMicrophone()</code></td>
-          <td><code>SetPlayoutDevice()</code>、<code>InitSpeaker()</code></td>
-      </tr>
-      <tr>
-          <td>准备 I/O 流</td>
-          <td><code>InitRecording()</code></td>
-          <td><code>InitPlayout()</code></td>
-      </tr>
-      <tr>
-          <td>开始 / 停止数据流</td>
-          <td><code>StartRecording()</code> / <code>StopRecording()</code></td>
-          <td><code>StartPlayout()</code> / <code>StopPlayout()</code></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>阶段</th>
+					<th>录音侧的代表方法</th>
+					<th>播放侧的代表方法</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>模块初始化</td>
+					<td><code>Init()</code></td>
+					<td>同一个 <code>Init()</code></td>
+			</tr>
+			<tr>
+					<td>选择设备、准备控制能力</td>
+					<td><code>SetRecordingDevice()</code>、<code>InitMicrophone()</code></td>
+					<td><code>SetPlayoutDevice()</code>、<code>InitSpeaker()</code></td>
+			</tr>
+			<tr>
+					<td>准备 I/O 流</td>
+					<td><code>InitRecording()</code></td>
+					<td><code>InitPlayout()</code></td>
+			</tr>
+			<tr>
+					<td>开始 / 停止数据流</td>
+					<td><code>StartRecording()</code> / <code>StopRecording()</code></td>
+					<td><code>StartPlayout()</code> / <code>StopPlayout()</code></td>
+			</tr>
+	</tbody>
 </table>
 <p>在 <code>AudioState</code> 中，运行还与收发流是否存在、录音/播放开关是否启用有关：</p>
 
@@ -460,7 +476,7 @@ chart.setOption({
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 伪代码：每次交付 10 ms，每声道样本数为 sample_rate / 100。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">adb</span><span class="o">-&gt;</span><span class="n">SetRecordedBuffer</span><span class="p">(</span><span class="n">pcm</span><span class="p">,</span> <span class="n">samples_per_channel</span><span class="p">,</span> <span class="n">capture_timestamp_ns</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">adb</span><span class="o">-&gt;</span><span class="n">SetRecordedBuffer</span><span class="p">(</span><span class="n">pcm</span><span class="p">,</span> <span class="n">samples_per_channel</span><span class="p">,</span> <span class="n">capture_timestamp_ns</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">adb</span><span class="o">-&gt;</span><span class="n">SetVQEData</span><span class="p">(</span><span class="n">playout_delay_ms</span><span class="p">,</span> <span class="n">recording_delay_ms</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">adb</span><span class="o">-&gt;</span><span class="n">DeliverRecordedData</span><span class="p">();</span></span></span></code></pre></td></tr></table>
 </div>
@@ -483,7 +499,7 @@ chart.setOption({
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 简化自 AudioDeviceBuffer::DeliverRecordedData()，省略错误处理。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">const</span> <span class="n">size_t</span> <span class="n">frames</span> <span class="o">=</span> <span class="n">rec_buffer_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="n">rec_channels_</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">size_t</span> <span class="n">frames</span> <span class="o">=</span> <span class="n">rec_buffer_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="n">rec_channels_</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">size_t</span> <span class="n">bytes_per_frame</span> <span class="o">=</span> <span class="n">rec_channels_</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int16_t</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="kt">uint32_t</span> <span class="n">ignored_new_mic_level</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -575,8 +591,8 @@ sequenceDiagram
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 伪代码：后端已经确定采样率、声道与 10 ms 块长。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">adb</span><span class="o">-&gt;</span><span class="n">RequestPlayoutData</span><span class="p">(</span><span class="n">samples_per_channel</span><span class="p">);</span>  <span class="c1">// 向上层请求并保存 PCM。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">adb</span><span class="o">-&gt;</span><span class="n">GetPlayoutData</span><span class="p">(</span><span class="n">device_buffer</span><span class="p">);</span>           <span class="c1">// 复制到后端提供的缓冲。
+</span></span></span><span class="line"><span class="cl"><span class="n">adb</span><span class="o">-&gt;</span><span class="n">RequestPlayoutData</span><span class="p">(</span><span class="n">samples_per_channel</span><span class="p">);</span>  <span class="c1">// 向上层请求并保存 PCM。
+</span></span></span><span class="line"><span class="cl"><span class="n">adb</span><span class="o">-&gt;</span><span class="n">GetPlayoutData</span><span class="p">(</span><span class="n">device_buffer</span><span class="p">);</span>           <span class="c1">// 复制到后端提供的缓冲。
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div>
@@ -657,34 +673,34 @@ sequenceDiagram
 <p><code>AudioTransport</code> 还定义了 <code>PullRenderData()</code>。本基线中的注释说明，Chromium 使用这个入口并拥有自己的 APM，因此该方法没有在内部调用 <code>ProcessReverseStream()</code>；采集侧 <code>RecordedDataIsAvailable()</code> 的默认处理路径也注明不用于 Chromium。分析 Chrome 时，应继续追踪浏览器自己的采集与处理装配，不能把上面的 native 调用链直接套过去。</p>
 <h3 id="37-adbfineaudiobuffer-与-neteq三种缓冲分别解决什么">3.7 ADB、FineAudioBuffer 与 NetEq：三种缓冲分别解决什么</h3>
 <table>
-  <thead>
-      <tr>
-          <th>组件</th>
-          <th>缓冲的是什么</th>
-          <th>面对哪种差异</th>
-          <th>典型行为</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>AudioDeviceBuffer</code></td>
-          <td>本次采集 / 播放的 PCM</td>
-          <td>后端与运输回调的交接</td>
-          <td>保存 PCM、格式和元数据，调用双向接口</td>
-      </tr>
-      <tr>
-          <td><code>FineAudioBuffer</code></td>
-          <td>设备块与 10 ms 块之间的 PCM 余量</td>
-          <td>本地设备回调块长不一致</td>
-          <td>采集攒够 10 ms 才交付，播放取 10 ms 后按需切出</td>
-      </tr>
-      <tr>
-          <td><code>NetEq</code></td>
-          <td>接收包及解码、时伸缩等所需的音频状态</td>
-          <td>网络到包与稳定播放之间的时间差</td>
-          <td>抖动控制、按需解码、丢包补偿</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>组件</th>
+					<th>缓冲的是什么</th>
+					<th>面对哪种差异</th>
+					<th>典型行为</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>AudioDeviceBuffer</code></td>
+					<td>本次采集 / 播放的 PCM</td>
+					<td>后端与运输回调的交接</td>
+					<td>保存 PCM、格式和元数据，调用双向接口</td>
+			</tr>
+			<tr>
+					<td><code>FineAudioBuffer</code></td>
+					<td>设备块与 10 ms 块之间的 PCM 余量</td>
+					<td>本地设备回调块长不一致</td>
+					<td>采集攒够 10 ms 才交付，播放取 10 ms 后按需切出</td>
+			</tr>
+			<tr>
+					<td><code>NetEq</code></td>
+					<td>接收包及解码、时伸缩等所需的音频状态</td>
+					<td>网络到包与稳定播放之间的时间差</td>
+					<td>抖动控制、按需解码、丢包补偿</td>
+			</tr>
+	</tbody>
 </table>
 <p><code>FineAudioBuffer::DeliverRecordedData()</code> 中的循环体现了这个区别：追加本次设备数据，只要缓存达到一个 10 ms 块，就调用 ADB 的 <code>SetRecordedBuffer()</code>、<code>SetVQEData()</code>、<code>DeliverRecordedData()</code>，剩余数据保留到下次。</p>
 <p>反向的 <code>GetPlayoutData()</code> 则不断请求 10 ms，直到足够满足设备这次的需求，然后复制所需部分并保留余量。它会缓存后端传入的播放延迟，供后续采集交付时一起上报。完整实现见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/fine_audio_buffer.cc">fine_audio_buffer.cc</a>。</p>
@@ -702,58 +718,58 @@ sequenceDiagram
     B &lt;--&gt; A[&#34;Android&lt;br/&gt;Java / OpenSL ES / AAudio&#34;]
     B &lt;--&gt; I[&#34;iOS&lt;br/&gt;AVAudioSession 与 VoiceProcessingIO&#34;]</div>
 <table>
-  <thead>
-      <tr>
-          <th>平台 / 路径</th>
-          <th>系统 I/O 方式</th>
-          <th>块长适配的主要位置</th>
-          <th>设备选择 / 路由</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Windows 传统 Core Audio 后端</td>
-          <td>WASAPI 共享模式，事件唤醒采集/播放线程</td>
-          <td>后端的同步缓冲与 10 ms 循环</td>
-          <td>endpoint 枚举、设备 ID、默认设备角色</td>
-      </tr>
-      <tr>
-          <td>macOS</td>
-          <td>CoreAudio HAL 的 IOProc</td>
-          <td>环形缓冲、工作线程与 <code>AudioConverter</code></td>
-          <td>HAL 设备及属性监听</td>
-      </tr>
-      <tr>
-          <td>Linux PulseAudio</td>
-          <td>服务端音频流、threaded mainloop 与后端线程</td>
-          <td>后端按 10 ms 整理，与服务端缓冲衔接</td>
-          <td>Pulse server 的 source / sink</td>
-      </tr>
-      <tr>
-          <td>Linux ALSA</td>
-          <td>PCM 读写与等待</td>
-          <td>后端读写线程、本地缓冲</td>
-          <td>ALSA PCM 设备</td>
-      </tr>
-      <tr>
-          <td>Android Java</td>
-          <td><code>AudioRecord</code> / <code>AudioTrack</code> 高优先级线程</td>
-          <td>Java/JNI 按 10 ms 交接</td>
-          <td>Android 系统与应用的路由管理</td>
-      </tr>
-      <tr>
-          <td>Android OpenSL ES / AAudio</td>
-          <td>buffer queue / data callback</td>
-          <td><code>FineAudioBuffer</code></td>
-          <td>受系统路由和具体后端能力影响</td>
-      </tr>
-      <tr>
-          <td>iOS</td>
-          <td>VoiceProcessingIO AudioUnit 回调</td>
-          <td><code>FineAudioBuffer</code></td>
-          <td><code>AVAudioSession</code></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>平台 / 路径</th>
+					<th>系统 I/O 方式</th>
+					<th>块长适配的主要位置</th>
+					<th>设备选择 / 路由</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Windows 传统 Core Audio 后端</td>
+					<td>WASAPI 共享模式，事件唤醒采集/播放线程</td>
+					<td>后端的同步缓冲与 10 ms 循环</td>
+					<td>endpoint 枚举、设备 ID、默认设备角色</td>
+			</tr>
+			<tr>
+					<td>macOS</td>
+					<td>CoreAudio HAL 的 IOProc</td>
+					<td>环形缓冲、工作线程与 <code>AudioConverter</code></td>
+					<td>HAL 设备及属性监听</td>
+			</tr>
+			<tr>
+					<td>Linux PulseAudio</td>
+					<td>服务端音频流、threaded mainloop 与后端线程</td>
+					<td>后端按 10 ms 整理，与服务端缓冲衔接</td>
+					<td>Pulse server 的 source / sink</td>
+			</tr>
+			<tr>
+					<td>Linux ALSA</td>
+					<td>PCM 读写与等待</td>
+					<td>后端读写线程、本地缓冲</td>
+					<td>ALSA PCM 设备</td>
+			</tr>
+			<tr>
+					<td>Android Java</td>
+					<td><code>AudioRecord</code> / <code>AudioTrack</code> 高优先级线程</td>
+					<td>Java/JNI 按 10 ms 交接</td>
+					<td>Android 系统与应用的路由管理</td>
+			</tr>
+			<tr>
+					<td>Android OpenSL ES / AAudio</td>
+					<td>buffer queue / data callback</td>
+					<td><code>FineAudioBuffer</code></td>
+					<td>受系统路由和具体后端能力影响</td>
+			</tr>
+			<tr>
+					<td>iOS</td>
+					<td>VoiceProcessingIO AudioUnit 回调</td>
+					<td><code>FineAudioBuffer</code></td>
+					<td><code>AVAudioSession</code></td>
+			</tr>
+	</tbody>
 </table>
 <p>以下“默认”都指这份源码及对应构建条件下的选择。SDK 的创建入口、应用注入的 ADM 和构建开关，都会影响真正使用的后端。</p>
 <h3 id="42-windowswasapi-事件驱动注意两套-adm-入口">4.2 Windows：WASAPI 事件驱动，注意两套 ADM 入口</h3>
@@ -794,46 +810,46 @@ sequenceDiagram
 <h3 id="45-android输入与输出可以采用不同-api">4.5 Android：输入与输出可以采用不同 API</h3>
 <p>Android 需要先问清楚“通过哪个工厂、选择哪种 AudioLayer 创建 ADM”。native API 的 <code>CreateAndroidAudioDeviceModule()</code> 支持这些组合：</p>
 <table>
-  <thead>
-      <tr>
-          <th>AudioLayer</th>
-          <th>采集端</th>
-          <th>播放端</th>
-          <th>设计考虑</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>kAndroidJavaAudio</code></td>
-          <td><code>AudioRecord</code></td>
-          <td><code>AudioTrack</code></td>
-          <td>Java API 路径</td>
-      </tr>
-      <tr>
-          <td><code>kAndroidOpenSLESAudio</code></td>
-          <td>OpenSL ES</td>
-          <td>OpenSL ES</td>
-          <td>native buffer queue 路径</td>
-      </tr>
-      <tr>
-          <td><code>kAndroidJavaInputAndOpenSLESOutputAudio</code></td>
-          <td><code>AudioRecord</code></td>
-          <td>OpenSL ES</td>
-          <td>Java 输入音效能力与 native 输出结合</td>
-      </tr>
-      <tr>
-          <td><code>kAndroidAAudioAudio</code></td>
-          <td>AAudio</td>
-          <td>AAudio</td>
-          <td>AAudio data callback 路径，需构建支持</td>
-      </tr>
-      <tr>
-          <td><code>kAndroidJavaInputAndAAudioOutputAudio</code></td>
-          <td><code>AudioRecord</code></td>
-          <td>AAudio</td>
-          <td>Java 输入与 AAudio 输出组合，需构建支持</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>AudioLayer</th>
+					<th>采集端</th>
+					<th>播放端</th>
+					<th>设计考虑</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>kAndroidJavaAudio</code></td>
+					<td><code>AudioRecord</code></td>
+					<td><code>AudioTrack</code></td>
+					<td>Java API 路径</td>
+			</tr>
+			<tr>
+					<td><code>kAndroidOpenSLESAudio</code></td>
+					<td>OpenSL ES</td>
+					<td>OpenSL ES</td>
+					<td>native buffer queue 路径</td>
+			</tr>
+			<tr>
+					<td><code>kAndroidJavaInputAndOpenSLESOutputAudio</code></td>
+					<td><code>AudioRecord</code></td>
+					<td>OpenSL ES</td>
+					<td>Java 输入音效能力与 native 输出结合</td>
+			</tr>
+			<tr>
+					<td><code>kAndroidAAudioAudio</code></td>
+					<td>AAudio</td>
+					<td>AAudio</td>
+					<td>AAudio data callback 路径，需构建支持</td>
+			</tr>
+			<tr>
+					<td><code>kAndroidJavaInputAndAAudioOutputAudio</code></td>
+					<td><code>AudioRecord</code></td>
+					<td>AAudio</td>
+					<td>Java 输入与 AAudio 输出组合，需构建支持</td>
+			</tr>
+	</tbody>
 </table>
 <p>在这个工厂中，请求 <code>kPlatformDefaultAudio</code> 时，若定义了 <code>WEBRTC_AUDIO_DEVICE_INCLUDE_ANDROID_AAUDIO</code>，选择 AAudio 双向路径；否则根据系统报告的低延迟输入/输出能力，在 OpenSL ES、混合路径和 Java 路径之间选择。这是该工厂的选择逻辑，不代表所有 Android SDK 接入都采用同样的默认值。</p>
 <p><strong>Java 路径的数据交接</strong>很适合作为一个具体例子：</p>
@@ -888,84 +904,84 @@ sequenceDiagram
 <p>源码入口：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/objc/native/api/audio_device_module.mm">iOS SDK 工厂</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/objc/native/src/audio/audio_device_ios.mm">AudioDeviceIOS</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/objc/native/src/audio/voice_processing_audio_unit.mm">VoiceProcessingAudioUnit</a>。</p>
 <h3 id="47-哪些能力不能假定跨平台一致">4.7 哪些能力不能假定跨平台一致</h3>
 <table>
-  <thead>
-      <tr>
-          <th>问题</th>
-          <th>共同接口背后的实际差异</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>能否枚举并选择任意设备？</td>
-          <td>桌面后端一般支持设备枚举；移动端更多依赖系统路由，部分 ADM 方法只提供逻辑设备或未实现</td>
-      </tr>
-      <tr>
-          <td>能否设置音量、静音、立体声？</td>
-          <td>要查询相应 <code>IsAvailable</code> 能力并检查返回值，不能由接口存在推断设备支持</td>
-      </tr>
-      <tr>
-          <td>是否启用系统 AEC？</td>
-          <td>取决于平台、后端与创建配置；Android Java 输入和 iOS voice processing 需要与软件 APM 配合</td>
-      </tr>
-      <tr>
-          <td>延迟是不是精确测量？</td>
-          <td>后端可能使用系统时间戳、缓冲查询或固定估计，精度不同</td>
-      </tr>
-      <tr>
-          <td>换设备能否自动恢复？</td>
-          <td>取决于后端、选项和应用策略，公共接口并不保证所有平台自动恢复</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>问题</th>
+					<th>共同接口背后的实际差异</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>能否枚举并选择任意设备？</td>
+					<td>桌面后端一般支持设备枚举；移动端更多依赖系统路由，部分 ADM 方法只提供逻辑设备或未实现</td>
+			</tr>
+			<tr>
+					<td>能否设置音量、静音、立体声？</td>
+					<td>要查询相应 <code>IsAvailable</code> 能力并检查返回值，不能由接口存在推断设备支持</td>
+			</tr>
+			<tr>
+					<td>是否启用系统 AEC？</td>
+					<td>取决于平台、后端与创建配置；Android Java 输入和 iOS voice processing 需要与软件 APM 配合</td>
+			</tr>
+			<tr>
+					<td>延迟是不是精确测量？</td>
+					<td>后端可能使用系统时间戳、缓冲查询或固定估计，精度不同</td>
+			</tr>
+			<tr>
+					<td>换设备能否自动恢复？</td>
+					<td>取决于后端、选项和应用策略，公共接口并不保证所有平台自动恢复</td>
+			</tr>
+	</tbody>
 </table>
 <p>例如，ALSA 可以从 <code>snd_pcm_delay()</code> 换算延迟；AAudio 可以根据流的时间与帧位置估计；iOS 的 <code>PlayoutDelay()</code> 在此基线中返回固定估计。这些值可以辅助音频处理和诊断，但不能当成同等精度的端到端延迟测量。</p>
 <p>真实设备之外还可以使用 dummy、文件或测试 ADM。它们证明了这个边界的可替换性：上层需要的是符合契约的音频源和输出端，不一定是 WebRTC 亲自打开的物理麦克风与扬声器。</p>
 <h2 id="五带着问题回到源码">五、带着问题回到源码</h2>
 <h3 id="51-建议的阅读顺序">5.1 建议的阅读顺序</h3>
 <table>
-  <thead>
-      <tr>
-          <th>要回答的问题</th>
-          <th>优先阅读的文件与方法</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>上层能要求设备做什么？</td>
-          <td><code>api/audio/audio_device.h</code>、<code>audio_device_defines.h</code></td>
-      </tr>
-      <tr>
-          <td>设备与上层在哪里接通？</td>
-          <td><code>webrtc_voice_engine.cc</code> 的 <code>Init()</code>，ADM 的 <code>RegisterAudioCallback()</code></td>
-      </tr>
-      <tr>
-          <td>谁控制什么时候开麦、播放？</td>
-          <td><code>audio/audio_state.cc</code> 的 <code>Add*Stream()</code>、<code>SetRecording()</code>、<code>SetPlayout()</code></td>
-      </tr>
-      <tr>
-          <td>PCM 怎样过设备边界？</td>
-          <td><code>audio_device_buffer.cc</code> 的两组交付/请求方法</td>
-      </tr>
-      <tr>
-          <td>为什么上层都是 10 ms？</td>
-          <td><code>fine_audio_buffer.cc</code> 与各后端的缓冲循环</td>
-      </tr>
-      <tr>
-          <td>APM 和收发流在哪里连接？</td>
-          <td><code>audio/audio_transport_impl.cc</code> 的两个主回调</td>
-      </tr>
-      <tr>
-          <td>编码在哪里切换线程？</td>
-          <td><code>audio/channel_send.cc</code> 的 <code>ProcessAndEncodeAudio()</code></td>
-      </tr>
-      <tr>
-          <td>播放怎样到达 NetEq？</td>
-          <td><code>audio_mixer_impl.cc</code>、<code>audio_receive_stream.cc</code>、<code>channel_receive.cc</code></td>
-      </tr>
-      <tr>
-          <td>某个平台为什么有额外延迟或重启？</td>
-          <td>实际选中的平台后端、工厂和构建开关</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>要回答的问题</th>
+					<th>优先阅读的文件与方法</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>上层能要求设备做什么？</td>
+					<td><code>api/audio/audio_device.h</code>、<code>audio_device_defines.h</code></td>
+			</tr>
+			<tr>
+					<td>设备与上层在哪里接通？</td>
+					<td><code>webrtc_voice_engine.cc</code> 的 <code>Init()</code>，ADM 的 <code>RegisterAudioCallback()</code></td>
+			</tr>
+			<tr>
+					<td>谁控制什么时候开麦、播放？</td>
+					<td><code>audio/audio_state.cc</code> 的 <code>Add*Stream()</code>、<code>SetRecording()</code>、<code>SetPlayout()</code></td>
+			</tr>
+			<tr>
+					<td>PCM 怎样过设备边界？</td>
+					<td><code>audio_device_buffer.cc</code> 的两组交付/请求方法</td>
+			</tr>
+			<tr>
+					<td>为什么上层都是 10 ms？</td>
+					<td><code>fine_audio_buffer.cc</code> 与各后端的缓冲循环</td>
+			</tr>
+			<tr>
+					<td>APM 和收发流在哪里连接？</td>
+					<td><code>audio/audio_transport_impl.cc</code> 的两个主回调</td>
+			</tr>
+			<tr>
+					<td>编码在哪里切换线程？</td>
+					<td><code>audio/channel_send.cc</code> 的 <code>ProcessAndEncodeAudio()</code></td>
+			</tr>
+			<tr>
+					<td>播放怎样到达 NetEq？</td>
+					<td><code>audio_mixer_impl.cc</code>、<code>audio_receive_stream.cc</code>、<code>channel_receive.cc</code></td>
+			</tr>
+			<tr>
+					<td>某个平台为什么有额外延迟或重启？</td>
+					<td>实际选中的平台后端、工厂和构建开关</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="52-用数据断点定位有设备但没有声音">5.2 用数据断点定位“有设备，但没有声音”</h3>
 <p>比起一开始钻进驱动，更有效的办法是沿公共边界逐段检查：</p>
@@ -991,10 +1007,12 @@ sequenceDiagram
 <h2 id="一先从音频科技切入而不是直接做泛科技">一、先从音频科技切入，而不是直接做泛科技</h2>
 <p>结合自己的经历，目前比较合适的定位是：</p>
 <blockquote>
-<p>一个懂音频的程序员，用真实实验帮普通人看懂科技产品。</p></blockquote>
+<p>一个懂音频的程序员，用真实实验帮普通人看懂科技产品。</p>
+</blockquote>
 <p>如果进一步把账号价值压缩成一句话，可以是：</p>
 <blockquote>
-<p>不背参数，不念发布会，用实验告诉你技术有没有用、产品值不值得买。</p></blockquote>
+<p>不背参数，不念发布会，用实验告诉你技术有没有用、产品值不值得买。</p>
+</blockquote>
 <p>这个定位有几个好处：</p>
 <ul>
 <li>音频技术和我的从业经历高度匹配，不需要从零积累专业性；</li>
@@ -1006,7 +1024,8 @@ sequenceDiagram
 <h2 id="二受众以普通消费者为主科技爱好者为辅">二、受众以普通消费者为主，科技爱好者为辅</h2>
 <p>我不想只面向音频开发人员，因为这个群体相对小，内容也容易变成技术课程。更合适的受众关系是：</p>
 <blockquote>
-<p>普通消费者是主要服务对象，科技爱好者是内容传播者和专业度验证者。</p></blockquote>
+<p>普通消费者是主要服务对象，科技爱好者是内容传播者和专业度验证者。</p>
+</blockquote>
 <p>这类观众不一定想学习一整套算法，但会关心三个问题：</p>
 <ol>
 <li>这个功能到底有什么用？</li>
@@ -1018,35 +1037,35 @@ sequenceDiagram
 <p>起步阶段不宜在手机、汽车、相机和电脑之间反复跳跃。观众需要先能用一句话记住这个账号，之后才会接受内容边界的扩展。</p>
 <p>初期可以按以下比例规划：</p>
 <table>
-  <thead>
-      <tr>
-          <th>内容方向</th>
-          <th style="text-align: right">比例</th>
-          <th>主要作用</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>耳机、麦克风、音箱、直播设备</td>
-          <td style="text-align: right">50%</td>
-          <td>建立专业标签和账号辨识度</td>
-      </tr>
-      <tr>
-          <td>AI 语音、AI 硬件、智能设备</td>
-          <td style="text-align: right">25%</td>
-          <td>承接科技热点和新产品</td>
-      </tr>
-      <tr>
-          <td>手机、电脑等泛科技产品</td>
-          <td style="text-align: right">15%</td>
-          <td>逐步扩大受众范围</td>
-      </tr>
-      <tr>
-          <td>程序员视角和行业故事</td>
-          <td style="text-align: right">10%</td>
-          <td>建立真实的个人形象</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>内容方向</th>
+					<th style="text-align: right">比例</th>
+					<th>主要作用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>耳机、麦克风、音箱、直播设备</td>
+					<td style="text-align: right">50%</td>
+					<td>建立专业标签和账号辨识度</td>
+			</tr>
+			<tr>
+					<td>AI 语音、AI 硬件、智能设备</td>
+					<td style="text-align: right">25%</td>
+					<td>承接科技热点和新产品</td>
+			</tr>
+			<tr>
+					<td>手机、电脑等泛科技产品</td>
+					<td style="text-align: right">15%</td>
+					<td>逐步扩大受众范围</td>
+			</tr>
+			<tr>
+					<td>程序员视角和行业故事</td>
+					<td style="text-align: right">10%</td>
+					<td>建立真实的个人形象</td>
+			</tr>
+	</tbody>
 </table>
 <p>在表现形式上，可以先建立四个固定栏目。</p>
 <h3 id="1-这项技术到底有没有用">1. 这项技术到底有没有用</h3>
@@ -1111,7 +1130,8 @@ sequenceDiagram
 </div>
 <p>例如讲降噪耳机，可以用一个普通用户经历过的问题开场：</p>
 <blockquote>
-<p>你的降噪耳机能消掉地铁声，却消不掉旁边的人说话，不一定是产品质量差。因为这两种声音对降噪算法来说，难度完全不同。</p></blockquote>
+<p>你的降噪耳机能消掉地铁声，却消不掉旁边的人说话，不一定是产品质量差。因为这两种声音对降噪算法来说，难度完全不同。</p>
+</blockquote>
 <p>紧接着播放对比实验，等观众已经产生疑问后，再解释稳定噪声和突发人声的区别。不宜一开头就从“主动降噪的定义”讲起。</p>
 <p>表达风格可以定为“可信赖的工程师朋友”：</p>
 <ul>
@@ -1123,7 +1143,8 @@ sequenceDiagram
 </ul>
 <p>还可以尝试用一句固定结尾强化账号记忆：</p>
 <blockquote>
-<p>参数负责告诉我们它能做什么，实验负责告诉我们它做得怎么样。</p></blockquote>
+<p>参数负责告诉我们它能做什么，实验负责告诉我们它做得怎么样。</p>
+</blockquote>
 <h2 id="六第一批选题">六、第一批选题</h2>
 <p>第一批内容不应全部做新品评测，而应该同时测试实验、解释、购买建议和观点等不同内容模式。</p>
 <ol>
@@ -1216,7 +1237,8 @@ sequenceDiagram
 </ol>
 <p>本质上，目标不是只做一个“靠流量吃饭的媒体”，而是：</p>
 <blockquote>
-<p>用大众内容建立影响力，再用专业能力完成高价值变现。</p></blockquote>
+<p>用大众内容建立影响力，再用专业能力完成高价值变现。</p>
+</blockquote>
 <p>这种模式与现有职业经验衔接得更好，也比单纯依赖广告分成更稳定。</p>
 <h2 id="十信任和职业边界">十、信任和职业边界</h2>
 <p>科技消费内容一旦开始变现，最容易损伤的就是观众信任。因此，需要尽早建立几条原则：</p>
@@ -1325,11 +1347,11 @@ sequenceDiagram
 </span></span></span><span class="line"><span class="cl"><span class="sd">  所有 API 变更都必须兼容现有客户端
 </span></span></span><span class="line"><span class="cl"><span class="sd">  所有 OpenSpec 产物使用中文</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">rules</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">每个 API 任务都要包含自动化测试</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">operations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">operations</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">apply</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">guidance</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">在标记任务完成前运行测试和 Lint</span></span></span></code></pre></td></tr></table>
@@ -1354,7 +1376,8 @@ sequenceDiagram
 <h2 id="放进一个真实需求中怎么用">放进一个真实需求中怎么用</h2>
 <p>以“接入 RNNoise 降噪模型”为例。最初的需求往往只有一句话：</p>
 <blockquote>
-<p>在现有实时音频处理链路中接入 RNNoise，降低环境噪声。</p></blockquote>
+<p>在现有实时音频处理链路中接入 RNNoise，降低环境噪声。</p>
+</blockquote>
 <p>这句话还不能直接变成代码。按 OpenSpec 流程，可以这样做。</p>
 <h3 id="1-explore先把问题想清楚">1. Explore：先把问题想清楚</h3>
 <p>在 AI 对话中说：</p>
@@ -1426,11 +1449,11 @@ sequenceDiagram
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="gu">### Requirement: 实时 RNNoise 降噪
-</span></span></span><span class="line"><span class="cl"><span class="gu"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">系统必须在实时音频链路中按 RNNoise 帧规格连续处理音频，并保持输出的时序和时长与输入一致。
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="gu">#### Scenario: 处理任意长度的音频回调
-</span></span></span><span class="line"><span class="cl"><span class="gu"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">-</span> **WHEN** 上游输入 48 kHz 单声道 PCM，且每次回调的采样点数不固定
 </span></span><span class="line"><span class="cl"><span class="k">-</span> **THEN** 系统必须先缓冲并组成 480 个采样点的完整帧
 </span></span><span class="line"><span class="cl"><span class="k">-</span> **AND** 每个完整帧必须严格按时间顺序调用一次 RNNoise 推理
@@ -1486,34 +1509,34 @@ sequenceDiagram
 <h2 id="openspec-如何解决没有中间记录">OpenSpec 如何解决“没有中间记录”</h2>
 <p>回到开头的第一个问题，OpenSpec 的作用非常直接。</p>
 <table>
-  <thead>
-      <tr>
-          <th>AI Coding 中的问题</th>
-          <th>OpenSpec 的对应机制</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Agent 方案不符合预期，代码需要重写</td>
-          <td>在 Propose 和 Review 阶段先修正文本，延迟代码生成</td>
-      </tr>
-      <tr>
-          <td>不记得某个决策为什么做</td>
-          <td><code>proposal.md</code> 和 <code>design.md</code> 保存背景、备选方案与取舍</td>
-      </tr>
-      <tr>
-          <td>中途打断或上下文用完</td>
-          <td>变更文件提供上下文，<code>tasks.md</code> 勾选项提供显式进度</td>
-      </tr>
-      <tr>
-          <td>不知道代码是否真的完成</td>
-          <td>Spec 把“完成”改写为可验收的场景</td>
-      </tr>
-      <tr>
-          <td>对话结束后信息消失</td>
-          <td>文件进入 Git，Archive 保留变更历史并更新主 Spec</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>AI Coding 中的问题</th>
+					<th>OpenSpec 的对应机制</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Agent 方案不符合预期，代码需要重写</td>
+					<td>在 Propose 和 Review 阶段先修正文本，延迟代码生成</td>
+			</tr>
+			<tr>
+					<td>不记得某个决策为什么做</td>
+					<td><code>proposal.md</code> 和 <code>design.md</code> 保存背景、备选方案与取舍</td>
+			</tr>
+			<tr>
+					<td>中途打断或上下文用完</td>
+					<td>变更文件提供上下文，<code>tasks.md</code> 勾选项提供显式进度</td>
+			</tr>
+			<tr>
+					<td>不知道代码是否真的完成</td>
+					<td>Spec 把“完成”改写为可验收的场景</td>
+			</tr>
+			<tr>
+					<td>对话结束后信息消失</td>
+					<td>文件进入 Git，Archive 保留变更历史并更新主 Spec</td>
+			</tr>
+	</tbody>
 </table>
 <p>其中我认为最重要的一点是：**进度不再是 Agent 脑中的隐藏状态。**只要仓库还在，任何 Agent 都能通过读取文件重建任务状态。会话可以丢，工作不应该一起丢。</p>
 <h2 id="openspec-能否让-agent-跟着项目成长">OpenSpec 能否让 Agent 跟着项目成长</h2>
@@ -1586,7 +1609,8 @@ sequenceDiagram
       <description>当代码生成越来越便宜，工程师真正稀缺的能力是什么？这篇文章整理了我和 ChatGPT 关于职业前景的一次长谈，以及一条从 AI Coding、Spec 到 Agent Engineering 的个人进阶路线。</description>
       <content:encoded><![CDATA[<p>AI Coding 已经进入软件开发的完整流程：读代码、写代码、补测试、查问题、改文档，甚至可以自己运行命令，再根据结果继续迭代。它带来的不只是效率提升，也有一个越来越难回避的问题：</p>
 <blockquote>
-<p>当 AI 可以完成越来越多开发工作，以后还需要软件工程师吗？如果需要，工程师真正值钱的能力又是什么？</p></blockquote>
+<p>当 AI 可以完成越来越多开发工作，以后还需要软件工程师吗？如果需要，工程师真正值钱的能力又是什么？</p>
+</blockquote>
 <p>最近我把这个问题抛给了 ChatGPT，又结合自己的情况继续追问：一个已经做了多年 C/C++、音视频和移动端开发的工程师，应该继续深挖原来的技术栈，还是转向 AI Agent？如果要转，具体该学什么？</p>
 <p>讨论很长，下面不是聊天记录的原样搬运，而是我重新整理后的结论和行动路线。</p>
 <p>先说答案：<strong>软件工程师仍然需要，但“会写代码”不再足以定义一个软件工程师。</strong></p>
@@ -1757,30 +1781,30 @@ sequenceDiagram
 <p>操作系统、编译器、数据库、音视频、网络、安全、机器人、嵌入式、高性能计算和大型分布式系统，则不会因为代码生成变快就突然变简单。它们面对的是现实世界的复杂约束，需要长期的工程取舍、跨模块理解和故障处理。</p>
 <p>未来的软件工程师可能形成三种分化：</p>
 <table>
-  <thead>
-      <tr>
-          <th>类型</th>
-          <th>能力结构</th>
-          <th>处境</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>纯代码生产者</td>
-          <td>按明确需求实现功能</td>
-          <td>工作最容易被压缩</td>
-      </tr>
-      <tr>
-          <td>AI 增强型开发者</td>
-          <td>Coding + AI 工具</td>
-          <td>产出明显提高</td>
-      </tr>
-      <tr>
-          <td>AI 增强型领域工程师</td>
-          <td>领域知识 + 系统设计 + Coding + Agent + 验证</td>
-          <td>能解决复杂问题，杠杆最高</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>类型</th>
+					<th>能力结构</th>
+					<th>处境</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>纯代码生产者</td>
+					<td>按明确需求实现功能</td>
+					<td>工作最容易被压缩</td>
+			</tr>
+			<tr>
+					<td>AI 增强型开发者</td>
+					<td>Coding + AI 工具</td>
+					<td>产出明显提高</td>
+			</tr>
+			<tr>
+					<td>AI 增强型领域工程师</td>
+					<td>领域知识 + 系统设计 + Coding + Agent + 验证</td>
+					<td>能解决复杂问题，杠杆最高</td>
+			</tr>
+	</tbody>
 </table>
 <p>我想走的是第三条路。目标不是和 AI 比谁敲代码快，而是把自己的领域经验、工程判断和 AI 的执行能力组合起来，完成过去需要更多人协作才能完成的系统。</p>
 <p>这个结论也延续了我之前对 AI Coding 的看法。我曾在<a href="/posts/202601/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/">《关于 AI Coding 的一些感想和后续规划》</a>里写过，AI 的能力边界很大程度受使用者影响，生产代码的责任仍在人身上。现在再往前一步看，真正的变化不只是“用 AI 写得更快”，而是要围绕 AI 重新设计整套软件工程流程。</p>
@@ -1983,50 +2007,50 @@ sequenceDiagram
 <h2 id="六时间如何分配">六、时间如何分配</h2>
 <p>如果每周可以投入 8～10 小时，我准备按下面的比例推进：</p>
 <table>
-  <thead>
-      <tr>
-          <th>阶段</th>
-          <th style="text-align: right">参考时间</th>
-          <th>主要产出</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>工程闭环补强</td>
-          <td style="text-align: right">2～4 周</td>
-          <td>测试、性能与架构检查清单</td>
-      </tr>
-      <tr>
-          <td>AI Coding 工作流</td>
-          <td style="text-align: right">3～6 周</td>
-          <td>Explore 到 Review 的稳定流程</td>
-      </tr>
-      <tr>
-          <td>Specification / SDD</td>
-          <td style="text-align: right">3～6 周</td>
-          <td>可执行、可验收的项目 Spec</td>
-      </tr>
-      <tr>
-          <td>Agent 原理</td>
-          <td style="text-align: right">4～6 周</td>
-          <td>Mini Agent</td>
-      </tr>
-      <tr>
-          <td>MCP / Tool</td>
-          <td style="text-align: right">3～4 周</td>
-          <td>带权限边界的工具集成</td>
-      </tr>
-      <tr>
-          <td>Runtime 研究</td>
-          <td style="text-align: right">4～8 周</td>
-          <td>对一个真实 Agent 的源码分析</td>
-      </tr>
-      <tr>
-          <td>AI-Native Engineering</td>
-          <td style="text-align: right">持续</td>
-          <td>完整项目与复盘</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>阶段</th>
+					<th style="text-align: right">参考时间</th>
+					<th>主要产出</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>工程闭环补强</td>
+					<td style="text-align: right">2～4 周</td>
+					<td>测试、性能与架构检查清单</td>
+			</tr>
+			<tr>
+					<td>AI Coding 工作流</td>
+					<td style="text-align: right">3～6 周</td>
+					<td>Explore 到 Review 的稳定流程</td>
+			</tr>
+			<tr>
+					<td>Specification / SDD</td>
+					<td style="text-align: right">3～6 周</td>
+					<td>可执行、可验收的项目 Spec</td>
+			</tr>
+			<tr>
+					<td>Agent 原理</td>
+					<td style="text-align: right">4～6 周</td>
+					<td>Mini Agent</td>
+			</tr>
+			<tr>
+					<td>MCP / Tool</td>
+					<td style="text-align: right">3～4 周</td>
+					<td>带权限边界的工具集成</td>
+			</tr>
+			<tr>
+					<td>Runtime 研究</td>
+					<td style="text-align: right">4～8 周</td>
+					<td>对一个真实 Agent 的源码分析</td>
+			</tr>
+			<tr>
+					<td>AI-Native Engineering</td>
+					<td style="text-align: right">持续</td>
+					<td>完整项目与复盘</td>
+			</tr>
+	</tbody>
 </table>
 <p>时间不是硬指标。判断一个阶段是否完成的标准，不是“资料看完了”，而是能否拿出可以运行、可以验证、可以复盘的产物。</p>
 <h2 id="七参考资料">七、参考资料</h2>
@@ -2042,7 +2066,8 @@ sequenceDiagram
 <h2 id="八最后不要成为工具收藏家">八、最后：不要成为工具收藏家</h2>
 <p>这次讨论最终给我的提醒，不是赶紧转行，也不是赶紧再学一个热门框架，而是重新确认自己的能力组合：</p>
 <blockquote>
-<p>未来优秀的软件工程师，应该能定义问题、设计系统、驾驭 Agent、验证结果，并对最终交付负责。</p></blockquote>
+<p>未来优秀的软件工程师，应该能定义问题、设计系统、驾驭 Agent、验证结果，并对最终交付负责。</p>
+</blockquote>
 <p>因此，不应该按照“先学 TypeScript，再学 Agent，再学 MCP，再学某个框架”的课程目录前进。更有效的方式，是始终围绕一个真实项目：项目需要什么，就补什么；做出结果，再复盘哪些判断可以沉淀成 Spec、测试、工具或工作流。</p>
 <p>代码正在变便宜，但正确的软件并没有因此自动出现。会写代码仍然重要，只是它不再是终点。接下来真正值得投入的，是把领域经验、系统工程和 AI 组织成一套能持续交付的能力。</p>
 ]]></content:encoded>
@@ -2110,35 +2135,35 @@ sequenceDiagram
 </div>
 <p>本机数字：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: right">N</th>
-          <th style="text-align: right">耗时</th>
-          <th style="text-align: right">GFLOPS</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: right">64</td>
-          <td style="text-align: right">0.072 ms</td>
-          <td style="text-align: right">7.28</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">256</td>
-          <td style="text-align: right">12.7 ms</td>
-          <td style="text-align: right">2.65</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">512</td>
-          <td style="text-align: right">82.5 ms</td>
-          <td style="text-align: right">3.25</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">1024</td>
-          <td style="text-align: right">850 ms</td>
-          <td style="text-align: right"><strong>2.53</strong></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: right">N</th>
+					<th style="text-align: right">耗时</th>
+					<th style="text-align: right">GFLOPS</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: right">64</td>
+					<td style="text-align: right">0.072 ms</td>
+					<td style="text-align: right">7.28</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">256</td>
+					<td style="text-align: right">12.7 ms</td>
+					<td style="text-align: right">2.65</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">512</td>
+					<td style="text-align: right">82.5 ms</td>
+					<td style="text-align: right">3.25</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">1024</td>
+					<td style="text-align: right">850 ms</td>
+					<td style="text-align: right"><strong>2.53</strong></td>
+			</tr>
+	</tbody>
 </table>
 <p>$N$ 一大，立刻掉到 2～3 GFLOPS。这就是后面所有加速比的分母。</p>
 <h2 id="2-循环交换-ikj同一套乘法换一条路">2. 循环交换 ikj：同一套乘法，换一条路</h2>
@@ -2169,40 +2194,40 @@ sequenceDiagram
 </div>
 <p>本机数字（相对 naive）：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: right">N</th>
-          <th style="text-align: right">ikj GFLOPS</th>
-          <th style="text-align: right">加速比</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: right">64</td>
-          <td style="text-align: right">23.8</td>
-          <td style="text-align: right">3.3×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">256</td>
-          <td style="text-align: right">26.8</td>
-          <td style="text-align: right">10.1×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">512</td>
-          <td style="text-align: right">28.3</td>
-          <td style="text-align: right">8.7×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">1024</td>
-          <td style="text-align: right"><strong>28.9</strong></td>
-          <td style="text-align: right"><strong>11.4×</strong></td>
-      </tr>
-      <tr>
-          <td style="text-align: right">2048</td>
-          <td style="text-align: right">24.9</td>
-          <td style="text-align: right">—</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: right">N</th>
+					<th style="text-align: right">ikj GFLOPS</th>
+					<th style="text-align: right">加速比</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: right">64</td>
+					<td style="text-align: right">23.8</td>
+					<td style="text-align: right">3.3×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">256</td>
+					<td style="text-align: right">26.8</td>
+					<td style="text-align: right">10.1×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">512</td>
+					<td style="text-align: right">28.3</td>
+					<td style="text-align: right">8.7×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">1024</td>
+					<td style="text-align: right"><strong>28.9</strong></td>
+					<td style="text-align: right"><strong>11.4×</strong></td>
+			</tr>
+			<tr>
+					<td style="text-align: right">2048</td>
+					<td style="text-align: right">24.9</td>
+					<td style="text-align: right">—</td>
+			</tr>
+	</tbody>
 </table>
 <p>只换循环顺序，大矩阵直接快一个数量级。这是整篇文章里，<strong>代码改动最小、收益最稳</strong> 的一步。后面所有花活，都建立在「先别跟 cache line 作对」之上。</p>
 <h2 id="3-cache-分块一次只请得起三块">3. Cache 分块：一次只请得起三块</h2>
@@ -2226,35 +2251,35 @@ sequenceDiagram
 </div>
 <p>本机上，单独给 ikj 套一层 64×64 分块，并没有更快：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: right">N</th>
-          <th style="text-align: right">tiled</th>
-          <th style="text-align: right">ikj</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: right">256</td>
-          <td style="text-align: right">24.2</td>
-          <td style="text-align: right">26.8</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">512</td>
-          <td style="text-align: right">22.4</td>
-          <td style="text-align: right">28.3</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">1024</td>
-          <td style="text-align: right">20.2</td>
-          <td style="text-align: right">28.9</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">2048</td>
-          <td style="text-align: right">16.2</td>
-          <td style="text-align: right">24.9</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: right">N</th>
+					<th style="text-align: right">tiled</th>
+					<th style="text-align: right">ikj</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: right">256</td>
+					<td style="text-align: right">24.2</td>
+					<td style="text-align: right">26.8</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">512</td>
+					<td style="text-align: right">22.4</td>
+					<td style="text-align: right">28.3</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">1024</td>
+					<td style="text-align: right">20.2</td>
+					<td style="text-align: right">28.9</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">2048</td>
+					<td style="text-align: right">16.2</td>
+					<td style="text-align: right">24.9</td>
+			</tr>
+	</tbody>
 </table>
 <p>这不是分块错了。是 <strong>ikj 已经被预取器喂饱，多出来的三重分块循环在收税</strong>。分块的价值要等微核出现：只有当你真的会把同一块 A 连乘很多块 B，把它钉在 L1 才划算。下面两步会把这件事做实。</p>
 <h2 id="4-packing给微核铺一条直道">4. Packing：给微核铺一条直道</h2>
@@ -2268,35 +2293,35 @@ sequenceDiagram
 <p>卡在哪：没有这一层，每次 <code>c[j] += a * b[j]</code> 都要读 C、写 C。C 的流量从 $O(n^2)$ 变成跟着 $K$ 放大。寄存器分块把 C 的写回从「每个 k 一次」收成「每个微核一次」。</p>
 <p>本机 4×4 标量寄存器分块：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: right">N</th>
-          <th style="text-align: right">GFLOPS</th>
-          <th style="text-align: right">相对 naive</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: right">64</td>
-          <td style="text-align: right">47.7</td>
-          <td style="text-align: right">6.6×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">256</td>
-          <td style="text-align: right">31.3</td>
-          <td style="text-align: right">11.8×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">1024</td>
-          <td style="text-align: right">29.9</td>
-          <td style="text-align: right">11.8×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">2048</td>
-          <td style="text-align: right">10.7</td>
-          <td style="text-align: right">—</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: right">N</th>
+					<th style="text-align: right">GFLOPS</th>
+					<th style="text-align: right">相对 naive</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: right">64</td>
+					<td style="text-align: right">47.7</td>
+					<td style="text-align: right">6.6×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">256</td>
+					<td style="text-align: right">31.3</td>
+					<td style="text-align: right">11.8×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">1024</td>
+					<td style="text-align: right">29.9</td>
+					<td style="text-align: right">11.8×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">2048</td>
+					<td style="text-align: right">10.7</td>
+					<td style="text-align: right">—</td>
+			</tr>
+	</tbody>
 </table>
 <p>小矩阵整表住在缓存里，寄存器分块几乎白捡一倍。$N=2048$ 时没有外层 cache 分块护着，窗口外的 A、B 重新开始流，数字掉下去。再一次：微核和分块是一对，拆开都不完整。</p>
 <h2 id="6-neon一次-fma-吃-4-个-fp32">6. NEON：一次 FMA 吃 4 个 FP32</h2>
@@ -2329,45 +2354,45 @@ sequenceDiagram
 </div>
 <p>加上前面的分块和 packing，单线程微核在本机非常稳：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: right">N</th>
-          <th style="text-align: right">NEON GFLOPS</th>
-          <th style="text-align: right">相对 ikj</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: right">64</td>
-          <td style="text-align: right">43.7</td>
-          <td style="text-align: right">1.8×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">256</td>
-          <td style="text-align: right">50.2</td>
-          <td style="text-align: right">1.9×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">512</td>
-          <td style="text-align: right">51.2</td>
-          <td style="text-align: right">1.8×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">1024</td>
-          <td style="text-align: right"><strong>51.1</strong></td>
-          <td style="text-align: right">1.8×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">2048</td>
-          <td style="text-align: right">49.6</td>
-          <td style="text-align: right">2.0×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">4096</td>
-          <td style="text-align: right">45.6</td>
-          <td style="text-align: right">—</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: right">N</th>
+					<th style="text-align: right">NEON GFLOPS</th>
+					<th style="text-align: right">相对 ikj</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: right">64</td>
+					<td style="text-align: right">43.7</td>
+					<td style="text-align: right">1.8×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">256</td>
+					<td style="text-align: right">50.2</td>
+					<td style="text-align: right">1.9×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">512</td>
+					<td style="text-align: right">51.2</td>
+					<td style="text-align: right">1.8×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">1024</td>
+					<td style="text-align: right"><strong>51.1</strong></td>
+					<td style="text-align: right">1.8×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">2048</td>
+					<td style="text-align: right">49.6</td>
+					<td style="text-align: right">2.0×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">4096</td>
+					<td style="text-align: right">45.6</td>
+					<td style="text-align: right">—</td>
+			</tr>
+	</tbody>
 </table>
 <p>大约 50 GFLOPS，几乎不随 $N$ 抖。说明微核已经把单核 NEON 的数据通路走顺了。6 个 P 核的 NEON 理论峰值大约在 600+ GFLOPS 这个量级，单核 50 离「喂饱一条核」还有距离，但已经不是访存在主导。</p>
 <h2 id="7-多线程先喂-p-核并看-qos">7. 多线程：先喂 P 核，并看 QoS</h2>
@@ -2392,52 +2417,52 @@ sequenceDiagram
 </div>
 <p>本机：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: right">N</th>
-          <th style="text-align: right">单线程 NEON</th>
-          <th style="text-align: right">GCD 默认</th>
-          <th style="text-align: right">GCD UI</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: right">64</td>
-          <td style="text-align: right"><strong>43.7</strong></td>
-          <td style="text-align: right">27.6</td>
-          <td style="text-align: right">29.1</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">256</td>
-          <td style="text-align: right">50.2</td>
-          <td style="text-align: right">91.9</td>
-          <td style="text-align: right">90.9</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">512</td>
-          <td style="text-align: right">51.2</td>
-          <td style="text-align: right">189</td>
-          <td style="text-align: right">190</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">1024</td>
-          <td style="text-align: right">51.1</td>
-          <td style="text-align: right">276</td>
-          <td style="text-align: right"><strong>280</strong></td>
-      </tr>
-      <tr>
-          <td style="text-align: right">2048</td>
-          <td style="text-align: right">49.6</td>
-          <td style="text-align: right">329</td>
-          <td style="text-align: right"><strong>330</strong></td>
-      </tr>
-      <tr>
-          <td style="text-align: right">4096</td>
-          <td style="text-align: right">45.6</td>
-          <td style="text-align: right">278</td>
-          <td style="text-align: right"><strong>323</strong></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: right">N</th>
+					<th style="text-align: right">单线程 NEON</th>
+					<th style="text-align: right">GCD 默认</th>
+					<th style="text-align: right">GCD UI</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: right">64</td>
+					<td style="text-align: right"><strong>43.7</strong></td>
+					<td style="text-align: right">27.6</td>
+					<td style="text-align: right">29.1</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">256</td>
+					<td style="text-align: right">50.2</td>
+					<td style="text-align: right">91.9</td>
+					<td style="text-align: right">90.9</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">512</td>
+					<td style="text-align: right">51.2</td>
+					<td style="text-align: right">189</td>
+					<td style="text-align: right">190</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">1024</td>
+					<td style="text-align: right">51.1</td>
+					<td style="text-align: right">276</td>
+					<td style="text-align: right"><strong>280</strong></td>
+			</tr>
+			<tr>
+					<td style="text-align: right">2048</td>
+					<td style="text-align: right">49.6</td>
+					<td style="text-align: right">329</td>
+					<td style="text-align: right"><strong>330</strong></td>
+			</tr>
+			<tr>
+					<td style="text-align: right">4096</td>
+					<td style="text-align: right">45.6</td>
+					<td style="text-align: right">278</td>
+					<td style="text-align: right"><strong>323</strong></td>
+			</tr>
+	</tbody>
 </table>
 <p>三件事：</p>
 <ol>
@@ -2462,59 +2487,59 @@ sequenceDiagram
 </div>
 <p>本机 Accelerate：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: right">N</th>
-          <th style="text-align: right">耗时</th>
-          <th style="text-align: right">GFLOPS</th>
-          <th style="text-align: right">相对 naive</th>
-          <th style="text-align: right">相对单核 NEON</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: right">64</td>
-          <td style="text-align: right">0.001 ms</td>
-          <td style="text-align: right">524</td>
-          <td style="text-align: right">72×</td>
-          <td style="text-align: right">12×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">256</td>
-          <td style="text-align: right">0.033 ms</td>
-          <td style="text-align: right">1017</td>
-          <td style="text-align: right">383×</td>
-          <td style="text-align: right">20×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">512</td>
-          <td style="text-align: right">0.121 ms</td>
-          <td style="text-align: right">2218</td>
-          <td style="text-align: right">682×</td>
-          <td style="text-align: right">43×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">1024</td>
-          <td style="text-align: right">0.793 ms</td>
-          <td style="text-align: right"><strong>2708</strong></td>
-          <td style="text-align: right"><strong>1072×</strong></td>
-          <td style="text-align: right"><strong>53×</strong></td>
-      </tr>
-      <tr>
-          <td style="text-align: right">2048</td>
-          <td style="text-align: right">7.94 ms</td>
-          <td style="text-align: right">2163</td>
-          <td style="text-align: right">—</td>
-          <td style="text-align: right">44×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">4096</td>
-          <td style="text-align: right">69.7 ms</td>
-          <td style="text-align: right">1972</td>
-          <td style="text-align: right">—</td>
-          <td style="text-align: right">43×</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: right">N</th>
+					<th style="text-align: right">耗时</th>
+					<th style="text-align: right">GFLOPS</th>
+					<th style="text-align: right">相对 naive</th>
+					<th style="text-align: right">相对单核 NEON</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: right">64</td>
+					<td style="text-align: right">0.001 ms</td>
+					<td style="text-align: right">524</td>
+					<td style="text-align: right">72×</td>
+					<td style="text-align: right">12×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">256</td>
+					<td style="text-align: right">0.033 ms</td>
+					<td style="text-align: right">1017</td>
+					<td style="text-align: right">383×</td>
+					<td style="text-align: right">20×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">512</td>
+					<td style="text-align: right">0.121 ms</td>
+					<td style="text-align: right">2218</td>
+					<td style="text-align: right">682×</td>
+					<td style="text-align: right">43×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">1024</td>
+					<td style="text-align: right">0.793 ms</td>
+					<td style="text-align: right"><strong>2708</strong></td>
+					<td style="text-align: right"><strong>1072×</strong></td>
+					<td style="text-align: right"><strong>53×</strong></td>
+			</tr>
+			<tr>
+					<td style="text-align: right">2048</td>
+					<td style="text-align: right">7.94 ms</td>
+					<td style="text-align: right">2163</td>
+					<td style="text-align: right">—</td>
+					<td style="text-align: right">44×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">4096</td>
+					<td style="text-align: right">69.7 ms</td>
+					<td style="text-align: right">1972</td>
+					<td style="text-align: right">—</td>
+					<td style="text-align: right">43×</td>
+			</tr>
+	</tbody>
 </table>
 <p>AMX 没有公开指令文档，Accelerate 在矩阵够大时会走它。$N=64$ 就已经 524 GFLOPS，说明阈值很低。$N$ 再大，数字从 2.7 TFLOPS 回到 2 TFLOPS 附近，开始碰到带宽、缓存归属和功耗墙。</p>
 <p>手写 NEON 很难追上，不是微核不够认真，是 <strong>单元就不一样</strong>。产品代码到这一步，默认答案就是调用系统库。</p>
@@ -2534,91 +2559,91 @@ sequenceDiagram
 <h2 id="本机总表">本机总表</h2>
 <p>平台：Mac mini M2 Pro，FP32，$C=AB$，行主序。单位 GFLOPS。空格是这一档太慢、没跑。</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: left">kernel</th>
-          <th style="text-align: right">64</th>
-          <th style="text-align: right">256</th>
-          <th style="text-align: right">512</th>
-          <th style="text-align: right">1024</th>
-          <th style="text-align: right">2048</th>
-          <th style="text-align: right">4096</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left">naive ijk</td>
-          <td style="text-align: right">7.3</td>
-          <td style="text-align: right">2.7</td>
-          <td style="text-align: right">3.3</td>
-          <td style="text-align: right">2.5</td>
-          <td style="text-align: right"></td>
-          <td style="text-align: right"></td>
-      </tr>
-      <tr>
-          <td style="text-align: left">ikj</td>
-          <td style="text-align: right">23.8</td>
-          <td style="text-align: right">26.8</td>
-          <td style="text-align: right">28.3</td>
-          <td style="text-align: right">28.9</td>
-          <td style="text-align: right">24.9</td>
-          <td style="text-align: right"></td>
-      </tr>
-      <tr>
-          <td style="text-align: left">tiled（无微核）</td>
-          <td style="text-align: right">23.8</td>
-          <td style="text-align: right">24.2</td>
-          <td style="text-align: right">22.4</td>
-          <td style="text-align: right">20.2</td>
-          <td style="text-align: right">16.2</td>
-          <td style="text-align: right"></td>
-      </tr>
-      <tr>
-          <td style="text-align: left">寄存器分块</td>
-          <td style="text-align: right">47.7</td>
-          <td style="text-align: right">31.3</td>
-          <td style="text-align: right">30.2</td>
-          <td style="text-align: right">29.9</td>
-          <td style="text-align: right">10.7</td>
-          <td style="text-align: right"></td>
-      </tr>
-      <tr>
-          <td style="text-align: left">packed 标量</td>
-          <td style="text-align: right">6.7</td>
-          <td style="text-align: right">7.6</td>
-          <td style="text-align: right">7.5</td>
-          <td style="text-align: right">7.5</td>
-          <td style="text-align: right">7.5</td>
-          <td style="text-align: right"></td>
-      </tr>
-      <tr>
-          <td style="text-align: left">NEON 微核</td>
-          <td style="text-align: right">43.7</td>
-          <td style="text-align: right">50.2</td>
-          <td style="text-align: right">51.2</td>
-          <td style="text-align: right">51.1</td>
-          <td style="text-align: right">49.6</td>
-          <td style="text-align: right">45.6</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">GCD + NEON</td>
-          <td style="text-align: right">29.1</td>
-          <td style="text-align: right">90.9</td>
-          <td style="text-align: right">190</td>
-          <td style="text-align: right">280</td>
-          <td style="text-align: right">330</td>
-          <td style="text-align: right">323</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">Accelerate</td>
-          <td style="text-align: right"><strong>524</strong></td>
-          <td style="text-align: right"><strong>1017</strong></td>
-          <td style="text-align: right"><strong>2218</strong></td>
-          <td style="text-align: right"><strong>2708</strong></td>
-          <td style="text-align: right"><strong>2163</strong></td>
-          <td style="text-align: right"><strong>1972</strong></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: left">kernel</th>
+					<th style="text-align: right">64</th>
+					<th style="text-align: right">256</th>
+					<th style="text-align: right">512</th>
+					<th style="text-align: right">1024</th>
+					<th style="text-align: right">2048</th>
+					<th style="text-align: right">4096</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">naive ijk</td>
+					<td style="text-align: right">7.3</td>
+					<td style="text-align: right">2.7</td>
+					<td style="text-align: right">3.3</td>
+					<td style="text-align: right">2.5</td>
+					<td style="text-align: right"></td>
+					<td style="text-align: right"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">ikj</td>
+					<td style="text-align: right">23.8</td>
+					<td style="text-align: right">26.8</td>
+					<td style="text-align: right">28.3</td>
+					<td style="text-align: right">28.9</td>
+					<td style="text-align: right">24.9</td>
+					<td style="text-align: right"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">tiled（无微核）</td>
+					<td style="text-align: right">23.8</td>
+					<td style="text-align: right">24.2</td>
+					<td style="text-align: right">22.4</td>
+					<td style="text-align: right">20.2</td>
+					<td style="text-align: right">16.2</td>
+					<td style="text-align: right"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">寄存器分块</td>
+					<td style="text-align: right">47.7</td>
+					<td style="text-align: right">31.3</td>
+					<td style="text-align: right">30.2</td>
+					<td style="text-align: right">29.9</td>
+					<td style="text-align: right">10.7</td>
+					<td style="text-align: right"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">packed 标量</td>
+					<td style="text-align: right">6.7</td>
+					<td style="text-align: right">7.6</td>
+					<td style="text-align: right">7.5</td>
+					<td style="text-align: right">7.5</td>
+					<td style="text-align: right">7.5</td>
+					<td style="text-align: right"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">NEON 微核</td>
+					<td style="text-align: right">43.7</td>
+					<td style="text-align: right">50.2</td>
+					<td style="text-align: right">51.2</td>
+					<td style="text-align: right">51.1</td>
+					<td style="text-align: right">49.6</td>
+					<td style="text-align: right">45.6</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">GCD + NEON</td>
+					<td style="text-align: right">29.1</td>
+					<td style="text-align: right">90.9</td>
+					<td style="text-align: right">190</td>
+					<td style="text-align: right">280</td>
+					<td style="text-align: right">330</td>
+					<td style="text-align: right">323</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Accelerate</td>
+					<td style="text-align: right"><strong>524</strong></td>
+					<td style="text-align: right"><strong>1017</strong></td>
+					<td style="text-align: right"><strong>2218</strong></td>
+					<td style="text-align: right"><strong>2708</strong></td>
+					<td style="text-align: right"><strong>2163</strong></td>
+					<td style="text-align: right"><strong>1972</strong></td>
+			</tr>
+	</tbody>
 </table>
 <p>读这张表的方式：</p>
 <ul>
@@ -2690,7 +2715,8 @@ sequenceDiagram
 <p>我并不认为懂财务的人就不该买自住房。对很多中国家庭，房子同时承担居住、婚姻、子女教育和安全感，完全按美国那套「先买出租物业」来生活，既不现实，也不必要。</p>
 <p>更要紧的是承认：</p>
 <blockquote>
-<p>自住房是你愿意为之付钱的消费品。它可能在很多年以后变成净资产，但它在供着的时候，并不是资产。</p></blockquote>
+<p>自住房是你愿意为之付钱的消费品。它可能在很多年以后变成净资产，但它在供着的时候，并不是资产。</p>
+</blockquote>
 <p>愿意付，是因为你要住，而且现金流睡得着。不愿意，也可以继续租，把住房成本显式化。真正麻烦的，是第三种：不为住，只为上车，然后把月供解释成「我在投资」。那不是投资，是用未来几十年的工资，给过去某一年的恐惧买单。</p>
 <p>如果已经买了，也不必道德化成「当初真蠢」。更实际的是把账重新记一遍：这套房每个月拿走多少钱、自己还能剩多少、剩下的钱有没有在买真正的资产。认清它是负债，比继续讲「反正房子还在」更有用。</p>
 <h2 id="三职业与事业ai-正在改写程序员这份职业">三、职业与事业：AI 正在改写程序员这份职业</h2>
@@ -2752,98 +2778,98 @@ sequenceDiagram
 <p>前面几条是在降低月供压力，后面几条是在补风险。40 年本身不强制，银行也还会看年龄、收入和当地市场。实务上很多银行仍要求贷款到期时借款人不超过 70 到 75 岁，所以真正能贷满 40 年的，主要是更年轻的购房人。</p>
 <p>月供会少多少，可以用一组公开算法算清楚。按 100 万本金、年利率 3%、等额本息：</p>
 <table>
-  <thead>
-      <tr>
-          <th>年限</th>
-          <th>月供</th>
-          <th>总利息</th>
-          <th>前 5 年还本</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>30 年</td>
-          <td>4216 元</td>
-          <td>约 51.8 万</td>
-          <td>约 11.1 万</td>
-      </tr>
-      <tr>
-          <td>40 年</td>
-          <td>3580 元</td>
-          <td>约 71.8 万</td>
-          <td>约 7.0 万</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>年限</th>
+					<th>月供</th>
+					<th>总利息</th>
+					<th>前 5 年还本</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>30 年</td>
+					<td>4216 元</td>
+					<td>约 51.8 万</td>
+					<td>约 11.1 万</td>
+			</tr>
+			<tr>
+					<td>40 年</td>
+					<td>3580 元</td>
+					<td>约 71.8 万</td>
+					<td>约 7.0 万</td>
+			</tr>
+	</tbody>
 </table>
 <p>月供少了大约 636 元，总利息多了大约 20 万。前 5 年几乎都在还利息：30 年期还掉本金 11 万，40 年期只还掉 7 万。如果本金是 200 万、利率 3.05%，40 年比 30 年月供大约少 1269 元，总利息大约多 41 万。</p>
 <p>所以 40 年解决的是「这个月能不能过」，不是「这套房总共花多少钱」。它把压力从当下挪到了后面 10 年。</p>
 <h2 id="二其他国家的房贷政策">二、其他国家的房贷政策</h2>
 <p>把贷款年限拉长，不是中国独创。房价相对收入偏高、年轻人前期收入偏低时，很多国家都用过「以时间换月供」。差别在于：有的国家把风险关在银行门口，有的国家把风险摊给下一代。</p>
 <table>
-  <thead>
-      <tr>
-          <th>国家 / 地区</th>
-          <th>常见或最长年限</th>
-          <th>首付 / 成数</th>
-          <th>更关键的约束</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>美国</td>
-          <td>30 年固定利率是主流</td>
-          <td>常规 3%–20%</td>
-          <td>债务收入比大约 43%–50%；长期锁利率</td>
-      </tr>
-      <tr>
-          <td>英国</td>
-          <td>传统 25 年，现可到 35–40 年</td>
-          <td>常见 5%–10%</td>
-          <td>多数要求贷款在 70–75 岁前到期</td>
-      </tr>
-      <tr>
-          <td>日本</td>
-          <td>传统 35 年，近年出现 50 年</td>
-          <td>常见 10%–20%</td>
-          <td>团信几乎是标配；还有两代接力还款</td>
-      </tr>
-      <tr>
-          <td>新加坡</td>
-          <td>HDB 贷款最长 25 年，银行贷款约 30–35 年</td>
-          <td>成数受剩余年限和年龄限制</td>
-          <td>用公积金还贷通常必须上住房保障保险</td>
-      </tr>
-      <tr>
-          <td>德国</td>
-          <td>合同常先固定 10–15 年，总年期 20–30 年</td>
-          <td>常见约 20%</td>
-          <td>不靠拉长年限制造购买力</td>
-      </tr>
-      <tr>
-          <td>法国</td>
-          <td>常见 20–25 年</td>
-          <td>0–10% 都有</td>
-          <td>还款占收入硬上限约 35%</td>
-      </tr>
-      <tr>
-          <td>荷兰</td>
-          <td>最长约 30 年</td>
-          <td>理论上可接近 0 首付</td>
-          <td>负债率表非常严</td>
-      </tr>
-      <tr>
-          <td>瑞典</td>
-          <td>法律上几乎没有上限</td>
-          <td>约 15%</td>
-          <td>曾经大量超长期甚至只还利息，2016 年后强制摊还</td>
-      </tr>
-      <tr>
-          <td>葡萄牙</td>
-          <td>居民最长可到 40–50 年</td>
-          <td>因银行而异</td>
-          <td>通常要求在 75–80 岁前还清</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>国家 / 地区</th>
+					<th>常见或最长年限</th>
+					<th>首付 / 成数</th>
+					<th>更关键的约束</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>美国</td>
+					<td>30 年固定利率是主流</td>
+					<td>常规 3%–20%</td>
+					<td>债务收入比大约 43%–50%；长期锁利率</td>
+			</tr>
+			<tr>
+					<td>英国</td>
+					<td>传统 25 年，现可到 35–40 年</td>
+					<td>常见 5%–10%</td>
+					<td>多数要求贷款在 70–75 岁前到期</td>
+			</tr>
+			<tr>
+					<td>日本</td>
+					<td>传统 35 年，近年出现 50 年</td>
+					<td>常见 10%–20%</td>
+					<td>团信几乎是标配；还有两代接力还款</td>
+			</tr>
+			<tr>
+					<td>新加坡</td>
+					<td>HDB 贷款最长 25 年，银行贷款约 30–35 年</td>
+					<td>成数受剩余年限和年龄限制</td>
+					<td>用公积金还贷通常必须上住房保障保险</td>
+			</tr>
+			<tr>
+					<td>德国</td>
+					<td>合同常先固定 10–15 年，总年期 20–30 年</td>
+					<td>常见约 20%</td>
+					<td>不靠拉长年限制造购买力</td>
+			</tr>
+			<tr>
+					<td>法国</td>
+					<td>常见 20–25 年</td>
+					<td>0–10% 都有</td>
+					<td>还款占收入硬上限约 35%</td>
+			</tr>
+			<tr>
+					<td>荷兰</td>
+					<td>最长约 30 年</td>
+					<td>理论上可接近 0 首付</td>
+					<td>负债率表非常严</td>
+			</tr>
+			<tr>
+					<td>瑞典</td>
+					<td>法律上几乎没有上限</td>
+					<td>约 15%</td>
+					<td>曾经大量超长期甚至只还利息，2016 年后强制摊还</td>
+			</tr>
+			<tr>
+					<td>葡萄牙</td>
+					<td>居民最长可到 40–50 年</td>
+					<td>因银行而异</td>
+					<td>通常要求在 75–80 岁前还清</td>
+			</tr>
+	</tbody>
 </table>
 <p>几个值得单独说的点：</p>
 <p><strong>美国的 30 年固定利率</strong>，本质不是「贷得久」，而是「利率锁得住」。借款人用确定性换时间，银行再把贷款打包卖到资本市场。中国目前主流仍是 LPR 加点的浮动利率，拉长年限之后，利率风险还在借款人身上。</p>
@@ -2923,7 +2949,8 @@ sequenceDiagram
 </ul>
 <p>书里还有一句常被简化的话：富人买资产，穷人买负债。它容易被读成「永远别买房」。我并不这么看。对很多中国家庭，房子同时承担居住、婚姻、子女教育和安全感，完全按美国那套「先买出租物业」来生活，既不现实，也不必要。更有用的读法是：</p>
 <blockquote>
-<p>先承认自住房是负债，再决定自己愿不愿意为这份负债付钱。</p></blockquote>
+<p>先承认自住房是负债，再决定自己愿不愿意为这份负债付钱。</p>
+</blockquote>
 <p>愿意，是因为你要的是确定的居住，不是因为政策让你「上车更便宜了」。不愿意，也不需要道德化成「懂财务的人都不买房」。租房把住房成本显式化，买房把住房成本隐藏进月供和利息。两种都是在为住付钱，区别只是：钱付给房东，还是付给银行，以及 10 年、20 年后手里有没有一套还完债的房子。</p>
 <p>从财务账上看，我会给自己三条很具体的建议。</p>
 <p>第一，<strong>用 30 年的月供标准去衡量能不能买，用 40 年当备用轮胎。</strong> 过得了 30 年这关，40 年就是锦上添花；过不了 30 年、只能过 40 年，说明规模已经碰到天花板。</p>
@@ -2950,10 +2977,12 @@ sequenceDiagram
       <guid>https://lyapple2008.github.io/posts/202607/2026-07-15-%E6%9C%AC%E5%9C%B0ai%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%96%B9%E6%A1%88/</guid>
       <description>&lt;p&gt;&lt;img alt=&#34;尝试本地部署？&#34; loading=&#34;lazy&#34; src=&#34;https://lyapple2008.github.io/images/2026-07/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2.jpg&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;如果把个人可以买到的设备限制在最多 128GB 统一内存，什么开源模型最适合 AI Coding？买 Mac Studio、AMD 大内存小主机、DGX Spark 或多显卡工作站，和直接调用在线 API 相比，哪一种更快、更便宜？&lt;/p&gt;</description>
+&lt;p&gt;如果把个人可以买到的设备限制在最多 128GB 统一内存，什么开源模型最适合 AI Coding？买 Mac Studio、AMD 大内存小主机、DGX Spark 或多显卡工作站，和直接调用在线 API 相比，哪一种更快、更便宜？&lt;/p&gt;
+&lt;/blockquote&gt;</description>
       <content:encoded><![CDATA[<p><img alt="尝试本地部署？" loading="lazy" src="/images/2026-07/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2.jpg"></p>
 <blockquote>
-<p>如果把个人可以买到的设备限制在最多 128GB 统一内存，什么开源模型最适合 AI Coding？买 Mac Studio、AMD 大内存小主机、DGX Spark 或多显卡工作站，和直接调用在线 API 相比，哪一种更快、更便宜？</p></blockquote>
+<p>如果把个人可以买到的设备限制在最多 128GB 统一内存，什么开源模型最适合 AI Coding？买 Mac Studio、AMD 大内存小主机、DGX Spark 或多显卡工作站，和直接调用在线 API 相比，哪一种更快、更便宜？</p>
+</blockquote>
 <p>这篇文章只讨论 <strong>AI Coding Agent</strong>：模型需要读取代码仓库、调用终端、修改多个文件、执行测试，并根据报错继续迭代。普通聊天、知识问答和只补全下一行代码的 FIM 模型不在本文范围内。</p>
 <p>为了让比较有实际采购意义，本文增加两个约束：</p>
 <ol>
@@ -2983,65 +3012,65 @@ sequenceDiagram
 </ul>
 <p>公开 Coding 基准如下：</p>
 <table>
-  <thead>
-      <tr>
-          <th>基准</th>
-          <th style="text-align: right">成绩</th>
-          <th>主要考察内容</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>SWE-bench Verified</td>
-          <td style="text-align: right">70.6</td>
-          <td>修复真实 GitHub Issue</td>
-      </tr>
-      <tr>
-          <td>SWE-bench Pro</td>
-          <td style="text-align: right">44.3</td>
-          <td>更困难、更抗数据污染的软件工程任务</td>
-      </tr>
-      <tr>
-          <td>Terminal-Bench 2.0</td>
-          <td style="text-align: right">36.2</td>
-          <td>终端操作、工具调用和长链路 Agent 能力</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>基准</th>
+					<th style="text-align: right">成绩</th>
+					<th>主要考察内容</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>SWE-bench Verified</td>
+					<td style="text-align: right">70.6</td>
+					<td>修复真实 GitHub Issue</td>
+			</tr>
+			<tr>
+					<td>SWE-bench Pro</td>
+					<td style="text-align: right">44.3</td>
+					<td>更困难、更抗数据污染的软件工程任务</td>
+			</tr>
+			<tr>
+					<td>Terminal-Bench 2.0</td>
+					<td style="text-align: right">36.2</td>
+					<td>终端操作、工具调用和长链路 Agent 能力</td>
+			</tr>
+	</tbody>
 </table>
 <p>这些成绩会受到 Agent 框架、提示词、工具集和推理参数影响，不能理解为在任何 IDE 中都有固定成功率。不过它们至少说明，这个模型的目标不是生成几个函数，而是完成仓库级软件工程任务。</p>
 <h3 id="为什么不选择更大的模型">为什么不选择更大的模型</h3>
 <p>总参数更大的模型不一定适合本次硬件约束。例如 GLM-5.2 的最低实用量化也需要约 223GB～245GB 总内存，128GB 设备只能依赖大量 SSD 或远程卸载。它虽然能“启动”，但权重会频繁跨层级搬运，无法获得正常的 AI Coding 交互体验。</p>
 <p>Qwen3-Coder-Next 的优势正好相反：总参数 80B，但每 Token 只激活约 3B。根据 <a href="https://unsloth.ai/docs/models/qwen3-coder-next">Unsloth 的本地运行说明</a>：</p>
 <table>
-  <thead>
-      <tr>
-          <th>量化精度</th>
-          <th style="text-align: right">模型占用</th>
-          <th style="text-align: right">适合的本地内存</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>3bit</td>
-          <td style="text-align: right">低于 4bit，具体随量化格式变化</td>
-          <td style="text-align: right">48GB 紧凑部署</td>
-      </tr>
-      <tr>
-          <td>4bit</td>
-          <td style="text-align: right">约 46GB</td>
-          <td style="text-align: right">64GB～96GB</td>
-      </tr>
-      <tr>
-          <td>8bit</td>
-          <td style="text-align: right">约 85GB</td>
-          <td style="text-align: right">96GB～128GB</td>
-      </tr>
-      <tr>
-          <td>BF16</td>
-          <td style="text-align: right">约 160GB，另需运行时空间</td>
-          <td style="text-align: right">超出本文上限</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>量化精度</th>
+					<th style="text-align: right">模型占用</th>
+					<th style="text-align: right">适合的本地内存</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>3bit</td>
+					<td style="text-align: right">低于 4bit，具体随量化格式变化</td>
+					<td style="text-align: right">48GB 紧凑部署</td>
+			</tr>
+			<tr>
+					<td>4bit</td>
+					<td style="text-align: right">约 46GB</td>
+					<td style="text-align: right">64GB～96GB</td>
+			</tr>
+			<tr>
+					<td>8bit</td>
+					<td style="text-align: right">约 85GB</td>
+					<td style="text-align: right">96GB～128GB</td>
+			</tr>
+			<tr>
+					<td>BF16</td>
+					<td style="text-align: right">约 160GB，另需运行时空间</td>
+					<td style="text-align: right">超出本文上限</td>
+			</tr>
+	</tbody>
 </table>
 <p>本文默认选择 <strong>4bit</strong>。它能在 64GB 设备上运行，又比 3bit 更稳；8bit 虽然更接近原始模型，但在 96GB 设备上只剩很少空间给 KV Cache，综合体验未必更好。</p>
 <h2 id="三ai-coding-性能不能只看-tokens">三、AI Coding 性能不能只看 Token/s</h2>
@@ -3068,74 +3097,74 @@ sequenceDiagram
 <h2 id="四本地部署方案对比">四、本地部署方案对比</h2>
 <p>下面所有方案都以 Qwen3-Coder-Next 4bit、单用户 AI Coding 为基础。速度等级是综合容量、内存带宽、推理后端和是否发生卸载后的相对判断，不是厂商保证值。</p>
 <table>
-  <thead>
-      <tr>
-          <th>本地方案</th>
-          <th style="text-align: right">可用内存</th>
-          <th>模型状态</th>
-          <th>交互性能</th>
-          <th style="text-align: right">采购成本粗估</th>
-          <th>核心瓶颈</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>64GB Mac Studio</td>
-          <td style="text-align: right">64GB 统一内存</td>
-          <td>4bit 可完整装入，余量较小</td>
-          <td>中～高</td>
-          <td style="text-align: right">¥2.5万～¥3.5万</td>
-          <td>KV Cache 余量、Metal 后端、546GB/s 带宽</td>
-      </tr>
-      <tr>
-          <td>96GB Mac Studio M3 Ultra</td>
-          <td style="text-align: right">96GB 统一内存</td>
-          <td>4bit 宽裕，8bit 紧张</td>
-          <td>高</td>
-          <td style="text-align: right">¥4.5万～¥6万元</td>
-          <td>价格、无 CUDA、长上下文 Prefill</td>
-      </tr>
-      <tr>
-          <td>Ryzen AI Max+ 395 128GB</td>
-          <td style="text-align: right">128GB 统一内存</td>
-          <td>4bit/8bit 均可装入</td>
-          <td>中</td>
-          <td style="text-align: right">¥2万～¥3.5万元</td>
-          <td>LPDDR5x 带宽、ROCm/后端成熟度</td>
-      </tr>
-      <tr>
-          <td>DGX Spark / GB10 128GB</td>
-          <td style="text-align: right">128GB 一致性内存</td>
-          <td>4bit/8bit 均可装入</td>
-          <td>中</td>
-          <td style="text-align: right">¥3.5万～¥4.5万元</td>
-          <td>273GB/s 内存带宽、ARM64 兼容性</td>
-      </tr>
-      <tr>
-          <td>双 RTX 3090 工作站</td>
-          <td style="text-align: right">48GB 显存 + 系统内存</td>
-          <td>4bit 极紧，宜 3bit 或少量卸载</td>
-          <td>中～高</td>
-          <td style="text-align: right">¥1.2万～¥2万元</td>
-          <td>跨卡通信、显存余量、功耗散热</td>
-      </tr>
-      <tr>
-          <td>RTX 5090 + 128GB RAM</td>
-          <td style="text-align: right">32GB 显存 + 128GB RAM</td>
-          <td>4bit 需 CPU/GPU 混合卸载</td>
-          <td>中</td>
-          <td style="text-align: right">¥2.5万～¥3.5万元</td>
-          <td>PCIe 搬运、系统内存带宽</td>
-      </tr>
-      <tr>
-          <td>RTX PRO 6000 Blackwell</td>
-          <td style="text-align: right">96GB 显存</td>
-          <td>4bit 很宽裕，8bit 可用</td>
-          <td>很高</td>
-          <td style="text-align: right">通常超过 ¥10万元</td>
-          <td>采购价格、功耗、并发时 KV Cache</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>本地方案</th>
+					<th style="text-align: right">可用内存</th>
+					<th>模型状态</th>
+					<th>交互性能</th>
+					<th style="text-align: right">采购成本粗估</th>
+					<th>核心瓶颈</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>64GB Mac Studio</td>
+					<td style="text-align: right">64GB 统一内存</td>
+					<td>4bit 可完整装入，余量较小</td>
+					<td>中～高</td>
+					<td style="text-align: right">¥2.5万～¥3.5万</td>
+					<td>KV Cache 余量、Metal 后端、546GB/s 带宽</td>
+			</tr>
+			<tr>
+					<td>96GB Mac Studio M3 Ultra</td>
+					<td style="text-align: right">96GB 统一内存</td>
+					<td>4bit 宽裕，8bit 紧张</td>
+					<td>高</td>
+					<td style="text-align: right">¥4.5万～¥6万元</td>
+					<td>价格、无 CUDA、长上下文 Prefill</td>
+			</tr>
+			<tr>
+					<td>Ryzen AI Max+ 395 128GB</td>
+					<td style="text-align: right">128GB 统一内存</td>
+					<td>4bit/8bit 均可装入</td>
+					<td>中</td>
+					<td style="text-align: right">¥2万～¥3.5万元</td>
+					<td>LPDDR5x 带宽、ROCm/后端成熟度</td>
+			</tr>
+			<tr>
+					<td>DGX Spark / GB10 128GB</td>
+					<td style="text-align: right">128GB 一致性内存</td>
+					<td>4bit/8bit 均可装入</td>
+					<td>中</td>
+					<td style="text-align: right">¥3.5万～¥4.5万元</td>
+					<td>273GB/s 内存带宽、ARM64 兼容性</td>
+			</tr>
+			<tr>
+					<td>双 RTX 3090 工作站</td>
+					<td style="text-align: right">48GB 显存 + 系统内存</td>
+					<td>4bit 极紧，宜 3bit 或少量卸载</td>
+					<td>中～高</td>
+					<td style="text-align: right">¥1.2万～¥2万元</td>
+					<td>跨卡通信、显存余量、功耗散热</td>
+			</tr>
+			<tr>
+					<td>RTX 5090 + 128GB RAM</td>
+					<td style="text-align: right">32GB 显存 + 128GB RAM</td>
+					<td>4bit 需 CPU/GPU 混合卸载</td>
+					<td>中</td>
+					<td style="text-align: right">¥2.5万～¥3.5万元</td>
+					<td>PCIe 搬运、系统内存带宽</td>
+			</tr>
+			<tr>
+					<td>RTX PRO 6000 Blackwell</td>
+					<td style="text-align: right">96GB 显存</td>
+					<td>4bit 很宽裕，8bit 可用</td>
+					<td>很高</td>
+					<td style="text-align: right">通常超过 ¥10万元</td>
+					<td>采购价格、功耗、并发时 KV Cache</td>
+			</tr>
+	</tbody>
 </table>
 <p>Unsloth 给出的经验是：量化模型完整放入计算设备后，可期待 20+ Token/s；一旦模型不能完整装入而需要分层卸载，速度会明显下降。这个数字是模型级经验，不是对每一种硬件的实测承诺。</p>
 <h3 id="1-64gb-mac-studio能用但要控制上下文">1. 64GB Mac Studio：能用，但要控制上下文</h3>
@@ -3192,40 +3221,40 @@ sequenceDiagram
 <p>它的主要瓶颈不是技术，而是价格：单卡价格已经超过大多数个人工作站。只有在多人共享、商业服务、模型微调、专业渲染等负载能够共同分摊成本时，才可能合理。</p>
 <h2 id="五推理后端怎么选">五、推理后端怎么选</h2>
 <table>
-  <thead>
-      <tr>
-          <th>设备</th>
-          <th>推荐后端</th>
-          <th>原因</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Apple Silicon</td>
-          <td>llama.cpp、MLX-LM、Ollama、LM Studio</td>
-          <td>Metal 和统一内存支持成熟</td>
-      </tr>
-      <tr>
-          <td>Ryzen AI Max</td>
-          <td>llama.cpp、ROCm 后端</td>
-          <td>能使用统一内存，需按系统验证兼容性</td>
-      </tr>
-      <tr>
-          <td>单机 NVIDIA</td>
-          <td>llama.cpp、SGLang、vLLM</td>
-          <td>CUDA 生态完整，服务化工具丰富</td>
-      </tr>
-      <tr>
-          <td>双 3090/多 GPU</td>
-          <td>llama.cpp Tensor Split、SGLang/vLLM Tensor Parallel</td>
-          <td>需要显式拆分模型和通信</td>
-      </tr>
-      <tr>
-          <td>DGX Spark</td>
-          <td>NVIDIA 容器、SGLang、vLLM、llama.cpp</td>
-          <td>适合复用 CUDA 服务部署流程</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>设备</th>
+					<th>推荐后端</th>
+					<th>原因</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Apple Silicon</td>
+					<td>llama.cpp、MLX-LM、Ollama、LM Studio</td>
+					<td>Metal 和统一内存支持成熟</td>
+			</tr>
+			<tr>
+					<td>Ryzen AI Max</td>
+					<td>llama.cpp、ROCm 后端</td>
+					<td>能使用统一内存，需按系统验证兼容性</td>
+			</tr>
+			<tr>
+					<td>单机 NVIDIA</td>
+					<td>llama.cpp、SGLang、vLLM</td>
+					<td>CUDA 生态完整，服务化工具丰富</td>
+			</tr>
+			<tr>
+					<td>双 3090/多 GPU</td>
+					<td>llama.cpp Tensor Split、SGLang/vLLM Tensor Parallel</td>
+					<td>需要显式拆分模型和通信</td>
+			</tr>
+			<tr>
+					<td>DGX Spark</td>
+					<td>NVIDIA 容器、SGLang、vLLM、llama.cpp</td>
+					<td>适合复用 CUDA 服务部署流程</td>
+			</tr>
+	</tbody>
 </table>
 <p>个人桌面部署建议先使用 llama.cpp 或封装它的 Ollama/LM Studio。它们对 GGUF 量化和 CPU/GPU 混合卸载支持最好。团队共享、需要并发时，再考虑 SGLang 或 vLLM。</p>
 <p>无论使用哪一个后端，都应向 Coding 客户端暴露 OpenAI 兼容接口。这样可以把模型接入 OpenCode、Cline、Continue、Aider、Codex 或其他 Agent，而不必把工作流锁定在单一推理程序中。</p>
@@ -3233,30 +3262,30 @@ sequenceDiagram
 <p><a href="https://www.qwencloud.com/models/qwen3-coder-next">Qwen Cloud 的 Qwen3-Coder-Next 页面</a>提供 OpenAI 兼容 API、函数调用、结构化输出和上下文缓存。官方公布的上下文上限约 262K，最大输入约 204.8K，最大输出约 65.5K。</p>
 <p>API 按单次请求的输入长度分档计价：</p>
 <table>
-  <thead>
-      <tr>
-          <th>单次请求输入长度</th>
-          <th style="text-align: right">输入价格</th>
-          <th style="text-align: right">输出价格</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>不超过 32K</td>
-          <td style="text-align: right">$0.3 / 百万 Token</td>
-          <td style="text-align: right">$1.5 / 百万 Token</td>
-      </tr>
-      <tr>
-          <td>32K～128K</td>
-          <td style="text-align: right">$0.5 / 百万 Token</td>
-          <td style="text-align: right">$2.5 / 百万 Token</td>
-      </tr>
-      <tr>
-          <td>128K～256K</td>
-          <td style="text-align: right">$0.8 / 百万 Token</td>
-          <td style="text-align: right">$4 / 百万 Token</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>单次请求输入长度</th>
+					<th style="text-align: right">输入价格</th>
+					<th style="text-align: right">输出价格</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>不超过 32K</td>
+					<td style="text-align: right">$0.3 / 百万 Token</td>
+					<td style="text-align: right">$1.5 / 百万 Token</td>
+			</tr>
+			<tr>
+					<td>32K～128K</td>
+					<td style="text-align: right">$0.5 / 百万 Token</td>
+					<td style="text-align: right">$2.5 / 百万 Token</td>
+			</tr>
+			<tr>
+					<td>128K～256K</td>
+					<td style="text-align: right">$0.8 / 百万 Token</td>
+					<td style="text-align: right">$4 / 百万 Token</td>
+			</tr>
+	</tbody>
 </table>
 <p>在线 API 的优势：</p>
 <ul>
@@ -3277,122 +3306,122 @@ sequenceDiagram
 <h2 id="七api-月度成本">七、API 月度成本</h2>
 <p>为了避免只看“每百万 Token”却不知道一个月花多少，下面设置三种个人 AI Coding 用量：</p>
 <table>
-  <thead>
-      <tr>
-          <th>使用强度</th>
-          <th style="text-align: right">月输入</th>
-          <th style="text-align: right">月输出</th>
-          <th>典型场景</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>轻度</td>
-          <td style="text-align: right">10M</td>
-          <td style="text-align: right">2M</td>
-          <td>偶尔修 Bug、解释代码</td>
-      </tr>
-      <tr>
-          <td>中度</td>
-          <td style="text-align: right">30M</td>
-          <td style="text-align: right">6M</td>
-          <td>每个工作日使用 Agent</td>
-      </tr>
-      <tr>
-          <td>重度</td>
-          <td style="text-align: right">50M</td>
-          <td style="text-align: right">10M</td>
-          <td>多项目、高频仓库级任务</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>使用强度</th>
+					<th style="text-align: right">月输入</th>
+					<th style="text-align: right">月输出</th>
+					<th>典型场景</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>轻度</td>
+					<td style="text-align: right">10M</td>
+					<td style="text-align: right">2M</td>
+					<td>偶尔修 Bug、解释代码</td>
+			</tr>
+			<tr>
+					<td>中度</td>
+					<td style="text-align: right">30M</td>
+					<td style="text-align: right">6M</td>
+					<td>每个工作日使用 Agent</td>
+			</tr>
+			<tr>
+					<td>重度</td>
+					<td style="text-align: right">50M</td>
+					<td style="text-align: right">10M</td>
+					<td>多项目、高频仓库级任务</td>
+			</tr>
+	</tbody>
 </table>
 <p>按 1 美元约 7.2 元人民币计算，暂不计上下文缓存可能带来的进一步优惠：</p>
 <table>
-  <thead>
-      <tr>
-          <th>使用强度</th>
-          <th style="text-align: right">请求通常 ≤32K</th>
-          <th style="text-align: right">请求通常为 32K～128K</th>
-          <th style="text-align: right">请求通常为 128K～256K</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>轻度</td>
-          <td style="text-align: right">$6 / 约 ¥43</td>
-          <td style="text-align: right">$10 / 约 ¥72</td>
-          <td style="text-align: right">$16 / 约 ¥115</td>
-      </tr>
-      <tr>
-          <td>中度</td>
-          <td style="text-align: right">$18 / 约 ¥130</td>
-          <td style="text-align: right">$30 / 约 ¥216</td>
-          <td style="text-align: right">$48 / 约 ¥346</td>
-      </tr>
-      <tr>
-          <td>重度</td>
-          <td style="text-align: right">$30 / 约 ¥216</td>
-          <td style="text-align: right">$50 / 约 ¥360</td>
-          <td style="text-align: right">$80 / 约 ¥576</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>使用强度</th>
+					<th style="text-align: right">请求通常 ≤32K</th>
+					<th style="text-align: right">请求通常为 32K～128K</th>
+					<th style="text-align: right">请求通常为 128K～256K</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>轻度</td>
+					<td style="text-align: right">$6 / 约 ¥43</td>
+					<td style="text-align: right">$10 / 约 ¥72</td>
+					<td style="text-align: right">$16 / 约 ¥115</td>
+			</tr>
+			<tr>
+					<td>中度</td>
+					<td style="text-align: right">$18 / 约 ¥130</td>
+					<td style="text-align: right">$30 / 约 ¥216</td>
+					<td style="text-align: right">$48 / 约 ¥346</td>
+			</tr>
+			<tr>
+					<td>重度</td>
+					<td style="text-align: right">$30 / 约 ¥216</td>
+					<td style="text-align: right">$50 / 约 ¥360</td>
+					<td style="text-align: right">$80 / 约 ¥576</td>
+			</tr>
+	</tbody>
 </table>
 <p>这里的上下文档位是单次请求长度，不是月度 Token 总量。一个设计合理的 Coding Agent 会通过代码搜索、摘要和缓存尽量让请求留在 32K 内；如果每轮都把整个仓库重复发送到 128K 以上，不仅费用增加，首 Token 延迟也会变长。</p>
 <h2 id="八本地硬件的真实月成本">八、本地硬件的真实月成本</h2>
 <p>“本地 Token 免费”并不等于运行成本为零。把设备按 3 年折旧，并粗略加入每月 100 小时推理的电费，可以得到下面的数量级：</p>
 <table>
-  <thead>
-      <tr>
-          <th>设备</th>
-          <th style="text-align: right">一次性投入粗估</th>
-          <th style="text-align: right">三年折旧 + 电费/月</th>
-          <th>相对 API 的成本结论</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>已有 64GB/48GB 设备</td>
-          <td style="text-align: right">新增投入接近 0</td>
-          <td style="text-align: right">约 ¥20～¥200</td>
-          <td>最划算，适合直接尝试</td>
-      </tr>
-      <tr>
-          <td>二手双 RTX 3090</td>
-          <td style="text-align: right">¥1.2万～¥2万元</td>
-          <td style="text-align: right">约 ¥450～¥850</td>
-          <td>通常高于同名 API</td>
-      </tr>
-      <tr>
-          <td>Ryzen AI Max 128GB</td>
-          <td style="text-align: right">¥2万～¥3.5万元</td>
-          <td style="text-align: right">约 ¥580～¥1050</td>
-          <td>很难仅靠 Token 费回本</td>
-      </tr>
-      <tr>
-          <td>64GB Mac Studio</td>
-          <td style="text-align: right">¥2.5万～¥3.5万元</td>
-          <td style="text-align: right">约 ¥720～¥1050</td>
-          <td>购买理由应是隐私和日常生产力</td>
-      </tr>
-      <tr>
-          <td>DGX Spark 128GB</td>
-          <td style="text-align: right">¥3.5万～¥4.5万元</td>
-          <td style="text-align: right">约 ¥1000～¥1350</td>
-          <td>更适合 CUDA 研发和部署验证</td>
-      </tr>
-      <tr>
-          <td>96GB Mac Studio</td>
-          <td style="text-align: right">¥4.5万～¥6万元</td>
-          <td style="text-align: right">约 ¥1280～¥1750</td>
-          <td>单用户纯推理经济性较低</td>
-      </tr>
-      <tr>
-          <td>RTX PRO 6000 工作站</td>
-          <td style="text-align: right">通常超过 ¥10万元</td>
-          <td style="text-align: right">通常超过 ¥2900</td>
-          <td>需要团队或商业负载分摊</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>设备</th>
+					<th style="text-align: right">一次性投入粗估</th>
+					<th style="text-align: right">三年折旧 + 电费/月</th>
+					<th>相对 API 的成本结论</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>已有 64GB/48GB 设备</td>
+					<td style="text-align: right">新增投入接近 0</td>
+					<td style="text-align: right">约 ¥20～¥200</td>
+					<td>最划算，适合直接尝试</td>
+			</tr>
+			<tr>
+					<td>二手双 RTX 3090</td>
+					<td style="text-align: right">¥1.2万～¥2万元</td>
+					<td style="text-align: right">约 ¥450～¥850</td>
+					<td>通常高于同名 API</td>
+			</tr>
+			<tr>
+					<td>Ryzen AI Max 128GB</td>
+					<td style="text-align: right">¥2万～¥3.5万元</td>
+					<td style="text-align: right">约 ¥580～¥1050</td>
+					<td>很难仅靠 Token 费回本</td>
+			</tr>
+			<tr>
+					<td>64GB Mac Studio</td>
+					<td style="text-align: right">¥2.5万～¥3.5万元</td>
+					<td style="text-align: right">约 ¥720～¥1050</td>
+					<td>购买理由应是隐私和日常生产力</td>
+			</tr>
+			<tr>
+					<td>DGX Spark 128GB</td>
+					<td style="text-align: right">¥3.5万～¥4.5万元</td>
+					<td style="text-align: right">约 ¥1000～¥1350</td>
+					<td>更适合 CUDA 研发和部署验证</td>
+			</tr>
+			<tr>
+					<td>96GB Mac Studio</td>
+					<td style="text-align: right">¥4.5万～¥6万元</td>
+					<td style="text-align: right">约 ¥1280～¥1750</td>
+					<td>单用户纯推理经济性较低</td>
+			</tr>
+			<tr>
+					<td>RTX PRO 6000 工作站</td>
+					<td style="text-align: right">通常超过 ¥10万元</td>
+					<td style="text-align: right">通常超过 ¥2900</td>
+					<td>需要团队或商业负载分摊</td>
+			</tr>
+	</tbody>
 </table>
 <p>假设重度使用的 API 费用为 ¥216～¥576/月：</p>
 <ul>
@@ -3403,133 +3432,133 @@ sequenceDiagram
 <p>这还没有计算 SSD、设备残值、维护时间、硬件故障和本地 4bit 量化的能力损失。只为了省 API 费购买新机器，经济上基本不成立。</p>
 <h2 id="九性能瓶颈总表">九、性能瓶颈总表</h2>
 <table>
-  <thead>
-      <tr>
-          <th>方案</th>
-          <th>首 Token</th>
-          <th>生成速度</th>
-          <th>长上下文</th>
-          <th>任务质量</th>
-          <th>最主要瓶颈</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>64GB Mac</td>
-          <td>本地短上下文快</td>
-          <td>可交互</td>
-          <td>受内存余量限制</td>
-          <td>4bit，接近但不等于原版</td>
-          <td>KV Cache 和 Swap</td>
-      </tr>
-      <tr>
-          <td>96GB M3 Ultra</td>
-          <td>较快</td>
-          <td>本地方案中较好</td>
-          <td>4bit 下较宽裕</td>
-          <td>4bit</td>
-          <td>Metal 生态、Prefill</td>
-      </tr>
-      <tr>
-          <td>Ryzen 128GB</td>
-          <td>较快</td>
-          <td>中等</td>
-          <td>容量宽裕</td>
-          <td>可选 4bit/8bit</td>
-          <td>内存带宽和软件优化</td>
-      </tr>
-      <tr>
-          <td>DGX Spark 128GB</td>
-          <td>较快</td>
-          <td>中等</td>
-          <td>容量宽裕</td>
-          <td>可选 4bit/8bit</td>
-          <td>273GB/s 带宽、ARM64</td>
-      </tr>
-      <tr>
-          <td>双 RTX 3090</td>
-          <td>较快</td>
-          <td>中～高</td>
-          <td>显存余量很小</td>
-          <td>3bit/4bit</td>
-          <td>跨卡通信和容量</td>
-      </tr>
-      <tr>
-          <td>5090 + CPU 卸载</td>
-          <td>较快</td>
-          <td>随卸载比例下降</td>
-          <td>使用 RAM 可扩展</td>
-          <td>4bit</td>
-          <td>PCIe 和 DDR 带宽</td>
-      </tr>
-      <tr>
-          <td>RTX PRO 6000</td>
-          <td>快</td>
-          <td>很高</td>
-          <td>4bit 下宽裕</td>
-          <td>4bit/8bit</td>
-          <td>价格和并发 KV Cache</td>
-      </tr>
-      <tr>
-          <td>Qwen Cloud API</td>
-          <td>受网络和排队影响</td>
-          <td>服务端通常稳定</td>
-          <td>无本机容量压力</td>
-          <td>精度与版本由服务商管理</td>
-          <td>网络、限流、隐私、长上下文价格</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>方案</th>
+					<th>首 Token</th>
+					<th>生成速度</th>
+					<th>长上下文</th>
+					<th>任务质量</th>
+					<th>最主要瓶颈</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>64GB Mac</td>
+					<td>本地短上下文快</td>
+					<td>可交互</td>
+					<td>受内存余量限制</td>
+					<td>4bit，接近但不等于原版</td>
+					<td>KV Cache 和 Swap</td>
+			</tr>
+			<tr>
+					<td>96GB M3 Ultra</td>
+					<td>较快</td>
+					<td>本地方案中较好</td>
+					<td>4bit 下较宽裕</td>
+					<td>4bit</td>
+					<td>Metal 生态、Prefill</td>
+			</tr>
+			<tr>
+					<td>Ryzen 128GB</td>
+					<td>较快</td>
+					<td>中等</td>
+					<td>容量宽裕</td>
+					<td>可选 4bit/8bit</td>
+					<td>内存带宽和软件优化</td>
+			</tr>
+			<tr>
+					<td>DGX Spark 128GB</td>
+					<td>较快</td>
+					<td>中等</td>
+					<td>容量宽裕</td>
+					<td>可选 4bit/8bit</td>
+					<td>273GB/s 带宽、ARM64</td>
+			</tr>
+			<tr>
+					<td>双 RTX 3090</td>
+					<td>较快</td>
+					<td>中～高</td>
+					<td>显存余量很小</td>
+					<td>3bit/4bit</td>
+					<td>跨卡通信和容量</td>
+			</tr>
+			<tr>
+					<td>5090 + CPU 卸载</td>
+					<td>较快</td>
+					<td>随卸载比例下降</td>
+					<td>使用 RAM 可扩展</td>
+					<td>4bit</td>
+					<td>PCIe 和 DDR 带宽</td>
+			</tr>
+			<tr>
+					<td>RTX PRO 6000</td>
+					<td>快</td>
+					<td>很高</td>
+					<td>4bit 下宽裕</td>
+					<td>4bit/8bit</td>
+					<td>价格和并发 KV Cache</td>
+			</tr>
+			<tr>
+					<td>Qwen Cloud API</td>
+					<td>受网络和排队影响</td>
+					<td>服务端通常稳定</td>
+					<td>无本机容量压力</td>
+					<td>精度与版本由服务商管理</td>
+					<td>网络、限流、隐私、长上下文价格</td>
+			</tr>
+	</tbody>
 </table>
 <h2 id="十不同用户应该怎么选">十、不同用户应该怎么选</h2>
 <table>
-  <thead>
-      <tr>
-          <th>用户情况</th>
-          <th>推荐方案</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>没有现成大内存硬件</td>
-          <td>直接使用 Qwen3-Coder-Next API</td>
-      </tr>
-      <tr>
-          <td>已有 64GB Apple Silicon</td>
-          <td>本地 4bit，默认 16K～32K 上下文</td>
-      </tr>
-      <tr>
-          <td>想买安静、省电、维护简单的主机</td>
-          <td>64GB/96GB Mac Studio</td>
-      </tr>
-      <tr>
-          <td>需要 128GB，偏好 Linux/Windows</td>
-          <td>Ryzen AI Max+ 395 主机</td>
-      </tr>
-      <tr>
-          <td>需要 128GB 和 CUDA 软件栈</td>
-          <td>DGX Spark/GB10</td>
-      </tr>
-      <tr>
-          <td>预算有限、能维护 Linux 和多显卡</td>
-          <td>二手双 RTX 3090，优先 3bit 或混合卸载</td>
-      </tr>
-      <tr>
-          <td>已有 RTX 5090</td>
-          <td>增加系统内存，用 llama.cpp 混合卸载，不必立刻换设备</td>
-      </tr>
-      <tr>
-          <td>小团队需要高并发</td>
-          <td>96GB 专业显卡或云 GPU 服务</td>
-      </tr>
-      <tr>
-          <td>代码绝对不能离开内网</td>
-          <td>本地 4bit；性能成本让位于隐私要求</td>
-      </tr>
-      <tr>
-          <td>个人追求综合性价比</td>
-          <td>本地处理敏感和高频任务，困难任务调用 API</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>用户情况</th>
+					<th>推荐方案</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>没有现成大内存硬件</td>
+					<td>直接使用 Qwen3-Coder-Next API</td>
+			</tr>
+			<tr>
+					<td>已有 64GB Apple Silicon</td>
+					<td>本地 4bit，默认 16K～32K 上下文</td>
+			</tr>
+			<tr>
+					<td>想买安静、省电、维护简单的主机</td>
+					<td>64GB/96GB Mac Studio</td>
+			</tr>
+			<tr>
+					<td>需要 128GB，偏好 Linux/Windows</td>
+					<td>Ryzen AI Max+ 395 主机</td>
+			</tr>
+			<tr>
+					<td>需要 128GB 和 CUDA 软件栈</td>
+					<td>DGX Spark/GB10</td>
+			</tr>
+			<tr>
+					<td>预算有限、能维护 Linux 和多显卡</td>
+					<td>二手双 RTX 3090，优先 3bit 或混合卸载</td>
+			</tr>
+			<tr>
+					<td>已有 RTX 5090</td>
+					<td>增加系统内存，用 llama.cpp 混合卸载，不必立刻换设备</td>
+			</tr>
+			<tr>
+					<td>小团队需要高并发</td>
+					<td>96GB 专业显卡或云 GPU 服务</td>
+			</tr>
+			<tr>
+					<td>代码绝对不能离开内网</td>
+					<td>本地 4bit；性能成本让位于隐私要求</td>
+			</tr>
+			<tr>
+					<td>个人追求综合性价比</td>
+					<td>本地处理敏感和高频任务，困难任务调用 API</td>
+			</tr>
+	</tbody>
 </table>
 <h2 id="十一我的推荐配置">十一、我的推荐配置</h2>
 <p>如果从零购买，我不会为了省 Token 费组建多卡服务器，而会在下面三种方案中选择：</p>
@@ -3550,7 +3579,8 @@ sequenceDiagram
 <p>而 API 的瓶颈不是本地内存，而是网络延迟、限流、隐私和长上下文价格。以目前同名模型的价格看，个人新购硬件几乎不可能单靠节省 Token 费用回本。</p>
 <p>所以最终建议仍然是：</p>
 <blockquote>
-<p><strong>没有现成硬件就先用 API；已有 64GB 以上设备就部署本地 4bit；有隐私或离线刚需再购买 96GB～128GB 设备。不要为了“本地免费”忽略折旧、速度和任务成功率。</strong></p></blockquote>
+<p><strong>没有现成硬件就先用 API；已有 64GB 以上设备就部署本地 4bit；有隐私或离线刚需再购买 96GB～128GB 设备。不要为了“本地免费”忽略折旧、速度和任务成功率。</strong></p>
+</blockquote>
 <h2 id="参考资料">参考资料</h2>
 <ul>
 <li><a href="https://huggingface.co/Qwen/Qwen3-Coder-Next">Qwen3-Coder-Next 官方模型卡</a></li>

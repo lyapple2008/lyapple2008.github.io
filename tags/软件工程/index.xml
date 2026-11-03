@@ -9,8 +9,8 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.147.9</generator>
-    <language>zh</language>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Thu, 17 Sep 2026 16:55:34 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
@@ -22,7 +22,8 @@
       <description>当代码生成越来越便宜，工程师真正稀缺的能力是什么？这篇文章整理了我和 ChatGPT 关于职业前景的一次长谈，以及一条从 AI Coding、Spec 到 Agent Engineering 的个人进阶路线。</description>
       <content:encoded><![CDATA[<p>AI Coding 已经进入软件开发的完整流程：读代码、写代码、补测试、查问题、改文档，甚至可以自己运行命令，再根据结果继续迭代。它带来的不只是效率提升，也有一个越来越难回避的问题：</p>
 <blockquote>
-<p>当 AI 可以完成越来越多开发工作，以后还需要软件工程师吗？如果需要，工程师真正值钱的能力又是什么？</p></blockquote>
+<p>当 AI 可以完成越来越多开发工作，以后还需要软件工程师吗？如果需要，工程师真正值钱的能力又是什么？</p>
+</blockquote>
 <p>最近我把这个问题抛给了 ChatGPT，又结合自己的情况继续追问：一个已经做了多年 C/C++、音视频和移动端开发的工程师，应该继续深挖原来的技术栈，还是转向 AI Agent？如果要转，具体该学什么？</p>
 <p>讨论很长，下面不是聊天记录的原样搬运，而是我重新整理后的结论和行动路线。</p>
 <p>先说答案：<strong>软件工程师仍然需要，但“会写代码”不再足以定义一个软件工程师。</strong></p>
@@ -193,30 +194,30 @@
 <p>操作系统、编译器、数据库、音视频、网络、安全、机器人、嵌入式、高性能计算和大型分布式系统，则不会因为代码生成变快就突然变简单。它们面对的是现实世界的复杂约束，需要长期的工程取舍、跨模块理解和故障处理。</p>
 <p>未来的软件工程师可能形成三种分化：</p>
 <table>
-  <thead>
-      <tr>
-          <th>类型</th>
-          <th>能力结构</th>
-          <th>处境</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>纯代码生产者</td>
-          <td>按明确需求实现功能</td>
-          <td>工作最容易被压缩</td>
-      </tr>
-      <tr>
-          <td>AI 增强型开发者</td>
-          <td>Coding + AI 工具</td>
-          <td>产出明显提高</td>
-      </tr>
-      <tr>
-          <td>AI 增强型领域工程师</td>
-          <td>领域知识 + 系统设计 + Coding + Agent + 验证</td>
-          <td>能解决复杂问题，杠杆最高</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>类型</th>
+					<th>能力结构</th>
+					<th>处境</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>纯代码生产者</td>
+					<td>按明确需求实现功能</td>
+					<td>工作最容易被压缩</td>
+			</tr>
+			<tr>
+					<td>AI 增强型开发者</td>
+					<td>Coding + AI 工具</td>
+					<td>产出明显提高</td>
+			</tr>
+			<tr>
+					<td>AI 增强型领域工程师</td>
+					<td>领域知识 + 系统设计 + Coding + Agent + 验证</td>
+					<td>能解决复杂问题，杠杆最高</td>
+			</tr>
+	</tbody>
 </table>
 <p>我想走的是第三条路。目标不是和 AI 比谁敲代码快，而是把自己的领域经验、工程判断和 AI 的执行能力组合起来，完成过去需要更多人协作才能完成的系统。</p>
 <p>这个结论也延续了我之前对 AI Coding 的看法。我曾在<a href="/posts/202601/2026-02-01-%E5%85%B3%E4%BA%8Eaicoding%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3%E5%92%8C%E5%90%8E%E7%BB%AD%E7%9A%84%E8%A7%84%E5%88%92/">《关于 AI Coding 的一些感想和后续规划》</a>里写过，AI 的能力边界很大程度受使用者影响，生产代码的责任仍在人身上。现在再往前一步看，真正的变化不只是“用 AI 写得更快”，而是要围绕 AI 重新设计整套软件工程流程。</p>
@@ -419,50 +420,50 @@
 <h2 id="六时间如何分配">六、时间如何分配</h2>
 <p>如果每周可以投入 8～10 小时，我准备按下面的比例推进：</p>
 <table>
-  <thead>
-      <tr>
-          <th>阶段</th>
-          <th style="text-align: right">参考时间</th>
-          <th>主要产出</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>工程闭环补强</td>
-          <td style="text-align: right">2～4 周</td>
-          <td>测试、性能与架构检查清单</td>
-      </tr>
-      <tr>
-          <td>AI Coding 工作流</td>
-          <td style="text-align: right">3～6 周</td>
-          <td>Explore 到 Review 的稳定流程</td>
-      </tr>
-      <tr>
-          <td>Specification / SDD</td>
-          <td style="text-align: right">3～6 周</td>
-          <td>可执行、可验收的项目 Spec</td>
-      </tr>
-      <tr>
-          <td>Agent 原理</td>
-          <td style="text-align: right">4～6 周</td>
-          <td>Mini Agent</td>
-      </tr>
-      <tr>
-          <td>MCP / Tool</td>
-          <td style="text-align: right">3～4 周</td>
-          <td>带权限边界的工具集成</td>
-      </tr>
-      <tr>
-          <td>Runtime 研究</td>
-          <td style="text-align: right">4～8 周</td>
-          <td>对一个真实 Agent 的源码分析</td>
-      </tr>
-      <tr>
-          <td>AI-Native Engineering</td>
-          <td style="text-align: right">持续</td>
-          <td>完整项目与复盘</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>阶段</th>
+					<th style="text-align: right">参考时间</th>
+					<th>主要产出</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>工程闭环补强</td>
+					<td style="text-align: right">2～4 周</td>
+					<td>测试、性能与架构检查清单</td>
+			</tr>
+			<tr>
+					<td>AI Coding 工作流</td>
+					<td style="text-align: right">3～6 周</td>
+					<td>Explore 到 Review 的稳定流程</td>
+			</tr>
+			<tr>
+					<td>Specification / SDD</td>
+					<td style="text-align: right">3～6 周</td>
+					<td>可执行、可验收的项目 Spec</td>
+			</tr>
+			<tr>
+					<td>Agent 原理</td>
+					<td style="text-align: right">4～6 周</td>
+					<td>Mini Agent</td>
+			</tr>
+			<tr>
+					<td>MCP / Tool</td>
+					<td style="text-align: right">3～4 周</td>
+					<td>带权限边界的工具集成</td>
+			</tr>
+			<tr>
+					<td>Runtime 研究</td>
+					<td style="text-align: right">4～8 周</td>
+					<td>对一个真实 Agent 的源码分析</td>
+			</tr>
+			<tr>
+					<td>AI-Native Engineering</td>
+					<td style="text-align: right">持续</td>
+					<td>完整项目与复盘</td>
+			</tr>
+	</tbody>
 </table>
 <p>时间不是硬指标。判断一个阶段是否完成的标准，不是“资料看完了”，而是能否拿出可以运行、可以验证、可以复盘的产物。</p>
 <h2 id="七参考资料">七、参考资料</h2>
@@ -478,7 +479,8 @@
 <h2 id="八最后不要成为工具收藏家">八、最后：不要成为工具收藏家</h2>
 <p>这次讨论最终给我的提醒，不是赶紧转行，也不是赶紧再学一个热门框架，而是重新确认自己的能力组合：</p>
 <blockquote>
-<p>未来优秀的软件工程师，应该能定义问题、设计系统、驾驭 Agent、验证结果，并对最终交付负责。</p></blockquote>
+<p>未来优秀的软件工程师，应该能定义问题、设计系统、驾驭 Agent、验证结果，并对最终交付负责。</p>
+</blockquote>
 <p>因此，不应该按照“先学 TypeScript，再学 Agent，再学 MCP，再学某个框架”的课程目录前进。更有效的方式，是始终围绕一个真实项目：项目需要什么，就补什么；做出结果，再复盘哪些判断可以沉淀成 Spec、测试、工具或工作流。</p>
 <p>代码正在变便宜，但正确的软件并没有因此自动出现。会写代码仍然重要，只是它不再是终点。接下来真正值得投入的，是把领域经验、系统工程和 AI 组织成一套能持续交付的能力。</p>
 ]]></content:encoded>

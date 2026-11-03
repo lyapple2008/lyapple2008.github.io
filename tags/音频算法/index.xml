@@ -9,8 +9,8 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.147.9</generator>
-    <language>zh</language>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Sat, 04 Jul 2026 10:23:20 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
@@ -20,9 +20,11 @@
       <pubDate>Sat, 04 Jul 2026 10:23:20 +0800</pubDate>
       <guid>https://lyapple2008.github.io/posts/202607/mel_spectrogram/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;Mel Spectrogram 是语音识别、音频分类、音乐信息检索里非常常见的输入特征。它做的事情可以简单理解为：把一段一维波形，变成一张“符合人耳听觉习惯”的时间-频率能量图。&lt;/p&gt;</description>
+&lt;p&gt;Mel Spectrogram 是语音识别、音频分类、音乐信息检索里非常常见的输入特征。它做的事情可以简单理解为：把一段一维波形，变成一张“符合人耳听觉习惯”的时间-频率能量图。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
       <content:encoded><![CDATA[<blockquote>
-<p>Mel Spectrogram 是语音识别、音频分类、音乐信息检索里非常常见的输入特征。它做的事情可以简单理解为：把一段一维波形，变成一张“符合人耳听觉习惯”的时间-频率能量图。</p></blockquote>
+<p>Mel Spectrogram 是语音识别、音频分类、音乐信息检索里非常常见的输入特征。它做的事情可以简单理解为：把一段一维波形，变成一张“符合人耳听觉习惯”的时间-频率能量图。</p>
+</blockquote>
 <hr>
 <h2 id="1-从一段声音开始">1. 从一段声音开始</h2>
 <p>计算机拿到的音频通常是一串采样点：</p>
@@ -65,34 +67,34 @@ X(m, k) = \sum_{n=0}^{N-1} x[n + mH] \cdot w[n] \cdot e^{-j2\pi kn/N}
 $$</p>
 <p>其中：</p>
 <table>
-  <thead>
-      <tr>
-          <th>符号</th>
-          <th>含义</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>$N$</td>
-          <td>FFT 点数，也通常是窗口大小附近的值</td>
-      </tr>
-      <tr>
-          <td>$H$</td>
-          <td>帧移，决定相邻帧间隔</td>
-      </tr>
-      <tr>
-          <td>$m$</td>
-          <td>第几帧，也就是时间维索引</td>
-      </tr>
-      <tr>
-          <td>$k$</td>
-          <td>第几个频率 bin</td>
-      </tr>
-      <tr>
-          <td>$w[n]$</td>
-          <td>窗函数，常用 Hann window</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>符号</th>
+					<th>含义</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>$N$</td>
+					<td>FFT 点数，也通常是窗口大小附近的值</td>
+			</tr>
+			<tr>
+					<td>$H$</td>
+					<td>帧移，决定相邻帧间隔</td>
+			</tr>
+			<tr>
+					<td>$m$</td>
+					<td>第几帧，也就是时间维索引</td>
+			</tr>
+			<tr>
+					<td>$k$</td>
+					<td>第几个频率 bin</td>
+			</tr>
+			<tr>
+					<td>$w[n]$</td>
+					<td>窗函数，常用 Hann window</td>
+			</tr>
+	</tbody>
 </table>
 <p>FFT 输出的是复数，实际做特征时通常取幅度谱或功率谱：</p>
 <p>$$
@@ -243,50 +245,50 @@ $$</p>
 <h2 id="7-常见参数怎么选">7. 常见参数怎么选？</h2>
 <p>语音任务里最常见的配置：</p>
 <table>
-  <thead>
-      <tr>
-          <th>参数</th>
-          <th>常见值</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>sample_rate</td>
-          <td>16000</td>
-          <td>ASR 常用 16kHz</td>
-      </tr>
-      <tr>
-          <td>win_length</td>
-          <td>400</td>
-          <td>25ms，$16000 \times 0.025 = 400$</td>
-      </tr>
-      <tr>
-          <td>hop_length</td>
-          <td>160</td>
-          <td>10ms，$16000 \times 0.01 = 160$</td>
-      </tr>
-      <tr>
-          <td>n_fft</td>
-          <td>512</td>
-          <td>FFT 点数，通常不小于 win_length</td>
-      </tr>
-      <tr>
-          <td>n_mels</td>
-          <td>80</td>
-          <td>Whisper、Paraformer 等常见取值</td>
-      </tr>
-      <tr>
-          <td>f_min</td>
-          <td>0</td>
-          <td>最低频率</td>
-      </tr>
-      <tr>
-          <td>f_max</td>
-          <td>8000</td>
-          <td>16kHz 采样时 Nyquist 频率</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>参数</th>
+					<th>常见值</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>sample_rate</td>
+					<td>16000</td>
+					<td>ASR 常用 16kHz</td>
+			</tr>
+			<tr>
+					<td>win_length</td>
+					<td>400</td>
+					<td>25ms，$16000 \times 0.025 = 400$</td>
+			</tr>
+			<tr>
+					<td>hop_length</td>
+					<td>160</td>
+					<td>10ms，$16000 \times 0.01 = 160$</td>
+			</tr>
+			<tr>
+					<td>n_fft</td>
+					<td>512</td>
+					<td>FFT 点数，通常不小于 win_length</td>
+			</tr>
+			<tr>
+					<td>n_mels</td>
+					<td>80</td>
+					<td>Whisper、Paraformer 等常见取值</td>
+			</tr>
+			<tr>
+					<td>f_min</td>
+					<td>0</td>
+					<td>最低频率</td>
+			</tr>
+			<tr>
+					<td>f_max</td>
+					<td>8000</td>
+					<td>16kHz 采样时 Nyquist 频率</td>
+			</tr>
+	</tbody>
 </table>
 <p>帧长和帧移的意义：</p>
 <div class="highlight"><div class="chroma">
@@ -423,30 +425,30 @@ $$</p>
     F --&gt; G[文本]</div>
 <p>不同系统叫法可能略有差异：</p>
 <table>
-  <thead>
-      <tr>
-          <th>名称</th>
-          <th>常见含义</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Mel Spectrogram</td>
-          <td>Mel 频带能量图，通常可能还没取 log</td>
-      </tr>
-      <tr>
-          <td>Log-Mel</td>
-          <td>取 log 或 dB 后的 Mel 特征</td>
-      </tr>
-      <tr>
-          <td>FBank</td>
-          <td>Filter Bank 特征，在 ASR 中通常就是 Log-Mel filterbank</td>
-      </tr>
-      <tr>
-          <td>MFCC</td>
-          <td>在 Log-Mel 后再做 DCT 得到的倒谱特征</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>名称</th>
+					<th>常见含义</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Mel Spectrogram</td>
+					<td>Mel 频带能量图，通常可能还没取 log</td>
+			</tr>
+			<tr>
+					<td>Log-Mel</td>
+					<td>取 log 或 dB 后的 Mel 特征</td>
+			</tr>
+			<tr>
+					<td>FBank</td>
+					<td>Filter Bank 特征，在 ASR 中通常就是 Log-Mel filterbank</td>
+			</tr>
+			<tr>
+					<td>MFCC</td>
+					<td>在 Log-Mel 后再做 DCT 得到的倒谱特征</td>
+			</tr>
+	</tbody>
 </table>
 <p>现代深度学习 ASR 更常用 Log-Mel / FBank，而不是 MFCC。因为神经网络可以自己学习频带之间的组合关系，不一定需要 DCT 做进一步压缩。</p>
 <hr>
@@ -541,7 +543,11 @@ $$</p>
 &lt;hr&gt;
 &lt;h3 id=&#34;11-采样操作的本质频谱复制&#34;&gt;1.1 采样操作的本质：频谱复制&lt;/h3&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;核心结论 — Whittaker-Shannon 插值公式：&lt;/strong&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;strong&gt;核心结论 — Whittaker-Shannon 插值公式：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;$$x_c(t) = \sum_{n=-\infty}^{\infty} x[n] \cdot \text{sinc}\left(\frac{t - nT}{T}\right)$$&lt;/p&gt;
+&lt;p&gt;其中 $\text{sinc}(u) = \frac{\sin(\pi u)}{\pi u}$。
+&lt;strong&gt;这意味着：任意时刻的连续值 = 离散样本与 sinc 函数的卷积。&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</description>
       <content:encoded><![CDATA[<p>深入理解 sinc 卷积如何完成信号重建，探索从朴素算法到 SpeexDSP 的优化之路</p>
 <hr>
 <h2 id="第一部分重采样的原理与处理过程">第一部分：重采样的原理与处理过程</h2>
@@ -560,7 +566,8 @@ $$</p>
 <p><strong>核心结论 — Whittaker-Shannon 插值公式：</strong></p>
 <p>$$x_c(t) = \sum_{n=-\infty}^{\infty} x[n] \cdot \text{sinc}\left(\frac{t - nT}{T}\right)$$</p>
 <p>其中 $\text{sinc}(u) = \frac{\sin(\pi u)}{\pi u}$。
-<strong>这意味着：任意时刻的连续值 = 离散样本与 sinc 函数的卷积。</strong></p></blockquote>
+<strong>这意味着：任意时刻的连续值 = 离散样本与 sinc 函数的卷积。</strong></p>
+</blockquote>
 <h4 id="第一步采样定理的数学表达">第一步：采样定理的数学表达</h4>
 <p>设连续信号 $x_c(t)$ 的傅里叶变换为 $X_c(j\Omega)$，带宽限制在 $|\Omega| \leq \Omega_0$（即 bandlimited）。</p>
 <p><strong>采样</strong>（采样周期 $T$）等价于将 $x_c(t)$ 乘以冲激串：</p>
@@ -674,7 +681,8 @@ $$</p>
 <p>令 $\Omega_c = \pi/T$，则：</p>
 <p>$$h(t) = T \cdot \frac{\sin(\pi t/T)}{\pi t/T} = \text{sinc}\left(\frac{t}{T}\right)$$</p>
 <blockquote>
-<p><strong>这就是 sinc 函数！</strong></p></blockquote>
+<p><strong>这就是 sinc 函数！</strong></p>
+</blockquote>
 <h4 id="sinc-同时完成重建与低通">sinc 同时完成重建与低通</h4>
 <p>sinc 卷积在频域做了一件事：<strong>只保留目标频段，切除其余复制品</strong>。从不同角度看，它有两个名字：</p>
 <div class="highlight"><div class="chroma">
@@ -696,22 +704,22 @@ $$</p>
 </div>
 </div>
 <table>
-  <thead>
-      <tr>
-          <th>视角</th>
-          <th>sinc 做了什么</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>重建</strong></td>
-          <td>从离散样本恢复出连续信号</td>
-      </tr>
-      <tr>
-          <td><strong>低通 / 防混叠</strong></td>
-          <td>去除采样产生的频谱复制品</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>视角</th>
+					<th>sinc 做了什么</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>重建</strong></td>
+					<td>从离散样本恢复出连续信号</td>
+			</tr>
+			<tr>
+					<td><strong>低通 / 防混叠</strong></td>
+					<td>去除采样产生的频谱复制品</td>
+			</tr>
+	</tbody>
 </table>
 <p><strong>它们是同一个滤波操作的两种叫法。</strong> 重建 = 低通滤波 = sinc 卷积。</p>
 <h4 id="sinc-如何确定截止频率">sinc 如何确定截止频率？</h4>
@@ -787,7 +795,8 @@ $$</p>
 <li>连续信号可以<strong>唯一地</strong>由其样本 ${x_c(nT)}$ 决定</li>
 <li>每个样本乘以一个 sinc 函数，所有这些 sinc 函数叠加即重建连续信号</li>
 <li>sinc 函数的峰值在 $t = nT$，在其他采样点为零（正交性）</li>
-</ul></blockquote>
+</ul>
+</blockquote>
 <hr>
 <h3 id="15-重采样过程">1.5 重采样过程</h3>
 <p>现在要将信号从采样率 $T_1$<strong>重采样</strong>到 $T_2$。</p>
@@ -809,28 +818,29 @@ $$</p>
 <hr>
 <h3 id="16-为什么是-sinc-而不是其他函数">1.6 为什么是 sinc 而不是其他函数？</h3>
 <table>
-  <thead>
-      <tr>
-          <th>函数</th>
-          <th>来源</th>
-          <th>性质</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>sinc</strong></td>
-          <td>理想低通滤波器的逆 FT</td>
-          <td>唯一满足完美重建（奈奎斯特条件）</td>
-      </tr>
-      <tr>
-          <td>其他插值核（线性、立方等）</td>
-          <td>窗化的 sinc 近似</td>
-          <td>是 sinc 的截断/平滑版本，有误差</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>函数</th>
+					<th>来源</th>
+					<th>性质</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>sinc</strong></td>
+					<td>理想低通滤波器的逆 FT</td>
+					<td>唯一满足完美重建（奈奎斯特条件）</td>
+			</tr>
+			<tr>
+					<td>其他插值核（线性、立方等）</td>
+					<td>窗化的 sinc 近似</td>
+					<td>是 sinc 的截断/平滑版本，有误差</td>
+			</tr>
+	</tbody>
 </table>
 <blockquote>
-<p><strong>sinc 是唯一的：<strong>在采样定理框架下，只有 sinc 能实现</strong>理论上完美</strong>的连续信号重建。任何其他核都是对 sinc 的近似，代价是高频失真（Gibbs 现象 / 振铃效应）。</p></blockquote>
+<p><strong>sinc 是唯一的：<strong>在采样定理框架下，只有 sinc 能实现</strong>理论上完美</strong>的连续信号重建。任何其他核都是对 sinc 的近似，代价是高频失真（Gibbs 现象 / 振铃效应）。</p>
+</blockquote>
 <hr>
 <h3 id="17-物理直觉">1.7 物理直觉</h3>
 <div class="highlight"><div class="chroma">
@@ -938,7 +948,8 @@ $$</p>
 </div>
 </div>
 <blockquote>
-<p><strong>核心瓶颈：</strong> sin() 是很贵的运算，每次都要算。</p></blockquote>
+<p><strong>核心瓶颈：</strong> sin() 是很贵的运算，每次都要算。</p>
+</blockquote>
 <hr>
 <h3 id="22-第一步优化查表代替实时计算">2.2 第一步优化：查表代替实时计算</h3>
 <p>sinc 函数是固定的，可以<strong>预先计算好一张表</strong>，运行时直接查表。</p>
@@ -1223,7 +1234,7 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 朴素：每个样本都做一次除法
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">frac_pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="n">fs_in</span><span class="p">)</span> <span class="o">%</span> <span class="n">fs_out</span> <span class="o">/</span> <span class="n">fs_out</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="n">frac_pos</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="n">fs_in</span><span class="p">)</span> <span class="o">%</span> <span class="n">fs_out</span> <span class="o">/</span> <span class="n">fs_out</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 <p><strong>除法很贵。</strong> Speex 用<strong>累加器</strong>避免除法：</p>
@@ -1243,14 +1254,14 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 预计算一次（整数除法，只在初始化时执行）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">int_advance</span>  <span class="o">=</span> <span class="n">num_rate</span> <span class="o">/</span> <span class="n">den_rate</span><span class="p">;</span>     <span class="c1">// 整数部分
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">frac_advance</span> <span class="o">=</span> <span class="n">num_rate</span> <span class="o">%</span> <span class="n">den_rate</span><span class="p">;</span>     <span class="c1">// 分数累加步长
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="n">int_advance</span>  <span class="o">=</span> <span class="n">num_rate</span> <span class="o">/</span> <span class="n">den_rate</span><span class="p">;</span>     <span class="c1">// 整数部分
+</span></span></span><span class="line"><span class="cl"><span class="n">frac_advance</span> <span class="o">=</span> <span class="n">num_rate</span> <span class="o">%</span> <span class="n">den_rate</span><span class="p">;</span>     <span class="c1">// 分数累加步长
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 每个输出样本（只有整数加法和比较）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">last_sample</span>  <span class="o">+=</span> <span class="n">int_advance</span><span class="p">;</span>            <span class="c1">// 整数步进
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">samp_frac_num</span> <span class="o">+=</span> <span class="n">frac_advance</span><span class="p">;</span>          <span class="c1">// 分数累加
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="n">samp_frac_num</span> <span class="o">&gt;=</span> <span class="n">den_rate</span><span class="p">)</span> <span class="p">{</span>        <span class="c1">// 进位
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">samp_frac_num</span> <span class="o">-=</span> <span class="n">den_rate</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">last_sample</span>  <span class="o">+=</span> <span class="n">int_advance</span><span class="p">;</span>            <span class="c1">// 整数步进
+</span></span></span><span class="line"><span class="cl"><span class="n">samp_frac_num</span> <span class="o">+=</span> <span class="n">frac_advance</span><span class="p">;</span>          <span class="c1">// 分数累加
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">samp_frac_num</span> <span class="o">&gt;=</span> <span class="n">den_rate</span><span class="p">)</span> <span class="p">{</span>        <span class="c1">// 进位
+</span></span></span><span class="line"><span class="cl">    <span class="n">samp_frac_num</span> <span class="o">-=</span> <span class="n">den_rate</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">last_sample</span><span class="o">++</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
@@ -1270,10 +1281,10 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 浮点版
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">sum</span> <span class="o">+=</span> <span class="n">sinc_val</span> <span class="o">*</span> <span class="n">input_val</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">sum</span> <span class="o">+=</span> <span class="n">sinc_val</span> <span class="o">*</span> <span class="n">input_val</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 定点版 (Q15 格式: 1 位符号 + 15 位小数)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">sum</span> <span class="o">+=</span> <span class="nf">MULT16_16</span><span class="p">(</span><span class="n">sinc_val_q15</span><span class="p">,</span> <span class="n">input_val_q15</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">sum</span> <span class="o">+=</span> <span class="nf">MULT16_16</span><span class="p">(</span><span class="n">sinc_val_q15</span><span class="p">,</span> <span class="n">input_val_q15</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 其中 MULT16_16 = (int32_t)a * (int32_t)b &gt;&gt; 15
 </span></span></span></code></pre></td></tr></table>
 </div>
@@ -1283,130 +1294,130 @@ $$</p>
 <h3 id="27-全景总结">2.7 全景总结</h3>
 <h4 id="优化路径">优化路径</h4>
 <table>
-  <thead>
-      <tr>
-          <th>步骤</th>
-          <th>优化内容</th>
-          <th>解决的问题</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>0</td>
-          <td>直接算 sinc</td>
-          <td>瓶颈：sin() 太慢</td>
-      </tr>
-      <tr>
-          <td>1</td>
-          <td>sinc 查表 + 插值</td>
-          <td>瓶颈：每个样本独立查表，重复计算</td>
-      </tr>
-      <tr>
-          <td>2</td>
-          <td>多相滤波（整数比时复用系数）</td>
-          <td>瓶颈：任意比怎么办</td>
-      </tr>
-      <tr>
-          <td>3</td>
-          <td>Speex 混合策略</td>
-          <td>瓶颈：每个样本做除法求分数位置</td>
-      </tr>
-      <tr>
-          <td>4</td>
-          <td>累加器推进（整数加法代替除法）</td>
-          <td>瓶颈：浮点运算慢</td>
-      </tr>
-      <tr>
-          <td>5</td>
-          <td>定点运算（16-bit 定点乘加）</td>
-          <td>最终：纯乘加，无除法，无 sin()，SIMD 友好</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>步骤</th>
+					<th>优化内容</th>
+					<th>解决的问题</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>0</td>
+					<td>直接算 sinc</td>
+					<td>瓶颈：sin() 太慢</td>
+			</tr>
+			<tr>
+					<td>1</td>
+					<td>sinc 查表 + 插值</td>
+					<td>瓶颈：每个样本独立查表，重复计算</td>
+			</tr>
+			<tr>
+					<td>2</td>
+					<td>多相滤波（整数比时复用系数）</td>
+					<td>瓶颈：任意比怎么办</td>
+			</tr>
+			<tr>
+					<td>3</td>
+					<td>Speex 混合策略</td>
+					<td>瓶颈：每个样本做除法求分数位置</td>
+			</tr>
+			<tr>
+					<td>4</td>
+					<td>累加器推进（整数加法代替除法）</td>
+					<td>瓶颈：浮点运算慢</td>
+			</tr>
+			<tr>
+					<td>5</td>
+					<td>定点运算（16-bit 定点乘加）</td>
+					<td>最终：纯乘加，无除法，无 sin()，SIMD 友好</td>
+			</tr>
+	</tbody>
 </table>
 <h4 id="各步骤对比">各步骤对比</h4>
 <table>
-  <thead>
-      <tr>
-          <th>优化步骤</th>
-          <th>解决的问题</th>
-          <th>核心手段</th>
-          <th>代价</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>查表</td>
-          <td>sin() 太贵</td>
-          <td>预计算 + 内存访问</td>
-          <td>需要插值弥补精度</td>
-      </tr>
-      <tr>
-          <td>Cubic 插值</td>
-          <td>sinc 表太大</td>
-          <td>小表 + 三次插值逼近</td>
-          <td>微小的高频误差</td>
-      </tr>
-      <tr>
-          <td>多相/累加器</td>
-          <td>重复计算 + 除法</td>
-          <td>周期性复用 + 整数累加</td>
-          <td>仅适用于整数比</td>
-      </tr>
-      <tr>
-          <td>混合策略</td>
-          <td>任意比 + 内存/精度权衡</td>
-          <td>自适应选择 Direct/Interpolated</td>
-          <td>代码复杂度</td>
-      </tr>
-      <tr>
-          <td>定点</td>
-          <td>浮点太慢</td>
-          <td>Q15 定点乘加</td>
-          <td>精度有限（~90dB）</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>优化步骤</th>
+					<th>解决的问题</th>
+					<th>核心手段</th>
+					<th>代价</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>查表</td>
+					<td>sin() 太贵</td>
+					<td>预计算 + 内存访问</td>
+					<td>需要插值弥补精度</td>
+			</tr>
+			<tr>
+					<td>Cubic 插值</td>
+					<td>sinc 表太大</td>
+					<td>小表 + 三次插值逼近</td>
+					<td>微小的高频误差</td>
+			</tr>
+			<tr>
+					<td>多相/累加器</td>
+					<td>重复计算 + 除法</td>
+					<td>周期性复用 + 整数累加</td>
+					<td>仅适用于整数比</td>
+			</tr>
+			<tr>
+					<td>混合策略</td>
+					<td>任意比 + 内存/精度权衡</td>
+					<td>自适应选择 Direct/Interpolated</td>
+					<td>代码复杂度</td>
+			</tr>
+			<tr>
+					<td>定点</td>
+					<td>浮点太慢</td>
+					<td>Q15 定点乘加</td>
+					<td>精度有限（~90dB）</td>
+			</tr>
+	</tbody>
 </table>
 <h4 id="speex-质量等级与滤波器参数">Speex 质量等级与滤波器参数</h4>
 <table>
-  <thead>
-      <tr>
-          <th>等级</th>
-          <th>filt_len</th>
-          <th>Oversample</th>
-          <th>阻带衰减</th>
-          <th>适用场景</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Q0</td>
-          <td>8</td>
-          <td>4</td>
-          <td>~60dB</td>
-          <td>低功耗实时</td>
-      </tr>
-      <tr>
-          <td>Q4</td>
-          <td>64</td>
-          <td>8</td>
-          <td>~80dB</td>
-          <td>一般语音</td>
-      </tr>
-      <tr>
-          <td>Q5</td>
-          <td>80</td>
-          <td>16</td>
-          <td>~100dB</td>
-          <td>高质量语音</td>
-      </tr>
-      <tr>
-          <td>Q10</td>
-          <td>256</td>
-          <td>32</td>
-          <td>~100dB+</td>
-          <td>音乐 / 离线处理</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>等级</th>
+					<th>filt_len</th>
+					<th>Oversample</th>
+					<th>阻带衰减</th>
+					<th>适用场景</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Q0</td>
+					<td>8</td>
+					<td>4</td>
+					<td>~60dB</td>
+					<td>低功耗实时</td>
+			</tr>
+			<tr>
+					<td>Q4</td>
+					<td>64</td>
+					<td>8</td>
+					<td>~80dB</td>
+					<td>一般语音</td>
+			</tr>
+			<tr>
+					<td>Q5</td>
+					<td>80</td>
+					<td>16</td>
+					<td>~100dB</td>
+					<td>高质量语音</td>
+			</tr>
+			<tr>
+					<td>Q10</td>
+					<td>256</td>
+					<td>32</td>
+					<td>~100dB+</td>
+					<td>音乐 / 离线处理</td>
+			</tr>
+	</tbody>
 </table>
 <p>filt_len 越长 → sinc 截断越接近理想 → 阻带衰减越好 → 计算量越大。</p>
 <hr>
@@ -1513,13 +1524,13 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;onnxruntime_c_api.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 创建运行时环境
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">OrtEnv</span><span class="o">*</span> <span class="n">env</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">OrtEnv</span><span class="o">*</span> <span class="n">env</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">OrtStatus</span><span class="o">*</span> <span class="n">status</span> <span class="o">=</span> <span class="nf">OrtCreateEnv</span><span class="p">(</span><span class="n">ORT_LOGGING_LEVEL_WARNING</span><span class="p">,</span> <span class="s">&#34;ORT&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">env</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 错误处理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">msg</span> <span class="o">=</span> <span class="nf">OrtGetErrorMessage</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">msg</span> <span class="o">=</span> <span class="nf">OrtGetErrorMessage</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">OrtReleaseStatus</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
@@ -1551,23 +1562,23 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;onnxruntime_c_api.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 1. 创建会话选项
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">OrtSessionOptions</span><span class="o">*</span> <span class="n">session_options</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">OrtSessionOptions</span><span class="o">*</span> <span class="n">session_options</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nf">OrtCreateSessionOptions</span><span class="p">(</span><span class="o">&amp;</span><span class="n">session_options</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 2. 创建推理会话
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">OrtSession</span><span class="o">*</span> <span class="n">session</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">OrtSession</span><span class="o">*</span> <span class="n">session</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">model_path</span> <span class="o">=</span> <span class="s">&#34;denoise_model.onnx&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">status</span> <span class="o">=</span> <span class="nf">OrtCreateSession</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">session</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 错误处理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">msg</span> <span class="o">=</span> <span class="nf">OrtGetErrorMessage</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">msg</span> <span class="o">=</span> <span class="nf">OrtGetErrorMessage</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">OrtReleaseStatus</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 3. 释放资源（使用完毕后）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtReleaseSessionOptions</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseSessionOptions</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseSession</span><span class="p">(</span><span class="n">session</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseEnv</span><span class="p">(</span><span class="n">env</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
@@ -1595,19 +1606,19 @@ $$</p>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// CPU执行（默认，无需显式添加）
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 直接创建会话即可使用CPU
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// CUDA执行（需要NVIDIA GPU）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtSessionOptionsAppendExecutionProvider_CUDA</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtSessionOptionsAppendExecutionProvider_CUDA</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// TensorRT执行（需要NVIDIA GPU和TensorRT）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">OrtTensorRTProviderOptions</span> <span class="n">trt_options</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">OrtTensorRTProviderOptions</span> <span class="n">trt_options</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl"><span class="nf">OrtSessionOptionsAppendExecutionProvider_TensorRT</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">trt_options</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// CoreML执行（macOS/iOS）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtSessionOptionsAppendExecutionProvider_CoreML</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtSessionOptionsAppendExecutionProvider_CoreML</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 创建会话（会按顺序尝试EP，失败则回退到下一个）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtCreateSession</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">session</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtCreateSession</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">session</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 <h4 id="inputoutput">Input/Output</h4>
@@ -1660,7 +1671,7 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 1. 获取输入输出信息
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">size_t</span> <span class="n">num_input_nodes</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">size_t</span> <span class="n">num_input_nodes</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">OrtStatus</span><span class="o">*</span> <span class="n">status</span> <span class="o">=</span> <span class="nf">OrtSessionGetInputCount</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">num_input_nodes</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">input_name</span><span class="p">;</span>
@@ -1669,9 +1680,9 @@ $$</p>
 </span></span><span class="line"><span class="cl"><span class="nf">OrtSessionGetInputTypeInfo</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">input_type_info</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 2. 准备输入数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">float</span> <span class="n">input_data</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="cm">/* audio_features数据 */</span> <span class="p">};</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="n">input_data</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="cm">/* audio_features数据 */</span> <span class="p">};</span>
 </span></span><span class="line"><span class="cl"><span class="kt">int64_t</span> <span class="n">input_shape</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">480</span><span class="p">};</span>  <span class="c1">// batch_size, feature_dim
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">size_t</span> <span class="n">input_tensor_size</span> <span class="o">=</span> <span class="mi">480</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">size_t</span> <span class="n">input_tensor_size</span> <span class="o">=</span> <span class="mi">480</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">OrtValue</span><span class="o">*</span> <span class="n">input_tensor</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">OrtMemoryInfo</span><span class="o">*</span> <span class="n">memory_info</span><span class="p">;</span>
@@ -1685,21 +1696,21 @@ $$</p>
 </span></span><span class="line"><span class="cl"><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 3. 执行推理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">input_names</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">input_name</span><span class="p">};</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">input_names</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">input_name</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">output_names</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;output&#34;</span><span class="p">};</span>  <span class="c1">// 根据模型实际输出名称
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">OrtValue</span><span class="o">*</span> <span class="n">output_tensor</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">OrtValue</span><span class="o">*</span> <span class="n">output_tensor</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">status</span> <span class="o">=</span> <span class="nf">OrtRun</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="n">input_names</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">input_tensor</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="n">output_names</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">output_tensor</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 4. 获取输出数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">float</span><span class="o">*</span> <span class="n">output_data</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">float</span><span class="o">*</span> <span class="n">output_data</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nf">OrtGetTensorMutableData</span><span class="p">(</span><span class="n">output_tensor</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span><span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">output_data</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 使用output_data...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 5. 释放资源
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtReleaseValue</span><span class="p">(</span><span class="n">output_tensor</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseValue</span><span class="p">(</span><span class="n">output_tensor</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseValue</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseMemoryInfo</span><span class="p">(</span><span class="n">memory_info</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
@@ -1742,28 +1753,28 @@ $$</p>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 图优化级别
 </span></span></span><span class="line"><span class="cl"><span class="c1">// ORT_DISABLE_ALL, ORT_ENABLE_BASIC, ORT_ENABLE_EXTENDED, ORT_ENABLE_ALL
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtSetSessionGraphOptimizationLevel</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="n">ORT_ENABLE_ALL</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtSetSessionGraphOptimizationLevel</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="n">ORT_ENABLE_ALL</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 线程数设置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtSetIntraOpNumThreads</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>  <span class="c1">// 算子内部并行线程数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtSetInterOpNumThreads</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">// 算子间并行线程数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtSetIntraOpNumThreads</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>  <span class="c1">// 算子内部并行线程数
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtSetInterOpNumThreads</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">// 算子间并行线程数
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 内存模式
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtEnableMemPattern</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span>  <span class="c1">// 启用内存模式优化
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtEnableCpuMemArena</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span> <span class="c1">// 启用CPU内存池
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtEnableMemPattern</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span>  <span class="c1">// 启用内存模式优化
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtEnableCpuMemArena</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span> <span class="c1">// 启用CPU内存池
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 执行模式
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtSetSessionExecutionMode</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="n">ORT_SEQUENTIAL</span><span class="p">);</span>  <span class="c1">// 顺序执行
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtSetSessionExecutionMode</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="n">ORT_SEQUENTIAL</span><span class="p">);</span>  <span class="c1">// 顺序执行
 </span></span></span><span class="line"><span class="cl"><span class="c1">// OrtSetSessionExecutionMode(session_options, ORT_PARALLEL);  // 并行执行
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 优化配置文件（可选，用于更精细的控制）
 </span></span></span><span class="line"><span class="cl"><span class="c1">// OrtSetOptimizedModelFilePath(session_options, &#34;optimized_model.onnx&#34;);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 创建会话时应用这些选项
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtCreateSession</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">session</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtCreateSession</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">session</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 使用完毕后释放
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtReleaseSessionOptions</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseSessionOptions</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 <h2 id="三语音降噪推理的特殊注意事项">三、语音降噪推理的特殊注意事项</h2>
@@ -2726,9 +2737,9 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Initialize ONNX model
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">initialize_onnx_model</span><span class="p">(</span><span class="n">RNNoiseContext</span><span class="o">*</span> <span class="n">ctx</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">model_path</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">initialize_onnx_model</span><span class="p">(</span><span class="n">RNNoiseContext</span><span class="o">*</span> <span class="n">ctx</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">model_path</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// Get ONNX Runtime API
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">const</span> <span class="n">OrtApiBase</span><span class="o">*</span> <span class="n">api_base</span> <span class="o">=</span> <span class="nf">OrtGetApiBase</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">OrtApiBase</span><span class="o">*</span> <span class="n">api_base</span> <span class="o">=</span> <span class="nf">OrtGetApiBase</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">api_base</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error getting ONNX Runtime API base</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
@@ -2741,21 +2752,21 @@ $$</p>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Initialize ONNX Runtime environment
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">OrtStatus</span><span class="o">*</span> <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">CreateEnv</span><span class="p">(</span><span class="n">ORT_LOGGING_LEVEL_WARNING</span><span class="p">,</span> <span class="s">&#34;RNNoiseONNX&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">env</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">OrtStatus</span><span class="o">*</span> <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">CreateEnv</span><span class="p">(</span><span class="n">ORT_LOGGING_LEVEL_WARNING</span><span class="p">,</span> <span class="s">&#34;RNNoiseONNX&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">env</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error creating ONNX Runtime environment</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Create session options
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">CreateSessionOptions</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session_options</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">CreateSessionOptions</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session_options</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error creating session options</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Set session options
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SetIntraOpNumThreads</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SetIntraOpNumThreads</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error setting intra-op threads</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
@@ -2768,21 +2779,21 @@ $$</p>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Create session
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">CreateSession</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">env</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">CreateSession</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">env</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error creating ONNX session</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Get allocator
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">GetAllocatorWithDefaultOptions</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">GetAllocatorWithDefaultOptions</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error getting allocator</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Get input/output names
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">size_t</span> <span class="n">num_input_nodes</span><span class="p">,</span> <span class="n">num_output_nodes</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kt">size_t</span> <span class="n">num_input_nodes</span><span class="p">,</span> <span class="n">num_output_nodes</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SessionGetInputCount</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">num_input_nodes</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error getting input count</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
@@ -2800,13 +2811,13 @@ $$</p>
 </span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;  Output nodes: %zu</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">num_output_nodes</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Detect model type: 4 inputs + 5 outputs = model with GRU states
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">has_gru_states</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_input_nodes</span> <span class="o">==</span> <span class="mi">4</span> <span class="o">&amp;&amp;</span> <span class="n">num_output_nodes</span> <span class="o">==</span> <span class="mi">5</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">has_gru_states</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_input_nodes</span> <span class="o">==</span> <span class="mi">4</span> <span class="o">&amp;&amp;</span> <span class="n">num_output_nodes</span> <span class="o">==</span> <span class="mi">5</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">has_gru_states</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;  Model type: WITH GRU state inputs/outputs</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="c1">// Get all input names
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SessionGetInputName</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_name</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SessionGetInputName</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_name</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error getting features input name</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
@@ -2828,7 +2839,7 @@ $$</p>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="c1">// Get all output names
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SessionGetOutputName</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_denoise</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SessionGetOutputName</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_denoise</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error getting denoise output name</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
@@ -2869,14 +2880,14 @@ $$</p>
 </span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;  Model type: Standard (without GRU state ports)</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="c1">// Get input name (standard model)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SessionGetInputName</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_name</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SessionGetInputName</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_name</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error getting input name</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="c1">// Get output names (standard model)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SessionGetOutputName</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_denoise</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SessionGetOutputName</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_denoise</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error getting denoise output name</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
@@ -2894,7 +2905,7 @@ $$</p>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Allocate buffers
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_buffer</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="p">)</span><span class="nf">malloc</span><span class="p">(</span><span class="n">FRAME_SIZE</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_buffer</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="p">)</span><span class="nf">malloc</span><span class="p">(</span><span class="n">FRAME_SIZE</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_buffer</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="p">)</span><span class="nf">malloc</span><span class="p">(</span><span class="n">FRAME_SIZE</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_buffer</span> <span class="o">||</span> <span class="o">!</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_buffer</span><span class="p">)</span> <span class="p">{</span>
@@ -2903,7 +2914,7 @@ $$</p>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Initialize RNNoise state for feature extraction
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">denoise_state</span> <span class="o">=</span> <span class="nf">rnnoise_create</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">denoise_state</span> <span class="o">=</span> <span class="nf">rnnoise_create</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">denoise_state</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error: Failed to create RNNoise state</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
@@ -2911,11 +2922,11 @@ $$</p>
 </span></span><span class="line"><span class="cl">    <span class="nf">rnnoise_init</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">denoise_state</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Initialize biquad filter memory
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">mem_hp_x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">mem_hp_x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">mem_hp_x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Initialize processing buffers
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">memset</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">X</span><span class="p">));</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">X</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">P</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">P</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">Ex</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">Ex</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">Ep</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">Ep</span><span class="p">));</span>
@@ -2924,17 +2935,17 @@ $$</p>
 </span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">synthesis_mem</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">synthesis_mem</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Initialize frame count
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">frame_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">frame_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Initialize GRU states if model supports it
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">initialize_gru_states</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">initialize_gru_states</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;ONNX model loaded successfully: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">model_path</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// Initialize GRU states
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">initialize_gru_states</span><span class="p">(</span><span class="n">RNNoiseContext</span><span class="o">*</span> <span class="n">ctx</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">initialize_gru_states</span><span class="p">(</span><span class="n">RNNoiseContext</span><span class="o">*</span> <span class="n">ctx</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">vad_gru_state</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">vad_gru_state</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">noise_gru_state</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">noise_gru_state</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">denoise_gru_state</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">denoise_gru_state</span><span class="p">));</span>
@@ -2942,23 +2953,23 @@ $$</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// ONNX inference with external state management
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">onnx_inference_with_states</span><span class="p">(</span><span class="n">RNNoiseContext</span><span class="o">*</span> <span class="n">ctx</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">features</span><span class="p">,</span> <span class="kt">float</span><span class="o">*</span> <span class="n">gains</span><span class="p">,</span> <span class="kt">float</span><span class="o">*</span> <span class="n">vad</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">onnx_inference_with_states</span><span class="p">(</span><span class="n">RNNoiseContext</span><span class="o">*</span> <span class="n">ctx</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">features</span><span class="p">,</span> <span class="kt">float</span><span class="o">*</span> <span class="n">gains</span><span class="p">,</span> <span class="kt">float</span><span class="o">*</span> <span class="n">vad</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// Prepare separate input tensors for features and GRU states
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">float</span> <span class="n">features_data</span><span class="p">[</span><span class="mi">42</span><span class="p">];</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">features_data</span><span class="p">[</span><span class="mi">42</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">vad_state_data</span><span class="p">[</span><span class="mi">24</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">noise_state_data</span><span class="p">[</span><span class="mi">48</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">denoise_state_data</span><span class="p">[</span><span class="mi">96</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Copy features
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">memcpy</span><span class="p">(</span><span class="n">features_data</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="mi">42</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">memcpy</span><span class="p">(</span><span class="n">features_data</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="mi">42</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Copy GRU states (use saved states for next frame)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">memcpy</span><span class="p">(</span><span class="n">vad_state_data</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">vad_gru_state</span><span class="p">,</span> <span class="mi">24</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">memcpy</span><span class="p">(</span><span class="n">vad_state_data</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">vad_gru_state</span><span class="p">,</span> <span class="mi">24</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memcpy</span><span class="p">(</span><span class="n">noise_state_data</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">noise_gru_state</span><span class="p">,</span> <span class="mi">48</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memcpy</span><span class="p">(</span><span class="n">denoise_state_data</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">denoise_gru_state</span><span class="p">,</span> <span class="mi">96</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Create input tensors
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">const</span> <span class="kt">int64_t</span> <span class="n">features_shape</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">42</span><span class="p">};</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">int64_t</span> <span class="n">features_shape</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">42</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">int64_t</span> <span class="n">vad_state_shape</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">int64_t</span> <span class="n">noise_state_shape</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">48</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">int64_t</span> <span class="n">denoise_state_shape</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">96</span><span class="p">};</span>
@@ -2971,7 +2982,7 @@ $$</p>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Create input tensors
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">OrtValue</span><span class="o">*</span> <span class="n">features_tensor</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">OrtValue</span><span class="o">*</span> <span class="n">features_tensor</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">OrtValue</span><span class="o">*</span> <span class="n">vad_state_tensor</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">OrtValue</span><span class="o">*</span> <span class="n">noise_state_tensor</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">OrtValue</span><span class="o">*</span> <span class="n">denoise_state_tensor</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
@@ -3019,18 +3030,18 @@ $$</p>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Prepare input names and tensors
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">input_names</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_name</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_name_vad_state</span><span class="p">,</span> 
+</span></span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">input_names</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_name</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_name_vad_state</span><span class="p">,</span> 
 </span></span><span class="line"><span class="cl">                                 <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_name_noise_state</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_name_denoise_state</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl">    <span class="n">OrtValue</span><span class="o">*</span> <span class="n">input_tensors</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">features_tensor</span><span class="p">,</span> <span class="n">vad_state_tensor</span><span class="p">,</span> <span class="n">noise_state_tensor</span><span class="p">,</span> <span class="n">denoise_state_tensor</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Prepare output names
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">output_names</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_denoise</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_vad</span><span class="p">,</span> 
+</span></span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">output_names</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_denoise</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_vad</span><span class="p">,</span> 
 </span></span><span class="line"><span class="cl">                                  <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_vad_state</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_noise_state</span><span class="p">,</span> 
 </span></span><span class="line"><span class="cl">                                  <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_denoise_state</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl">    <span class="n">OrtValue</span><span class="o">*</span> <span class="n">output_tensors</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Run inference
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">Run</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">input_names</span><span class="p">,</span> <span class="p">(</span><span class="k">const</span> <span class="n">OrtValue</span><span class="o">*</span> <span class="k">const</span><span class="o">*</span><span class="p">)</span><span class="n">input_tensors</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">Run</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">input_names</span><span class="p">,</span> <span class="p">(</span><span class="k">const</span> <span class="n">OrtValue</span><span class="o">*</span> <span class="k">const</span><span class="o">*</span><span class="p">)</span><span class="n">input_tensors</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">                   <span class="n">output_names</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">output_tensors</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error running inference</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
@@ -3043,7 +3054,7 @@ $$</p>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Get output data
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">float</span><span class="o">*</span> <span class="n">denoise_output</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kt">float</span><span class="o">*</span> <span class="n">denoise_output</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">float</span><span class="o">*</span> <span class="n">vad_output</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">float</span><span class="o">*</span> <span class="n">updated_vad_state</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">float</span><span class="o">*</span> <span class="n">updated_noise_state</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
@@ -3080,18 +3091,18 @@ $$</p>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Store results
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">memcpy</span><span class="p">(</span><span class="n">gains</span><span class="p">,</span> <span class="n">denoise_output</span><span class="p">,</span> <span class="n">NB_BANDS</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">memcpy</span><span class="p">(</span><span class="n">gains</span><span class="p">,</span> <span class="n">denoise_output</span><span class="p">,</span> <span class="n">NB_BANDS</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="o">*</span><span class="n">vad</span> <span class="o">=</span> <span class="n">vad_output</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Update GRU states with the outputs from the model (for next frame)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">memcpy</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">vad_gru_state</span><span class="p">,</span> <span class="n">updated_vad_state</span><span class="p">,</span> <span class="mi">24</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">memcpy</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">vad_gru_state</span><span class="p">,</span> <span class="n">updated_vad_state</span><span class="p">,</span> <span class="mi">24</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memcpy</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">noise_gru_state</span><span class="p">,</span> <span class="n">updated_noise_state</span><span class="p">,</span> <span class="mi">48</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memcpy</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">denoise_gru_state</span><span class="p">,</span> <span class="n">updated_denoise_state</span><span class="p">,</span> <span class="mi">96</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">gru_states_initialized</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl"><span class="nl">cleanup</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// Cleanup
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">ReleaseValue</span><span class="p">(</span><span class="n">features_tensor</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">ReleaseValue</span><span class="p">(</span><span class="n">features_tensor</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">ReleaseValue</span><span class="p">(</span><span class="n">vad_state_tensor</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">ReleaseValue</span><span class="p">(</span><span class="n">noise_state_tensor</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">ReleaseValue</span><span class="p">(</span><span class="n">denoise_state_tensor</span><span class="p">);</span>
@@ -3215,7 +3226,8 @@ $$</p>
 </ul>
 <p>访问方式简单：在Hugging Face平台搜索并下载，或使用Python的datasets库加载。数据集设计覆盖不同噪声、混响和麦克风配置，确保评估的全面性。</p>
 <blockquote>
-<p>可以参考下面的代码将hugging face中的validataion数据集以wav形式保存在本地，方便后续不同算法进行处理后，对处理结果进行评估。</p></blockquote>
+<p>可以参考下面的代码将hugging face中的validataion数据集以wav形式保存在本地，方便后续不同算法进行处理后，对处理结果进行评估。</p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -3326,7 +3338,8 @@ $$</p>
 <p>计算这些指标需要工具和脚本。URGENT挑战的GitHub仓库（https://github.com/urgent-challenge/urgent2024_challenge）提供了evaluation_metrics文件夹下的实用脚本，如calculate_intrusive_se_metrics.py（处理PESQ、ESTOI、SDR、MCD、LSD等侵入式指标，支持无限SDR值处理），calculate_nonintrusive_dnsmos.py和calculate_nonintrusive_nisqa.py分别计算DNSMOS和NISQA。</p>
 <p><strong>计算步骤示例</strong>：</p>
 <blockquote>
-<p>参考evaluation_metrics/README.md</p></blockquote>
+<p>参考evaluation_metrics/README.md</p>
+</blockquote>
 <ol>
 <li><strong>数据准备</strong>对validation数据集中的noisy数据进行处理，得到enhanced的数据，按下面的目录结构进行组织
 <div class="highlight"><div class="chroma">
@@ -3400,18 +3413,18 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nv">nj</span><span class="o">=</span><span class="m">8</span>  <span class="c1"># Number of parallel CPU jobs for speedup</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">nj</span><span class="o">=</span><span class="m">8</span>  <span class="c1"># Number of parallel CPU jobs for speedup</span>
 </span></span><span class="line"><span class="cl"><span class="nv">python</span><span class="o">=</span>python3
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nv">output_prefix</span><span class="o">=</span>metrics_score
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># PESQ, ESTOI, SDR, MCD, LSD</span>
 </span></span><span class="line"><span class="cl"><span class="si">${</span><span class="nv">python</span><span class="si">}</span> calculate_intrusive_se_metrics.py <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>   --ref_scp reference.scp <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>   --inf_scp enhanced_webrtc.scp <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>   --output_dir <span class="s2">&#34;</span><span class="si">${</span><span class="nv">output_prefix</span><span class="si">}</span><span class="s2">&#34;</span>/scoring_webrtc <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>   --nj <span class="si">${</span><span class="nv">nj</span><span class="si">}</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>   --chunksize <span class="m">60</span></span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl">   --ref_scp reference.scp <span class="se">\
+</span></span></span><span class="line"><span class="cl">   --inf_scp enhanced_webrtc.scp <span class="se">\
+</span></span></span><span class="line"><span class="cl">   --output_dir <span class="s2">&#34;</span><span class="si">${</span><span class="nv">output_prefix</span><span class="si">}</span><span class="s2">&#34;</span>/scoring_webrtc <span class="se">\
+</span></span></span><span class="line"><span class="cl">   --nj <span class="si">${</span><span class="nv">nj</span><span class="si">}</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">   --chunksize <span class="m">60</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 对于批量计算，仓库脚本支持文件夹输入。</li>
@@ -3476,12 +3489,13 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">    <span class="c1">// Previous estimate based on previous frame with gain filter.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">float</span> <span class="n">prev_tsa</span> <span class="o">=</span> <span class="n">spectrum_prev_process_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">prev_tsa</span> <span class="o">=</span> <span class="n">spectrum_prev_process_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span>
 </span></span><span class="line"><span class="cl">                     <span class="p">(</span><span class="n">prev_noise_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.0001f</span><span class="p">)</span> <span class="o">*</span> <span class="n">filter_</span><span class="p">[</span><span class="n">i</span><span class="p">];</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 <blockquote>
-<p>spectrum_prev_process_[i] 为前一帧信号的幅度谱，filter_[i]为前帧的Wiener滤波器增益，两者相乘后就是估计的纯净语音信号，因此prev_tsa就是前一帧的TSA (time-smoothed a priori SNR)</p></blockquote>
+<p>spectrum_prev_process_[i] 为前一帧信号的幅度谱，filter_[i]为前帧的Wiener滤波器增益，两者相乘后就是估计的纯净语音信号，因此prev_tsa就是前一帧的TSA (time-smoothed a priori SNR)</p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -3493,7 +3507,7 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">    <span class="c1">// Post SNR.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">noise_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">noise_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="n">post_snr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">noise_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.0001f</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.f</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="n">post_snr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
@@ -3501,7 +3515,8 @@ $$</p>
 </div>
 </div>
 <blockquote>
-<p>只有当信号幅度大于噪声幅度时，才认为有语音信号存在，避免负增益</p></blockquote>
+<p>只有当信号幅度大于噪声幅度时，才认为有语音信号存在，避免负增益</p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -3511,7 +3526,8 @@ $$</p>
 </div>
 </div>
 <blockquote>
-<p>0.98 是平滑因子，表示以历史先验估计为主，防止突变</p></blockquote>
+<p>0.98 是平滑因子，表示以历史先验估计为主，防止突变</p>
+</blockquote>
 <ol start="2">
 <li>基本增益计算</li>
 </ol>
@@ -3525,7 +3541,7 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">    <span class="c1">// 参变维纳滤波器，参考《语音增强--理论与实践》,通过over_subtraction_factor来控制降噪力度
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">filter_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">filter_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span>
 </span></span><span class="line"><span class="cl">        <span class="n">snr_prior</span> <span class="o">/</span> <span class="p">(</span><span class="n">suppression_params_</span><span class="p">.</span><span class="n">over_subtraction_factor</span> <span class="o">+</span> <span class="n">snr_prior</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">filter_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="nf">max</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="nf">min</span><span class="p">(</span><span class="n">filter_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mf">1.f</span><span class="p">),</span>
 </span></span><span class="line"><span class="cl">                          <span class="n">suppression_params_</span><span class="p">.</span><span class="n">minimum_attenuating_gain</span><span class="p">);</span></span></span></code></pre></td></tr></table>
@@ -3602,18 +3618,18 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="c1">// Computes the attenuating gain for the noise suppression of the upper bands.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">float</span> <span class="nf">ComputeUpperBandsGain</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="nf">ComputeUpperBandsGain</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">minimum_attenuating_gain</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">filter</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="o">&gt;</span> <span class="n">speech_probability</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">prev_analysis_signal_spectrum</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">signal_spectrum</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Average speech prob and filter gain for the end of the lowest band.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">constexpr</span> <span class="kt">int</span> <span class="n">kNumAvgBins</span> <span class="o">=</span> <span class="mi">32</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">constexpr</span> <span class="kt">int</span> <span class="n">kNumAvgBins</span> <span class="o">=</span> <span class="mi">32</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kOneByNumAvgBins</span> <span class="o">=</span> <span class="mf">1.f</span> <span class="o">/</span> <span class="n">kNumAvgBins</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// 计算低带中最后的的kNumAvgBins个频点（靠近8kHz附近）的平均语音概率和平均增益
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">avg_prob_speech</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">avg_prob_speech</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">avg_filter_gain</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="n">kFftSizeBy2Plus1</span> <span class="o">-</span> <span class="n">kNumAvgBins</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">       <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
@@ -3624,10 +3640,10 @@ $$</p>
 </span></span><span class="line"><span class="cl">  <span class="n">avg_filter_gain</span> <span class="o">=</span> <span class="n">avg_filter_gain</span> <span class="o">*</span> <span class="n">kOneByNumAvgBins</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// If the speech was suppressed by a component between Analyze and Process, an
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// example being by an AEC, it should not be considered speech for the purpose
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// of high band suppression. To that end, the speech probability is scaled
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// accordingly.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">sum_analysis_spectrum</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// example being by an AEC, it should not be considered speech for the purpose
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// of high band suppression. To that end, the speech probability is scaled
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// accordingly.
+</span></span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">sum_analysis_spectrum</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">sum_processing_spectrum</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">sum_analysis_spectrum</span> <span class="o">+=</span> <span class="n">prev_analysis_signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
@@ -3635,23 +3651,23 @@ $$</p>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// The magnitude spectrum computation enforces the spectrum to be strictly
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// positive.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">RTC_DCHECK_GT</span><span class="p">(</span><span class="n">sum_analysis_spectrum</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// positive.
+</span></span></span><span class="line"><span class="cl">  <span class="nf">RTC_DCHECK_GT</span><span class="p">(</span><span class="n">sum_analysis_spectrum</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="n">avg_prob_speech</span> <span class="o">*=</span> <span class="n">sum_processing_spectrum</span> <span class="o">/</span> <span class="n">sum_analysis_spectrum</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Compute gain based on speech probability.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">gain</span> <span class="o">=</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">gain</span> <span class="o">=</span>
 </span></span><span class="line"><span class="cl">      <span class="mf">0.5f</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.f</span> <span class="o">+</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="nf">tanh</span><span class="p">(</span><span class="mf">2.f</span> <span class="o">*</span> <span class="n">avg_prob_speech</span> <span class="o">-</span> <span class="mf">1.f</span><span class="p">)));</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Combine gain with low band gain.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="n">avg_prob_speech</span> <span class="o">&gt;=</span> <span class="mf">0.5f</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">avg_prob_speech</span> <span class="o">&gt;=</span> <span class="mf">0.5f</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">gain</span> <span class="o">=</span> <span class="mf">0.25f</span> <span class="o">*</span> <span class="n">gain</span> <span class="o">+</span> <span class="mf">0.75f</span> <span class="o">*</span> <span class="n">avg_filter_gain</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">gain</span> <span class="o">=</span> <span class="mf">0.5f</span> <span class="o">*</span> <span class="n">gain</span> <span class="o">+</span> <span class="mf">0.5f</span> <span class="o">*</span> <span class="n">avg_filter_gain</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Make sure gain is within flooring range.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="nf">min</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="nf">max</span><span class="p">(</span><span class="n">gain</span><span class="p">,</span> <span class="n">minimum_attenuating_gain</span><span class="p">),</span> <span class="mf">1.f</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="nf">min</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="nf">max</span><span class="p">(</span><span class="n">gain</span><span class="p">,</span> <span class="n">minimum_attenuating_gain</span><span class="p">),</span> <span class="mf">1.f</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
@@ -3735,35 +3751,35 @@ $$</p>
 <h2 id="六小结与启发">六、小结与启发</h2>
 <p>WebRTC 的 Wiener 降噪模块体现了“理论 + 工程”的完美结合：</p>
 <table>
-  <thead>
-      <tr>
-          <th>模块</th>
-          <th>功能</th>
-          <th>工程优化</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Wiener 增益</td>
-          <td>降噪核心</td>
-          <td>加入先验平滑与概率调节</td>
-      </tr>
-      <tr>
-          <td>SNR估计</td>
-          <td>支持增益计算</td>
-          <td>TSA平滑，避免突变</td>
-      </tr>
-      <tr>
-          <td>语音概率</td>
-          <td>增益微调</td>
-          <td>三特征融合 + Sigmoid 映射</td>
-      </tr>
-      <tr>
-          <td>噪声谱估计</td>
-          <td>保证准确性</td>
-          <td>分位数估计 + 启动模型</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>模块</th>
+					<th>功能</th>
+					<th>工程优化</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Wiener 增益</td>
+					<td>降噪核心</td>
+					<td>加入先验平滑与概率调节</td>
+			</tr>
+			<tr>
+					<td>SNR估计</td>
+					<td>支持增益计算</td>
+					<td>TSA平滑，避免突变</td>
+			</tr>
+			<tr>
+					<td>语音概率</td>
+					<td>增益微调</td>
+					<td>三特征融合 + Sigmoid 映射</td>
+			</tr>
+			<tr>
+					<td>噪声谱估计</td>
+					<td>保证准确性</td>
+					<td>分位数估计 + 启动模型</td>
+			</tr>
+	</tbody>
 </table>
 <p>这种设计保证了算法在实时语音场景中的鲁棒性、稳定性与可听感提升效果。</p>
 <img src="/images/To-Be-Continued.jpeg"/>
@@ -3826,7 +3842,7 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="c1">// Updates the log LRT measures.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">UpdateSpectralLrt</span><span class="p">(</span><span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">prior_snr</span><span class="p">,</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">UpdateSpectralLrt</span><span class="p">(</span><span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">prior_snr</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">                       <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">post_snr</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">                       <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">avg_log_lrt</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">                       <span class="kt">float</span><span class="o">*</span> <span class="n">lrt</span><span class="p">)</span> <span class="p">{</span>
@@ -3890,15 +3906,15 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="c1">// Width parameter in sigmoid map for prior model.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kWidthPrior0</span> <span class="o">=</span> <span class="mf">4.f</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kWidthPrior0</span> <span class="o">=</span> <span class="mf">4.f</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Width for pause region: lower range, so increase width in tanh map.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kWidthPrior1</span> <span class="o">=</span> <span class="mf">2.f</span> <span class="o">*</span> <span class="n">kWidthPrior0</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kWidthPrior1</span> <span class="o">=</span> <span class="mf">2.f</span> <span class="o">*</span> <span class="n">kWidthPrior0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Average LRT feature: use larger width in tanh map for pause regions.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">width_prior</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">lrt</span> <span class="o">&lt;</span> <span class="n">prior_model</span><span class="p">.</span><span class="n">lrt</span> <span class="o">?</span> <span class="nl">kWidthPrior1</span> <span class="p">:</span> <span class="n">kWidthPrior0</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">width_prior</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">lrt</span> <span class="o">&lt;</span> <span class="n">prior_model</span><span class="p">.</span><span class="n">lrt</span> <span class="o">?</span> <span class="nl">kWidthPrior1</span> <span class="p">:</span> <span class="n">kWidthPrior0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Compute indicator function: sigmoid map.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">indicator0</span> <span class="o">=</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">indicator0</span> <span class="o">=</span>
 </span></span><span class="line"><span class="cl">      <span class="mf">0.5f</span> <span class="o">*</span> <span class="p">(</span><span class="nf">tanh</span><span class="p">(</span><span class="n">width_prior</span> <span class="o">*</span> <span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">lrt</span> <span class="o">-</span> <span class="n">prior_model</span><span class="p">.</span><span class="n">lrt</span><span class="p">))</span> <span class="o">+</span> <span class="mf">1.f</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
@@ -3941,15 +3957,15 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="c1">// Updates the spectral flatness based on the input spectrum.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">UpdateSpectralFlatness</span><span class="p">(</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">UpdateSpectralFlatness</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">signal_spectrum</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">signal_spectral_sum</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">float</span><span class="o">*</span> <span class="n">spectral_flatness</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nf">RTC_DCHECK</span><span class="p">(</span><span class="n">spectral_flatness</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Compute log of ratio of the geometric to arithmetic mean (handle the log(0)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// separately).
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kAveraging</span> <span class="o">=</span> <span class="mf">0.3f</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// separately).
+</span></span></span><span class="line"><span class="cl">  <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kAveraging</span> <span class="o">=</span> <span class="mf">0.3f</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">avg_spect_flatness_num</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.f</span><span class="p">)</span> <span class="p">{</span>
@@ -3971,7 +3987,7 @@ $$</p>
 </span></span><span class="line"><span class="cl">      <span class="nf">ExpApproximation</span><span class="p">(</span><span class="n">avg_spect_flatness_num</span><span class="p">)</span> <span class="o">/</span> <span class="n">avg_spect_flatness_denom</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Time-avg update of spectral flatness feature.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="o">*</span><span class="n">spectral_flatness</span> <span class="o">+=</span> <span class="n">kAveraging</span> <span class="o">*</span> <span class="p">(</span><span class="n">spectral_tmp</span> <span class="o">-</span> <span class="o">*</span><span class="n">spectral_flatness</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">  <span class="o">*</span><span class="n">spectral_flatness</span> <span class="o">+=</span> <span class="n">kAveraging</span> <span class="o">*</span> <span class="p">(</span><span class="n">spectral_tmp</span> <span class="o">-</span> <span class="o">*</span><span class="n">spectral_flatness</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
@@ -3998,7 +4014,8 @@ $$</p>
 <li>语音信号：存在能量集中（共振峰），几何均值 ≪ 算数均值，Flatness 接近 0</li>
 </ol>
 <blockquote>
-<p>因此谱平坦度 = 能量分布的“均匀性量尺” → 能直接用来做语音/噪声分类特征！</p></blockquote>
+<p>因此谱平坦度 = 能量分布的“均匀性量尺” → 能直接用来做语音/噪声分类特征！</p>
+</blockquote>
 <ul>
 <li>代码实现</li>
 </ul>
@@ -4070,13 +4087,14 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="c1">// Time-avg update of spectral flatness feature.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="o">*</span><span class="n">spectral_flatness</span> <span class="o">+=</span> <span class="n">kAveraging</span> <span class="o">*</span> <span class="p">(</span><span class="n">spectral_tmp</span> <span class="o">-</span> <span class="o">*</span><span class="n">spectral_flatness</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl">  <span class="o">*</span><span class="n">spectral_flatness</span> <span class="o">+=</span> <span class="n">kAveraging</span> <span class="o">*</span> <span class="p">(</span><span class="n">spectral_tmp</span> <span class="o">-</span> <span class="o">*</span><span class="n">spectral_flatness</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 <h2 id="indicator2-spectral-difference-谱模板差异">indicator2: Spectral Difference 谱模板差异</h2>
 <p>Spectral Difference频谱差异是用于衡量当前帧的频谱与已学习噪声模板之间的差异程度。其基本思想是：</p>
 <blockquote>
-<p>如果当前帧的频谱结构与噪声模板相似，则可能是噪声；如果差异大，则可能是语音。</p></blockquote>
+<p>如果当前帧的频谱结构与噪声模板相似，则可能是噪声；如果差异大，则可能是语音。</p>
+</blockquote>
 <ol>
 <li>总体计算公式
 $$
@@ -4109,7 +4127,7 @@ $$</li>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="c1">// Combine the indicator function with the feature weights.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">ind_prior</span> <span class="o">=</span> <span class="n">prior_model</span><span class="p">.</span><span class="n">lrt_weighting</span> <span class="o">*</span> <span class="n">indicator0</span> <span class="o">+</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">ind_prior</span> <span class="o">=</span> <span class="n">prior_model</span><span class="p">.</span><span class="n">lrt_weighting</span> <span class="o">*</span> <span class="n">indicator0</span> <span class="o">+</span>
 </span></span><span class="line"><span class="cl">                    <span class="n">prior_model</span><span class="p">.</span><span class="n">flatness_weighting</span> <span class="o">*</span> <span class="n">indicator1</span> <span class="o">+</span>
 </span></span><span class="line"><span class="cl">                    <span class="n">prior_model</span><span class="p">.</span><span class="n">difference_weighting</span> <span class="o">*</span> <span class="n">indicator2</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
@@ -4121,38 +4139,38 @@ $$</li>
 </ul>
 <p>举例子：</p>
 <table>
-  <thead>
-      <tr>
-          <th>情况</th>
-          <th>LRT</th>
-          <th>Flatness</th>
-          <th>Spectral Diff</th>
-          <th>判断结果</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>短促辅音 [k]</td>
-          <td>高</td>
-          <td>高（像噪声）</td>
-          <td>低（像模板）</td>
-          <td>不能仅靠 flatness 判断，indicator2 弥补</td>
-      </tr>
-      <tr>
-          <td>背景突发噪声</td>
-          <td>高</td>
-          <td>高</td>
-          <td>高</td>
-          <td>indicator2 抑制误判</td>
-      </tr>
-      <tr>
-          <td>语音暂停期</td>
-          <td>低</td>
-          <td>高</td>
-          <td>高</td>
-          <td>三项均为低，VAD 静音</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>情况</th>
+					<th>LRT</th>
+					<th>Flatness</th>
+					<th>Spectral Diff</th>
+					<th>判断结果</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>短促辅音 [k]</td>
+					<td>高</td>
+					<td>高（像噪声）</td>
+					<td>低（像模板）</td>
+					<td>不能仅靠 flatness 判断，indicator2 弥补</td>
+			</tr>
+			<tr>
+					<td>背景突发噪声</td>
+					<td>高</td>
+					<td>高</td>
+					<td>高</td>
+					<td>indicator2 抑制误判</td>
+			</tr>
+			<tr>
+					<td>语音暂停期</td>
+					<td>低</td>
+					<td>高</td>
+					<td>高</td>
+					<td>三项均为低，VAD 静音</td>
+			</tr>
+	</tbody>
 </table>
 <h2 id="计算频点的后验语音概率">计算频点的后验语音概率</h2>
 <ul>
@@ -4168,10 +4186,10 @@ $$</li>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="c1">// Compute the prior probability.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">prior_speech_prob_</span> <span class="o">+=</span> <span class="mf">0.1f</span> <span class="o">*</span> <span class="p">(</span><span class="n">ind_prior</span> <span class="o">-</span> <span class="n">prior_speech_prob_</span><span class="p">);</span> 
+</span></span></span><span class="line"><span class="cl">  <span class="n">prior_speech_prob_</span> <span class="o">+=</span> <span class="mf">0.1f</span> <span class="o">*</span> <span class="p">(</span><span class="n">ind_prior</span> <span class="o">-</span> <span class="n">prior_speech_prob_</span><span class="p">);</span> 
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Make sure probabilities are within range: keep floor to 0.01.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">prior_speech_prob_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="nf">max</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="nf">min</span><span class="p">(</span><span class="n">prior_speech_prob_</span><span class="p">,</span> <span class="mf">1.f</span><span class="p">),</span> <span class="mf">0.01f</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl">  <span class="n">prior_speech_prob_</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="nf">max</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="nf">min</span><span class="p">(</span><span class="n">prior_speech_prob_</span><span class="p">,</span> <span class="mf">1.f</span><span class="p">),</span> <span class="mf">0.01f</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 <ul>
@@ -4205,7 +4223,7 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="c1">// Final speech probability: combine prior model with LR factor:.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">float</span> <span class="n">gain_prior</span> <span class="o">=</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">gain_prior</span> <span class="o">=</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="mf">1.f</span> <span class="o">-</span> <span class="n">prior_speech_prob_</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">prior_speech_prob_</span> <span class="o">+</span> <span class="mf">0.0001f</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">inv_lrt</span><span class="p">;</span>
@@ -4272,7 +4290,7 @@ $$</p>
 </span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="o">&gt;</span> <span class="n">speech_probability</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="n">rtc</span><span class="o">::</span><span class="n">ArrayView</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">float</span><span class="p">,</span> <span class="n">kFftSizeBy2Plus1</span><span class="o">&gt;</span> <span class="n">signal_spectrum</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="c1">// Time-avg parameter for noise_spectrum update.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kNoiseUpdate</span> <span class="o">=</span> <span class="mf">0.9f</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">  <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kNoiseUpdate</span> <span class="o">=</span> <span class="mf">0.9f</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="kt">float</span> <span class="n">gamma</span> <span class="o">=</span> <span class="n">kNoiseUpdate</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">kFftSizeBy2Plus1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
@@ -4280,27 +4298,27 @@ $$</p>
 </span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">float</span> <span class="n">prob_non_speech</span> <span class="o">=</span> <span class="mf">1.f</span> <span class="o">-</span> <span class="n">prob_speech</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// Temporary noise update used for speech frames if update value is less
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// than previous.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">float</span> <span class="n">noise_update_tmp</span> <span class="o">=</span>
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// than previous.
+</span></span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">noise_update_tmp</span> <span class="o">=</span>
 </span></span><span class="line"><span class="cl">        <span class="n">gamma</span> <span class="o">*</span> <span class="n">prev_noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span>
 </span></span><span class="line"><span class="cl">        <span class="p">(</span><span class="mf">1.f</span> <span class="o">-</span> <span class="n">gamma</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">prob_non_speech</span> <span class="o">*</span> <span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span>
 </span></span><span class="line"><span class="cl">                         <span class="n">prob_speech</span> <span class="o">*</span> <span class="n">prev_noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// Time-constant based on speech/noise_spectrum state.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">float</span> <span class="n">gamma_old</span> <span class="o">=</span> <span class="n">gamma</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">gamma_old</span> <span class="o">=</span> <span class="n">gamma</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// Increase gamma for frame likely to be seech.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kProbRange</span> <span class="o">=</span> <span class="mf">.2f</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">constexpr</span> <span class="kt">float</span> <span class="n">kProbRange</span> <span class="o">=</span> <span class="mf">.2f</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">gamma</span> <span class="o">=</span> <span class="n">prob_speech</span> <span class="o">&gt;</span> <span class="n">kProbRange</span> <span class="o">?</span> <span class="mf">.99f</span> <span class="o">:</span> <span class="n">kNoiseUpdate</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// Conservative noise_spectrum update.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">prob_speech</span> <span class="o">&lt;</span> <span class="n">kProbRange</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">prob_speech</span> <span class="o">&lt;</span> <span class="n">kProbRange</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="n">conservative_noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span>
 </span></span><span class="line"><span class="cl">          <span class="mf">0.05f</span> <span class="o">*</span> <span class="p">(</span><span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">conservative_noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// Noise_spectrum update.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">==</span> <span class="n">gamma_old</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">==</span> <span class="n">gamma_old</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="n">noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">noise_update_tmp</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">      <span class="n">noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span>
@@ -4308,8 +4326,8 @@ $$</p>
 </span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="mf">1.f</span> <span class="o">-</span> <span class="n">gamma</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">prob_non_speech</span> <span class="o">*</span> <span class="n">signal_spectrum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span>
 </span></span><span class="line"><span class="cl">                           <span class="n">prob_speech</span> <span class="o">*</span> <span class="n">prev_noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl">      <span class="c1">// Allow for noise_spectrum update downwards: If noise_spectrum update
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">// decreases the noise_spectrum, it is safe, so allow it to happen.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="n">noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="nf">min</span><span class="p">(</span><span class="n">noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">noise_update_tmp</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">      <span class="c1">// decreases the noise_spectrum, it is safe, so allow it to happen.
+</span></span></span><span class="line"><span class="cl">      <span class="n">noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="nf">min</span><span class="p">(</span><span class="n">noise_spectrum_</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">noise_update_tmp</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
@@ -4319,40 +4337,40 @@ $$</p>
 <p>那为什么已经有了基于分位数的噪声估计，还需要在PostUpdate()中进行进一步修正呢？</p>
 <p>如下表，我们对比与初始分位数估计的关系和区别</p>
 <table>
-  <thead>
-      <tr>
-          <th>特征</th>
-          <th>PreUpdate() 中的分位数估计</th>
-          <th>PostUpdate() 中的时间平均更新</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>原理</td>
-          <td>统计过往帧的底噪分布（log-domain）</td>
-          <td>利用当前帧的语音概率进行时间递归更新</td>
-      </tr>
-      <tr>
-          <td>更新维度</td>
-          <td>横向（跨帧分布）</td>
-          <td>纵向（帧内时间平滑）</td>
-      </tr>
-      <tr>
-          <td>响应特性</td>
-          <td>对背景缓慢变化有响应，对突发语音稳健</td>
-          <td>在语音帧期间抑制更新，非语音帧中轻微修正</td>
-      </tr>
-      <tr>
-          <td>对应变量</td>
-          <td>quantile_noise_estimator_.Estimate(&hellip;) → noise_spectrum_[]</td>
-          <td>初值	noise_spectrum_[] → 平滑动态追踪修正</td>
-      </tr>
-      <tr>
-          <td>目的</td>
-          <td>建立初步噪声模型</td>
-          <td>细化并动态追踪噪声谱</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>特征</th>
+					<th>PreUpdate() 中的分位数估计</th>
+					<th>PostUpdate() 中的时间平均更新</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>原理</td>
+					<td>统计过往帧的底噪分布（log-domain）</td>
+					<td>利用当前帧的语音概率进行时间递归更新</td>
+			</tr>
+			<tr>
+					<td>更新维度</td>
+					<td>横向（跨帧分布）</td>
+					<td>纵向（帧内时间平滑）</td>
+			</tr>
+			<tr>
+					<td>响应特性</td>
+					<td>对背景缓慢变化有响应，对突发语音稳健</td>
+					<td>在语音帧期间抑制更新，非语音帧中轻微修正</td>
+			</tr>
+			<tr>
+					<td>对应变量</td>
+					<td>quantile_noise_estimator_.Estimate(&hellip;) → noise_spectrum_[]</td>
+					<td>初值	noise_spectrum_[] → 平滑动态追踪修正</td>
+			</tr>
+			<tr>
+					<td>目的</td>
+					<td>建立初步噪声模型</td>
+					<td>细化并动态追踪噪声谱</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="总结为什么需要-postupdate">总结：为什么需要 PostUpdate？</h3>
 <ul>
@@ -4425,31 +4443,32 @@ $$</p>
 <p>设：当前估计值为Q，当前观测值为X</p>
 <p>我们每帧更新规则如下：</p>
 <table>
-  <thead>
-      <tr>
-          <th>情况</th>
-          <th>更新量</th>
-          <th>含义</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>x &gt; Q</td>
-          <td>Q ← Q + 0.25 × step</td>
-          <td>当前值太大，稍微拉高估计值</td>
-      </tr>
-      <tr>
-          <td>x &lt; Q</td>
-          <td>Q ← Q - 0.75 × step</td>
-          <td>当前值太小，大幅拉低估计值</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>情况</th>
+					<th>更新量</th>
+					<th>含义</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>x &gt; Q</td>
+					<td>Q ← Q + 0.25 × step</td>
+					<td>当前值太大，稍微拉高估计值</td>
+			</tr>
+			<tr>
+					<td>x &lt; Q</td>
+					<td>Q ← Q - 0.75 × step</td>
+					<td>当前值太小，大幅拉低估计值</td>
+			</tr>
+	</tbody>
 </table>
 <h4 id="收敛分析平衡点--25分位数">收敛分析：平衡点 = 25%分位数</h4>
 <p>考虑连续观察大量值 {x₁, x₂, &hellip;, xₙ}，估计值 Q 如果在一个固定位置附近波动，那它一定满足：
 平均上调量 ≈ 平均下调量，也就是说，在那个点：</p>
 <blockquote>
-<p>上调概率 × 上调步长 = 下调概率 × 下调步长</p></blockquote>
+<p>上调概率 × 上调步长 = 下调概率 × 下调步长</p>
+</blockquote>
 <p>其中：</p>
 <ul>
 <li>上调概率 p_up = P(x &gt; Q)</li>
@@ -4460,7 +4479,8 @@ $$</p>
 </ul>
 <p>✅ 说明这个估计最终会逼近 25% 分位数！</p>
 <blockquote>
-<p>这个分位数的实现真是妙了呀，避免了常规分位计算需要排序的问题，同时还可以实时更新。👍</p></blockquote>
+<p>这个分位数的实现真是妙了呀，避免了常规分位计算需要排序的问题，同时还可以实时更新。👍</p>
+</blockquote>
 <h3 id="多分位数估计分时更新">多分位数估计分时更新</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -4552,7 +4572,8 @@ $$</p>
 <h3 id="利用密度估计实现自适应步长">利用”密度“估计实现自适应步长</h3>
 <p>分位数估计器在更新的时候，其更新步长与这个density_变量直接相关，现在我们来看下webrtc的实现是如何做到自适应步长的。</p>
 <blockquote>
-<p>density_[j]表示: 当前分位数估计点附近的”局部密度估计“，近似表示这个log频谱点的概率密度函数值。</p></blockquote>
+<p>density_[j]表示: 当前分位数估计点附近的”局部密度估计“，近似表示这个log频谱点的概率密度函数值。</p>
+</blockquote>
 <p>现实场景中，噪声频点能量分布是变化的，当低噪声变化时，噪声频点能量分布密集；当语音变化时，噪声频点能量分布稀疏。因此需要估计分布密度，以调整步长动态性，防止在高密度或低密度区域过度抖动或者太慢反应</p>
 <ul>
 <li>density_是如何计算的</li>
@@ -4579,33 +4600,34 @@ $$</p>
 </div>
 <p>这是一种滑动窗口统计估计法：</p>
 <table>
-  <thead>
-      <tr>
-          <th>步骤</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>fabs(&hellip;) &lt; kWidth</td>
-          <td>当前观测值是否落在估计值 ±0.01 范围内</td>
-      </tr>
-      <tr>
-          <td>kOneByWidthPlus2 = 1 / (2 × 0.01)</td>
-          <td>这是一个常数权重（经验值）</td>
-      </tr>
-      <tr>
-          <td>density_[j] = (&hellip;)</td>
-          <td>使用 指数滑动平均 来更新密度值</td>
-      </tr>
-      <tr>
-          <td>最终的效果是：</td>
-          <td></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>步骤</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>fabs(&hellip;) &lt; kWidth</td>
+					<td>当前观测值是否落在估计值 ±0.01 范围内</td>
+			</tr>
+			<tr>
+					<td>kOneByWidthPlus2 = 1 / (2 × 0.01)</td>
+					<td>这是一个常数权重（经验值）</td>
+			</tr>
+			<tr>
+					<td>density_[j] = (&hellip;)</td>
+					<td>使用 指数滑动平均 来更新密度值</td>
+			</tr>
+			<tr>
+					<td>最终的效果是：</td>
+					<td></td>
+			</tr>
+	</tbody>
 </table>
 <blockquote>
-<p>density_[j] 趋近于“单位宽度窗口”内命中次数的平均值 —— 表示在分位点附近的信号频谱密集程度。</p></blockquote>
+<p>density_[j] 趋近于“单位宽度窗口”内命中次数的平均值 —— 表示在分位点附近的信号频谱密集程度。</p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1

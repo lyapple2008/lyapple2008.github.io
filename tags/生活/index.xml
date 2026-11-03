@@ -9,8 +9,8 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.147.9</generator>
-    <language>zh</language>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Thu, 03 Sep 2026 22:30:00 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/tags/%E7%94%9F%E6%B4%BB/index.xml" rel="self" type="application/rss+xml" />
@@ -20,7 +20,8 @@
       <pubDate>Sun, 22 Feb 2026 09:43:54 +0800</pubDate>
       <guid>https://lyapple2008.github.io/posts/2026-todo/</guid>
       <description>&lt;blockquote&gt;
-&lt;p&gt;记录跟踪2026年要做的事情和正在做的事情。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;记录跟踪2026年要做的事情和正在做的事情。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;目标&#34;&gt;目标&lt;/h2&gt;
 &lt;ul&gt;
@@ -50,9 +51,17 @@ chart.setOption({
 &lt;/script&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;探索可能&lt;/p&gt;</description>
+&lt;p&gt;探索可能&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 英语能力，熟练3篇演讲短文&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 独立开发，目标完成4个独立项目 &amp;ndash;&amp;gt; 进度2/4&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 公众号输出，目标输出文章10篇  &amp;ndash;&amp;gt; 进度12/10&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
       <content:encoded><![CDATA[<blockquote>
-<p>记录跟踪2026年要做的事情和正在做的事情。</p></blockquote>
+<p>记录跟踪2026年要做的事情和正在做的事情。</p>
+</blockquote>
 <hr>
 <h2 id="目标">目标</h2>
 <ul>
@@ -110,31 +119,36 @@ chart.setOption({
 </ul>
 <h2 id="一些随想">一些随想</h2>
 <blockquote>
-<p>记录一些生活工作中一些小感受和小想法</p></blockquote>
+<p>记录一些生活工作中一些小感受和小想法</p>
+</blockquote>
 <ul>
 <li>2026.10.18</li>
 </ul>
 <blockquote>
-<p>AI流行的这段时间，每天都在想如何利用AI提高工作效率，提高AI含量，最近越来越发现瓶颈在个人，也许本质还是没有变化，决定产物质量的高量还是个人，所以慢下来提高个人能力还是一如既往的重要。</p></blockquote>
+<p>AI流行的这段时间，每天都在想如何利用AI提高工作效率，提高AI含量，最近越来越发现瓶颈在个人，也许本质还是没有变化，决定产物质量的高量还是个人，所以慢下来提高个人能力还是一如既往的重要。</p>
+</blockquote>
 <ul>
 <li>2026.07.04</li>
 </ul>
 <blockquote>
-<p>慢下来才能更快。</p></blockquote>
+<p>慢下来才能更快。</p>
+</blockquote>
 <ul>
 <li>2026.05.24</li>
 </ul>
 <blockquote>
 <p>You can outsource your thinking, but you can&rsquo;t outsource your understanding.<br>
 思考可以外包，但理解不能外包<br>
-虽然现在AI进展神速，但是工作/学习的底层逻辑没有变化，AI只是加速了知识的获取和帮忙个人思考，对事情的理解过程还是存在于个人的大脑，这个是AI没法替你完成的。</p></blockquote>
+虽然现在AI进展神速，但是工作/学习的底层逻辑没有变化，AI只是加速了知识的获取和帮忙个人思考，对事情的理解过程还是存在于个人的大脑，这个是AI没法替你完成的。</p>
+</blockquote>
 <ul>
 <li>2026.03.29</li>
 </ul>
 <blockquote>
 <p>每天记录和量化进度，本身就是一种负担，而且对于效率提高帮助不大，也不利于长期任务，与其每天盯着任务进度，
 不如现在开始试下，里程碑式的工作方法，给自己一段时间设定一些目标，到期后来检查完成情况，中间如何只记录
-据有里程碑意义的事件。</p></blockquote>
+据有里程碑意义的事件。</p>
+</blockquote>
 ]]></content:encoded>
     </item>
     <item>
@@ -185,7 +199,8 @@ chart.setOption({
 <p>我并不认为懂财务的人就不该买自住房。对很多中国家庭，房子同时承担居住、婚姻、子女教育和安全感，完全按美国那套「先买出租物业」来生活，既不现实，也不必要。</p>
 <p>更要紧的是承认：</p>
 <blockquote>
-<p>自住房是你愿意为之付钱的消费品。它可能在很多年以后变成净资产，但它在供着的时候，并不是资产。</p></blockquote>
+<p>自住房是你愿意为之付钱的消费品。它可能在很多年以后变成净资产，但它在供着的时候，并不是资产。</p>
+</blockquote>
 <p>愿意付，是因为你要住，而且现金流睡得着。不愿意，也可以继续租，把住房成本显式化。真正麻烦的，是第三种：不为住，只为上车，然后把月供解释成「我在投资」。那不是投资，是用未来几十年的工资，给过去某一年的恐惧买单。</p>
 <p>如果已经买了，也不必道德化成「当初真蠢」。更实际的是把账重新记一遍：这套房每个月拿走多少钱、自己还能剩多少、剩下的钱有没有在买真正的资产。认清它是负债，比继续讲「反正房子还在」更有用。</p>
 <h2 id="三职业与事业ai-正在改写程序员这份职业">三、职业与事业：AI 正在改写程序员这份职业</h2>
@@ -247,98 +262,98 @@ chart.setOption({
 <p>前面几条是在降低月供压力，后面几条是在补风险。40 年本身不强制，银行也还会看年龄、收入和当地市场。实务上很多银行仍要求贷款到期时借款人不超过 70 到 75 岁，所以真正能贷满 40 年的，主要是更年轻的购房人。</p>
 <p>月供会少多少，可以用一组公开算法算清楚。按 100 万本金、年利率 3%、等额本息：</p>
 <table>
-  <thead>
-      <tr>
-          <th>年限</th>
-          <th>月供</th>
-          <th>总利息</th>
-          <th>前 5 年还本</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>30 年</td>
-          <td>4216 元</td>
-          <td>约 51.8 万</td>
-          <td>约 11.1 万</td>
-      </tr>
-      <tr>
-          <td>40 年</td>
-          <td>3580 元</td>
-          <td>约 71.8 万</td>
-          <td>约 7.0 万</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>年限</th>
+					<th>月供</th>
+					<th>总利息</th>
+					<th>前 5 年还本</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>30 年</td>
+					<td>4216 元</td>
+					<td>约 51.8 万</td>
+					<td>约 11.1 万</td>
+			</tr>
+			<tr>
+					<td>40 年</td>
+					<td>3580 元</td>
+					<td>约 71.8 万</td>
+					<td>约 7.0 万</td>
+			</tr>
+	</tbody>
 </table>
 <p>月供少了大约 636 元，总利息多了大约 20 万。前 5 年几乎都在还利息：30 年期还掉本金 11 万，40 年期只还掉 7 万。如果本金是 200 万、利率 3.05%，40 年比 30 年月供大约少 1269 元，总利息大约多 41 万。</p>
 <p>所以 40 年解决的是「这个月能不能过」，不是「这套房总共花多少钱」。它把压力从当下挪到了后面 10 年。</p>
 <h2 id="二其他国家的房贷政策">二、其他国家的房贷政策</h2>
 <p>把贷款年限拉长，不是中国独创。房价相对收入偏高、年轻人前期收入偏低时，很多国家都用过「以时间换月供」。差别在于：有的国家把风险关在银行门口，有的国家把风险摊给下一代。</p>
 <table>
-  <thead>
-      <tr>
-          <th>国家 / 地区</th>
-          <th>常见或最长年限</th>
-          <th>首付 / 成数</th>
-          <th>更关键的约束</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>美国</td>
-          <td>30 年固定利率是主流</td>
-          <td>常规 3%–20%</td>
-          <td>债务收入比大约 43%–50%；长期锁利率</td>
-      </tr>
-      <tr>
-          <td>英国</td>
-          <td>传统 25 年，现可到 35–40 年</td>
-          <td>常见 5%–10%</td>
-          <td>多数要求贷款在 70–75 岁前到期</td>
-      </tr>
-      <tr>
-          <td>日本</td>
-          <td>传统 35 年，近年出现 50 年</td>
-          <td>常见 10%–20%</td>
-          <td>团信几乎是标配；还有两代接力还款</td>
-      </tr>
-      <tr>
-          <td>新加坡</td>
-          <td>HDB 贷款最长 25 年，银行贷款约 30–35 年</td>
-          <td>成数受剩余年限和年龄限制</td>
-          <td>用公积金还贷通常必须上住房保障保险</td>
-      </tr>
-      <tr>
-          <td>德国</td>
-          <td>合同常先固定 10–15 年，总年期 20–30 年</td>
-          <td>常见约 20%</td>
-          <td>不靠拉长年限制造购买力</td>
-      </tr>
-      <tr>
-          <td>法国</td>
-          <td>常见 20–25 年</td>
-          <td>0–10% 都有</td>
-          <td>还款占收入硬上限约 35%</td>
-      </tr>
-      <tr>
-          <td>荷兰</td>
-          <td>最长约 30 年</td>
-          <td>理论上可接近 0 首付</td>
-          <td>负债率表非常严</td>
-      </tr>
-      <tr>
-          <td>瑞典</td>
-          <td>法律上几乎没有上限</td>
-          <td>约 15%</td>
-          <td>曾经大量超长期甚至只还利息，2016 年后强制摊还</td>
-      </tr>
-      <tr>
-          <td>葡萄牙</td>
-          <td>居民最长可到 40–50 年</td>
-          <td>因银行而异</td>
-          <td>通常要求在 75–80 岁前还清</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>国家 / 地区</th>
+					<th>常见或最长年限</th>
+					<th>首付 / 成数</th>
+					<th>更关键的约束</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>美国</td>
+					<td>30 年固定利率是主流</td>
+					<td>常规 3%–20%</td>
+					<td>债务收入比大约 43%–50%；长期锁利率</td>
+			</tr>
+			<tr>
+					<td>英国</td>
+					<td>传统 25 年，现可到 35–40 年</td>
+					<td>常见 5%–10%</td>
+					<td>多数要求贷款在 70–75 岁前到期</td>
+			</tr>
+			<tr>
+					<td>日本</td>
+					<td>传统 35 年，近年出现 50 年</td>
+					<td>常见 10%–20%</td>
+					<td>团信几乎是标配；还有两代接力还款</td>
+			</tr>
+			<tr>
+					<td>新加坡</td>
+					<td>HDB 贷款最长 25 年，银行贷款约 30–35 年</td>
+					<td>成数受剩余年限和年龄限制</td>
+					<td>用公积金还贷通常必须上住房保障保险</td>
+			</tr>
+			<tr>
+					<td>德国</td>
+					<td>合同常先固定 10–15 年，总年期 20–30 年</td>
+					<td>常见约 20%</td>
+					<td>不靠拉长年限制造购买力</td>
+			</tr>
+			<tr>
+					<td>法国</td>
+					<td>常见 20–25 年</td>
+					<td>0–10% 都有</td>
+					<td>还款占收入硬上限约 35%</td>
+			</tr>
+			<tr>
+					<td>荷兰</td>
+					<td>最长约 30 年</td>
+					<td>理论上可接近 0 首付</td>
+					<td>负债率表非常严</td>
+			</tr>
+			<tr>
+					<td>瑞典</td>
+					<td>法律上几乎没有上限</td>
+					<td>约 15%</td>
+					<td>曾经大量超长期甚至只还利息，2016 年后强制摊还</td>
+			</tr>
+			<tr>
+					<td>葡萄牙</td>
+					<td>居民最长可到 40–50 年</td>
+					<td>因银行而异</td>
+					<td>通常要求在 75–80 岁前还清</td>
+			</tr>
+	</tbody>
 </table>
 <p>几个值得单独说的点：</p>
 <p><strong>美国的 30 年固定利率</strong>，本质不是「贷得久」，而是「利率锁得住」。借款人用确定性换时间，银行再把贷款打包卖到资本市场。中国目前主流仍是 LPR 加点的浮动利率，拉长年限之后，利率风险还在借款人身上。</p>
@@ -418,7 +433,8 @@ chart.setOption({
 </ul>
 <p>书里还有一句常被简化的话：富人买资产，穷人买负债。它容易被读成「永远别买房」。我并不这么看。对很多中国家庭，房子同时承担居住、婚姻、子女教育和安全感，完全按美国那套「先买出租物业」来生活，既不现实，也不必要。更有用的读法是：</p>
 <blockquote>
-<p>先承认自住房是负债，再决定自己愿不愿意为这份负债付钱。</p></blockquote>
+<p>先承认自住房是负债，再决定自己愿不愿意为这份负债付钱。</p>
+</blockquote>
 <p>愿意，是因为你要的是确定的居住，不是因为政策让你「上车更便宜了」。不愿意，也不需要道德化成「懂财务的人都不买房」。租房把住房成本显式化，买房把住房成本隐藏进月供和利息。两种都是在为住付钱，区别只是：钱付给房东，还是付给银行，以及 10 年、20 年后手里有没有一套还完债的房子。</p>
 <p>从财务账上看，我会给自己三条很具体的建议。</p>
 <p>第一，<strong>用 30 年的月供标准去衡量能不能买，用 40 年当备用轮胎。</strong> 过得了 30 年这关，40 年就是锦上添花；过不了 30 年、只能过 40 年，说明规模已经碰到天花板。</p>
@@ -441,7 +457,8 @@ chart.setOption({
 <p>我觉得所谓的算法工程师应该叫算法应用工程师会更合适一些。因为算法工程师的工作流程大概是这样的（以我自身的经历为例，可能不同公司有不同的工作方式），接到一个功能需求，然后开始调研实现这个功能需要的算法，研究过程中挑选两三种可能的方案，对这些挑选的方案进行实现（也可能是github clone），分析对比这几种方案。最后从中选出一种方案，作为最后的方案。接下来就是对最终的算法方案针对自己的功能需求和业务场景进行做优化，这期间你会对这个算法方案进行原理研究，参数调整，性能优化等等，最终的目标就是尽可能满足业务需求方的要求。</p>
 <p>知乎上@Jackpop的回答应该是符合大多数算法工程师的实际工作状态，而我们毕业那会想象中的算法工程师，天天手推工式那种，应该叫科学家或者研究员更合适些。<strong>总结一下，我觉得一个优秀的算法工程师应该是能够针对不同的业务场景选择最优的算法方案，并能对现有的算法针对业务场景做一些微调和优化，以更进一步适合业务场景。因为对于企业来说不能落地的算法，是丝毫没有价值的。</strong></p>
 <blockquote>
-<p>以下转载自知乎：https://www.zhihu.com/question/310484101/answer/644079765</p></blockquote>
+<p>以下转载自知乎：https://www.zhihu.com/question/310484101/answer/644079765</p>
+</blockquote>
 <h3 id="算法工程师大致做什么的">算法工程师大致做什么的？</h3>
 <p>算法，对于大多数理工科学生并不陌生。无论是学计算机还是学数学，或者其他理工科，我们都会接触很多成熟、经过十几年甚至几十年考验的算法。
 算法工程师的关键点在“工程师”这三个字，日常所做的工作无非是选择一种或几种成熟、优秀的算法进行组合、验证，来解决特定场景下的问题。在大多数企业里面这一点体现更为明显，**在企业里作为算法工程师是不会创造算法，只是使用经过多年考验的成熟、稳定算法。**其实现在不仅是企业界，就连学术界，创新可用的新算法也是寥寥可数，就拿人工智能常用的优化算法来说：</p>
@@ -509,12 +526,14 @@ chart.setOption({
 <li>最近一次记录的体重是64.3Kg，距离55Kg还是有很大距离，初始体重是65.9Kg</li>
 </ul>
 <blockquote>
-<p>这一项完成度是<strong>14.68%</strong></p></blockquote>
+<p>这一项完成度是<strong>14.68%</strong></p>
+</blockquote>
 <ul>
 <li>跑里程达到400Km，这里有记录的数据是8.20Km</li>
 </ul>
 <blockquote>
-<p>太可怜了，我不算了，直接写**0%**好了</p></blockquote>
+<p>太可怜了，我不算了，直接写**0%**好了</p>
+</blockquote>
 <ol start="2">
 <li>小爱好</li>
 </ol>
@@ -522,23 +541,27 @@ chart.setOption({
 <li>现在连一首&laquo;纸短情长&raquo;都还没练会，太笨了。。。。</li>
 </ul>
 <blockquote>
-<p>完成度是<strong>0%</strong></p></blockquote>
+<p>完成度是<strong>0%</strong></p>
+</blockquote>
 <ul>
 <li>今年书是看了《小岛经济学》《九败一胜：美团创始人王兴》《跃迁：成为高手的技术》</li>
 </ul>
 <blockquote>
-<p>这个完成度也算是<strong>0%</strong>，没有输出的阅读，相当于是无效的努力</p></blockquote>
+<p>这个完成度也算是<strong>0%</strong>，没有输出的阅读，相当于是无效的努力</p>
+</blockquote>
 <ol start="3">
 <li>技术</li>
 </ol>
 <blockquote>
 <p>音视频应用开发：这个也没有继续跟进下去，然后最后还是逃不掉<br>
-深度学习方面：由于新工作的原因，开始接触实际项目，算是个入门吧</p></blockquote>
+深度学习方面：由于新工作的原因，开始接触实际项目，算是个入门吧</p>
+</blockquote>
 <ol start="4">
 <li>写博客</li>
 </ol>
 <blockquote>
-<p>2018一共写了7篇文章，也是一个远不及格的成绩，没有输出相当于没有成长。</p></blockquote>
+<p>2018一共写了7篇文章，也是一个远不及格的成绩，没有输出相当于没有成长。</p>
+</blockquote>
 <h1 id="2019新的flag">2019新的Flag</h1>
 <p>虽然脸已经被打肿了，但是flag还是不能倒呀，2019-猪年-新的flag还是要立起来。通过回顾2018年flag的完成情况，可以深刻的把自己定位为一个执行力弱不爆的人士了。作为一个立志成为海贼王的男人，怎么可以这样呢，2019必须成长了呀，才能成为海贼王的男人。在成为海贼王的男人前，先把2019年的flag完成好吗，脸真的痛好吗</p>
 <ol>
@@ -580,14 +603,16 @@ chart.setOption({
 &lt;li&gt;课程：Fit健身&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;今天买了课程，花了大价钱，达不成目标就要打水漂了！！！&lt;/p&gt;</description>
+&lt;p&gt;今天买了课程，花了大价钱，达不成目标就要打水漂了！！！&lt;/p&gt;
+&lt;/blockquote&gt;</description>
       <content:encoded><![CDATA[<p>  今天又一次重新开始健身计划，这次到这里来做个记录，看看能坚持多久！为了更好的身体，为了腹肌，加油，少年，你是要成为海贼王的男人！！！</p>
 <ul>
 <li>器械：瑜伽垫一张</li>
 <li>课程：Fit健身</li>
 </ul>
 <blockquote>
-<p>今天买了课程，花了大价钱，达不成目标就要打水漂了！！！</p></blockquote>
+<p>今天买了课程，花了大价钱，达不成目标就要打水漂了！！！</p>
+</blockquote>
 <center>
 <!-- <img src="https://user-images.githubusercontent.com/3350865/61180053-a357bf80-a642-11e9-914e-529f460e4445.jpg" width="50%" height="50%"/> -->
 <img src="/images/2018-10-15-001.jpg" width="50%" height="50%"/>
@@ -599,136 +624,136 @@ chart.setOption({
 </li>
 </ul>
 <table>
-  <thead>
-      <tr>
-          <th>日期</th>
-          <th style="text-align: center">体重（Kg）</th>
-          <th style="text-align: center">运动内容</th>
-          <th style="text-align: center">运动时间（分钟）</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>2018-10-15</td>
-          <td style="text-align: center">65.9</td>
-          <td style="text-align: center">HIIT-畅快流汗</td>
-          <td style="text-align: center">20</td>
-      </tr>
-      <tr>
-          <td>2018-10-16</td>
-          <td style="text-align: center">65.0</td>
-          <td style="text-align: center">HIIT-畅快流汗</td>
-          <td style="text-align: center">20</td>
-      </tr>
-      <tr>
-          <td>2018-10-17</td>
-          <td style="text-align: center">65.3</td>
-          <td style="text-align: center">HIIT-腹部燃脂</td>
-          <td style="text-align: center">29</td>
-      </tr>
-      <tr>
-          <td>2018-10-18</td>
-          <td style="text-align: center">65.1</td>
-          <td style="text-align: center">HIIT-脂肪ByeBye</td>
-          <td style="text-align: center">14</td>
-      </tr>
-      <tr>
-          <td>2018-10-19</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-10-20</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-10-21</td>
-          <td style="text-align: center">64.7</td>
-          <td style="text-align: center">FIT健身体能测试</td>
-          <td style="text-align: center">10</td>
-      </tr>
-      <tr>
-          <td>2018-10-22</td>
-          <td style="text-align: center">65.4</td>
-          <td style="text-align: center">腹肌撕裂者初级<br>HIIT-进击的Burpee</td>
-          <td style="text-align: center">25</td>
-      </tr>
-      <tr>
-          <td>2018-10-23</td>
-          <td style="text-align: center">65.7</td>
-          <td style="text-align: center">打篮球</td>
-          <td style="text-align: center">60</td>
-      </tr>
-      <tr>
-          <td>2018-10-24</td>
-          <td style="text-align: center">65.4</td>
-          <td style="text-align: center">休息恢复</td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>2018-10-25</td>
-          <td style="text-align: center">65.6</td>
-          <td style="text-align: center">HIIT-腹部燃脂</td>
-          <td style="text-align: center">29</td>
-      </tr>
-      <tr>
-          <td>2018-10-26</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>2018-10-27</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center">HIIT-全身活力燃脂</td>
-          <td style="text-align: center">22</td>
-      </tr>
-      <tr>
-          <td>2018-10-28</td>
-          <td style="text-align: center">64.1</td>
-          <td style="text-align: center">HIIT-畅快流汗<br>入门瑜伽伸展</td>
-          <td style="text-align: center">30</td>
-      </tr>
-      <tr>
-          <td>2018-10-29</td>
-          <td style="text-align: center">65.1</td>
-          <td style="text-align: center">核心力量初级训练<br>Tabata-碎脂机进阶</td>
-          <td style="text-align: center">24</td>
-      </tr>
-      <tr>
-          <td>2018-10-30</td>
-          <td style="text-align: center">65.3</td>
-          <td style="text-align: center">打篮球</td>
-          <td style="text-align: center">60</td>
-      </tr>
-      <tr>
-          <td>2018-10-26</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>日期</th>
+					<th style="text-align: center">体重（Kg）</th>
+					<th style="text-align: center">运动内容</th>
+					<th style="text-align: center">运动时间（分钟）</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>2018-10-15</td>
+					<td style="text-align: center">65.9</td>
+					<td style="text-align: center">HIIT-畅快流汗</td>
+					<td style="text-align: center">20</td>
+			</tr>
+			<tr>
+					<td>2018-10-16</td>
+					<td style="text-align: center">65.0</td>
+					<td style="text-align: center">HIIT-畅快流汗</td>
+					<td style="text-align: center">20</td>
+			</tr>
+			<tr>
+					<td>2018-10-17</td>
+					<td style="text-align: center">65.3</td>
+					<td style="text-align: center">HIIT-腹部燃脂</td>
+					<td style="text-align: center">29</td>
+			</tr>
+			<tr>
+					<td>2018-10-18</td>
+					<td style="text-align: center">65.1</td>
+					<td style="text-align: center">HIIT-脂肪ByeBye</td>
+					<td style="text-align: center">14</td>
+			</tr>
+			<tr>
+					<td>2018-10-19</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-10-20</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-10-21</td>
+					<td style="text-align: center">64.7</td>
+					<td style="text-align: center">FIT健身体能测试</td>
+					<td style="text-align: center">10</td>
+			</tr>
+			<tr>
+					<td>2018-10-22</td>
+					<td style="text-align: center">65.4</td>
+					<td style="text-align: center">腹肌撕裂者初级<br>HIIT-进击的Burpee</td>
+					<td style="text-align: center">25</td>
+			</tr>
+			<tr>
+					<td>2018-10-23</td>
+					<td style="text-align: center">65.7</td>
+					<td style="text-align: center">打篮球</td>
+					<td style="text-align: center">60</td>
+			</tr>
+			<tr>
+					<td>2018-10-24</td>
+					<td style="text-align: center">65.4</td>
+					<td style="text-align: center">休息恢复</td>
+					<td></td>
+			</tr>
+			<tr>
+					<td>2018-10-25</td>
+					<td style="text-align: center">65.6</td>
+					<td style="text-align: center">HIIT-腹部燃脂</td>
+					<td style="text-align: center">29</td>
+			</tr>
+			<tr>
+					<td>2018-10-26</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td></td>
+			</tr>
+			<tr>
+					<td>2018-10-27</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center">HIIT-全身活力燃脂</td>
+					<td style="text-align: center">22</td>
+			</tr>
+			<tr>
+					<td>2018-10-28</td>
+					<td style="text-align: center">64.1</td>
+					<td style="text-align: center">HIIT-畅快流汗<br>入门瑜伽伸展</td>
+					<td style="text-align: center">30</td>
+			</tr>
+			<tr>
+					<td>2018-10-29</td>
+					<td style="text-align: center">65.1</td>
+					<td style="text-align: center">核心力量初级训练<br>Tabata-碎脂机进阶</td>
+					<td style="text-align: center">24</td>
+			</tr>
+			<tr>
+					<td>2018-10-30</td>
+					<td style="text-align: center">65.3</td>
+					<td style="text-align: center">打篮球</td>
+					<td style="text-align: center">60</td>
+			</tr>
+			<tr>
+					<td>2018-10-26</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td></td>
+			</tr>
+	</tbody>
 </table>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: center">运动天数</th>
-          <th style="text-align: center">开始体重</th>
-          <th style="text-align: center">结束体重</th>
-          <th style="text-align: center">体重变化（Kg）</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: center">13</td>
-          <td style="text-align: center">65.9</td>
-          <td style="text-align: center">65.3</td>
-          <td style="text-align: center">-0.6</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: center">运动天数</th>
+					<th style="text-align: center">开始体重</th>
+					<th style="text-align: center">结束体重</th>
+					<th style="text-align: center">体重变化（Kg）</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: center">13</td>
+					<td style="text-align: center">65.9</td>
+					<td style="text-align: center">65.3</td>
+					<td style="text-align: center">-0.6</td>
+			</tr>
+	</tbody>
 </table>
 <hr>
 <ul>
@@ -737,208 +762,208 @@ chart.setOption({
 </li>
 </ul>
 <table>
-  <thead>
-      <tr>
-          <th>日期</th>
-          <th style="text-align: center">体重（Kg）</th>
-          <th style="text-align: center">运动内容</th>
-          <th style="text-align: center">运动时间（分钟）</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>2018-11-1</td>
-          <td style="text-align: center">64.7</td>
-          <td style="text-align: center">腹肌撕裂者初级<br>HIIT-减脂巨星</td>
-          <td style="text-align: center">41</td>
-      </tr>
-      <tr>
-          <td>2018-11-2</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-11-3</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-11-4</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-11-5</td>
-          <td style="text-align: center">64.6</td>
-          <td style="text-align: center">HIIT-畅快流汗<br>核心进阶减脂训练</td>
-          <td style="text-align: center">36</td>
-      </tr>
-      <tr>
-          <td>2018-11-6</td>
-          <td style="text-align: center">64.3</td>
-          <td style="text-align: center">强力带全身焕活-减脂初级</td>
-          <td style="text-align: center">49</td>
-      </tr>
-      <tr>
-          <td>2018-11-7</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>2018-11-8</td>
-          <td style="text-align: center">64.7</td>
-          <td style="text-align: center">HIIT-全身活力燃脂<br>腹肌撕裂者进阶</td>
-          <td style="text-align: center">40</td>
-      </tr>
-      <tr>
-          <td>2018-11-9</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-11-10</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-11-11</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-11-12</td>
-          <td style="text-align: center">64.1</td>
-          <td style="text-align: center">Tabata-碎脂机进阶<br>核心进阶减脂训练</td>
-          <td style="text-align: center">29</td>
-      </tr>
-      <tr>
-          <td>2018-11-13</td>
-          <td style="text-align: center">64.2</td>
-          <td style="text-align: center">打篮球</td>
-          <td style="text-align: center">60</td>
-      </tr>
-      <tr>
-          <td>2018-11-14</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td></td>
-      </tr>
-      <tr>
-          <td>2018-11-15</td>
-          <td style="text-align: center">64.6</td>
-          <td style="text-align: center">HIIT-腹部燃脂</td>
-          <td style="text-align: center">28</td>
-      </tr>
-      <tr>
-          <td>2018-11-16</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-11-17</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-11-18</td>
-          <td style="text-align: center">64.6</td>
-          <td style="text-align: center"><a href="https://www.youtube.com/watch?v=bTHnzGSgkqk">十分鐘家中腹肌訓練</a></td>
-          <td style="text-align: center">10</td>
-      </tr>
-      <tr>
-          <td>2018-11-19</td>
-          <td style="text-align: center">64.7</td>
-          <td style="text-align: center">HIIT-进击的Burpee</td>
-          <td style="text-align: center">22</td>
-      </tr>
-      <tr>
-          <td>2018-11-20</td>
-          <td style="text-align: center">64.3</td>
-          <td style="text-align: center">打篮球</td>
-          <td style="text-align: center">60</td>
-      </tr>
-      <tr>
-          <td>2018-11-21</td>
-          <td style="text-align: center">64.4</td>
-          <td style="text-align: center">HIIT-腹部燃脂</td>
-          <td style="text-align: center">29</td>
-      </tr>
-      <tr>
-          <td>2018-11-22</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-11-23</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-11-24</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-11-25</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-11-26</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-11-27</td>
-          <td style="text-align: center">63.6</td>
-          <td style="text-align: center">打篮球</td>
-          <td style="text-align: center">60</td>
-      </tr>
-      <tr>
-          <td>2018-11-28</td>
-          <td style="text-align: center">63.7</td>
-          <td style="text-align: center">十分鐘家中腹肌訓練</td>
-          <td style="text-align: center">10</td>
-      </tr>
-      <tr>
-          <td>2018-11-29</td>
-          <td style="text-align: center">63.8</td>
-          <td style="text-align: center">HIIT-全身活力燃脂</td>
-          <td style="text-align: center">22</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>日期</th>
+					<th style="text-align: center">体重（Kg）</th>
+					<th style="text-align: center">运动内容</th>
+					<th style="text-align: center">运动时间（分钟）</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>2018-11-1</td>
+					<td style="text-align: center">64.7</td>
+					<td style="text-align: center">腹肌撕裂者初级<br>HIIT-减脂巨星</td>
+					<td style="text-align: center">41</td>
+			</tr>
+			<tr>
+					<td>2018-11-2</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-11-3</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-11-4</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-11-5</td>
+					<td style="text-align: center">64.6</td>
+					<td style="text-align: center">HIIT-畅快流汗<br>核心进阶减脂训练</td>
+					<td style="text-align: center">36</td>
+			</tr>
+			<tr>
+					<td>2018-11-6</td>
+					<td style="text-align: center">64.3</td>
+					<td style="text-align: center">强力带全身焕活-减脂初级</td>
+					<td style="text-align: center">49</td>
+			</tr>
+			<tr>
+					<td>2018-11-7</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td></td>
+			</tr>
+			<tr>
+					<td>2018-11-8</td>
+					<td style="text-align: center">64.7</td>
+					<td style="text-align: center">HIIT-全身活力燃脂<br>腹肌撕裂者进阶</td>
+					<td style="text-align: center">40</td>
+			</tr>
+			<tr>
+					<td>2018-11-9</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-11-10</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-11-11</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-11-12</td>
+					<td style="text-align: center">64.1</td>
+					<td style="text-align: center">Tabata-碎脂机进阶<br>核心进阶减脂训练</td>
+					<td style="text-align: center">29</td>
+			</tr>
+			<tr>
+					<td>2018-11-13</td>
+					<td style="text-align: center">64.2</td>
+					<td style="text-align: center">打篮球</td>
+					<td style="text-align: center">60</td>
+			</tr>
+			<tr>
+					<td>2018-11-14</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td></td>
+			</tr>
+			<tr>
+					<td>2018-11-15</td>
+					<td style="text-align: center">64.6</td>
+					<td style="text-align: center">HIIT-腹部燃脂</td>
+					<td style="text-align: center">28</td>
+			</tr>
+			<tr>
+					<td>2018-11-16</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-11-17</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-11-18</td>
+					<td style="text-align: center">64.6</td>
+					<td style="text-align: center"><a href="https://www.youtube.com/watch?v=bTHnzGSgkqk">十分鐘家中腹肌訓練</a></td>
+					<td style="text-align: center">10</td>
+			</tr>
+			<tr>
+					<td>2018-11-19</td>
+					<td style="text-align: center">64.7</td>
+					<td style="text-align: center">HIIT-进击的Burpee</td>
+					<td style="text-align: center">22</td>
+			</tr>
+			<tr>
+					<td>2018-11-20</td>
+					<td style="text-align: center">64.3</td>
+					<td style="text-align: center">打篮球</td>
+					<td style="text-align: center">60</td>
+			</tr>
+			<tr>
+					<td>2018-11-21</td>
+					<td style="text-align: center">64.4</td>
+					<td style="text-align: center">HIIT-腹部燃脂</td>
+					<td style="text-align: center">29</td>
+			</tr>
+			<tr>
+					<td>2018-11-22</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-11-23</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-11-24</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-11-25</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-11-26</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-11-27</td>
+					<td style="text-align: center">63.6</td>
+					<td style="text-align: center">打篮球</td>
+					<td style="text-align: center">60</td>
+			</tr>
+			<tr>
+					<td>2018-11-28</td>
+					<td style="text-align: center">63.7</td>
+					<td style="text-align: center">十分鐘家中腹肌訓練</td>
+					<td style="text-align: center">10</td>
+			</tr>
+			<tr>
+					<td>2018-11-29</td>
+					<td style="text-align: center">63.8</td>
+					<td style="text-align: center">HIIT-全身活力燃脂</td>
+					<td style="text-align: center">22</td>
+			</tr>
+	</tbody>
 </table>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: center">运动天数</th>
-          <th style="text-align: center">开始体重</th>
-          <th style="text-align: center">结束体重</th>
-          <th style="text-align: center">体重变化（Kg）</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: center">14</td>
-          <td style="text-align: center">65.3</td>
-          <td style="text-align: center">63.8</td>
-          <td style="text-align: center">-1.5</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: center">运动天数</th>
+					<th style="text-align: center">开始体重</th>
+					<th style="text-align: center">结束体重</th>
+					<th style="text-align: center">体重变化（Kg）</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: center">14</td>
+					<td style="text-align: center">65.3</td>
+					<td style="text-align: center">63.8</td>
+					<td style="text-align: center">-1.5</td>
+			</tr>
+	</tbody>
 </table>
 <hr>
 <ul>
@@ -947,118 +972,118 @@ chart.setOption({
 </li>
 </ul>
 <table>
-  <thead>
-      <tr>
-          <th>日期</th>
-          <th style="text-align: center">体重（Kg）</th>
-          <th style="text-align: center">运动内容</th>
-          <th style="text-align: center">运动时间（分钟）</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>2018-12-1</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-12-2</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-12-3</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-12-4</td>
-          <td style="text-align: center">64.4</td>
-          <td style="text-align: center">打篮球</td>
-          <td style="text-align: center">60</td>
-      </tr>
-      <tr>
-          <td>2018-12-5</td>
-          <td style="text-align: center">63.9</td>
-          <td style="text-align: center">腹肌撕裂者进阶</td>
-          <td style="text-align: center">18</td>
-      </tr>
-      <tr>
-          <td>2018-12-6</td>
-          <td style="text-align: center">64.0</td>
-          <td style="text-align: center">HIIT-进击的Burpee</td>
-          <td style="text-align: center">22</td>
-      </tr>
-      <tr>
-          <td>2018-12-7</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-12-8</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-12-9</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-12-10</td>
-          <td style="text-align: center">63.6</td>
-          <td style="text-align: center"><a href="https://www.youtube.com/watch?v=bTHnzGSgkqk">十分鐘家中腹肌訓練</a></td>
-          <td style="text-align: center">10</td>
-      </tr>
-      <tr>
-          <td>2018-12-11</td>
-          <td style="text-align: center">64.3</td>
-          <td style="text-align: center">打篮球</td>
-          <td style="text-align: center">60</td>
-      </tr>
-      <tr>
-          <td>2018-12-12</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-12-13</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-12-14</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-12-15</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-12-16</td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td>2018-12-17</td>
-          <td style="text-align: center">64.3</td>
-          <td style="text-align: center">HIIT-减脂巨星</td>
-          <td style="text-align: center">27</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>日期</th>
+					<th style="text-align: center">体重（Kg）</th>
+					<th style="text-align: center">运动内容</th>
+					<th style="text-align: center">运动时间（分钟）</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>2018-12-1</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-12-2</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-12-3</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-12-4</td>
+					<td style="text-align: center">64.4</td>
+					<td style="text-align: center">打篮球</td>
+					<td style="text-align: center">60</td>
+			</tr>
+			<tr>
+					<td>2018-12-5</td>
+					<td style="text-align: center">63.9</td>
+					<td style="text-align: center">腹肌撕裂者进阶</td>
+					<td style="text-align: center">18</td>
+			</tr>
+			<tr>
+					<td>2018-12-6</td>
+					<td style="text-align: center">64.0</td>
+					<td style="text-align: center">HIIT-进击的Burpee</td>
+					<td style="text-align: center">22</td>
+			</tr>
+			<tr>
+					<td>2018-12-7</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-12-8</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-12-9</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-12-10</td>
+					<td style="text-align: center">63.6</td>
+					<td style="text-align: center"><a href="https://www.youtube.com/watch?v=bTHnzGSgkqk">十分鐘家中腹肌訓練</a></td>
+					<td style="text-align: center">10</td>
+			</tr>
+			<tr>
+					<td>2018-12-11</td>
+					<td style="text-align: center">64.3</td>
+					<td style="text-align: center">打篮球</td>
+					<td style="text-align: center">60</td>
+			</tr>
+			<tr>
+					<td>2018-12-12</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-12-13</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-12-14</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-12-15</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-12-16</td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+					<td style="text-align: center"></td>
+			</tr>
+			<tr>
+					<td>2018-12-17</td>
+					<td style="text-align: center">64.3</td>
+					<td style="text-align: center">HIIT-减脂巨星</td>
+					<td style="text-align: center">27</td>
+			</tr>
+	</tbody>
 </table>
 <ul>
 <li>爆开始前的照片</li>
@@ -1078,18 +1103,22 @@ chart.setOption({
 <h2 id="1-健身">1. 健身</h2>
 <blockquote>
 <p>体重：55Kg
-跑步里程：400Km</p></blockquote>
+跑步里程：400Km</p>
+</blockquote>
 <h2 id="2-小爱好">2. 小爱好</h2>
 <blockquote>
 <p>Ukelele弹： 《活着》《带你去旅行》<br>
-阅读：5篇读书总结</p></blockquote>
+阅读：5篇读书总结</p>
+</blockquote>
 <h2 id="3-技术">3. 技术</h2>
 <blockquote>
 <p>短视频应用开发
-深度学习</p></blockquote>
+深度学习</p>
+</blockquote>
 <h2 id="4-写博客">4. 写博客</h2>
 <blockquote>
-<p>至少每月一篇博客</p></blockquote>]]></content:encoded>
+<p>至少每月一篇博客</p>
+</blockquote>]]></content:encoded>
     </item>
   </channel>
 </rss>

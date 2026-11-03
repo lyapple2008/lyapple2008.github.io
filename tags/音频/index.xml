@@ -9,8 +9,8 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.147.9</generator>
-    <language>zh</language>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Tue, 29 Sep 2026 09:05:00 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91/index.xml" rel="self" type="application/rss+xml" />
@@ -27,10 +27,12 @@
 <h2 id="一先从音频科技切入而不是直接做泛科技">一、先从音频科技切入，而不是直接做泛科技</h2>
 <p>结合自己的经历，目前比较合适的定位是：</p>
 <blockquote>
-<p>一个懂音频的程序员，用真实实验帮普通人看懂科技产品。</p></blockquote>
+<p>一个懂音频的程序员，用真实实验帮普通人看懂科技产品。</p>
+</blockquote>
 <p>如果进一步把账号价值压缩成一句话，可以是：</p>
 <blockquote>
-<p>不背参数，不念发布会，用实验告诉你技术有没有用、产品值不值得买。</p></blockquote>
+<p>不背参数，不念发布会，用实验告诉你技术有没有用、产品值不值得买。</p>
+</blockquote>
 <p>这个定位有几个好处：</p>
 <ul>
 <li>音频技术和我的从业经历高度匹配，不需要从零积累专业性；</li>
@@ -42,7 +44,8 @@
 <h2 id="二受众以普通消费者为主科技爱好者为辅">二、受众以普通消费者为主，科技爱好者为辅</h2>
 <p>我不想只面向音频开发人员，因为这个群体相对小，内容也容易变成技术课程。更合适的受众关系是：</p>
 <blockquote>
-<p>普通消费者是主要服务对象，科技爱好者是内容传播者和专业度验证者。</p></blockquote>
+<p>普通消费者是主要服务对象，科技爱好者是内容传播者和专业度验证者。</p>
+</blockquote>
 <p>这类观众不一定想学习一整套算法，但会关心三个问题：</p>
 <ol>
 <li>这个功能到底有什么用？</li>
@@ -54,35 +57,35 @@
 <p>起步阶段不宜在手机、汽车、相机和电脑之间反复跳跃。观众需要先能用一句话记住这个账号，之后才会接受内容边界的扩展。</p>
 <p>初期可以按以下比例规划：</p>
 <table>
-  <thead>
-      <tr>
-          <th>内容方向</th>
-          <th style="text-align: right">比例</th>
-          <th>主要作用</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>耳机、麦克风、音箱、直播设备</td>
-          <td style="text-align: right">50%</td>
-          <td>建立专业标签和账号辨识度</td>
-      </tr>
-      <tr>
-          <td>AI 语音、AI 硬件、智能设备</td>
-          <td style="text-align: right">25%</td>
-          <td>承接科技热点和新产品</td>
-      </tr>
-      <tr>
-          <td>手机、电脑等泛科技产品</td>
-          <td style="text-align: right">15%</td>
-          <td>逐步扩大受众范围</td>
-      </tr>
-      <tr>
-          <td>程序员视角和行业故事</td>
-          <td style="text-align: right">10%</td>
-          <td>建立真实的个人形象</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>内容方向</th>
+					<th style="text-align: right">比例</th>
+					<th>主要作用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>耳机、麦克风、音箱、直播设备</td>
+					<td style="text-align: right">50%</td>
+					<td>建立专业标签和账号辨识度</td>
+			</tr>
+			<tr>
+					<td>AI 语音、AI 硬件、智能设备</td>
+					<td style="text-align: right">25%</td>
+					<td>承接科技热点和新产品</td>
+			</tr>
+			<tr>
+					<td>手机、电脑等泛科技产品</td>
+					<td style="text-align: right">15%</td>
+					<td>逐步扩大受众范围</td>
+			</tr>
+			<tr>
+					<td>程序员视角和行业故事</td>
+					<td style="text-align: right">10%</td>
+					<td>建立真实的个人形象</td>
+			</tr>
+	</tbody>
 </table>
 <p>在表现形式上，可以先建立四个固定栏目。</p>
 <h3 id="1-这项技术到底有没有用">1. 这项技术到底有没有用</h3>
@@ -147,7 +150,8 @@
 </div>
 <p>例如讲降噪耳机，可以用一个普通用户经历过的问题开场：</p>
 <blockquote>
-<p>你的降噪耳机能消掉地铁声，却消不掉旁边的人说话，不一定是产品质量差。因为这两种声音对降噪算法来说，难度完全不同。</p></blockquote>
+<p>你的降噪耳机能消掉地铁声，却消不掉旁边的人说话，不一定是产品质量差。因为这两种声音对降噪算法来说，难度完全不同。</p>
+</blockquote>
 <p>紧接着播放对比实验，等观众已经产生疑问后，再解释稳定噪声和突发人声的区别。不宜一开头就从“主动降噪的定义”讲起。</p>
 <p>表达风格可以定为“可信赖的工程师朋友”：</p>
 <ul>
@@ -159,7 +163,8 @@
 </ul>
 <p>还可以尝试用一句固定结尾强化账号记忆：</p>
 <blockquote>
-<p>参数负责告诉我们它能做什么，实验负责告诉我们它做得怎么样。</p></blockquote>
+<p>参数负责告诉我们它能做什么，实验负责告诉我们它做得怎么样。</p>
+</blockquote>
 <h2 id="六第一批选题">六、第一批选题</h2>
 <p>第一批内容不应全部做新品评测，而应该同时测试实验、解释、购买建议和观点等不同内容模式。</p>
 <ol>
@@ -252,7 +257,8 @@
 </ol>
 <p>本质上，目标不是只做一个“靠流量吃饭的媒体”，而是：</p>
 <blockquote>
-<p>用大众内容建立影响力，再用专业能力完成高价值变现。</p></blockquote>
+<p>用大众内容建立影响力，再用专业能力完成高价值变现。</p>
+</blockquote>
 <p>这种模式与现有职业经验衔接得更好，也比单纯依赖广告分成更稳定。</p>
 <h2 id="十信任和职业边界">十、信任和职业边界</h2>
 <p>科技消费内容一旦开始变现，最容易损伤的就是观众信任。因此，需要尽早建立几条原则：</p>

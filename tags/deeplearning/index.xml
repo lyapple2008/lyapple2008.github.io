@@ -9,8 +9,8 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.147.9</generator>
-    <language>zh</language>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Mon, 10 Jun 2024 22:20:31 +0000</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/tags/deeplearning/index.xml" rel="self" type="application/rss+xml" />
@@ -167,7 +167,8 @@
 <li>减少限制跟要求，降低门槛 ，覆盖更多群体</li>
 </ul>
 <blockquote>
-<p>在谷歌内部，打造AI应用有两条思路，一是让更多人受惠，二是尽可能减少限制和要求</p></blockquote>
+<p>在谷歌内部，打造AI应用有两条思路，一是让更多人受惠，二是尽可能减少限制和要求</p>
+</blockquote>
 <!-- ![image.png](https://user-images.githubusercontent.com/3350865/62418833-90666700-b6a5-11e9-88f9-760391e1fe61.PNG) -->
 <img src="/images/2019-08-04-002.png"/>
 <ul>
@@ -175,7 +176,8 @@
 </ul>
 <blockquote>
 <p>个人隐私越来越被重视，以往的云端处理方案存在局限性
-一些场景要求算法要有极低的延时，如实时通信项目</p></blockquote>
+一些场景要求算法要有极低的延时，如实时通信项目</p>
+</blockquote>
 <p><em><strong>Flag终极目标：让算法随手可得</strong></em>
 <a name="6a1p8"></a></p>
 <!---more--->
@@ -237,11 +239,11 @@
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;-</span><span class="mi">8</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="cp">#ifndef FIXED_POINT
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="cm">/* Another check in case of -ffast-math */</span>
+</span></span></span><span class="line"><span class="cl">    <span class="cm">/* Another check in case of -ffast-math */</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">celt_isnan</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl">       <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">{</span>
 </span></span><span class="line"><span class="cl">       <span class="n">x</span><span class="o">=-</span><span class="n">x</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">       <span class="n">sign</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
@@ -324,90 +326,90 @@ x/(1+|x|)            5.5 ns
 <a name="10665c4b"></a></p>
 <h4 id="41-硬件厂商">4.1 硬件厂商</h4>
 <table>
-  <thead>
-      <tr>
-          <th>公司</th>
-          <th>硬件架构</th>
-          <th>开发工具</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>海思</td>
-          <td>NPU</td>
-          <td><a href="https://developer.huawei.com/consumer/cn/hiai">HiAI Foundation</a></td>
-      </tr>
-      <tr>
-          <td>高通</td>
-          <td>CPU/GPU/DSP</td>
-          <td><a href="https://developer.qualcomm.com/docs/snpe/index.html">Snapdragon Neural Processing Engine SDK</a></td>
-      </tr>
-      <tr>
-          <td>Apple</td>
-          <td>CPU/GPU/NeualEngine</td>
-          <td><a href="https://developer.apple.com/machine-learning/">CoreML</a></td>
-      </tr>
-      <tr>
-          <td>ARM</td>
-          <td>CPU/GPU</td>
-          <td><a href="https://github.com/ARM-software/armnn">ARM NN SDK</a></td>
-      </tr>
-      <tr>
-          <td>MediaTek</td>
-          <td>CPU/GPU/APU</td>
-          <td>NeuroPilot SDK</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>公司</th>
+					<th>硬件架构</th>
+					<th>开发工具</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>海思</td>
+					<td>NPU</td>
+					<td><a href="https://developer.huawei.com/consumer/cn/hiai">HiAI Foundation</a></td>
+			</tr>
+			<tr>
+					<td>高通</td>
+					<td>CPU/GPU/DSP</td>
+					<td><a href="https://developer.qualcomm.com/docs/snpe/index.html">Snapdragon Neural Processing Engine SDK</a></td>
+			</tr>
+			<tr>
+					<td>Apple</td>
+					<td>CPU/GPU/NeualEngine</td>
+					<td><a href="https://developer.apple.com/machine-learning/">CoreML</a></td>
+			</tr>
+			<tr>
+					<td>ARM</td>
+					<td>CPU/GPU</td>
+					<td><a href="https://github.com/ARM-software/armnn">ARM NN SDK</a></td>
+			</tr>
+			<tr>
+					<td>MediaTek</td>
+					<td>CPU/GPU/APU</td>
+					<td>NeuroPilot SDK</td>
+			</tr>
+	</tbody>
 </table>
 <p><a name="ca557462"></a></p>
 <h4 id="42-软件厂商">4.2 软件厂商</h4>
 <table>
-  <thead>
-      <tr>
-          <th>工具</th>
-          <th>公司</th>
-          <th>系统支持情况</th>
-          <th>特点</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><a href="">TensorFlow Lite</a></td>
-          <td>Google</td>
-          <td>Android/IOS</td>
-          <td>Android结合比较密，支持GPU加速</td>
-      </tr>
-      <tr>
-          <td><a href="">CoreML</a></td>
-          <td>Apple</td>
-          <td>IOS</td>
-          <td>软件硬件结合紧密，更新快</td>
-      </tr>
-      <tr>
-          <td><a href="">Caffe2</a></td>
-          <td>Facebook</td>
-          <td>Android/IOS</td>
-          <td></td>
-      </tr>
-      <tr>
-          <td><a href="">NCNN</a></td>
-          <td>Tencent</td>
-          <td>Android/IOS</td>
-          <td>支持大部分CNN网络，<strong>已经落地的应用多</strong></td>
-      </tr>
-      <tr>
-          <td><a href="https://github.com/XiaoMi/mace">MACE</a></td>
-          <td>小米</td>
-          <td>Android</td>
-          <td></td>
-      </tr>
-      <tr>
-          <td><a href="">MNN</a></td>
-          <td>阿里</td>
-          <td>Android/IOS</td>
-          <td></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>工具</th>
+					<th>公司</th>
+					<th>系统支持情况</th>
+					<th>特点</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><a href="">TensorFlow Lite</a></td>
+					<td>Google</td>
+					<td>Android/IOS</td>
+					<td>Android结合比较密，支持GPU加速</td>
+			</tr>
+			<tr>
+					<td><a href="">CoreML</a></td>
+					<td>Apple</td>
+					<td>IOS</td>
+					<td>软件硬件结合紧密，更新快</td>
+			</tr>
+			<tr>
+					<td><a href="">Caffe2</a></td>
+					<td>Facebook</td>
+					<td>Android/IOS</td>
+					<td></td>
+			</tr>
+			<tr>
+					<td><a href="">NCNN</a></td>
+					<td>Tencent</td>
+					<td>Android/IOS</td>
+					<td>支持大部分CNN网络，<strong>已经落地的应用多</strong></td>
+			</tr>
+			<tr>
+					<td><a href="https://github.com/XiaoMi/mace">MACE</a></td>
+					<td>小米</td>
+					<td>Android</td>
+					<td></td>
+			</tr>
+			<tr>
+					<td><a href="">MNN</a></td>
+					<td>阿里</td>
+					<td>Android/IOS</td>
+					<td></td>
+			</tr>
+	</tbody>
 </table>
 <ul>
 <li>利用Caffe2进行手写数字识别在Android端的部署</li>
@@ -493,9 +495,11 @@ skip-connection使得每个节点在进行建模时，能够同时利用到本�
 <!-- ![image](https://user-images.githubusercontent.com/3350865/61180151-90de8580-a644-11e9-97ac-3e7b2fcce8c6.jpg) -->
 <img src="/images/2019-03-31-007.jpg">
 <blockquote>
-<p>UNet++网络结构将Skip-Connection发挥到了极致，每个节点不单单只跟同层相邻节点连接，而是跟同层所有节点进行相连。同时一个大的UNet++网络结构其内部又可以一层层拆分成小的UNet++网络结构，这个特点使得其在做剪枝优化的时候非常简单方便，如图UNet++ L4到UNet++ L1就是简化过程。</p></blockquote>
+<p>UNet++网络结构将Skip-Connection发挥到了极致，每个节点不单单只跟同层相邻节点连接，而是跟同层所有节点进行相连。同时一个大的UNet++网络结构其内部又可以一层层拆分成小的UNet++网络结构，这个特点使得其在做剪枝优化的时候非常简单方便，如图UNet++ L4到UNet++ L1就是简化过程。</p>
+</blockquote>
 <blockquote>
-<p>由于UNet++相对于UNet结构增加了大概20%的参数，而训练数据并没有相应增强，最后的效果还没达到UNet的结果。</p></blockquote>
+<p>由于UNet++相对于UNet结构增加了大概20%的参数，而训练数据并没有相应增强，最后的效果还没达到UNet的结果。</p>
+</blockquote>
 <ul>
 <li>
 <h4 id="结合相位信息">结合相位信息</h4>
@@ -510,43 +514,45 @@ skip-connection使得每个节点在进行建模时，能够同时利用到本�
 <!-- ![image](https://user-images.githubusercontent.com/3350865/61180157-99cf5700-a644-11e9-9fd8-560b11e04dd7.jpg) -->
 <img src="/images/2019-03-31-010.jpg">
 <table>
-  <thead>
-      <tr>
-          <th>方法</th>
-          <th style="text-align: center">效果（1-10分，分数越高效果越好）</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>理想结果</td>
-          <td style="text-align: center">10</td>
-      </tr>
-      <tr>
-          <td>基于幅度谱方法的结果</td>
-          <td style="text-align: center">8</td>
-      </tr>
-      <tr>
-          <td>基于幅度谱和相位谱方法的结果</td>
-          <td style="text-align: center">7</td>
-      </tr>
-      <tr>
-          <td>忽略相位的结果</td>
-          <td style="text-align: center">0</td>
-      </tr>
-      <tr>
-          <td>基于幅度谱方法的理想结果</td>
-          <td style="text-align: center">8</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th style="text-align: center">效果（1-10分，分数越高效果越好）</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>理想结果</td>
+					<td style="text-align: center">10</td>
+			</tr>
+			<tr>
+					<td>基于幅度谱方法的结果</td>
+					<td style="text-align: center">8</td>
+			</tr>
+			<tr>
+					<td>基于幅度谱和相位谱方法的结果</td>
+					<td style="text-align: center">7</td>
+			</tr>
+			<tr>
+					<td>忽略相位的结果</td>
+					<td style="text-align: center">0</td>
+			</tr>
+			<tr>
+					<td>基于幅度谱方法的理想结果</td>
+					<td style="text-align: center">8</td>
+			</tr>
+	</tbody>
 </table>
 <blockquote>
-<p>相位对于音源分类任务的影响极小，更准确的幅度谱估计才能提升效果，相位沿用混合音频的相位就好。</p></blockquote>
+<p>相位对于音源分类任务的影响极小，更准确的幅度谱估计才能提升效果，相位沿用混合音频的相位就好。</p>
+</blockquote>
 <h3 id="一些可能的方向">一些可能的方向</h3>
 <ul>
 <li>WAVE U-Net直接在时域上进行分离</li>
 </ul>
 <blockquote>
-<p>WAVE U-Net分离的结果中伴奏都很弱</p></blockquote>
+<p>WAVE U-Net分离的结果中伴奏都很弱</p>
+</blockquote>
 <ul>
 <li>Multi-Scale Multi-band</li>
 </ul>
@@ -558,38 +564,38 @@ skip-connection使得每个节点在进行建模时，能够同时利用到本�
 </ul>
 <h3 id="公开的数据集">公开的数据集</h3>
 <table>
-  <thead>
-      <tr>
-          <th>名称</th>
-          <th>数据量</th>
-          <th>时长</th>
-          <th>年份</th>
-          <th>链接</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>DSD100</td>
-          <td>100首</td>
-          <td>6h58m20s</td>
-          <td>2015</td>
-          <td><a href="https://sigsep.github.io/datasets/dsd100.html">https://sigsep.github.io/datasets/dsd100.html</a></td>
-      </tr>
-      <tr>
-          <td>ccMixter</td>
-          <td>50首</td>
-          <td>3h12m30s</td>
-          <td>2014</td>
-          <td><a href="https://members.loria.fr/ALiutkus/kam/">https://members.loria.fr/ALiutkus/kam/</a></td>
-      </tr>
-      <tr>
-          <td>MUSDB18</td>
-          <td>150首</td>
-          <td>9h50m</td>
-          <td>2017</td>
-          <td><a href="https://sigsep.github.io/datasets/musdb.html">https://sigsep.github.io/datasets/musdb.html</a></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>名称</th>
+					<th>数据量</th>
+					<th>时长</th>
+					<th>年份</th>
+					<th>链接</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>DSD100</td>
+					<td>100首</td>
+					<td>6h58m20s</td>
+					<td>2015</td>
+					<td><a href="https://sigsep.github.io/datasets/dsd100.html">https://sigsep.github.io/datasets/dsd100.html</a></td>
+			</tr>
+			<tr>
+					<td>ccMixter</td>
+					<td>50首</td>
+					<td>3h12m30s</td>
+					<td>2014</td>
+					<td><a href="https://members.loria.fr/ALiutkus/kam/">https://members.loria.fr/ALiutkus/kam/</a></td>
+			</tr>
+			<tr>
+					<td>MUSDB18</td>
+					<td>150首</td>
+					<td>9h50m</td>
+					<td>2017</td>
+					<td><a href="https://sigsep.github.io/datasets/musdb.html">https://sigsep.github.io/datasets/musdb.html</a></td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="参考">参考</h3>
 <p>[1] <a href="https://www.math.ucdavis.edu/~aberrian/research/voice_separation/index.html">Project on Music/Voice Separation:  一些传统方法</a><br>

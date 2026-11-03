@@ -9,8 +9,8 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.147.9</generator>
-    <language>zh</language>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Sun, 25 Oct 2026 15:28:43 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/tags/%E9%9F%B3%E9%A2%91%E8%AE%BE%E5%A4%87/index.xml" rel="self" type="application/rss+xml" />
@@ -22,11 +22,13 @@
       <description>&lt;p&gt;麦克风把声音变成 PCM，扬声器把 PCM 变回声音。对一个实时通话系统来说，这两句话之间还有很多事情：选择设备、协商格式、启动音频流、适应设备回调的节奏，以及在耳机拔出、来电中断后恢复工作。&lt;/p&gt;
 &lt;p&gt;WebRTC 把这些工作集中在 &lt;strong&gt;Audio Device Module，简称 ADM&lt;/strong&gt;。理解它，最好先建立整体位置，再沿着音频数据走一遍，最后进入代码和平台实现。否则很容易把“设备缓冲”“网络抖动缓冲”和“回声消除”混成一件事。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;本文以本地 &lt;code&gt;webrtc_src&lt;/code&gt; 的提交 &lt;code&gt;3dec7d05377fb690e84f503db865edde982ab2a5&lt;/code&gt; 为源码基线，提交日期为 2026-10-23。正文主要讨论使用内置设备模块的 native 音频路径；浏览器或业务方可以注入自己的 ADM，复用这里的接口而采用不同的数据通路。文中的源码链接固定到该提交，代码片段会标明是否经过简化。&lt;/p&gt;&lt;/blockquote&gt;</description>
+&lt;p&gt;本文以本地 &lt;code&gt;webrtc_src&lt;/code&gt; 的提交 &lt;code&gt;3dec7d05377fb690e84f503db865edde982ab2a5&lt;/code&gt; 为源码基线，提交日期为 2026-10-23。正文主要讨论使用内置设备模块的 native 音频路径；浏览器或业务方可以注入自己的 ADM，复用这里的接口而采用不同的数据通路。文中的源码链接固定到该提交，代码片段会标明是否经过简化。&lt;/p&gt;
+&lt;/blockquote&gt;</description>
       <content:encoded><![CDATA[<p>麦克风把声音变成 PCM，扬声器把 PCM 变回声音。对一个实时通话系统来说，这两句话之间还有很多事情：选择设备、协商格式、启动音频流、适应设备回调的节奏，以及在耳机拔出、来电中断后恢复工作。</p>
 <p>WebRTC 把这些工作集中在 <strong>Audio Device Module，简称 ADM</strong>。理解它，最好先建立整体位置，再沿着音频数据走一遍，最后进入代码和平台实现。否则很容易把“设备缓冲”“网络抖动缓冲”和“回声消除”混成一件事。</p>
 <blockquote>
-<p>本文以本地 <code>webrtc_src</code> 的提交 <code>3dec7d05377fb690e84f503db865edde982ab2a5</code> 为源码基线，提交日期为 2026-10-23。正文主要讨论使用内置设备模块的 native 音频路径；浏览器或业务方可以注入自己的 ADM，复用这里的接口而采用不同的数据通路。文中的源码链接固定到该提交，代码片段会标明是否经过简化。</p></blockquote>
+<p>本文以本地 <code>webrtc_src</code> 的提交 <code>3dec7d05377fb690e84f503db865edde982ab2a5</code> 为源码基线，提交日期为 2026-10-23。正文主要讨论使用内置设备模块的 native 音频路径；浏览器或业务方可以注入自己的 ADM，复用这里的接口而采用不同的数据通路。文中的源码链接固定到该提交，代码片段会标明是否经过简化。</p>
+</blockquote>
 <h2 id="一整体视角adm-是-webrtc-与操作系统音频-io-的边界">一、整体视角：ADM 是 WebRTC 与操作系统音频 I/O 的边界</h2>
 <h3 id="11-它在整个系统的什么位置">1.1 它在整个系统的什么位置</h3>
 <p>可以把 WebRTC 的音频部分分成三个层次：最下面连接操作系统和设备，中间处理 PCM，上面处理编码后的数据和网络传输。</p>
@@ -50,35 +52,35 @@
 <p>从上向下看，ADM 提供“准备并启停输入输出、获取和交付 PCM”的能力；从下向上看，它把不同系统的音频 API 适配成 WebRTC 能使用的接口。上层不必分别理解 WASAPI、CoreAudio、AudioRecord 或 AudioUnit。</p>
 <h3 id="12-adm-管理哪些事情">1.2 ADM 管理哪些事情</h3>
 <table>
-  <thead>
-      <tr>
-          <th>职责</th>
-          <th>解决的问题</th>
-          <th>典型例子</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>设备与能力管理</td>
-          <td>用哪个输入输出，支持什么能力</td>
-          <td>枚举设备、选择默认设备、查询立体声和音量能力</td>
-      </tr>
-      <tr>
-          <td>生命周期管理</td>
-          <td>什么时候准备、开始、停止 I/O</td>
-          <td>初始化模块，准备录音流，启动采集，停止播放</td>
-      </tr>
-      <tr>
-          <td>PCM 交接与适配</td>
-          <td>如何把系统缓冲交给 WebRTC</td>
-          <td>格式转换、缓冲拼接、交付采集 PCM、请求播放 PCM</td>
-      </tr>
-      <tr>
-          <td>设备侧时序与状态</td>
-          <td>音频在设备侧停留多久，流是否正常</td>
-          <td>播放/采集延迟、可选采集时间戳、欠载或中断处理</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>职责</th>
+					<th>解决的问题</th>
+					<th>典型例子</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>设备与能力管理</td>
+					<td>用哪个输入输出，支持什么能力</td>
+					<td>枚举设备、选择默认设备、查询立体声和音量能力</td>
+			</tr>
+			<tr>
+					<td>生命周期管理</td>
+					<td>什么时候准备、开始、停止 I/O</td>
+					<td>初始化模块，准备录音流，启动采集，停止播放</td>
+			</tr>
+			<tr>
+					<td>PCM 交接与适配</td>
+					<td>如何把系统缓冲交给 WebRTC</td>
+					<td>格式转换、缓冲拼接、交付采集 PCM、请求播放 PCM</td>
+			</tr>
+			<tr>
+					<td>设备侧时序与状态</td>
+					<td>音频在设备侧停留多久，流是否正常</td>
+					<td>播放/采集延迟、可选采集时间戳、欠载或中断处理</td>
+			</tr>
+	</tbody>
 </table>
 <p>这里的“ADM”有两种常见含义：狭义上指公共的 <code>AudioDeviceModule</code> 接口；广义上指接口实现、平台后端和缓冲适配组成的整个设备模块。后面说“ADM 适配设备回调”时，通常采用广义含义。</p>
 <p>ADM 交付的是 PCM。降噪、回声消除等算法主要属于 <strong>APM（Audio Processing Module）</strong>；网络包的乱序、抖动与丢包补偿属于接收侧 <strong>NetEq</strong>；编码器负责把 PCM 压缩成待发送的音频。某些平台后端可以启用系统语音处理，但这不改变这些职责边界。</p>
@@ -146,30 +148,30 @@
 <p>在本文所讨论的 <code>AudioDeviceBuffer</code> → <code>AudioTransportImpl</code> 路径中，上下层主要交换 <strong>16-bit、交错存储的 PCM</strong>，每次处理 <strong>10 ms</strong>。交错双声道的排列是 <code>L0, R0, L1, R1, ...</code>。</p>
 <p>以 48 kHz 为例：</p>
 <table>
-  <thead>
-      <tr>
-          <th>概念</th>
-          <th>单声道的 10 ms</th>
-          <th>双声道的 10 ms</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>每声道样本数 / PCM frame 数</td>
-          <td>480</td>
-          <td>480</td>
-      </tr>
-      <tr>
-          <td>所有声道合计的标量样本数</td>
-          <td>480</td>
-          <td>960</td>
-      </tr>
-      <tr>
-          <td>数据字节数，S16</td>
-          <td>960</td>
-          <td>1920</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>概念</th>
+					<th>单声道的 10 ms</th>
+					<th>双声道的 10 ms</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>每声道样本数 / PCM frame 数</td>
+					<td>480</td>
+					<td>480</td>
+			</tr>
+			<tr>
+					<td>所有声道合计的标量样本数</td>
+					<td>480</td>
+					<td>960</td>
+			</tr>
+			<tr>
+					<td>数据字节数，S16</td>
+					<td>960</td>
+					<td>1920</td>
+			</tr>
+	</tbody>
 </table>
 <p>这里一个 <strong>PCM frame</strong> 包含同一时刻所有声道的样本；它与源码中表示一整段音频的 <code>AudioFrame</code> 对象是两个概念。换成 16 kHz，10 ms 就是每声道 160 个样本，因此 10 ms 也不等于固定的 480 个样本。</p>
 <p><strong>10 ms 是逻辑处理粒度，设备回调周期和编码包时长可以不同。</strong> 设备可能每次给 128、192 或其他数量的 PCM frame；编码器也可能积累两个 10 ms 输入，才产出一个 20 ms 的编码包。</p>
@@ -187,45 +189,45 @@
 <h2 id="三源码视角对象如何连接方法如何调用">三、源码视角：对象如何连接，方法如何调用</h2>
 <h3 id="31-先分清六个核心角色">3.1 先分清六个核心角色</h3>
 <table>
-  <thead>
-      <tr>
-          <th>对象 / 接口</th>
-          <th>主要责任</th>
-          <th>需要避免的误解</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>AudioDeviceModule</code></td>
-          <td>面向上层的设备公共接口</td>
-          <td>它不等于某一个平台实现类</td>
-      </tr>
-      <tr>
-          <td>平台后端</td>
-          <td>调用 OS API、操作设备流、完成本地缓冲适配</td>
-          <td>各平台的线程和缓冲结构可以不同</td>
-      </tr>
-      <tr>
-          <td><code>AudioDeviceBuffer</code>，ADB</td>
-          <td>保存 PCM、采样率、声道、延迟等，调用运输回调</td>
-          <td>它不会自动把任意输入拼成 10 ms</td>
-      </tr>
-      <tr>
-          <td><code>FineAudioBuffer</code></td>
-          <td>在任意设备块长与 10 ms 之间拆分、拼接</td>
-          <td>它既不做网络抖动控制，也不负责重采样</td>
-      </tr>
-      <tr>
-          <td><code>AudioTransport</code> / <code>AudioTransportImpl</code></td>
-          <td>前者定义双向 PCM 回调，后者连接 APM、发送流和混音器</td>
-          <td>这里的 Transport 不是网络传输</td>
-      </tr>
-      <tr>
-          <td><code>AudioState</code></td>
-          <td>协调 ADM、APM、混音器和收发流的公共状态</td>
-          <td>音频 PCM 回调实际由其内部的 <code>AudioTransportImpl</code> 承接</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>对象 / 接口</th>
+					<th>主要责任</th>
+					<th>需要避免的误解</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>AudioDeviceModule</code></td>
+					<td>面向上层的设备公共接口</td>
+					<td>它不等于某一个平台实现类</td>
+			</tr>
+			<tr>
+					<td>平台后端</td>
+					<td>调用 OS API、操作设备流、完成本地缓冲适配</td>
+					<td>各平台的线程和缓冲结构可以不同</td>
+			</tr>
+			<tr>
+					<td><code>AudioDeviceBuffer</code>，ADB</td>
+					<td>保存 PCM、采样率、声道、延迟等，调用运输回调</td>
+					<td>它不会自动把任意输入拼成 10 ms</td>
+			</tr>
+			<tr>
+					<td><code>FineAudioBuffer</code></td>
+					<td>在任意设备块长与 10 ms 之间拆分、拼接</td>
+					<td>它既不做网络抖动控制，也不负责重采样</td>
+			</tr>
+			<tr>
+					<td><code>AudioTransport</code> / <code>AudioTransportImpl</code></td>
+					<td>前者定义双向 PCM 回调，后者连接 APM、发送流和混音器</td>
+					<td>这里的 Transport 不是网络传输</td>
+			</tr>
+			<tr>
+					<td><code>AudioState</code></td>
+					<td>协调 ADM、APM、混音器和收发流的公共状态</td>
+					<td>音频 PCM 回调实际由其内部的 <code>AudioTransportImpl</code> 承接</td>
+			</tr>
+	</tbody>
 </table>
 <p>以通用 <code>AudioDeviceModuleImpl</code> 路径为例，对象关系如下。节点中合并标出接口与实现，箭头表示持有或调用关系，不表示单向音频流。</p>
 
@@ -263,7 +265,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// AudioDeviceModuleImpl::AttachAudioBuffer()，保留核心语句。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">audio_device_</span><span class="o">-&gt;</span><span class="n">AttachAudioBuffer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">audio_device_buffer_</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="n">audio_device_</span><span class="o">-&gt;</span><span class="n">AttachAudioBuffer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">audio_device_buffer_</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 <p>这让平台后端知道应该向哪个 ADB 交付录音、从哪个 ADB 获取播放数据。</p>
@@ -282,35 +284,35 @@
 <h3 id="33-控制调用链初始化与真正运行分开">3.3 控制调用链：初始化与真正运行分开</h3>
 <p><code>Init()</code>、<code>InitMicrophone()</code> 和 <code>StartRecording()</code> 不是同一件事。公共接口把模块初始化、设备控制能力准备、I/O 流准备与运行分开；各平台实际创建资源的时机可能有所不同。</p>
 <table>
-  <thead>
-      <tr>
-          <th>阶段</th>
-          <th>录音侧的代表方法</th>
-          <th>播放侧的代表方法</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>模块初始化</td>
-          <td><code>Init()</code></td>
-          <td>同一个 <code>Init()</code></td>
-      </tr>
-      <tr>
-          <td>选择设备、准备控制能力</td>
-          <td><code>SetRecordingDevice()</code>、<code>InitMicrophone()</code></td>
-          <td><code>SetPlayoutDevice()</code>、<code>InitSpeaker()</code></td>
-      </tr>
-      <tr>
-          <td>准备 I/O 流</td>
-          <td><code>InitRecording()</code></td>
-          <td><code>InitPlayout()</code></td>
-      </tr>
-      <tr>
-          <td>开始 / 停止数据流</td>
-          <td><code>StartRecording()</code> / <code>StopRecording()</code></td>
-          <td><code>StartPlayout()</code> / <code>StopPlayout()</code></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>阶段</th>
+					<th>录音侧的代表方法</th>
+					<th>播放侧的代表方法</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>模块初始化</td>
+					<td><code>Init()</code></td>
+					<td>同一个 <code>Init()</code></td>
+			</tr>
+			<tr>
+					<td>选择设备、准备控制能力</td>
+					<td><code>SetRecordingDevice()</code>、<code>InitMicrophone()</code></td>
+					<td><code>SetPlayoutDevice()</code>、<code>InitSpeaker()</code></td>
+			</tr>
+			<tr>
+					<td>准备 I/O 流</td>
+					<td><code>InitRecording()</code></td>
+					<td><code>InitPlayout()</code></td>
+			</tr>
+			<tr>
+					<td>开始 / 停止数据流</td>
+					<td><code>StartRecording()</code> / <code>StopRecording()</code></td>
+					<td><code>StartPlayout()</code> / <code>StopPlayout()</code></td>
+			</tr>
+	</tbody>
 </table>
 <p>在 <code>AudioState</code> 中，运行还与收发流是否存在、录音/播放开关是否启用有关：</p>
 
@@ -337,7 +339,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 伪代码：每次交付 10 ms，每声道样本数为 sample_rate / 100。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">adb</span><span class="o">-&gt;</span><span class="n">SetRecordedBuffer</span><span class="p">(</span><span class="n">pcm</span><span class="p">,</span> <span class="n">samples_per_channel</span><span class="p">,</span> <span class="n">capture_timestamp_ns</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">adb</span><span class="o">-&gt;</span><span class="n">SetRecordedBuffer</span><span class="p">(</span><span class="n">pcm</span><span class="p">,</span> <span class="n">samples_per_channel</span><span class="p">,</span> <span class="n">capture_timestamp_ns</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">adb</span><span class="o">-&gt;</span><span class="n">SetVQEData</span><span class="p">(</span><span class="n">playout_delay_ms</span><span class="p">,</span> <span class="n">recording_delay_ms</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">adb</span><span class="o">-&gt;</span><span class="n">DeliverRecordedData</span><span class="p">();</span></span></span></code></pre></td></tr></table>
 </div>
@@ -360,7 +362,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 简化自 AudioDeviceBuffer::DeliverRecordedData()，省略错误处理。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">const</span> <span class="n">size_t</span> <span class="n">frames</span> <span class="o">=</span> <span class="n">rec_buffer_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="n">rec_channels_</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">size_t</span> <span class="n">frames</span> <span class="o">=</span> <span class="n">rec_buffer_</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="n">rec_channels_</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">size_t</span> <span class="n">bytes_per_frame</span> <span class="o">=</span> <span class="n">rec_channels_</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int16_t</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="kt">uint32_t</span> <span class="n">ignored_new_mic_level</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
@@ -452,8 +454,8 @@ sequenceDiagram
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 伪代码：后端已经确定采样率、声道与 10 ms 块长。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">adb</span><span class="o">-&gt;</span><span class="n">RequestPlayoutData</span><span class="p">(</span><span class="n">samples_per_channel</span><span class="p">);</span>  <span class="c1">// 向上层请求并保存 PCM。
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">adb</span><span class="o">-&gt;</span><span class="n">GetPlayoutData</span><span class="p">(</span><span class="n">device_buffer</span><span class="p">);</span>           <span class="c1">// 复制到后端提供的缓冲。
+</span></span></span><span class="line"><span class="cl"><span class="n">adb</span><span class="o">-&gt;</span><span class="n">RequestPlayoutData</span><span class="p">(</span><span class="n">samples_per_channel</span><span class="p">);</span>  <span class="c1">// 向上层请求并保存 PCM。
+</span></span></span><span class="line"><span class="cl"><span class="n">adb</span><span class="o">-&gt;</span><span class="n">GetPlayoutData</span><span class="p">(</span><span class="n">device_buffer</span><span class="p">);</span>           <span class="c1">// 复制到后端提供的缓冲。
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div>
@@ -534,34 +536,34 @@ sequenceDiagram
 <p><code>AudioTransport</code> 还定义了 <code>PullRenderData()</code>。本基线中的注释说明，Chromium 使用这个入口并拥有自己的 APM，因此该方法没有在内部调用 <code>ProcessReverseStream()</code>；采集侧 <code>RecordedDataIsAvailable()</code> 的默认处理路径也注明不用于 Chromium。分析 Chrome 时，应继续追踪浏览器自己的采集与处理装配，不能把上面的 native 调用链直接套过去。</p>
 <h3 id="37-adbfineaudiobuffer-与-neteq三种缓冲分别解决什么">3.7 ADB、FineAudioBuffer 与 NetEq：三种缓冲分别解决什么</h3>
 <table>
-  <thead>
-      <tr>
-          <th>组件</th>
-          <th>缓冲的是什么</th>
-          <th>面对哪种差异</th>
-          <th>典型行为</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>AudioDeviceBuffer</code></td>
-          <td>本次采集 / 播放的 PCM</td>
-          <td>后端与运输回调的交接</td>
-          <td>保存 PCM、格式和元数据，调用双向接口</td>
-      </tr>
-      <tr>
-          <td><code>FineAudioBuffer</code></td>
-          <td>设备块与 10 ms 块之间的 PCM 余量</td>
-          <td>本地设备回调块长不一致</td>
-          <td>采集攒够 10 ms 才交付，播放取 10 ms 后按需切出</td>
-      </tr>
-      <tr>
-          <td><code>NetEq</code></td>
-          <td>接收包及解码、时伸缩等所需的音频状态</td>
-          <td>网络到包与稳定播放之间的时间差</td>
-          <td>抖动控制、按需解码、丢包补偿</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>组件</th>
+					<th>缓冲的是什么</th>
+					<th>面对哪种差异</th>
+					<th>典型行为</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>AudioDeviceBuffer</code></td>
+					<td>本次采集 / 播放的 PCM</td>
+					<td>后端与运输回调的交接</td>
+					<td>保存 PCM、格式和元数据，调用双向接口</td>
+			</tr>
+			<tr>
+					<td><code>FineAudioBuffer</code></td>
+					<td>设备块与 10 ms 块之间的 PCM 余量</td>
+					<td>本地设备回调块长不一致</td>
+					<td>采集攒够 10 ms 才交付，播放取 10 ms 后按需切出</td>
+			</tr>
+			<tr>
+					<td><code>NetEq</code></td>
+					<td>接收包及解码、时伸缩等所需的音频状态</td>
+					<td>网络到包与稳定播放之间的时间差</td>
+					<td>抖动控制、按需解码、丢包补偿</td>
+			</tr>
+	</tbody>
 </table>
 <p><code>FineAudioBuffer::DeliverRecordedData()</code> 中的循环体现了这个区别：追加本次设备数据，只要缓存达到一个 10 ms 块，就调用 ADB 的 <code>SetRecordedBuffer()</code>、<code>SetVQEData()</code>、<code>DeliverRecordedData()</code>，剩余数据保留到下次。</p>
 <p>反向的 <code>GetPlayoutData()</code> 则不断请求 10 ms，直到足够满足设备这次的需求，然后复制所需部分并保留余量。它会缓存后端传入的播放延迟，供后续采集交付时一起上报。完整实现见 <a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/modules/audio_device/fine_audio_buffer.cc">fine_audio_buffer.cc</a>。</p>
@@ -579,58 +581,58 @@ sequenceDiagram
     B &lt;--&gt; A[&#34;Android&lt;br/&gt;Java / OpenSL ES / AAudio&#34;]
     B &lt;--&gt; I[&#34;iOS&lt;br/&gt;AVAudioSession 与 VoiceProcessingIO&#34;]</div>
 <table>
-  <thead>
-      <tr>
-          <th>平台 / 路径</th>
-          <th>系统 I/O 方式</th>
-          <th>块长适配的主要位置</th>
-          <th>设备选择 / 路由</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>Windows 传统 Core Audio 后端</td>
-          <td>WASAPI 共享模式，事件唤醒采集/播放线程</td>
-          <td>后端的同步缓冲与 10 ms 循环</td>
-          <td>endpoint 枚举、设备 ID、默认设备角色</td>
-      </tr>
-      <tr>
-          <td>macOS</td>
-          <td>CoreAudio HAL 的 IOProc</td>
-          <td>环形缓冲、工作线程与 <code>AudioConverter</code></td>
-          <td>HAL 设备及属性监听</td>
-      </tr>
-      <tr>
-          <td>Linux PulseAudio</td>
-          <td>服务端音频流、threaded mainloop 与后端线程</td>
-          <td>后端按 10 ms 整理，与服务端缓冲衔接</td>
-          <td>Pulse server 的 source / sink</td>
-      </tr>
-      <tr>
-          <td>Linux ALSA</td>
-          <td>PCM 读写与等待</td>
-          <td>后端读写线程、本地缓冲</td>
-          <td>ALSA PCM 设备</td>
-      </tr>
-      <tr>
-          <td>Android Java</td>
-          <td><code>AudioRecord</code> / <code>AudioTrack</code> 高优先级线程</td>
-          <td>Java/JNI 按 10 ms 交接</td>
-          <td>Android 系统与应用的路由管理</td>
-      </tr>
-      <tr>
-          <td>Android OpenSL ES / AAudio</td>
-          <td>buffer queue / data callback</td>
-          <td><code>FineAudioBuffer</code></td>
-          <td>受系统路由和具体后端能力影响</td>
-      </tr>
-      <tr>
-          <td>iOS</td>
-          <td>VoiceProcessingIO AudioUnit 回调</td>
-          <td><code>FineAudioBuffer</code></td>
-          <td><code>AVAudioSession</code></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>平台 / 路径</th>
+					<th>系统 I/O 方式</th>
+					<th>块长适配的主要位置</th>
+					<th>设备选择 / 路由</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Windows 传统 Core Audio 后端</td>
+					<td>WASAPI 共享模式，事件唤醒采集/播放线程</td>
+					<td>后端的同步缓冲与 10 ms 循环</td>
+					<td>endpoint 枚举、设备 ID、默认设备角色</td>
+			</tr>
+			<tr>
+					<td>macOS</td>
+					<td>CoreAudio HAL 的 IOProc</td>
+					<td>环形缓冲、工作线程与 <code>AudioConverter</code></td>
+					<td>HAL 设备及属性监听</td>
+			</tr>
+			<tr>
+					<td>Linux PulseAudio</td>
+					<td>服务端音频流、threaded mainloop 与后端线程</td>
+					<td>后端按 10 ms 整理，与服务端缓冲衔接</td>
+					<td>Pulse server 的 source / sink</td>
+			</tr>
+			<tr>
+					<td>Linux ALSA</td>
+					<td>PCM 读写与等待</td>
+					<td>后端读写线程、本地缓冲</td>
+					<td>ALSA PCM 设备</td>
+			</tr>
+			<tr>
+					<td>Android Java</td>
+					<td><code>AudioRecord</code> / <code>AudioTrack</code> 高优先级线程</td>
+					<td>Java/JNI 按 10 ms 交接</td>
+					<td>Android 系统与应用的路由管理</td>
+			</tr>
+			<tr>
+					<td>Android OpenSL ES / AAudio</td>
+					<td>buffer queue / data callback</td>
+					<td><code>FineAudioBuffer</code></td>
+					<td>受系统路由和具体后端能力影响</td>
+			</tr>
+			<tr>
+					<td>iOS</td>
+					<td>VoiceProcessingIO AudioUnit 回调</td>
+					<td><code>FineAudioBuffer</code></td>
+					<td><code>AVAudioSession</code></td>
+			</tr>
+	</tbody>
 </table>
 <p>以下“默认”都指这份源码及对应构建条件下的选择。SDK 的创建入口、应用注入的 ADM 和构建开关，都会影响真正使用的后端。</p>
 <h3 id="42-windowswasapi-事件驱动注意两套-adm-入口">4.2 Windows：WASAPI 事件驱动，注意两套 ADM 入口</h3>
@@ -671,46 +673,46 @@ sequenceDiagram
 <h3 id="45-android输入与输出可以采用不同-api">4.5 Android：输入与输出可以采用不同 API</h3>
 <p>Android 需要先问清楚“通过哪个工厂、选择哪种 AudioLayer 创建 ADM”。native API 的 <code>CreateAndroidAudioDeviceModule()</code> 支持这些组合：</p>
 <table>
-  <thead>
-      <tr>
-          <th>AudioLayer</th>
-          <th>采集端</th>
-          <th>播放端</th>
-          <th>设计考虑</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>kAndroidJavaAudio</code></td>
-          <td><code>AudioRecord</code></td>
-          <td><code>AudioTrack</code></td>
-          <td>Java API 路径</td>
-      </tr>
-      <tr>
-          <td><code>kAndroidOpenSLESAudio</code></td>
-          <td>OpenSL ES</td>
-          <td>OpenSL ES</td>
-          <td>native buffer queue 路径</td>
-      </tr>
-      <tr>
-          <td><code>kAndroidJavaInputAndOpenSLESOutputAudio</code></td>
-          <td><code>AudioRecord</code></td>
-          <td>OpenSL ES</td>
-          <td>Java 输入音效能力与 native 输出结合</td>
-      </tr>
-      <tr>
-          <td><code>kAndroidAAudioAudio</code></td>
-          <td>AAudio</td>
-          <td>AAudio</td>
-          <td>AAudio data callback 路径，需构建支持</td>
-      </tr>
-      <tr>
-          <td><code>kAndroidJavaInputAndAAudioOutputAudio</code></td>
-          <td><code>AudioRecord</code></td>
-          <td>AAudio</td>
-          <td>Java 输入与 AAudio 输出组合，需构建支持</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>AudioLayer</th>
+					<th>采集端</th>
+					<th>播放端</th>
+					<th>设计考虑</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>kAndroidJavaAudio</code></td>
+					<td><code>AudioRecord</code></td>
+					<td><code>AudioTrack</code></td>
+					<td>Java API 路径</td>
+			</tr>
+			<tr>
+					<td><code>kAndroidOpenSLESAudio</code></td>
+					<td>OpenSL ES</td>
+					<td>OpenSL ES</td>
+					<td>native buffer queue 路径</td>
+			</tr>
+			<tr>
+					<td><code>kAndroidJavaInputAndOpenSLESOutputAudio</code></td>
+					<td><code>AudioRecord</code></td>
+					<td>OpenSL ES</td>
+					<td>Java 输入音效能力与 native 输出结合</td>
+			</tr>
+			<tr>
+					<td><code>kAndroidAAudioAudio</code></td>
+					<td>AAudio</td>
+					<td>AAudio</td>
+					<td>AAudio data callback 路径，需构建支持</td>
+			</tr>
+			<tr>
+					<td><code>kAndroidJavaInputAndAAudioOutputAudio</code></td>
+					<td><code>AudioRecord</code></td>
+					<td>AAudio</td>
+					<td>Java 输入与 AAudio 输出组合，需构建支持</td>
+			</tr>
+	</tbody>
 </table>
 <p>在这个工厂中，请求 <code>kPlatformDefaultAudio</code> 时，若定义了 <code>WEBRTC_AUDIO_DEVICE_INCLUDE_ANDROID_AAUDIO</code>，选择 AAudio 双向路径；否则根据系统报告的低延迟输入/输出能力，在 OpenSL ES、混合路径和 Java 路径之间选择。这是该工厂的选择逻辑，不代表所有 Android SDK 接入都采用同样的默认值。</p>
 <p><strong>Java 路径的数据交接</strong>很适合作为一个具体例子：</p>
@@ -765,84 +767,84 @@ sequenceDiagram
 <p>源码入口：<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/objc/native/api/audio_device_module.mm">iOS SDK 工厂</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/objc/native/src/audio/audio_device_ios.mm">AudioDeviceIOS</a>、<a href="https://webrtc.googlesource.com/src/&#43;/3dec7d05377fb690e84f503db865edde982ab2a5/sdk/objc/native/src/audio/voice_processing_audio_unit.mm">VoiceProcessingAudioUnit</a>。</p>
 <h3 id="47-哪些能力不能假定跨平台一致">4.7 哪些能力不能假定跨平台一致</h3>
 <table>
-  <thead>
-      <tr>
-          <th>问题</th>
-          <th>共同接口背后的实际差异</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>能否枚举并选择任意设备？</td>
-          <td>桌面后端一般支持设备枚举；移动端更多依赖系统路由，部分 ADM 方法只提供逻辑设备或未实现</td>
-      </tr>
-      <tr>
-          <td>能否设置音量、静音、立体声？</td>
-          <td>要查询相应 <code>IsAvailable</code> 能力并检查返回值，不能由接口存在推断设备支持</td>
-      </tr>
-      <tr>
-          <td>是否启用系统 AEC？</td>
-          <td>取决于平台、后端与创建配置；Android Java 输入和 iOS voice processing 需要与软件 APM 配合</td>
-      </tr>
-      <tr>
-          <td>延迟是不是精确测量？</td>
-          <td>后端可能使用系统时间戳、缓冲查询或固定估计，精度不同</td>
-      </tr>
-      <tr>
-          <td>换设备能否自动恢复？</td>
-          <td>取决于后端、选项和应用策略，公共接口并不保证所有平台自动恢复</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>问题</th>
+					<th>共同接口背后的实际差异</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>能否枚举并选择任意设备？</td>
+					<td>桌面后端一般支持设备枚举；移动端更多依赖系统路由，部分 ADM 方法只提供逻辑设备或未实现</td>
+			</tr>
+			<tr>
+					<td>能否设置音量、静音、立体声？</td>
+					<td>要查询相应 <code>IsAvailable</code> 能力并检查返回值，不能由接口存在推断设备支持</td>
+			</tr>
+			<tr>
+					<td>是否启用系统 AEC？</td>
+					<td>取决于平台、后端与创建配置；Android Java 输入和 iOS voice processing 需要与软件 APM 配合</td>
+			</tr>
+			<tr>
+					<td>延迟是不是精确测量？</td>
+					<td>后端可能使用系统时间戳、缓冲查询或固定估计，精度不同</td>
+			</tr>
+			<tr>
+					<td>换设备能否自动恢复？</td>
+					<td>取决于后端、选项和应用策略，公共接口并不保证所有平台自动恢复</td>
+			</tr>
+	</tbody>
 </table>
 <p>例如，ALSA 可以从 <code>snd_pcm_delay()</code> 换算延迟；AAudio 可以根据流的时间与帧位置估计；iOS 的 <code>PlayoutDelay()</code> 在此基线中返回固定估计。这些值可以辅助音频处理和诊断，但不能当成同等精度的端到端延迟测量。</p>
 <p>真实设备之外还可以使用 dummy、文件或测试 ADM。它们证明了这个边界的可替换性：上层需要的是符合契约的音频源和输出端，不一定是 WebRTC 亲自打开的物理麦克风与扬声器。</p>
 <h2 id="五带着问题回到源码">五、带着问题回到源码</h2>
 <h3 id="51-建议的阅读顺序">5.1 建议的阅读顺序</h3>
 <table>
-  <thead>
-      <tr>
-          <th>要回答的问题</th>
-          <th>优先阅读的文件与方法</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>上层能要求设备做什么？</td>
-          <td><code>api/audio/audio_device.h</code>、<code>audio_device_defines.h</code></td>
-      </tr>
-      <tr>
-          <td>设备与上层在哪里接通？</td>
-          <td><code>webrtc_voice_engine.cc</code> 的 <code>Init()</code>，ADM 的 <code>RegisterAudioCallback()</code></td>
-      </tr>
-      <tr>
-          <td>谁控制什么时候开麦、播放？</td>
-          <td><code>audio/audio_state.cc</code> 的 <code>Add*Stream()</code>、<code>SetRecording()</code>、<code>SetPlayout()</code></td>
-      </tr>
-      <tr>
-          <td>PCM 怎样过设备边界？</td>
-          <td><code>audio_device_buffer.cc</code> 的两组交付/请求方法</td>
-      </tr>
-      <tr>
-          <td>为什么上层都是 10 ms？</td>
-          <td><code>fine_audio_buffer.cc</code> 与各后端的缓冲循环</td>
-      </tr>
-      <tr>
-          <td>APM 和收发流在哪里连接？</td>
-          <td><code>audio/audio_transport_impl.cc</code> 的两个主回调</td>
-      </tr>
-      <tr>
-          <td>编码在哪里切换线程？</td>
-          <td><code>audio/channel_send.cc</code> 的 <code>ProcessAndEncodeAudio()</code></td>
-      </tr>
-      <tr>
-          <td>播放怎样到达 NetEq？</td>
-          <td><code>audio_mixer_impl.cc</code>、<code>audio_receive_stream.cc</code>、<code>channel_receive.cc</code></td>
-      </tr>
-      <tr>
-          <td>某个平台为什么有额外延迟或重启？</td>
-          <td>实际选中的平台后端、工厂和构建开关</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>要回答的问题</th>
+					<th>优先阅读的文件与方法</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>上层能要求设备做什么？</td>
+					<td><code>api/audio/audio_device.h</code>、<code>audio_device_defines.h</code></td>
+			</tr>
+			<tr>
+					<td>设备与上层在哪里接通？</td>
+					<td><code>webrtc_voice_engine.cc</code> 的 <code>Init()</code>，ADM 的 <code>RegisterAudioCallback()</code></td>
+			</tr>
+			<tr>
+					<td>谁控制什么时候开麦、播放？</td>
+					<td><code>audio/audio_state.cc</code> 的 <code>Add*Stream()</code>、<code>SetRecording()</code>、<code>SetPlayout()</code></td>
+			</tr>
+			<tr>
+					<td>PCM 怎样过设备边界？</td>
+					<td><code>audio_device_buffer.cc</code> 的两组交付/请求方法</td>
+			</tr>
+			<tr>
+					<td>为什么上层都是 10 ms？</td>
+					<td><code>fine_audio_buffer.cc</code> 与各后端的缓冲循环</td>
+			</tr>
+			<tr>
+					<td>APM 和收发流在哪里连接？</td>
+					<td><code>audio/audio_transport_impl.cc</code> 的两个主回调</td>
+			</tr>
+			<tr>
+					<td>编码在哪里切换线程？</td>
+					<td><code>audio/channel_send.cc</code> 的 <code>ProcessAndEncodeAudio()</code></td>
+			</tr>
+			<tr>
+					<td>播放怎样到达 NetEq？</td>
+					<td><code>audio_mixer_impl.cc</code>、<code>audio_receive_stream.cc</code>、<code>channel_receive.cc</code></td>
+			</tr>
+			<tr>
+					<td>某个平台为什么有额外延迟或重启？</td>
+					<td>实际选中的平台后端、工厂和构建开关</td>
+			</tr>
+	</tbody>
 </table>
 <h3 id="52-用数据断点定位有设备但没有声音">5.2 用数据断点定位“有设备，但没有声音”</h3>
 <p>比起一开始钻进驱动，更有效的办法是沿公共边界逐段检查：</p>

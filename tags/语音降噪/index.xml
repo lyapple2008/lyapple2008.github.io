@@ -9,8 +9,8 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.147.9</generator>
-    <language>zh</language>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Mon, 03 Nov 2025 19:39:53 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/tags/%E8%AF%AD%E9%9F%B3%E9%99%8D%E5%99%AA/index.xml" rel="self" type="application/rss+xml" />
@@ -110,13 +110,13 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;onnxruntime_c_api.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 创建运行时环境
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">OrtEnv</span><span class="o">*</span> <span class="n">env</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">OrtEnv</span><span class="o">*</span> <span class="n">env</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">OrtStatus</span><span class="o">*</span> <span class="n">status</span> <span class="o">=</span> <span class="nf">OrtCreateEnv</span><span class="p">(</span><span class="n">ORT_LOGGING_LEVEL_WARNING</span><span class="p">,</span> <span class="s">&#34;ORT&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">env</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 错误处理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">msg</span> <span class="o">=</span> <span class="nf">OrtGetErrorMessage</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">msg</span> <span class="o">=</span> <span class="nf">OrtGetErrorMessage</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">OrtReleaseStatus</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
@@ -148,23 +148,23 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;onnxruntime_c_api.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 1. 创建会话选项
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">OrtSessionOptions</span><span class="o">*</span> <span class="n">session_options</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">OrtSessionOptions</span><span class="o">*</span> <span class="n">session_options</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nf">OrtCreateSessionOptions</span><span class="p">(</span><span class="o">&amp;</span><span class="n">session_options</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 2. 创建推理会话
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">OrtSession</span><span class="o">*</span> <span class="n">session</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">OrtSession</span><span class="o">*</span> <span class="n">session</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">model_path</span> <span class="o">=</span> <span class="s">&#34;denoise_model.onnx&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">status</span> <span class="o">=</span> <span class="nf">OrtCreateSession</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">session</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 错误处理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">msg</span> <span class="o">=</span> <span class="nf">OrtGetErrorMessage</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">msg</span> <span class="o">=</span> <span class="nf">OrtGetErrorMessage</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">OrtReleaseStatus</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 3. 释放资源（使用完毕后）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtReleaseSessionOptions</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseSessionOptions</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseSession</span><span class="p">(</span><span class="n">session</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseEnv</span><span class="p">(</span><span class="n">env</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
@@ -192,19 +192,19 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// CPU执行（默认，无需显式添加）
 </span></span></span><span class="line"><span class="cl"><span class="c1">// 直接创建会话即可使用CPU
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// CUDA执行（需要NVIDIA GPU）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtSessionOptionsAppendExecutionProvider_CUDA</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtSessionOptionsAppendExecutionProvider_CUDA</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// TensorRT执行（需要NVIDIA GPU和TensorRT）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">OrtTensorRTProviderOptions</span> <span class="n">trt_options</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">OrtTensorRTProviderOptions</span> <span class="n">trt_options</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl"><span class="nf">OrtSessionOptionsAppendExecutionProvider_TensorRT</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">trt_options</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// CoreML执行（macOS/iOS）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtSessionOptionsAppendExecutionProvider_CoreML</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtSessionOptionsAppendExecutionProvider_CoreML</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 创建会话（会按顺序尝试EP，失败则回退到下一个）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtCreateSession</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">session</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtCreateSession</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">session</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 <h4 id="inputoutput">Input/Output</h4>
@@ -257,7 +257,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 1. 获取输入输出信息
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">size_t</span> <span class="n">num_input_nodes</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">size_t</span> <span class="n">num_input_nodes</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">OrtStatus</span><span class="o">*</span> <span class="n">status</span> <span class="o">=</span> <span class="nf">OrtSessionGetInputCount</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">num_input_nodes</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">input_name</span><span class="p">;</span>
@@ -266,9 +266,9 @@
 </span></span><span class="line"><span class="cl"><span class="nf">OrtSessionGetInputTypeInfo</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">input_type_info</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 2. 准备输入数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">float</span> <span class="n">input_data</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="cm">/* audio_features数据 */</span> <span class="p">};</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="n">input_data</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="cm">/* audio_features数据 */</span> <span class="p">};</span>
 </span></span><span class="line"><span class="cl"><span class="kt">int64_t</span> <span class="n">input_shape</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">480</span><span class="p">};</span>  <span class="c1">// batch_size, feature_dim
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">size_t</span> <span class="n">input_tensor_size</span> <span class="o">=</span> <span class="mi">480</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">size_t</span> <span class="n">input_tensor_size</span> <span class="o">=</span> <span class="mi">480</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">OrtValue</span><span class="o">*</span> <span class="n">input_tensor</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">OrtMemoryInfo</span><span class="o">*</span> <span class="n">memory_info</span><span class="p">;</span>
@@ -282,21 +282,21 @@
 </span></span><span class="line"><span class="cl"><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 3. 执行推理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">input_names</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">input_name</span><span class="p">};</span>
+</span></span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">input_names</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">input_name</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">output_names</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;output&#34;</span><span class="p">};</span>  <span class="c1">// 根据模型实际输出名称
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">OrtValue</span><span class="o">*</span> <span class="n">output_tensor</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">OrtValue</span><span class="o">*</span> <span class="n">output_tensor</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">status</span> <span class="o">=</span> <span class="nf">OrtRun</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="n">input_names</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">input_tensor</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="n">output_names</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">output_tensor</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 4. 获取输出数据
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">float</span><span class="o">*</span> <span class="n">output_data</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">float</span><span class="o">*</span> <span class="n">output_data</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="nf">OrtGetTensorMutableData</span><span class="p">(</span><span class="n">output_tensor</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span><span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">output_data</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 使用output_data...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 5. 释放资源
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtReleaseValue</span><span class="p">(</span><span class="n">output_tensor</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseValue</span><span class="p">(</span><span class="n">output_tensor</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseValue</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseMemoryInfo</span><span class="p">(</span><span class="n">memory_info</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
@@ -339,28 +339,28 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 图优化级别
 </span></span></span><span class="line"><span class="cl"><span class="c1">// ORT_DISABLE_ALL, ORT_ENABLE_BASIC, ORT_ENABLE_EXTENDED, ORT_ENABLE_ALL
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtSetSessionGraphOptimizationLevel</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="n">ORT_ENABLE_ALL</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtSetSessionGraphOptimizationLevel</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="n">ORT_ENABLE_ALL</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 线程数设置
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtSetIntraOpNumThreads</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>  <span class="c1">// 算子内部并行线程数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtSetInterOpNumThreads</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">// 算子间并行线程数
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtSetIntraOpNumThreads</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>  <span class="c1">// 算子内部并行线程数
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtSetInterOpNumThreads</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">// 算子间并行线程数
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 内存模式
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtEnableMemPattern</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span>  <span class="c1">// 启用内存模式优化
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtEnableCpuMemArena</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span> <span class="c1">// 启用CPU内存池
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtEnableMemPattern</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span>  <span class="c1">// 启用内存模式优化
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtEnableCpuMemArena</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span> <span class="c1">// 启用CPU内存池
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 执行模式
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtSetSessionExecutionMode</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="n">ORT_SEQUENTIAL</span><span class="p">);</span>  <span class="c1">// 顺序执行
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtSetSessionExecutionMode</span><span class="p">(</span><span class="n">session_options</span><span class="p">,</span> <span class="n">ORT_SEQUENTIAL</span><span class="p">);</span>  <span class="c1">// 顺序执行
 </span></span></span><span class="line"><span class="cl"><span class="c1">// OrtSetSessionExecutionMode(session_options, ORT_PARALLEL);  // 并行执行
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 优化配置文件（可选，用于更精细的控制）
 </span></span></span><span class="line"><span class="cl"><span class="c1">// OrtSetOptimizedModelFilePath(session_options, &#34;optimized_model.onnx&#34;);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 创建会话时应用这些选项
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtCreateSession</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">session</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtCreateSession</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">session</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 使用完毕后释放
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">OrtReleaseSessionOptions</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl"><span class="nf">OrtReleaseSessionOptions</span><span class="p">(</span><span class="n">session_options</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 <h2 id="三语音降噪推理的特殊注意事项">三、语音降噪推理的特殊注意事项</h2>
@@ -1323,9 +1323,9 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Initialize ONNX model
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">initialize_onnx_model</span><span class="p">(</span><span class="n">RNNoiseContext</span><span class="o">*</span> <span class="n">ctx</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">model_path</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">initialize_onnx_model</span><span class="p">(</span><span class="n">RNNoiseContext</span><span class="o">*</span> <span class="n">ctx</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">model_path</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// Get ONNX Runtime API
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">const</span> <span class="n">OrtApiBase</span><span class="o">*</span> <span class="n">api_base</span> <span class="o">=</span> <span class="nf">OrtGetApiBase</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">OrtApiBase</span><span class="o">*</span> <span class="n">api_base</span> <span class="o">=</span> <span class="nf">OrtGetApiBase</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">api_base</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error getting ONNX Runtime API base</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
@@ -1338,21 +1338,21 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Initialize ONNX Runtime environment
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">OrtStatus</span><span class="o">*</span> <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">CreateEnv</span><span class="p">(</span><span class="n">ORT_LOGGING_LEVEL_WARNING</span><span class="p">,</span> <span class="s">&#34;RNNoiseONNX&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">env</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">OrtStatus</span><span class="o">*</span> <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">CreateEnv</span><span class="p">(</span><span class="n">ORT_LOGGING_LEVEL_WARNING</span><span class="p">,</span> <span class="s">&#34;RNNoiseONNX&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">env</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error creating ONNX Runtime environment</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Create session options
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">CreateSessionOptions</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session_options</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">CreateSessionOptions</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session_options</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error creating session options</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Set session options
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SetIntraOpNumThreads</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SetIntraOpNumThreads</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session_options</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error setting intra-op threads</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
@@ -1365,21 +1365,21 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Create session
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">CreateSession</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">env</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">CreateSession</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">env</span><span class="p">,</span> <span class="n">model_path</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session_options</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error creating ONNX session</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Get allocator
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">GetAllocatorWithDefaultOptions</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">GetAllocatorWithDefaultOptions</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error getting allocator</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Get input/output names
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">size_t</span> <span class="n">num_input_nodes</span><span class="p">,</span> <span class="n">num_output_nodes</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kt">size_t</span> <span class="n">num_input_nodes</span><span class="p">,</span> <span class="n">num_output_nodes</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SessionGetInputCount</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">num_input_nodes</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error getting input count</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
@@ -1397,13 +1397,13 @@
 </span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;  Output nodes: %zu</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">num_output_nodes</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Detect model type: 4 inputs + 5 outputs = model with GRU states
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">has_gru_states</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_input_nodes</span> <span class="o">==</span> <span class="mi">4</span> <span class="o">&amp;&amp;</span> <span class="n">num_output_nodes</span> <span class="o">==</span> <span class="mi">5</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">has_gru_states</span> <span class="o">=</span> <span class="p">(</span><span class="n">num_input_nodes</span> <span class="o">==</span> <span class="mi">4</span> <span class="o">&amp;&amp;</span> <span class="n">num_output_nodes</span> <span class="o">==</span> <span class="mi">5</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">has_gru_states</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;  Model type: WITH GRU state inputs/outputs</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="c1">// Get all input names
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SessionGetInputName</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_name</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SessionGetInputName</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_name</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error getting features input name</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
@@ -1425,7 +1425,7 @@
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="c1">// Get all output names
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SessionGetOutputName</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_denoise</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SessionGetOutputName</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_denoise</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error getting denoise output name</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
@@ -1466,14 +1466,14 @@
 </span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;  Model type: Standard (without GRU state ports)</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="c1">// Get input name (standard model)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SessionGetInputName</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_name</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SessionGetInputName</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_name</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error getting input name</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="c1">// Get output names (standard model)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SessionGetOutputName</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_denoise</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">        <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">SessionGetOutputName</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">allocator</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_denoise</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error getting denoise output name</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
@@ -1491,7 +1491,7 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Allocate buffers
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_buffer</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="p">)</span><span class="nf">malloc</span><span class="p">(</span><span class="n">FRAME_SIZE</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_buffer</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="p">)</span><span class="nf">malloc</span><span class="p">(</span><span class="n">FRAME_SIZE</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_buffer</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="p">)</span><span class="nf">malloc</span><span class="p">(</span><span class="n">FRAME_SIZE</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_buffer</span> <span class="o">||</span> <span class="o">!</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_buffer</span><span class="p">)</span> <span class="p">{</span>
@@ -1500,7 +1500,7 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Initialize RNNoise state for feature extraction
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">denoise_state</span> <span class="o">=</span> <span class="nf">rnnoise_create</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">denoise_state</span> <span class="o">=</span> <span class="nf">rnnoise_create</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">denoise_state</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error: Failed to create RNNoise state</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
@@ -1508,11 +1508,11 @@
 </span></span><span class="line"><span class="cl">    <span class="nf">rnnoise_init</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">denoise_state</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Initialize biquad filter memory
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">mem_hp_x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">mem_hp_x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">mem_hp_x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Initialize processing buffers
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">memset</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">X</span><span class="p">));</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">X</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">P</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">P</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">Ex</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">Ex</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">Ep</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">Ep</span><span class="p">));</span>
@@ -1521,17 +1521,17 @@
 </span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">synthesis_mem</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">synthesis_mem</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Initialize frame count
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">frame_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">frame_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Initialize GRU states if model supports it
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">initialize_gru_states</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">initialize_gru_states</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;ONNX model loaded successfully: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">model_path</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// Initialize GRU states
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">initialize_gru_states</span><span class="p">(</span><span class="n">RNNoiseContext</span><span class="o">*</span> <span class="n">ctx</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">initialize_gru_states</span><span class="p">(</span><span class="n">RNNoiseContext</span><span class="o">*</span> <span class="n">ctx</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">vad_gru_state</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">vad_gru_state</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">noise_gru_state</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">noise_gru_state</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">denoise_gru_state</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">denoise_gru_state</span><span class="p">));</span>
@@ -1539,23 +1539,23 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// ONNX inference with external state management
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">onnx_inference_with_states</span><span class="p">(</span><span class="n">RNNoiseContext</span><span class="o">*</span> <span class="n">ctx</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">features</span><span class="p">,</span> <span class="kt">float</span><span class="o">*</span> <span class="n">gains</span><span class="p">,</span> <span class="kt">float</span><span class="o">*</span> <span class="n">vad</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">onnx_inference_with_states</span><span class="p">(</span><span class="n">RNNoiseContext</span><span class="o">*</span> <span class="n">ctx</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span><span class="o">*</span> <span class="n">features</span><span class="p">,</span> <span class="kt">float</span><span class="o">*</span> <span class="n">gains</span><span class="p">,</span> <span class="kt">float</span><span class="o">*</span> <span class="n">vad</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// Prepare separate input tensors for features and GRU states
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">float</span> <span class="n">features_data</span><span class="p">[</span><span class="mi">42</span><span class="p">];</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">features_data</span><span class="p">[</span><span class="mi">42</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">vad_state_data</span><span class="p">[</span><span class="mi">24</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">noise_state_data</span><span class="p">[</span><span class="mi">48</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">denoise_state_data</span><span class="p">[</span><span class="mi">96</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Copy features
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">memcpy</span><span class="p">(</span><span class="n">features_data</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="mi">42</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">memcpy</span><span class="p">(</span><span class="n">features_data</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="mi">42</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Copy GRU states (use saved states for next frame)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">memcpy</span><span class="p">(</span><span class="n">vad_state_data</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">vad_gru_state</span><span class="p">,</span> <span class="mi">24</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">memcpy</span><span class="p">(</span><span class="n">vad_state_data</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">vad_gru_state</span><span class="p">,</span> <span class="mi">24</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memcpy</span><span class="p">(</span><span class="n">noise_state_data</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">noise_gru_state</span><span class="p">,</span> <span class="mi">48</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memcpy</span><span class="p">(</span><span class="n">denoise_state_data</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">denoise_gru_state</span><span class="p">,</span> <span class="mi">96</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Create input tensors
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">const</span> <span class="kt">int64_t</span> <span class="n">features_shape</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">42</span><span class="p">};</span>
+</span></span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">int64_t</span> <span class="n">features_shape</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">42</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">int64_t</span> <span class="n">vad_state_shape</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">int64_t</span> <span class="n">noise_state_shape</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">48</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">int64_t</span> <span class="n">denoise_state_shape</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">96</span><span class="p">};</span>
@@ -1568,7 +1568,7 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Create input tensors
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">OrtValue</span><span class="o">*</span> <span class="n">features_tensor</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">OrtValue</span><span class="o">*</span> <span class="n">features_tensor</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">OrtValue</span><span class="o">*</span> <span class="n">vad_state_tensor</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">OrtValue</span><span class="o">*</span> <span class="n">noise_state_tensor</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">OrtValue</span><span class="o">*</span> <span class="n">denoise_state_tensor</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
@@ -1616,18 +1616,18 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Prepare input names and tensors
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">input_names</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_name</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_name_vad_state</span><span class="p">,</span> 
+</span></span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">input_names</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_name</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_name_vad_state</span><span class="p">,</span> 
 </span></span><span class="line"><span class="cl">                                 <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_name_noise_state</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">input_name_denoise_state</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl">    <span class="n">OrtValue</span><span class="o">*</span> <span class="n">input_tensors</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">features_tensor</span><span class="p">,</span> <span class="n">vad_state_tensor</span><span class="p">,</span> <span class="n">noise_state_tensor</span><span class="p">,</span> <span class="n">denoise_state_tensor</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Prepare output names
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">output_names</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_denoise</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_vad</span><span class="p">,</span> 
+</span></span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">output_names</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_denoise</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_vad</span><span class="p">,</span> 
 </span></span><span class="line"><span class="cl">                                  <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_vad_state</span><span class="p">,</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_noise_state</span><span class="p">,</span> 
 </span></span><span class="line"><span class="cl">                                  <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">output_name_denoise_state</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl">    <span class="n">OrtValue</span><span class="o">*</span> <span class="n">output_tensors</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Run inference
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">Run</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">input_names</span><span class="p">,</span> <span class="p">(</span><span class="k">const</span> <span class="n">OrtValue</span><span class="o">*</span> <span class="k">const</span><span class="o">*</span><span class="p">)</span><span class="n">input_tensors</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">status</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">Run</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">session</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">input_names</span><span class="p">,</span> <span class="p">(</span><span class="k">const</span> <span class="n">OrtValue</span><span class="o">*</span> <span class="k">const</span><span class="o">*</span><span class="p">)</span><span class="n">input_tensors</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">                   <span class="n">output_names</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">output_tensors</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Error running inference</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
@@ -1640,7 +1640,7 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Get output data
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">float</span><span class="o">*</span> <span class="n">denoise_output</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl">    <span class="kt">float</span><span class="o">*</span> <span class="n">denoise_output</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">float</span><span class="o">*</span> <span class="n">vad_output</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">float</span><span class="o">*</span> <span class="n">updated_vad_state</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">float</span><span class="o">*</span> <span class="n">updated_noise_state</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
@@ -1677,18 +1677,18 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Store results
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">memcpy</span><span class="p">(</span><span class="n">gains</span><span class="p">,</span> <span class="n">denoise_output</span><span class="p">,</span> <span class="n">NB_BANDS</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">memcpy</span><span class="p">(</span><span class="n">gains</span><span class="p">,</span> <span class="n">denoise_output</span><span class="p">,</span> <span class="n">NB_BANDS</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="o">*</span><span class="n">vad</span> <span class="o">=</span> <span class="n">vad_output</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// Update GRU states with the outputs from the model (for next frame)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">memcpy</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">vad_gru_state</span><span class="p">,</span> <span class="n">updated_vad_state</span><span class="p">,</span> <span class="mi">24</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">memcpy</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">vad_gru_state</span><span class="p">,</span> <span class="n">updated_vad_state</span><span class="p">,</span> <span class="mi">24</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memcpy</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">noise_gru_state</span><span class="p">,</span> <span class="n">updated_noise_state</span><span class="p">,</span> <span class="mi">48</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">memcpy</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">denoise_gru_state</span><span class="p">,</span> <span class="n">updated_denoise_state</span><span class="p">,</span> <span class="mi">96</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">gru_states_initialized</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl"><span class="nl">cleanup</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// Cleanup
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">ReleaseValue</span><span class="p">(</span><span class="n">features_tensor</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">ReleaseValue</span><span class="p">(</span><span class="n">features_tensor</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">ReleaseValue</span><span class="p">(</span><span class="n">vad_state_tensor</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">ReleaseValue</span><span class="p">(</span><span class="n">noise_state_tensor</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">ctx</span><span class="o">-&gt;</span><span class="n">api</span><span class="o">-&gt;</span><span class="nf">ReleaseValue</span><span class="p">(</span><span class="n">denoise_state_tensor</span><span class="p">);</span>
@@ -1812,7 +1812,8 @@
 </ul>
 <p>访问方式简单：在Hugging Face平台搜索并下载，或使用Python的datasets库加载。数据集设计覆盖不同噪声、混响和麦克风配置，确保评估的全面性。</p>
 <blockquote>
-<p>可以参考下面的代码将hugging face中的validataion数据集以wav形式保存在本地，方便后续不同算法进行处理后，对处理结果进行评估。</p></blockquote>
+<p>可以参考下面的代码将hugging face中的validataion数据集以wav形式保存在本地，方便后续不同算法进行处理后，对处理结果进行评估。</p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1923,7 +1924,8 @@
 <p>计算这些指标需要工具和脚本。URGENT挑战的GitHub仓库（https://github.com/urgent-challenge/urgent2024_challenge）提供了evaluation_metrics文件夹下的实用脚本，如calculate_intrusive_se_metrics.py（处理PESQ、ESTOI、SDR、MCD、LSD等侵入式指标，支持无限SDR值处理），calculate_nonintrusive_dnsmos.py和calculate_nonintrusive_nisqa.py分别计算DNSMOS和NISQA。</p>
 <p><strong>计算步骤示例</strong>：</p>
 <blockquote>
-<p>参考evaluation_metrics/README.md</p></blockquote>
+<p>参考evaluation_metrics/README.md</p>
+</blockquote>
 <ol>
 <li><strong>数据准备</strong>对validation数据集中的noisy数据进行处理，得到enhanced的数据，按下面的目录结构进行组织
 <div class="highlight"><div class="chroma">
@@ -1997,18 +1999,18 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nv">nj</span><span class="o">=</span><span class="m">8</span>  <span class="c1"># Number of parallel CPU jobs for speedup</span>
+</span></span></span><span class="line"><span class="cl"><span class="nv">nj</span><span class="o">=</span><span class="m">8</span>  <span class="c1"># Number of parallel CPU jobs for speedup</span>
 </span></span><span class="line"><span class="cl"><span class="nv">python</span><span class="o">=</span>python3
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nv">output_prefix</span><span class="o">=</span>metrics_score
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># PESQ, ESTOI, SDR, MCD, LSD</span>
 </span></span><span class="line"><span class="cl"><span class="si">${</span><span class="nv">python</span><span class="si">}</span> calculate_intrusive_se_metrics.py <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>   --ref_scp reference.scp <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>   --inf_scp enhanced_webrtc.scp <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>   --output_dir <span class="s2">&#34;</span><span class="si">${</span><span class="nv">output_prefix</span><span class="si">}</span><span class="s2">&#34;</span>/scoring_webrtc <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>   --nj <span class="si">${</span><span class="nv">nj</span><span class="si">}</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>   --chunksize <span class="m">60</span></span></span></code></pre></td></tr></table>
+</span></span></span><span class="line"><span class="cl">   --ref_scp reference.scp <span class="se">\
+</span></span></span><span class="line"><span class="cl">   --inf_scp enhanced_webrtc.scp <span class="se">\
+</span></span></span><span class="line"><span class="cl">   --output_dir <span class="s2">&#34;</span><span class="si">${</span><span class="nv">output_prefix</span><span class="si">}</span><span class="s2">&#34;</span>/scoring_webrtc <span class="se">\
+</span></span></span><span class="line"><span class="cl">   --nj <span class="si">${</span><span class="nv">nj</span><span class="si">}</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">   --chunksize <span class="m">60</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 对于批量计算，仓库脚本支持文件夹输入。</li>

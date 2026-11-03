@@ -9,8 +9,8 @@
       <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
-    <generator>Hugo -- 0.147.9</generator>
-    <language>zh</language>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
     <lastBuildDate>Sun, 06 Sep 2026 21:30:00 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/tags/apple-silicon/index.xml" rel="self" type="application/rss+xml" />
@@ -77,35 +77,35 @@
 </div>
 <p>本机数字：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: right">N</th>
-          <th style="text-align: right">耗时</th>
-          <th style="text-align: right">GFLOPS</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: right">64</td>
-          <td style="text-align: right">0.072 ms</td>
-          <td style="text-align: right">7.28</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">256</td>
-          <td style="text-align: right">12.7 ms</td>
-          <td style="text-align: right">2.65</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">512</td>
-          <td style="text-align: right">82.5 ms</td>
-          <td style="text-align: right">3.25</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">1024</td>
-          <td style="text-align: right">850 ms</td>
-          <td style="text-align: right"><strong>2.53</strong></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: right">N</th>
+					<th style="text-align: right">耗时</th>
+					<th style="text-align: right">GFLOPS</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: right">64</td>
+					<td style="text-align: right">0.072 ms</td>
+					<td style="text-align: right">7.28</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">256</td>
+					<td style="text-align: right">12.7 ms</td>
+					<td style="text-align: right">2.65</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">512</td>
+					<td style="text-align: right">82.5 ms</td>
+					<td style="text-align: right">3.25</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">1024</td>
+					<td style="text-align: right">850 ms</td>
+					<td style="text-align: right"><strong>2.53</strong></td>
+			</tr>
+	</tbody>
 </table>
 <p>$N$ 一大，立刻掉到 2～3 GFLOPS。这就是后面所有加速比的分母。</p>
 <h2 id="2-循环交换-ikj同一套乘法换一条路">2. 循环交换 ikj：同一套乘法，换一条路</h2>
@@ -136,40 +136,40 @@
 </div>
 <p>本机数字（相对 naive）：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: right">N</th>
-          <th style="text-align: right">ikj GFLOPS</th>
-          <th style="text-align: right">加速比</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: right">64</td>
-          <td style="text-align: right">23.8</td>
-          <td style="text-align: right">3.3×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">256</td>
-          <td style="text-align: right">26.8</td>
-          <td style="text-align: right">10.1×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">512</td>
-          <td style="text-align: right">28.3</td>
-          <td style="text-align: right">8.7×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">1024</td>
-          <td style="text-align: right"><strong>28.9</strong></td>
-          <td style="text-align: right"><strong>11.4×</strong></td>
-      </tr>
-      <tr>
-          <td style="text-align: right">2048</td>
-          <td style="text-align: right">24.9</td>
-          <td style="text-align: right">—</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: right">N</th>
+					<th style="text-align: right">ikj GFLOPS</th>
+					<th style="text-align: right">加速比</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: right">64</td>
+					<td style="text-align: right">23.8</td>
+					<td style="text-align: right">3.3×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">256</td>
+					<td style="text-align: right">26.8</td>
+					<td style="text-align: right">10.1×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">512</td>
+					<td style="text-align: right">28.3</td>
+					<td style="text-align: right">8.7×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">1024</td>
+					<td style="text-align: right"><strong>28.9</strong></td>
+					<td style="text-align: right"><strong>11.4×</strong></td>
+			</tr>
+			<tr>
+					<td style="text-align: right">2048</td>
+					<td style="text-align: right">24.9</td>
+					<td style="text-align: right">—</td>
+			</tr>
+	</tbody>
 </table>
 <p>只换循环顺序，大矩阵直接快一个数量级。这是整篇文章里，<strong>代码改动最小、收益最稳</strong> 的一步。后面所有花活，都建立在「先别跟 cache line 作对」之上。</p>
 <h2 id="3-cache-分块一次只请得起三块">3. Cache 分块：一次只请得起三块</h2>
@@ -193,35 +193,35 @@
 </div>
 <p>本机上，单独给 ikj 套一层 64×64 分块，并没有更快：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: right">N</th>
-          <th style="text-align: right">tiled</th>
-          <th style="text-align: right">ikj</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: right">256</td>
-          <td style="text-align: right">24.2</td>
-          <td style="text-align: right">26.8</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">512</td>
-          <td style="text-align: right">22.4</td>
-          <td style="text-align: right">28.3</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">1024</td>
-          <td style="text-align: right">20.2</td>
-          <td style="text-align: right">28.9</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">2048</td>
-          <td style="text-align: right">16.2</td>
-          <td style="text-align: right">24.9</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: right">N</th>
+					<th style="text-align: right">tiled</th>
+					<th style="text-align: right">ikj</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: right">256</td>
+					<td style="text-align: right">24.2</td>
+					<td style="text-align: right">26.8</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">512</td>
+					<td style="text-align: right">22.4</td>
+					<td style="text-align: right">28.3</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">1024</td>
+					<td style="text-align: right">20.2</td>
+					<td style="text-align: right">28.9</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">2048</td>
+					<td style="text-align: right">16.2</td>
+					<td style="text-align: right">24.9</td>
+			</tr>
+	</tbody>
 </table>
 <p>这不是分块错了。是 <strong>ikj 已经被预取器喂饱，多出来的三重分块循环在收税</strong>。分块的价值要等微核出现：只有当你真的会把同一块 A 连乘很多块 B，把它钉在 L1 才划算。下面两步会把这件事做实。</p>
 <h2 id="4-packing给微核铺一条直道">4. Packing：给微核铺一条直道</h2>
@@ -235,35 +235,35 @@
 <p>卡在哪：没有这一层，每次 <code>c[j] += a * b[j]</code> 都要读 C、写 C。C 的流量从 $O(n^2)$ 变成跟着 $K$ 放大。寄存器分块把 C 的写回从「每个 k 一次」收成「每个微核一次」。</p>
 <p>本机 4×4 标量寄存器分块：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: right">N</th>
-          <th style="text-align: right">GFLOPS</th>
-          <th style="text-align: right">相对 naive</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: right">64</td>
-          <td style="text-align: right">47.7</td>
-          <td style="text-align: right">6.6×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">256</td>
-          <td style="text-align: right">31.3</td>
-          <td style="text-align: right">11.8×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">1024</td>
-          <td style="text-align: right">29.9</td>
-          <td style="text-align: right">11.8×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">2048</td>
-          <td style="text-align: right">10.7</td>
-          <td style="text-align: right">—</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: right">N</th>
+					<th style="text-align: right">GFLOPS</th>
+					<th style="text-align: right">相对 naive</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: right">64</td>
+					<td style="text-align: right">47.7</td>
+					<td style="text-align: right">6.6×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">256</td>
+					<td style="text-align: right">31.3</td>
+					<td style="text-align: right">11.8×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">1024</td>
+					<td style="text-align: right">29.9</td>
+					<td style="text-align: right">11.8×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">2048</td>
+					<td style="text-align: right">10.7</td>
+					<td style="text-align: right">—</td>
+			</tr>
+	</tbody>
 </table>
 <p>小矩阵整表住在缓存里，寄存器分块几乎白捡一倍。$N=2048$ 时没有外层 cache 分块护着，窗口外的 A、B 重新开始流，数字掉下去。再一次：微核和分块是一对，拆开都不完整。</p>
 <h2 id="6-neon一次-fma-吃-4-个-fp32">6. NEON：一次 FMA 吃 4 个 FP32</h2>
@@ -296,45 +296,45 @@
 </div>
 <p>加上前面的分块和 packing，单线程微核在本机非常稳：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: right">N</th>
-          <th style="text-align: right">NEON GFLOPS</th>
-          <th style="text-align: right">相对 ikj</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: right">64</td>
-          <td style="text-align: right">43.7</td>
-          <td style="text-align: right">1.8×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">256</td>
-          <td style="text-align: right">50.2</td>
-          <td style="text-align: right">1.9×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">512</td>
-          <td style="text-align: right">51.2</td>
-          <td style="text-align: right">1.8×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">1024</td>
-          <td style="text-align: right"><strong>51.1</strong></td>
-          <td style="text-align: right">1.8×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">2048</td>
-          <td style="text-align: right">49.6</td>
-          <td style="text-align: right">2.0×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">4096</td>
-          <td style="text-align: right">45.6</td>
-          <td style="text-align: right">—</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: right">N</th>
+					<th style="text-align: right">NEON GFLOPS</th>
+					<th style="text-align: right">相对 ikj</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: right">64</td>
+					<td style="text-align: right">43.7</td>
+					<td style="text-align: right">1.8×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">256</td>
+					<td style="text-align: right">50.2</td>
+					<td style="text-align: right">1.9×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">512</td>
+					<td style="text-align: right">51.2</td>
+					<td style="text-align: right">1.8×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">1024</td>
+					<td style="text-align: right"><strong>51.1</strong></td>
+					<td style="text-align: right">1.8×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">2048</td>
+					<td style="text-align: right">49.6</td>
+					<td style="text-align: right">2.0×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">4096</td>
+					<td style="text-align: right">45.6</td>
+					<td style="text-align: right">—</td>
+			</tr>
+	</tbody>
 </table>
 <p>大约 50 GFLOPS，几乎不随 $N$ 抖。说明微核已经把单核 NEON 的数据通路走顺了。6 个 P 核的 NEON 理论峰值大约在 600+ GFLOPS 这个量级，单核 50 离「喂饱一条核」还有距离，但已经不是访存在主导。</p>
 <h2 id="7-多线程先喂-p-核并看-qos">7. 多线程：先喂 P 核，并看 QoS</h2>
@@ -359,52 +359,52 @@
 </div>
 <p>本机：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: right">N</th>
-          <th style="text-align: right">单线程 NEON</th>
-          <th style="text-align: right">GCD 默认</th>
-          <th style="text-align: right">GCD UI</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: right">64</td>
-          <td style="text-align: right"><strong>43.7</strong></td>
-          <td style="text-align: right">27.6</td>
-          <td style="text-align: right">29.1</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">256</td>
-          <td style="text-align: right">50.2</td>
-          <td style="text-align: right">91.9</td>
-          <td style="text-align: right">90.9</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">512</td>
-          <td style="text-align: right">51.2</td>
-          <td style="text-align: right">189</td>
-          <td style="text-align: right">190</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">1024</td>
-          <td style="text-align: right">51.1</td>
-          <td style="text-align: right">276</td>
-          <td style="text-align: right"><strong>280</strong></td>
-      </tr>
-      <tr>
-          <td style="text-align: right">2048</td>
-          <td style="text-align: right">49.6</td>
-          <td style="text-align: right">329</td>
-          <td style="text-align: right"><strong>330</strong></td>
-      </tr>
-      <tr>
-          <td style="text-align: right">4096</td>
-          <td style="text-align: right">45.6</td>
-          <td style="text-align: right">278</td>
-          <td style="text-align: right"><strong>323</strong></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: right">N</th>
+					<th style="text-align: right">单线程 NEON</th>
+					<th style="text-align: right">GCD 默认</th>
+					<th style="text-align: right">GCD UI</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: right">64</td>
+					<td style="text-align: right"><strong>43.7</strong></td>
+					<td style="text-align: right">27.6</td>
+					<td style="text-align: right">29.1</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">256</td>
+					<td style="text-align: right">50.2</td>
+					<td style="text-align: right">91.9</td>
+					<td style="text-align: right">90.9</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">512</td>
+					<td style="text-align: right">51.2</td>
+					<td style="text-align: right">189</td>
+					<td style="text-align: right">190</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">1024</td>
+					<td style="text-align: right">51.1</td>
+					<td style="text-align: right">276</td>
+					<td style="text-align: right"><strong>280</strong></td>
+			</tr>
+			<tr>
+					<td style="text-align: right">2048</td>
+					<td style="text-align: right">49.6</td>
+					<td style="text-align: right">329</td>
+					<td style="text-align: right"><strong>330</strong></td>
+			</tr>
+			<tr>
+					<td style="text-align: right">4096</td>
+					<td style="text-align: right">45.6</td>
+					<td style="text-align: right">278</td>
+					<td style="text-align: right"><strong>323</strong></td>
+			</tr>
+	</tbody>
 </table>
 <p>三件事：</p>
 <ol>
@@ -429,59 +429,59 @@
 </div>
 <p>本机 Accelerate：</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: right">N</th>
-          <th style="text-align: right">耗时</th>
-          <th style="text-align: right">GFLOPS</th>
-          <th style="text-align: right">相对 naive</th>
-          <th style="text-align: right">相对单核 NEON</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: right">64</td>
-          <td style="text-align: right">0.001 ms</td>
-          <td style="text-align: right">524</td>
-          <td style="text-align: right">72×</td>
-          <td style="text-align: right">12×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">256</td>
-          <td style="text-align: right">0.033 ms</td>
-          <td style="text-align: right">1017</td>
-          <td style="text-align: right">383×</td>
-          <td style="text-align: right">20×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">512</td>
-          <td style="text-align: right">0.121 ms</td>
-          <td style="text-align: right">2218</td>
-          <td style="text-align: right">682×</td>
-          <td style="text-align: right">43×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">1024</td>
-          <td style="text-align: right">0.793 ms</td>
-          <td style="text-align: right"><strong>2708</strong></td>
-          <td style="text-align: right"><strong>1072×</strong></td>
-          <td style="text-align: right"><strong>53×</strong></td>
-      </tr>
-      <tr>
-          <td style="text-align: right">2048</td>
-          <td style="text-align: right">7.94 ms</td>
-          <td style="text-align: right">2163</td>
-          <td style="text-align: right">—</td>
-          <td style="text-align: right">44×</td>
-      </tr>
-      <tr>
-          <td style="text-align: right">4096</td>
-          <td style="text-align: right">69.7 ms</td>
-          <td style="text-align: right">1972</td>
-          <td style="text-align: right">—</td>
-          <td style="text-align: right">43×</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: right">N</th>
+					<th style="text-align: right">耗时</th>
+					<th style="text-align: right">GFLOPS</th>
+					<th style="text-align: right">相对 naive</th>
+					<th style="text-align: right">相对单核 NEON</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: right">64</td>
+					<td style="text-align: right">0.001 ms</td>
+					<td style="text-align: right">524</td>
+					<td style="text-align: right">72×</td>
+					<td style="text-align: right">12×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">256</td>
+					<td style="text-align: right">0.033 ms</td>
+					<td style="text-align: right">1017</td>
+					<td style="text-align: right">383×</td>
+					<td style="text-align: right">20×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">512</td>
+					<td style="text-align: right">0.121 ms</td>
+					<td style="text-align: right">2218</td>
+					<td style="text-align: right">682×</td>
+					<td style="text-align: right">43×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">1024</td>
+					<td style="text-align: right">0.793 ms</td>
+					<td style="text-align: right"><strong>2708</strong></td>
+					<td style="text-align: right"><strong>1072×</strong></td>
+					<td style="text-align: right"><strong>53×</strong></td>
+			</tr>
+			<tr>
+					<td style="text-align: right">2048</td>
+					<td style="text-align: right">7.94 ms</td>
+					<td style="text-align: right">2163</td>
+					<td style="text-align: right">—</td>
+					<td style="text-align: right">44×</td>
+			</tr>
+			<tr>
+					<td style="text-align: right">4096</td>
+					<td style="text-align: right">69.7 ms</td>
+					<td style="text-align: right">1972</td>
+					<td style="text-align: right">—</td>
+					<td style="text-align: right">43×</td>
+			</tr>
+	</tbody>
 </table>
 <p>AMX 没有公开指令文档，Accelerate 在矩阵够大时会走它。$N=64$ 就已经 524 GFLOPS，说明阈值很低。$N$ 再大，数字从 2.7 TFLOPS 回到 2 TFLOPS 附近，开始碰到带宽、缓存归属和功耗墙。</p>
 <p>手写 NEON 很难追上，不是微核不够认真，是 <strong>单元就不一样</strong>。产品代码到这一步，默认答案就是调用系统库。</p>
@@ -501,91 +501,91 @@
 <h2 id="本机总表">本机总表</h2>
 <p>平台：Mac mini M2 Pro，FP32，$C=AB$，行主序。单位 GFLOPS。空格是这一档太慢、没跑。</p>
 <table>
-  <thead>
-      <tr>
-          <th style="text-align: left">kernel</th>
-          <th style="text-align: right">64</th>
-          <th style="text-align: right">256</th>
-          <th style="text-align: right">512</th>
-          <th style="text-align: right">1024</th>
-          <th style="text-align: right">2048</th>
-          <th style="text-align: right">4096</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: left">naive ijk</td>
-          <td style="text-align: right">7.3</td>
-          <td style="text-align: right">2.7</td>
-          <td style="text-align: right">3.3</td>
-          <td style="text-align: right">2.5</td>
-          <td style="text-align: right"></td>
-          <td style="text-align: right"></td>
-      </tr>
-      <tr>
-          <td style="text-align: left">ikj</td>
-          <td style="text-align: right">23.8</td>
-          <td style="text-align: right">26.8</td>
-          <td style="text-align: right">28.3</td>
-          <td style="text-align: right">28.9</td>
-          <td style="text-align: right">24.9</td>
-          <td style="text-align: right"></td>
-      </tr>
-      <tr>
-          <td style="text-align: left">tiled（无微核）</td>
-          <td style="text-align: right">23.8</td>
-          <td style="text-align: right">24.2</td>
-          <td style="text-align: right">22.4</td>
-          <td style="text-align: right">20.2</td>
-          <td style="text-align: right">16.2</td>
-          <td style="text-align: right"></td>
-      </tr>
-      <tr>
-          <td style="text-align: left">寄存器分块</td>
-          <td style="text-align: right">47.7</td>
-          <td style="text-align: right">31.3</td>
-          <td style="text-align: right">30.2</td>
-          <td style="text-align: right">29.9</td>
-          <td style="text-align: right">10.7</td>
-          <td style="text-align: right"></td>
-      </tr>
-      <tr>
-          <td style="text-align: left">packed 标量</td>
-          <td style="text-align: right">6.7</td>
-          <td style="text-align: right">7.6</td>
-          <td style="text-align: right">7.5</td>
-          <td style="text-align: right">7.5</td>
-          <td style="text-align: right">7.5</td>
-          <td style="text-align: right"></td>
-      </tr>
-      <tr>
-          <td style="text-align: left">NEON 微核</td>
-          <td style="text-align: right">43.7</td>
-          <td style="text-align: right">50.2</td>
-          <td style="text-align: right">51.2</td>
-          <td style="text-align: right">51.1</td>
-          <td style="text-align: right">49.6</td>
-          <td style="text-align: right">45.6</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">GCD + NEON</td>
-          <td style="text-align: right">29.1</td>
-          <td style="text-align: right">90.9</td>
-          <td style="text-align: right">190</td>
-          <td style="text-align: right">280</td>
-          <td style="text-align: right">330</td>
-          <td style="text-align: right">323</td>
-      </tr>
-      <tr>
-          <td style="text-align: left">Accelerate</td>
-          <td style="text-align: right"><strong>524</strong></td>
-          <td style="text-align: right"><strong>1017</strong></td>
-          <td style="text-align: right"><strong>2218</strong></td>
-          <td style="text-align: right"><strong>2708</strong></td>
-          <td style="text-align: right"><strong>2163</strong></td>
-          <td style="text-align: right"><strong>1972</strong></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th style="text-align: left">kernel</th>
+					<th style="text-align: right">64</th>
+					<th style="text-align: right">256</th>
+					<th style="text-align: right">512</th>
+					<th style="text-align: right">1024</th>
+					<th style="text-align: right">2048</th>
+					<th style="text-align: right">4096</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">naive ijk</td>
+					<td style="text-align: right">7.3</td>
+					<td style="text-align: right">2.7</td>
+					<td style="text-align: right">3.3</td>
+					<td style="text-align: right">2.5</td>
+					<td style="text-align: right"></td>
+					<td style="text-align: right"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">ikj</td>
+					<td style="text-align: right">23.8</td>
+					<td style="text-align: right">26.8</td>
+					<td style="text-align: right">28.3</td>
+					<td style="text-align: right">28.9</td>
+					<td style="text-align: right">24.9</td>
+					<td style="text-align: right"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">tiled（无微核）</td>
+					<td style="text-align: right">23.8</td>
+					<td style="text-align: right">24.2</td>
+					<td style="text-align: right">22.4</td>
+					<td style="text-align: right">20.2</td>
+					<td style="text-align: right">16.2</td>
+					<td style="text-align: right"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">寄存器分块</td>
+					<td style="text-align: right">47.7</td>
+					<td style="text-align: right">31.3</td>
+					<td style="text-align: right">30.2</td>
+					<td style="text-align: right">29.9</td>
+					<td style="text-align: right">10.7</td>
+					<td style="text-align: right"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">packed 标量</td>
+					<td style="text-align: right">6.7</td>
+					<td style="text-align: right">7.6</td>
+					<td style="text-align: right">7.5</td>
+					<td style="text-align: right">7.5</td>
+					<td style="text-align: right">7.5</td>
+					<td style="text-align: right"></td>
+			</tr>
+			<tr>
+					<td style="text-align: left">NEON 微核</td>
+					<td style="text-align: right">43.7</td>
+					<td style="text-align: right">50.2</td>
+					<td style="text-align: right">51.2</td>
+					<td style="text-align: right">51.1</td>
+					<td style="text-align: right">49.6</td>
+					<td style="text-align: right">45.6</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">GCD + NEON</td>
+					<td style="text-align: right">29.1</td>
+					<td style="text-align: right">90.9</td>
+					<td style="text-align: right">190</td>
+					<td style="text-align: right">280</td>
+					<td style="text-align: right">330</td>
+					<td style="text-align: right">323</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Accelerate</td>
+					<td style="text-align: right"><strong>524</strong></td>
+					<td style="text-align: right"><strong>1017</strong></td>
+					<td style="text-align: right"><strong>2218</strong></td>
+					<td style="text-align: right"><strong>2708</strong></td>
+					<td style="text-align: right"><strong>2163</strong></td>
+					<td style="text-align: right"><strong>1972</strong></td>
+			</tr>
+	</tbody>
 </table>
 <p>读这张表的方式：</p>
 <ul>
