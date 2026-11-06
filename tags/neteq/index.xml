@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>NetEQ on BeYoung</title>
+    <link>https://lyapple2008.github.io/tags/neteq/</link>
+    <description>Recent content in NetEQ on BeYoung</description>
+    <image>
+      <title>BeYoung</title>
+      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
+    <lastBuildDate>Thu, 05 Nov 2026 20:18:58 +0800</lastBuildDate>
+    <atom:link href="https://lyapple2008.github.io/tags/neteq/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WebRTC 音频丢包恢复：NetEQ、Opus FEC、NACK 与 PLC 如何协作</title>
+      <link>https://lyapple2008.github.io/posts/202611/2026-11-05-webrtc%E4%B8%AD%E9%9F%B3%E9%A2%91%E4%B8%A2%E5%8C%85%E6%81%A2%E5%A4%8D/</link>
+      <pubDate>Thu, 05 Nov 2026 20:18:58 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202611/2026-11-05-webrtc%E4%B8%AD%E9%9F%B3%E9%A2%91%E4%B8%A2%E5%8C%85%E6%81%A2%E5%A4%8D/</guid>
+      <description>&lt;p&gt;视频丢一帧，画面可能短暂卡住；语音丢掉一个承载 20 ms 音频的包，则可能吞掉一个关键的辅音片段。接收端还必须按时向扬声器交付 PCM：原包即使最终到了，错过播放时刻也无法补回已经听到的声音。&lt;/p&gt;
+&lt;p&gt;所以讨论音频丢包恢复，先要问：&lt;strong&gt;缺失的音频在播放截止时间前，究竟还有没有机会拿到？&lt;/strong&gt; 有机会，就争取拿到编码数据；没有机会，就生成一段连续的替代声音。本文以本地 WebRTC 源码提交 &lt;code&gt;c8bca1867efcbc5f52adf58ad4463088ed257aa0&lt;/code&gt;（2026-10-22）为基线，说明这些选择如何落到 WebRTC 的音频链路中。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>视频丢一帧，画面可能短暂卡住；语音丢掉一个承载 20 ms 音频的包，则可能吞掉一个关键的辅音片段。接收端还必须按时向扬声器交付 PCM：原包即使最终到了，错过播放时刻也无法补回已经听到的声音。</p>
+<p>所以讨论音频丢包恢复，先要问：<strong>缺失的音频在播放截止时间前，究竟还有没有机会拿到？</strong> 有机会，就争取拿到编码数据；没有机会，就生成一段连续的替代声音。本文以本地 WebRTC 源码提交 <code>c8bca1867efcbc5f52adf58ad4463088ed257aa0</code>（2026-10-22）为基线，说明这些选择如何落到 WebRTC 的音频链路中。</p>
+<h2 id="一丢包造成的并不只是少了一个-rtp-包">一、丢包造成的并不只是“少了一个 RTP 包”</h2>
+<p>假设每包承载 20 ms 音频，P2 没有按时到达：</p>
+
+<div class="mermaid">flowchart LR
+    P1[&#34;P1：0～20 ms&lt;br/&gt;按时到达&#34;] --&gt; P2[&#34;P2：20～40 ms&lt;br/&gt;暂时缺失&#34;] --&gt; P3[&#34;P3：40～60 ms&lt;br/&gt;按时到达&#34;]
+    P2 --&gt; D{&#34;P2 播放截止前&lt;br/&gt;能取得可用数据吗？&#34;}
+    D --&gt;|&#34;原包或及时重传&#34;| A[&#34;正常解码 P2&#34;]
+    D --&gt;|&#34;P3 携带可用冗余&#34;| B[&#34;FEC / RED 恢复 P2&#34;]
+    D --&gt;|&#34;都没有&#34;| C[&#34;PLC 生成替代音频&#34;]</div>
+<p><strong>序号缺口不等于永久丢包。</strong> P2 可能只是乱序或延迟；如果它在截止前进入接收缓冲，仍可正常播放。真正影响听感的是截止时仍没有可用音频。短缺口会损伤辅音、爆破音或瞬态；连续缺口会让预测逐渐失真，出现机械音、音量衰减甚至静音。长包虽减少包头开销，丢一包时缺失的时间也更长。</p>
+<p>接收端为了等待乱序包，可以提高抖动缓冲的目标延迟；代价是整条通话更慢。<strong>缓冲只能把“迟到但仍赶得上”的包变为可用，无法凭空恢复真正丢失的数据。</strong></p>
+<h2 id="二先看-webrtc-的实际接收链路">二、先看 WebRTC 的实际接收链路</h2>
+
+<div class="mermaid">flowchart LR
+    S[&#34;发送端 Opus 编码&lt;br/&gt;可选择带内 FEC / RED&#34;] --&gt; R[&#34;RTP 网络&lt;br/&gt;乱序、延迟、丢失&#34;]
+    R --&gt; N[&#34;接收端 NetEQ&lt;br/&gt;排序、缓冲、目标延迟&#34;]
+    N --&gt; X{&#34;取音频时&lt;br/&gt;该时间段有可用帧？&#34;}
+    X --&gt;|有| Y[&#34;正常帧或冗余帧解码&#34;]
+    X --&gt;|无| Z[&#34;生成隐藏音频&lt;br/&gt;Expand / 可选 codec PLC&#34;]
+    Y --&gt; O[&#34;PCM → 播放&#34;]
+    Z --&gt; O
+    R -.-&gt;|&#34;检测序号缺口；配置允许时发 NACK&#34;| Q[&#34;RTCP 反馈 → 发送端补发&#34;]
+    Q -.-&gt;|&#34;赶上截止时间才有用&#34;| N</div>
+<p>NetEQ 不只是一个固定长度的队列。它根据到达情况调整目标延迟，在播放端请求音频时选择正常解码、时间伸缩、丢包隐藏和恢复后的拼接。缓冲偏多时可以加速消耗，偏少时可以预先拉伸；缺帧时执行 <code>Expand</code>，下一段正常音频到来后可能执行 <code>Merge</code>，让接缝不那么突兀。这些操作由 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_coding/neteq/decision_logic.cc">NetEQ 决策逻辑</a> 和 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_coding/neteq/neteq_impl.cc">NetEQ 主实现</a> 共同完成。</p>
+<p>发送端也能根据网络状况调整 Opus 码率、包时长和 FEC，但音频网络适配器（ANA）的控制策略需要启用并配置。降低码率可能缓解拥塞，却会牺牲编码质量；缩短包时长能缩短单次丢失的声音缺口，却增加每秒的包数与包头开销。这些措施改变的是后续丢包风险和恢复条件，不会把已经丢失的原始音频找回来。<a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_coding/codecs/opus/audio_encoder_opus.cc">Opus 编码器适配层</a>包含相关控制入口。</p>
+<p>这里有一个容易误解的区别：<strong>libopus 有 PLC，并不表示 WebRTC 默认总是调用 Opus 的 PLC。</strong> 在本文源码基线中，<code>AudioDecoderOpusImpl::GeneratePlc</code> 受 <code>WebRTC-Audio-OpusGeneratePlc</code> field trial 控制；未启用时它不产出音频，NetEQ 转用自己的 <code>Expand</code>。启用后，NetEQ 才可能向 Opus 解码器请求 PLC。依据见 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_coding/codecs/opus/audio_decoder_opus.cc">Opus 解码器适配层</a> 的 <code>GeneratePlc</code> 和 NetEQ 的 <code>DoCodecPlc</code>。</p>
+<h2 id="三fec提前付带宽换一次及时恢复的机会">三、FEC：提前付带宽，换一次及时恢复的机会</h2>
+<h3 id="opus-带内-fec下一包带上一段语音的低码率冗余">Opus 带内 FEC：下一包带上一段语音的低码率冗余</h3>
+<p>Opus 在合适的编码模式和网络条件下，可以把前一段语音的低码率冗余放进后续包。这种冗余通常称为 SILK LBRR。它不是前一包的字节副本，恢复音质也不必然等同于原包。</p>
+
+<div class="mermaid">flowchart LR
+    A[&#34;P1：语音 A&#34;] --&gt; B[&#34;P2：语音 B&lt;br/&gt;＋ A 的 LBRR&#34;] --&gt; C[&#34;P3：语音 C&lt;br/&gt;＋ B 的 LBRR&#34;]
+    A -.-&gt;|&#34;网络丢失 P1&#34;| L[&#34;A 缺失&#34;]
+    B --&gt;|&#34;P2 在 A 截止前到达&#34;| F[&#34;先用 P2 冗余解 A&lt;br/&gt;再正常解 B&#34;]
+    L --&gt; F</div>
+<p>图是“一包 20 ms、一包一段语音”的教学例子。要救 A，P2 必须到达、确实携带可用冗余，而且接收端要留出等待时间；不能把“打开 FEC”直接等同于“每次丢包都能恢复”。WebRTC 的 Opus 解码器会在发现 FEC 时，把冗余帧以较早的时间戳交给 NetEQ，再交入当前主帧；NetEQ 按播放时间和帧优先级选用。<a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_coding/codecs/opus/audio_decoder_opus.cc">解析路径</a>可见 <code>ParsePayload</code> 和 <code>DecodeRedundantInternal</code>。</p>
+<p>发送端需要协商接收能力，并允许编码器生成 FEC。WebRTC 的 <code>SetFec</code> 允许 Opus 使用带内 FEC，损失估计也会传给编码器；最终是否写入冗余，仍取决于码率、模式和内容。SILK 或 Hybrid 可利用这一路径；CELT-only 不应被假定有同样的 LBRR。参见 <a href="https://www.rfc-editor.org/rfc/rfc7587.html#section-3.3">RFC 7587 §3.3</a>和 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_coding/codecs/opus/audio_encoder_opus.cc">WebRTC Opus 编码器适配层</a>。</p>
+<h3 id="rtp-red复制以前的编码块">RTP RED：复制以前的编码块</h3>
+<p>RED 是 <a href="https://www.rfc-editor.org/rfc/rfc2198.html">RFC 2198</a> 定义的冗余负载封装格式，不是一套纠错算法。本文源码中的 <code>AudioEncoderCopyRed</code> 通常把上一份已编码音频连同当前音频装入新包；默认保留一层冗余，配置可改变层数。若原包丢失而后续 RED 包及时到达，可以拿到原先的编码块。相比 Opus LBRR，这种复制可能更接近原包内容，但常常消耗更多带宽，并受包大小、时间戳跨度和协商结果限制。依据见 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_coding/codecs/red/audio_encoder_copy_red.cc">RED 编码器</a> 和 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_coding/neteq/red_payload_splitter.cc">NetEQ RED 拆包</a>。</p>
+<p>前一篇参考资料中讲的 ULPFEC、FlexFEC 属于 RTP 包级保护机制；<strong>不能因为 RED、ULPFEC 和 Opus FEC 都带有“冗余”，就认为音频通话会自动同时启用它们。</strong> 本文的音频实用路径重点是 Opus 带内 FEC 与协商后的音频 RED。</p>
+<h2 id="四nack能拿回原包但要赶上播放时刻">四、NACK：能拿回原包，但要赶上播放时刻</h2>
+<p>接收端看到序号缺口后，可通过 RTCP NACK 请求补发；发送端必须还保留原包，并且补发流量没有被限制。这里的耗时可以粗略写为：</p>
+<p><code>恢复耗时 ≈ 发现缺口与反馈等待 ＋ 反馈上行 ＋ 发送端排队 ＋ 补发下行</code></p>
+<p>网络路径近似对称时，两段传播之和常用 RTT 估算，但排队与反馈等待还要另算。如果距播放截止只剩 30 ms，RTT 却有 100 ms，补发包即使最终到达，也难以改善这一刻的声音。RTT 小、缓冲较充足时，NACK 对孤立丢包更有价值；大 RTT 或连续丢包时，反复补发还可能挤占新音频的带宽。</p>
+<p>本文基线的音频接收端确实有 NACK 路径：<code>ChannelReceive::OnRtpPacket</code> 调用 <code>NackTracker</code> 找缺口并发送反馈；发送端从历史缓存取包并排队补发。但该路径受协商与 NACK 历史配置控制，<code>NackTracker</code> 的筛选也不等于对每个包精确计算扬声器的播放截止时间。依据见 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/audio/channel_receive.cc">接收端</a>、<a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/audio/nack_tracker.cc">NackTracker</a> 和 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/rtp_rtcp/source/rtp_sender.cc">发送端补发</a>。</p>
+<p>NACK 与 FEC 不是必须排成“先等 NACK、再尝试 FEC”的串行流水线。NACK 反馈可以在接收包时发出，冗余帧和补发的原帧则可能先后进入 NetEQ；<strong>到播放时刻，谁及时且可用，谁才有机会被采用。</strong></p>
+<h2 id="五plc数据来不及就尽量把声音接起来">五、PLC：数据来不及，就尽量把声音接起来</h2>
+<p>PLC（Packet Loss Concealment）不会复原未知的原始语音，而是根据已解码的历史生成替代音频。独立使用 libopus 时，传入空包可触发 Opus PLC：SILK 侧使用语音预测、基音和激励状态；CELT 侧会依据历史波形与频谱状态处理短缺口，较长丢失转向噪声和能量衰减。具体策略因编码模式和连续丢失长度而变。<a href="https://www.rfc-editor.org/rfc/rfc6716.html#section-4.4">RFC 6716 §4.4</a>描述了 Opus 的丢包隐藏。</p>
+<p>WebRTC 默认的 NetEQ <code>Expand</code> 同样从解码后的历史音频外推，并在连续缺口中逐渐衰减；恢复正常帧时通过 <code>Merge</code> 平滑衔接。它不需要额外传输数据，因而是截止前没有可用包时的兜底，但对爆破音、说话人突然转变、音乐瞬态和长时间连续丢包都没有“猜中原声”的保证。参见 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_coding/neteq/expand.h">Expand</a> 与 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_coding/neteq/merge.h">Merge</a>。</p>
+<h2 id="六把方案放在同一张表里比较">六、把方案放在同一张表里比较</h2>
+<table>
+	<thead>
+			<tr>
+					<th>机制</th>
+					<th>获得的内容</th>
+					<th>主要代价</th>
+					<th>更合适的条件</th>
+					<th>主要限制</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>NetEQ 抖动缓冲</td>
+					<td>迟到、乱序的原包</td>
+					<td>增加播放延迟</td>
+					<td>抖动明显，仍能赶上截止</td>
+					<td>不能修复真正丢失的包</td>
+			</tr>
+			<tr>
+					<td>Opus 带内 FEC</td>
+					<td>前一段语音的低码率冗余</td>
+					<td>持续带宽，等待后包</td>
+					<td>中等丢包、后包通常能到、可容忍一段等待</td>
+					<td>不保证每包有冗余；连续丢包效果差</td>
+			</tr>
+			<tr>
+					<td>音频 RED</td>
+					<td>以前编码块的副本</td>
+					<td>较高的带宽与包长</td>
+					<td>可用带宽较充足，想提高原数据可用率</td>
+					<td>后包也丢或超时就无效</td>
+			</tr>
+			<tr>
+					<td>NACK 重传</td>
+					<td>原编码包</td>
+					<td>反馈和补发流量、RTT</td>
+					<td>RTT 较小、缓冲有余量、偶发丢包</td>
+					<td>过期补发无法改善实时播放</td>
+			</tr>
+			<tr>
+					<td>PLC / Expand</td>
+					<td>估计的替代 PCM</td>
+					<td>无额外网络带宽</td>
+					<td>低延迟要求高，或前面方法都未赶上</td>
+					<td>无法还原原声，连续丢包听感下降</td>
+			</tr>
+	</tbody>
+</table>
+<p>这张表比较的是机制，不是某种固定优先级。实际效果受协商、码率、包时长、RTT、抖动分布与播放目标延迟共同影响。FEC、RED 和 NACK 的开销都要算进<strong>总发送预算</strong>；链路已经拥塞时，盲目叠加冗余可能使新包也丢失。</p>
+<h2 id="七按场景组合而不是寻找一个万能开关">七、按场景组合，而不是寻找一个万能开关</h2>
+
+<div class="mermaid">flowchart TD
+    A[&#34;先测 RTT、抖动、独立/突发丢包&lt;br/&gt;以及播放目标延迟&#34;] --&gt; B{&#34;主要是乱序、迟到？&#34;}
+    B --&gt;|是| C[&#34;调整 NetEQ 延迟目标&lt;br/&gt;检查迟到包比例&#34;]
+    B --&gt;|否| D{&#34;RTT 和剩余播放预算&lt;br/&gt;允许重传吗？&#34;}
+    D --&gt;|允许| E[&#34;协商音频 NACK&lt;br/&gt;观察补发是否真正被播放&#34;]
+    D --&gt;|不允许| F[&#34;评估 Opus 带内 FEC&lt;br/&gt;或协商音频 RED&#34;]
+    C --&gt; G[&#34;所有路径最终仍需 PLC 兜底&#34;]
+    E --&gt; G
+    F --&gt; G</div>
+<ul>
+<li><strong>低延迟语音通话、RTT 较大</strong>：先控制编码包时长与播放延迟；若带宽允许，评估 Opus 带内 FEC。剩余缺口交给 PLC。不要为了等遥远的重传而无限拉长缓冲。</li>
+<li><strong>近距离网络、偶发孤立丢包</strong>：NACK 可能在截止前拿回原包；仍要观察补发的到达时间，而不只看 NACK 数量。</li>
+<li><strong>连续突发丢包</strong>：依赖下一包的单层冗余经常一起失效。可以评估多层 RED 或其他保护设计，但会增加带宽与等待；同时应检查拥塞和发送码率，避免把网络问题仅当成解码问题。</li>
+<li><strong>音乐或高质量音频</strong>：CELT-only 场景不能照搬 SILK LBRR 的收益预期。若音质比带宽更重要，可评估适当冗余与缓冲；瞬态被 PLC 预测错误时，主观听感仍可能明显下降。</li>
+</ul>
+<p>验证时，除了网络丢包率，还要记录 NetEQ 的 <code>concealedSamples</code>、<code>concealmentEvents</code>、<code>fecPacketsReceived</code>、<code>fecPacketsDiscarded</code>、缓冲延迟、NACK 数量，以及补发包是否在截止前真正被解码播放。<a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/audio/audio_receive_stream.cc">WebRTC 接收统计映射</a>包含这些接收侧指标。收到冗余包不等于成功用它恢复声音，发出 NACK 也不等于补发赶上了播放。测试应分别注入孤立丢包、连续丢包和纯延迟抖动，并在相同总码率与端到端延迟约束下比较听感；否则多花的带宽或多等的时间会被误认为恢复算法更好。</p>
+<p>归根结底，WebRTC 的音频恢复是一场与播放截止时间的赛跑：NetEQ 尽量给原包、冗余和补发创造机会；来不及的部分由 PLC 保住连续性。<strong>恢复率、实时性和带宽必须一起看。</strong></p>]]></content:encoded>
+    </item>
+  </channel>
+</rss>

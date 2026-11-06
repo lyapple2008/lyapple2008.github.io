@@ -12,7 +12,7 @@
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
-    <lastBuildDate>Sun, 25 Oct 2026 15:28:43 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 05 Nov 2026 20:18:58 +0800</lastBuildDate>
     <atom:link href="https://lyapple2008.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>【置顶】2026</title>
@@ -150,6 +150,134 @@ chart.setOption({
 据有里程碑意义的事件。</p>
 </blockquote>
 ]]></content:encoded>
+    </item>
+    <item>
+      <title>WebRTC 音频丢包恢复：NetEQ、Opus FEC、NACK 与 PLC 如何协作</title>
+      <link>https://lyapple2008.github.io/posts/202611/2026-11-05-webrtc%E4%B8%AD%E9%9F%B3%E9%A2%91%E4%B8%A2%E5%8C%85%E6%81%A2%E5%A4%8D/</link>
+      <pubDate>Thu, 05 Nov 2026 20:18:58 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202611/2026-11-05-webrtc%E4%B8%AD%E9%9F%B3%E9%A2%91%E4%B8%A2%E5%8C%85%E6%81%A2%E5%A4%8D/</guid>
+      <description>&lt;p&gt;视频丢一帧，画面可能短暂卡住；语音丢掉一个承载 20 ms 音频的包，则可能吞掉一个关键的辅音片段。接收端还必须按时向扬声器交付 PCM：原包即使最终到了，错过播放时刻也无法补回已经听到的声音。&lt;/p&gt;
+&lt;p&gt;所以讨论音频丢包恢复，先要问：&lt;strong&gt;缺失的音频在播放截止时间前，究竟还有没有机会拿到？&lt;/strong&gt; 有机会，就争取拿到编码数据；没有机会，就生成一段连续的替代声音。本文以本地 WebRTC 源码提交 &lt;code&gt;c8bca1867efcbc5f52adf58ad4463088ed257aa0&lt;/code&gt;（2026-10-22）为基线，说明这些选择如何落到 WebRTC 的音频链路中。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>视频丢一帧，画面可能短暂卡住；语音丢掉一个承载 20 ms 音频的包，则可能吞掉一个关键的辅音片段。接收端还必须按时向扬声器交付 PCM：原包即使最终到了，错过播放时刻也无法补回已经听到的声音。</p>
+<p>所以讨论音频丢包恢复，先要问：<strong>缺失的音频在播放截止时间前，究竟还有没有机会拿到？</strong> 有机会，就争取拿到编码数据；没有机会，就生成一段连续的替代声音。本文以本地 WebRTC 源码提交 <code>c8bca1867efcbc5f52adf58ad4463088ed257aa0</code>（2026-10-22）为基线，说明这些选择如何落到 WebRTC 的音频链路中。</p>
+<h2 id="一丢包造成的并不只是少了一个-rtp-包">一、丢包造成的并不只是“少了一个 RTP 包”</h2>
+<p>假设每包承载 20 ms 音频，P2 没有按时到达：</p>
+
+<div class="mermaid">flowchart LR
+    P1[&#34;P1：0～20 ms&lt;br/&gt;按时到达&#34;] --&gt; P2[&#34;P2：20～40 ms&lt;br/&gt;暂时缺失&#34;] --&gt; P3[&#34;P3：40～60 ms&lt;br/&gt;按时到达&#34;]
+    P2 --&gt; D{&#34;P2 播放截止前&lt;br/&gt;能取得可用数据吗？&#34;}
+    D --&gt;|&#34;原包或及时重传&#34;| A[&#34;正常解码 P2&#34;]
+    D --&gt;|&#34;P3 携带可用冗余&#34;| B[&#34;FEC / RED 恢复 P2&#34;]
+    D --&gt;|&#34;都没有&#34;| C[&#34;PLC 生成替代音频&#34;]</div>
+<p><strong>序号缺口不等于永久丢包。</strong> P2 可能只是乱序或延迟；如果它在截止前进入接收缓冲，仍可正常播放。真正影响听感的是截止时仍没有可用音频。短缺口会损伤辅音、爆破音或瞬态；连续缺口会让预测逐渐失真，出现机械音、音量衰减甚至静音。长包虽减少包头开销，丢一包时缺失的时间也更长。</p>
+<p>接收端为了等待乱序包，可以提高抖动缓冲的目标延迟；代价是整条通话更慢。<strong>缓冲只能把“迟到但仍赶得上”的包变为可用，无法凭空恢复真正丢失的数据。</strong></p>
+<h2 id="二先看-webrtc-的实际接收链路">二、先看 WebRTC 的实际接收链路</h2>
+
+<div class="mermaid">flowchart LR
+    S[&#34;发送端 Opus 编码&lt;br/&gt;可选择带内 FEC / RED&#34;] --&gt; R[&#34;RTP 网络&lt;br/&gt;乱序、延迟、丢失&#34;]
+    R --&gt; N[&#34;接收端 NetEQ&lt;br/&gt;排序、缓冲、目标延迟&#34;]
+    N --&gt; X{&#34;取音频时&lt;br/&gt;该时间段有可用帧？&#34;}
+    X --&gt;|有| Y[&#34;正常帧或冗余帧解码&#34;]
+    X --&gt;|无| Z[&#34;生成隐藏音频&lt;br/&gt;Expand / 可选 codec PLC&#34;]
+    Y --&gt; O[&#34;PCM → 播放&#34;]
+    Z --&gt; O
+    R -.-&gt;|&#34;检测序号缺口；配置允许时发 NACK&#34;| Q[&#34;RTCP 反馈 → 发送端补发&#34;]
+    Q -.-&gt;|&#34;赶上截止时间才有用&#34;| N</div>
+<p>NetEQ 不只是一个固定长度的队列。它根据到达情况调整目标延迟，在播放端请求音频时选择正常解码、时间伸缩、丢包隐藏和恢复后的拼接。缓冲偏多时可以加速消耗，偏少时可以预先拉伸；缺帧时执行 <code>Expand</code>，下一段正常音频到来后可能执行 <code>Merge</code>，让接缝不那么突兀。这些操作由 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_coding/neteq/decision_logic.cc">NetEQ 决策逻辑</a> 和 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_coding/neteq/neteq_impl.cc">NetEQ 主实现</a> 共同完成。</p>
+<p>发送端也能根据网络状况调整 Opus 码率、包时长和 FEC，但音频网络适配器（ANA）的控制策略需要启用并配置。降低码率可能缓解拥塞，却会牺牲编码质量；缩短包时长能缩短单次丢失的声音缺口，却增加每秒的包数与包头开销。这些措施改变的是后续丢包风险和恢复条件，不会把已经丢失的原始音频找回来。<a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_coding/codecs/opus/audio_encoder_opus.cc">Opus 编码器适配层</a>包含相关控制入口。</p>
+<p>这里有一个容易误解的区别：<strong>libopus 有 PLC，并不表示 WebRTC 默认总是调用 Opus 的 PLC。</strong> 在本文源码基线中，<code>AudioDecoderOpusImpl::GeneratePlc</code> 受 <code>WebRTC-Audio-OpusGeneratePlc</code> field trial 控制；未启用时它不产出音频，NetEQ 转用自己的 <code>Expand</code>。启用后，NetEQ 才可能向 Opus 解码器请求 PLC。依据见 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_coding/codecs/opus/audio_decoder_opus.cc">Opus 解码器适配层</a> 的 <code>GeneratePlc</code> 和 NetEQ 的 <code>DoCodecPlc</code>。</p>
+<h2 id="三fec提前付带宽换一次及时恢复的机会">三、FEC：提前付带宽，换一次及时恢复的机会</h2>
+<h3 id="opus-带内-fec下一包带上一段语音的低码率冗余">Opus 带内 FEC：下一包带上一段语音的低码率冗余</h3>
+<p>Opus 在合适的编码模式和网络条件下，可以把前一段语音的低码率冗余放进后续包。这种冗余通常称为 SILK LBRR。它不是前一包的字节副本，恢复音质也不必然等同于原包。</p>
+
+<div class="mermaid">flowchart LR
+    A[&#34;P1：语音 A&#34;] --&gt; B[&#34;P2：语音 B&lt;br/&gt;＋ A 的 LBRR&#34;] --&gt; C[&#34;P3：语音 C&lt;br/&gt;＋ B 的 LBRR&#34;]
+    A -.-&gt;|&#34;网络丢失 P1&#34;| L[&#34;A 缺失&#34;]
+    B --&gt;|&#34;P2 在 A 截止前到达&#34;| F[&#34;先用 P2 冗余解 A&lt;br/&gt;再正常解 B&#34;]
+    L --&gt; F</div>
+<p>图是“一包 20 ms、一包一段语音”的教学例子。要救 A，P2 必须到达、确实携带可用冗余，而且接收端要留出等待时间；不能把“打开 FEC”直接等同于“每次丢包都能恢复”。WebRTC 的 Opus 解码器会在发现 FEC 时，把冗余帧以较早的时间戳交给 NetEQ，再交入当前主帧；NetEQ 按播放时间和帧优先级选用。<a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_coding/codecs/opus/audio_decoder_opus.cc">解析路径</a>可见 <code>ParsePayload</code> 和 <code>DecodeRedundantInternal</code>。</p>
+<p>发送端需要协商接收能力，并允许编码器生成 FEC。WebRTC 的 <code>SetFec</code> 允许 Opus 使用带内 FEC，损失估计也会传给编码器；最终是否写入冗余，仍取决于码率、模式和内容。SILK 或 Hybrid 可利用这一路径；CELT-only 不应被假定有同样的 LBRR。参见 <a href="https://www.rfc-editor.org/rfc/rfc7587.html#section-3.3">RFC 7587 §3.3</a>和 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_coding/codecs/opus/audio_encoder_opus.cc">WebRTC Opus 编码器适配层</a>。</p>
+<h3 id="rtp-red复制以前的编码块">RTP RED：复制以前的编码块</h3>
+<p>RED 是 <a href="https://www.rfc-editor.org/rfc/rfc2198.html">RFC 2198</a> 定义的冗余负载封装格式，不是一套纠错算法。本文源码中的 <code>AudioEncoderCopyRed</code> 通常把上一份已编码音频连同当前音频装入新包；默认保留一层冗余，配置可改变层数。若原包丢失而后续 RED 包及时到达，可以拿到原先的编码块。相比 Opus LBRR，这种复制可能更接近原包内容，但常常消耗更多带宽，并受包大小、时间戳跨度和协商结果限制。依据见 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_coding/codecs/red/audio_encoder_copy_red.cc">RED 编码器</a> 和 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_coding/neteq/red_payload_splitter.cc">NetEQ RED 拆包</a>。</p>
+<p>前一篇参考资料中讲的 ULPFEC、FlexFEC 属于 RTP 包级保护机制；<strong>不能因为 RED、ULPFEC 和 Opus FEC 都带有“冗余”，就认为音频通话会自动同时启用它们。</strong> 本文的音频实用路径重点是 Opus 带内 FEC 与协商后的音频 RED。</p>
+<h2 id="四nack能拿回原包但要赶上播放时刻">四、NACK：能拿回原包，但要赶上播放时刻</h2>
+<p>接收端看到序号缺口后，可通过 RTCP NACK 请求补发；发送端必须还保留原包，并且补发流量没有被限制。这里的耗时可以粗略写为：</p>
+<p><code>恢复耗时 ≈ 发现缺口与反馈等待 ＋ 反馈上行 ＋ 发送端排队 ＋ 补发下行</code></p>
+<p>网络路径近似对称时，两段传播之和常用 RTT 估算，但排队与反馈等待还要另算。如果距播放截止只剩 30 ms，RTT 却有 100 ms，补发包即使最终到达，也难以改善这一刻的声音。RTT 小、缓冲较充足时，NACK 对孤立丢包更有价值；大 RTT 或连续丢包时，反复补发还可能挤占新音频的带宽。</p>
+<p>本文基线的音频接收端确实有 NACK 路径：<code>ChannelReceive::OnRtpPacket</code> 调用 <code>NackTracker</code> 找缺口并发送反馈；发送端从历史缓存取包并排队补发。但该路径受协商与 NACK 历史配置控制，<code>NackTracker</code> 的筛选也不等于对每个包精确计算扬声器的播放截止时间。依据见 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/audio/channel_receive.cc">接收端</a>、<a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/audio/nack_tracker.cc">NackTracker</a> 和 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/rtp_rtcp/source/rtp_sender.cc">发送端补发</a>。</p>
+<p>NACK 与 FEC 不是必须排成“先等 NACK、再尝试 FEC”的串行流水线。NACK 反馈可以在接收包时发出，冗余帧和补发的原帧则可能先后进入 NetEQ；<strong>到播放时刻，谁及时且可用，谁才有机会被采用。</strong></p>
+<h2 id="五plc数据来不及就尽量把声音接起来">五、PLC：数据来不及，就尽量把声音接起来</h2>
+<p>PLC（Packet Loss Concealment）不会复原未知的原始语音，而是根据已解码的历史生成替代音频。独立使用 libopus 时，传入空包可触发 Opus PLC：SILK 侧使用语音预测、基音和激励状态；CELT 侧会依据历史波形与频谱状态处理短缺口，较长丢失转向噪声和能量衰减。具体策略因编码模式和连续丢失长度而变。<a href="https://www.rfc-editor.org/rfc/rfc6716.html#section-4.4">RFC 6716 §4.4</a>描述了 Opus 的丢包隐藏。</p>
+<p>WebRTC 默认的 NetEQ <code>Expand</code> 同样从解码后的历史音频外推，并在连续缺口中逐渐衰减；恢复正常帧时通过 <code>Merge</code> 平滑衔接。它不需要额外传输数据，因而是截止前没有可用包时的兜底，但对爆破音、说话人突然转变、音乐瞬态和长时间连续丢包都没有“猜中原声”的保证。参见 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_coding/neteq/expand.h">Expand</a> 与 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_coding/neteq/merge.h">Merge</a>。</p>
+<h2 id="六把方案放在同一张表里比较">六、把方案放在同一张表里比较</h2>
+<table>
+	<thead>
+			<tr>
+					<th>机制</th>
+					<th>获得的内容</th>
+					<th>主要代价</th>
+					<th>更合适的条件</th>
+					<th>主要限制</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>NetEQ 抖动缓冲</td>
+					<td>迟到、乱序的原包</td>
+					<td>增加播放延迟</td>
+					<td>抖动明显，仍能赶上截止</td>
+					<td>不能修复真正丢失的包</td>
+			</tr>
+			<tr>
+					<td>Opus 带内 FEC</td>
+					<td>前一段语音的低码率冗余</td>
+					<td>持续带宽，等待后包</td>
+					<td>中等丢包、后包通常能到、可容忍一段等待</td>
+					<td>不保证每包有冗余；连续丢包效果差</td>
+			</tr>
+			<tr>
+					<td>音频 RED</td>
+					<td>以前编码块的副本</td>
+					<td>较高的带宽与包长</td>
+					<td>可用带宽较充足，想提高原数据可用率</td>
+					<td>后包也丢或超时就无效</td>
+			</tr>
+			<tr>
+					<td>NACK 重传</td>
+					<td>原编码包</td>
+					<td>反馈和补发流量、RTT</td>
+					<td>RTT 较小、缓冲有余量、偶发丢包</td>
+					<td>过期补发无法改善实时播放</td>
+			</tr>
+			<tr>
+					<td>PLC / Expand</td>
+					<td>估计的替代 PCM</td>
+					<td>无额外网络带宽</td>
+					<td>低延迟要求高，或前面方法都未赶上</td>
+					<td>无法还原原声，连续丢包听感下降</td>
+			</tr>
+	</tbody>
+</table>
+<p>这张表比较的是机制，不是某种固定优先级。实际效果受协商、码率、包时长、RTT、抖动分布与播放目标延迟共同影响。FEC、RED 和 NACK 的开销都要算进<strong>总发送预算</strong>；链路已经拥塞时，盲目叠加冗余可能使新包也丢失。</p>
+<h2 id="七按场景组合而不是寻找一个万能开关">七、按场景组合，而不是寻找一个万能开关</h2>
+
+<div class="mermaid">flowchart TD
+    A[&#34;先测 RTT、抖动、独立/突发丢包&lt;br/&gt;以及播放目标延迟&#34;] --&gt; B{&#34;主要是乱序、迟到？&#34;}
+    B --&gt;|是| C[&#34;调整 NetEQ 延迟目标&lt;br/&gt;检查迟到包比例&#34;]
+    B --&gt;|否| D{&#34;RTT 和剩余播放预算&lt;br/&gt;允许重传吗？&#34;}
+    D --&gt;|允许| E[&#34;协商音频 NACK&lt;br/&gt;观察补发是否真正被播放&#34;]
+    D --&gt;|不允许| F[&#34;评估 Opus 带内 FEC&lt;br/&gt;或协商音频 RED&#34;]
+    C --&gt; G[&#34;所有路径最终仍需 PLC 兜底&#34;]
+    E --&gt; G
+    F --&gt; G</div>
+<ul>
+<li><strong>低延迟语音通话、RTT 较大</strong>：先控制编码包时长与播放延迟；若带宽允许，评估 Opus 带内 FEC。剩余缺口交给 PLC。不要为了等遥远的重传而无限拉长缓冲。</li>
+<li><strong>近距离网络、偶发孤立丢包</strong>：NACK 可能在截止前拿回原包；仍要观察补发的到达时间，而不只看 NACK 数量。</li>
+<li><strong>连续突发丢包</strong>：依赖下一包的单层冗余经常一起失效。可以评估多层 RED 或其他保护设计，但会增加带宽与等待；同时应检查拥塞和发送码率，避免把网络问题仅当成解码问题。</li>
+<li><strong>音乐或高质量音频</strong>：CELT-only 场景不能照搬 SILK LBRR 的收益预期。若音质比带宽更重要，可评估适当冗余与缓冲；瞬态被 PLC 预测错误时，主观听感仍可能明显下降。</li>
+</ul>
+<p>验证时，除了网络丢包率，还要记录 NetEQ 的 <code>concealedSamples</code>、<code>concealmentEvents</code>、<code>fecPacketsReceived</code>、<code>fecPacketsDiscarded</code>、缓冲延迟、NACK 数量，以及补发包是否在截止前真正被解码播放。<a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/audio/audio_receive_stream.cc">WebRTC 接收统计映射</a>包含这些接收侧指标。收到冗余包不等于成功用它恢复声音，发出 NACK 也不等于补发赶上了播放。测试应分别注入孤立丢包、连续丢包和纯延迟抖动，并在相同总码率与端到端延迟约束下比较听感；否则多花的带宽或多等的时间会被误认为恢复算法更好。</p>
+<p>归根结底，WebRTC 的音频恢复是一场与播放截止时间的赛跑：NetEQ 尽量给原包、冗余和补发创造机会；来不及的部分由 PLC 保住连续性。<strong>恢复率、实时性和带宽必须一起看。</strong></p>]]></content:encoded>
     </item>
     <item>
       <title>WebRTC 音频设备管理：从双向数据流到跨平台实现</title>
@@ -2969,634 +3097,6 @@ sequenceDiagram
       <pubDate>Fri, 31 Jul 2026 22:04:00 +0800</pubDate>
       <guid>https://lyapple2008.github.io/posts/202607/speex-echo-cancellation/</guid>
       <description>从声学回声模型、自适应滤波与 MDF/AUMDF 原理，深入到 SpeexDSP 1.2.1 mdf.c 工程实现的交互式中文导读。</description>
-    </item>
-    <item>
-      <title>Token在燃烧？尝试本地部署？</title>
-      <link>https://lyapple2008.github.io/posts/202607/2026-07-15-%E6%9C%AC%E5%9C%B0ai%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%96%B9%E6%A1%88/</link>
-      <pubDate>Wed, 15 Jul 2026 22:52:35 +0800</pubDate>
-      <guid>https://lyapple2008.github.io/posts/202607/2026-07-15-%E6%9C%AC%E5%9C%B0ai%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%96%B9%E6%A1%88/</guid>
-      <description>&lt;p&gt;&lt;img alt=&#34;尝试本地部署？&#34; loading=&#34;lazy&#34; src=&#34;https://lyapple2008.github.io/images/2026-07/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2.jpg&#34;&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;如果把个人可以买到的设备限制在最多 128GB 统一内存，什么开源模型最适合 AI Coding？买 Mac Studio、AMD 大内存小主机、DGX Spark 或多显卡工作站，和直接调用在线 API 相比，哪一种更快、更便宜？&lt;/p&gt;
-&lt;/blockquote&gt;</description>
-      <content:encoded><![CDATA[<p><img alt="尝试本地部署？" loading="lazy" src="/images/2026-07/%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2.jpg"></p>
-<blockquote>
-<p>如果把个人可以买到的设备限制在最多 128GB 统一内存，什么开源模型最适合 AI Coding？买 Mac Studio、AMD 大内存小主机、DGX Spark 或多显卡工作站，和直接调用在线 API 相比，哪一种更快、更便宜？</p>
-</blockquote>
-<p>这篇文章只讨论 <strong>AI Coding Agent</strong>：模型需要读取代码仓库、调用终端、修改多个文件、执行测试，并根据报错继续迭代。普通聊天、知识问答和只补全下一行代码的 FIM 模型不在本文范围内。</p>
-<p>为了让比较有实际采购意义，本文增加两个约束：</p>
-<ol>
-<li>本地设备的统一内存或可用于推理的总高速内存不超过 <strong>128GB</strong>；</li>
-<li>所有本地方案运行同一个开源模型，在线方案也尽量调用同名模型，避免把模型能力差异误算成硬件差异。</li>
-</ol>
-<p>资料和价格更新至 <strong>2026 年 7 月 19 日</strong>。硬件价格按市场数量级估算，API 价格来自官方页面，实际采购价、汇率和服务价格可能变化。</p>
-<h2 id="一先说结论">一、先说结论</h2>
-<p>在 128GB 上限内，我选择 <strong>Qwen3-Coder-Next</strong> 作为本地 AI Coding 的比较样本。它不是所有维度都绝对最强，但在“开源许可、Coding Agent 能力、模型尺寸和本地推理效率”这几个条件同时成立时，是目前最有代表性的高端本地模型之一。</p>
-<p>我的结论是：</p>
-<ol>
-<li><strong>只为降低 Token 费用，不值得专门购买本地硬件。</strong> 同名模型的 Qwen Cloud API 在短上下文下，重度个人使用约 ¥216/月；一台 ¥2万～¥5万元的本地设备通常需要很多年才能靠 API 费差价回本。</li>
-<li><strong>已有 64GB 以上 Mac 或 48GB 显存工作站时，本地部署很有价值。</strong> Qwen3-Coder-Next 4bit 约需 46GB，模型完整装入后可以达到可交互的 Agent 速度。</li>
-<li><strong>64GB 是能用，96GB～128GB 才是舒服。</strong> 64GB 在加载 4bit 权重后，留给操作系统、运行时和 KV Cache 的空间有限；96GB～128GB 更适合长上下文和并行工具任务。</li>
-<li><strong>128GB 容量不等于高性能。</strong> Ryzen AI Max+ 395 和 DGX Spark 都能装入模型，但生成速度会受到约 256～273GB/s 内存带宽限制；专业显卡带宽更高，但价格也高得多。</li>
-<li><strong>个人最合理的模式仍然是混合使用。</strong> 敏感代码、离线任务和高频小修改走本地；长上下文、紧急任务和复杂重构走 API。</li>
-</ol>
-<h2 id="二为什么选择-qwen3-coder-next">二、为什么选择 Qwen3-Coder-Next</h2>
-<p><a href="https://huggingface.co/Qwen/Qwen3-Coder-Next">Qwen3-Coder-Next</a> 是专门面向 Coding Agent 和本地开发的 MoE 模型，采用 Apache-2.0 许可证。官方模型卡给出的核心参数如下：</p>
-<ul>
-<li>总参数量 80B，每个 Token 激活约 3B；</li>
-<li>原生上下文 262,144 Token；</li>
-<li>只支持非思考模式；</li>
-<li>支持函数调用和 OpenAI 兼容服务；</li>
-<li>可接入 Qwen Code、Claude Code、Codex、Cline、Kilo 等 Coding 工具；</li>
-<li>支持 llama.cpp、MLX-LM、Ollama、SGLang 和 vLLM 等后端。</li>
-</ul>
-<p>公开 Coding 基准如下：</p>
-<table>
-	<thead>
-			<tr>
-					<th>基准</th>
-					<th style="text-align: right">成绩</th>
-					<th>主要考察内容</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td>SWE-bench Verified</td>
-					<td style="text-align: right">70.6</td>
-					<td>修复真实 GitHub Issue</td>
-			</tr>
-			<tr>
-					<td>SWE-bench Pro</td>
-					<td style="text-align: right">44.3</td>
-					<td>更困难、更抗数据污染的软件工程任务</td>
-			</tr>
-			<tr>
-					<td>Terminal-Bench 2.0</td>
-					<td style="text-align: right">36.2</td>
-					<td>终端操作、工具调用和长链路 Agent 能力</td>
-			</tr>
-	</tbody>
-</table>
-<p>这些成绩会受到 Agent 框架、提示词、工具集和推理参数影响，不能理解为在任何 IDE 中都有固定成功率。不过它们至少说明，这个模型的目标不是生成几个函数，而是完成仓库级软件工程任务。</p>
-<h3 id="为什么不选择更大的模型">为什么不选择更大的模型</h3>
-<p>总参数更大的模型不一定适合本次硬件约束。例如 GLM-5.2 的最低实用量化也需要约 223GB～245GB 总内存，128GB 设备只能依赖大量 SSD 或远程卸载。它虽然能“启动”，但权重会频繁跨层级搬运，无法获得正常的 AI Coding 交互体验。</p>
-<p>Qwen3-Coder-Next 的优势正好相反：总参数 80B，但每 Token 只激活约 3B。根据 <a href="https://unsloth.ai/docs/models/qwen3-coder-next">Unsloth 的本地运行说明</a>：</p>
-<table>
-	<thead>
-			<tr>
-					<th>量化精度</th>
-					<th style="text-align: right">模型占用</th>
-					<th style="text-align: right">适合的本地内存</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td>3bit</td>
-					<td style="text-align: right">低于 4bit，具体随量化格式变化</td>
-					<td style="text-align: right">48GB 紧凑部署</td>
-			</tr>
-			<tr>
-					<td>4bit</td>
-					<td style="text-align: right">约 46GB</td>
-					<td style="text-align: right">64GB～96GB</td>
-			</tr>
-			<tr>
-					<td>8bit</td>
-					<td style="text-align: right">约 85GB</td>
-					<td style="text-align: right">96GB～128GB</td>
-			</tr>
-			<tr>
-					<td>BF16</td>
-					<td style="text-align: right">约 160GB，另需运行时空间</td>
-					<td style="text-align: right">超出本文上限</td>
-			</tr>
-	</tbody>
-</table>
-<p>本文默认选择 <strong>4bit</strong>。它能在 64GB 设备上运行，又比 3bit 更稳；8bit 虽然更接近原始模型，但在 96GB 设备上只剩很少空间给 KV Cache，综合体验未必更好。</p>
-<h2 id="三ai-coding-性能不能只看-tokens">三、AI Coding 性能不能只看 Token/s</h2>
-<p>Coding Agent 的完整链路通常是：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">理解需求 -&gt; 搜索仓库 -&gt; 阅读文件 -&gt; 规划修改 -&gt; 编辑代码
-</span></span><span class="line"><span class="cl">        -&gt; 执行命令 -&gt; 分析报错 -&gt; 再次修改 -&gt; 运行测试</span></span></code></pre></td></tr></table>
-</div>
-</div>
-<p>因此需要同时比较四种性能：</p>
-<ul>
-<li><strong>任务成功率</strong>：能否最终通过测试，而不是只输出看起来正确的代码；</li>
-<li><strong>首 Token 延迟</strong>：提交任务后多久开始响应；</li>
-<li><strong>生成速度</strong>：模型持续输出时的 Token/s；</li>
-<li><strong>总完成时间</strong>：包括读取上下文、工具调用、失败重试和人工纠错。</li>
-</ul>
-<p>本地部署最容易只关注生成速度，但 AI Coding 中经常更慢的是长提示词的 Prefill。一次输入 50K Token 的仓库上下文，即使后续输出很快，也可能在开始生成前等待很久。</p>
-<p>另一个常见误区是把“支持 256K 上下文”理解成“应该默认开启 256K”。上下文越长，KV Cache、Prefill 时间和内存碎片越大。个人使用建议从 <strong>16K 或 32K</strong> 开始，让 Agent 通过代码搜索按需读取文件，再根据项目逐步提高。</p>
-<h2 id="四本地部署方案对比">四、本地部署方案对比</h2>
-<p>下面所有方案都以 Qwen3-Coder-Next 4bit、单用户 AI Coding 为基础。速度等级是综合容量、内存带宽、推理后端和是否发生卸载后的相对判断，不是厂商保证值。</p>
-<table>
-	<thead>
-			<tr>
-					<th>本地方案</th>
-					<th style="text-align: right">可用内存</th>
-					<th>模型状态</th>
-					<th>交互性能</th>
-					<th style="text-align: right">采购成本粗估</th>
-					<th>核心瓶颈</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td>64GB Mac Studio</td>
-					<td style="text-align: right">64GB 统一内存</td>
-					<td>4bit 可完整装入，余量较小</td>
-					<td>中～高</td>
-					<td style="text-align: right">¥2.5万～¥3.5万</td>
-					<td>KV Cache 余量、Metal 后端、546GB/s 带宽</td>
-			</tr>
-			<tr>
-					<td>96GB Mac Studio M3 Ultra</td>
-					<td style="text-align: right">96GB 统一内存</td>
-					<td>4bit 宽裕，8bit 紧张</td>
-					<td>高</td>
-					<td style="text-align: right">¥4.5万～¥6万元</td>
-					<td>价格、无 CUDA、长上下文 Prefill</td>
-			</tr>
-			<tr>
-					<td>Ryzen AI Max+ 395 128GB</td>
-					<td style="text-align: right">128GB 统一内存</td>
-					<td>4bit/8bit 均可装入</td>
-					<td>中</td>
-					<td style="text-align: right">¥2万～¥3.5万元</td>
-					<td>LPDDR5x 带宽、ROCm/后端成熟度</td>
-			</tr>
-			<tr>
-					<td>DGX Spark / GB10 128GB</td>
-					<td style="text-align: right">128GB 一致性内存</td>
-					<td>4bit/8bit 均可装入</td>
-					<td>中</td>
-					<td style="text-align: right">¥3.5万～¥4.5万元</td>
-					<td>273GB/s 内存带宽、ARM64 兼容性</td>
-			</tr>
-			<tr>
-					<td>双 RTX 3090 工作站</td>
-					<td style="text-align: right">48GB 显存 + 系统内存</td>
-					<td>4bit 极紧，宜 3bit 或少量卸载</td>
-					<td>中～高</td>
-					<td style="text-align: right">¥1.2万～¥2万元</td>
-					<td>跨卡通信、显存余量、功耗散热</td>
-			</tr>
-			<tr>
-					<td>RTX 5090 + 128GB RAM</td>
-					<td style="text-align: right">32GB 显存 + 128GB RAM</td>
-					<td>4bit 需 CPU/GPU 混合卸载</td>
-					<td>中</td>
-					<td style="text-align: right">¥2.5万～¥3.5万元</td>
-					<td>PCIe 搬运、系统内存带宽</td>
-			</tr>
-			<tr>
-					<td>RTX PRO 6000 Blackwell</td>
-					<td style="text-align: right">96GB 显存</td>
-					<td>4bit 很宽裕，8bit 可用</td>
-					<td>很高</td>
-					<td style="text-align: right">通常超过 ¥10万元</td>
-					<td>采购价格、功耗、并发时 KV Cache</td>
-			</tr>
-	</tbody>
-</table>
-<p>Unsloth 给出的经验是：量化模型完整放入计算设备后，可期待 20+ Token/s；一旦模型不能完整装入而需要分层卸载，速度会明显下降。这个数字是模型级经验，不是对每一种硬件的实测承诺。</p>
-<h3 id="1-64gb-mac-studio能用但要控制上下文">1. 64GB Mac Studio：能用，但要控制上下文</h3>
-<p>Mac 的 CPU 和 GPU 共用统一内存，不存在传统 PC 上“系统有 64GB，但显卡只能用 24GB”的硬边界。Qwen3-Coder-Next 4bit 约 46GB，64GB Mac 可以完整加载，并通过 llama.cpp、MLX-LM、Ollama 或 LM Studio 提供本地 API。</p>
-<p>它的主要瓶颈不是计算单元数量，而是 <strong>剩余内存和内存带宽</strong>：</p>
-<ul>
-<li>权重加载后只剩约 18GB，操作系统、运行时和 KV Cache 都要使用这部分空间；</li>
-<li>上下文开得过大时容易触发内存压力和 Swap；</li>
-<li>发生 SSD Swap 后，速度会从可交互迅速下降；</li>
-<li>Metal 对桌面推理很成熟，但新模型的高级优化通常晚于 CUDA 后端。</li>
-</ul>
-<p>因此 64GB 更适合 4bit + 16K～32K 上下文，不适合追求 256K 满上下文。</p>
-<h3 id="2-96gb-mac-studio-m3-ultramac-路线的性能型选择">2. 96GB Mac Studio M3 Ultra：Mac 路线的性能型选择</h3>
-<p><a href="https://www.apple.com/mac-studio/specs/">Apple 的技术规格</a>显示，M3 Ultra 的统一内存带宽为 819GB/s。96GB 配置运行 46GB 的 4bit 模型时，可以给 KV Cache 和其他应用留下较大空间，比 64GB 配置更适合作为长期运行的本地 Coding 服务。</p>
-<p>8bit 约需 85GB，看起来也能加载，但只剩约 11GB，容易被系统和长上下文吃完。实际使用更建议继续选择高质量 4bit，把容量留给上下文。</p>
-<p>主要瓶颈是：</p>
-<ul>
-<li>没有 CUDA，无法使用只提供 CUDA Kernel 的最新优化；</li>
-<li>单用户速度不错，但多人并发能力不如专业 GPU 服务；</li>
-<li>长上下文仍受 KV Cache 和 Prefill 时间限制；</li>
-<li>设备价格远高于调用同名 API 的费用。</li>
-</ul>
-<h3 id="3-ryzen-ai-max-395-128gb容量优先的-pc-小主机">3. Ryzen AI Max+ 395 128GB：容量优先的 PC 小主机</h3>
-<p><a href="https://frame.work/desktop">Framework Desktop</a> 等设备可配置 128GB LPDDR5x-8000 统一内存，官方称最多可提供 96GB 图形可寻址内存，采用 256-bit 内存总线。Qwen3-Coder-Next 4bit 可以宽裕运行，8bit 也有机会完整装入。</p>
-<p>这条路线的优点是容量大、体积小、功耗低，并且保留 Linux/Windows 环境。主要瓶颈是：</p>
-<ul>
-<li>统一内存带宽明显低于 M3 Ultra 和高端独立显卡；</li>
-<li>ROCm、Vulkan、llama.cpp 对新架构的优化程度不完全一致；</li>
-<li>“模型能装入”不代表 GPU 能以独显级速度完成推理；</li>
-<li>Windows、Linux 和不同驱动版本的实际表现可能差异较大。</li>
-</ul>
-<p>它适合把“运行更大模型和更长上下文”放在第一位的人，不适合单纯追求最快 Token/s。</p>
-<h3 id="4-dgx-spark128gb--cuda但不是大显存显卡的速度">4. DGX Spark：128GB + CUDA，但不是大显存显卡的速度</h3>
-<p><a href="https://www.nvidia.com/en-us/products/workstations/dgx-spark/">NVIDIA DGX Spark</a> 使用 GB10 Grace Blackwell Superchip，提供 128GB 一致性内存和 NVIDIA AI 软件栈。它的价值是小体积、CUDA 环境和大容量可以同时获得，部署容器、NIM、PyTorch、SGLang 和 vLLM 类工具更接近 NVIDIA 服务器工作流。</p>
-<p>它的核心瓶颈是约 <strong>273GB/s 内存带宽</strong>。这远低于 RTX 5090 和 RTX PRO 6000，因此不能因为名字中有“DGX”就预期获得数据中心 GPU 的生成速度。其他限制还包括 ARM64 环境的软件兼容、部分 Python Wheel 和第三方工具需要重新验证。</p>
-<p>DGX Spark 更适合学习和验证 CUDA 部署栈，未必是单用户桌面 AI Coding 的最高性价比方案。</p>
-<h3 id="5-双-rtx-3090最便宜的-48gb-cuda-路线">5. 双 RTX 3090：最便宜的 48GB CUDA 路线</h3>
-<p>两张 RTX 3090 合计有 48GB 显存，接近 4bit 模型约 46GB 的大小。它的显存带宽高、CUDA 生态成熟，二手整机价格也低于新款大内存设备。</p>
-<p>问题是两张显卡的显存不会自动变成一块无缝的 48GB：</p>
-<ul>
-<li>推理框架必须支持 Tensor Split 或 Tensor Parallel；</li>
-<li>4bit 权重几乎占满显存，KV Cache 余量很小；</li>
-<li>跨卡通信受 PCIe 或 NVLink 限制；</li>
-<li>两张卡的额定功耗合计可达约 700W；</li>
-<li>二手显卡还存在显存稳定性和维修历史风险。</li>
-</ul>
-<p>更现实的做法是使用 3bit，或者把少量层和 KV Cache 放到系统内存。代价是量化质量或速度下降。</p>
-<h3 id="6-rtx-5090--128gb-系统内存显卡快卸载慢">6. RTX 5090 + 128GB 系统内存：显卡快，卸载慢</h3>
-<p>RTX 5090 有 32GB 显存，无法完整装下约 46GB 的 4bit 模型。llama.cpp 可以把一部分层留在系统内存，从而让模型运行起来。</p>
-<p>这条路线的瓶颈非常明确：CPU 中的权重要经过系统内存和 PCIe，不能享受显卡本地 GDDR7 的完整带宽。模型越多层卸载到 CPU，生成速度越接近系统内存方案，而不是 5090 的理论性能。</p>
-<p>如果已经拥有 5090，这是一条新增成本很低的尝试路线；如果准备新购设备专门运行 Qwen3-Coder-Next，则不如直接选择能完整容纳模型的硬件。</p>
-<h3 id="7-rtx-pro-6000-blackwell性能最好成本最差">7. RTX PRO 6000 Blackwell：性能最好，成本最差</h3>
-<p>RTX PRO 6000 Blackwell 提供 96GB GDDR7 ECC 显存和约 1792GB/s 带宽。Qwen3-Coder-Next 4bit 可以完整装入，并为 KV Cache 和并发保留大量空间，是本文本地方案中性能最接近理想状态的一种。</p>
-<p>它的主要瓶颈不是技术，而是价格：单卡价格已经超过大多数个人工作站。只有在多人共享、商业服务、模型微调、专业渲染等负载能够共同分摊成本时，才可能合理。</p>
-<h2 id="五推理后端怎么选">五、推理后端怎么选</h2>
-<table>
-	<thead>
-			<tr>
-					<th>设备</th>
-					<th>推荐后端</th>
-					<th>原因</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td>Apple Silicon</td>
-					<td>llama.cpp、MLX-LM、Ollama、LM Studio</td>
-					<td>Metal 和统一内存支持成熟</td>
-			</tr>
-			<tr>
-					<td>Ryzen AI Max</td>
-					<td>llama.cpp、ROCm 后端</td>
-					<td>能使用统一内存，需按系统验证兼容性</td>
-			</tr>
-			<tr>
-					<td>单机 NVIDIA</td>
-					<td>llama.cpp、SGLang、vLLM</td>
-					<td>CUDA 生态完整，服务化工具丰富</td>
-			</tr>
-			<tr>
-					<td>双 3090/多 GPU</td>
-					<td>llama.cpp Tensor Split、SGLang/vLLM Tensor Parallel</td>
-					<td>需要显式拆分模型和通信</td>
-			</tr>
-			<tr>
-					<td>DGX Spark</td>
-					<td>NVIDIA 容器、SGLang、vLLM、llama.cpp</td>
-					<td>适合复用 CUDA 服务部署流程</td>
-			</tr>
-	</tbody>
-</table>
-<p>个人桌面部署建议先使用 llama.cpp 或封装它的 Ollama/LM Studio。它们对 GGUF 量化和 CPU/GPU 混合卸载支持最好。团队共享、需要并发时，再考虑 SGLang 或 vLLM。</p>
-<p>无论使用哪一个后端，都应向 Coding 客户端暴露 OpenAI 兼容接口。这样可以把模型接入 OpenCode、Cline、Continue、Aider、Codex 或其他 Agent，而不必把工作流锁定在单一推理程序中。</p>
-<h2 id="六同名模型在线-api-方案">六、同名模型在线 API 方案</h2>
-<p><a href="https://www.qwencloud.com/models/qwen3-coder-next">Qwen Cloud 的 Qwen3-Coder-Next 页面</a>提供 OpenAI 兼容 API、函数调用、结构化输出和上下文缓存。官方公布的上下文上限约 262K，最大输入约 204.8K，最大输出约 65.5K。</p>
-<p>API 按单次请求的输入长度分档计价：</p>
-<table>
-	<thead>
-			<tr>
-					<th>单次请求输入长度</th>
-					<th style="text-align: right">输入价格</th>
-					<th style="text-align: right">输出价格</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td>不超过 32K</td>
-					<td style="text-align: right">$0.3 / 百万 Token</td>
-					<td style="text-align: right">$1.5 / 百万 Token</td>
-			</tr>
-			<tr>
-					<td>32K～128K</td>
-					<td style="text-align: right">$0.5 / 百万 Token</td>
-					<td style="text-align: right">$2.5 / 百万 Token</td>
-			</tr>
-			<tr>
-					<td>128K～256K</td>
-					<td style="text-align: right">$0.8 / 百万 Token</td>
-					<td style="text-align: right">$4 / 百万 Token</td>
-			</tr>
-	</tbody>
-</table>
-<p>在线 API 的优势：</p>
-<ul>
-<li>无硬件投入，开通即可使用；</li>
-<li>不需要下载模型、处理驱动和量化兼容；</li>
-<li>由服务端承担扩容、故障恢复和推理优化；</li>
-<li>不需要为了适配 64GB 设备亲自选择量化和分配 KV Cache；服务端具体精度并未公开；</li>
-<li>长上下文不会挤占本机内存。</li>
-</ul>
-<p>API 的性能瓶颈则是：</p>
-<ul>
-<li>首 Token 延迟包含公网往返、排队和长提示词 Prefill；</li>
-<li>官方限制为 600 RPM、100 万 TPM，高并发时会触及配额；</li>
-<li>请求超过 32K 和 128K 后，输入、输出单价都会提高；</li>
-<li>速度和模型版本由服务商控制，无法固定推理 Kernel；</li>
-<li>私有代码需要离开本机，必须评估数据协议、地区和合规要求。</li>
-</ul>
-<h2 id="七api-月度成本">七、API 月度成本</h2>
-<p>为了避免只看“每百万 Token”却不知道一个月花多少，下面设置三种个人 AI Coding 用量：</p>
-<table>
-	<thead>
-			<tr>
-					<th>使用强度</th>
-					<th style="text-align: right">月输入</th>
-					<th style="text-align: right">月输出</th>
-					<th>典型场景</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td>轻度</td>
-					<td style="text-align: right">10M</td>
-					<td style="text-align: right">2M</td>
-					<td>偶尔修 Bug、解释代码</td>
-			</tr>
-			<tr>
-					<td>中度</td>
-					<td style="text-align: right">30M</td>
-					<td style="text-align: right">6M</td>
-					<td>每个工作日使用 Agent</td>
-			</tr>
-			<tr>
-					<td>重度</td>
-					<td style="text-align: right">50M</td>
-					<td style="text-align: right">10M</td>
-					<td>多项目、高频仓库级任务</td>
-			</tr>
-	</tbody>
-</table>
-<p>按 1 美元约 7.2 元人民币计算，暂不计上下文缓存可能带来的进一步优惠：</p>
-<table>
-	<thead>
-			<tr>
-					<th>使用强度</th>
-					<th style="text-align: right">请求通常 ≤32K</th>
-					<th style="text-align: right">请求通常为 32K～128K</th>
-					<th style="text-align: right">请求通常为 128K～256K</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td>轻度</td>
-					<td style="text-align: right">$6 / 约 ¥43</td>
-					<td style="text-align: right">$10 / 约 ¥72</td>
-					<td style="text-align: right">$16 / 约 ¥115</td>
-			</tr>
-			<tr>
-					<td>中度</td>
-					<td style="text-align: right">$18 / 约 ¥130</td>
-					<td style="text-align: right">$30 / 约 ¥216</td>
-					<td style="text-align: right">$48 / 约 ¥346</td>
-			</tr>
-			<tr>
-					<td>重度</td>
-					<td style="text-align: right">$30 / 约 ¥216</td>
-					<td style="text-align: right">$50 / 约 ¥360</td>
-					<td style="text-align: right">$80 / 约 ¥576</td>
-			</tr>
-	</tbody>
-</table>
-<p>这里的上下文档位是单次请求长度，不是月度 Token 总量。一个设计合理的 Coding Agent 会通过代码搜索、摘要和缓存尽量让请求留在 32K 内；如果每轮都把整个仓库重复发送到 128K 以上，不仅费用增加，首 Token 延迟也会变长。</p>
-<h2 id="八本地硬件的真实月成本">八、本地硬件的真实月成本</h2>
-<p>“本地 Token 免费”并不等于运行成本为零。把设备按 3 年折旧，并粗略加入每月 100 小时推理的电费，可以得到下面的数量级：</p>
-<table>
-	<thead>
-			<tr>
-					<th>设备</th>
-					<th style="text-align: right">一次性投入粗估</th>
-					<th style="text-align: right">三年折旧 + 电费/月</th>
-					<th>相对 API 的成本结论</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td>已有 64GB/48GB 设备</td>
-					<td style="text-align: right">新增投入接近 0</td>
-					<td style="text-align: right">约 ¥20～¥200</td>
-					<td>最划算，适合直接尝试</td>
-			</tr>
-			<tr>
-					<td>二手双 RTX 3090</td>
-					<td style="text-align: right">¥1.2万～¥2万元</td>
-					<td style="text-align: right">约 ¥450～¥850</td>
-					<td>通常高于同名 API</td>
-			</tr>
-			<tr>
-					<td>Ryzen AI Max 128GB</td>
-					<td style="text-align: right">¥2万～¥3.5万元</td>
-					<td style="text-align: right">约 ¥580～¥1050</td>
-					<td>很难仅靠 Token 费回本</td>
-			</tr>
-			<tr>
-					<td>64GB Mac Studio</td>
-					<td style="text-align: right">¥2.5万～¥3.5万元</td>
-					<td style="text-align: right">约 ¥720～¥1050</td>
-					<td>购买理由应是隐私和日常生产力</td>
-			</tr>
-			<tr>
-					<td>DGX Spark 128GB</td>
-					<td style="text-align: right">¥3.5万～¥4.5万元</td>
-					<td style="text-align: right">约 ¥1000～¥1350</td>
-					<td>更适合 CUDA 研发和部署验证</td>
-			</tr>
-			<tr>
-					<td>96GB Mac Studio</td>
-					<td style="text-align: right">¥4.5万～¥6万元</td>
-					<td style="text-align: right">约 ¥1280～¥1750</td>
-					<td>单用户纯推理经济性较低</td>
-			</tr>
-			<tr>
-					<td>RTX PRO 6000 工作站</td>
-					<td style="text-align: right">通常超过 ¥10万元</td>
-					<td style="text-align: right">通常超过 ¥2900</td>
-					<td>需要团队或商业负载分摊</td>
-			</tr>
-	</tbody>
-</table>
-<p>假设重度使用的 API 费用为 ¥216～¥576/月：</p>
-<ul>
-<li>¥2万元设备的静态回本时间约为 2.9～7.7 年；</li>
-<li>¥3万元设备约为 4.3～11.6 年；</li>
-<li>¥5万元设备约为 7.2～19.3 年。</li>
-</ul>
-<p>这还没有计算 SSD、设备残值、维护时间、硬件故障和本地 4bit 量化的能力损失。只为了省 API 费购买新机器，经济上基本不成立。</p>
-<h2 id="九性能瓶颈总表">九、性能瓶颈总表</h2>
-<table>
-	<thead>
-			<tr>
-					<th>方案</th>
-					<th>首 Token</th>
-					<th>生成速度</th>
-					<th>长上下文</th>
-					<th>任务质量</th>
-					<th>最主要瓶颈</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td>64GB Mac</td>
-					<td>本地短上下文快</td>
-					<td>可交互</td>
-					<td>受内存余量限制</td>
-					<td>4bit，接近但不等于原版</td>
-					<td>KV Cache 和 Swap</td>
-			</tr>
-			<tr>
-					<td>96GB M3 Ultra</td>
-					<td>较快</td>
-					<td>本地方案中较好</td>
-					<td>4bit 下较宽裕</td>
-					<td>4bit</td>
-					<td>Metal 生态、Prefill</td>
-			</tr>
-			<tr>
-					<td>Ryzen 128GB</td>
-					<td>较快</td>
-					<td>中等</td>
-					<td>容量宽裕</td>
-					<td>可选 4bit/8bit</td>
-					<td>内存带宽和软件优化</td>
-			</tr>
-			<tr>
-					<td>DGX Spark 128GB</td>
-					<td>较快</td>
-					<td>中等</td>
-					<td>容量宽裕</td>
-					<td>可选 4bit/8bit</td>
-					<td>273GB/s 带宽、ARM64</td>
-			</tr>
-			<tr>
-					<td>双 RTX 3090</td>
-					<td>较快</td>
-					<td>中～高</td>
-					<td>显存余量很小</td>
-					<td>3bit/4bit</td>
-					<td>跨卡通信和容量</td>
-			</tr>
-			<tr>
-					<td>5090 + CPU 卸载</td>
-					<td>较快</td>
-					<td>随卸载比例下降</td>
-					<td>使用 RAM 可扩展</td>
-					<td>4bit</td>
-					<td>PCIe 和 DDR 带宽</td>
-			</tr>
-			<tr>
-					<td>RTX PRO 6000</td>
-					<td>快</td>
-					<td>很高</td>
-					<td>4bit 下宽裕</td>
-					<td>4bit/8bit</td>
-					<td>价格和并发 KV Cache</td>
-			</tr>
-			<tr>
-					<td>Qwen Cloud API</td>
-					<td>受网络和排队影响</td>
-					<td>服务端通常稳定</td>
-					<td>无本机容量压力</td>
-					<td>精度与版本由服务商管理</td>
-					<td>网络、限流、隐私、长上下文价格</td>
-			</tr>
-	</tbody>
-</table>
-<h2 id="十不同用户应该怎么选">十、不同用户应该怎么选</h2>
-<table>
-	<thead>
-			<tr>
-					<th>用户情况</th>
-					<th>推荐方案</th>
-			</tr>
-	</thead>
-	<tbody>
-			<tr>
-					<td>没有现成大内存硬件</td>
-					<td>直接使用 Qwen3-Coder-Next API</td>
-			</tr>
-			<tr>
-					<td>已有 64GB Apple Silicon</td>
-					<td>本地 4bit，默认 16K～32K 上下文</td>
-			</tr>
-			<tr>
-					<td>想买安静、省电、维护简单的主机</td>
-					<td>64GB/96GB Mac Studio</td>
-			</tr>
-			<tr>
-					<td>需要 128GB，偏好 Linux/Windows</td>
-					<td>Ryzen AI Max+ 395 主机</td>
-			</tr>
-			<tr>
-					<td>需要 128GB 和 CUDA 软件栈</td>
-					<td>DGX Spark/GB10</td>
-			</tr>
-			<tr>
-					<td>预算有限、能维护 Linux 和多显卡</td>
-					<td>二手双 RTX 3090，优先 3bit 或混合卸载</td>
-			</tr>
-			<tr>
-					<td>已有 RTX 5090</td>
-					<td>增加系统内存，用 llama.cpp 混合卸载，不必立刻换设备</td>
-			</tr>
-			<tr>
-					<td>小团队需要高并发</td>
-					<td>96GB 专业显卡或云 GPU 服务</td>
-			</tr>
-			<tr>
-					<td>代码绝对不能离开内网</td>
-					<td>本地 4bit；性能成本让位于隐私要求</td>
-			</tr>
-			<tr>
-					<td>个人追求综合性价比</td>
-					<td>本地处理敏感和高频任务，困难任务调用 API</td>
-			</tr>
-	</tbody>
-</table>
-<h2 id="十一我的推荐配置">十一、我的推荐配置</h2>
-<p>如果从零购买，我不会为了省 Token 费组建多卡服务器，而会在下面三种方案中选择：</p>
-<h3 id="方案-a不买硬件直接-api">方案 A：不买硬件，直接 API</h3>
-<p>适合大多数个人开发者。按实际用量付费，短上下文下即使重度使用也约 ¥216/月。省下的硬件预算可以购买很多年的 API，并且不需要维护模型和驱动。</p>
-<h3 id="方案-b已有-64gb-设备本地-4bit--api-兜底">方案 B：已有 64GB 设备，本地 4bit + API 兜底</h3>
-<p>这是性价比最高的本地路线。本地运行 Qwen3-Coder-Next 4bit，设置 16K～32K 上下文；同一个任务连续失败两次、上下文过长或需要更高成功率时，切换 Qwen Cloud API。</p>
-<h3 id="方案-c隐私优先新购-96gb128gb-设备">方案 C：隐私优先，新购 96GB～128GB 设备</h3>
-<p>Mac Studio 更安静省心，Ryzen AI Max 主机容量价格比更好，DGX Spark 的 CUDA 生态更完整。三者都应优先运行 4bit，而不是为了 8bit 把内存占满。额外容量应留给 KV Cache、IDE、编译和测试进程。</p>
-<h2 id="总结">总结</h2>
-<p>在统一内存不超过 128GB 的条件下，Qwen3-Coder-Next 是一个很合适的高端本地 AI Coding 样本：80B 总参数、3B 激活参数、4bit 约 46GB，既有较强的公开 Coding 成绩，也能在个人可以买到的设备上完整运行。</p>
-<p>不同本地方案的本质差异可以压缩成三句话：</p>
-<ul>
-<li><strong>Mac Studio</strong> 用高带宽统一内存换取安静、简单，但受 Metal 生态和不可升级限制；</li>
-<li><strong>Ryzen AI Max 与 DGX Spark</strong> 用 128GB 容量换取更大的模型空间，但性能瓶颈是内存带宽；</li>
-<li><strong>NVIDIA 多卡或专业显卡</strong> 速度和生态最好，但瓶颈转向显存容量、跨卡通信和采购成本。</li>
-</ul>
-<p>而 API 的瓶颈不是本地内存，而是网络延迟、限流、隐私和长上下文价格。以目前同名模型的价格看，个人新购硬件几乎不可能单靠节省 Token 费用回本。</p>
-<p>所以最终建议仍然是：</p>
-<blockquote>
-<p><strong>没有现成硬件就先用 API；已有 64GB 以上设备就部署本地 4bit；有隐私或离线刚需再购买 96GB～128GB 设备。不要为了“本地免费”忽略折旧、速度和任务成功率。</strong></p>
-</blockquote>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><a href="https://huggingface.co/Qwen/Qwen3-Coder-Next">Qwen3-Coder-Next 官方模型卡</a></li>
-<li><a href="https://unsloth.ai/docs/models/qwen3-coder-next">Qwen3-Coder-Next 本地运行、量化与内存要求</a></li>
-<li><a href="https://www.qwencloud.com/models/qwen3-coder-next">Qwen3-Coder-Next 官方 API 能力与价格</a></li>
-<li><a href="https://github.com/QwenLM/Qwen3-Coder">Qwen3-Coder GitHub</a></li>
-<li><a href="https://github.com/ggml-org/llama.cpp">llama.cpp</a></li>
-<li><a href="https://github.com/vllm-project/vllm">vLLM</a></li>
-<li><a href="https://github.com/sgl-project/sglang">SGLang</a></li>
-<li><a href="https://www.apple.com/mac-studio/specs/">Apple Mac Studio 技术规格</a></li>
-<li><a href="https://frame.work/desktop">Framework Desktop Ryzen AI Max</a></li>
-<li><a href="https://www.nvidia.com/en-us/products/workstations/dgx-spark/">NVIDIA DGX Spark</a></li>
-<li><a href="https://www.nvidia.com/en-us/products/workstations/professional-desktop-gpus/rtx-pro-6000/">NVIDIA RTX PRO 6000 Blackwell</a></li>
-<li><a href="https://www.nvidia.com/en-us/geforce/graphics-cards/50-series/rtx-5090/">NVIDIA GeForce RTX 5090</a></li>
-</ul>
-]]></content:encoded>
     </item>
   </channel>
 </rss>
