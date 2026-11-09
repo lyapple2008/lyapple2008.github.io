@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">WebRTC 多路音频混音</title>
+  <desc id="desc">三路音频波形汇入求和节点，经过限幅后形成一路连续的播放波形。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07172b"/>
+      <stop offset=".55" stop-color="#102a47"/>
+      <stop offset="1" stop-color="#07192f"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#63d7ff"/>
+      <stop offset="1" stop-color="#83eed5"/>
+    </linearGradient>
+    <linearGradient id="hot" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffb969"/>
+      <stop offset="1" stop-color="#ff806a"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#163c60"/>
+      <stop offset="1" stop-color="#0b2643"/>
+    </linearGradient>
+    <radialGradient id="halo">
+      <stop offset="0" stop-color="#288bc9" stop-opacity=".29"/>
+      <stop offset="1" stop-color="#288bc9" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#b6dffa" stroke-opacity=".065"/>
+    </pattern>
+    <filter id="shadow" x="-35%" y="-45%" width="170%" height="200%">
+      <feDropShadow dx="0" dy="16" stdDeviation="13" flood-color="#000914" flood-opacity=".55"/>
+    </filter>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="13"/>
+    </filter>
+    <marker id="arrowBlue" markerWidth="13" markerHeight="13" refX="11" refY="6.5" orient="auto">
+      <path d="M1 1L12 6.5 1 12" fill="none" stroke="#82dff3" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrowMint" markerWidth="13" markerHeight="13" refX="11" refY="6.5" orient="auto">
+      <path d="M1 1L12 6.5 1 12" fill="none" stroke="#8cf0d9" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      .cn {font-family:"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+      .mono {font-family:"SFMono-Regular",Menlo,Consolas,monospace}
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+  <ellipse cx="840" cy="495" rx="810" ry="440" fill="url(#halo)"/>
+  <rect x="30" y="30" width="1540" height="840" rx="34" fill="none" stroke="#82c9f2" stroke-opacity=".18" stroke-width="3"/>
+
+  <g transform="translate(95 76)">
+    <rect width="222" height="42" rx="21" fill="#194363" stroke="#62cef5" stroke-opacity=".65"/>
+    <circle cx="25" cy="21" r="7" fill="#66d8ff"/>
+    <text x="45" y="29" fill="#c1efff" font-size="19" font-weight="800" class="mono">WEBRTC / AUDIO</text>
+    <text x="0" y="138" fill="#a7e9ff" font-size="87" font-weight="900" letter-spacing="-3" class="cn">WebRTC</text>
+    <text x="421" y="138" fill="#f6fbff" font-size="81" font-weight="900" letter-spacing="-2" class="cn">多路音频混音</text>
+    <text x="3" y="192" fill="#accadd" font-size="29" font-weight="600" class="cn">多路 PCM 汇合，控制峰值后连续播放</text>
+  </g>
+
+  <text x="100" y="335" fill="#8fc6e7" font-size="20" font-weight="800" class="mono">10 ms / SOURCE FRAMES</text>
+  <text x="635" y="335" fill="#8fc6e7" font-size="20" font-weight="800" class="mono">FLOAT SUM</text>
+  <text x="961" y="335" fill="#ffc58c" font-size="20" font-weight="800" class="mono">PEAK CONTROL</text>
+  <text x="1309" y="335" fill="#9ce8d8" font-size="20" font-weight="800" class="mono">OUTPUT</text>
+
+  <g filter="url(#shadow)">
+    <rect x="96" y="367" width="413" height="83" rx="22" fill="url(#card)" stroke="#5cbcf2" stroke-width="2"/>
+    <rect x="96" y="474" width="413" height="83" rx="22" fill="url(#card)" stroke="#f7b36b" stroke-width="2"/>
+    <rect x="96" y="581" width="413" height="83" rx="22" fill="url(#card)" stroke="#75e1d4" stroke-width="2"/>
+    <circle cx="141" cy="409" r="20" fill="#236085"/>
+    <circle cx="141" cy="516" r="20" fill="#805034"/>
+    <circle cx="141" cy="623" r="20" fill="#246b69"/>
+    <text x="141" y="416" text-anchor="middle" fill="#eafaff" font-size="22" font-weight="850" class="mono">A</text>
+    <text x="141" y="523" text-anchor="middle" fill="#fff1da" font-size="22" font-weight="850" class="mono">B</text>
+    <text x="141" y="630" text-anchor="middle" fill="#eafff7" font-size="22" font-weight="850" class="mono">C</text>
+    <path d="M181 409H209L220 393 231 426 243 381 255 433 269 396 281 413H306L316 400 327 421 338 387 350 430 363 397 374 410H484" fill="none" stroke="#7bd5fb" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M181 516H208L220 504 233 532 247 490 260 541 275 496 288 517H308L318 502 331 528 344 484 357 540 371 501 384 517H484" fill="none" stroke="#ffbf7e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M181 623H208L222 613 235 633 248 604 261 644 275 607 288 623H310L322 614 334 632 347 603 360 643 375 612 388 623H484" fill="none" stroke="#8ae8d7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <path d="M520 409C574 409 578 475 622 500M520 516H622M520 623C574 623 578 557 622 532" fill="none" stroke="#78cfee" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="690" cy="516" r="86" fill="#4cbde6" fill-opacity=".35" filter="url(#glow)"/>
+  <circle cx="690" cy="516" r="81" fill="#123858" stroke="#8bdcf5" stroke-width="4" filter="url(#shadow)"/>
+  <circle cx="690" cy="516" r="62" fill="none" stroke="#8bdcf5" stroke-opacity=".23" stroke-width="2"/>
+  <text x="690" y="544" text-anchor="middle" fill="#e4f9ff" font-size="94" font-weight="500" class="mono">Σ</text>
+
+  <path d="M780 516H895" fill="none" stroke="#8bdcf5" stroke-width="5" stroke-linecap="round" marker-end="url(#arrowBlue)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="920" y="371" width="298" height="289" rx="28" fill="#132f49" stroke="#f5ac69" stroke-width="3"/>
+    <rect x="941" y="393" width="256" height="243" rx="20" fill="#10283e" stroke="#f8bc7b" stroke-opacity=".23" stroke-width="2"/>
+    <text x="1069" y="444" text-anchor="middle" fill="#ffdbb5" font-size="37" font-weight="850" class="mono">Limiter</text>
+    <path d="M971 588H1173M985 598V473" fill="none" stroke="#5f7e93" stroke-width="2"/>
+    <path d="M985 588L1057 532C1085 508 1102 500 1129 494C1148 491 1163 490 1173 490" fill="none" stroke="url(#hot)" stroke-width="6" stroke-linecap="round"/>
+    <path d="M985 588L1173 454" fill="none" stroke="#8098ac" stroke-opacity=".4" stroke-width="2" stroke-dasharray="8 8"/>
+    <circle cx="1129" cy="494" r="8" fill="#ffc27f"/>
+    <text x="1069" y="621" text-anchor="middle" fill="#abc5d6" font-size="18" font-weight="750" class="cn">超出上限时平滑压低增益</text>
+  </g>
+
+  <path d="M1225 516H1292" fill="none" stroke="#8cf0d9" stroke-width="5" stroke-linecap="round" marker-end="url(#arrowMint)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="1312" y="392" width="194" height="246" rx="28" fill="#113b4b" stroke="#8ce7d8" stroke-width="3"/>
+    <circle cx="1409" cy="473" r="56" fill="#246b71" stroke="#96ebdd" stroke-width="3"/>
+    <path d="M1384 459H1394L1411 445V500L1394 486H1384Z" fill="#eafff8"/>
+    <path d="M1422 457C1433 466 1433 481 1422 489M1431 445C1449 460 1449 486 1431 501" fill="none" stroke="#eafff8" stroke-width="4" stroke-linecap="round"/>
+    <text x="1409" y="567" text-anchor="middle" fill="#eafff7" font-size="29" font-weight="850" class="cn">一路播放</text>
+    <text x="1409" y="603" text-anchor="middle" fill="#a5dcd5" font-size="19" font-weight="750" class="mono">16-bit PCM</text>
+  </g>
+
+  <g transform="translate(95 713)">
+    <rect width="1410" height="113" rx="27" fill="#09223b" stroke="#355f7c" stroke-width="2"/>
+    <text x="30" y="35" fill="#9bc5dc" font-size="18" font-weight="800" class="mono">MIXED WAVEFORM</text>
+    <text x="1377" y="35" text-anchor="end" fill="#9cc9d3" font-size="19" font-weight="700" class="cn">保留单人音量 · 控制多人峰值</text>
+    <path d="M33 74H1377" stroke="#315771" stroke-width="2"/>
+    <path d="M45 74H78L90 62 103 88 117 49 131 99 146 57 161 75H186L198 63 211 86 225 47 239 101 254 58 269 75H295L309 57 324 92 338 44 353 103 368 60 382 75H410L424 56 440 94 455 43 471 104 486 59 502 75H529L545 57 561 93 577 44 593 103 609 58 624 75H649L663 61 678 90 693 48 709 100 724 58 739 75H766L782 59 798 91 814 47 830 100 847 60 861 75H890L905 60 920 90 936 48 952 101 968 61 984 75H1013L1028 60 1043 91 1058 47 1075 101 1091 59 1106 75H1132L1146 62 1160 89 1175 49 1190 99 1205 60 1220 75H1245L1258 63 1272 86 1286 51 1300 97 1315 61 1330 74H1365" fill="none" stroke="url(#accent)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

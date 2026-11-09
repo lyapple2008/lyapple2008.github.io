@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="710" viewBox="0 0 1280 710" role="img" aria-labelledby="title desc">
+  <title id="title">WebRTC Limiter 电平估计的 attack 与 decay</title>
+  <desc id="desc">输入峰值在 20 毫秒跃升到 40000，电平估计在相邻子帧内快速跟随；输入在 60 毫秒归零后，估计值缓慢下降，约每 20 毫秒降低 1 分贝，帮助限制器平滑恢复增益。</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#081b30"/>
+      <stop offset="1" stop-color="#102d4d"/>
+    </linearGradient>
+    <style>
+      .cn {font-family:"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+      .mono {font-family:"SFMono-Regular",Menlo,Consolas,monospace}
+    </style>
+  </defs>
+  <rect width="1280" height="710" rx="28" fill="url(#background)"/>
+  <rect x="27" y="27" width="1226" height="656" rx="23" fill="none" stroke="#427396" stroke-width="2" opacity=".75"/>
+  <text x="68" y="82" fill="#edfaff" font-size="37" font-weight="850" class="cn">Limiter 的 attack / decay：电平快升、慢降</text>
+  <text x="70" y="119" fill="#a8c7da" font-size="20" class="cn">示意输入：峰值升至 40000，持续 40 ms 后归零；图中蓝线为峰值估计，不是音频波形</text>
+
+  <rect x="118" y="145" width="1025" height="371" rx="19" fill="#0e2943" stroke="#355e7a" stroke-width="2"/>
+  <path d="M154 480.0H1110" stroke="#294a66" stroke-width="1" stroke-dasharray="5 8"/><text x="136" y="486.0" text-anchor="end" fill="#a8c1d1" font-size="18" class="mono">0k</text><path d="M154 400.0H1110" stroke="#294a66" stroke-width="1" stroke-dasharray="5 8"/><text x="136" y="406.0" text-anchor="end" fill="#a8c1d1" font-size="18" class="mono">10k</text><path d="M154 320.0H1110" stroke="#294a66" stroke-width="1" stroke-dasharray="5 8"/><text x="136" y="326.0" text-anchor="end" fill="#a8c1d1" font-size="18" class="mono">20k</text><path d="M154 240.0H1110" stroke="#294a66" stroke-width="1" stroke-dasharray="5 8"/><text x="136" y="246.0" text-anchor="end" fill="#a8c1d1" font-size="18" class="mono">30k</text><path d="M154 160.0H1110" stroke="#294a66" stroke-width="1" stroke-dasharray="5 8"/><text x="136" y="166.0" text-anchor="end" fill="#a8c1d1" font-size="18" class="mono">40k</text>
+  <path d="M154 160V480H1110" fill="none" stroke="#708ea5" stroke-width="2"/>
+  <path d="M260.2 160V480M472.7 160V480" stroke="#5b7c95" stroke-width="2" stroke-dasharray="7 8" opacity=".85"/>
+  <polyline points="154.0,480.0 260.2,480.0 260.2,160.0 472.7,160.0 472.7,480.0 1110.0,480.0" fill="none" stroke="#f4ae72" stroke-width="4" stroke-dasharray="12 9" stroke-linejoin="round"/>
+  <polyline points="154.0,480.0 257.6,480.0 257.6,160.0 472.7,160.0 475.3,160.9 478.0,161.8 480.6,162.8 483.3,163.7 485.9,164.6 488.6,165.5 491.3,166.4 493.9,167.3 496.6,168.2 499.2,169.1 501.9,170.0 504.5,170.9 507.2,171.8 509.8,172.6 512.5,173.5 515.2,174.4 517.8,175.3 520.5,176.2 523.1,177.0 525.8,177.9 528.4,178.8 531.1,179.6 533.7,180.5 536.4,181.4 539.1,182.2 541.7,183.1 544.4,183.9 547.0,184.8 549.7,185.6 552.3,186.5 555.0,187.3 557.6,188.2 560.3,189.0 563.0,189.8 565.6,190.7 568.3,191.5 570.9,192.3 573.6,193.2 576.2,194.0 578.9,194.8 581.5,195.6 584.2,196.4 586.9,197.3 589.5,198.1 592.2,198.9 594.8,199.7 597.5,200.5 600.1,201.3 602.8,202.1 605.4,202.9 608.1,203.7 610.8,204.5 613.4,205.3 616.1,206.1 618.7,206.9 621.4,207.6 624.0,208.4 626.7,209.2 629.3,210.0 632.0,210.8 634.7,211.5 637.3,212.3 640.0,213.1 642.6,213.8 645.3,214.6 647.9,215.4 650.6,216.1 653.2,216.9 655.9,217.6 658.6,218.4 661.2,219.1 663.9,219.9 666.5,220.6 669.2,221.4 671.8,222.1 674.5,222.9 677.1,223.6 679.8,224.3 682.5,225.1 685.1,225.8 687.8,226.5 690.4,227.3 693.1,228.0 695.7,228.7 698.4,229.4 701.0,230.2 703.7,230.9 706.4,231.6 709.0,232.3 711.7,233.0 714.3,233.7 717.0,234.4 719.6,235.2 722.3,235.9 724.9,236.6 727.6,237.3 730.3,238.0 732.9,238.6 735.6,239.3 738.2,240.0 740.9,240.7 743.5,241.4 746.2,242.1 748.8,242.8 751.5,243.5 754.2,244.1 756.8,244.8 759.5,245.5 762.1,246.2 764.8,246.8 767.4,247.5 770.1,248.2 772.7,248.8 775.4,249.5 778.1,250.2 780.7,250.8 783.4,251.5 786.0,252.1 788.7,252.8 791.3,253.5 794.0,254.1 796.6,254.8 799.3,255.4 802.0,256.1 804.6,256.7 807.3,257.3 809.9,258.0 812.6,258.6 815.2,259.3 817.9,259.9 820.5,260.5 823.2,261.1 825.9,261.8 828.5,262.4 831.2,263.0 833.8,263.7 836.5,264.3 839.1,264.9 841.8,265.5 844.4,266.1 847.1,266.7 849.8,267.4 852.4,268.0 855.1,268.6 857.7,269.2 860.4,269.8 863.0,270.4 865.7,271.0 868.3,271.6 871.0,272.2 873.7,272.8 876.3,273.4 879.0,274.0 881.6,274.6 884.3,275.2 886.9,275.8 889.6,276.3 892.2,276.9 894.9,277.5 897.6,278.1 900.2,278.7 902.9,279.3 905.5,279.8 908.2,280.4 910.8,281.0 913.5,281.6 916.1,282.1 918.8,282.7 921.5,283.3 924.1,283.8 926.8,284.4 929.4,284.9 932.1,285.5 934.7,286.1 937.4,286.6 940.0,287.2 942.7,287.7 945.4,288.3 948.0,288.8 950.7,289.4 953.3,289.9 956.0,290.5 958.6,291.0 961.3,291.6 963.9,292.1 966.6,292.7 969.3,293.2 971.9,293.7 974.6,294.3 977.2,294.8 979.9,295.3 982.5,295.9 985.2,296.4 987.8,296.9 990.5,297.4 993.2,298.0 995.8,298.5 998.5,299.0 1001.1,299.5 1003.8,300.1 1006.4,300.6 1009.1,301.1 1011.7,301.6 1014.4,302.1 1017.1,302.6 1019.7,303.1 1022.4,303.6 1025.0,304.1 1027.7,304.7 1030.3,305.2 1033.0,305.7 1035.6,306.2 1038.3,306.7 1041.0,307.2 1043.6,307.7 1046.3,308.2 1048.9,308.6 1051.6,309.1 1054.2,309.6 1056.9,310.1 1059.5,310.6 1062.2,311.1 1064.9,311.6 1067.5,312.1 1070.2,312.5 1072.8,313.0 1075.5,313.5 1078.1,314.0 1080.8,314.5 1083.4,314.9 1086.1,315.4 1088.8,315.9 1091.4,316.4 1094.1,316.8 1096.7,317.3 1099.4,317.8 1102.0,318.2 1104.7,318.7 1107.3,319.2 1110.0,319.6" fill="none" stroke="#72d5fa" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+  <line x1="154.0" y1="480" x2="154.0" y2="488" stroke="#68849b" stroke-width="2"/><text x="154.0" y="515" text-anchor="middle" fill="#a8c1d1" font-size="19" class="mono">0</text><line x1="260.2" y1="480" x2="260.2" y2="488" stroke="#68849b" stroke-width="2"/><text x="260.2" y="515" text-anchor="middle" fill="#a8c1d1" font-size="19" class="mono">20</text><line x1="472.7" y1="480" x2="472.7" y2="488" stroke="#68849b" stroke-width="2"/><text x="472.7" y="515" text-anchor="middle" fill="#a8c1d1" font-size="19" class="mono">60</text><line x1="685.1" y1="480" x2="685.1" y2="488" stroke="#68849b" stroke-width="2"/><text x="685.1" y="515" text-anchor="middle" fill="#a8c1d1" font-size="19" class="mono">100</text><line x1="897.6" y1="480" x2="897.6" y2="488" stroke="#68849b" stroke-width="2"/><text x="897.6" y="515" text-anchor="middle" fill="#a8c1d1" font-size="19" class="mono">140</text><line x1="1110.0" y1="480" x2="1110.0" y2="488" stroke="#68849b" stroke-width="2"/><text x="1110.0" y="515" text-anchor="middle" fill="#a8c1d1" font-size="19" class="mono">180</text>
+  <text x="1132" y="515" fill="#a8c1d1" font-size="19" class="mono">ms</text>
+  <text x="63" y="176" fill="#a8c1d1" font-size="20" class="cn">峰值</text>
+
+  <path d="M280.2 205L332.2 256" fill="none" stroke="#84e9d2" stroke-width="2.5"/>
+  <rect x="280.2" y="240" width="233" height="73" rx="12" fill="#143d4d" stroke="#64d6c3" stroke-width="1.5"/>
+  <text x="295.2" y="270" fill="#a8f2e0" font-size="22" font-weight="800" class="cn">Attack：立即跟随</text>
+  <text x="295.2" y="298" fill="#b6d9d7" font-size="17" class="cn">高峰到来 → 目标增益降低</text>
+
+  <path d="M685.1 225.8L748 284" fill="none" stroke="#84e9d2" stroke-width="2.5"/>
+  <rect x="738" y="228" width="317" height="75" rx="12" fill="#143d4d" stroke="#64d6c3" stroke-width="1.5"/>
+  <text x="755" y="259" fill="#a8f2e0" font-size="22" font-weight="800" class="cn">Decay：缓慢回落</text>
+  <text x="755" y="287" fill="#b6d9d7" font-size="17" class="cn">高峰消失 → 增益缓慢恢复</text>
+
+  <path d="M113 571H155" stroke="#f4ae72" stroke-width="4" stroke-dasharray="12 9"/>
+  <text x="169" y="578" fill="#edc69e" font-size="21" class="cn">输入子帧峰值</text>
+  <path d="M419 571H461" stroke="#72d5fa" stroke-width="5"/>
+  <text x="475" y="578" fill="#b7eafa" font-size="21" class="cn">平滑后的峰值估计</text>
+  <text x="111" y="635" fill="#adcadc" font-size="20" class="cn">上升峰值在相邻子帧内提前 0.5 ms；图中按此机制绘制。帧边界没有额外预读。</text>
+</svg>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Limiter on BeYoung</title>
+    <link>https://lyapple2008.github.io/tags/limiter/</link>
+    <description>Recent content in Limiter on BeYoung</description>
+    <image>
+      <title>BeYoung</title>
+      <url>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://lyapple2008.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <copyright>See this site&amp;rsquo;s source code here, licensed under GPLv3 ·</copyright>
+    <lastBuildDate>Mon, 09 Nov 2026 15:26:52 +0800</lastBuildDate>
+    <atom:link href="https://lyapple2008.github.io/tags/limiter/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WebRTC 多路音频混音：从接收流到求和与限幅</title>
+      <link>https://lyapple2008.github.io/posts/202611/2026-11-09-webrtc%E4%B8%AD%E5%A4%9A%E8%B7%AF%E9%9F%B3%E9%A2%91%E6%B5%81%E6%B7%B7%E9%9F%B3/</link>
+      <pubDate>Mon, 09 Nov 2026 15:26:52 +0800</pubDate>
+      <guid>https://lyapple2008.github.io/posts/202611/2026-11-09-webrtc%E4%B8%AD%E5%A4%9A%E8%B7%AF%E9%9F%B3%E9%A2%91%E6%B5%81%E6%B7%B7%E9%9F%B3/</guid>
+      <description>&lt;p&gt;两个人同时说话，扬声器最终只能收到一路播放数据。最直观的做法是把两个波形逐样本相加；问题是相加后的峰值可能超过 16 位 PCM 的表示范围。直接截断会失真，简单地除以人数又可能让只说话的那个人变小声。&lt;/p&gt;
+&lt;p&gt;WebRTC 的默认选择是：&lt;strong&gt;接收端逐路取出 10 ms 音频，统一格式后用浮点数求和，再用 Limiter 控制合成音频的峰值。&lt;/strong&gt; 本文以本地源码提交 &lt;a href=&#34;https://webrtc.googlesource.com/src/&amp;#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0&#34;&gt;&lt;code&gt;c8bca1867e&lt;/code&gt;&lt;/a&gt;（2026-10-22）为基线，先看播放链路，再比较三种混音方法。&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>两个人同时说话，扬声器最终只能收到一路播放数据。最直观的做法是把两个波形逐样本相加；问题是相加后的峰值可能超过 16 位 PCM 的表示范围。直接截断会失真，简单地除以人数又可能让只说话的那个人变小声。</p>
+<p>WebRTC 的默认选择是：<strong>接收端逐路取出 10 ms 音频，统一格式后用浮点数求和，再用 Limiter 控制合成音频的峰值。</strong> 本文以本地源码提交 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0"><code>c8bca1867e</code></a>（2026-10-22）为基线，先看播放链路，再比较三种混音方法。</p>
+<h2 id="一webrtc-多路音频流的混音流程">一、WebRTC 多路音频流的混音流程</h2>
+<h3 id="混音发生在播放端的哪一处">混音发生在播放端的哪一处</h3>
+<p>一个远端音频流对应一个接收源。它自己的 NetEQ 负责抖动缓冲、解码与丢包隐藏；混音器拿到的是各路 <strong>PCM 帧</strong>，不是把 Opus 或 RTP 包直接相加。<code>AudioState</code> 在接收流加入、退出时把源注册到混音器；音频设备需要下一段播放数据时，<code>AudioTransportImpl</code> 才调用 <code>Mix()</code> 拉取并合成。<a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/audio/audio_state.cc">接收源注册</a> · <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/audio/audio_transport_impl.cc">播放回调</a></p>
+
+<div class="mermaid">flowchart LR
+    A[&#34;远端流 A&lt;br/&gt;RTP → NetEQ → PCM&#34;] --&gt; M[&#34;AudioMixerImpl&lt;br/&gt;每次拉取 10 ms&#34;]
+    B[&#34;远端流 B&lt;br/&gt;RTP → NetEQ → PCM&#34;] --&gt; M
+    C[&#34;远端流 C&lt;br/&gt;RTP → NetEQ → PCM&#34;] --&gt; M
+    M --&gt; F[&#34;统一采样率与声道&lt;br/&gt;求和 → Limiter&#34;]
+    F --&gt; R[&#34;播放反向音频处理&lt;br/&gt;供回声消除参考&#34;]
+    R --&gt; D[&#34;重采样为设备格式&lt;br/&gt;扬声器播放&#34;]</div>
+<p>这条链路由<strong>播放时钟驱动</strong>：每次播放回调从每个源要下一段 10 ms 音频。NetEQ 各自处理网络抖动与时钟差异；混音器并不把不同流的 RTP 时间戳逐样本配对。混合后的声音进入音频处理的反向路径，供回声消除使用，随后按播放设备的采样率重采样。Chromium 的 <code>PullRenderData()</code> 路径会跳过这里的反向音频处理，因为 Chromium 自己管理对应的 APM 实例。<a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/audio/channel_receive.cc"><code>ChannelReceive::GetAudioFrameWithInfo</code></a> · <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/audio/audio_transport_impl.cc"><code>AudioTransportImpl</code></a></p>
+<h3 id="一次-mix-做了什么">一次 <code>Mix()</code> 做了什么</h3>
+
+<div class="mermaid">flowchart TD
+    A[&#34;收集已注册源的 PreferredSampleRate&#34;] --&gt; B[&#34;选混音采样率&lt;br/&gt;8 / 16 / 32 / 48 kHz 中满足最高需求的最低档&#34;]
+    B --&gt; C[&#34;逐路请求 10 ms AudioFrame&lt;br/&gt;源内部按要求重采样&#34;]
+    C --&gt; D{&#34;帧状态&#34;}
+    D --&gt;|&#34;正常&#34;| E[&#34;加入混音列表&#34;]
+    D --&gt;|&#34;静音或错误&#34;| X[&#34;不加入本帧求和&#34;]
+    E --&gt; F[&#34;转换到调用方要求的声道数&#34;]
+    X --&gt; G
+    F --&gt; G[&#34;0 路：静音&lt;br/&gt;1 个已注册源：直通&lt;br/&gt;多源：浮点求和与可选 Limiter&#34;]
+    G --&gt; H[&#34;输出 16 位 PCM 的 AudioFrame&#34;]</div>
+<p>默认采样率不是把所有流降到最低：它取各源首选采样率的最大值，再向上选到支持的原生采样率，最高 48 kHz；没有源时使用 48 kHz。输出声道数由播放端指定，常见设备路径是单声道或双声道。源的采样率转换发生在各自的 <code>ChannelReceive</code> 中，声道转换发生在求和之前。<a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_mixer/default_output_rate_calculator.cc"><code>DefaultOutputRateCalculator</code></a> · <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_mixer/frame_combiner.cc"><code>FrameCombiner</code></a></p>
+<p>这里的“多源”依据<strong>已注册源数</strong>，并非这一帧实际发声的人数。两个源仍在房间里、其中一个静音时，静音帧不参与求和，但默认流程仍经过 Limiter。音量较低时其增益通常为 1；若前一刻出现过高峰，增益恢复过程仍可能影响这段声音。这一点从 <code>AudioMixerImpl::Mix()</code> 传入的 <code>number_of_streams</code> 和 <code>FrameCombiner::Combine()</code> 的分支可以直接看到。<a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_mixer/audio_mixer_impl.cc"><code>AudioMixerImpl</code></a> · <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_mixer/frame_combiner.cc"><code>FrameCombiner</code></a></p>
+<h2 id="二混音实现先相加再限制峰值">二、混音实现：先相加，再限制峰值</h2>
+<h3 id="为什么相加是混音的基础">为什么“相加”是混音的基础</h3>
+<p>当各路帧已经处于相同采样率、相同声道布局和同一播放时段时，每个输出声道的样本可以写成：</p>
+<p><code>s[t, c] = x₁[t, c] + x₂[t, c] + … + xₖ[t, c]</code></p>
+<p>其中 <code>t</code> 是采样点，<code>c</code> 是声道，<code>k</code> 是参与混音的流数。WebRTC 在 <code>FrameCombiner</code> 中把 16 位输入转换到 <code>FloatS16</code> 浮点缓冲区逐样本累加，再转换回 16 位 PCM。浮点缓冲区允许中间和超过 32767，避免<strong>在累加途中</strong>就溢出；它本身没有解决<strong>最终输出</strong>的削顶问题。<a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_mixer/frame_combiner.cc">求和实现</a> · <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/common_audio/include/audio_util.h"><code>FloatS16ToS16</code></a></p>
+<h3 id="limiter-怎样压住叠加后的峰值">Limiter 怎样压住叠加后的峰值</h3>
+
+<div class="mermaid">flowchart LR
+    A[&#34;已求和的浮点音频&lt;br/&gt;可超出 ±32768&#34;] --&gt; B[&#34;10 ms 切成 20 段&lt;br/&gt;每段 0.5 ms&#34;]
+    B --&gt; C[&#34;估计所有声道的最大绝对值&lt;br/&gt;上升快、下降慢&#34;]
+    C --&gt; D[&#34;查增益曲线&lt;br/&gt;低电平保持 1，高电平降低增益&#34;]
+    D --&gt; E[&#34;逐样本插值增益&lt;br/&gt;所有声道共用&#34;]
+    E --&gt; F[&#34;硬钳制到 16 位范围&lt;br/&gt;输出 PCM&#34;]</div>
+<p>Limiter 使用的是<strong>峰值估计</strong>，不是说话人数，也不是平均音量。估计器将 10 ms 帧分成 20 个子帧，在所有声道中取最大绝对值；峰值升高时迅速响应，降低时约按 20 ms 衰减 1 dB。增益曲线在约 −0.75 dBFS 以下保持原样，接着通过软拐点逐渐压低；高电平区使用约 5:1 的压缩关系。目标增益在子帧间逐样本插值，所有声道共用同一增益，避免声道间电平比例突然变化。<a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_processing/agc2/fixed_digital_level_estimator.cc"><code>FixedDigitalLevelEstimator</code></a> · <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_processing/agc2/interpolated_gain_curve.cc"><code>InterpolatedGainCurve</code></a> · <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_processing/agc2/limiter.cc"><code>Limiter</code></a></p>
+<h3 id="attack--decay让峰值估计快升慢降">Attack / decay：让峰值估计快升慢降</h3>
+<p>Attack / decay 是控制状态量变化速度的常用方法：根据新观测值相对旧状态的变化方向，选择不同的平滑系数。<strong>具体哪一方向要快，取决于控制目标。</strong> Limiter 要及时抑制突发峰值，所以峰值估计采用“快速上升、缓慢下降”；高峰过去后，目标增益才逐渐恢复，避免声音忽大忽小。</p>
+<p><code>FixedDigitalLevelEstimator::ComputeLevel()</code> 先在每个 0.5 ms 子帧、所有声道中取最大绝对样本值 <code>x</code>，再用上一子帧的估计值 <code>y_prev</code> 更新包络：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">x &gt; y_prev（attack）: y = x                          // 系数为 0，立即跟随峰值
+</span></span><span class="line"><span class="cl">x ≤ y_prev（decay） : y = 0.0028741 × x + 0.9971259 × y_prev</span></span></code></pre></td></tr></table>
+</div>
+</div>
+<p>下降系数 <code>0.9971259</code> 每 0.5 ms 应用一次；<strong>当输入降为零</strong>，估计值约每 20 ms 下降 1 dB。若输入只是变小而非归零，估计值会向新的电平靠近，下降速度不能简单等同于 1 dB / 20 ms。<code>filter_state_level_</code> 会把估计状态延续到下一子帧、下一次 <code>Process()</code> 调用。<a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_processing/agc2/fixed_digital_level_estimator.cc">电平估计与系数</a></p>
+<p><img alt="Limiter 的峰值估计在 attack 阶段迅速上升、decay 阶段缓慢下降" loading="lazy" src="/images/2026-11/webrtc-audio-limiter-attack-decay.svg"></p>
+<p>图中橙线是输入子帧的峰值，蓝线是平滑后的估计值。代码还会把<strong>相邻下一子帧更高的峰值提前一个子帧</strong>，让后续增益插值更早开始下降；图中的 0.5 ms 提前量在整张时间图上几乎不可见。这不是跨 10 ms 帧的预读，也不能保证突发峰值完全没有削顶。注意图示的是<strong>电平估计</strong>：估计值上升时目标增益下降，估计值缓慢回落时目标增益才缓慢上升；真正施加到音频样本上的增益还会在 <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_processing/agc2/limiter.cc"><code>ComputePerSampleSubframeFactors()</code></a> 中逐样本插值。</p>
+<p>同样的非对称平滑也用于 WebRTC 其他音频控制环节，例如 AGC2 的<a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_processing/agc2/saturation_protector.cc">饱和保护器</a>根据峰值余量的变化选用不同系数；<a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_processing/agc2/noise_level_estimator.cc">噪声底估计器</a>则是慢升、快降。它们都采用按方向调整响应速度的思路，但系数和目标不同。</p>
+<h3 id="两路音频相加后的波形示例">两路音频相加后的波形示例</h3>
+<p>假设 A、B 是同相的正弦波，各自峰值为 <code>20000</code>。浮点求和后，峰值变为 <code>40000</code>，已越过 16 位 PCM 的 <code>+32767</code> 上限。下图四条轨道使用<strong>相同的纵向比例</strong>，便于直接比较波形高度。</p>
+<p><img alt="两路同相音频先求和再限幅的波形示例" loading="lazy" src="/images/2026-11/webrtc-audio-mixing-example.svg"></p>
+<p>在这种<strong>持续高电平、增益已稳定</strong>的例子中，<code>40000</code> 超过增益曲线约 <code>+1 dBFS</code> 的最高输入区间，因此目标增益约为 <code>32768 / 40000 ≈ 0.819</code>。Limiter 把这个增益施加到整个混音波形，再将结果钳制为 16 位范围；图中绿色波形的峰值约为 <code>32767</code>。红色虚线表示若直接把 <code>40000</code> 的波形硬截断，超出范围的部分会被削成平顶。实际实现会按 0.5 ms 子帧估计电平，并在子帧间逐样本平滑增益，因此输入刚变大时的输出不会立刻等同于图中的稳定状态。<a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_processing/agc2/interpolated_gain_curve.cc">增益曲线超上限分支</a> · <a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_processing/agc2/limiter.cc">增益插值与钳制</a></p>
+<p>Limiter 不能保证完全没有削顶：它没有整帧预读的 look-ahead，突发峰值的最初几个样本可能在增益降下来前被最终的硬钳制截断。它解决的是多路音频相加时的<strong>常见电平过高问题</strong>，不是对每路说话人做响度均衡。<a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/modules/audio_processing/agc2/limiter.cc"><code>Limiter::ScaleSamples</code></a></p>
+<h3 id="三种实现放在同一个例子里">三种实现放在同一个例子里</h3>
+<p>假设有两路单声道音频，输出是 16 位 PCM。先看一个采样时刻：A 与 B <strong>同相位</strong>，各为 <code>20000</code>；再看只有 A 发声、B 静音的时刻。下表中的 Limiter 数值指<strong>稳定高电平后的近似结果</strong>，不代表突发峰值第一样本的保证值。</p>
+
+<div class="mermaid">flowchart LR
+    X[&#34;同声：A=20000，B=20000&lt;br/&gt;原始和=40000&#34;] --&gt; D[&#34;直接求和&lt;br/&gt;最终截断为 32767&#34;]
+    X --&gt; N[&#34;固定按 2 路平均&lt;br/&gt;40000 / 2 = 20000&#34;]
+    X --&gt; L[&#34;求和 &#43; Limiter&lt;br/&gt;峰值附近降低增益，约 32767&#34;]
+    Y[&#34;单声：A=20000，B=0&#34;] --&gt; D2[&#34;直接求和&lt;br/&gt;20000&#34;]
+    Y --&gt; N2[&#34;固定按 2 路平均&lt;br/&gt;10000&#34;]
+    Y --&gt; L2[&#34;求和 &#43; Limiter&lt;br/&gt;通常保持约 20000&#34;]</div>
+<table>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th>两路同时较响</th>
+					<th>只有一路发声</th>
+					<th>主要取舍</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>直接求和，输出时硬截断</td>
+					<td>超过 16 位范围的波峰被削平，出现谐波失真</td>
+					<td>保留原音量</td>
+					<td>实现最简单，但多路同声时听感风险最高</td>
+			</tr>
+			<tr>
+					<td>固定按人数归一化：<code>(A+B)/N</code></td>
+					<td>峰值容易控制</td>
+					<td>若 <code>N=2</code>，单人也被压低 6 dB 左右</td>
+					<td>电平界限直观，却牺牲单人音量；按活跃人数调整又需要平滑切换</td>
+			</tr>
+			<tr>
+					<td>WebRTC 默认：浮点求和 + Limiter</td>
+					<td>按实际混音峰值降低增益，减少持续削顶</td>
+					<td>低电平通常不衰减</td>
+					<td>保留单人响度，同时应对同声峰值；高电平时有动态压缩和少量处理开销</td>
+			</tr>
+	</tbody>
+</table>
+<p>固定按人数平均对“所有输入都在同一时刻取最大同号样本”的情况确实稳妥，但人数越多，只有一个人说话时就越轻。若改为按<strong>活跃</strong>人数平均，加入、静音、退出会改变分母：两人说话时 A 的增益为 <code>1/2</code>，B 刚停止后 A 的增益变为 <code>1</code>，如果不做渐变就会突然增大。直接求和没有这个音量跳变，却要承受峰值硬截断。</p>
+<p>WebRTC 因而把控制量放在<strong>实际叠加后的峰值</strong>上：低电平保留，峰值逼近上限时逐渐压低，并通过插值减少增益突变。这是从源码行为作出的工程解释，不是官方关于历史选型的原话。它也不排斥业务层先给某一路设置音量：例如主持人声音高于背景音乐时，仍应先调每路增益，再让 Limiter 处理最终峰值。<a href="https://webrtc.googlesource.com/src/&#43;/c8bca1867efcbc5f52adf58ad4463088ed257aa0/audio/audio_receive_stream.cc">接收流增益入口</a></p>
+<p><strong>总结：</strong> WebRTC 默认混音器为实时播放提供了一条清晰的基线：逐路 NetEQ 取音频、统一格式、浮点相加、限制峰值、交给设备播放。它优先保持单人讲话的自然音量，并控制多人同时发声时的失真；多人持续高声、音乐混音或空间音频等场景，仍需结合逐路增益、声道布局和主观听感进一步设计。</p>]]></content:encoded>
+    </item>
+  </channel>
+</rss>
